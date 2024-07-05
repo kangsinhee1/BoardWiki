@@ -1,4 +1,4 @@
-  -- 알람 테이블
+-- 알람 테이블
 CREATE TABLE alert (
 	ale_num     NUMBER        NOT NULL, -- 알람 고유 번호
 	mem_num     NUMBER        NOT NULL, -- 회원고유의 번호
