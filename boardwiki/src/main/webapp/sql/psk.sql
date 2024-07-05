@@ -1,159 +1,140 @@
--- 스트리밍 테이블
-CREATE TABLE streaming (
-	str_num NUMBER NOT NULL, -- 방송 구별 번호
-	mem_num NUMBER NOT NULL, -- 회원고유의 번호
-	CONSTRAINT str_num_pk PRIMARY KEY (str_num),
-	CONSTRAINT mem_num_fk3 FOREIGN KEY (mem_num) REFERENCES member (mem_num)
+--출석
+CREATE TABLE  attendance  (
+	 att_num 	number		NOT NULL,  -- 출석번호
+	 att_date 	date		NOT NULL,  -- 출석날짜
+	 att_status 	number	DEFAULT 1 NOT NULL,  -- 1:미출석 2:출석
+	 mem_num 	number		NOT NULL,  -- 회원고유의 번호
+	CONSTRAINT  attendance_pk  PRIMARY KEY ( att_num ),
+	CONSTRAINT  attendance_fk  FOREIGN KEY ( mem_num ) REFERENCES  member  ( mem_num )
 );
-
-CREATE SEQUENCE streaming_seq;
-
--- 스트리밍 상세 테이블
-CREATE TABLE stream_detail (
-	strD_num  NUMBER       NOT NULL, -- 방송 상세 번호
-	str_num   NUMBER       NOT NULL, -- 방송 구별 번호
-	mem_num   NUMBER       NOT NULL, -- 회원고유의 번호
-	strD_title VARCHAR2(300) NOT NULL, -- 방송 제목
-	strD_start DATE        DEFAULT SYSDATE NOT NULL, -- 방송 시작 시간
-	strD_end   DATE        NULL, -- 방송 종료 시간
-	CONSTRAINT strD_num_pk PRIMARY KEY (strD_num),
-	CONSTRAINT str_num_fk FOREIGN KEY (str_num) REFERENCES streaming (str_num),
-	CONSTRAINT mem_num_fk4 FOREIGN KEY (mem_num) REFERENCES member (mem_num)
-);
-
-CREATE SEQUENCE stream_detail_seq;
-
--- 스트리밍 시청 시간 테이블
-CREATE TABLE stream_view_time (
-	view_id    NUMBER      NOT NULL, -- 시청 번호
-	str_num    NUMBER      NOT NULL, -- 방송 구별 번호
-	mem_num    NUMBER      NOT NULL, -- 회원고유의 번호
-	view_start DATE        NOT NULL, -- 시청 시작 시간
-	view_end   DATE        NULL, -- 시청 종료 시간
-	CONSTRAINT view_id_pk PRIMARY KEY (view_id),
-	CONSTRAINT str_num_fk1 FOREIGN KEY (str_num) REFERENCES streaming (str_num),
-	CONSTRAINT mem_num_fk5 FOREIGN KEY (mem_num) REFERENCES member (mem_num)
+--시청시간
+CREATE TABLE  stream_view_time  (
+	 view_id 	number		NOT NULL,  -- 시청번호
+	 view_start 	date		NOT NULL,  -- 시청 시작 시간
+	 view_end 	date		NULL,  -- 시청 종료 시간
+	 str_num 	number		NOT NULL,  -- 방송 구별을 위한 번호
+	CONSTRAINT  stream_view_time_pk  PRIMARY KEY ( view_id ),
+	CONSTRAINT  stream_view_time_fk  FOREIGN KEY ( str_num ) REFERENCES  streaming  ( str_num )
 );
 
 CREATE SEQUENCE stream_view_time_seq;
-
--- 스트리밍 채팅방 테이블
-CREATE TABLE streaming_chatroom (
-	strC_num NUMBER NOT NULL, -- 채팅방 번호
-	str_num  NUMBER NOT NULL, -- 방송 구별 번호
-	mem_num  NUMBER NOT NULL, -- 회원고유의 번호
-	CONSTRAINT strC_num_pk PRIMARY KEY (strC_num),
-	CONSTRAINT str_num_fk2 FOREIGN KEY (str_num) REFERENCES streaming (str_num),
-	CONSTRAINT mem_num_fk6 FOREIGN KEY (mem_num) REFERENCES member (mem_num)
+--채팅방
+CREATE TABLE  streaming_chatroom  (
+	 strC_num 	number		NOT NULL,  -- 채팅방번호
+	 str_num 	number		NOT NULL,  -- 방송 구별을 위한 번호
+	CONSTRAINT  streaming_chatroom_pk  PRIMARY KEY ( strC_num ),
+	CONSTRAINT  streaming_chatroom_fk  FOREIGN KEY ( str_num ) REFERENCES  streaming  ( str_num )
 );
 
 CREATE SEQUENCE streaming_chatroom_seq;
-
--- 스트리밍 채팅 메시지 테이블
-CREATE TABLE streaming_chattage (
-	strT_num  NUMBER       NOT NULL, -- 시청 번호
-	strC_num  NUMBER       NOT NULL, -- 채팅방 번호
-	str_num   NUMBER       NOT NULL, -- 방송 구별 번호
-	mem_num   NUMBER       NOT NULL, -- 회원고유의 번호
-	strT_chat VARCHAR2(300) NOT NULL, -- 채팅 메시지
-	strT_date DATE        DEFAULT SYSDATE NOT NULL, -- 채팅 날짜
-	CONSTRAINT strT_num_pk PRIMARY KEY (strT_num),
-	CONSTRAINT strC_num_fk FOREIGN KEY (strC_num) REFERENCES streaming_chatroom (strC_num),
-	CONSTRAINT str_num_fk3 FOREIGN KEY (str_num) REFERENCES streaming (str_num),
-	CONSTRAINT mem_num_fk7 FOREIGN KEY (mem_num) REFERENCES member (mem_num)
+--채팅 메세지
+CREATE TABLE  streaming_chattage  (
+	 strT_num 	number		NOT NULL,  -- 시청번호
+	 strT_chat 	varchar2(300)		NOT NULL,  -- 채팅메세지
+	 strT_date 	date		NOT NULL,  -- 채팅날짜
+	 strC_num 	number		NOT NULL,  -- 채팅방번호
+	CONSTRAINT  streaming_chattage_pk  PRIMARY KEY ( strT_num ),
+	CONSTRAINT  streaming_chattage_fk  FOREIGN KEY ( strC_num ) REFERENCES  streaming_chatroom  ( strC_num )
 );
 
 CREATE SEQUENCE streaming_chattage_seq;
-
--- 포인트 게임 테이블
-CREATE TABLE point_game (
-	poiG_num    NUMBER        NOT NULL, -- 게임 번호
-	str_num     NUMBER        NOT NULL, -- 방송 구별 번호
-	mem_num     NUMBER        NOT NULL, -- 회원고유의 번호
-	poiG_content VARCHAR2(500) NOT NULL, -- 게임 내용
-	poiG_start  DATE          NOT NULL, -- 게임 시작 시간
-	poiG_end    DATE          NULL, -- 게임 종료 시간
-	CONSTRAINT poiG_num_pk PRIMARY KEY (poiG_num),
-	CONSTRAINT str_num_fk4 FOREIGN KEY (str_num) REFERENCES streaming (str_num),
-	CONSTRAINT mem_num_fk12 FOREIGN KEY (mem_num) REFERENCES member (mem_num)
+--포인트 게임
+CREATE TABLE  point_game  (
+	 poiG_num 	number		NOT NULL,  -- 게임번호
+	 poiG_content 	varchar2(500)		NOT NULL,  -- 게임 내용
+	 poiG_start 	date		NOT NULL,  -- 게임시작
+	 poiG_end 	date		NULL,  -- 게임종료
+	 str_num 	number		NOT NULL,  -- 방송 구별을 위한 번호
+	CONSTRAINT  point_game_pk  PRIMARY KEY ( poiG_num ),
+	CONSTRAINT  point_game_fk  FOREIGN KEY ( str_num ) REFERENCES  streaming  ( str_num )
 );
 
 CREATE SEQUENCE point_game_seq;
-
--- 포인트 게임 선택지 테이블
-CREATE TABLE point_game_option (
-	poiO_num     NUMBER       NOT NULL, -- 선택지 번호
-	poiG_num     NUMBER       NOT NULL, -- 게임 번호
-	optO_content VARCHAR2(500) NOT NULL, -- 선택지 내용
-	poiO_no      NUMBER       NULL, -- 선택지 번호
-	CONSTRAINT poiO_num_pk PRIMARY KEY (poiO_num),
-	CONSTRAINT poiG_num_fk FOREIGN KEY (poiG_num) REFERENCES point_game (poiG_num)
+--포인트 게임 선택지
+CREATE TABLE  point_game_option  (
+	 poiO_num 	number		NOT NULL,  -- 선택지 고유 번호
+	 optO_content 	varchar2(500)		NOT NULL,  -- 선택지 내용
+	 poiO_no 	number		NULL,  -- 선택지번호
+	 poiG_num 	number		NOT NULL,  -- 게임번호
+	CONSTRAINT  point_game_option_pk  PRIMARY KEY ( poiO_num ),
+	CONSTRAINT  point_game_option_fk  FOREIGN KEY ( poiG_num ) REFERENCES  point_game  ( poiG_num )
 );
 
 CREATE SEQUENCE point_game_option_seq;
-
--- 포인트 게임 배팅 테이블
-CREATE TABLE point_game_betting (
-	bet_num    NUMBER        NOT NULL, -- 배팅 번호
-	poiG_num   NUMBER        NOT NULL, -- 게임 번호
-	poiO_num   NUMBER        NOT NULL, -- 선택지 번호
-	bet_point  NUMBER        NOT NULL, -- 배팅 포인트
-	bet_date   DATE          DEFAULT SYSDATE NOT NULL, -- 배팅 날짜
-	CONSTRAINT bet_num_pk PRIMARY KEY (bet_num),
-	CONSTRAINT poiG_num_fk1 FOREIGN KEY (poiG_num) REFERENCES point_game (poiG_num),
-	CONSTRAINT poiO_num_fk FOREIGN KEY (poiO_num) REFERENCES point_game_option (poiO_num)
+--포인트 게임 배팅
+CREATE TABLE  point_game_betting  (
+	 bet_num 	number		NOT NULL,  -- 배팅번호
+	 bet_point 	number		NOT NULL,  -- 배팅 포인트
+	 bet_date 	date	DEFAULT SYSDATE	NOT NULL,  -- 배팅 날짜
+	 poiO_num 	number		NOT NULL,  -- 선택지 고유 번호
+	CONSTRAINT  point_game_betting_pk  PRIMARY KEY ( bet_num ),
+	CONSTRAINT  point_game_betting_fk  FOREIGN KEY ( poiO_num ) REFERENCES  point_game_option  ( poiO_num )
 );
 
 CREATE SEQUENCE point_game_betting_seq;
-
--- 미션 테이블
-CREATE TABLE mission (
-	mis_num    NUMBER       NOT NULL, -- 미션 번호
-	str_num    NUMBER       NOT NULL, -- 방송 구별 번호
-	mem_num    NUMBER       NOT NULL, -- 회원고유의 번호
-	mis_point  NUMBER       NOT NULL, -- 미션 포인트
-	mis_content VARCHAR2(500) NOT NULL, -- 미션 내용
-	mis_status NUMBER       NOT NULL, -- 미션 상태 (0: 미수행, 1: 성공, 2: 실패)
-	mis_date   DATE         DEFAULT SYSDATE NOT NULL, -- 미션 날짜
-	CONSTRAINT mis_num_pk PRIMARY KEY (mis_num),
-	CONSTRAINT str_num_fk5 FOREIGN KEY (str_num) REFERENCES streaming (str_num),
-	CONSTRAINT mem_num_fk13 FOREIGN KEY (mem_num) REFERENCES member (mem_num)
+--미션
+CREATE TABLE  mission  (
+	 mis_num 	number		NOT NULL,  -- 미션번호
+	 mis_point 	number		NOT NULL,  -- 미션포인트
+	 mis_content 	varchar2(500)		NOT NULL,  -- 미션내용
+	 mis_status 	number		NOT NULL,  -- 0:미수행,1:성공,2:실패
+	 mis_date 	date	DEFAULT SYSDATE	NOT NULL,  -- 후원 날짜
+	 str_num 	number		NOT NULL,  -- 방송 구별을 위한 번호
+	CONSTRAINT  mission_pk  PRIMARY KEY ( mis_num ),
+	CONSTRAINT  mission_fk  FOREIGN KEY ( str_num ) REFERENCES  streaming  ( str_num )
 );
 
 CREATE SEQUENCE mission_seq;
-
--- 후원 테이블
-CREATE TABLE donation (
-	don_num    NUMBER       NOT NULL, -- 후원 번호
-	str_num    NUMBER       NOT NULL, -- 방송 구별 번호
-	mem_num    NUMBER       NOT NULL, -- 회원고유의 번호
-	don_point  NUMBER       NOT NULL, -- 후원 포인트
-	don_content VARCHAR2(500) NOT NULL, -- 후원 메시지
-	don_date   DATE         DEFAULT SYSDATE NOT NULL, -- 후원 날짜
-	CONSTRAINT don_num_pk PRIMARY KEY (don_num),
-	CONSTRAINT str_num_fk6 FOREIGN KEY (str_num) REFERENCES streaming (str_num),
-	CONSTRAINT mem_num_fk14 FOREIGN KEY (mem_num) REFERENCES member (mem_num)
+--후원
+CREATE TABLE  donation  (
+	 don_num 	number		NOT NULL,  -- 후원번호
+	 don_point 	number		NOT NULL,  -- 후원 포인트
+	 don_content 	varchar2(500)		NOT NULL,  -- 후원메세지
+	 don_date 	date	DEFAULT SYSDATE	NOT NULL,  -- 후원 날짜
+	 str_num 	number		NOT NULL,  -- 방송 구별을 위한 번호
+	CONSTRAINT  donation_pk  PRIMARY KEY ( don_num ),
+	CONSTRAINT  donation_fk  FOREIGN KEY ( str_num ) REFERENCES  streaming  ( str_num )
 );
 
 CREATE SEQUENCE donation_seq;
-
--- 포인트 총계 테이블
-CREATE TABLE point_total (
-	mem_num    NUMBER       NOT NULL, -- 회원고유의 번호
-	point_total VARCHAR2(255) NOT NULL, -- 총 포인트
-	CONSTRAINT mem_num_pk1 PRIMARY KEY (mem_num),
-	CONSTRAINT mem_num_fk15 FOREIGN KEY (mem_num) REFERENCES member (mem_num)
+--방송
+CREATE TABLE  streaming  (
+	 str_num 	number		NOT NULL,  -- 방송 구별을 위한 번호
+	 mem_num 	number		NOT NULL,  -- 회원고유의 번호
+	CONSTRAINT  streaming_pk  PRIMARY KEY ( str_num ),
+	CONSTRAINT  streaming_fk  FOREIGN KEY ( mem_num ) REFERENCES  member  ( mem_num )
 );
 
--- 포인트 테이블
-CREATE TABLE point (
-	poi_num    NUMBER       NOT NULL, -- 포인트 번호
-	mem_num    NUMBER       NOT NULL, -- 회원고유의 번호
-	poi_status NUMBER(1)    NOT NULL, -- 포인트 사용 유형
-	poi_use    NUMBER       NOT NULL, -- 사용 포인트
-	poi_date   DATE         DEFAULT SYSDATE NOT NULL, -- 사용일
-	CONSTRAINT poi_num_pk PRIMARY KEY (poi_num),
-	CONSTRAINT mem_num_fk16 FOREIGN KEY (mem_num) REFERENCES point_total (mem_num)
+CREATE SEQUENCE streaming_seq;
+--방송 디테일
+CREATE TABLE  stream_detail  (
+	 strD_num 	number		NOT NULL,  -- 방송 구별을 위한 상세 번호
+	 strD_title 	varchar2(300)		NOT NULL,  -- 방송제목
+	 strD_start 	date	DEFAULT SYSDATE	NOT NULL,  -- 방송 시작 시간
+	 strD_end 	date		NULL,  -- 방송 종료 시간
+	 str_num 	number		NOT NULL,  -- 방송 구별을 위한 번호
+	CONSTRAINT  stream_detail_pk  PRIMARY KEY ( strD_num ),
+	CONSTRAINT  stream_detail_fk  FOREIGN KEY ( str_num ) REFERENCES  streaming  ( str_num )
+);
+
+CREATE SEQUENCE stream_detail_seq;
+--총 포인트
+CREATE TABLE  point_Total  (
+	 point_Total 	varchar2(255)		NOT NULL,  -- 총포인트
+	 mem_num 	number		NOT NULL,  -- 회원고유의 번호
+	CONSTRAINT  point_Total_fk  FOREIGN KEY ( mem_num ) REFERENCES  member  ( mem_num )
+);
+
+CREATE SEQUENCE point_Total_seq;
+--포인트
+CREATE TABLE  point  (
+	 poi_num 	number		NOT NULL,  -- 포인트번호
+	 poi_status 	number	DEFAULT 1	NOT NULL,  -- 포인트사용유형
+	 poi_use 	number		NOT NULL,  -- 사용포인트
+	 poi_date 	date	DEFAULT SYSDATE	NOT NULL,  -- 사용일
+	 mem_num 	number		NOT NULL,  -- 회원고유의 번호
+	CONSTRAINT  point_pk  PRIMARY KEY ( poi_num ),
+	CONSTRAINT  point_fk  FOREIGN KEY ( mem_num ) REFERENCES  member  ( mem_num )
 );
 
 CREATE SEQUENCE point_seq;
