@@ -19,6 +19,9 @@ CREATE TABLE member_detail (
 	mem_mdate    DATE          NULL, -- 회원 수정 날짜
 	mem_photo    VARCHAR2(400) DEFAULT 'face.png' NULL -- 회원 프로필 사진
 );
+ALTER TABLE member_detail ADD CONSTRAINT member_detail_pk PRIMARY KEY (mem_num);
+ALTER TABLE member_detail ADD CONSTRAINT member_detail__fk1 FOREIGN KEY (mem_num) REFERENCES member (mem_num);
+CREATE SEQUENCE member_detail_mem_num_seq;
 
 -- 출석 테이블
 CREATE TABLE attendance (
@@ -30,11 +33,6 @@ CREATE TABLE attendance (
 ALTER TABLE attendance ADD CONSTRAINT attendance_pk PRIMARY KEY (att_num, mem_num);
 ALTER TABLE attendance ADD CONSTRAINT attendance__fk1 FOREIGN KEY (mem_num) REFERENCES member (mem_num);
 CREATE SEQUENCE attendance_att_num_seq;
-
-
-ALTER TABLE member_detail ADD CONSTRAINT member_detail_pk PRIMARY KEY (mem_num);
-ALTER TABLE member_detail ADD CONSTRAINT member_detail__fk1 FOREIGN KEY (mem_num) REFERENCES member (mem_num);
-CREATE SEQUENCE member_detail_mem_num_seq;
 
 -- 스트리밍 테이블 
 CREATE TABLE streaming (
