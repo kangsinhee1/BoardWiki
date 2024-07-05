@@ -5,7 +5,7 @@ CREATE TABLE member (
 	mem_auth   NUMBER(1)   NOT NULL -- 회원등급(일반 0, 정지 1, 탈퇴 2, 관리자 9)
 );
 ALTER TABLE member ADD CONSTRAINT member_pk PRIMARY KEY (mem_num);
-CREATE SEQUENCE member_mem_num_seq;
+CREATE SEQUENCE member_seq;
 
 -- 회원 상세 테이블
 CREATE TABLE member_detail (
@@ -19,6 +19,6 @@ CREATE TABLE member_detail (
 	mem_mdate    DATE          NULL, -- 회원 수정 날짜
 	mem_photo    VARCHAR2(400) DEFAULT 'face.png' NULL -- 회원 프로필 사진
 );
-ALTER TABLE member_detail ADD CONSTRAINT member_detail_pk PRIMARY KEY (mem_num);
-ALTER TABLE member_detail ADD CONSTRAINT member_detail__fk1 FOREIGN KEY (mem_num) REFERENCES member (mem_num);
-CREATE SEQUENCE member_detail_mem_num_seq;
+CONSTRAINT member_detail_pk PRIMARY KEY (mem_num);
+CONSTRAINT member_detail__fk1 FOREIGN KEY (mem_num) REFERENCES member (mem_num);
+CREATE SEQUENCE member_detail_seq;
