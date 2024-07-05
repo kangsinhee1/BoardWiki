@@ -34,7 +34,7 @@ ALTER TABLE member_detail ADD CONSTRAINT member_detail_pk PRIMARY KEY (mem_num);
 ALTER TABLE member_detail ADD CONSTRAINT member_detail__fk1 FOREIGN KEY (mem_num) REFERENCES member (mem_num);
 CREATE SEQUENCE member_detail_mem_num_seq;
 
--- 스트리밍 테이블
+-- 스트리밍 테이블 
 CREATE TABLE streaming (
 	str_num NUMBER NOT NULL, -- 방송 구별 번호
 	mem_num NUMBER NOT NULL -- 회원고유의 번호
