@@ -13,6 +13,7 @@ public interface TeamMapper {
 	//모임 관리( 관리자)
 		//목록보기
 		public Integer getTeamRowCount(Map<String,Object>map);
+		
 		public List<TeamVO> selectTeamList(Map<String,Object>map);
 		//등록
 		public void insertTeam(TeamVO team);

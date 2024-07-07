@@ -3,6 +3,31 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
 <mapper namespace="kr.spring.team.dao.TeamMapper"> 
+	<!-- sql 태그와 include 태그를 이용해서 SQL문을 재사용 -->
+	 <sql id="teamSearch">
+	 	<where>
+	 		<if test="keyword !=null and keyword != ''">
+		 		<if test="keyfield == 1">
+		 			tea_name LIKE '%' || #{keyword} || '%'
+		 		</if>
+		 		<if test="keyfield == 2">
+		 			(id LIKE '%' || #{keyword} || '%' OR
+		 			tea_address1 LIKE '%' || #{keyword} || '%')
+		 		</if>
+	 		</if>
+	 	</where>
+	 </sql>
+	 <sql id="teamOrder">
+	 	<if test="order == 1">
+	 		ORDER BY tea_num DESC
+	 	</if>
+	 	<if test="order == 2">
+	 		ORDER BY tea_hit DESC
+	 	</if>
+	 	<if test="order == 3">
+	 		ORDER BY fav_cnt DESC NULLS LAST
+	 	</if>
+	 </sql>
 	  <!-- 모임 등록 -->
 	  <insert id="insertTeam" parameterType="teamVO" >
 	  	INSERT INTO team(
@@ -29,9 +54,36 @@
 	   )
 	  </insert>
 	 <!-- 모임 목록 -->
-	 
-	 
+	 <select id="getTeamRowCount" parameterType="map" resultType="integer">
+	 	SELECT count(*)FROM team JOIN member USING(mem_num)
+	 </select>
+	 <select id="selectTeamList" parameterType="map" resultType="teamVO">
+	 	SELECT *FROM
+	 	(SELECT a.*, rownum rnum FROM
+	 	(SELECT tea_num,
+	 	  <![CDATA[
+	         REPLACE(REPLACE(tea_name,'<','&lt;'),'>','&gt;') tea_name,
+	      ]]>
+	      tea_content,
+	      tea_time,
+	      tea_zipcode,
+	      tea_address1,
+	      tea_address2,
+	      tea_rdate,
+	      tea_man,
+	      mem_num,
+	      mem_email
+	      FROM team
+	      JOIN member USING (mem_num) 
+	      <include refid="teamSearch"></include>
+	      <include refid="teamOrder"></include>	
+	 	)a)
+	 	<![CDATA[
+	 	WHERE rnum >= #{start} AND rnum <= #{end}
+	 	]]>	
+	 </select>
 	 <!-- 모임 수정 -->
+	 
 	 <!-- 일정 등록 -->
  </mapper>
 

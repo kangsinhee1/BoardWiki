@@ -24,11 +24,13 @@
 				<form:input type="number" path="tea_man"  min="2" max="99"/>
 				<form:errors path="tea_man" cssClass="error-color"/>
 			</li>
+			<!--  모임진행 날짜 등록시 ?
 			<li>
 				<form:label path="tea_time">모임 진행 날짜</form:label>
 				<form:input type="date" path="tea_time" />
 				<form:errors path="tea_time" cssClass="error-color"/>
 			</li>
+			 -->
 			
 			<li>
 				<form:label path="tea_content">홍보 내용</form:label>

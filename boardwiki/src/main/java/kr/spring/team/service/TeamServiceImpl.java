@@ -19,14 +19,12 @@ public class TeamServiceImpl implements TeamService {
 	
 	@Override
 	public Integer getTeamRowCount(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+		return teamMapper.getTeamRowCount(map);
 	}
 
 	@Override
 	public List<TeamVO> selectTeamList(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+		return teamMapper.selectTeamList(map);
 	}
 
 	@Override

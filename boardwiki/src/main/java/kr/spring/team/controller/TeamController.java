@@ -1,5 +1,9 @@
 package kr.spring.team.controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -11,10 +15,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.spring.team.controller.TeamController;
 import kr.spring.team.service.TeamService;
 import kr.spring.team.vo.TeamVO;
+import kr.spring.util.PagingUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -33,7 +39,30 @@ public class TeamController {
 	 * 모임게시판 목록
 	 *=====================*/
 	@GetMapping("/team/teamList")
-	public String selectList() {
+	public String selectList(
+			 @RequestParam(defaultValue="1") int pageNum,
+			 @RequestParam(defaultValue="1") int order,
+			 String keyfield,String keyword,Model model) {
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		
+		int count = teamService.getTeamRowCount(map);
+		
+		//페이지 처리
+		PagingUtil page = new PagingUtil(keyfield, keyword, pageNum,count,20,10,"teamList","&order="+order);
+		List<TeamVO> list = null;
+		if(count >0) {
+			map.put("order", order);
+			map.put("start",page.getStartRow());
+			map.put("end",page.getEndRow());
+			list = teamService.selectTeamList(map);
+		}
+		model.addAttribute("count",count);
+		model.addAttribute("list",list);
+		model.addAttribute("page",page.getPage());
+		
 		return "teamList";
 	};
 	/*=====================
