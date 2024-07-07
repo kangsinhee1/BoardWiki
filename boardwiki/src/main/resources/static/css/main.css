@@ -3,3 +3,6 @@
 	display : inline-block;
 	margin : 20px;
 }
+.form-control{
+	width:600px;
+}
