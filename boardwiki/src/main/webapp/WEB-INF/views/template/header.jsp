@@ -26,7 +26,7 @@
 	    <a class="dropdown-item" href="#">자유게시판</a>
 	    <a class="dropdown-item" href="#">팁게시판	</a>
 	    <a class="dropdown-item" href="#">후기게시판</a>
-	    <a class="dropdown-item" href="#">모임게시판</a>
+	    <a class="dropdown-item" href="${pageContext.request.contextPath}/team/teamList">모임게시판</a>
 	  </div>
 	</div>
 	<div class="dropdown">

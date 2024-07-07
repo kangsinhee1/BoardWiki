@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="kr.spring.team.dao.TeamMapper"> 
+	  <!-- 모임 등록 -->
+	  <insert id="insertTeam" parameterType="teamVO" >
+	  	INSERT INTO team(
+	  	tea_num,
+	  	tea_name,
+	  	tea_content,
+	  	tea_time,
+	  	tea_zipcode,
+	  	tea_address1,
+	  	tea_address2,
+	  	tea_man,
+	  	mem_num
+	  	)
+	   VALUES(
+	   team_seq.nextval,
+	   #{tea_name},
+	   #{tea_content},
+	   #{tea_time},
+	   #{tea_zipcode},
+	   #{tea_address1},
+	   #{tea_address2},
+	   #{tea_man},
+	   #{mem_num}
+	   )
+	  </insert>
+	 <!-- 모임 목록 -->
+	 
+	 
+	 <!-- 모임 수정 -->
+	 <!-- 일정 등록 -->
+ </mapper>
+
+
+
+
+
+
+
