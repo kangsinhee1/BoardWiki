@@ -11,8 +11,7 @@
 		 			tea_name LIKE '%' || #{keyword} || '%'
 		 		</if>
 		 		<if test="keyfield == 2">
-		 			(id LIKE '%' || #{keyword} || '%' OR
-		 			tea_address1 LIKE '%' || #{keyword} || '%')
+		 			tea_address1 LIKE '%' || #{keyword} || '%'
 		 		</if>
 	 		</if>
 	 	</where>
@@ -45,7 +44,7 @@
 	   team_seq.nextval,
 	   #{tea_name},
 	   #{tea_content},
-	   #{tea_time},
+	   #{tea_time, jdbcType=VARCHAR},
 	   #{tea_zipcode},
 	   #{tea_address1},
 	   #{tea_address2},
@@ -55,7 +54,7 @@
 	  </insert>
 	 <!-- 모임 목록 -->
 	 <select id="getTeamRowCount" parameterType="map" resultType="integer">
-	 	SELECT count(*)FROM team JOIN member USING(mem_num)
+	 	SELECT count(*)FROM team JOIN member USING(mem_num) WHERE tea_status = 1
 	 </select>
 	 <select id="selectTeamList" parameterType="map" resultType="teamVO">
 	 	SELECT *FROM
@@ -71,10 +70,12 @@
 	      tea_address2,
 	      tea_rdate,
 	      tea_man,
+	      tea_hit,
 	      mem_num,
 	      mem_email
 	      FROM team
 	      JOIN member USING (mem_num) 
+	      WHERE tea_status = 1
 	      <include refid="teamSearch"></include>
 	      <include refid="teamOrder"></include>	
 	 	)a)
@@ -83,7 +84,19 @@
 	 	]]>	
 	 </select>
 	 <!-- 모임 수정 -->
-	 
+	 <update id="updateTeam" parameterType="teamVO" >
+	  UPDATE
+	   team
+	   SET
+	   tea_name=#{tea_name},
+	   tea_content=#{tea_content},
+	   tea_time=#{tea_time, jdbcType=VARCHAR},
+	   tea_zipcode=#{tea_zipcode},
+	   tea_address1=#{tea_address1},
+	   tea_address2=#{tea_address2},
+	   tea_man=#{tea_man}
+	   WHERE tea_num =#{tea_num}
+	 </update>
 	 <!-- 일정 등록 -->
  </mapper>
 

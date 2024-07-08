@@ -1,5 +1,6 @@
 package kr.spring.team.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.team.controller.TeamController;
 import kr.spring.team.service.TeamService;
@@ -58,11 +60,11 @@ public class TeamController {
 			map.put("start",page.getStartRow());
 			map.put("end",page.getEndRow());
 			list = teamService.selectTeamList(map);
+			
 		}
 		model.addAttribute("count",count);
 		model.addAttribute("list",list);
 		model.addAttribute("page",page.getPage());
-		
 		return "teamList";
 	};
 	/*=====================
@@ -85,6 +87,7 @@ public class TeamController {
 		}
 		//회원번호 세팅
 		//MemberVO member = (MemberVO)session.getAttribute("user");
+		//teamVO.setMem_num(member.getMem_num);
 		teamVO.setMem_num(99999);
 		//모임글쓰기
 		teamService.insertTeam(teamVO);
@@ -94,6 +97,54 @@ public class TeamController {
 						 request.getContextPath()+"/team/teamList");
 		return "common/resultAlert";
 	}
+	/*=====================
+	 * 모임 게시판 상세
+	 *=====================*/
+	@GetMapping("/team/teamDetail")
+	public ModelAndView teamDetail(long tea_num) {
+		
+		teamService.updateTeamHit(tea_num);
+		
+		TeamVO team =  teamService.detailTeam(tea_num);
+		
+		return new ModelAndView("teamDetail","team",team);
+	}
+	/*=====================
+	 * 모임 게시판 수정
+	 *=====================*/
+	@GetMapping("/team/teamUpdate")
+	public String teamUpdate(long tea_num, Model model) {
+		TeamVO team = teamService.detailTeam(tea_num);
+		
+		model.addAttribute("team",team);
+		
+		return "teamUpdate";
+		
+	}
+	@PostMapping("/team/teamUpdate")
+	public String submitTeamUpdate(@Valid TeamVO teamVO,
+								BindingResult result,
+								HttpServletRequest request,
+								HttpSession session,
+								Model model)  throws IllegalStateException, IOException{
+		log.debug("" + teamVO);
+		if(result.hasErrors()) {
+			teamService.detailTeam(teamVO.getTea_num());
+			return "teamUpdate";
+		}
+		
+		teamService.updateTeam(teamVO);
+		model.addAttribute("message","글수정 완료");
+		model.addAttribute("url",request.getContextPath()+"teamDetail?tea_num="+teamVO.getTea_num());
+		
+		
+		return "common/resultAlert";
+		
+	}
+	
+	/*=====================
+	 * 모임 게시판 삭제( 실제로는 삭제가 아닌 비활성화 처리해서 보이지 않도록 처리)
+	 *=====================*/
 	
 	
 }

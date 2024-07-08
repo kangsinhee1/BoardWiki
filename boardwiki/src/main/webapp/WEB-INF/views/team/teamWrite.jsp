@@ -20,8 +20,8 @@
 				<form:errors path="tea_name" cssClass="error-color"/>
 			</li>
 			<li>
-				<form:label path="tea_man">신청가능 회원수</form:label>
-				<form:input type="number" path="tea_man"  min="2" max="99"/>
+				<form:label path="tea_man">모집 회원수</form:label>
+				<form:input type="number" path="tea_man"  min="2" max="99" defaultValue="2"/>
 				<form:errors path="tea_man" cssClass="error-color"/>
 			</li>
 			<!--  모임진행 날짜 등록시 ?
@@ -58,10 +58,9 @@
 			
 				<form:label path="tea_zipcode">모임 진행 장소</form:label>
 			<li>
-				<form:input path="tea_zipcode" placeholder="우편번호"/>
+				<form:input type="hidden" path="tea_zipcode"/>
 				<input type="button" onclick="execDaumPostcode()"
 				               value="우편번호 찾기" class="default-btn">
-				<form:errors path="tea_zipcode" cssClass="error-color"/>
 			</li>
 			<li>
 				<form:input path="tea_address1" placeholder="주소"/>

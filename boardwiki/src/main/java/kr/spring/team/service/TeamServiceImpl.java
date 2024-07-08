@@ -33,27 +33,23 @@ public class TeamServiceImpl implements TeamService {
 	}
 
 	@Override
-	public TeamVO updateTeam(Long tea_num) {
-		// TODO Auto-generated method stub
-		return null;
+	public void updateTeam(TeamVO teamVO) {
+		teamMapper.updateTeam(teamVO);
 	}
 
 	@Override
 	public void updateTeamSchedule(Long tea_num) {
-		// TODO Auto-generated method stub
-		
+		teamMapper.updateTeamSchedule(tea_num);
 	}
 
 	@Override
 	public void updateTeamHit(Long tea_num) {
-		// TODO Auto-generated method stub
-		
+		teamMapper.updateTeamHit(tea_num);
 	}
 
 	@Override
 	public void updateTeamStatus(Long tea_num) {
-		// TODO Auto-generated method stub
-		
+		teamMapper.updateTeamStatus(tea_num);
 	}
 
 	@Override
@@ -84,6 +80,11 @@ public class TeamServiceImpl implements TeamService {
 	public void deleteTeamFavByTeamNum(TeamFavVO tFav) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public TeamVO detailTeam(long tea_num) {
+		return teamMapper.detailTeam(tea_num);
 	}
 
 }

@@ -11,10 +11,12 @@ public interface TeamService {
 			//목록보기
 			public Integer getTeamRowCount(Map<String,Object>map);
 			public List<TeamVO> selectTeamList(Map<String,Object>map);
+			//상세
+			public TeamVO detailTeam(long tea_num);
 			//등록
 			public void insertTeam(TeamVO team);
 			//수정
-			public TeamVO updateTeam(Long tea_num);
+			public void updateTeam(TeamVO teamVO);
 			//일정 등록
 			public void updateTeamSchedule(Long tea_num);
 			//조회수
