@@ -1,7 +1,6 @@
 package kr.spring.member.controller;
 
 import java.util.Map;
-
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -140,76 +139,5 @@ public class MemberController {
 		model.addAttribute("member",member);
 				
 		return "myPage";
-	}
-	/*==============================
-	 * 			네이버 로그인
-	 *==============================*/
-	@GetMapping("/login/oauth2/code/naver")
-	public String naverLogin(@RequestParam String code, @RequestParam String state, HttpSession session) {
-
-		RestTemplate restTemplate = new RestTemplate();
-
-		// 액세스 토큰 요청
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-
-		MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
-		body.add("grant_type", "authorization_code");
-		body.add("client_id", naverClientId);
-		body.add("client_secret", naverClientSecret);
-		body.add("code", code);
-		body.add("state", state);
-
-		log.debug("Received code: " + code);
-		log.debug("Received state: " + state);
-
-		HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(body, headers);
-		ResponseEntity<Map> response = restTemplate.postForEntity("https://nid.naver.com/oauth2.0/token", request, Map.class);
-
-		Map<String, Object> responseBody = response.getBody();
-		String accessToken = (String) responseBody.get("access_token");
-
-		// 사용자 정보 요청
-		HttpHeaders userInfoHeaders = new HttpHeaders();
-		userInfoHeaders.setBearerAuth(accessToken);
-		HttpEntity<String> userInfoRequest = new HttpEntity<>(userInfoHeaders);
-
-		ResponseEntity<Map> userInfoResponse = restTemplate.exchange("https://openapi.naver.com/v1/nid/me", HttpMethod.GET, userInfoRequest, Map.class);
-		Map<String, Object> userInfo = (Map<String, Object>) userInfoResponse.getBody().get("response");
-
-		// 사용자 정보를 세션에 저장
-		session.setAttribute("user", userInfo);
-
-		// DB에 사용자 정보 저장
-		registerOrLoginUser(userInfo, session);
-
-		return "redirect:/main/main";
-	}
-
-	private void registerOrLoginUser(Map<String, Object> userInfo, HttpSession session) {
-		String email = (String) userInfo.get("email");
-		String name = (String) userInfo.get("name");
-
-		// MemberVO 객체 생성 및 정보 설정
-		MemberVO memberVO = new MemberVO();
-		memberVO.setMem_email(email);
-		memberVO.setMem_name(name);
-		memberVO.setMem_provider("naver");
-
-		// 이미 가입된 회원인지 확인
-		MemberVO Member = memberService.selectCheckMember(email);
-		if (Member == null) {
-			// 신규 회원 가입 처리
-			memberService.insertMember(memberVO);
-
-			// 회원가입 완료 메시지 저장
-			session.setAttribute("message", "회원 가입이 완료되었습니다.");
-		} else {
-			// 기존 회원 로그인 처리
-			session.setAttribute("message", "로그인 성공");
-		}
-
-		// 사용자 정보를 세션에 저장
-		session.setAttribute("loggedInUser", memberVO);
 	}
 }
