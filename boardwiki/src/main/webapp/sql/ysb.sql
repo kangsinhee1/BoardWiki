@@ -14,7 +14,7 @@ CREATE TABLE item (
 	maxplayers    VARCHAR2(50)  NULL, -- 최대 인원
 	description   CLOB          NULL, -- 설명
 	item_year     VARCHAR2(50)  NULL, -- 출시 연도
-	item_stock    NUMBER(3)     NOT NULL, -- 재고
+	item_stock    NUMBER    NOT NULL, -- 재고
 	item_reg_date DATE DEFAULT SYSDATE NOT NULL, -- 등록일
 	CONSTRAINT item_pk PRIMARY KEY (item_num)
 );

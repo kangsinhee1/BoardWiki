@@ -1,7 +1,6 @@
 package kr.spring.team.vo;
 
 import java.sql.Date;
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
