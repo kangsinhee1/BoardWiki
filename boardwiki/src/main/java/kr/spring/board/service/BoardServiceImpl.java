@@ -4,10 +4,14 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.board.dao.BoardMapper;
 import kr.spring.board.vo.BoardVO;
 
+@Service
+@Transactional
 public class BoardServiceImpl implements BoardService{
 	@Autowired
 	BoardMapper boardMapper;

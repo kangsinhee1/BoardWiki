@@ -1,30 +1,20 @@
 package kr.spring.board.controller;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.board.service.BoardService;
 import kr.spring.board.vo.BoardVO;
-import kr.spring.member.vo.MemberVO;
-import kr.spring.util.FileUtil;
 import kr.spring.util.PagingUtil;
-import kr.spring.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -39,46 +29,7 @@ public class BoardController {
 		return new BoardVO();
 	}
 	
-	/*====================
-	 *  게시판 글쓰기
-	 *====================*/
-	//등록 폼 호출
-	@GetMapping("/board/write")
-	public String form() {
-		return "boardWrite";
-	}
-	//등록 폼에서 전송된 데이터 처리
-	@PostMapping("/board/write")
-	public String submit(@Valid BoardVO boardVO,
-						  BindingResult result,
-						  HttpServletRequest request,
-						  HttpSession session,
-						  Model model) 
-							throws IllegalStateException,
-										IOException{
-		log.debug("<<게시판 글 저장>> : " + boardVO);
-		
-		//유효성 체크 결과 오류가 있으면 폼 호출
-		if(result.hasErrors()) {
-			return form();
-		}
-		
-		//회원번호 셋팅
-		MemberVO vo = (MemberVO)session.getAttribute("user");
-		boardVO.setMem_num(vo.getMem_num());
-		
-		//파일 업로드
-		boardVO.setBoa_file(FileUtil.createFile(request, boardVO.getUpload()));
-		//글쓰기
-		boardService.insertBoard(boardVO);
-		
-		//View 메시지 처리
-		model.addAttribute("message","성공적으로 글이 등록되었습니다.");
-		model.addAttribute("url",request.getContextPath()+"/board/list");
-		
-		
-		return "common/resultAlert";
-	}
+	
 	/*====================
 	 *  게시판 목록
 	 *====================*/

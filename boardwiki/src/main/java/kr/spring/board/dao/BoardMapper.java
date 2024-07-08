@@ -16,15 +16,15 @@ public interface BoardMapper {
 	public List<BoardVO> selectList(Map<String,Object> map);
 	public Integer selectRowCount(Map<String,Object> map);
 	public void insertBoard(BoardVO board);
-	@Select("SELECT * FROM spboard JOIN spmember USING(mem_num) LEFT OUTER JOIN spmember_detail USING(mem_num) WHERE board_num=#{board_num}")
-	public BoardVO selectBoard(Long board_num);
-	@Update("UPDATE spboard SET hit=hit+1 WHERE board_num=#{board_num}")
-	public void updateHit(Long board_num);
+	@Select("SELECT * FROM board JOIN member USING(mem_num) LEFT OUTER JOIN member_detail USING(mem_num) WHERE boa_num=#{boa_num}")
+	public BoardVO selectBoard(Long boa_num);
+	@Update("UPDATE board SET hit=hit+1 WHERE board_num=#{boa_num}")
+	public void updateHit(Long boa_num);
 	public void updateBoard(BoardVO board);
-	@Delete("DELETE FROM spboard WHERE board_num=#{board_num}")
-	public void deleteBoard(Long board_num);
-	@Update("UPDATE spboard SET filename='' WHERE board_num=#{board_num}")
-	public void deleteFile(Long board_num);
+	@Delete("DELETE FROM board WHERE boa_num=#{boa_num}")
+	public void deleteBoard(Long boa_num);
+	@Update("UPDATE board SET filename='' WHERE boa_num=#{boa_num}")
+	public void deleteFile(Long boa_num);
 	
 }
 

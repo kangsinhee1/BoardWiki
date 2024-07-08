@@ -6,25 +6,25 @@
 	 <!-- 글쓰기 -->
 	 <insert id="insertBoard" parameterType="boardVO">
 	 	INSERT INTO board(
-	 	  board_num,
-	 	  category,
-	 	  title,
-	 	  content,
-	 	  filename,
+	 	  boa_num,
+	 	  boa_category,
+	 	  boa_title,
+	 	  boa_content,
+	 	  boa_file,
 	 	  mem_num)
 	 	VALUES(
 	 	  board_seq.nextval,
-	 	  #{category},
-	 	  #{title},
-	 	  #{content},
-	 	  #{filename,jdbcType=VARCHAR},
+	 	  #{boa_category},
+	 	  #{boa_title},
+	 	  #{boa_content},
+	 	  #{boa_file,jdbcType=VARCHAR},
 	 	  #{mem_num})
 	 </insert>
 	 <!-- sql 태그와 include 태그를 이용해서 SQL문을 재사용 -->
 	 <sql id="boardSearch">
 	 	<where>
 	 		<if test="category !=null and category != ''">
-	 			category = #{category}
+	 			boa_category = #{boa_category}
 	 		</if>
 	 		<if test="keyword !=null and keyword != ''">
 	 			<if test="category !=null and category != ''">
@@ -32,25 +32,25 @@
 	 			</if>
 	 		</if>
 	 		<if test="keyfield == 1">
-	 			title LIKE '%' || #{keyword} || '%'
+	 			boa_title LIKE '%' || #{keyword} || '%'
 	 		</if>
 	 		<if test="keyfield == 2">
 	 			(id LIKE '%' || #{keyword} || '%' OR
 	 			nick_name LIKE '%' || #{keyword} || '%')
 	 		</if>
 	 		<if test="keyfield == 3">
-	 			content LIKE '%' || #{keyword} || '%'
+	 			boa_content LIKE '%' || #{keyword} || '%'
 	 		</if>
 	 		<if test="keyfield == 4">
-	 			(title LIKE '%' || #{keyword} || '%' OR
-	 			content LIKE '%' || #{keyword} || '%')
+	 			(boa_title LIKE '%' || #{keyword} || '%' OR
+	 			boa_content LIKE '%' || #{keyword} || '%')
 	 		</if>
 	 	</where>
 	 </sql>
 	 
 	 <sql id="boardOrder">
  		<if test="order == 1">
- 			ORDER BY board_num DESC
+ 			ORDER BY boa_num DESC
  		</if>
  		<if test="order == 2">
  			ORDER BY hit DESC
@@ -68,7 +68,7 @@
 									resultType="integer">
 		SELECT
 			COUNT(*)
-		FROM spboard JOIN spmember USING (mem_num)
+		FROM board JOIN member USING (mem_num)
 		<include refid="boardSearch"></include>	 
 	 </select>
 	 <!-- 게시판 전체 목록/검색 목록 -->
@@ -81,9 +81,9 @@
 	 			rownum rnum
 	 		   FROM (SELECT
 	 		   			*
-	 		   		 FROM spboard
-	 		   		 LEFT OUTER JOIN (SELECT COUNT(*) fav_cnt, board_num FROM spboard_fav GROUP BY board_num) USING(board_num)
-	 		   		 JOIN spmember USING(mem_num)
+	 		   		 FROM board
+	 		   		 LEFT OUTER JOIN (SELECT COUNT(*) fav_cnt, boa_num FROM board_fav GROUP BY boa_num) USING(boa_num)
+	 		   		 JOIN member USING(mem_num)
 	 		   		 <include refid="boardSearch"></include>
 	 		   		 <include refid="boardOrder"></include>
 	 		   		 )a)
@@ -92,51 +92,9 @@
 		]]>
 	</select>
 	<!-- 게시판 글 수정 -->
-	<update id="updateBoard" parameterType="boardVO">
-		UPDATE spboard SET
-			<if test="filename != null">
-			filename = #{filename},
-			</if>
-			title = #{title},
-			content= #{content},
-			ip = #{ip},
-			modify_date = SYSDATE
-		WHERE board_num = #{board_num}
-	</update>
 	
 	<!-- 댓글 등록 -->
-	<insert id="insertReply" parameterType="boardReplyVO">
-		INSERT INTO spboard_reply(
-			re_num,
-			re_content,
-			re_ip,
-			board_num,
-			mem_num)
-		VALUES (
-			spreply_seq.nextval,
-			#{re_content},
-			#{re_ip},
-			#{board_num},
-			#{mem_num})
-	</insert>
 	<!-- 댓글 목록 -->
-	<select id="selectListReply" parameterType="map"
-								resultType="boardReplyVO">
-		SELECT
-		   *
-		FROM (SELECT
-		 		a.*,
-		 		rownum rnum
-		 	  FROM (SELECT
-		 	  		 *
-		 	  		FROM spboard_reply
-		 	  		JOIN spmember USING(mem_num)
-		 	  		WHERE board_num=#{board_num}
-		 	  		ORDER BY re_num DESC)a)
-		<![CDATA[
-		WHERE rnum >= #{start} AND rnum <= #{end}
-		]]>
-	</select>
  </mapper>
 
 

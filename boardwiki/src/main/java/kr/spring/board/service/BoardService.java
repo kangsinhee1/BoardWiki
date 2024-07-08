@@ -10,10 +10,10 @@ public interface BoardService {
 	public List<BoardVO> selectList(Map<String,Object> map);
 	public Integer selectRowCount(Map<String,Object> map);
 	public void insertBoard(BoardVO board);
-	public BoardVO selectBoard(Long board_num);
-	public void updateHit(Long board_num);
+	public BoardVO selectBoard(Long boa_num);
+	public void updateHit(Long boa_num);
 	public void updateBoard(BoardVO board);
-	public void deleteBoard(Long board_num);
-	public void deleteFile(Long board_num);
+	public void deleteBoard(Long boa_num);
+	public void deleteFile(Long boa_num);
 	
 }
