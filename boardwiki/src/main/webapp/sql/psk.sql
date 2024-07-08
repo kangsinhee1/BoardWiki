@@ -133,6 +133,7 @@ CREATE TABLE  point  (
 	 poi_use 	number		NOT NULL,  -- 사용포인트
 	 poi_date 	date	DEFAULT SYSDATE	NOT NULL,  -- 사용일
 	 mem_num 	number		NOT NULL,  -- 회원고유의 번호
+	 poi_increase number not null, -- 1:감소,2:증가 
 	CONSTRAINT  point_pk  PRIMARY KEY ( poi_num ),
 	CONSTRAINT  point_fk  FOREIGN KEY ( mem_num ) REFERENCES  member  ( mem_num )
 );
