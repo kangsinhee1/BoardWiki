@@ -5,11 +5,22 @@
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 <tiles-definitions>
-	<definition name="syj" template="/WEB-INF/views/template/layout_basic.jsp">
-		<put-attribute name="title" value="SpringPage"/>
-		<put-attribute name="css" value="/WEB-INF/views/member/memberCSS.jsp"/>
-		<put-attribute name="body" value="/WEB-INF/views/main/main.jsp"/>
+	<definition name="item_main" extends="main">
+		<put-attribute name="title" value="123"/>
+		<!-- <put-attribute name="css" value="/WEB-INF/views/member/memberCSS.jsp"/> -->
+		<put-attribute name="body" value="/WEB-INF/views/item/item_main.jsp"/>
 	</definition>
+
+
+
+
+
+
+
+
+
+
+	
 </tiles-definitions>
 
 
