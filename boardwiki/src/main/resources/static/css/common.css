@@ -1,7 +1,11 @@
 @charset "UTF-8";
-
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
 /* 전체 레이아웃
 ---------------------*/
+*{
+	font-family:"Noto Sans KR", sans-serif;
+}
+
 #main{
 	width:1024px;
 	margin:0 auto;
@@ -314,7 +318,6 @@ ul#delivery_info li span{
 	width:130px;
 	display: inline-block;
 }
-
 
 
 
