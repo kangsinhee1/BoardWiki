@@ -15,7 +15,7 @@
 	    게임
 	  </button>
 	  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-	    <a class="dropdown-item" href="#">게임 메인</a>
+	    <a class="dropdown-item" href="${pageContext.request.contextPath}/item/item_main">게임 메인</a>
 	  </div>
 	</div>
 	<div class="dropdown">
