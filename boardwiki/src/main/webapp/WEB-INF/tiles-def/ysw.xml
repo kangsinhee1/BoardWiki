@@ -7,10 +7,9 @@
 <tiles-definitions>
 <!-- MyPage -->
 	<definition name="myPage" template="/WEB-INF/views/template/layout_mypage.jsp">
-		<put-attribute name="title" value="SpringPage"/>
-		<put-attribute name="header" value="/WEB-INF/views/template/header.jsp"/>
-		<put-attribute name="nav" value="/WEB-INF/views/template/nav_mypage.jsp"/>
-		<put-attribute name="body" value="/WEB-INF/views/member/memberView.jsp"/>
+		<put-attribute name="title" value="myPage"/>
+		<put-attribute name="nav" value="/WEB-INF/views/myPage/side-nav.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/myPage/myPageMain.jsp"/>
 		<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp"/>
 	</definition>
 </tiles-definitions>
