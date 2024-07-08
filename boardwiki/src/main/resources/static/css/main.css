@@ -3,6 +3,12 @@
 	display : inline-block;
 	margin : 10px;
 }
-.form-control{
-	width:600px;
+.navbar-brand{
+	margin-left: 200px;
+}
+.search-bar{
+	display : inline-block;
+	margin: 50px 0;
+	
+	text-align: center;
 }

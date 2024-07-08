@@ -29,5 +29,7 @@
     <span class="sr-only">Next</span>
   </a>
 </div>
+<hr size="1" noshade="noshade" width="100%">
+
 </div>
 <!-- 메인 끝 -->
