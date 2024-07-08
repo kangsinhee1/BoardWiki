@@ -10,7 +10,7 @@
 		<a href="list?boa_category=3">후기게시판</a> |
 		<a href="list?boa_category=4">공지사항</a> |
 		<a href="list?boa_category=5">QnA</a> |
-		<a href="list?boa_category=6">모임게시판</a>
+		<a href="${pageContext.request.contextPath}/team/teamList">모임게시판</a>
 	</div>
 	<br>
 	<form action="list" id="search_form" method="get">
