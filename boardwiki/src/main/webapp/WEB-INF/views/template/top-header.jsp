@@ -3,11 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- 상단 시작 -->
 <div class="align-right">	
-    <c:if test="${!empty user}">
+    <%-- <c:if test="${!empty user}"> --%>
     <a href="${pageContext.request.contextPath}/member/myPage">MY페이지</a>
     <img src="${pageContext.request.contextPath}/member/photoView" width="25" height="25" class="my-photo">
     <a href="${pageContext.request.contextPath}/member/logout">로그아웃</a>
-    </c:if>
+    <%-- </c:if> --%>
 	<c:if test="${empty user}">
 	<a href="${pageContext.request.contextPath}/member/registerUser">회원가입</a>
 	<a href="${pageContext.request.contextPath}/member/login">로그인</a>
