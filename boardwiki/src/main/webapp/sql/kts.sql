@@ -9,7 +9,7 @@ CREATE TABLE board (
 	boa_rdate  DATE         DEFAULT SYSDATE NOT NULL, -- 게시글 작성 날짜
 	boa_mdate  DATE         NULL, -- 게시글 수정 날짜
 	boa_auth   NUMBER(1)  DEFAULT '0'  NOT NULL, -- 게시글 권한 (0: 일반, 1: 신고 접수, 2: 정지)
-	boa_photo  VARCHAR2(400) NULL -- 게시글 사진
+	boa_file  VARCHAR2(400) NULL -- 게시글 파일
 );
 ALTER TABLE board ADD CONSTRAINT board_pk PRIMARY KEY (boa_num, mem_num);
 CREATE SEQUENCE board_boa_num_seq;
