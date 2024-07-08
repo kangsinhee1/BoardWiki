@@ -10,18 +10,19 @@
 	    <form:errors element="div" cssClass="error-color"/>
 		<ul>
 			<li class="floating-label">
-				<form:input path="email" placeholder="아이디"
+				<form:input path="mem_email" placeholder="아이디"
 				                             autocomplete="off" cssClass="form-input"/>
-				<form:label path="email">아이디</form:label>
+				<form:label path="mem_email">아이디</form:label>
 			</li>
 			<li class="floating-label">
-				<form:password path="passwd" placeholder="비밀번호" cssClass="form-input"/>
-				<form:label path="passwd">비밀번호</form:label>
+				<form:password path="mem_passwd" placeholder="비밀번호" cssClass="form-input"/>
+				<form:label path="mem_passwd">비밀번호</form:label>
 			</li>
 			<li>
 				<label for="auto"><input type="checkbox" name="auto" id="auto">로그인상태유지</label>
 			</li>
-		</ul> 
+		</ul>
+			<a href="http://localhost:8000/login/oauth2/code/naver">naver login</a>
 		<div>
 			<form:button class="login-btn">로그인</form:button>
 		</div>                           
@@ -35,6 +36,7 @@
 	</p>
 </div>
 <!-- 회원로그인 끝 -->
+
 
 
 
