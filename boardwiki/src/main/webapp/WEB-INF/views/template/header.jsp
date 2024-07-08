@@ -24,9 +24,9 @@
 		    커뮤니티
 		  </button>
 		  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-		    <a class="dropdown-item" href="#">자유게시판</a>
-		    <a class="dropdown-item" href="#">팁게시판	</a>
-		    <a class="dropdown-item" href="#">후기게시판</a>
+		    <a class="dropdown-item" href="${pageContext.request.contextPath}/board/list?boa_category=1">자유게시판</a>
+		    <a class="dropdown-item" href="${pageContext.request.contextPath}/board/list?boa_category=2">팁게시판	</a>
+		    <a class="dropdown-item" href="${pageContext.request.contextPath}/board/list?boa_category=3">후기게시판</a>
 		    <a class="dropdown-item" href="${pageContext.request.contextPath}/team/teamList">모임게시판</a>
 		  </div>
 		</div>
@@ -35,8 +35,8 @@
 		    공지
 		  </button>
 		  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-		    <a class="dropdown-item" href="#">공지</a>
-		    <a class="dropdown-item" href="#">QnA</a>
+		    <a class="dropdown-item" href="${pageContext.request.contextPath}/board/list?boa_category=4">공지</a>
+		    <a class="dropdown-item" href="${pageContext.request.contextPath}/board/list?boa_category=5">QnA</a>
 		  </div>
 		</div>
 		<div class="dropdown">

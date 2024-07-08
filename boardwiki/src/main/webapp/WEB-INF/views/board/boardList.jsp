@@ -4,15 +4,15 @@
 <!-- 게시판 목록 시작 -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 <div class="page-main">
-	<h2>게시판 목록</h2>
 	<div>
-		<a href="list?category=1">자유게시판</a>
-		<a href="list?category=2">팁게시판</a>
-		<a href="list?category=3">후기게시판</a>
-		<a href="list?category=4">공지사항</a>
-		<a href="list?category=5">QnA</a>
-		<a href="list?category=6">모임게시판</a>
+		<a href="list?boa_category=1">자유게시판</a> |
+		<a href="list?boa_category=2">팁게시판</a> |
+		<a href="list?boa_category=3">후기게시판</a> |
+		<a href="list?boa_category=4">공지사항</a> |
+		<a href="list?boa_category=5">QnA</a> |
+		<a href="list?boa_category=6">모임게시판</a>
 	</div>
+	<br>
 	<form action="list" id="search_form" method="get">
 		<input type="hidden" name="category" value="${param.category}">
 		<ul class="search">
@@ -40,15 +40,15 @@
 			</select>
 			<script type="text/javascript">
 				$('#order').change(function(){
-					location.href='list?category=${param.category}&keyfield='
+					location.href='list?boa_category=${param.boa_category}&keyfield='
 							+$('#keyfield').val()+'&keyword='
 							+$('#keyword').val()+'&order='
 							+$('#order').val();
 				});
 			</script>
-			<c:if test="${!empty user}">
+			
 			<input type="button" value="글쓰기" onclick="location.href='write'">
-			</c:if>
+			
 		</div>
 	</form>
 	<c:if test="${count==0}">
@@ -67,13 +67,10 @@
 		<c:forEach var="board" items="${list}">
 		<tr>
 			<td class="align-center">${board.boa_num}</td>
-			<td class="align-left"><a href="detail?board_num=${board.board_num}">${board.title}(${board.re_cnt})</a></td>
-			<td class="align-center">
-				<c:if test="${empty board.nick_name}">${board.id}</c:if>
-				<c:if test="${!empty board.nick_name}">${board.nick_name}</c:if>
-			</td>
-			<td class="align-center">${board.reg_date}</td>
-			<td class="align-center">${board.hit}</td>
+			<td class="align-left"><a href="detail?boa_num=${board.boa_num}">${board.boa_title}</a></td>
+			<td class="align-center">${board.mem_email}</td>
+			<td class="align-center">${board.boa_rdate}</td>
+			<td class="align-center">${board.boa_hit}</td>
 			<td class="align-center">${board.fav_cnt}</td>
 		</tr>
 		</c:forEach>

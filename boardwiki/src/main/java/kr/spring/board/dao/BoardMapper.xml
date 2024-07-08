@@ -53,7 +53,7 @@
  			ORDER BY boa_num DESC
  		</if>
  		<if test="order == 2">
- 			ORDER BY hit DESC
+ 			ORDER BY boa_hit DESC
  		</if>
  		<if test="order == 3">
  			ORDER BY fav_cnt DESC NULLS LAST

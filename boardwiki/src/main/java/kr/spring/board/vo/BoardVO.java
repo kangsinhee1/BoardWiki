@@ -29,4 +29,10 @@ public class BoardVO {
 	private int boa_auth;
 	private MultipartFile upload; 
 	private String boa_file;
+	
+	private String id;				
+	private String nick_name;		
+	
+	private int re_cnt;				
+	private int fav_cnt;
 }
