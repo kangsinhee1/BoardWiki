@@ -3,7 +3,18 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
 <mapper namespace="kr.spring.member.dao.MemberMapper"> 
-	
+    <!-- 이메일로 회원 조회 -->
+    <select id="selectCheckMember" parameterType="string" resultType="memberVO">
+	 	SELECT
+	 	   mem_num,
+	 	   mem_email,
+	 	   mem_auth,
+	 	   mem_nickname,
+	 	   mem_passwd
+	 	FROM member LEFT OUTER JOIN member_detail
+	 	USING (mem_num)
+	 	WHERE mem_email = #{mem_email}
+	 </select>
 </mapper>
 
 
