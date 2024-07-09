@@ -78,7 +78,7 @@ public class ItemController {
 		return "item_detail";
 	}
 	//등록 폼에서 전송된 데이터 처리
-	@PostMapping
+	//@PostMapping
 }
 
 
