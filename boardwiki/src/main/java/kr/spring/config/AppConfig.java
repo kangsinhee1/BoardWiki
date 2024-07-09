@@ -9,6 +9,7 @@ import org.springframework.web.servlet.view.tiles3.TilesView;
 import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 
 import kr.spring.interceptor.LoginCheckInterceptor;
+import kr.spring.util.NaverLoginUtil;
 
 //자바코드 기반 설정 클래스
 @Configuration

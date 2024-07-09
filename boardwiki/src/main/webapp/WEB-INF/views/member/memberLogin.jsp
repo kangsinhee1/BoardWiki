@@ -22,7 +22,7 @@
 				<label for="auto"><input type="checkbox" name="auto" id="auto">로그인상태유지</label>
 			</li>
 		</ul>
-			<a href="http://localhost:8000/login/oauth2/code/naver">naver login</a>
+			<a href="${naverUrl}">naver login</a>
 		<div>
 			<form:button class="login-btn">로그인</form:button>
 		</div>                           

@@ -37,9 +37,9 @@ spring:
     client:
       registration:
         naver:
-          client-id: bIwCvJnI1r_XLOaITYqT
-          client-secret: zx5A_1_BQ9
-          redirect-uri: http://localhost:8000/login/oauth2/code/naver
+          client-id: aGoUsn2QY4b5ZsjIvvn_
+          client-secret: mdnzHOAtxH
+          redirect-uri: https://localhost:8000/member/login/oauth2/code/naver
           authorization-grant-type: authorization_code
           scope: name, email
           client-name: naver
