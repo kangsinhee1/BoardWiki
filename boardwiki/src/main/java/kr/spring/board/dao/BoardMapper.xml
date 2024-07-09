@@ -13,7 +13,7 @@
 	 	  boa_file,
 	 	  mem_num)
 	 	VALUES(
-	 	  board_seq.nextval,
+	 	  board_boa_num_seq.nextval,
 	 	  #{boa_category},
 	 	  #{boa_title},
 	 	  #{boa_content},
@@ -23,11 +23,11 @@
 	 <!-- sql 태그와 include 태그를 이용해서 SQL문을 재사용 -->
 	 <sql id="boardSearch">
 	 	<where>
-	 		<if test="category !=null and category != ''">
+	 		<if test="boa_category !=null and boa_category != ''">
 	 			boa_category = #{boa_category}
 	 		</if>
 	 		<if test="keyword !=null and keyword != ''">
-	 			<if test="category !=null and category != ''">
+	 			<if test="boa_category !=null and boa_category != ''">
 	 				AND
 	 			</if>
 	 		</if>
@@ -92,7 +92,17 @@
 		]]>
 	</select>
 	<!-- 게시판 글 수정 -->
-	
+	<update id="updateBoard" parameterType="boardVO">
+ 		UPDATE board SET
+ 		   <if test="boa_file != null">
+ 		   boa_file = #{boa_file},
+ 		   </if>
+ 		   boa_title = #{boa_title},
+ 		   boa_content = #{boa_content},
+ 		   boa_mdate = SYSDATE
+ 		WHERE boa_num = #{boa_num}
+ 	</update>  
+ 	
 	<!-- 댓글 등록 -->
 	<!-- 댓글 목록 -->
  </mapper>

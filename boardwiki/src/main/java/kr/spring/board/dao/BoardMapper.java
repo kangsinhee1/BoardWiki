@@ -18,12 +18,12 @@ public interface BoardMapper {
 	public void insertBoard(BoardVO board);
 	@Select("SELECT * FROM board JOIN member USING(mem_num) LEFT OUTER JOIN member_detail USING(mem_num) WHERE boa_num=#{boa_num}")
 	public BoardVO selectBoard(Long boa_num);
-	@Update("UPDATE board SET hit=hit+1 WHERE board_num=#{boa_num}")
+	@Update("UPDATE board SET boa_hit=boa_hit+1 WHERE boa_num=#{boa_num}")
 	public void updateHit(Long boa_num);
 	public void updateBoard(BoardVO board);
 	@Delete("DELETE FROM board WHERE boa_num=#{boa_num}")
 	public void deleteBoard(Long boa_num);
-	@Update("UPDATE board SET filename='' WHERE boa_num=#{boa_num}")
+	@Update("UPDATE board SET boa_file='' WHERE boa_num=#{boa_num}")
 	public void deleteFile(Long boa_num);
 	
 }

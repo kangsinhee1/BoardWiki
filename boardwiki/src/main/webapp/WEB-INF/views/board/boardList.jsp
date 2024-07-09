@@ -68,7 +68,7 @@
 		<tr>
 			<td class="align-center">${board.boa_num}</td>
 			<td class="align-left"><a href="detail?boa_num=${board.boa_num}">${board.boa_title}</a></td>
-			<td class="align-center">${board.mem_email}</td>
+			<td class="align-center"></td>
 			<td class="align-center">${board.boa_rdate}</td>
 			<td class="align-center">${board.boa_hit}</td>
 			<td class="align-center">${board.fav_cnt}</td>

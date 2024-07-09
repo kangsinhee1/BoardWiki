@@ -5,7 +5,7 @@ CREATE TABLE board (
 	boa_category CHAR(1)      NOT NULL, -- 게시판 구분 (1:자유게시판, 2:팁게시판, 3:후기게시판, 4:공지사항, 5:QnA, 6:모임게시판)
 	boa_title  VARCHAR2(150) NOT NULL, -- 게시글 제목
 	boa_content CLOB        NOT NULL, -- 게시글 내용
-	boa_hit    NUMBER(10)   NOT NULL, -- 게시글 조회수
+	boa_hit    NUMBER(10)   default 0 NOT NULL, -- 게시글 조회수
 	boa_rdate  DATE         DEFAULT SYSDATE NOT NULL, -- 게시글 작성 날짜
 	boa_mdate  DATE         NULL, -- 게시글 수정 날짜
 	boa_auth   NUMBER(1)  DEFAULT '0'  NOT NULL, -- 게시글 권한 (0: 일반, 1: 신고 접수, 2: 정지)
