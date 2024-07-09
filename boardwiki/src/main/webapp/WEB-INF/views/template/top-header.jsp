@@ -3,10 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- 상단 시작 -->
 <div class="align-right">	
-    <%-- <c:if test="${!empty user && user.mem_auth!=9}"> --%>
+    <c:if test="${!empty user && user.mem_auth!=9}">
     <a href="${pageContext.request.contextPath}/member/myPage">MY페이지</a>
     <a href="${pageContext.request.contextPath}/member/logout">로그아웃</a>
-    <%-- </c:if> --%>
+    </c:if>
     <c:if test="${!empty user && user.mem_auth == 9 }">
     <a href="${pageContext.request.contextPath}/admin/adminPage">관리자페이지</a>
     <a href="${pageContext.request.contextPath}/member/logout">로그아웃</a>
