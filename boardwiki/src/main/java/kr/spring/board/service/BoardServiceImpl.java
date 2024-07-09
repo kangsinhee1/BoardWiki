@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.board.dao.BoardMapper;
+import kr.spring.board.vo.BoardFavVO;
+import kr.spring.board.vo.BoardReplyVO;
 import kr.spring.board.vo.BoardVO;
 
 @Service
@@ -32,13 +34,13 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public BoardVO selectBoard(Long board_num) {
-		return boardMapper.selectBoard(board_num);
+	public BoardVO selectBoard(Long boa_num) {
+		return boardMapper.selectBoard(boa_num);
 	}
 
 	@Override
-	public void updateHit(Long board_num) {
-		boardMapper.updateHit(board_num);
+	public void updateHit(Long boa_num) {
+		boardMapper.updateHit(boa_num);
 	}
 
 	@Override
@@ -47,13 +49,63 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public void deleteBoard(Long board_num) {
-		boardMapper.deleteBoard(board_num);
+	public void deleteBoard(Long boa_num) {
+		boardMapper.deleteBoard(boa_num);
 	}
 
 	@Override
-	public void deleteFile(Long board_num) {
-		boardMapper.deleteFile(board_num);
+	public void deleteFile(Long boa_num) {
+		boardMapper.deleteFile(boa_num);
+	}
+
+	@Override
+	public BoardFavVO selectFav(BoardFavVO fav) {
+		return boardMapper.selectFav(fav);
+	}
+
+	@Override
+	public Integer selectFavCount(Long boa_num) {
+		return boardMapper.selectFavCount(boa_num);
+	}
+
+	@Override
+	public void insertFav(BoardFavVO fav) {
+		boardMapper.insertFav(fav);
+	}
+
+	@Override
+	public void deleteFav(BoardFavVO fav) {
+		boardMapper.deleteFav(fav);
+	}
+
+	@Override
+	public List<BoardReplyVO> selectListReply(Map<String, Object> map) {
+		return boardMapper.selectListReply(map);
+	}
+
+	@Override
+	public Integer selectRowCountReply(Map<String, Object> map) {
+		return boardMapper.selectRowCountReply(map);
+	}
+
+	@Override
+	public BoardReplyVO selectReply(Long boaR_num) {
+		return boardMapper.selectReply(boaR_num);
+	}
+
+	@Override
+	public void insertReply(BoardReplyVO boardReply) {
+		boardMapper.insertReply(boardReply);
+	}
+
+	@Override
+	public void updateReply(BoardReplyVO boardReply) {
+		boardMapper.updateReply(boardReply);
+	}
+
+	@Override
+	public void deleteReply(Long boaR_num) {
+		boardMapper.deleteReply(boaR_num);
 	}
 
 }

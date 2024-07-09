@@ -19,7 +19,6 @@ CREATE TABLE board_reply (
 	boaR_num    NUMBER        NOT NULL, -- 댓글 번호
 	boa_num     NUMBER        NOT NULL, -- 게시글 번호
 	mem_num    NUMBER        NOT NULL, -- 회원고유의 번호
-	mem_num     NUMBER        NOT NULL, -- 댓글 작성자 번호
 	boaR_content VARCHAR2(1000) NOT NULL, -- 댓글 내용
 	boaR_auth   NUMBER(1)  DEFAULT '0'   NOT NULL, -- 댓글 권한 (0: 일반, 1: 신고 접수, 2: 정지)
 	boaR_rdate  DATE  DEFAULT SYSDATE  NOT NULL, -- 댓글 작성 날짜 (기본: SYSDATE)

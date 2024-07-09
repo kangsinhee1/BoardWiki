@@ -33,7 +33,6 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 	
-	//자바빈(VO) 초기화
 	@ModelAttribute
 	public BoardVO initCommand() {
 		return new BoardVO();
@@ -41,12 +40,10 @@ public class BoardController {
 	/*====================
 	 *  게시판 글쓰기
 	 *====================*/
-	//등록 폼 호출
 	@GetMapping("/board/write")
 	public String form() {
 		return "boardWrite";
 	}
-	//등록 폼에서 전송된 데이터 처리
 	@PostMapping("/board/write")
 	public String submit(@Valid BoardVO boardVO,
 						  BindingResult result,
@@ -57,21 +54,16 @@ public class BoardController {
 										IOException{
 		log.debug("<<게시판 글 저장>> : " + boardVO);
 		
-		//유효성 체크 결과 오류가 있으면 폼 호출
 		if(result.hasErrors()) {
 			return form();
 		}
 		
-		//회원번호 셋팅
 		MemberVO vo = (MemberVO)session.getAttribute("user");
 		boardVO.setMem_num(vo.getMem_num());
 		
-		//파일 업로드
 		boardVO.setBoa_file(FileUtil.createFile(request, boardVO.getUpload()));
-		//글쓰기
 		boardService.insertBoard(boardVO);
 		
-		//View 메시지 처리
 		model.addAttribute("message","성공적으로 글이 등록되었습니다.");
 		model.addAttribute("url",request.getContextPath()+"/board/list");
 		
@@ -99,10 +91,8 @@ public class BoardController {
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
 		
-		//전체,검색 레코드 수
 		int count = boardService.selectRowCount(map);
 		
-		//페이지 처리
 		PagingUtil page = new PagingUtil(keyfield,keyword,pageNum,count,
 							10,10,"list","&category="+category+"&order="+order);
 		List<BoardVO> list = null;
@@ -127,13 +117,9 @@ public class BoardController {
 	public ModelAndView process(long boa_num) {
 		log.debug("<<게시판 글 상세 - boa_num>> : " + boa_num);
 		
-		//해당 글의 조회수 증가
 		boardService.updateHit(boa_num);
 		
 		BoardVO board = boardService.selectBoard(boa_num);
-		
-		//내용에 태그를 허용하지 않으면서 줄바꿈 처리(CKEditor 사용시 주석 처리)
-		//board.setContent(StringUtil.useBrNoHTML(board.getContent()));
 		
 		return new ModelAndView("boardView","board",board);
 	}
@@ -150,7 +136,63 @@ public class BoardController {
 		
 		return "downloadView";
 	}
-
+	/*====================
+	 *  게시판 글 수정
+	 *====================*/
+	@GetMapping("/board/update")
+	public String formUpdate(long boa_num,Model model) {
+		BoardVO boardVO = boardService.selectBoard(boa_num);
+		model.addAttribute("boardVO", boardVO);
+		
+		return "boardModify";
+	}
+	@PostMapping("/board/update")
+	public String submitUpdate(@Valid BoardVO boardVO,
+							   BindingResult result,
+							   Model model,
+							   HttpServletRequest request) throws IllegalStateException, IOException {
+		log.debug("<<게시판 글 수정>> : " +  boardVO);
+		
+		if(result.hasErrors()) {
+			BoardVO vo = boardService.selectBoard(boardVO.getBoa_num());
+			boardVO.setBoa_file(vo.getBoa_file());
+			return "boardModify";
+		}
+		
+		BoardVO db_board = boardService.selectBoard( boardVO.getBoa_num());
+		boardVO.setBoa_file(FileUtil.createFile(request, boardVO.getUpload()));
+		
+		boardService.updateBoard(boardVO);
+		
+		if(boardVO.getUpload() != null && !boardVO.getUpload().isEmpty()) {
+			FileUtil.removeFile(request, db_board.getBoa_file());
+		}
+		
+		model.addAttribute("message", "글 수정 완료!!");
+		model.addAttribute("url", request.getContextPath() + "/board/detail?boa_num="
+														+boardVO.getBoa_num());	
+		
+		
+		return "common/resultAlert";
+	}
+	/*====================
+	 *  게시판 글 삭제
+	 *====================*/
+	@GetMapping("/board/delete") 
+	public String submitDelete(long boa_num, 
+							   HttpServletRequest request) {
+		log.debug("<<게시판 글 삭제 -- boa_num>> : " + boa_num);
+		
+		BoardVO db_board = boardService.selectBoard(boa_num);
+		
+		boardService.deleteBoard(boa_num);
+		
+		if(db_board.getBoa_file()!=null) {
+			FileUtil.removeFile(request, db_board.getBoa_file());
+		}
+		
+		return "redirect:/board/list";
+	}
 }
 
 

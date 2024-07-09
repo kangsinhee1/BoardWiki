@@ -4,10 +4,13 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import kr.spring.board.vo.BoardFavVO;
+import kr.spring.board.vo.BoardReplyVO;
 import kr.spring.board.vo.BoardVO;
 
 @Mapper
@@ -26,6 +29,33 @@ public interface BoardMapper {
 	@Update("UPDATE board SET boa_file='' WHERE boa_num=#{boa_num}")
 	public void deleteFile(Long boa_num);
 	
+	//부모글 좋아요
+	@Select("SELECT * FROM board_fav WHERE boa_num=#{boa_num} AND mem_num=#{mem_num}")
+	public BoardFavVO selectFav(BoardFavVO fav);
+	@Select("SELECT COUNT(*) FROM board_fav WHERE boa_num=#{boa_num}")
+	public Integer selectFavCount(Long boa_num);
+	@Insert("INSERT INTO board_fav (boa_num,mem_num) VALUES (#{boa_num},#{mem_num})")
+	public void insertFav(BoardFavVO fav);
+	@Delete("DELETE FROM board_fav WHERE boa_num=#{boa_num} AND mem_num=#{mem_num}")
+	public void deleteFav(BoardFavVO fav);
+	@Delete("DELETE FROM board_fav WHERE boa_num=#{boa_num}")
+	public void deleteFavByBoardNum(Long boa_num);
+	
+	//댓글
+	public List<BoardReplyVO> selectListReply(Map<String,Object> map);
+	@Select("SELECT COUNT(*) FROM board_reply WHERE boa_num=#{boa_num}")
+	public Integer selectRowCountReply(Map<String,Object> map);
+	//댓글 수정,삭제시 작성자 회원번호를 구하기 위해 사용
+	@Select("SELECT * FROM board_reply WHERE boaR_num=#{boaR_num}")
+	public BoardReplyVO selectReply(Long boaR_num);
+	public void insertReply(BoardReplyVO boardReply);
+	@Update("UPDATE board_reply SET boaR_content=#{boaR_content},boaR_mdate=SYSDATE WHERE boaR_num=#{boaR_num}")
+	public void updateReply(BoardReplyVO boardReply);
+	@Delete("DELETE FROM board_reply WHERE boaR_num=#{boaR_num}")
+	public void deleteReply(Long boaR_num);
+	//부모글 삭제시 댓글이 존재하면 부모글 삭제전 댓글 삭제
+	@Delete("DELETE FROM board_reply WHERE boa_num=#{boa_num}")
+	public void deleteReplyByBoardNum(Long boa_num);
 }
 
 

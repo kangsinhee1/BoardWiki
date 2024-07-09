@@ -8,20 +8,17 @@
 		<a href="list?boa_category=1">자유게시판</a> |
 		<a href="list?boa_category=2">팁게시판</a> |
 		<a href="list?boa_category=3">후기게시판</a> |
-		<a href="list?boa_category=4">공지사항</a> |
-		<a href="list?boa_category=5">QnA</a> |
 		<a href="${pageContext.request.contextPath}/team/teamList">모임게시판</a>
 	</div>
 	<br>
 	<form action="list" id="search_form" method="get">
-		<input type="hidden" name="category" value="${param.category}">
+		<input type="hidden" name="boa_category" value="${param.boa_category}">
 		<ul class="search">
 			<li>
 				<select name="keyfield" id="keyfield">
 					<option value="1"<c:if test="${param.keyfield == 1}">selected</c:if>>제목</option>
-					<option value="2"<c:if test="${param.keyfield == 2}">selected</c:if>>ID+별명</option>
-					<option value="3"<c:if test="${param.keyfield == 3}">selected</c:if>>내용</option>
-					<option value="4"<c:if test="${param.keyfield == 4}">selected</c:if>>제목+내용</option>
+					<option value="2"<c:if test="${param.keyfield == 2}">selected</c:if>>내용</option>
+					<option value="3"<c:if test="${param.keyfield == 3}">selected</c:if>>제목+내용</option>
 				</select>
 			</li>
 			<li>

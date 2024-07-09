@@ -35,13 +35,9 @@
 	 			boa_title LIKE '%' || #{keyword} || '%'
 	 		</if>
 	 		<if test="keyfield == 2">
-	 			(id LIKE '%' || #{keyword} || '%' OR
-	 			nick_name LIKE '%' || #{keyword} || '%')
-	 		</if>
-	 		<if test="keyfield == 3">
 	 			boa_content LIKE '%' || #{keyword} || '%'
 	 		</if>
-	 		<if test="keyfield == 4">
+	 		<if test="keyfield == 3">
 	 			(boa_title LIKE '%' || #{keyword} || '%' OR
 	 			boa_content LIKE '%' || #{keyword} || '%')
 	 		</if>
@@ -104,6 +100,18 @@
  	</update>  
  	
 	<!-- 댓글 등록 -->
+	<insert id="insertReply" parameterType="boardReplyVO">
+ 		INSERT INTO board_reply(
+ 			boaR_num,
+ 			boaR_content,
+ 			boa_num,
+ 			mem_num)
+ 		VALUES (
+ 			board_reply_boaR_num_seq.nextval,
+ 			#{boaR_content},
+ 			#{boa_num},
+ 			#{mem_num})	
+ 	</insert>
 	<!-- 댓글 목록 -->
  </mapper>
 
