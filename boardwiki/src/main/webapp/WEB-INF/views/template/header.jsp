@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- 상단 시작 -->
 <div class="search-bar">
-  <form class="form-inline">
+  <form class="form-inline">  
 	<a class="navbar-brand">Boardwiki</a>
     <input class="form-control mr-sm-2" style="width:500px;" type="search" placeholder="Search" aria-label="Search">
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit" >Search</button>

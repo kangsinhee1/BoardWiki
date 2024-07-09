@@ -46,9 +46,9 @@
 							+$('#order').val();
 				});
 			</script>
-			
+			<c:if test="${!empty user}">
 			<input type="button" value="글쓰기" onclick="location.href='write'">
-			
+			</c:if>
 		</div>
 	</form>
 	<c:if test="${count==0}">
