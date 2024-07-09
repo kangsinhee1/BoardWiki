@@ -8,12 +8,16 @@
         <h2 class="big-name">인기 게임</h2>
            <div class="small-name">
            <c:forEach var="item" items="${list}">
-               <div>
-                   <img src="${item.item_image}" width="200" height="200">
-                   <p>${item.item_name}</p>
-                   <p>${item.minplayers}~${item.maxplayers}명</p>
-                   <p>순위:${item.item_rank}</p>
-                   <p>평점:${item.item_average}</p>
+               <div class="big-box" style="display:inline-block;vertical-align:top;">
+               <div class="image-box" style="display:inline-block;vertical-align:top;">
+                   <img onclick="location.href='${pageContext.request.contextPath}/item/item_detail?item_num=${item.item_num}'" src="${item.item_image}" width="180" height="180">
+               </div>
+               <div class="text-box" style="display:inline-block;vertical-align:top;">
+                   <a>${item.item_name}</a><br>
+                   <a>${item.minplayers}~${item.maxplayers}명</a><br>
+                   <a>순위:${item.item_rank}</a><br>
+                   <a>평점:${item.item_average}</a>
+               </div>
                </div>
            </c:forEach>
            </div>

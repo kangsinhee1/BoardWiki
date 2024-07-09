@@ -1,7 +1,6 @@
 package kr.spring.item.service;
 
 import java.util.List;
-
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,7 @@ import kr.spring.item.vo.ItemVO;
 @Service
 @Transactional
 public class ItemServiceImpl implements ItemService{
-	
+
 	@Autowired
 	ItemMapper itemMapper;
 
@@ -33,5 +32,5 @@ public class ItemServiceImpl implements ItemService{
 		// TODO Auto-generated method stub
 		return itemMapper.selectItem(item_num);
 	}
-	
+
 }
