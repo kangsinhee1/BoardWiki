@@ -37,7 +37,7 @@
 		</div>
 		<div class="detail-content">${team.tea_content}</div>
 		<hr>
-<h4>모임 주소: ${team.tea_address1}</h4>
+<h4>모임 주소: ${team.tea_address1} ${team.tea_address2}</h4>
 <div id="map" style="width:100%;height:350px;"></div>
 
 <br>
@@ -83,7 +83,8 @@ geocoder.addressSearch(address, function(result, status) {
 
         // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
         map.setCenter(coords);
-        map.setDraggable(false);
+        map.setDraggable(false); 
+        map.setZoomable(false); 
     } 
 });    
 </script>
