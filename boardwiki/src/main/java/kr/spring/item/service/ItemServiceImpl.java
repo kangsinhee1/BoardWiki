@@ -1,5 +1,9 @@
 package kr.spring.item.service;
 
+import java.util.List;
+
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +21,16 @@ public class ItemServiceImpl implements ItemService{
 	@Override
 	public ItemVO selectItem_num(Long item_num) {
 		return itemMapper.selectItem(item_num);
+	}
+
+	@Override
+	public List<ItemVO> selectList(Map<String, Object> map) {
+		return itemMapper.selectList(map);
+	}
+
+	@Override
+	public Integer selectRowCount(Map<String, Object> map) {
+		return itemMapper.selectRowCount(map);
 	}
 	
 }

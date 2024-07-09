@@ -1,19 +1,19 @@
--- 상품 테이블
-CREATE TABLE item (
+-- 상품 테이블 수정
+CREATE TABLE item(
 	item_num      NUMBER        NOT NULL, -- 상품 번호
-	item_id       VARCHAR2(500) NOT NULL, -- 상품 ID
+	item_id       NUMBER   NOT NULL, -- 상품 ID
 	item_name     VARCHAR2(300) NOT NULL, -- 상품 이름
 	item_price    NUMBER        NOT NULL, -- 상품 가격
-	item_rank     VARCHAR2(50)  NULL, -- 상품 순위
-	item_average  VARCHAR2(50)  NULL, -- 상품 평점
+	item_rank     NUMBER  NULL, -- 상품 순위
+	item_average  NUMBER    NULL, -- 상품 평점
 	item_genre    VARCHAR2(500) NULL, -- 상품 장르
 	item_image    VARCHAR2(500) NULL, -- 상품 이미지
 	item_thumbnail VARCHAR2(500) NULL, -- 상품 썸네일
-	minage        VARCHAR2(50)  NULL, -- 최소 연령
-	minplayers    VARCHAR2(50)  NULL, -- 최소 인원
-	maxplayers    VARCHAR2(50)  NULL, -- 최대 인원
+	minage        NUMBER    NULL, -- 최소 연령
+	minplayers    NUMBER    NULL, -- 최소 인원
+	maxplayers    NUMBER    NULL, -- 최대 인원
 	description   CLOB          NULL, -- 설명
-	item_year     VARCHAR2(50)  NULL, -- 출시 연도
+	item_year     NUMBER    NULL, -- 출시 연도
 	item_stock    NUMBER    NOT NULL, -- 재고
 	item_reg_date DATE DEFAULT SYSDATE NOT NULL, -- 등록일
 	CONSTRAINT item_pk PRIMARY KEY (item_num)
