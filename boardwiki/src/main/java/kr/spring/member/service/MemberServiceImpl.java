@@ -20,13 +20,14 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public void insertMember(MemberVO memberVO) {
-		memberMapper.insertMember(memberVO);
-		
+	public void insertMember(MemberVO membervo) {
+		membervo.setMem_num(memberMapper.selectMem_num());
+		memberMapper.insertMember(membervo);
+		memberMapper.insertMember_detail(membervo);
 	}
 
 	@Override
 	public MemberVO selectCheckMember(String mem_email) {
 		return memberMapper.selectCheckMember(mem_email);
-	}	
+	}
 }

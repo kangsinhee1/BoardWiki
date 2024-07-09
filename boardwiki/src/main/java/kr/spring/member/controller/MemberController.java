@@ -1,5 +1,10 @@
 package kr.spring.member.controller;
 
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -13,6 +18,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.github.scribejava.core.model.OAuth2AccessToken;
 
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
@@ -46,11 +54,10 @@ public class MemberController {
     	log.debug("<<로그인페이지 요청>>");
     	String naverAuthUrl = naverLoginUtil.getAuthorizationUrl(session);
 		model.addAttribute("naverUrl", naverAuthUrl);
-		log.debug("<<naverAuthUrl>> : " + naverAuthUrl);
 		
         return "memberLogin";
     }
-  //로그인 폼에서 전송된 데이터 처리
+    //로그인 폼에서 전송된 데이터 처리
   	@PostMapping("/member/login")
   	public String submitLogin(@Valid MemberVO memberVO,
   			                  BindingResult result,
@@ -109,6 +116,44 @@ public class MemberController {
   			return formLogin(model, session);
   		}
   	}
+  	//네이버 로그인 폼에서 받아온 데이터 처리
+  	//네이버 - 네이버 로그인 성공시 callback 호출 후 사용자 정보 요청
+  	@GetMapping("/oauth2/code/naver")
+    public String callbackNaver(Model model,
+                                @RequestParam Map<String, Object> paramMap,
+                                @RequestParam String code,
+                                @RequestParam String state,
+                                HttpSession session) throws IOException {
+
+        log.info("callbackNaver");
+
+        log.debug("paramMap:" + paramMap);
+
+        OAuth2AccessToken oauthToken = naverLoginUtil.getAccessToken(session, code, state);
+
+        // 로그인 사용자 정보를 읽어온다.
+        String apiResult = naverLoginUtil.getUserProfile(oauthToken);
+        log.debug("apiResult : " + apiResult);
+
+        // JSON 데이터를 Map으로 직접 처리
+        Map<String, Object> mapJson = new HashMap<String, Object>();
+        mapJson.put("response", apiResult); // 예시로 전체 API 응답을 넣었지만, 실제로는 필요한 부분을 추출하여 넣어야 함
+
+        log.debug("apiJson : " + mapJson);
+
+        // 사용자 정보 매핑
+        MemberVO memberVO = new MemberVO();
+        memberVO.setMem_email((String) mapJson.get("email"));
+        memberVO.setMem_auth(0); // 예시로 회원 등급 설정
+        memberVO.setMem_provider("naver");
+        // 기타 필요한 사용자 정보들을 매핑해준다.
+        memberVO.setMem_name((String) mapJson.get("name"));
+        
+        //회원 가입
+        memberService.insertMember(memberVO);
+
+        return "common/resultView"; // 예시로 회원 프로필 페이지로 이동
+    }
   	/*==============================
   	 * 로그아웃
   	 *==============================*/
