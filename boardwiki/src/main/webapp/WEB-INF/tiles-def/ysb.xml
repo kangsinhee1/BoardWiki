@@ -7,7 +7,7 @@
 <tiles-definitions>
 	<definition name="item_main" extends="main">
 		<put-attribute name="title" value="123"/>
-		<!-- <put-attribute name="css" value="/WEB-INF/views/member/memberCSS.jsp"/> -->
+		<put-attribute name="css" value="/WEB-INF/views/item/itemCSS.jsp"/>
 		<put-attribute name="body" value="/WEB-INF/views/item/item_main.jsp"/>
 	</definition>
 

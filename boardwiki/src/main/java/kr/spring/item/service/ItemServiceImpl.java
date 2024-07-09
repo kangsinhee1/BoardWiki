@@ -19,11 +19,6 @@ public class ItemServiceImpl implements ItemService{
 	ItemMapper itemMapper;
 
 	@Override
-	public ItemVO selectItem_num(Long item_num) {
-		return itemMapper.selectItem(item_num);
-	}
-
-	@Override
 	public List<ItemVO> selectList(Map<String, Object> map) {
 		return itemMapper.selectList(map);
 	}
@@ -31,6 +26,12 @@ public class ItemServiceImpl implements ItemService{
 	@Override
 	public Integer selectRowCount(Map<String, Object> map) {
 		return itemMapper.selectRowCount(map);
+	}
+
+	@Override
+	public ItemVO selectItem(Long item_num) {
+		// TODO Auto-generated method stub
+		return itemMapper.selectItem(item_num);
 	}
 	
 }

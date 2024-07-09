@@ -66,6 +66,6 @@ public class ItemController {
 		model.addAttribute("list", list);
 		model.addAttribute("page", page.getPage());
 		
-		return "itemList";
+		return "item_main";
 	}
 }

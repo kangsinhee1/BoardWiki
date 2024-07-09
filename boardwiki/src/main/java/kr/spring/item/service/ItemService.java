@@ -8,5 +8,5 @@ import kr.spring.item.vo.ItemVO;
 public interface ItemService {
 	public List<ItemVO> selectList(Map<String,Object> map);
 	public Integer selectRowCount(Map<String,Object> map);
-	public ItemVO selectItem_num(Long item_num);
+	public ItemVO selectItem(Long item_num);
 }
