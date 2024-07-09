@@ -29,7 +29,6 @@ public class ItemServiceImpl implements ItemService{
 
 	@Override
 	public ItemVO selectItem(Long item_num) {
-		// TODO Auto-generated method stub
 		return itemMapper.selectItem(item_num);
 	}
 

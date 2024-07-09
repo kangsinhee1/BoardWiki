@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.item.service.ItemService;
 import kr.spring.item.vo.ItemVO;
@@ -51,6 +52,8 @@ public class ItemController {
 				new PagingUtil(keyfield,keyword,pageNum,
 						count,20,10,"list",
 						"&category="+category+"&order="+order);
+	    
+	    //////////////////////////
 	    List<ItemVO> list = null;
 	    if(count > 0) {
 			map.put("order", order);
@@ -66,4 +69,35 @@ public class ItemController {
 
 		return "item_main";
 	}
+	
+	/*=========================
+	 * 게임 상세
+	 *=========================*/
+	@GetMapping("/item/item_detail")
+	public String form() {
+		return "item_detail";
+	}
+	//등록 폼에서 전송된 데이터 처리
+	@PostMapping
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
