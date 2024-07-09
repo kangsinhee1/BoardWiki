@@ -12,6 +12,7 @@ import kr.spring.point.vo.PointVO;
 
 @Mapper
 public interface PointMapper {
+	//포인트 사용 및 리스트
 	/**총 포인트 감소/증가 sql*/
 	public void updatepointtotal(PointVO pointVO);
 	/**포인트 획득/감소 sql*/
@@ -24,4 +25,7 @@ public interface PointMapper {
 	public List<PointVO> selectPointList(Map<String,Object> map);
 	/**포인트 카운트*/
 	public Integer selectRowCount(Map<String,Object> map);
+	
+	//포인트 게임
+	
 }
