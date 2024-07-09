@@ -3,16 +3,21 @@ package kr.spring.team.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import kr.spring.team.vo.TeamApplyVO;
 import kr.spring.team.vo.TeamFavVO;
 import kr.spring.team.vo.TeamVO;
 
 @Mapper
 public interface TeamMapper {
 	//모임 관리( 관리자)
+		@Select("SELECT team_seq.nextval FROM dual")
+		public Long selectTea_num();
 		//목록보기
 		public Integer getTeamRowCount(Map<String,Object>map);
 		
@@ -35,14 +40,25 @@ public interface TeamMapper {
 		
 		
 		//모임 좋아요 확인
+		@Select("SELECT * FROM team_fav WHERE mem_num=#{mem_num} AND tea_num=#{tea_num}")
 		public TeamFavVO selectTeamFav(TeamFavVO tFav);
 		//모임 좋아요 개수
+		@Select("SELECT count(*) FROM team_fav WHERE tea_num=#{tea_num}")
 		public Integer selectTeamFavCount(long tea_num);
 		//모임 좋아요 등록
+		@Insert("INSERT INTO team_fav(mem_num,tea_num) VALUES(#{mem_num},#{tea_num})")
 		public void insertTeamFav(TeamFavVO tFav);
 		//모임 좋아요 취소
+		@Delete("delete FROM team_fav WHERE mem_num=#{mem_num} AND tea_num = #{tea_num}")
 		public void deleteTeamFav(TeamFavVO tFav);
-		public void deleteTeamFavByTeamNum(TeamFavVO tFav);
+		@Delete("DELETE FROM team_fav WHERE tea_num=#{tea_num}")
+		public void deleteTeamFavByTeamNum(long tea_num);
 
+		
+		
+		// 모임 신청 및 관리
+		
+		public void insertTeamApplyByAdmin(TeamVO team);
+		public void insertTeamApply(TeamApplyVO teamApply);
 
 }

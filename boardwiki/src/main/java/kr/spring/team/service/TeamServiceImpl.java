@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.team.dao.TeamMapper;
+import kr.spring.team.vo.TeamApplyVO;
 import kr.spring.team.vo.TeamFavVO;
 import kr.spring.team.vo.TeamVO;
 
@@ -29,7 +30,9 @@ public class TeamServiceImpl implements TeamService {
 
 	@Override
 	public void insertTeam(TeamVO teamVO) {
+		teamVO.setTea_num(teamMapper.selectTea_num());
 		teamMapper.insertTeam(teamVO);
+		teamMapper.insertTeamApplyByAdmin(teamVO);
 	}
 
 	@Override
@@ -54,37 +57,44 @@ public class TeamServiceImpl implements TeamService {
 
 	@Override
 	public TeamFavVO selectTeamFav(TeamFavVO tFav) {
-		// TODO Auto-generated method stub
-		return null;
+		return teamMapper.selectTeamFav(tFav);
 	}
 
 	@Override
 	public Integer selectTeamFavCount(long tea_num) {
-		// TODO Auto-generated method stub
-		return null;
+		return teamMapper.selectTeamFavCount(tea_num);
 	}
 
 	@Override
 	public void insertTeamFav(TeamFavVO tFav) {
-		// TODO Auto-generated method stub
-		
+		teamMapper.insertTeamFav(tFav);
 	}
 
 	@Override
 	public void deleteTeamFav(TeamFavVO tFav) {
-		// TODO Auto-generated method stub
-		
+		teamMapper.deleteTeamFav(tFav);
 	}
 
 	@Override
-	public void deleteTeamFavByTeamNum(TeamFavVO tFav) {
-		// TODO Auto-generated method stub
-		
+	public void deleteTeamFavByTeamNum(long tea_num ) {
+		teamMapper.deleteTeamFavByTeamNum(tea_num);
 	}
 
 	@Override
 	public TeamVO detailTeam(long tea_num) {
 		return teamMapper.detailTeam(tea_num);
+	}
+
+
+	@Override
+	public void insertTeamApply(TeamApplyVO teamApply) {
+		teamMapper.insertTeamApply(teamApply);
+	}
+
+	@Override
+	public void insertTeamApplyByAdmin(TeamVO team) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -4,6 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/videoAdapter.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/teamFav.js"></script>
 <div class="page-main">
 	<h2 class="align-center">${team.tea_name}</h2>
 	<ul class="detail-info align-right">
@@ -20,7 +21,7 @@
 	<hr size="1" width="100%">
 	<div class="align-right">
 	<input type="button" value="목록" onclick="location.href='teamList'">
-		<%-- <c:if test="${!empty user &&user.mem_num == team.mem_num}"> --%>
+		<c:if test="${!empty user &&user.mem_num == team.mem_num}">
 			<input type="button" value="수정"
 				onclick="location.href='teamUpdate?tea_num=${team.tea_num}'">
 			<input type="button" value="삭제" id="delete_btn">
@@ -33,7 +34,7 @@
 	 				}
 	 			}
 	 		</script>
-<%-- 		</c:if> --%>
+ 		</c:if> 
 		</div>
 		<div class="detail-content">${team.tea_content}</div>
 		<hr>
@@ -44,7 +45,7 @@
 <p class="align-center">
 		<input type="button" value="가입하기"
 			  class="default-btn"
-			  onclick="location.href='teamApply'">
+			  onclick="location.href='teamApply?tea_num=${team.tea_num}'">	
 	</p>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=77c9fa63541b3e967dfb6eb75abb22ff&libraries=services"></script>

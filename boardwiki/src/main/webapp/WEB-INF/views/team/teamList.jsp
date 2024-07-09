@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>    
 <!-- 게시판 목록 시작 -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 <div class="page-main">
-	<h2>모임 목록</h2>
+	<h2>모임 신청</h2>
+	<div><a href="myTeam"> 내 모임 보기</a></div>
 	
 	<form action="teamList" id="search_form" method="get">
 		<ul class="search">
@@ -60,7 +62,7 @@
 		<c:forEach var="team" items="${list}">
 		<tr>
 			<td class="align-center">${team.tea_num}</td>
-			<td class="align-left"><a href="teamDetail?tea_num=${team.tea_num}">${team.tea_name}</a></td>
+			<td class="align-left"><a href="teamDetail?tea_num=${team.tea_num}">(${fn:substring(team.tea_address1,0,2)}) ${team.tea_name}</a></td>
 			<td class="align-center">
 				${team.mem_email}
 			</td>

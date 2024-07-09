@@ -8,6 +8,6 @@ import lombok.ToString;
 @Setter
 @ToString
 public class TeamFavVO {
-	private int mem_num;
-	private int tea_num;
+	private long mem_num;
+	private long tea_num;
 }

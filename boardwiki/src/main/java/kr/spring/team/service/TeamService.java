@@ -3,6 +3,7 @@ package kr.spring.team.service;
 import java.util.List;
 import java.util.Map;
 
+import kr.spring.team.vo.TeamApplyVO;
 import kr.spring.team.vo.TeamFavVO;
 import kr.spring.team.vo.TeamVO;
 
@@ -33,6 +34,9 @@ public interface TeamService {
 			public void insertTeamFav(TeamFavVO tFav);
 			//모임 좋아요 취소
 			public void deleteTeamFav(TeamFavVO tFav);
-			public void deleteTeamFavByTeamNum(TeamFavVO tFav);
+			public void deleteTeamFavByTeamNum(long tea_num);
+			//모임 신청
+			public void insertTeamApplyByAdmin(TeamVO team);
+			public void insertTeamApply(TeamApplyVO teamApply);
 
 }

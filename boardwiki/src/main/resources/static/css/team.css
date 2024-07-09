@@ -146,7 +146,49 @@ div.item{
 #file_detail{
 	margin:5px 0 0 130px;
 }
+.navbar {
+    background: #333;
+    color: #fff;
+    padding: 10px 0;
+}
 
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.navbar-logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+}
+
+.navbar-menu {
+    list-style: none;
+    display: flex;
+}
+
+.navbar-item {
+    margin-left: 20px;
+}
+
+.navbar-link {
+    color: #fff;
+    text-decoration: none;
+    padding: 7px 10px;
+    transition: background 0.3s, color 0.3s;
+}
+
+.navbar-link:hover {
+    background: #575757;
+    color: #fff;
+    border-radius: 4px;
+}
 
 
 

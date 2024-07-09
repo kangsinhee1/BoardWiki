@@ -41,7 +41,7 @@
 	  	mem_num
 	  	)
 	   VALUES(
-	   team_seq.nextval,
+	   #{tea_num},
 	   #{tea_name},
 	   #{tea_content},
 	   #{tea_time, jdbcType=VARCHAR},
@@ -71,16 +71,18 @@
 	      tea_rdate,
 	      tea_man,
 	      tea_hit,
+	      tea_status,
 	      mem_num,
-	      mem_email
+	      mem_email,
+	      fav_cnt
 	      FROM team
 	      JOIN member USING (mem_num) 
-	      WHERE tea_status = 1
+	      LEFT OUTER JOIN (SELECT count(*) fav_cnt ,tea_num FROM team_fav GROUP BY tea_num) USING(tea_num)
 	      <include refid="teamSearch"></include>
 	      <include refid="teamOrder"></include>	
 	 	)a)
 	 	<![CDATA[
-	 	WHERE rnum >= #{start} AND rnum <= #{end}
+	 	WHERE rnum >= #{start} AND rnum <= #{end} AND tea_status = 1
 	 	]]>	
 	 </select>
 	 <!-- 모임 수정 -->
@@ -98,6 +100,43 @@
 	   WHERE tea_num =#{tea_num}
 	 </update>
 	 <!-- 일정 등록 -->
+	 
+	 
+	 
+	 <!--모임 등록시 관리자 설정 -->
+	 <insert id="insertTeamApplyByAdmin" parameterType="teamApplyVO">
+	 	INSERT INTO
+	 	team_apply(
+	 	 teaA_num,
+	 	 tea_num,
+	 	 teaA_auth,
+	 	 teaA_status,
+	 	 mem_num
+	 	)
+	 	VALUES(
+	 	team_apply_seq.nextval,
+	 	#{tea_num},
+	 	9,
+	 	1,
+	 	#{mem_num}
+	 	)
+	 	
+	 </insert>
+	 	 <insert id="insertTeamApply" parameterType="teamApplyVO">
+	 	INSERT INTO
+	 	team_apply(
+	 	 teaA_num,
+	 	 teaA_content,
+	 	 tea_num,
+	 	 mem_num
+	 	)
+	 	VALUES(
+	 	team_apply_seq.nextval,
+	 	#{teaA_content , jdbcType=VARCHAR},
+	 	#{tea_num},
+	 	#{mem_num}
+	 	)
+	 </insert>
  </mapper>
 
 

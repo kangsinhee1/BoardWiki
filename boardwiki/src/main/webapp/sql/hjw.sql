@@ -25,14 +25,16 @@ CREATE TABLE  team_fav  (
 
 CREATE TABLE  team_Apply  (
 	 teaA_num 	number		NOT NULL,  -- 모임 신청을 식별하는 번호
-	 teaA_status 	number	DEFAULT 0	NOT NULL,  -- 모임 신청결과 식별(0:승인대기,1:승인2: 거부)
+	 teaA_status 	number	DEFAULT 1	NOT NULL,  -- 모임 신청결과 식별(1:승인대기,  2:승인   0: 거부 관리자:9)
 	 teaA_time 	date	DEFAULT SYSDATE	NOT NULL,  -- 신청한 시간을 식별
-	 teaA_attend 	number		NOT NULL,  -- 참석여부 신청(참석:1,불참:0)
+	 teaA_attend 	number	 DeFAULT 0	NOT NULL,  -- 참석여부 신청(참석:1,불참:0)
 	 teaA_content 	varchar2(300)		NULL,  -- 신청할때 하고싶은말
-	 teaA_auth 	number		NOT NULL,  -- 모임 권한(모임장: 9, 신청자 :0)
+	 teaA_auth 	number DEFAULT 2 NOT NULL,  -- 모임 권한(모임장: 9, 신청자 :2)
 	 tea_num 	number		NOT NULL,  -- 모임번호를 식별하는 번호
+	 mem_num number not null,  -- 신청 회원 번호
 	CONSTRAINT  team_apply_pk  PRIMARY KEY ( teaA_num ),
-	CONSTRAINT  team_apply_fk  FOREIGN KEY ( tea_num ) REFERENCES  team  ( tea_num )
+	CONSTRAINT  team_apply_fk1 FOREIGN KEY ( tea_num ) REFERENCES  team  ( tea_num ),
+	CONSTRAINT  team_apply_fk2  FOREIGN KEY ( mem_num ) REFERENCES  member  ( mem_num )
 );
 
 CREATE SEQUENCE team_apply_seq;
