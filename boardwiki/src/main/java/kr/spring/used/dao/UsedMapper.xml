@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="kr.spring.used.dao.UsedMapper"> 
+	<sql id="usedSearch">
+	 	<where>
+	 		<if test="keyword !=null and keyword != ''">
+		 		<if test="keyfield == 1">
+		 			use_title LIKE '%' || #{keyword} || '%'
+		 		</if>
+		 		<if test="keyfield == 2">
+		 			use_content LIKE '%' || #{keyword} || '%'
+		 		</if>
+		 		<if test="keyfield == 3">
+		 			item_name LIKE '%' || #{keyword} || '%'
+		 		</if>
+	 		</if>
+	 	</where>
+	 </sql>
+	<!-- 중고 글 목록 -->
+	 <select id="selectUsedList" parameterType="map" resultType="usedItemVO">
+	 	SELECT *FROM
+	 	(SELECT a.*, rownum rnum FROM
+	 	(SELECT use_num,
+	 	  <![CDATA[
+	         REPLACE(REPLACE(use_title,'<','&lt;'),'>','&gt;') use_title,
+	      ]]>
+	      use_content,
+	      use_comment,
+	      use_grade,
+	      use_photo,
+	      use_price,
+	      use_check,
+	      use_rdate,
+	      use_mdate,
+	      mem_num,
+	      item_num
+	      FROM (used_item
+	      JOIN member USING (mem_num)) JOIN item USING (item_num)
+	      WHERE tea_status = 1
+	 	)a ) 
+	 	<![CDATA[
+	 	WHERE rnum >= #{start} AND rnum <= #{end}
+	 	]]>	
+	 </select>
+	 <!-- 모임 등록 -->
+	  <insert id="insertUsed" parameterType="usedItemVO" >
+	  	INSERT INTO used_item(
+	  	use_num,
+	  	mem_num,
+	  	item_num,
+	  	use_title,
+	  	use_content,
+	  	use_photo,
+	  	use_price,
+	  	use_check,
+	  	use_rdate
+	  	)
+	   VALUES(
+	   used_item_seq.nextval,
+	   #{use_num},
+	   #{mem_num},
+	   #{item_num},
+	   #{use_title},
+	   #{use_content},
+	   #{use_photo},
+	   #{use_price},
+	   #{use_check},
+	   sysdate
+	   )
+	  </insert>
+ </mapper>
+
+
+
+
+
+
+
