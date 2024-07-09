@@ -17,6 +17,8 @@
 	 	(SELECT *
 	 	  
 	      FROM item	
+	      <![CDATA[
 	 	)a)WHERE rnum >= 1 AND rnum <= 3
+	 	]]>
 	 </select>
 </mapper>
