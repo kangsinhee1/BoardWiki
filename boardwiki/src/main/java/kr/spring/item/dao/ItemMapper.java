@@ -15,6 +15,7 @@ import kr.spring.item.vo.ItemVO;
 public interface ItemMapper {
 	//상품관리
 	public List<ItemVO> selectList(Map<String,Object> map);
+	public List<ItemVO> selectList2(Map<String,Object> map);
 	public Integer selectRowCount(Map<String,Object> map);
 	@Select("SELECT * FROM item WHERE item_num=#{item_num}")
 	public ItemVO selectItem(Long item_num);

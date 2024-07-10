@@ -33,6 +33,7 @@ public class ItemController {
 	/*====================
 	 *  게임 목록
 	 *====================*/
+	//인기 게임
 	@GetMapping("/item/item_main")
 	public String getList(@RequestParam(defaultValue="1") int pageNum,
                           @RequestParam(defaultValue="1") int order,
@@ -65,14 +66,22 @@ public class ItemController {
 
 			list = itemService.selectList(map);
 		}
+	    List<ItemVO> list2 = null;
+	    if(count > 0) {
+			map.put("order", order);
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+
+			list2 = itemService.selectList2(map);
+		}
 
 	    model.addAttribute("count", count);
 		model.addAttribute("list", list);
+		model.addAttribute("list2", list2);
 		model.addAttribute("page", page.getPage());
 
 		return "item_main";
 	}
-	
 	/*=========================
 	 * 게임 상세
 	 *=========================*/

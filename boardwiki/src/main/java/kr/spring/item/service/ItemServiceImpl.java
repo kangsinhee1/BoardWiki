@@ -32,4 +32,9 @@ public class ItemServiceImpl implements ItemService{
 		return itemMapper.selectItem(item_num);
 	}
 
+	@Override
+	public List<ItemVO> selectList2(Map<String, Object> map) {
+		return itemMapper.selectList2(map);
+	}
+
 }
