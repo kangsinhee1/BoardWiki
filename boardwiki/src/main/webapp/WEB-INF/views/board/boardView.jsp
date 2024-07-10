@@ -55,8 +55,17 @@
 			};
 		</script>   
 		</c:if>
-		<input type="button" value="목록"
-		                 onclick="location.href='list'">
+		<c:choose>
+			<c:when test="${board.boa_category == 1}">
+				<input type="button" value="목록" onclick="location.href='list?boa_category=1'">
+		    </c:when>
+		    <c:when test="${board.boa_category == 2}">
+				<input type="button" value="목록" onclick="location.href='list?boa_category=2'">
+		    </c:when> 
+		    <c:when test="${board.boa_category == 3}">
+				<input type="button" value="목록" onclick="location.href='list?boa_category=3'">
+		    </c:when>      
+		</c:choose>
 	</div>
 	<hr size="1" width="100%">
 	<!-- 댓글 UI 시작 -->
@@ -65,8 +74,8 @@
 		<form id="re_form">
 			<input type="hidden" name="boa_num"
 			          value="${board.boa_num}" id="boa_num">
-			<textarea rows="3" cols="50" name="re_content"
-			      id="re_content" class="rep-content"
+			<textarea rows="3" cols="50" name="boaR_content"
+			      id="boaR_content" class="rep-content"
 			      <c:if test="${empty user}">disabled="disabled"</c:if>
 			><c:if test="${empty user}">로그인해야 작성할 수 있습니다.</c:if></textarea>          
 			<c:if test="${!empty user}">

@@ -21,9 +21,7 @@ public class BoardReplyVO {
 	
 	//로그인 한 상태에서 클릭한 사람의 정보 읽기, 로그인하지 않으면 0 전달
 	private int click_num;		
-	private int refav_cnt;		//댓글 좋아요 개수
 	
-	private int resp_cnt;		//답글 개수
 	
 	public void setRe_date(String boaR_rdate) {
 		this.boaR_rdate = 

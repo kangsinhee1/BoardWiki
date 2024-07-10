@@ -112,7 +112,34 @@
  			#{boa_num},
  			#{mem_num})	
  	</insert>
-	<!-- 댓글 목록 -->
+	<!-- 댓글 목록 --> 
+ 	<select id="selectListReply" parameterType="map"
+ 	                            resultType="boardReplyVO">
+ 		SELECT
+ 		   *
+ 		FROM (SELECT
+ 		        a.*,
+ 		        rownum rnum
+ 		      FROM (SELECT
+ 		              boaR_num,
+ 		              <![CDATA[
+ 		              REPLACE(REPLACE(boaR_content,'<','&lt;'),'>','&gt;') boaR_content,
+ 		              ]]>
+ 		              boaR_rdate,
+ 		              boaR_mdate,
+ 		              boa_num,
+ 		              mem_nickname,
+ 		              mem_email,
+ 		              mem_num
+ 		            FROM (board_reply
+ 		            JOIN member USING(mem_num))
+ 		            JOIN member_detail USING(mem_num)
+ 		            WHERE boa_num=#{boa_num}
+ 		            ORDER BY boaR_num DESC)a)
+ 		<![CDATA[
+ 		WHERE rnum >= #{start} AND rnum <= #{end}
+ 		]]>            
+ 	</select>     
  </mapper>
 
 
