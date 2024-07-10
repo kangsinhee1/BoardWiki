@@ -22,7 +22,106 @@
 			</li>
 			<li>
 				<form:label path="item_num">제품명</form:label>
-				<form:input type="number" path="item_num"  min="2" max="99" defaultValue="2"/>
+				<form:input type="hidden" path="item_num"  min="0" max="999999" defaultValue=""/>
+				<input type="text" name="item_name" placeholder="책을 선택해주세요" id="item_name" maxlength="10" readonly="readonly"  >
+				<input type="button" id ="item_numbtn" value="책선택"  class="button2">
+				<div class="modal hide">
+					<form id="searchform" >
+					<h4>제품 검색</h4>
+					<input type="text" name="search" class="inputcheck input-style2" id="search" maxlength="30" placeholder="제목을 입력하세요">
+ 					<input id="bookbtn" type="submit" value="검색" class="button2"><input id="bookbtn2" type="button" value="취소" class="button2">
+					<div id="add">
+					</div>
+					<input type="button" class="button2 paging2" style="display:none;"  value="이전">
+					<input type="button"  class="button2 paging" style="display:none;"  value="다음">
+					</form>
+				</div>
+				 <script type="text/javascript">
+				 	let currentNum ;
+				 	let count;
+				 	let rowCount=10;
+			    	$("#item_numbtn").click(function() {
+				        if($('.modal').hasClass('hide')){
+				            $('.modal').removeClass('hide');
+				        }else{
+				            $('.modal').addClass('hide');
+				    	}
+			  	  	});
+			    	$("#searchform").submit(function(event){
+			    		selList(1);
+			    		
+			    		event.preventDefault();
+			    	});
+			    	function selList(pageNum){
+			    		currentNum=pageNum;
+			    		
+			    		if(currentNum ==0){
+			    			currentNum =1;
+			    		}
+			    		
+			    		$.ajax({
+			    			url:'searchItem',
+			    			data:{item_name:$("#search").val(),pageNum:currentNum},
+			    			type:'post',
+			    			dataType:'json',
+			    			success:function(param){
+			    				if(param.result=='none'){
+			    					$('#add').empty();
+			    					$('#add').append('찾으시는 보드게임이 없습니다.');
+			    					
+			    				}else if(param.result=='success'){
+			    					$('#add').empty();
+			    					let output = '';
+			    					count = param.count;	
+			    					$(param.list).each(function(index,item){
+			    						output += '<input type="text" value="'+item.item_name+'" readonly="readonly" class="itemsh" id="'+item.item_num+'">';
+			    						output +='<br>';
+			    					})
+			    					$('#add').append(output);
+			    					if(currentNum>=Math.ceil(count/rowCount)){
+			    						//다음 페이지가 없음
+			    						$('.paging').hide();
+			    					}else{
+			    						//다음 페이지가 존재
+			    						$('.paging').show();
+			    					}
+			    					if(currentNum<=1){
+			    						
+			    						$('.paging2').hide();
+			    					}else{
+			    						
+			    						$('.paging2').show();
+			    					}
+			    					$("#bookbtn").click(function(){
+			    						$('.paging').hide();
+			    						$('.paging2').hide();
+			    					});
+			    				}else{
+			    					alert('보드게임찾기오류');
+			    				}
+			    				
+			    			},error:function(){
+			    				alert('네트워크오류');
+			    			}
+			    			
+			    			
+			    			
+			    		});
+			    	}
+			    $(function(){$(document).on('click','.itemsh',function(){
+		    		$('#item_name').val(this.value);
+		    		$('#item_num').val(this.id);
+		    		 $('.modal').addClass('hide');
+	        });});
+			    $('.paging').click(function(){
+					selList(currentNum + 1);
+				});
+			    $('.paging2').click(function(){
+					selList(currentNum - 1);
+				});
+			    
+			    </script>
+			    
 				<form:errors path="item_num" cssClass="error-color"/>
 			</li>
 			<li>

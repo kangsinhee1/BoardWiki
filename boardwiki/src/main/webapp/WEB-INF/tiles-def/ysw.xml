@@ -21,6 +21,12 @@
 		<put-attribute name="body" value="/WEB-INF/views/adminPage/adminPageMain.jsp"/>
 		<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp"/>
 	</definition>
+	<!-- 캘린더 -->
+	<definition name="calendar" extends="myPage">
+		<put-attribute name="title" value="calendar"/>
+		<put-attribute name="body" value="/WEB-INF/views/calendar/calendar.jsp"/>
+	</definition>
+	<!-- 중고 -->
 	<definition name="usedList" extends="main">
 		<put-attribute name="title" value="중고 게시판"/>
 		<put-attribute name="body" value="/WEB-INF/views/used/usedList.jsp"/>
