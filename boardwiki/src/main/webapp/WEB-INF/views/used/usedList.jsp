@@ -56,7 +56,7 @@
 		<c:forEach var="used" items="${list}">
 		<tr>
 			<td class="align-center">${used.use_num}</td>
-			<td class="align-left"><a href="usedDetail?use_num=${used.use_num}">${used.use_name}</a></td>
+			<td class="align-left"><a href="usedDetail?use_num=${used.use_num}">${used.use_title}</a></td>
 			<td class="align-center">${used.mem_email}</td>
 			<td class="align-center">${used.use_rdate}</td>
 			<td class="align-center">${used.item_name}</td>

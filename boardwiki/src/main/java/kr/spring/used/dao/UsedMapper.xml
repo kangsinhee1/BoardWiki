@@ -38,11 +38,20 @@
 	      item_num
 	      FROM (used_item
 	      JOIN member USING (mem_num)) JOIN item USING (item_num)
-	      WHERE tea_status = 1
 	 	)a ) 
 	 	<![CDATA[
 	 	WHERE rnum >= #{start} AND rnum <= #{end}
 	 	]]>	
+	 </select>
+	 <!-- 중고글 선택 -->
+	 <select id="selectUsed" parameterType="map" resultType="usedItemVO">
+	 	SELECT
+	 		 * 
+	 	 FROM used_item 
+	 	 JOIN member USING(mem_num) 
+	 	 LEFT OUTER JOIN member_detail USING(mem_num) 
+	 	 LEFT OUTER JOIN item USING(item_num) 
+	 	 WHERE use_num=#{use_num}
 	 </select>
 	 <!-- 모임 등록 -->
 	  <insert id="insertUsed" parameterType="usedItemVO" >
@@ -70,6 +79,18 @@
 	   sysdate
 	   )
 	  </insert>
+	  <update id="updateUsed" parameterType="usedItemVO">
+ 		UPDATE used_item SET
+ 		   <if test="use_photo != null">
+ 		   use_photo = #{use_photo},
+ 		   </if>
+ 		   use_title = #{use_title},
+ 		   use_content = #{use_content},
+ 		   use_check = #{use_check},
+ 		   use_price = #{use_price},
+ 		   use_mdate = SYSDATE
+ 		WHERE use_num = #{use_num}
+ 	</update>  
  </mapper>
 
 
