@@ -2,7 +2,98 @@ $(function(){
 	let rowCount = 10;
 	let currentPage;
 	let count;
+	/* ========================================================================
+	 * 댓글 목록
+	 * ======================================================================== */
+	//댓글목록
+	function selectList(pageNum){
+		currentPage = pageNum;
+		
+		//서버와 통신
+		$.ajax({
+			url:'listReply',
+			type:'get',
+			data:{boa_num:$('#boa_num').val(),pageNum:pageNum,rowCount:rowCount},
+			dataType:'json',
+			beforeSend:function(){
+				$('#loading').show();//로딩 이미지 표시
+			},
+			complete:function(){
+				//success와 error 콜백이 호출된 후에 호출
+				$('#loading').hide();//로딩 이미지 숨김
+			},
+			success:function(param){
+				count = param.count;
+				
+				if(pageNum == 1){
+					//처음 호출시는 해당 ID의 div의 내부 내용물을 제거
+					$('#output').empty();
+				}
+				
+				//댓글수 읽어 오기
+				displayReplyCount(param.count);
+				
+				//댓글 목록 작업
+				$(param.list).each(function(index,item){
+					//처음에는 보여지지 않고 다음 댓글부터 수평선에 보이게 처리
+					if(index>0) $('#output').append('<hr size="1" width="100%">'); 
+					
+					let output = '<div class="item">';
+					output += '     <ul class="detail-info">';
+					output +='        <li>';
+					   
+					if(item.mem_nickname){
+						output += item.mem_nickname + '<br>';
+					}else{
+						output += item.mem_email + '<br>';
+					}
+					if(item.boaR_mdate){
+						output += '<span class="boaR-mdate">최근 수정일 : ' + item.boaR_mdate + '</span>';
+					}else{
+						output += '<span class="boaR-mdate">등록일 : ' + item.boaR_rdate + '</span>';
+					}
+					output +='        </li>';
+					output +='     </ul>';
+					output +='     <div class="sub-item">';
+					output += '    <p>' + item.boaR_content.replace(/\r\n/g,'<br>') + '</p>';
+					
+					
+					if(param.user_num===item.mem_num){
+						//로그인 한 회원번호와 댓글 작성자 회원번호가 같으면
+						output += '  <input type="button" data-num="'+item.boaR_num+'" value="수정" class="modify-btn">';
+						output += '  <input type="button" data-num="'+item.boaR_num+'" value="삭제" class="delete-btn">';
+					}
+					
+					output += '  </div>';
+					output += '</div>';
+											
+					//문서 객체에 추가
+					$('#output').append(output);
+				});
+				
+				console.log("currentPage:"+currentPage);
+				console.log("count:"+count);
+				console.log("rowCount:"+rowCount);
+				//paging button 처리
+				if(currentPage>=Math.ceil(count/rowCount)){
+					//다음 페이지가 없음
+					$('.paging-button').hide();
+				}else{
+					//다음 페이지가 존재
+					$('.paging-button').show();
+				}
+			},
+			error:function(){
+				alert('네트워크 오류');
+			}
+		});
+	}
 	
+	//다음 댓글 보기 버튼 클릭시 데이터 추가
+	$('.paging-button input').click(function(){
+		selectList(currentPage + 1);
+	});
+
 	
 	/*--------------------
 	 * 댓글 등록
@@ -57,17 +148,17 @@ $(function(){
 	//댓글 수정 버튼 클릭시 수정폼 노출
 	$(document).on('click','.modify-btn',function(){
 		//댓글 번호 
-		let re_num = $(this).attr('data-num');
+		let boaR_num = $(this).attr('data-num');
 		//댓글 내용
-		let re_content = $(this).parent()
+		let boaR_content = $(this).parent()
 		                     .find('p')
 		                     .html()
 		                     .replace(/<br>/gi,'\r\n');
 		                     //g:지정문자열 모두, i:대소문자 무시
 		//댓글 수정폼 UI
 		let modifyUI = '<form id="mre_form">';
-		modifyUI += '<input type="hidden" name="re_num" id="re_num" value="'+re_num+'">'; 
-		modifyUI += '<textarea rows="3" cols="50" name="re_content" id="mre_content" class="rep-content">'+re_content+'</textarea>';    
+		modifyUI += '<input type="hidden" name="boaR_num" id="boaR_num" value="'+boaR_num+'">'; 
+		modifyUI += '<textarea rows="3" cols="50" name="boaR_content" id="mre_content" class="rep-content">'+boaR_content+'</textarea>';    
 		modifyUI += '<div id="mre_first"><span class="letter-count">300/300</span></div>';
 		modifyUI += '<div id="mre_second" class="align-right">'; 
 		modifyUI += ' <input type="submit" value="수정">';
@@ -137,7 +228,7 @@ $(function(){
 					                                    .replace(/\n/g,'<br>'));
 					//최근 수정일 처리
 					$('#mre_form').parent()
-					              .find('.modify-date')
+					              .find('.boaR-mdate')
 					              .text('최근 수정일 : 5초미만'); 
 					//수정폼 초기화
 					initModifyForm();               
@@ -169,7 +260,7 @@ $(function(){
 			//남은 글자수 구하기
 			let remain = 300 - inputLength;
 			remain += '/300';
-			if($(this).attr('id')=='re_content'){
+			if($(this).attr('id')=='boaR_content'){
 				//댓글 등록 폼 글자수
 				$('#re_first .letter-count').text(remain);
 			}else if($(this).attr('id')=='mre_content'){
@@ -190,12 +281,12 @@ $(function(){
 	 *--------------------*/
 	$(document).on('click','.delete-btn',function(){
 		//댓글 번호
-		let re_num = $(this).attr('data-num');
+		let boaR_num = $(this).attr('data-num');
 		//서버와 통신
 		$.ajax({
 			url:'deleteReply',
 			type:'post',
-			data:{re_num:re_num},
+			data:{boaR_num:boaR_num},
 			dataType:'json',
 			success:function(param){
 				if(param.result == 'logout'){
@@ -229,55 +320,7 @@ $(function(){
 		$('#output_rcount').text(output);
 	}
 	
-	/*--------------------
-	 * 댓글 좋아요 등록
-	 *--------------------*/
-	$(document).on('click','.output_rfav',function(){
-		let heart = $(this);
-		//서버와 통신
-		$.ajax({
-			url:'writeReFav',
-			type:'post',
-			data:{re_num:heart.attr('data-num')},
-			dataType:'json',
-			success:function(param){
-				if(param.result == 'logout'){
-					alert('로그인 후 좋아요를 눌러주세요');
-				}else if(param.result == 'success'){
-					displayFav(param,heart);
-				}else{
-					alert('댓글 좋아요 등록/삭제 오류');
-				}
-			}
-		});
-	});
-	/*--------------------
-	 * 댓글 좋아요 표시
-	 *--------------------*/
-	function displayFav(param,heart){
-		let output;
-		if(param.status == 'noFav'){
-			output = '../images/heart01.png';
-		}else{
-			output = '../images/heart02.png';
-		}
-		//문서 객체에 추가
-		heart.attr('src',output);
-		heart.parent().find('.output_rfcount')
-		              .text(param.count);
-	}
 	
-	/*--------------------
-	 * 답글 수정
-	 *--------------------*/
-	
-	/*--------------------
-	 * 답글 삭제
-	 *--------------------*/
-	
-	/*--------------------
-	 * 초기 데이터 호출
-	 *--------------------*/
 	selectList(1);
 });
 

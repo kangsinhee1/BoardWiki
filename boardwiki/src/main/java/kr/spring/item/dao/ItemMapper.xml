@@ -3,22 +3,52 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
 <mapper namespace="kr.spring.item.dao.ItemMapper">
-    <!-- 게시판 글 총 레코드수/검색 레코드수  -->
+    <!-- 상품 총 레코드수/검색 레코드수  -->
      <select id="selectRowCount" resultType="integer">
        SELECT
           COUNT(*)
        FROM item
      </select>
-    <!-- 상품 목록 -->
+    <!-- 상품 목록 인기 -->
     <select id="selectList" parameterType="map" resultType="itemVO">
 	 	SELECT * FROM
 	 	(SELECT a.*, rownum rnum FROM
-	 	(SELECT *
-	 	  
-	      FROM item	
+	 	(SELECT * FROM item	
 	      <![CDATA[
 	 	)a)WHERE rnum >= 1 AND rnum <= 3
 	 	]]>
 	 </select>
-	 <!-- 상품 목록 -->
+     <!-- 최고 평점 -->
+     <select id="selectList2" parameterType="map" resultType="itemVO">
+	  
+	     SELECT * FROM (SELECT * FROM item ORDER BY item_average DESC) WHERE ROWNUM 
+	     <![CDATA[<= 3]]>
+     </select>
+     <!-- 신작 게임 -->
+     <select id="selectList3" parameterType="map" resultType="itemVO">
+	     SELECT * FROM (SELECT * FROM item ORDER BY item_year DESC) WHERE ROWNUM 
+	     <![CDATA[<= 3]]>
+     </select>
+     <!-- 상품 목록 -->
+	 <sql id="itemNameSearch">
+		<where>
+			item_name LIKE '%' || #{keyword} || '%'
+		</where>
+	</sql>
+    <select id="selectListByKeyword" parameterType="map" resultType="itemVO">
+	 	SELECT
+			*
+		FROM (SELECT
+				a.*,
+				rownum rnum
+			FROM (SELECT
+					*
+				FROM item  
+				<include refid="itemNameSearch"></include>
+				)a)
+	<![CDATA[
+	WHERE rnum >= #{start} AND rnum <= #{end}
+	]]>	
+	 </select>
+     
 </mapper>

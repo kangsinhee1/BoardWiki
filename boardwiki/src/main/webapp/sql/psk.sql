@@ -53,7 +53,7 @@ CREATE SEQUENCE point_game_seq;
 --포인트 게임 선택지
 CREATE TABLE  point_game_option  (
 	 poiO_num 	number		NOT NULL,  -- 선택지 고유 번호
-	 optO_content 	varchar2(500)		NOT NULL,  -- 선택지 내용
+	 poiO_content 	varchar2(500)		NOT NULL,  -- 선택지 내용
 	 poiO_no 	number		NULL,  -- 선택지번호
 	 poiG_num 	number		NOT NULL,  -- 게임번호
 	CONSTRAINT  point_game_option_pk  PRIMARY KEY ( poiO_num ),
@@ -67,6 +67,7 @@ CREATE TABLE  point_game_betting  (
 	 bet_point 	number		NOT NULL,  -- 배팅 포인트
 	 bet_date 	date	DEFAULT SYSDATE	NOT NULL,  -- 배팅 날짜
 	 poiO_num 	number		NOT NULL,  -- 선택지 고유 번호
+	 mem_num    number      NOT NULL,  -- 회원 구별
 	CONSTRAINT  point_game_betting_pk  PRIMARY KEY ( bet_num ),
 	CONSTRAINT  point_game_betting_fk  FOREIGN KEY ( poiO_num ) REFERENCES  point_game_option  ( poiO_num )
 );

@@ -52,4 +52,45 @@
        WHERE rnum >= #{start} AND rnum <= #{end}
     ]]>
     </select>
+    
+    <!-- 포인트 게임 조건문 -->
+    <sql id="pointgamelist">
+    	<where>
+            <if test="poi_ck != null and poi_ck != ''">
+                mem_num =#{mem_num}
+            </if>
+        </where>
+    </sql>
+    <!-- 포인트 게임 목록 -->
+    <select id="selectPointGameList" parameterType="map" resultType="pointGameVO">
+    SELECT * FROM (SELECT a.*, rownum rnum FROM(
+    SELECT * FROM point_game
+    <include refid="pointgamelist"/>
+    )a)
+    <![CDATA[
+       WHERE rnum >= #{start} AND rnum <= #{end}
+    ]]>
+    </select>
+    <!-- 포인트 게임 카운트 -->
+    <select id="selectPointGameRowCount" parameterType="map" resultType="integer">
+    SELECT COUNT(*) FROM point_game <include refid="pointgamelist"/>
+    </select>
+    
+    <!-- 포인트 게임 조건문 -->
+    <sql id="pointgameoptionlist">
+            <if test="poi_ck != null and poi_ck != ''">
+                AND mem_num =#{mem_num}
+            </if>
+    </sql>
+    <!-- 포인트 게임옵션 목록 -->
+    <select id="selectPointGameOptionList" parameterType="map" resultType="pointGameVO">
+    SELECT * FROM (SELECT a.*, rownum rnum FROM(
+    SELECT * FROM point_game_option WHERE poiG_num 
+    <include refid="pointgameoptionlist"/>
+    )a)
+    <![CDATA[
+       WHERE rnum >= #{start} AND rnum <= #{end}
+    ]]>
+    </select>
+    
  </mapper>

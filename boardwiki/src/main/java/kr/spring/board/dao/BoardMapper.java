@@ -15,7 +15,7 @@ import kr.spring.board.vo.BoardVO;
 
 @Mapper
 public interface BoardMapper {
-	//부모글
+	//게시글
 	public List<BoardVO> selectList(Map<String,Object> map);
 	public Integer selectRowCount(Map<String,Object> map);
 	public void insertBoard(BoardVO board);
@@ -29,7 +29,7 @@ public interface BoardMapper {
 	@Update("UPDATE board SET boa_file='' WHERE boa_num=#{boa_num}")
 	public void deleteFile(Long boa_num);
 	
-	//부모글 좋아요
+	//게시글 좋아요
 	@Select("SELECT * FROM board_fav WHERE boa_num=#{boa_num} AND mem_num=#{mem_num}")
 	public BoardFavVO selectFav(BoardFavVO fav);
 	@Select("SELECT COUNT(*) FROM board_fav WHERE boa_num=#{boa_num}")

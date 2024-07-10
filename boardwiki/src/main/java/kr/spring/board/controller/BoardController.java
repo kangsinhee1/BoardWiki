@@ -80,21 +80,21 @@ public class BoardController {
 	public String getList(
 				@RequestParam(defaultValue="1") int pageNum,
 				@RequestParam(defaultValue="1") int order,
-				@RequestParam(defaultValue="") String category,
+				@RequestParam(defaultValue="") String boa_category,
 				String keyfield,String keyword,Model model) {
 		
-		log.debug("<<게시판 목록 - category>> : " + category);
+		log.debug("<<게시판 목록 - boa_category>> : " + boa_category);
 		log.debug("<<게시판 목록 - order>> : " + order);
 		
 		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("category", category);
+		map.put("boa_category", boa_category);
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
 		
 		int count = boardService.selectRowCount(map);
 		
 		PagingUtil page = new PagingUtil(keyfield,keyword,pageNum,count,
-							10,10,"list","&category="+category+"&order="+order);
+							10,10,"list","&boa_category="+boa_category+"&order="+order);
 		List<BoardVO> list = null;
 		if(count > 0) {
 			map.put("order", order);
