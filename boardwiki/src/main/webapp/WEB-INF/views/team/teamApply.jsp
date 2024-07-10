@@ -7,18 +7,22 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <div class="page-main">
 	<h2>모임 신청하기</h2>
+	<div class="result-display">
 	<form:form action="teamApply" id="board_register" modelAttribute="teamApplyVO" >
 	
+	<h4> 모임 신청</h4>
+	<div>하고싶은 말:</div>
 		<form:hidden path="tea_num" value="${param.tea_num}"/>
-		<form:label path="teaA_content">하고싶은말</form:label>
-		<form:textarea path="teaA_content"/>
+		<form:textarea path="teaA_content" cols="35" rows="5"/>
 	
 		<div class="align-center">
 			<form:button class="default-btn">신청</form:button>
+			
 			<input type="button" value="취소"
 			  class="default-btn"
 			  onclick="location.href='teamList'">
 		</div>                           
 	</form:form>
 </div>
+	</div>
 

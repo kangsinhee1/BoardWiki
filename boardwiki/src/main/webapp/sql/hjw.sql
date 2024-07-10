@@ -61,6 +61,7 @@ CREATE TABLE  team_reply  (
 	 teaR_rdate 	date	DEFAULT SYSDATE	NOT NULL,  -- 댓글작성날짜
 	 teaR_mdate 	date		NULL,  -- 댓글수정날짜
 	 teaB_num 	number		NOT NULL,  -- 게시글을 식별 번호
+	 teaB_hit	number DEFAULT 0 not null,
 	CONSTRAINT  team_reply_pk  PRIMARY KEY ( teaR_num ),
 	CONSTRAINT  team_reply_fk  FOREIGN KEY ( teaB_num ) REFERENCES  team_board  ( teaB_num )
 );

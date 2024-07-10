@@ -205,19 +205,82 @@ public class TeamController {
 			model.addAttribute("url", request.getContextPath()+"/team/teamList");
 			return "common/resultAlert";
 		}
+		//본인이 만든 모임은 신청하지 못하도록 처리
+		TeamVO team = teamService.detailTeam(applyVO.getTea_num());
+		
+		if(user.getMem_num() ==  team.getMem_num()) {
+			model.addAttribute("message", "본인이 등록한 모임입니다.");
+			model.addAttribute("url", request.getContextPath()+"/team/teamList");
+			return "common/resultAlert";
+		}
 		//이전에 신청한 기록이 있으면 신청한 기록이 있다고 확인시켜주기
+		
 		applyVO.setMem_num(user.getMem_num());
 		teamService.insertTeamApply(applyVO);
-		return getMyTeam();
+		return getMyTeam(model, session);
 	}
-	
+	  
 	
 	/*=====================
-	 * 나의 모임 게시판 목록
+	 * 나의 모임 게시판
 	 *=====================*/
+	
+
+	/*=====================
+	 * 나의 모임 게시판 목록(가입한 모임, 등록한 모임, 신청중 모임)
+	 *=====================*/
+	
 	@GetMapping("/team/myTeam")
-	public String getMyTeam() {
+	public String getMyTeam(Model model, HttpSession session) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		Map<String,Object> map2 = new HashMap<String,Object>();
+		Map<String,Object> map3= new HashMap<String,Object>();
+		
+		
+		//본인이 가입한 모임 목록
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		map.put("mem_num",user.getMem_num());
+		map.put("teaA_status",2);
+		List<TeamVO> list = null;
+		list = teamService.selectTeamListApplied(map);
+		model.addAttribute("list",list);
+		//본인이 등록한 모임 목록
+		
+		  map2.put("mem_num",user.getMem_num());
+		  map2.put("teaA_status",9); 
+		  List<TeamVO> list2 = null; list2 = teamService.selectTeamListApplied(map2);
+		  model.addAttribute("list2",list2);
+		 
+		// 신청한 모임 목록
+		map3.put("mem_num",user.getMem_num());
+		map3.put("teaA_status",1);
+		List<TeamVO> list3 = null;
+		list3 = teamService.selectTeamListApplied(map3);
+		model.addAttribute("list3",list3);
+		
+		
+		model.addAttribute("navJspPath", "/WEB-INF/views/team/myTeam-nav.jsp");
+        model.addAttribute("bodyJspPath", "/WEB-INF/views/team/myTeam.jsp");
+        
 		return "myTeam";
 	}
+	@GetMapping("/team/teamBoardWrite")
+	public String insertTeamBoard(HttpServletRequest request,
+			HttpSession session,
+			Model model) {
+		MemberVO member =(MemberVO)session.getAttribute("user");
+		if(member== null) {
+			model.addAttribute("message", "로그인후 작성 가능합니다.");
+			model.addAttribute("url", 
+					 request.getContextPath()+"/team/teamBoardList");
+	return "common/resultAlert";
+			
+		}
+		return "teamBoardWrite";
+	}
+	
+	
+	
+	
 	
 }

@@ -9,7 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.team.dao.TeamMapper;
 import kr.spring.team.vo.TeamApplyVO;
+import kr.spring.team.vo.TeamBoardVO;
 import kr.spring.team.vo.TeamFavVO;
+import kr.spring.team.vo.TeamReplyVO;
 import kr.spring.team.vo.TeamVO;
 
 @Service
@@ -93,6 +95,131 @@ public class TeamServiceImpl implements TeamService {
 
 	@Override
 	public void insertTeamApplyByAdmin(TeamVO team) {
+		teamMapper.insertTeamApplyByAdmin(team);
+		
+	}
+
+	@Override
+	public List<TeamVO> selectTeamListApplied(Map<String, Object> map) {
+		
+		return teamMapper.selectTeamListApplied(map);
+	}
+
+	@Override
+	public TeamApplyVO selectTeamApplyList(TeamApplyVO teamApply) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public TeamApplyVO selectTeamApplyListByTeamNum(long tea_num) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void updateTeamApply(TeamApplyVO teamApply) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteTeamApply(long teaA_num) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteTeamApplyByTeaNum(long tea_num) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateTeamApplyUser(TeamApplyVO teamApply) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<TeamBoardVO> selectTeamBoardList(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Integer selectTeamBoardRowCount(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void insertTeamBoard(TeamBoardVO teamBoard) {
+		teamMapper.insertTeamBoard(teamBoard);
+	}
+
+	@Override
+	public TeamBoardVO getTeamBoardDetail(long teaB_num) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void updateTeamBoard(long teaB_num) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteTeamBoard(long teaB_num) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteTeamBoardFile(long teaB_num) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateHitTeamBoard(long teaB_num) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<TeamReplyVO> selectTeamBoardReplyList(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Integer selectTeamBoardReplyCount(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void insertTeamBoardReply(TeamReplyVO teamReply) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateTeamBoardReply(TeamReplyVO teamReply) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteTeamBoardReply(long teaR_num) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteTeamBoardReplyByTeamBoardNum(long teaB_num) {
 		// TODO Auto-generated method stub
 		
 	}
