@@ -1,6 +1,7 @@
 package kr.spring.item.controller;
 
 import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
 
@@ -37,8 +38,10 @@ public class ItemController {
                           @RequestParam(defaultValue="1") int order,
                           @RequestParam(defaultValue="") String category,
                           String keyfield,String keyword,Model model) {
-
-        Map<String,Object> map = new HashMap<>();
+		log.debug("<<게임 목록 - category>> : "+category);
+		log.debug("<<게임 목록 - order>> : "+order);
+		
+        Map<String,Object> map = new HashMap<String,Object>();
 
 		map.put("category", category);
 		map.put("keyfield", keyfield);
@@ -74,11 +77,13 @@ public class ItemController {
 	 * 게임 상세
 	 *=========================*/
 	@GetMapping("/item/item_detail")
-	public String form() {
-		return "item_detail";
+	public ModelAndView process(Long item_num) {
+		log.debug("<<게임 상세 - item_num>> : "+item_num);
+		
+		ItemVO item = itemService.selectItem(item_num);
+		
+		return new ModelAndView("item_detail","item",item);
 	}
-	//등록 폼에서 전송된 데이터 처리
-	//@PostMapping
 }
 
 

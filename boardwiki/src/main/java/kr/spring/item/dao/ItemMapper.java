@@ -27,4 +27,5 @@ public interface ItemMapper {
 	public void deleteItem(Long item_num);
 	@Delete("DELETE FROM item WHERE item_num=#{item_num}")
 	public void deleteBoard(Long item_num);
+	//상품 상세
 }

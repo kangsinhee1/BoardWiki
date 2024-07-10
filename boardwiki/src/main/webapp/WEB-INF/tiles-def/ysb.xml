@@ -6,21 +6,15 @@
 
 <tiles-definitions>
 	<definition name="item_main" extends="main">
-		<put-attribute name="title" value="123"/>
+		<put-attribute name="title" value="게임 메인"/>
 		<put-attribute name="css" value="/WEB-INF/views/item/itemCSS.jsp"/>
 		<put-attribute name="body" value="/WEB-INF/views/item/item_main.jsp"/>
 	</definition>
-
-
-
-
-
-
-
-
-
-
-	
+	<definition name="item_detail" extends="main">
+		<put-attribute name="title" value="게임 상세"/>
+		<put-attribute name="css" value="/WEB-INF/views/item/itemCSS.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/item/item_detail.jsp"/>
+	</definition>	
 </tiles-definitions>
 
 
