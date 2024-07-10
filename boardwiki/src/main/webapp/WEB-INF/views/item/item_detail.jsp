@@ -26,7 +26,8 @@
 	</div>
 	<div class="big-box2">
 	    <a>${item.description}</a>
-	    <button>바로구매</button>
-		<button>장바구니</button>
+	    <button>대여</button>
+		<button>중고거래</button>
 	</div>
+	<button>목록</button>
 </div>
