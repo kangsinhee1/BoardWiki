@@ -3,7 +3,7 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
 <mapper namespace="kr.spring.item.dao.ItemMapper">
-    <!-- 게시판 글 총 레코드수/검색 레코드수  -->
+    <!-- 상품 총 레코드수/검색 레코드수  -->
      <select id="selectRowCount" resultType="integer">
        SELECT
           COUNT(*)
@@ -19,9 +19,5 @@
 	      <![CDATA[
 	 	)a)WHERE rnum >= 1 AND rnum <= 3
 	 	]]>
-	 </select>
-	 <!-- 상품 상세 -->
-	 <select id="selectdetail" parameterType="map" resultType="itemVO">
-	     SELECT * FROM item
 	 </select>
 </mapper>

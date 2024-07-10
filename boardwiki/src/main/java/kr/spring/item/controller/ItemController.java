@@ -27,7 +27,7 @@ public class ItemController {
 	//자바빈(VO) 초기화
 	@ModelAttribute
 	public ItemVO initCommand() {
-		return  new ItemVO();
+		return new ItemVO();
 	}
 
 	/*====================
