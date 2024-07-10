@@ -44,7 +44,7 @@
         let count;
         let rowCount = 10;
         let cnt = 0;
-		let data_form = $('#search').val();
+        let data_form ="";
 		
         $('#item_numbtn').click(function() {
             if (cnt === 0) {
@@ -62,6 +62,7 @@
         });
 
         $('#itembtn').on('click',function(event) {
+        	data_form = $('#search').val();
             event.preventDefault();
             selList(1);
         });
@@ -74,10 +75,11 @@
             $.ajax({
                 url: 'searchItem',
                 data: {
-                    item_name: data_form,
-                    pageNum: currentNum
+                    keyword: data_form,
+                    pageNum: currentNum,
+                    rowCount: rowCount
                 },
-                type: 'post',
+                type: 'get',
                 dataType: 'json',
                 success: function(param) {
                     $('#add').empty();

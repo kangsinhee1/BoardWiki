@@ -35,6 +35,7 @@ public class ItemAjaxController {
 									  int rowCount,
 									  HttpSession session){
 		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("keyword", keyword);
 		
 		//총글의 개수
 		int count = itemService.selectRowCount(map);
@@ -51,7 +52,7 @@ public class ItemAjaxController {
 		
 		List<ItemVO> list = null;
 		if(count > 0) {
-			list = itemService.selectList(map);
+			list = itemService.selectListByKeyword(map);
 		}else {
 			list = Collections.emptyList();
 		}
@@ -59,6 +60,8 @@ public class ItemAjaxController {
 		Map<String,Object> mapJson = new HashMap<String,Object>();
 		mapJson.put("count", count);
 		mapJson.put("list", list);
+		mapJson.put("result", "success");
+		
 		if(user!=null) {
 			mapJson.put("user_num", user.getMem_num());
 		}
