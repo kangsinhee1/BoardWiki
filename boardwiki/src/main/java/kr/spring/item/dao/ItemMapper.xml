@@ -26,4 +26,26 @@
 	     WHERE ROWNUM <= 3;
 	     ]]>
      </select>
+      <!-- 상품 목록 -->
+	 <sql id="itemNameSearch">
+		<where>
+			item_name LIKE '%' || #{keyword} || '%'
+		</where>
+	</sql>
+    <select id="selectListByKeyword" parameterType="map" resultType="itemVO">
+	 	SELECT
+			*
+		FROM (SELECT
+				a.*,
+				rownum rnum
+			FROM (SELECT
+					*
+				FROM item  
+				<include refid="itemNameSearch"></include>
+				)a)
+	<![CDATA[
+	WHERE rnum >= #{start} AND rnum <= #{end}
+	]]>	
+	 </select>
+     
 </mapper>

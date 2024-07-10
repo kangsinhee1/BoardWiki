@@ -37,4 +37,9 @@ public class ItemServiceImpl implements ItemService{
 		return itemMapper.selectList2(map);
 	}
 
+	@Override
+	public List<ItemVO> selectListByKeyword(Map<String, Object> map) {
+		return itemMapper.selectListByKeyword(map);
+	}
+
 }

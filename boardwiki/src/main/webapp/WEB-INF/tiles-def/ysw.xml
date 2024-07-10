@@ -33,6 +33,7 @@
 	</definition>
 	<definition name="usedWrite" extends="main">
 		<put-attribute name="title" value="중고 글쓰기"/>
+		<put-attribute name="css" value="/WEB-INF/views/used/usedCSS.jsp"/>
 		<put-attribute name="body" value="/WEB-INF/views/used/usedWrite.jsp"/>
 	</definition>
 </tiles-definitions>

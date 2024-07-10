@@ -14,6 +14,7 @@ import kr.spring.item.vo.ItemVO;
 @Mapper
 public interface ItemMapper {
 	//상품관리
+	public List<ItemVO> selectListByKeyword(Map<String,Object> map);
 	public List<ItemVO> selectList(Map<String,Object> map);
 	public List<ItemVO> selectList2(Map<String,Object> map);
 	public Integer selectRowCount(Map<String,Object> map);
@@ -29,4 +30,5 @@ public interface ItemMapper {
 	@Delete("DELETE FROM item WHERE item_num=#{item_num}")
 	public void deleteBoard(Long item_num);
 	//상품 상세
+	
 }

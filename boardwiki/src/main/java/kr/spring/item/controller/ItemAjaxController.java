@@ -30,12 +30,11 @@ public class ItemAjaxController {
 	 *==============*/
 	@GetMapping("/used/searchItem")
 	@ResponseBody
-	public Map<String,Object> getList(int item_num,
+	public Map<String,Object> getList(String keyword,
 									  int pageNum,
 									  int rowCount,
 									  HttpSession session){
 		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("item_num", item_num);
 		
 		//총글의 개수
 		int count = itemService.selectRowCount(map);
