@@ -4,6 +4,17 @@
 <!-- 게시판 목록 시작 -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 <div class="page-main">
+	 <c:choose>
+        <c:when test="${param.boa_category == 1}">
+            <h2>자유게시판</h2>
+        </c:when>
+        <c:when test="${param.boa_category == 2}">
+            <h2>팁게시판</h2>
+        </c:when>
+        <c:when test="${param.boa_category == 3}">
+            <h2>후기게시판</h2>
+        </c:when>
+    </c:choose>
 	<div>
 		<a href="list?boa_category=1">자유게시판</a> |
 		<a href="list?boa_category=2">팁게시판</a> |

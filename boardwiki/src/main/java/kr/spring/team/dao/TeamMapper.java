@@ -10,7 +10,9 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import kr.spring.team.vo.TeamApplyVO;
+import kr.spring.team.vo.TeamBoardVO;
 import kr.spring.team.vo.TeamFavVO;
+import kr.spring.team.vo.TeamReplyVO;
 import kr.spring.team.vo.TeamVO;
 
 @Mapper
@@ -54,11 +56,73 @@ public interface TeamMapper {
 		@Delete("DELETE FROM team_fav WHERE tea_num=#{tea_num}")
 		public void deleteTeamFavByTeamNum(long tea_num);
 
+		// 회원이 가입한 모임
+		public List<TeamVO> selectTeamListApplied(Map<String,Object>map);
+		// 본인이 등록한 모임
+		public List<TeamApplyVO> selectTeamListRegistered(Map<String,Object>map);
 		
 		
 		// 모임 신청 및 관리
 		
 		public void insertTeamApplyByAdmin(TeamVO team);
 		public void insertTeamApply(TeamApplyVO teamApply);
+		
+		//신청 목록 확인
+		
+		public TeamApplyVO selectTeamApplyList(TeamApplyVO teamApply);
+		
+		//모임별 신청회원 확인
+		@Select("SELECT * FROM team_apply WHERE tea_num=#{tea_num} AND teaA_status=1 ")
+		public TeamApplyVO selectTeamApplyListByTeamNum(long tea_num);
+		@Update("UPDATE team_apply SET teaA_content = #{teaA_content}")
+		public 	void updateTeamApply(TeamApplyVO teamApply);
+		@Delete("DELETE FROM team_apply WHERE teaA_num=#{teaA_num}")
+		public void deleteTeamApply(long teaA_num);
+		@Delete("DELETE FROM team_apply WHERE tea_num=#{tea_num}")
+		public void deleteTeamApplyByTeaNum(long tea_num);
+		
+		//모임 신청 처리
+		@Update("UPDATE team_apply SET teaA_attend=1")
+		public void updateTeamApplyUser(TeamApplyVO teamApply);
+		//모임 참석 회원 확인
+		@Select("SELECT * FROM team_apply JOIN team USING(mem_num) WHERE teaA_attend=1")
+		public void selectTeamApplyATTEND(TeamApplyVO teamApply);
+		
+		//모임 게시판 관리
+		
+		//모임 게시판 목록
+		
+		public List<TeamBoardVO> selectTeamBoardList(Map<String,Object>map);
+		//모임 게시판 개수
+		
+		public Integer selectTeamBoardRowCount(Map<String,Object>map);
+		//모임 게시판 등록
+		public void insertTeamBoard(TeamBoardVO teamBoard);
+		//모임 게시판 상세
+		public TeamBoardVO getTeamBoardDetail(long teaB_num);
+		//모임 게시판 수정
+		public void updateTeamBoard(long teaB_num);
+		//모임 게시판 삭제
+		public void deleteTeamBoard(long teaB_num);
+		//모임 게시판 파일 관리
+		public void deleteTeamBoardFile(long teaB_num);
+		//모임 게시판 조회수
+		public void updateHitTeamBoard(long teaB_num);
+		// 모임게시판 댓글
+		//댓글 목록
+		public List<TeamReplyVO> selectTeamBoardReplyList(Map<String,Object>map);
+		//댓글 갯수
+		public Integer selectTeamBoardReplyCount(Map<String,Object>map);
+		//댓글 등록
+		public void insertTeamBoardReply(TeamReplyVO teamReply);
+		//댓글 수정
+		public void updateTeamBoardReply(TeamReplyVO teamReply);
+		//댓글 삭제
+		public void deleteTeamBoardReply(long teaR_num);
+		//부모글 삭제시 댓글 삭제
+		public void deleteTeamBoardReplyByTeamBoardNum(long teaB_num);
+		
+		
+		
 
 }
