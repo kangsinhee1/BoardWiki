@@ -24,10 +24,10 @@ public class MemberVO {
 	private String mem_photo;
 	
 	//비밀번호 일치 여부 체크
-		public boolean ischeckedPassword(String userPasswd) {
-			if(mem_auth > 1 && mem_passwd.equals(userPasswd)) {
-				return true;
-			}
-			return false;
+	public boolean ischeckedPassword(String userPasswd) {
+		if(mem_auth > 1 && mem_passwd.equals(userPasswd)) {
+			return true;
 		}
-}
+		return false;
+	}
+} 
