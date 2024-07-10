@@ -10,15 +10,15 @@
 		<ul>
 			<li>
 				<form:label path="mem_email">이메일</form:label>
-				<form:input path="mem_email"/>                                                      
+				<form:input path="mem_email" readonly="true"/>                                                      
 			</li>
 			<li>
 				<form:label path="mem_passwd">비밀번호</form:label>
-				<form:password path="mem_passwd"/>
+				<form:password path="mem_passwd" readonly="true"/>
 			</li>
 			<li>
 				<form:label path="mem_name">이름</form:label>
-				<form:input path="mem_name"/>
+				<form:input path="mem_name" readonly="true"/>
 			</li>
 			<li>
 				<form:label path="mem_nickName">별명</form:label>
