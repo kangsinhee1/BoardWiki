@@ -74,10 +74,19 @@ public class ItemController {
 
 			list2 = itemService.selectList2(map);
 		}
+	    List<ItemVO> list3 = null;
+	    if(count > 0) {
+			map.put("order", order);
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+
+			list3 = itemService.selectList3(map);
+		}
 
 	    model.addAttribute("count", count);
 		model.addAttribute("list", list);
 		model.addAttribute("list2", list2);
+		model.addAttribute("list3", list3);
 		model.addAttribute("page", page.getPage());
 
 		return "item_main";

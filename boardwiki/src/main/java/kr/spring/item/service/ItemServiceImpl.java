@@ -42,4 +42,9 @@ public class ItemServiceImpl implements ItemService{
 		return itemMapper.selectListByKeyword(map);
 	}
 
+	@Override
+	public List<ItemVO> selectList3(Map<String, Object> map) {
+		return itemMapper.selectList3(map);
+	}
+
 }

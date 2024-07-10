@@ -37,10 +37,9 @@
                </div>
            </c:forEach>
            </div>
-           <div class="small-name">
-        <!-- 
         <h2 class="big-name">신작 게임</h2>
-           <c:forEach var="item_start" items="${list}">
+           <div class="small-name">
+           <c:forEach var="item" items="${list3}">
                <div class="big-box" style="display:inline-block;vertical-align:top;">
                <div class="image-box" style="display:inline-block;vertical-align:top;">
                    <img onclick="location.href='${pageContext.request.contextPath}/item/item_detail?item_num=${item.item_num}'" src="${item.item_image}" width="180" height="180">
@@ -54,7 +53,5 @@
                </div>
            </c:forEach>
            </div>
-        -->
-       </div>
    </div>
 </div>
