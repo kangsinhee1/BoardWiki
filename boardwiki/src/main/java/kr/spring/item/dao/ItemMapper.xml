@@ -26,7 +26,13 @@
 	     WHERE ROWNUM <= 3;
 	     ]]>
      </select>
-      <!-- 상품 목록 -->
+     <!-- 최고 평점 -->
+     <select id="selectList2" parameterType="map" resultType="itemVO">
+	  
+	     SELECT * FROM (SELECT * FROM item ORDER BY item_average DESC) WHERE ROWNUM 
+	     <![CDATA[<= 3]]>
+     </select>
+     <!-- 상품 목록 -->
 	 <sql id="itemNameSearch">
 		<where>
 			item_name LIKE '%' || #{keyword} || '%'
