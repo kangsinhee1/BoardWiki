@@ -10,14 +10,13 @@ CONSTRAINT game_rent_pk PRIMARY KEY (rent_num),
 CONSTRAINT game_rent_fk1 FOREIGN KEY (mem_num) REFERENCES member (mem_num),
 CONSTRAINT game_rent_fk2 FOREIGN KEY (item_num) REFERENCES item (item_num)
 );
-
-ALTER TABLE item
-ADD min_time NUMBER;
-
-ALTER TABLE item
-ADD max_time NUMBER;
-
 CREATE SEQUENCE game_rent_seq;
+
+--ALTER TABLE item
+--ADD min_time NUMBER;
+--
+--ALTER TABLE item
+--ADD max_time NUMBER;
 
 -- 신고 테이블
 CREATE TABLE report (
