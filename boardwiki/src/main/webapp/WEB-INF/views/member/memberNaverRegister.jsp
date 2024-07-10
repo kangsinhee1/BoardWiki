@@ -14,7 +14,7 @@
 			</li>
 			<li>
 				<form:label path="mem_passwd">비밀번호</form:label>
-				<form:password path="mem_passwd" />
+				<form:password path="mem_passwd"/>
 			</li>
 			<li>
 				<form:label path="mem_name">이름</form:label>

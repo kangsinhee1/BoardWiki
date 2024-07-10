@@ -148,6 +148,7 @@ public class MemberController {
 		String naver_name = jsonResponse.getString("name");
 		String naver_email = jsonResponse.getString("email");
 		String naver_passwd = jsonResponse.getString("id");
+		
 
 		log.debug("<<name>> : " + naver_name);
 		log.debug("<<email>> : " + naver_email);
@@ -160,6 +161,7 @@ public class MemberController {
 		    memberVO.setMem_name(naver_name);
 		    memberVO.setMem_email(naver_email);
 		    memberVO.setMem_passwd(naver_passwd);
+		    memberVO.setMem_provider("Naver");
 		    
 		    model.addAttribute("memberVO", memberVO);
 		    
