@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <!-- 회원로그인 시작 -->
 <div class="page-main">
 	<h2>회원로그인</h2>
@@ -22,7 +23,12 @@
 				<label for="auto"><input type="checkbox" name="auto" id="auto">로그인상태유지</label>
 			</li>
 		</ul>
+		<div>
 			<a href="${naverUrl}">naver login</a>
+		</div>
+		<div>
+			<a href="javascrpit:kakaoLogin()">kakao Login</a>
+		</div>
 		<div>
 			<form:button class="login-btn">로그인</form:button>
 		</div>                           

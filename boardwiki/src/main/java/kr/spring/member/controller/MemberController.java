@@ -40,7 +40,7 @@ public class MemberController {
 
 	@Autowired
 	private NaverLoginUtil naverLoginUtil;
-
+	
 
 	// 자바빈(VO) 초기화
 	@ModelAttribute
@@ -56,10 +56,11 @@ public class MemberController {
 	@GetMapping("/member/login")
 	public String formLogin(Model model,HttpSession session) {
 		log.debug("<<로그인페이지 요청>>");
+		/*==============
+		 * 	 네이버 로그인
+		 *==============*/
 		String naverAuthUrl = naverLoginUtil.getAuthorizationUrl(session);
 		model.addAttribute("naverUrl", naverAuthUrl);
-		log.debug("<<naverUrl>> :" + naverAuthUrl);
-
 		return "memberLogin";
 	}
 	
