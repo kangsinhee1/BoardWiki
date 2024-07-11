@@ -58,9 +58,11 @@ public class MemberController {
 		log.debug("<<로그인페이지 요청>>");
 		String naverAuthUrl = naverLoginUtil.getAuthorizationUrl(session);
 		model.addAttribute("naverUrl", naverAuthUrl);
+		log.debug("<<naverUrl>> :" + naverAuthUrl);
 
 		return "memberLogin";
 	}
+	
 	//로그인 폼에서 전송된 데이터 처리
 	@PostMapping("/member/login")
 	public String submitLogin(@Valid MemberVO memberVO,
@@ -122,6 +124,45 @@ public class MemberController {
 			return formLogin(model, session);
 		}
 	}
+	//회원가입 선택 폼 호출
+	@GetMapping("/member/memberRegisterChoice")
+	public String choiceRegister(Model model,HttpSession session) {
+		log.debug("<<로그인페이지 요청>>");
+		String naverAuthUrl = naverLoginUtil.getAuthorizationUrl(session);
+		model.addAttribute("naverUrl", naverAuthUrl);
+		log.debug("<<naverUrl>> :" + naverAuthUrl);
+
+		return "memberRegisterChoice";
+	}
+	//일반 회원가입
+	@GetMapping("/member/memberRegister")
+	public String formRegister() {
+		log.debug("<<일반 회원가입 페이지 요청 메서드>>");
+		return "memberRegister";//Tiles 설정명
+	}
+	//전송된 데이터 처리
+	@PostMapping("/member/memberRegister")
+	public String submit(@Valid MemberVO memberVO, BindingResult result, Model model, HttpServletRequest request) {
+		log.debug("<<회원가입>> : " + memberVO);
+		
+		//유효성 체크 결과 오류가 있으면 폼 호출
+		if(result.hasErrors()) {
+			return formMemberNaverRegister();
+		}
+		//회원 가입
+		memberService.insertMember(memberVO);
+
+		//UI 메시지 처리
+		model.addAttribute("accessTitle", "회원 가입");
+		model.addAttribute("accessMsg", "회원 가입이 완료되었습니다.");
+		model.addAttribute("accessBtn", "홈으로");
+		model.addAttribute("accessUrl", 
+				request.getContextPath()+"/main/main");
+
+		return "common/resultView";
+	}
+	
+
 	//네이버 로그인 폼에서 받아온 데이터 처리
 	//네이버 - 네이버 로그인 성공시 callback 호출 후 사용자 정보 요청
 	@GetMapping("/member/login/oauth2/code/naver")
@@ -188,18 +229,15 @@ public class MemberController {
 		log.debug("<<네이버 회원가입 페이지 요청 메서드>>");
 		return "memberNaverRegister";//Tiles 설정명
 	}
-
-	
-	
 	//전송된 데이터 처리
-	@PostMapping("/member/registerNaverUser")
-	public String submit(@Valid MemberVO memberVO, BindingResult result, Model model, HttpServletRequest request) {
+	@PostMapping("	")
+	public String submitNaver(@Valid MemberVO memberVO, BindingResult result, Model model, HttpServletRequest request) {
 		log.debug("<<회원가입>> : " + memberVO);
-
-		//유효성 체크 결과 오류가 있으면 폼 호출
-		if(result.hasErrors()) {
-			return formMemberNaverRegister();
-		}
+		
+		/*
+		 * //유효성 체크 결과 오류가 있으면 폼 호출 if(result.hasErrors()) { return
+		 * formMemberNaverRegister(); }
+		 */
 		//회원 가입
 		memberService.insertMember(memberVO);
 
@@ -209,7 +247,7 @@ public class MemberController {
 		model.addAttribute("accessBtn", "홈으로");
 		model.addAttribute("accessUrl", 
 				request.getContextPath()+"/main/main");
-
+		
 		return "common/resultView";
 	}
 	/*==============================

@@ -16,25 +16,19 @@
 	 	WHERE mem_email = #{mem_email}
 	 </select>
 	 <!-- 회원가입 -->
-	 <insert id="insertMember_detail" parameterType="memberVO">
+	  <insert id="insertMember_detail" parameterType="memberVO">
 	 	INSERT INTO member_detail (
 	 	  mem_num,
-	 	  name,
-	 	  passwd,
-	 	  phone,
-	 	  email,
-	 	  zipcode,
-	 	  address1,
-	 	  address2)	
+	 	  mem_name,
+	 	 mem_passwd,
+	 	  mem_phone,
+	 	  mem_provider)	
 	 	VALUES (
 	 	  #{mem_num},
-	 	  #{name},
-	 	  #{passwd},
-	 	  #{phone},
-	 	  #{email},
-	 	  #{zipcode},
-	 	  #{address1},
-	 	  #{address2}
+	 	  #{mem_name},
+	 	  #{mem_passwd},
+	 	  #{mem_phone},
+	 	  #{mem_provider}
 	 	)
 	 </insert>
 </mapper>

@@ -4,39 +4,38 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!-- 회원가입 시작 -->
 <div class="page-main">
-	<h2>네이버 회원가입</h2>
-	<form:form action="memberNaverRegister" id="member_register"
+	<h2>회원가입</h2>
+	<form:form action="memberRegister" id="member_register"
 	                            modelAttribute="memberVO">
 		<ul>
 			<li>
 				<form:label path="mem_email">이메일</form:label>
-				<form:input path="mem_email" readonly="true"/>                                                      
+				<form:input path="mem_email" placeholder="영문,숫자만 4~12자"
+				                             autocomplete="off"/>
+				<input type="button" id="confirmId" value="ID중복체크"
+				                                 class="default-btn">                             
+				<span id="message_id"></span>
+				<form:errors path="mem_email" cssClass="error-color"/>                             
 			</li>
 			<li>
 				<form:label path="mem_name">이름</form:label>
-				<form:input path="mem_name" readonly="true"/>
+				<form:input path="mem_name"/>
+				<form:errors path="mem_name" cssClass="error-color"/>
 			</li>
 			<li>
 				<form:label path="mem_nickName">별명</form:label>
 				<form:input path="mem_nickName"/>
 			</li>
 			<li>
+				<form:label path="mem_passwd">비밀번호</form:label>
+				<form:password path="mem_passwd" placeholder="영문,숫자만 4~12자"/>
+				<form:errors path="mem_passwd" cssClass="error-color"/>
+			</li>
+			<li>
 				<form:label path="mem_phone">전화번호</form:label>
 				<form:input path="mem_phone"/>
 				<form:errors path="mem_phone" cssClass="error-color"/>
 			</li>
-			<li>
-				<form:label path="mem_passwd"></form:label>
-				<form:hidden path="mem_passwd"/>
-			</li>
-			<li>
-				<form:label path="mem_provider"></form:label>
-				<form:hidden path="mem_provider"/>
-			</li>
-			
-			
-			
-			
 		</ul> 
 		<div class="align-center">
 			<form:button class="default-btn">전송</form:button>
