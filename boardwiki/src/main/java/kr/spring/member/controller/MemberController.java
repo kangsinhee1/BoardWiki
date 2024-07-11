@@ -236,6 +236,7 @@ public class MemberController {
 		log.debug("<<회원가입>> : " + memberVO);
 		
 		
+		
 		/*
 		 * //유효성 체크 결과 오류가 있으면 폼 호출 if(result.hasErrors()) { return
 		 * formMemberNaverRegister(); }
