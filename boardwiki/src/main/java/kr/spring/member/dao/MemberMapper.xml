@@ -22,13 +22,15 @@
 	 	  mem_name,
 	 	 mem_passwd,
 	 	  mem_phone,
-	 	  mem_provider)	
+	 	  mem_provider,
+	 	  mem_nickName)	
 	 	VALUES (
 	 	  #{mem_num},
 	 	  #{mem_name},
 	 	  #{mem_passwd},
 	 	  #{mem_phone},
-	 	  #{mem_provider}
+	 	  #{mem_provider},
+	 	  #{mem_nickName}
 	 	)
 	 </insert>
 </mapper>
