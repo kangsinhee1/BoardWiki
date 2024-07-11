@@ -231,7 +231,7 @@ public class MemberController {
 		return "memberNaverRegister";//Tiles 설정명
 	}
 	//전송된 데이터 처리
-	@PostMapping("	")
+	@PostMapping("/member/login/oauth2/code/memberNaverRegister")
 	public String submitNaver(@Valid MemberVO memberVO, BindingResult result, Model model, HttpServletRequest request) {
 		log.debug("<<회원가입>> : " + memberVO);
 		
