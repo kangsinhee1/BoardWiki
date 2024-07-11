@@ -29,6 +29,8 @@
 				<form:input path="mem_phone"/>
 				<form:errors path="mem_phone" cssClass="error-color"/>
 			</li>
+			
+			
 		</ul> 
 		<div class="align-center">
 			<form:button class="default-btn">전송</form:button>

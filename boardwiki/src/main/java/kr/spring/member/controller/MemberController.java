@@ -106,6 +106,8 @@ public class MemberController {
 					return "redirect:/main/main";
 				}
 			}
+			
+			
 			//인증 실패
 			throw new AuthCheckException();
 		}catch(AuthCheckException e) {
