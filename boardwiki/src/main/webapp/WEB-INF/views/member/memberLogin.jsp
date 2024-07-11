@@ -27,7 +27,7 @@
 			<a href="${naverUrl}">naver login</a>
 		</div>
 		<div>
-			<a href="javascrpit:kakaoLogin()">kakao Login</a>
+			<a href="${naverUrl}">kakao Login</a>
 		</div>
 		<div>
 			<form:button class="login-btn">로그인</form:button>
