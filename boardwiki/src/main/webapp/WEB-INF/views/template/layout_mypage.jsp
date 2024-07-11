@@ -10,14 +10,15 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script> 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/common.css" type="text/css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css" type="text/css">
 <tiles:insertAttribute name="css" ignore="true"/>
 </head>
 <body>
 <div id="main">
 	<div id="main_top-header">
 		<tiles:insertAttribute name="top-header"/>
+	</div>
+	<div id="main_header">
+		<tiles:insertAttribute name="header"/>
 	</div>
 	<div class="side-height">
 		<div id="page_nav">

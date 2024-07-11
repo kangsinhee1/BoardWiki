@@ -13,16 +13,4 @@
 	text-align: center;
 }
 
-/* myPage */
 
-/* side-bar */
-/* 사이드바 */
-#page_nav{
-	height: 700px;
-	background-color:#0da58c;
-}
-.side-nav li{
-	font-size: 20px;
-	color:white;
-	margin: 10px 0;
-}

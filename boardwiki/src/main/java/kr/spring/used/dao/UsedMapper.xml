@@ -18,6 +18,33 @@
 	 		</if>
 	 	</where>
 	 </sql>
+	 <sql id="usedOrder">
+ 		<if test="order == 1">
+ 			ORDER BY use_num DESC
+ 		</if>
+ 		<if test="order == 2">
+ 			ORDER BY use_price DESC
+ 		</if>
+	 </sql>
+	 <!-- 게시판 전체 목록/검색 목록 -->
+	<!--  <select id="getUsedRowCount" parameterType="map"
+	 							resultType="usedItemVO">
+	 	SELECT
+	 	   *
+	 	FROM (SELECT
+	 			a.*,
+	 			rownum rnum
+	 		   FROM (SELECT
+	 		   			*
+	 		   		 FROM used_item
+	 		   		 JOIN item USING(item_num)
+	 		   		 <include refid="usedSearch"></include>
+	 		   		 <include refid="usedOrder"></include>
+	 		   		 )a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+	</select> -->
 	<!-- 중고 글 목록 -->
 	 <select id="selectUsedList" parameterType="map" resultType="usedItemVO">
 	 	SELECT *FROM

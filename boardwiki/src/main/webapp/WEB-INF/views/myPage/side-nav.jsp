@@ -1,15 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<h1>MyPage</h1>
+<h1 id="mypage-side-bar-name">MyPage</h1>
 <nav class="side-nav">
 	<ul>
-		<li>알림</li>
-		<li>일정</li>
-		<li>채팅방</li>
-		<li>주문</li>
-		<li>전적</li>
-		<li>작성한글</li>
-		<li>포인트</li>
-		<li>내QnA</li>
+		<li><a>알림</a></li>
+		<li><a href="${pageContext.request.contextPath}/member/calendar">일정</a></li>
+		<li><a>채팅방</a></li>
+		<li><a>주문</a></li>
+		<li><a>전적</a></li>
+		<li><a href="${pageContext.request.contextPath}/member/myWrite">작성한글</a></li>
+		<li><a>포인트</a></li>
+		<li><a>내QnA</a></li>	
 	</ul>
 </nav>
