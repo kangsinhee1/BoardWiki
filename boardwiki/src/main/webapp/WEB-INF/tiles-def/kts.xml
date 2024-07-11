@@ -30,6 +30,11 @@
 		<put-attribute name="css" value="/WEB-INF/views/rulebook/rulebookCSS.jsp"/>
 		<put-attribute name="body" value="/WEB-INF/views/rulebook/rulebookList.jsp"/>
 	</definition>
+	<definition name="rulebookWrite" extends="main">
+		<put-attribute name="title" value="룰북 추가"/>
+		<put-attribute name="css" value="/WEB-INF/views/rulebook/rulebookCSS.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/rulebook/rulebookWrite.jsp"/>
+	</definition>
 </tiles-definitions>
 
 

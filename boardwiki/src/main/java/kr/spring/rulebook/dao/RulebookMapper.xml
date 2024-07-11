@@ -48,8 +48,7 @@
 	 	  rulB_filename,
 	 	  mem_num)
 	 	VALUES(
-	 	  board_boa_num_seq.nextval,
-	 	  #{boa_category},
+	 	  rulebook_rulB_num_seq.nextval,
 	 	  #{item_num},
 	 	  #{rulB_content},
 	 	  #{rulB_filename,jdbcType=VARCHAR},

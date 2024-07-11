@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import kr.spring.board.vo.BoardVO;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.rulebook.service.RulebookService;
 import kr.spring.rulebook.vo.RulebookVO;
@@ -39,12 +38,12 @@ public class RulebookController {
 	/*====================
 	 *  룰북 글쓰기
 	 *====================*/
-	@GetMapping("/rulebook/write")
-	public String form() {
+	@GetMapping("/rulebook/rulebookWrite")
+	public String insertrulebook() {
 		return "rulebookWrite";
 	}
-	@PostMapping("/rulebook/write")
-	public String submit(@Valid RulebookVO rulebookVO,
+	@PostMapping("/rulebook/rulebookWrite")
+	public String submitrulebook(@Valid RulebookVO rulebookVO,
 						  BindingResult result,
 						  HttpServletRequest request,
 						  HttpSession session,
@@ -54,7 +53,7 @@ public class RulebookController {
 		log.debug("<<게시판 글 저장>> : " + rulebookVO);
 		
 		if(result.hasErrors()) {
-			return form();
+			return insertrulebook();
 		}
 		
 		MemberVO vo = (MemberVO)session.getAttribute("user");

@@ -10,14 +10,11 @@
 <script src="${pageContext.request.contextPath}/js/uploadAdapter.js"></script>
 <div class="page-main">
 	<h2>룰북 작성</h2>
-	<form:form action="rulebookwrite" id="rulebook_register"
+	<form:form action="rulebookWrite" id="rulebook_register"
 	           enctype="multipart/form-data"
 	                            modelAttribute="rulebookVO">
 		<ul>
-			<li>
-				<form:input path="boa_title" placeholder="제목을 입력하세요"/>
-				<form:errors path="boa_title" cssClass="error-color"/>
-			</li>
+			
 			<li>
 				<form:textarea path="rulB_content"/>
 				<form:errors path="rulB_content" cssClass="error-color"/>
@@ -41,8 +38,8 @@
 			    </script> 
 			</li>
 			<li>
-				<form:label path="upload">파일업로드</form:label>
-				<input type="file" name="upload" id="upload">
+				<form:label path="rulB_upload">파일업로드</form:label>
+				<input type="file" name="rulB_upload" id="rulB_upload">
 			</li>
 		</ul> 
 		<div class="align-center">
