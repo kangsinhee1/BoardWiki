@@ -8,8 +8,8 @@
 <!-- include ckeditor js -->
 <script src="${pageContext.request.contextPath}/js/ckeditor.js"></script>
 <script src="${pageContext.request.contextPath}/js/uploadAdapter.js"></script>
-<div class="page-main">
 	<h2>모임게시판  글쓰기</h2>
+<div class="">
 	<form:form action="teamWrite" id="team_register"
 	           enctype="multipart/form-data"
 	                            modelAttribute="teamVO">

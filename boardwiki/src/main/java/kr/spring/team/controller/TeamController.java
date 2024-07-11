@@ -217,7 +217,7 @@ public class TeamController {
 		
 		applyVO.setMem_num(user.getMem_num());
 		teamService.insertTeamApply(applyVO);
-		return getMyTeam(model, session);
+		return getMyTeam(model, session, request);
 	}
 	  
 	
@@ -231,7 +231,7 @@ public class TeamController {
 	 *=====================*/
 	
 	@GetMapping("/team/myTeam")
-	public String getMyTeam(Model model, HttpSession session) {
+	public String getMyTeam(Model model, HttpSession session,HttpServletRequest request) {
 		Map<String,Object> map = new HashMap<String,Object>();
 		Map<String,Object> map2 = new HashMap<String,Object>();
 		Map<String,Object> map3= new HashMap<String,Object>();
@@ -239,6 +239,12 @@ public class TeamController {
 		
 		//본인이 가입한 모임 목록
 		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user==null) {
+			model.addAttribute("message", "로그인 후에 가능합니다.");
+			model.addAttribute("url", request.getContextPath()+"/team/teamList");
+		return "common/resultAlert";
+			
+		}
 		map.put("mem_num",user.getMem_num());
 		map.put("teaA_status",2);
 		List<TeamVO> list = null;
@@ -246,10 +252,10 @@ public class TeamController {
 		model.addAttribute("list",list);
 		//본인이 등록한 모임 목록
 		
-		  map2.put("mem_num",user.getMem_num());
-		  map2.put("teaA_status",9); 
-		  List<TeamVO> list2 = null; list2 = teamService.selectTeamListApplied(map2);
-		  model.addAttribute("list2",list2);
+		map2.put("mem_num",user.getMem_num());
+		map2.put("teaA_status",9); 
+		List<TeamVO> list2 = null; list2 = teamService.selectTeamListApplied(map2);
+		model.addAttribute("list2",list2);
 		 
 		// 신청한 모임 목록
 		map3.put("mem_num",user.getMem_num());
@@ -258,16 +264,20 @@ public class TeamController {
 		list3 = teamService.selectTeamListApplied(map3);
 		model.addAttribute("list3",list3);
 		
+		model.addAttribute("count",0);
 		
 		model.addAttribute("navJspPath", "/WEB-INF/views/team/myTeam-nav.jsp");
         model.addAttribute("bodyJspPath", "/WEB-INF/views/team/myTeam.jsp");
         
 		return "myTeam";
 	}
+	
 	@GetMapping("/team/teamBoardWrite")
 	public String insertTeamBoard(HttpServletRequest request,
 			HttpSession session,
 			Model model) {
+		
+		
 		MemberVO member =(MemberVO)session.getAttribute("user");
 		if(member== null) {
 			model.addAttribute("message", "로그인후 작성 가능합니다.");

@@ -10,7 +10,7 @@
             <a href="#" class="navbar-logo">내가 가입한 모임</a>
             <ul class="navbar-menu">
             <c:forEach var="team" items="${list}">
-                <li class="navbar-item"><a href="myteam?tea_num=${team.tea_num}" class="navbar-link">${team.tea_name}</a></li>
+                <li class="navbar-item" id="navbar-applied"><a href="myteam?tea_num=${team.tea_num}" class="navbar-link">${team.tea_name}</a></li>
             </c:forEach>
             </ul>
         </div>
@@ -20,7 +20,7 @@
             <a href="#" class="navbar-logo">내가 관리하는 모임</a>
             <ul class="navbar-menu">
             <c:forEach var="team" items="${list2}">
-                <li class="navbar-item"><a href="myteam?tea_num=${team.tea_num}" class="navbar-link">${team.tea_name}</a></li>
+                <li class="navbar-item" id="navbar-authorized"><a href="myteam?tea_num=${team.tea_num}" class="navbar-link">${team.tea_name}</a></li>
             </c:forEach>
             </ul>
         </div>
@@ -30,7 +30,7 @@
             <a href="#" class="navbar-logo">내가 신청한 모임</a>
             <ul class="navbar-menu">
             <c:forEach var="team" items="${list3}">
-                <li class="navbar-item"><a href="myteam?tea_num=${team.tea_num}" class="navbar-link">${team.tea_name}</a></li>
+                <li class="navbar-item" id="navbar-requested"><a href="myteam?tea_num=${team.tea_num}" class="navbar-link">${team.tea_name}</a></li>
             </c:forEach>
             </ul>
         </div>
