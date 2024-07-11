@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -21,14 +22,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.github.scribejava.core.exceptions.OAuthException;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.AuthCheckException;
-import kr.spring.util.CaptchaUtil;
+import kr.spring.util.KakaoLoginUtil;
 import kr.spring.util.NaverLoginUtil;
 import lombok.extern.slf4j.Slf4j;
 
@@ -41,6 +42,10 @@ public class MemberController {
 	@Autowired
 	private NaverLoginUtil naverLoginUtil;
 	
+	@Autowired
+	private KakaoLoginUtil kakaoLoginUtil;
+	
+	
 
 	// 자바빈(VO) 초기화
 	@ModelAttribute
@@ -51,7 +56,6 @@ public class MemberController {
 	/*==============================
 	 * 회원 로그인
 	 *==============================*/
-
 	// 로그인 폼 호출
 	@GetMapping("/member/login")
 	public String formLogin(Model model,HttpSession session) {
@@ -61,6 +65,15 @@ public class MemberController {
 		 *==============*/
 		String naverAuthUrl = naverLoginUtil.getAuthorizationUrl(session);
 		model.addAttribute("naverUrl", naverAuthUrl);
+		
+		/*==============
+		 * 	 카카오 로그인
+		 *==============*/
+		/*
+		 * String kakaoAuthUrl = kakaoLoginUtil.getAuthorizationUrl(session);
+		 * model.addAttribute("kakaoUrl", kakaoAuthUrl);
+		 */
+		
 		return "memberLogin";
 	}
 	

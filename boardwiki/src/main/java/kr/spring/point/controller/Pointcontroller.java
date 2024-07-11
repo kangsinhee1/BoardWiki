@@ -72,19 +72,19 @@ public class Pointcontroller {
 	    return "pointList";
 	}
 	
-	@GetMapping("/create")
+	@GetMapping("/pointgame/create")
     public String createGamePage() {
         return "createGame";
     }
 	
-	@GetMapping("/list")
+	@GetMapping("/pointgame/list")
     public String gameListPage(Model model) {
         List<PointVO> games = pointService.selectPointGameList(null); // Adjust as necessary
         model.addAttribute("games", games);
         return "gameList";
     }
 	
-	@GetMapping("/participate/{poiG_num}")
+	@GetMapping("/pointgame/participate/{poiG_num}")
     public String participateGamePage(@PathVariable Long poiG_num, Model model) {
         PointGameVO game = pointService.selectPointGame(poiG_num);
         Map<String, Object> params = Map.of("poiG_num", poiG_num);

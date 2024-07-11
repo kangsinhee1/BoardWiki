@@ -28,11 +28,13 @@ public class AppConfig implements WebMvcConfigurer{
 		registry.addInterceptor(loginCheck)
 		        .addPathPatterns("/member/myPage")
 		        .addPathPatterns("/member/update")
-		        .addPathPatterns("/member/changePassword")
+		        .addPathPatterns("/member/chagePassword")
 		        .addPathPatterns("/member/delete")
 		        .addPathPatterns("/board/write")
 		        .addPathPatterns("/board/update")
 		        .addPathPatterns("/board/delete")
+		        .addPathPatterns("/rent/rent")
+		        .addPathPatterns("/rent/list")
 		       ;
 	}
 	
