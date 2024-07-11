@@ -100,15 +100,14 @@ public class TeamServiceImpl implements TeamService {
 	}
 
 	@Override
-	public List<TeamVO> selectTeamListApplied(Map<String, Object> map) {
+	public List<TeamApplyVO> selectTeamListApplied(Map<String, Object> map) {
 		
 		return teamMapper.selectTeamListApplied(map);
 	}
 
 	@Override
-	public TeamApplyVO selectTeamApplyList(TeamApplyVO teamApply) {
-		// TODO Auto-generated method stub
-		return null;
+	public Integer selectTeamApplyList(TeamApplyVO teamApply) {
+		return teamMapper.selectTeamApplyList(teamApply);
 	}
 
 	@Override
@@ -125,8 +124,7 @@ public class TeamServiceImpl implements TeamService {
 
 	@Override
 	public void deleteTeamApply(long teaA_num) {
-		// TODO Auto-generated method stub
-		
+		teamMapper.deleteTeamApply(teaA_num);
 	}
 
 	@Override
@@ -222,6 +220,11 @@ public class TeamServiceImpl implements TeamService {
 	public void deleteTeamBoardReplyByTeamBoardNum(long teaB_num) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public List<TeamApplyVO> selectTeamApplyListByMem_Num (long mem_num) {
+		return teamMapper.selectTeamApplyListByMem_Num(mem_num);
 	}
 
 }

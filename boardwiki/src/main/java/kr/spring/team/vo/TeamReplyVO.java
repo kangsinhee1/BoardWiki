@@ -1,7 +1,14 @@
 package kr.spring.team.vo;
 
-import kr.spring.util.DurationFromNow;
+import java.sql.Date;
 
+import kr.spring.util.DurationFromNow;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+@Getter
+@Setter
+@ToString
 public class TeamReplyVO {
 	private long teaR_num;
 	private String teaR_content;

@@ -42,11 +42,13 @@
 <div id="map" style="width:100%;height:350px;"></div>
 
 <br>
+<c:if test="${team.mem_num != user.mem_num }">
 <p class="align-center">
 		<input type="button" value="가입하기"
 			  class="default-btn"
 			  onclick="location.href='teamApply?tea_num=${team.tea_num}'">	
 	</p>
+</c:if>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=77c9fa63541b3e967dfb6eb75abb22ff&libraries=services"></script>
 <script>

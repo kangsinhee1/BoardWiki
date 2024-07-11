@@ -57,7 +57,7 @@ public interface TeamMapper {
 		public void deleteTeamFavByTeamNum(long tea_num);
 
 		// 회원이 가입한 모임
-		public List<TeamVO> selectTeamListApplied(Map<String,Object>map);
+		public List<TeamApplyVO> selectTeamListApplied(Map<String,Object>map);
 		// 본인이 등록한 모임
 		public List<TeamApplyVO> selectTeamListRegistered(Map<String,Object>map);
 		
@@ -69,20 +69,27 @@ public interface TeamMapper {
 		
 		//신청 목록 확인
 		
-		public TeamApplyVO selectTeamApplyList(TeamApplyVO teamApply);
+		@Select("SELECT count(*) FROM team_apply WHERE tea_num=#{tea_num} AND mem_num=#{mem_num}")
+		public Integer selectTeamApplyList(TeamApplyVO teamApply);
 		
 		//모임별 신청회원 확인
-		@Select("SELECT * FROM team_apply WHERE tea_num=#{tea_num} AND teaA_status=1 ")
+		@Select("SELECT * FROM team_apply WHERE tea_num=#{tea_num} AND mem_num=#{mem_num}")
 		public TeamApplyVO selectTeamApplyListByTeamNum(long tea_num);
-		@Update("UPDATE team_apply SET teaA_content = #{teaA_content}")
+		//개인별 신청 모임 게시판 확인
+		
+		@Select("SELECT * FROM team_apply WHERE mem_num=#{mem_num}")
+		public List<TeamApplyVO> selectTeamApplyListByMem_Num(long mem_num);
+		
+		@Update("UPDATE team_apply SET teaA_content = #{teaA_content} WHERE teaA_num = #{teaA_num}")
 		public 	void updateTeamApply(TeamApplyVO teamApply);
 		@Delete("DELETE FROM team_apply WHERE teaA_num=#{teaA_num}")
 		public void deleteTeamApply(long teaA_num);
 		@Delete("DELETE FROM team_apply WHERE tea_num=#{tea_num}")
 		public void deleteTeamApplyByTeaNum(long tea_num);
 		
+		
 		//모임 신청 처리
-		@Update("UPDATE team_apply SET teaA_attend=1")
+		@Update("UPDATE team_apply SET teaA_attend=1 WHERE teaA_num=#{teaA_num}")
 		public void updateTeamApplyUser(TeamApplyVO teamApply);
 		//모임 참석 회원 확인
 		@Select("SELECT * FROM team_apply JOIN team USING(mem_num) WHERE teaA_attend=1")

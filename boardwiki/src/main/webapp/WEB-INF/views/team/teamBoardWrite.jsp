@@ -12,17 +12,27 @@
 <div class="">
 	<form:form action="teamWrite" id="team_register"
 	           enctype="multipart/form-data"
-	                            modelAttribute="teamVO">
+	                            modelAttribute="teamBoardVO">
 		<ul>
+			
 			<li>
-				<form:label path="tea_name">제목</form:label>
-				<form:input path="tea_name" />
-				<form:errors path="tea_name" cssClass="error-color"/>
+				<form:label path="teaB_category">분류</form:label>
+				<form:select path="teaB_category" >
+						<form:option value="1">공지사항</form:option>
+						<form:option value="2">잡담</form:option>
+						<form:option value="3">후기	</form:option>
+				</form:select>
+				<form:errors path="teaB_category" cssClass="error-color"/>
 			</li>
 			<li>
-				<form:label path="tea_content">내용</form:label>
-				<form:textarea path="tea_content"/>
-				<form:errors path="tea_content" cssClass="error-color"/>
+				<form:label path="teaB_title">제목</form:label>
+				<form:input path="teaB_title" />
+				<form:errors path="teaB_title" cssClass="error-color"/>
+			</li>
+			<li>
+				<form:label path="teaB_content">내용</form:label>
+				<form:textarea path="teaB_content"/>
+				<form:errors path="teaB_content" cssClass="error-color"/>
 				<script>
 				 function MyCustomUploadAdapterPlugin(editor) {
 					    editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
@@ -31,7 +41,7 @@
 					}
 				 
 				 ClassicEditor
-		            .create( document.querySelector( '#tea_content' ),{
+		            .create( document.querySelector( '#teaB_content' ),{
 		            	extraPlugins: [MyCustomUploadAdapterPlugin]
 		            })
 		            .then( editor => {
@@ -41,6 +51,10 @@
 		                console.error( error );
 		            } );
 			    </script> 
+			    <li>
+				<form:label path="upload">파일 업로드</form:label>
+				<input type="file" name="upload" id="upload">
+			</li>
 		</ul> 
 		<div class="align-center">
 			<form:button class="default-btn">전송</form:button>

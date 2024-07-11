@@ -43,10 +43,10 @@ public interface TeamService {
 
 			//신청 목록 확인
 			
-			public TeamApplyVO selectTeamApplyList(TeamApplyVO teamApply);
+			public Integer selectTeamApplyList(TeamApplyVO teamApply);
 			
 			// 회원이 가입한 모임
-			public List<TeamVO> selectTeamListApplied(Map<String,Object>map);
+			public List<TeamApplyVO> selectTeamListApplied(Map<String,Object>map);
 			//모임별 신청회원 확인
 			public TeamApplyVO selectTeamApplyListByTeamNum(long tea_num);
 			//
@@ -59,6 +59,8 @@ public interface TeamService {
 			//모임 신청 처리
 			public void updateTeamApplyUser(TeamApplyVO teamApply);
 			
+			//개인별 신청 모임 게시판 확인
+			public List<TeamApplyVO> selectTeamApplyListByMem_Num(long mem_num);
 			//모임 게시판 관리
 			//모임 게시판 목록
 			public List<TeamBoardVO> selectTeamBoardList(Map<String,Object>map);

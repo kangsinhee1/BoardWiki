@@ -19,5 +19,6 @@ public class TeamApplyVO {
  private long mem_num;
  private String mem_email;
  private String tea_name;
+ private long tea_status; 	//신고처리시 모임 비활성화(기본1,비활:0)
  
 }

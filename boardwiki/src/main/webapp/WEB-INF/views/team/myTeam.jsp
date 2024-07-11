@@ -5,74 +5,51 @@
 <!-- 게시판 목록 시작 -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 <div class="page-main">
-	<h2>모임 게시판</h2>
-	<form action="teamBoardList" id="search_form" method="get">
-		<ul class="search">
-			<li>
-				<select name="keyfield" id="keyfield">
-					<option value="1" <c:if test="${param.keyfield == 1}">selected</c:if>>제목</option>
-					<option value="2" <c:if test="${param.keyfield == 2}">selected</c:if>>내용</option>
-				</select>
-			</li>
-			<li>
-				<input type="search" name="keyword"
-				  id="keyword" value="${param.keyword}">
-			</li>
-			<li>
-				<input type="submit" value="찾기">
-			</li>
-		</ul> 
-		<div class="align-right">
-			<select id="order" name="order">
-				<option value="1" <c:if test="${param.order == 1}">selected</c:if>>최신순</option>
-				<option value="2" <c:if test="${param.order == 2}">selected</c:if>>조회수</option>
-				<option value="3" <c:if test="${param.order == 3}">selected</c:if>>좋아요</option>
-			</select>
-			<script type="text/javascript">
-				$('#order').change(function(){
-					location.href='teamList?keyfield='
-							         +$('#keyfield').val()+'&keyword='
-							         +$('#keyword').val()+'&order='
-							         +$('#order').val();
-				});
-			</script>
-			
-			<input type="button" value="글쓰기" 
-			                    onclick="location.href='teamBoardWrite'">
-		</div>                     
-	</form>
-	<c:if test="${count == 0}">
-	<div class="result-display">표시할 게시물이 없습니다.</div>
-	</c:if>
-	<c:if test="${count > 0}">
-	<table class="striped-table">
-		<tr>
-			<th>번호</th>
-			<th width="400">제목</th>
-			<th>작성자</th>
-			<th>작성일</th>
-			<th>조회수</th>
-			<th>좋아요수</th>
-		</tr>
-		<c:forEach var="team" items="${list4}">
-		<tr>
-			<td class="align-center">${team.tea_num}</td>
-			<td class="align-left"><a href="teamBoardDetail?teaB_num=${team.teaB_num}">${team.teaB_name}</a></td>
-			<td class="align-center">
-				${team.mem_email}
-			</td>
-			<td class="align-center">${team.tea_rdate}</td>
-			<td class="align-center">${team.tea_hit}</td>
-			<td class="align-center">${team.fav_cnt}</td>
-		</tr>
-		</c:forEach>
-	</table>
-	<div class="align-center">${page}</div>
-	</c:if>	
+<div class="content-container" id="content">
+    <!-- Content for 내가 신청한 모임 -->
+    <table class="table">
+    <h2> 내가 신청한 모임 목록</h2>
+        <thead>
+            <tr>
+                <th>신청 번호</th>
+                <th>모임 이름</th>
+                <th>신청 상태</th>
+                <th>신청 일자</th>
+                <th>취소</th>
+            </tr>
+        </thead>
+        <tbody>
+            <c:forEach var="team" items="${list3}">
+                <tr>
+                	<td>${team.teaA_num}</td>
+                    <td>${team.tea_name}</td>
+                   <td>
+                    <c:choose>
+                   <c:when test="${team.teaA_status ==1 }">수락 대기중</c:when>
+                    <c:when test="${team.teaA_status ==0 }">수락 거부</c:when>
+                    <c:when test="${team.teaA_status ==2 }">수락 완료</c:when>
+                    </c:choose>
+                   </td> 
+                    <td>${fn:substring(team.teaA_time, 0, 10)}</td>
+                    <td><input type="button" data-num="${team.teaA_num}" id="delete_btn"  class="delete_btn" value="취소"></td>
+                </tr>
+            </c:forEach>
+        </tbody>
+    </table>
 </div>
-<!-- 게시판 목록 끝 -->
+<script type="text/javascript">
+	 			const delete_btn = document.getElementById('delete_btn');
+	 			delete_btn.onclick=function(){
+	 				let teaA_num = $(this).data('num');
+	 				console.log(teaA_num);
+	 				const choice = confirm('삭제하시겠습니까?');
+	 				if(choice){
+	 					location.replace('deleteTeamApply?teaA_num='+teaA_num);
+	 				}
+	 			}
+	 		</script>
 
-
+</div>
 
 
 

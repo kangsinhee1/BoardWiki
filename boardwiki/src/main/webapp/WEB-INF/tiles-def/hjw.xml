@@ -37,15 +37,33 @@
 		<put-attribute name="nav" value="/WEB-INF/views/team/myTeam-nav.jsp"/>
 		<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp"/>
 	</definition>
+	<definition name="myTeamprac" template="/WEB-INF/views/template/layout_myteam.jsp">
+		<put-attribute name="title" value="나의 모임"/>
+		<put-attribute name="top-header" value="/WEB-INF/views/template/top-header.jsp"/>
+		<put-attribute name="header" value="/WEB-INF/views/template/header.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/team/myTeam.jsp"/>
+		<put-attribute name="nav" value="/WEB-INF/views/team/teamNav_parac.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp"/>
+	</definition>
 		<definition name="teamApply" extends="main">
 		<put-attribute name="title" value="모임 신청"/>
 		<put-attribute name="css" value="/WEB-INF/views/team/teamCSS.jsp"/>
 		<put-attribute name="body" value="/WEB-INF/views/team/teamApply.jsp"/>
 	</definition>
-		<definition name="teamBoardWrite" extends="myTeam">
+		<definition name="teamBoardWrite" extends="main">
 		<put-attribute name="title" value="모임게시판 글 작성"/>
 		<put-attribute name="css" value="/WEB-INF/views/team/teamCSS.jsp"/>
 		<put-attribute name="body" value="/WEB-INF/views/team/teamBoardWrite.jsp"/>
+	</definition>
+		<definition name="teamBoardAdmin" extends="main">
+		<put-attribute name="title" value="모임 마당 (관리자)"/>
+		<put-attribute name="css" value="/WEB-INF/views/team/teamCSS.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/team/teamBoardAdmin.jsp"/>
+	</definition>
+		<definition name="teamBoardUser" extends="main">
+		<put-attribute name="title" value="모임 마당"/>
+		<put-attribute name="css" value="/WEB-INF/views/team/teamCSS.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/team/teamBoardUser.jsp"/>
 	</definition>
 </tiles-definitions>
 
