@@ -50,14 +50,21 @@
 			<th width="400">제목</th>
 			<th>작성자</th>
 			<th>작성일</th>
-			<th>제품</th>
+			<th>제품명</th>
 			<th>가격</th>
 		</tr>
 		<c:forEach var="used" items="${list}">
 		<tr>
 			<td class="align-center">${used.use_num}</td>
 			<td class="align-left"><a href="usedDetail?use_num=${used.use_num}">${used.use_title}</a></td>
-			<td class="align-center">${used.mem_email}</td>
+			<td class="align-center">
+				<c:if test="${empty mem_nickname}">			
+					${used.mem_email}
+				</c:if>
+				<c:if test="${!empty mem_nickname}">			
+					${used.mem_nickname}
+				</c:if>
+			</td>
 			<td class="align-center">${used.use_rdate}</td>
 			<td class="align-center">${used.item_name}</td>
 			<td class="align-center">${used.use_price}</td>

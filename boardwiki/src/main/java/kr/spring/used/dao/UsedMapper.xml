@@ -35,9 +35,14 @@
 	      use_rdate,
 	      use_mdate,
 	      mem_num,
-	      item_num
-	      FROM (used_item
-	      JOIN member USING (mem_num)) JOIN item USING (item_num)
+	      item_num,
+	      item_name,
+	      mem_email,
+	      mem_nickname
+	      FROM used_item
+	      JOIN member USING (mem_num)
+	      LEFT OUTER JOIN item USING (item_num)
+	      LEFT OUTER JOIN member_detail USING (mem_num)
 	 	)a ) 
 	 	<![CDATA[
 	 	WHERE rnum >= #{start} AND rnum <= #{end}
@@ -49,7 +54,7 @@
 	 		 * 
 	 	 FROM used_item 
 	 	 JOIN member USING(mem_num) 
-	 	 LEFT OUTER JOIN member_detail USING(mem_num) 
+	 	 LEFT OUTER JOIN member_detail USING(mem_num)
 	 	 LEFT OUTER JOIN item USING(item_num) 
 	 	 WHERE use_num=#{use_num}
 	 </select>
@@ -63,20 +68,17 @@
 	  	use_content,
 	  	use_photo,
 	  	use_price,
-	  	use_check,
-	  	use_rdate
+	  	use_check
 	  	)
 	   VALUES(
 	   used_item_seq.nextval,
-	   #{use_num},
 	   #{mem_num},
 	   #{item_num},
 	   #{use_title},
 	   #{use_content},
-	   #{use_photo},
+	   #{use_photo,jdbcType=VARCHAR},
 	   #{use_price},
-	   #{use_check},
-	   sysdate
+	   #{use_check}
 	   )
 	  </insert>
 	  <update id="updateUsed" parameterType="usedItemVO">

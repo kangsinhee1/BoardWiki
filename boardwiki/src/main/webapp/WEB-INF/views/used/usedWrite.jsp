@@ -9,11 +9,11 @@
 <script src="${pageContext.request.contextPath}/js/ckeditor.js"></script>
 <script src="${pageContext.request.contextPath}/js/uploadAdapter.js"></script>
 <div class="page-main">
-    <h2>모임 글쓰기</h2>
+    <h2>중고 글쓰기</h2>
     <form:form action="usedWrite" id="used_write"
                enctype="multipart/form-data"
                modelAttribute="usedItemVO" method="post">
-        <form:hidden path="mem_num" />
+        <form:hidden path="mem_num" value="${member.mem_num }"/>
         <ul>
             <li>
                 제목
@@ -22,7 +22,7 @@
             </li>
             <li>
                 제품명
-                <form:input type="hidden" path="item_num" id="item_num" min="0" max="999999" defaultValue=""/>
+                <form:input type="hidden" path="item_num" id="item_num"/>
                 <form:errors path="item_num" cssClass="error-color"/>
                 <input type="text" name="item_name" placeholder="제품을 선택해주세요" id="item_name" maxlength="10" readonly="readonly">
                 <input type="button" id="item_numbtn" value="제품선택" class="button2">
@@ -67,8 +67,8 @@
                 <form:errors path="use_check" cssClass="error-color"/>
             </li>
             <li>
-                <form:label path="use_photo">제품 사진</form:label>
-                <input type="file" name="use_photo" id="use_photo">
+                <form:label path="use_upload">제품 사진</form:label>
+                <input type="file" name="use_upload" id="use_upload">
             </li>
         </ul> 
         <div class="align-center">
@@ -77,7 +77,7 @@
         </div>                           
     </form:form>
 </div>
-<div class="modal">
+				<div class="modal">
                     <form id="searchform">
                         <h4>제품 검색</h4>
                         <input type="text" name="search" class="inputcheck input-style2" id="search" maxlength="30" placeholder="제목을 입력하세요">

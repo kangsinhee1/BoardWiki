@@ -9,11 +9,11 @@
 <script src="${pageContext.request.contextPath}/js/ckeditor.js"></script>
 <script src="${pageContext.request.contextPath}/js/uploadAdapter.js"></script>
 <div class="page-main">
-    <h2>모임 글쓰기</h2>
-    <form:form action="usedModify" id="used_modify"
+    <h2>중고 글수정</h2>
+    <form:form action="usedUpdate" id="used_modify"
                enctype="multipart/form-data"
                modelAttribute="usedItemVO" method="post">
-        <form:hidden path="mem_num" />
+        <form:hidden path="use_num" value="${used.use_num }"/>
         <ul>
             <li>
                 제목
@@ -22,10 +22,9 @@
             </li>
             <li>
                 제품명
-                <form:input type="hidden" path="item_num" id="item_num" min="0" max="999999" defaultValue=""/>
+                <form:input type="hidden" path="item_num" id="item_num"/>
                 <form:errors path="item_num" cssClass="error-color"/>
-                <input type="text" name="item_name" value="" id="item_name" maxlength="10" readonly="readonly">
-                <input type="button" id="item_numbtn" value="제품선택" class="button2">
+                <input type="text" value="${used.item_name}"name="item_name" id="item_name" maxlength="10" readonly="readonly">
             </li>
             <li>
                 <form:label path="use_content">내용</form:label>
@@ -66,8 +65,8 @@
                 <form:errors path="use_check" cssClass="error-color"/>
             </li>
             <li>
-                <form:label path="use_photo">제품 사진</form:label>
-                <input type="file" name="use_photo" id="use_photo">
+                <form:label path="use_upload">제품 사진</form:label>
+                <input type="file" name="use_upload" id="use_upload">
             </li>
         </ul> 
         <div class="align-center">
@@ -76,3 +75,4 @@
         </div>                           
     </form:form>
 </div>
+
