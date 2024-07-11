@@ -75,21 +75,7 @@ public class MemberController {
 	// 로그인 폼 호출
 	@GetMapping("/member/login")
 	public String formLogin(Model model,HttpSession session) {
-		log.debug("<<로그인페이지 요청>>");
-		/*==============
-		 * 	 네이버 로그인
-		 *==============*/
-//		String naverAuthUrl = naverLoginUtil.getAuthorizationUrl(session);
-//		model.addAttribute("naverUrl", naverAuthUrl);
-		
-		/*==============
-		 * 	 카카오 로그인
-		 *==============*/
-		/*
-		 * String kakaoAuthUrl = kakaoLoginUtil.getAuthorizationUrl(session);
-		 * model.addAttribute("kakaoUrl", kakaoAuthUrl);
-		 */
-		
+		log.debug("<<로그인페이지 요청>>");		
 		return "memberLogin";
 	}
 	
@@ -281,6 +267,66 @@ public class MemberController {
 				request.getContextPath()+"/main/main");
 		
 		return "common/resultView";
+	}
+	//카카오 로그인 폼에서 받아온 데이터 처리
+	//카카오 - 카카오 로그인 성공시 callback 호출 후 사용자 정보 요청
+	@GetMapping("/member/login/oauth2/code/kakao")
+	public String callbackKakao(Model model,
+			MemberVO memberVO,
+			@RequestParam Map<String,Object> paramMap,
+			@RequestParam String code,
+			@RequestParam String state,
+			HttpSession session) throws IOException {
+
+		log.info("callbackKakao");
+
+		log.debug("paramMap:" + paramMap);
+
+		// 네이버 OAuth Access Token 획득
+		OAuth2AccessToken oauthToken = naverLoginUtil.getAccessToken(session, code, state);
+
+		// 네이버 API를 통해 사용자 프로필 정보 읽어오기
+		String apiResult = naverLoginUtil.getUserProfile(oauthToken);
+		log.debug("apiResult : " + apiResult);
+
+		// JSON 형식의 응답을 파싱하여 필요한 정보 추출
+		JSONObject responseJson = new JSONObject(apiResult);
+		JSONObject jsonResponse = responseJson.getJSONObject("response");
+
+		String naver_name = jsonResponse.getString("name");
+		String naver_email = jsonResponse.getString("email");
+		String naver_passwd = jsonResponse.getString("id");
+		
+
+		log.debug("<<name>> : " + naver_name);
+		log.debug("<<email>> : " + naver_email);
+		log.debug("<<pwd>> : " + naver_passwd);
+
+		// 이메일 중복 체크
+		MemberVO result = memberService.isemailCheck(naver_email);
+
+		if(result == null) { // 네이버 메일로 조회해서 일치하는 정보가 없는 경우 회원가입
+		    memberVO.setMem_name(naver_name);
+		    memberVO.setMem_email(naver_email);
+		    memberVO.setMem_passwd(naver_passwd);
+		    memberVO.setMem_provider("Kakao");
+		    
+		    model.addAttribute("memberVO", memberVO);
+		    
+		    log.debug("<<model>> : " + model);
+		    log.debug("<<memberVO>> : " + memberVO);
+		    
+			return formMemberNaverRegister(); // 회원가입 폼으로 리다이렉트
+		}
+		//
+		MemberVO member = memberService.selectCheckMember(naver_email);
+		session.setAttribute("user", member);
+
+		log.debug("<<인증 성공>>");
+		log.debug("<<id>> : " + member.getMem_email());
+		log.debug("<<auth>> : " + member.getMem_auth());
+		
+		return "redirect:/main/main"; // 성공적으로 처리되면 메인 페이지로 리다이렉트
 	}
 	/*==============================
 	 * 로그아웃
