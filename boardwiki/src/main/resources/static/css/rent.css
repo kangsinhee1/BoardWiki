@@ -6,22 +6,27 @@ form#search_form #order{
 }
 /* 게시판 폼
 ---------------------*/
-/*CKEditor 사용시 등록,수정폼*/
-form#board_register, form#board_modify{
+/* /*CKEditor 사용시 등록,수정폼*/
+/* form#rent_register, form#rent_modify{
 	padding:0 0 10px 0;
 	width:800px;
-}
-form#board_register ul, form#board_modify ul{
+} */ 
+form#rent_register ul, form#rent_modify ul{
 	padding:20px;
 }
-form#board_register input[type="text"], 
-                form#board_modify input[type="text"]{
-	width:759px;
+form#rent_register input[type="text"], 
+                form#rent_modify input[type="text"]{
+	width:200px;
 	margin-bottom: 10px;                
 }
-.ck-editor__editable_inline{/*CKEditor 전용*/
-	min-height:250px;
+form#rent_register input[type="number"], 
+                form#rent_modify input[type="number"]{
+	width:200px;
+	margin-bottom: 10px;            
 }
+/* .ck-editor__editable_inline{CKEditor 전용
+	min-height:250px;
+} */
 /* 게시판 글상세
 ---------------------*/
 ul.detail-info{

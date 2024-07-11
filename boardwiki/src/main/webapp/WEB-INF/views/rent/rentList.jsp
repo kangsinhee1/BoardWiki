@@ -43,10 +43,10 @@
 					location.href='list?category=${param.category}&keyfield='+$('#keyfield').val()+'&keyword='+$('#keyword').val()+'&order='+$('#order').val();
 				});
 			</script>
-	<%-- 	<c:if test="${!empty user}">
-			<input type="button" value="글쓰기" onclick="location.href='write'">
+		<c:if test="${!empty user}">
+			<input type="button" value="대여" onclick="location.href='rent'">
 			
-		</c:if> --%>
+		</c:if>
 		
 		</div>
 
