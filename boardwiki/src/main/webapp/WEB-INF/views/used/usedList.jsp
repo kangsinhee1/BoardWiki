@@ -55,7 +55,13 @@
 		<c:forEach var="used" items="${list}">
 		<tr>
 			<td class="align-center">${used.use_num}</td>
-			<td class="align-left"><a href="usedDetail?use_num=${used.use_num}">${used.use_title}</a></td>
+			<td class="align-left">
+			<a href="usedDetail?use_num=${used.use_num}">
+			<c:if test="${used.use_check==1 }"><b>[판매중] </b></c:if>
+			<c:if test="${used.use_check==2 }"><b>[예약중] </b></c:if>
+			<c:if test="${used.use_check==3 }"><b>[판매완료] </b></c:if>
+			${used.use_title}
+			</a></td>
 			<td class="align-center">
 				<c:if test="${empty mem_nickname}">			
 					${used.mem_email}

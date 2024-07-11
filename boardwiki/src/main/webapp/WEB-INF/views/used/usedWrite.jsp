@@ -57,16 +57,6 @@
                 <form:errors path="use_price" cssClass="error-color"/>
             </li>
             <li>
-                <form:label path="use_check">제품상태</form:label>
-                <form:select path="use_check" id="use_check">
-                    <form:option value="0" disabled="disabled">제품상태를 선택해주세요</form:option>
-                    <form:option value="1">A</form:option>
-                    <form:option value="2">B</form:option>
-                    <form:option value="3">C</form:option>
-                </form:select>
-                <form:errors path="use_check" cssClass="error-color"/>
-            </li>
-            <li>
                 <form:label path="use_upload">제품 사진</form:label>
                 <input type="file" name="use_upload" id="use_upload">
             </li>

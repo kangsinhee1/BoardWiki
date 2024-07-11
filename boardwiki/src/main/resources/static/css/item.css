@@ -8,3 +8,6 @@
     text-overflow: ellipsis;
     width: 150px; /* 텍스트가 넘칠 경우 적용할 너비 */
 }
+.btn{
+	margin: 4px 0;
+}

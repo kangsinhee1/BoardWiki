@@ -55,12 +55,12 @@
                 <form:errors path="use_price" cssClass="error-color"/>
             </li>
             <li>
-                <form:label path="use_check">제품상태</form:label>
+                <form:label path="use_check">판매상태</form:label>
                 <form:select path="use_check" id="use_check">
                     <form:option value="0" disabled="disabled">제품상태를 선택해주세요</form:option>
-                    <form:option value="1">A</form:option>
-                    <form:option value="2">B</form:option>
-                    <form:option value="3">C</form:option>
+                    <form:option value="1">판매중</form:option>
+                    <form:option value="2">예약중</form:option>
+                    <form:option value="3">판매완료</form:option>
                 </form:select>
                 <form:errors path="use_check" cssClass="error-color"/>
             </li>

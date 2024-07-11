@@ -47,4 +47,9 @@ public class ItemServiceImpl implements ItemService{
 		return itemMapper.selectList3(map);
 	}
 
+	@Override
+	public List<ItemVO> selectListByItemGenre(Map<String, Object> map) {
+		return itemMapper.selectListByItemGenre(map);
+	}
+
 }
