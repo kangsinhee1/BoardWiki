@@ -22,7 +22,7 @@ public interface PointMapper {
 	public void insertpoint(PointVO pointVO);
 	/**포인트 사용 상세 내역 sql*/
 	@Select("SELECT * FROM point JOIN point_total USING(mem_num) WHERE mem_num=#{mem_num}")
-	public void selectPoint(PointVO pointVO);
+	public PointVO selectPoint(PointVO pointVO);
 	/**포인트 사용 목록*/
 	public List<PointVO> selectPointList(Map<String,Object> map);
 	/**포인트 카운트*/
@@ -34,7 +34,7 @@ public interface PointMapper {
 	public void insertPointGame(PointGameVO pointGameVO);
 	//포인트 게임 상세 불러오기
 	@Select("SELECT * FROM point_game WHERE poiG_num=#{poiG_num} AND mem_num=#{mem_num}")
-	public void selectPointGame(Long poiG_num);
+	public PointGameVO selectPointGame(Long poiG_num);
 	//포인트 게임 리스트
 	public List<PointVO> selectPointGameList(Map<String,Object> map);
 	//포인트 게임 카운트
@@ -45,14 +45,14 @@ public interface PointMapper {
 	
 	//포인트 게임 옵션
 	//포인트 게임 옵션 등록
-	@Insert("INSERT INTO point_game_option (poiO_num,poiO_content,poiO_no,poiG_num) VALUES (point_game_option_seq.nextval(),#P)")
+	@Insert("INSERT INTO point_game_option (poiO_num,poiO_content,poiO_no,poiG_num) VALUES (point_game_option_seq.nextval,#{poiO_content},#{poiO_no},#{poiG_num})")
 	public void insertPointOption(PointGameVO pointGameVO);
 	//포인트 게임 옵션 상세불러오기
 	@Select("SELECT * FROM point_game_option WHERE poiO_num=#{poiO_num}")
-	public void selectPointOption(Long poiO_num);
-	//포인트 게임 리스트
+	public PointGameVO selectPointOption(Long poiO_num);
+	//포인트 게임 옵션 리스트
 	public List<PointGameVO> selectPointGameOptionList(Map<String,Object> map);
-	//포인트 게임 카운트
+	//포인트 게임 옵션 카운트
 	public Integer selectPointGameOptionRowCount(Map<String,Object> map);
 	//포인트 게임 - 포인트게임의 옵션 전부 삭제
 	@Delete("DELETE FROM point_game_option WHERE poiG_num=#{poiG_num}")
@@ -60,11 +60,16 @@ public interface PointMapper {
 	
 	//포인트 게임 배팅
 	//포인트 게임 배팅 등록
+	@Insert("INSERT INTO point_game_betting (bet_num,bet_point,poiO_num,mem_num) VALUES (point_game_betting_seq.nextval,#{bet_point},#{poiO_num},#{mem_num})")
 	public void insertPointBetting(PointGameVO pointGameVO);
 	//포인트 게임 배팅 현황 보기
-	public void selectPointGameBetting(Long mem_num,Long poiO_num);
+	@Select("SELECT * FROM point_game_betting WHERE mem_num = #{poiO_num}")
+	public PointGameVO selectPointGameBetting(Long mem_num,Long poiO_num);
 	//포인트 게임 배팅 전체 현황
 	public List<PointGameVO> selectPointGameBettingList(Map<String,Object> map);
 	//포인트 게임 배팅 카운트
 	public Integer selectPointGameBettingRowCount(Map<String,Object> map);
+	//포인트 게임 배팅 삭제
+	@Delete("DELETE FROM point_game_betting WHERE mem_num=#{mem_num} AND poiO_num=#{poiO_num}")
+	public void deletePointGameBetting(Long mem_num,Long poiO_num);
 }
