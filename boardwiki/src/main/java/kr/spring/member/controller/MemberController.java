@@ -56,6 +56,22 @@ public class MemberController {
 	/*==============================
 	 * 회원 로그인
 	 *==============================*/
+	
+	@GetMapping("/member/login/naver")
+	public String formNaverLogin(HttpSession session) {
+	    log.debug("<<네이버 로그인 페이지 요청>>");
+	    String naverAuthUrl = naverLoginUtil.getAuthorizationUrl(session);
+	    return "redirect:" + naverAuthUrl;
+	}
+
+	// 카카오 로그인 폼 호출 및 리다이렉트
+	@GetMapping("/member/login/kakao")
+	public String formKakaoLogin(HttpSession session) {
+	    log.debug("<<카카오 로그인 페이지 요청>>");
+	    String kakaoAuthUrl = kakaoLoginUtil.getAuthorizationUrl(session);
+	    return "redirect:" + kakaoAuthUrl;
+	}
+	
 	// 로그인 폼 호출
 	@GetMapping("/member/login")
 	public String formLogin(Model model,HttpSession session) {
@@ -63,8 +79,8 @@ public class MemberController {
 		/*==============
 		 * 	 네이버 로그인
 		 *==============*/
-		String naverAuthUrl = naverLoginUtil.getAuthorizationUrl(session);
-		model.addAttribute("naverUrl", naverAuthUrl);
+//		String naverAuthUrl = naverLoginUtil.getAuthorizationUrl(session);
+//		model.addAttribute("naverUrl", naverAuthUrl);
 		
 		/*==============
 		 * 	 카카오 로그인
