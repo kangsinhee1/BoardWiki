@@ -45,15 +45,19 @@ public class PointAjaxController {
 		return mapJson;
 	}
 	
-	@PostMapping("/create")
+	@PostMapping("/pointgame/create")
     @ResponseBody
-    public void createGame(@RequestBody Map<String, Object> payload) {
+    public void createGame(@RequestBody Map<String, Object> payload, HttpSession session) {
+        MemberVO user = (MemberVO) session.getAttribute("user");
+        long mem_num = user.getMem_num();
+
         String gameTitle = (String) payload.get("poiG_content");
         List<String> choices = (List<String>) payload.get("choices");
 
         PointGameVO gameVO = new PointGameVO();
         gameVO.setPoiG_content(gameTitle);
         gameVO.setStr_num(0); // Placeholder, replace with actual logic to set the stream number
+        gameVO.setMem_num(mem_num);
 
         pointService.insertPointGame(gameVO);
 
@@ -67,46 +71,51 @@ public class PointAjaxController {
         }
     }
 	
-	@PostMapping("/bet")
+	@PostMapping("/pointgame/bet")
     @ResponseBody
-    public void placeBet(@RequestBody Map<String, Object> payload) {
-        Long memNum = Long.valueOf((String) payload.get("mem_num"));
+    public void placeBet(@RequestBody Map<String, Object> payload, HttpSession session) {
+        MemberVO user = (MemberVO) session.getAttribute("user");
+        long mem_num = user.getMem_num();
+        log.debug("<<회원 번호 확인>>"+mem_num);
+
         Long poiO_num = Long.valueOf((String) payload.get("poiO_num"));
         int betPoint = Integer.valueOf((String) payload.get("bet_point"));
 
         PointGameVO pointGameVO = new PointGameVO();
-        pointGameVO.setMem_num(memNum);
+        pointGameVO.setMem_num(mem_num);
         pointGameVO.setPoiO_num(poiO_num);
         pointGameVO.setBet_point(betPoint);
 
         pointService.insertPointBetting(pointGameVO);
 
         PointVO pointVO = new PointVO();
-        pointVO.setMem_num(memNum);
+        pointVO.setMem_num(mem_num);
         pointVO.setPoi_use(betPoint);
         pointVO.setPoi_increase(1); // 1: Use points
 
         pointService.processPointTransaction(pointVO);
     }
 
-    @PostMapping("/cancelBet")
+    @PostMapping("/pointgame/cancelBet")
     @ResponseBody
-    public void cancelBet(@RequestBody Map<String, Object> payload) {
-        Long memNum = Long.valueOf((String) payload.get("mem_num"));
+    public void cancelBet(@RequestBody Map<String, Object> payload, HttpSession session) {
+        MemberVO user = (MemberVO) session.getAttribute("user");
+        long mem_num = user.getMem_num();
+
         Long poiO_num = Long.valueOf((String) payload.get("poiO_num"));
         int betPoint = Integer.valueOf((String) payload.get("bet_point"));
 
-        pointService.deletePointGameBetting(memNum, poiO_num);
+        pointService.deletePointGameBetting(mem_num, poiO_num);
 
         PointVO pointVO = new PointVO();
-        pointVO.setMem_num(memNum);
+        pointVO.setMem_num(mem_num);
         pointVO.setPoi_use(betPoint);
         pointVO.setPoi_increase(2); // 2: Gain points
 
         pointService.processPointTransaction(pointVO);
     }
 
-    @PostMapping("/close/{poiG_num}")
+    @PostMapping("/pointgame/close/{poiG_num}")
     @ResponseBody
     public void closeGame(@PathVariable Long poiG_num, @RequestParam Long winningOption) {
         Map<String, Object> params = Map.of("poiG_num", poiG_num);

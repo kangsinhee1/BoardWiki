@@ -18,7 +18,7 @@ public interface PointMapper {
 	/**총 포인트 감소/증가 sql*/
 	public void updatepointtotal(PointVO pointVO);
 	/**포인트 획득/감소 sql*/
-	@Insert("INSERT INTO point (poi_num,poi_status,poi_use,poi_date,mem_num,poi_increase) VALUES (point_seq.nextval(),#{poi_status},#{poi_use},SYSDATE,#{mem_num},#{poi_increase})")
+	@Insert("INSERT INTO point (poi_num,poi_status,poi_use,poi_date,mem_num,poi_increase) VALUES (point_seq.nextval,#{poi_status},#{poi_use},SYSDATE,#{mem_num},#{poi_increase})")
 	public void insertpoint(PointVO pointVO);
 	/**포인트 사용 상세 내역 sql*/
 	@Select("SELECT * FROM point JOIN point_total USING(mem_num) WHERE mem_num=#{mem_num}")
@@ -30,7 +30,7 @@ public interface PointMapper {
 	
 	//포인트 게임
 	//포인트 게임 등록
-	@Insert("INSERT INTO point_game (poiG_num,poiG_content,poiG_start,str_num,mem_num) VALUES (point_game_seq.nextval(),#{poiG_content},SYSDATE,#{str_num},#{mem_num})")
+	@Insert("INSERT INTO point_game (poiG_num,poiG_content,poiG_start,str_num,mem_num) VALUES (point_game_seq.nextval,#{poiG_content},SYSDATE,#{str_num},#{mem_num})")
 	public void insertPointGame(PointGameVO pointGameVO);
 	//포인트 게임 상세 불러오기
 	@Select("SELECT * FROM point_game WHERE poiG_num=#{poiG_num} AND mem_num=#{mem_num}")
