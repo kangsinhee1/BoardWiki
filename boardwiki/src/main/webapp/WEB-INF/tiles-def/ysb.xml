@@ -5,6 +5,14 @@
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 <tiles-definitions>
+   <definition name="main2" template="/WEB-INF/views/template/layout_basic.jsp">
+		<put-attribute name="title" value="Boardwiki"/>
+		<put-attribute name="top-header" value="/WEB-INF/views/template/top-header.jsp"/>
+		<put-attribute name="header" value="/WEB-INF/views/template/header.jsp"/>
+		<put-attribute name="down-header" value="/WEB-INF/views/template/down-header.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/main/main.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp"/>
+	</definition>
 	<definition name="item_main" extends="main">
 		<put-attribute name="title" value="게임 메인"/>
 		<put-attribute name="css" value="/WEB-INF/views/item/itemCSS.jsp"/>
@@ -14,7 +22,7 @@
 		<put-attribute name="title" value="게임 상세"/>
 		<put-attribute name="css" value="/WEB-INF/views/item/itemCSS.jsp"/>
 		<put-attribute name="body" value="/WEB-INF/views/item/item_detail.jsp"/>
-	</definition>	
+	</definition>
 </tiles-definitions>
 
 
