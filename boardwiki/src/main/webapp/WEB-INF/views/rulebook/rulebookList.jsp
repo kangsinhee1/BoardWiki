@@ -20,7 +20,7 @@
 		<div class="align-right">
 			<c:if test="${!empty user}">
 			<input type="button" value="글쓰기" 
-			                    onclick="location.href='rulebookwrite'">
+			                    onclick="location.href='rulebookWrite'">
 			</c:if>
 		</div>
 	</form>
