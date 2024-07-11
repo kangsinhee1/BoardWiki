@@ -80,7 +80,7 @@
     <sql id="pointgameoptionlist">
             <if test="poi_ck != null and poi_ck != ''">
                 AND mem_num =#{mem_num}
-            </if>
+            </if>  
     </sql>  
     <!-- 포인트 게임옵션 목록 -->
     <select id="selectPointGameOptionList" parameterType="map" resultType="pointGameVO">
