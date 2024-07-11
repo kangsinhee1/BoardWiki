@@ -42,6 +42,7 @@
 		<input type="button" value="수정"
 		   onclick="location.href='usedUpdate?use_num=${used.use_num}'">
 		<input type="button" value="삭제" id="delete_btn">
+		<input type="button" value="목록" class="default-btn" onclick="location.href='usedList'">
 		<script>
 			const delete_btn = document.getElementById('delete_btn');
 			delete_btn.onclick=function(){

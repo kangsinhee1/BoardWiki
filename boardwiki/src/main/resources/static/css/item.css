@@ -1,1 +1,10 @@
 @charset "UTF-8";
+/*게임 메인*/
+.name{
+	display: inline-block; /* inline-block으로 설정하여 너비를 제한할 수 있게 함 */
+    max-width: 150px; /* 적절한 너비 설정 */
+	white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 150px; /* 텍스트가 넘칠 경우 적용할 너비 */
+}

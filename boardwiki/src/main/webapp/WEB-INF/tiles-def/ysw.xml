@@ -42,7 +42,12 @@
 		<put-attribute name="body" value="/WEB-INF/views/used/usedView.jsp"/>
 	</definition>
 	<definition name="usedModify" extends="main">
-		<put-attribute name="title" value="중고 상세보기"/>
+		<put-attribute name="title" value="중고 글수정"/>
+		<put-attribute name="css" value="/WEB-INF/views/used/usedCSS.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/used/usedModify.jsp"/>
+	</definition>
+	<definition name="usedUpdate" extends="main">
+		<put-attribute name="title" value="중고 글수정"/>
 		<put-attribute name="css" value="/WEB-INF/views/used/usedCSS.jsp"/>
 		<put-attribute name="body" value="/WEB-INF/views/used/usedModify.jsp"/>
 	</definition>

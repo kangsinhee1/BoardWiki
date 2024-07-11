@@ -13,6 +13,7 @@ public class ItemVO {
 	private Long item_num;
 	private Long item_id;
 	private String item_name;
+	private Long item_price;//가격
 	private Long item_rank;//순위
 	private Long item_average;//평점
 	private String item_genre;//장르

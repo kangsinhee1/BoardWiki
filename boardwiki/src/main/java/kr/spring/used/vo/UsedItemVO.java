@@ -20,16 +20,16 @@ public class UsedItemVO {
 	private long use_num;
 	private long mem_num;
 	private long item_num;
+	
 	@NotBlank
 	private String use_title;
 	@NotEmpty
 	private String use_content;
+	
 	private String use_comment;
 	private long use_grade;
 	private MultipartFile use_upload; 
 	private String use_photo;
-	@Max(value=999999999)
-	@Min(value=0)
 	private int use_price;
 	private int use_check;
 	private Date use_rdate;

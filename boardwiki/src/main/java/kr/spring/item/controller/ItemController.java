@@ -95,12 +95,18 @@ public class ItemController {
 	 * 게임 상세
 	 *=========================*/
 	@GetMapping("/item/item_detail")
-	public ModelAndView process(Long item_num) {
+	public ModelAndView process(Long item_num,Model model) {
 		log.debug("<<게임 상세 - item_num>> : "+item_num);
 		
 		ItemVO item = itemService.selectItem(item_num);
 		
-		return new ModelAndView("item_detail","item",item);
+		Long mintime = (item.getMin_time() / 60);
+		Long maxtime = (item.getMax_time() / 60);
+		
+		model.addAttribute("mintime",mintime);
+		model.addAttribute("maxtime",maxtime);
+		
+		return new ModelAndView("item_detail","item",item); 
 	}
 }
 
