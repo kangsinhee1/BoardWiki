@@ -50,14 +50,15 @@ public class ItemAjaxController {
 			map.put("mem_num", 0);
 		}
 		
+		Map<String,Object> mapJson = new HashMap<String,Object>();
 		List<ItemVO> list = null;
 		if(count > 0) {
 			list = itemService.selectListByKeyword(map);
 		}else {
 			list = Collections.emptyList();
+			mapJson.put("result", "none");
 		}
 		
-		Map<String,Object> mapJson = new HashMap<String,Object>();
 		mapJson.put("count", count);
 		mapJson.put("list", list);
 		mapJson.put("result", "success");

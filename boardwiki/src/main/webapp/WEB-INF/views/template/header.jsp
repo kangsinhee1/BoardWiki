@@ -5,7 +5,7 @@
 <div class="search-bar">
   <form class="form-inline">  
 	<a class="navbar-brand">Boardwiki</a>
-    <input class="form-control mr-sm-2" style="width:500px;" type="search" placeholder="Search" aria-label="Search">
+    <input id="main_search" class="form-control mr-sm-2" style="width:500px;" type="search" placeholder="Search" aria-label="Search">
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit" >Search</button>
   </form>
 </div>
@@ -17,7 +17,7 @@
 		  </button>
 		  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 		    <a class="dropdown-item" href="${pageContext.request.contextPath}/item/item_main">게임 메인</a>
-		    <a class="dropdown-item" href="${pageContext.request.contextPath}/item/item_rent">게임 대여</a>
+		    <a class="dropdown-item" href="${pageContext.request.contextPath}/rent/list">게임 대여</a>
 		  </div>
 		</div>
 		<div class="dropdown">

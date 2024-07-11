@@ -16,7 +16,7 @@ import java.util.List;
 public class BggGameInfo {
 
 	public static void main(String[] args) {
-		// 예시 보드게임 ID 목록
+		// BGG 보드게임 ID 목록(1~100위)
 		int[] gameIds = { 224517, 161936, 174430, 342942, 233078, 316554, 167791, 115746, 187645, 291457, 162886,
 				220308, 12333, 182028, 193738, 84876, 169786, 246900, 173346, 28720, 167355, 266507, 177736, 124361,
 				341169, 205637, 266192, 312484, 120677, 295770, 237182, 164928, 192135, 96848, 251247, 199792, 324856,
@@ -51,13 +51,14 @@ public class BggGameInfo {
 				NodeList titleNodes = (NodeList) titleExpr.evaluate(doc, XPathConstants.NODESET);
 				NodeList descriptionNodes = (NodeList) descriptionExpr.evaluate(doc, XPathConstants.NODESET);
 
-				// 결과 처리
+				// 결과 저장
+				// title
 				if (titleNodes.getLength() > 0) {
 					Element titleElement = (Element) titleNodes.item(0);
 					String title = titleElement.getTextContent().trim();
 					gameTitles.add(title);
 				}
-
+				// description
 				if (descriptionNodes.getLength() > 0) {
 					Element descriptionElement = (Element) descriptionNodes.item(0);
 					String description = descriptionElement.getTextContent().trim();
@@ -68,12 +69,13 @@ public class BggGameInfo {
 			}
 		}
 
-		// 결과 출력
+		// 결과 출력(title)
 //		for (int i = 0; i < gameTitles.size(); i++) {
-//			System.out.println("Title 순위 : " + (i + 1) +  gameTitles.get(i));
+//			System.out.println("Title 순위 : " + (i + 1) + gameTitles.get(i));
 //			System.out.println("--------------------------------------------------");
 //		}
 
+		// 결과 출력(description)
 		for (int i = 0; i < gameDescriptions.size(); i++) {
 			System.out.println(gameDescriptions.get(i));
 		}

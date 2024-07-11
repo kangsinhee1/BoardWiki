@@ -11,7 +11,7 @@ public interface UsedService {
 	//중고글 정보
 	public List<UsedItemVO> selectUsedList(Map<String,Object>map);
 	//중고글 상세
-	public UsedItemVO selectUsed(Long use_num);
+	public UsedItemVO selectUsed(long use_num);
 	//중고글 등록
 	public void insertUsed(UsedItemVO used);
 	//중고글 수정

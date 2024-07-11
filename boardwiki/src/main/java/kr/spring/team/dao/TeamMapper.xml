@@ -117,7 +117,7 @@
 	 	team_apply_seq.nextval,
 	 	#{tea_num},
 	 	9,
-	 	1,
+	 	9,
 	 	#{mem_num}
 	 	)
 	 	
@@ -137,6 +137,59 @@
 	 	#{mem_num}
 	 	)
 	 </insert>
+	 
+	  <select id="selectTeamListApplied" parameterType="map" resultType="teamVO">
+	 	SELECT * FROM team_apply a JOIN team b on a.tea_num=b.tea_num WHERE a.mem_num=#{mem_num} AND a.teaA_status =#{teaA_status}
+	 </select>
+	 
+	 <!--모임 게시판 등록  -->
+	 <insert id="insertTeamBoard" parameterType="teamBoardVO">
+	 	INSERT INTO team_board(
+	 	 teaB_num,
+	 	 teaB_status,
+	 	 teaB_title,
+	 	 teaB_content,
+	 	 teaB_rdate,
+	 	 teaB_category,
+	 	 teaB_filename,
+	 	)VALUES(
+	 	 team_board_seq.nextval,
+	 	 #{teaB_status},
+	 	 #{teaB_title},
+	 	 #{teaB_content},
+	 	 SYSDATE,
+	 	 #{teaB_category},
+	 	 #{teaB_filename},
+	 	)
+	 	
+	 
+	 
+	 </insert>
+	 
+	 
+	 
+	 <sql id="teamBoardSearch">
+	 	<where>
+	 		<if test="keyword !=null and keyword != ''">
+		 		<if test="keyfield == 1">
+		 			teaB_title LIKE '%' || #{keyword} || '%'
+		 		</if>
+		 		<if test="keyfield == 2">
+		 			teaB_content LIKE '%' || #{keyword} || '%'
+		 		</if>
+	 		</if>
+	 	</where>
+	 </sql>
+	 <sql id="teamBoardOrder">
+	 	<if test="order == 1">
+	 		ORDER BY teaB_num DESC
+	 	</if>
+	 	<if test="order == 2">
+	 		ORDER BY teaB_hit DESC
+	 	</if>
+	 </sql>
+	  <!-- 모임게시판  등록 -->
+	  
  </mapper>
 
 

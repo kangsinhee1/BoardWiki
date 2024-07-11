@@ -9,7 +9,7 @@
 <script src="${pageContext.request.contextPath}/js/ckeditor.js"></script>
 <script src="${pageContext.request.contextPath}/js/uploadAdapter.js"></script>
 <div class="page-main">
-	<h2>글쓰기</h2>
+	<h2>게시판 작성</h2>
 	<form:form action="write" id="board_register"
 	           enctype="multipart/form-data"
 	                            modelAttribute="boardVO">

@@ -18,5 +18,6 @@ public class TeamApplyVO {
  private long tea_num;
  private long mem_num;
  private String mem_email;
+ private String tea_name;
  
 }

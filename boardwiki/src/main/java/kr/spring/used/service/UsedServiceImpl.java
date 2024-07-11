@@ -28,8 +28,8 @@ public class UsedServiceImpl implements UsedService{
 	}
 
 	@Override
-	public UsedItemVO selectUsed(Long use_num) {
-		return null;
+	public UsedItemVO selectUsed(long use_num) {
+		return usedMapper.selectUsed(use_num);
 	}
 
 	@Override
@@ -39,14 +39,12 @@ public class UsedServiceImpl implements UsedService{
 
 	@Override
 	public void updateUsed(UsedItemVO used) {
-		// TODO Auto-generated method stub
-		
+		usedMapper.updateUsed(used);
 	}
 
 	@Override
 	public void deleteUsed(long use_num) {
-		// TODO Auto-generated method stub
-		
+		usedMapper.deleteUsed(use_num);
 	}
 
 }
