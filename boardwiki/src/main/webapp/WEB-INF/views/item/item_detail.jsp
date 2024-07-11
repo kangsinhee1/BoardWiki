@@ -12,12 +12,19 @@
 			</div>
 			<div class="small-box1" style="display: inline-block; vertical-align: top;">
 				<div class="text-box1" style="display: inline-block; vertical-align: top;">
-					<a>장르:${item.item_genre}</a><br> <a>${item.minplayers}~${item.maxplayers}명</a><br>
-					<a>순위:${item.item_rank}</a><br> <a>평점:${item.item_average}</a>
+					<p>장르:${item.item_genre}</p>
+					<p>가격:${item.item_price}원</p>
+					<p>출시연도:${item.item_year}년</p>
 				</div>
 				<div class="text-box2" style="display: inline-block; vertical-align: top;">
-					<a>${item.item_name}</a><br> <a>${item.minplayers}~${item.maxplayers}명</a><br>
-					<a>순위:${item.item_rank}</a><br> <a>평점:${item.item_average}</a>
+				    <p>최소연령:${item.minage}세</p>
+					<p>참여인원:${item.minplayers}~${item.maxplayers}명</p>
+					<p>플레이 타임:${mintime}~${maxtime}시간</p>
+				</div>
+				<div class="text-box3" style="display: inline-block; vertical-align: top;">
+					<p>순위:${item.item_rank}위</p>
+					<p>평점:${item.item_average}점</p>
+					<p>재고:${item.item_stock}개</p>
 					<button>바로구매</button>
 					<button>장바구니</button>
 				</div>
@@ -25,9 +32,14 @@
 		</div>
 	</div>
 	<div class="big-box2">
-		<a>${item.description}</a>
-		<button>대여</button>
-		<button>중고거래</button>
-	</div>
-	<button>목록</button>
+	    <div class="midle-box2">
+	        <button>간단설명</button>
+	        <button>대여</button>
+		    <button>중고거래</button>
+		</div>
+		<div class="midle-box3">
+		    <a>${item.description}</a>
+		</div>
+        <button>목록</button>
+     </div>
 </div>
