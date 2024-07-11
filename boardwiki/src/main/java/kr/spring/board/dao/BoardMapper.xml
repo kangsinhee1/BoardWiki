@@ -80,6 +80,7 @@
 	 		   		 FROM board
 	 		   		 LEFT OUTER JOIN (SELECT COUNT(*) fav_cnt, boa_num FROM board_fav GROUP BY boa_num) USING(boa_num)
 	 		   		 JOIN member USING(mem_num)
+	 		   		 JOIN member_detail USING(mem_num)
 	 		   		 <include refid="boardSearch"></include>
 	 		   		 <include refid="boardOrder"></include>
 	 		   		 )a)

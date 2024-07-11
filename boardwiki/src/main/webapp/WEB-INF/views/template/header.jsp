@@ -18,6 +18,7 @@
 		  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 		    <a class="dropdown-item" href="${pageContext.request.contextPath}/item/item_main">게임 메인</a>
 		    <a class="dropdown-item" href="${pageContext.request.contextPath}/rent/list">게임 대여</a>
+		    <a class="dropdown-item" href="${pageContext.request.contextPath}/rulebook/rulebookList">룰북</a>
 		  </div>
 		</div>
 		<div class="dropdown">

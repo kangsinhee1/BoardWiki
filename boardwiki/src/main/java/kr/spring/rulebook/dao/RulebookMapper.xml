@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="kr.spring.rulebook.dao.RulebookMapper"> 
+	 <!-- sql 태그와 include 태그를 이용해서 SQL문을 재사용 -->
+	 <sql id="rulebookSearch">
+	 	<where>
+	 		<if test="keyfield == 1">
+	 			item_name LIKE '%' || #{keyword} || '%'
+	 		</if>
+	 	</where>
+	 </sql>
+	 
+	 <!-- 게시판 글 총레코드수/검색레코드수 -->
+	 <select id="selectRulebookRowCount" parameterType="map"
+									resultType="integer">
+		SELECT
+			COUNT(*)
+		FROM rulebook JOIN member USING (mem_num)
+		<include refid="rulebookSearch"></include>	 
+	 </select>
+	 <!-- 게시판 전체 목록/검색 목록 -->
+	 <select id="selectRulebookList" parameterType="map"
+	 							resultType="boardVO">
+	 	SELECT
+	 	   *
+	 	FROM (SELECT
+	 			a.*,
+	 			rownum rnum
+	 		   FROM (SELECT
+	 		   			*
+	 		   		 FROM rulebook
+	 		   		 JOIN member USING(mem_num)
+	 		   		 JOIN member_detail USING(mem_num)
+	 		   		 <include refid="rulebookSearch"></include>
+	 		   		 )a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+	</select>
+	 <!-- 글쓰기 -->
+	 <insert id="insertRulebook" parameterType="rulebookVO">
+	 	INSERT INTO rulebook(
+	 	  rulB_num,
+	 	  item_num,
+	 	  rulB_content,
+	 	  rulB_filename,
+	 	  mem_num)
+	 	VALUES(
+	 	  board_boa_num_seq.nextval,
+	 	  #{boa_category},
+	 	  #{item_num},
+	 	  #{rulB_content},
+	 	  #{rulB_filename,jdbcType=VARCHAR},
+	 	  #{mem_num})
+	 </insert>
+	<!-- 게시판 글 수정 -->
+	  
+ </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

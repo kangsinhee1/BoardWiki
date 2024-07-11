@@ -64,6 +64,7 @@ $(function(){
 						output += '  <input type="button" data-num="'+item.boaR_num+'" value="삭제" class="delete-btn">';
 					}
 					
+					
 					output += '  </div>';
 					output += '</div>';
 											
@@ -164,15 +165,8 @@ $(function(){
 		modifyUI += ' <input type="submit" value="수정">';
 		modifyUI += ' <input type="button" value="취소" class="re-reset">';
 		modifyUI += '</div>';
-		modifyUI += '<hr size="1" noshade width="96%">';
 		modifyUI += '</form>';   
 		
-		//답글이 있는 경우 답글 초기화
-		
-		//답글이 있는 경우 답글 초기화 
-		
-		//이전에 이미 수정하는 댓글이 있을 경우 수정 버튼을 클릭하면
-		//숨김 sub-item를 환원시키고 수정폼을 초기화함
 		initModifyForm();
 		//지금 클릭해서 수정하고자 하는 데이터는 감추기
 		//(수정 버튼을 감싸고 있는 div)   

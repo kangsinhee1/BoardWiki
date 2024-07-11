@@ -14,13 +14,20 @@
         <c:when test="${param.boa_category == 3}">
             <h2>후기게시판</h2>
         </c:when>
+        <c:when test="${param.boa_category == 4}">
+            <h2>공지</h2>
+        </c:when>
+        <c:when test="${param.boa_category == 5}">
+            <h2>QnA</h2>
+        </c:when>
     </c:choose>
-	<div>
+	<%-- <div>
 		<a href="list?boa_category=1">자유게시판</a> |
 		<a href="list?boa_category=2">팁게시판</a> |
 		<a href="list?boa_category=3">후기게시판</a> |
-		<a href="${pageContext.request.contextPath}/team/teamList">모임게시판</a>
-	</div>
+		<a href="${pageContext.request.contextPath}/team/teamList">모임게시판</a> |
+		<a href="${pageContext.request.contextPath}/used/usedList">중고게시판</a>
+	</div>--%>
 	<br>
 	<form action="list" id="search_form" method="get">
 		<input type="hidden" name="boa_category" value="${param.boa_category}">
@@ -54,9 +61,18 @@
 							+$('#order').val();
 				});
 			</script>
-			<c:if test="${!empty user}">
-			<input type="button" value="글쓰기" onclick="location.href='write'">
-			</c:if>
+			<c:choose>
+				<c:when test="${param.boa_category != 4}">
+					<c:if test="${!empty user}">
+						<input type="button" value="글쓰기" onclick="location.href='write'">
+					</c:if>
+	  			</c:when>
+	    		<c:when test="${param.boa_category == 4}">
+					<c:if test="${!empty user && user.mem_auth == 9}">
+						<input type="button" value="글쓰기" onclick="location.href='write'">
+					</c:if>
+	   			</c:when>    
+			</c:choose>
 		</div>
 	</form>
 	<c:if test="${count==0}">
@@ -76,7 +92,10 @@
 		<tr>
 			<td class="align-center">${board.boa_num}</td>
 			<td class="align-left"><a href="detail?boa_num=${board.boa_num}">${board.boa_title}</a></td>
-			<td class="align-center"></td>
+			<td class="align-center">
+				<c:if test="${empty board.mem_nickname}">${board.mem_email}</c:if>
+				<c:if test="${!empty board.mem_nickname}">${board.mem_nickname}</c:if>
+			</td>
 			<td class="align-center">${board.boa_rdate}</td>
 			<td class="align-center">${board.boa_hit}</td>
 			<td class="align-center">${board.fav_cnt}</td>
