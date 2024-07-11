@@ -151,7 +151,7 @@
 	 	 teaB_content,
 	 	 teaB_rdate,
 	 	 teaB_category,
-	 	 teaB_filename,
+	 	teaB_filename,
 	 	 tea_num,
 	 	 mem_num
 	 	)VALUES(
@@ -161,7 +161,7 @@
 	 	 #{teaB_content},
 	 	 SYSDATE,
 	 	 #{teaB_category},
-	 	 #{teaB_filename},
+	 	 #{filename},
 	 	 #{tea_num},
 	 	 #{mem_num}
 	 	)
