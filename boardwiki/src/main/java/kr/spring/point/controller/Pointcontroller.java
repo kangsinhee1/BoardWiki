@@ -11,10 +11,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.spring.member.vo.MemberVO;
 import kr.spring.point.service.PointService;
+import kr.spring.point.vo.PointGameVO;
 import kr.spring.point.vo.PointVO;
 import kr.spring.util.PagingUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -69,4 +71,30 @@ public class Pointcontroller {
 	    
 	    return "pointList";
 	}
+	
+	@GetMapping("/create")
+    public String createGamePage() {
+        return "createGame";
+    }
+	
+	@GetMapping("/list")
+    public String gameListPage(Model model) {
+        List<PointVO> games = pointService.selectPointGameList(null); // Adjust as necessary
+        model.addAttribute("games", games);
+        return "gameList";
+    }
+	
+	@GetMapping("/participate/{poiG_num}")
+    public String participateGamePage(@PathVariable Long poiG_num, Model model) {
+        PointGameVO game = pointService.selectPointGame(poiG_num);
+        Map<String, Object> params = Map.of("poiG_num", poiG_num);
+        List<PointGameVO> options = pointService.selectPointGameOptionList(params);
+
+        model.addAttribute("game", game);
+        model.addAttribute("options", options);
+
+        return "participateGame";
+    }
+
+	
 }

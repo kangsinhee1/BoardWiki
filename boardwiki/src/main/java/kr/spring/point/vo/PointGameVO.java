@@ -27,7 +27,7 @@ public class PointGameVO {
 	private Long bet_num;//배팅 고유 번호
 	private int bet_point;//배팅 포인트
 	private Date bet_date;//배팅 날짜
-	private int mem_num;//회원 구분
+	private Long mem_num;//회원 구분
 	
 	//조건 체크용
 	private int poi_ck;//조건체크
