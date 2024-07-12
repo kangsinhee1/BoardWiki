@@ -47,7 +47,7 @@
 		    스트리밍
 		  </button>
 		  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-		    <a class="dropdown-item" href="#">실시간 보드게임</a>
+		    <a class="dropdown-item" href="${pageContext.request.contextPath}/pointgame/list">실시간 보드게임</a>
 		    <a class="dropdown-item" href="#">스트리밍</a>
 		  </div>
 		</div>

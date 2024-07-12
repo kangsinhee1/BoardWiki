@@ -10,16 +10,20 @@
 		<put-attribute name="body" value="/WEB-INF/views/point/pointList.jsp"/>
 	</definition>
 	<definition name="createGame" extends="main">
-		<put-attribute name="title" value="포인트 상세"/>
+		<put-attribute name="title" value="포인트 게임 생성"/>
 		<put-attribute name="body" value="/WEB-INF/views/point/createGame.jsp"/>
 	</definition>
 	<definition name="gameList" extends="main">
-		<put-attribute name="title" value="포인트 상세"/>
+		<put-attribute name="title" value="포인트 게임 리스트"/>
 		<put-attribute name="body" value="/WEB-INF/views/point/gameList.jsp"/>
 	</definition>
 	<definition name="participateGame" extends="main">
-		<put-attribute name="title" value="포인트 상세"/>
+		<put-attribute name="title" value="포인트 게임 참여"/>
 		<put-attribute name="body" value="/WEB-INF/views/point/participateGame.jsp"/>
+	</definition>
+	<definition name="manageGame" extends="main">
+		<put-attribute name="title" value="포인트 게임 관리"/>
+		<put-attribute name="body" value="/WEB-INF/views/point/manageGame.jsp"/>
 	</definition>
 </tiles-definitions>
 
