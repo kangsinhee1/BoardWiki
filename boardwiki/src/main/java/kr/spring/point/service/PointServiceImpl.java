@@ -142,7 +142,8 @@ public class PointServiceImpl implements PointService {
                 pointVO.setPoi_use(pointsWon);
                 pointVO.setPoi_increase(2); // 2: Gain points
 
-                processPointTransaction(pointVO);
+                pointMapper.insertpoint(pointVO);
+                pointMapper.updatepointtotal(pointVO);
             }
         }
 
@@ -163,4 +164,10 @@ public class PointServiceImpl implements PointService {
 	public List<PointGameVO> selectPointBettingList(Long poiO_num) {
 		return pointMapper.selectPointBettingList(poiO_num);
 	}
+
+	@Override
+	public Integer selectPointTotal(Long mem_num) {
+		return pointMapper.selectPointTotal(mem_num);
+	}
+	
 }

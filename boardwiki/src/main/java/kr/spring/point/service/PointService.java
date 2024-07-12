@@ -62,4 +62,5 @@ public interface PointService {
     List<PointGameVO> getGameOptions(Long poiG_num);
     
     public List<PointGameVO> selectPointBettingList(Long poiO_num);
+    public Integer selectPointTotal(Long mem_num);
 }

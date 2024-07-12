@@ -28,6 +28,9 @@ public interface PointMapper {
 	public List<PointVO> selectPointList(Map<String,Object> map);
 	/**포인트 카운트*/
 	public Integer selectRowCount(Map<String,Object> map);
+	//포인트 확인
+	@Select("SELECT * FROM point_total WHERE mem_num = #{mem_num}")
+	public Integer selectPointTotal(Long mem_num);
 	
 	//포인트 게임
 	//포인트게임 번호 생성
@@ -76,7 +79,7 @@ public interface PointMapper {
 	@Insert("INSERT INTO point_game_betting (bet_num,bet_point,poiO_num,mem_num,poiG_num) VALUES (point_game_betting_seq.nextval,#{bet_point},#{poiO_num},#{mem_num},#{poiG_num})")
 	public void insertPointBetting(PointGameVO pointGameVO);
 	//포인트 게임 배팅 현황 보기
-	@Select("SELECT * FROM point_game_betting WHERE mem_num = #{poiO_num}")
+	@Select("SELECT * FROM point_game_betting WHERE mem_num = #{mem_num} AND poiO_num =#{poiO_num}")
 	public PointGameVO selectPointGameBetting(Long mem_num,Long poiO_num);
 	@Select("SELECT * FROM point_game_betting WHERE poiO_num = #{poiO_num}")
 	public List<PointGameVO> selectPointBettingList(@Param("poiO_num") Long poiO_num);

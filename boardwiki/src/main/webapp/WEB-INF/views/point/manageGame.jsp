@@ -5,7 +5,9 @@
 <script src="/js/manageGame.js"></script>
 <h1>Manage Your Games</h1>
 <div id="gameManagementContainer">
+
     <c:forEach var="game" items="${createdGames}">
+    <c:if test="${game.poiG_end==null}">
         <div class="game">
             <h2>${game.poiG_content}</h2>
             <button class="cancelGameButton" data-game-id="${game.poiG_num}">Cancel Game</button>
@@ -19,5 +21,6 @@
                 <button class="selectWinnerButton" data-game-id="${game.poiG_num}">Select Winner</button>
             </div>
         </div>
+     </c:if>
 </c:forEach>
 </div>

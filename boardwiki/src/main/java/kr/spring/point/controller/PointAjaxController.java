@@ -84,23 +84,34 @@ public class PointAjaxController {
         }
 
         Long mem_num = user.getMem_num();
-        log.debug("<<회원 번호 확인>>" + mem_num);
 
         String poiO_numStr = (String) payload.get("poiO_num");
         String betPointStr = (String) payload.get("bet_point");
         String poiG_numStr = (String) payload.get("poiG_num");
         
-        if (poiO_numStr == null || betPointStr == null) {
-            map.put("result", "error");
-            map.put("message", "Invalid input: poiO_num or bet_point is null.");
-            return map;
+        Long poiG_num = Long.valueOf(poiG_numStr);
+        int betPoint = Integer.valueOf(betPointStr);
+        Long poiO_num = Long.valueOf(poiO_numStr);
+        
+        PointGameVO user_num = pointService.selectPointGame(poiG_num);
+        
+        if(mem_num == user_num.getMem_num()) {
+        	map.put("result", "autolet");
+        	return map;
+        }
+        if(pointService.selectPointTotal(mem_num) < betPoint) {
+        	map.put("result", "error");
+        	return map;
+        }
+        
+        log.debug("회원"+mem_num+"옵션값"+poiO_num);
+        
+        if(pointService.selectPointGameBetting(mem_num, poiO_num)!=null) {
+        	map.put("result", "regame");
+        	return map;
         }
 
         try {
-            Long poiO_num = Long.valueOf(poiO_numStr);
-            int betPoint = Integer.valueOf(betPointStr);
-            Long poiG_num = Long.valueOf(poiG_numStr);
-
             PointGameVO pointGameVO = new PointGameVO();
             pointGameVO.setMem_num(mem_num);
             pointGameVO.setPoiO_num(poiO_num);

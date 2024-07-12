@@ -7,31 +7,6 @@ $(document).ready(function() {
         const choice = $('input[name="choice"]:checked').val();
         const poiG_num = $('#poiG_num').val();
 
-        // Debugging logs
-        console.log('Game ID:', gameId);
-        console.log('Bet Points:', betPoints);
-        console.log('Choice:', choice);
-
-        if (!gameId || gameId.trim() === '') {
-            alert('Game ID is required.');
-            return;
-        }
-
-        if (!betPoints || betPoints.trim() === '') {
-            alert('Bet Points are required.');
-            return;
-        }
-
-        if (!choice) {
-            alert('You must select a choice.');
-            return;
-        }
-        
-        if (!poiG_num || poiG_num.trim() === '') {
-            alert('Game ID is required.');
-            return;
-        }
-
         const formData = {
             poiO_num: choice,
             bet_point: betPoints,
@@ -48,7 +23,11 @@ $(document).ready(function() {
                 if (response.result == "logout") {
                     alert('로그인 필요');
                 } else if (response.result == "error") {
-                    alert(response.message);
+                    alert('당신이 걸었던 포인트는 당신이 가지고 있는 포인트보다 높습니다.');
+                }else if (response.result == "autolet") {
+                    alert('게임 생성자는 참여불가');
+                }else if(response.result == "regame"){
+					alert('당신은 이미 게임에 참여했습니다.');
                 } else {
                     alert('배팅 완료');
                     window.location.href = '/pointgame/list';
