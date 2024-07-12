@@ -8,6 +8,8 @@
        SELECT
           COUNT(*)
        FROM item
+       <include refid="itemGenreSearch"></include>
+	   <include refid="itemOrder"></include>
      </select>
     <!-- 상품 목록 인기 -->
     <select id="selectList" parameterType="map" resultType="itemVO">
@@ -69,6 +71,17 @@
 		</if>
 		</where>
 	</sql>
+	<sql id="itemOrder">
+ 		<if test="order == 1">
+ 			ORDER BY item_rank ASC
+ 		</if>
+ 		<if test="order == 2">
+ 			ORDER BY item_average DESC
+ 		</if>
+ 		<if test="order == 3">
+ 			ORDER BY item_year DESC
+ 		</if>
+	 </sql>
     <select id="selectListByItemGenre" parameterType="map" resultType="itemVO">
 	 	SELECT
 			*
@@ -80,6 +93,7 @@
 				FROM item
 				
 				<include refid="itemGenreSearch"></include>
+				<include refid="itemOrder"></include>
 				)a)
 	<![CDATA[
 	WHERE rnum >= #{start} AND rnum <= #{end}

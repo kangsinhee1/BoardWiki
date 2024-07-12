@@ -44,14 +44,14 @@ public class ItemController {
 	//인기 게임
 	@GetMapping("/item/item_main")
 	public String getList(@RequestParam(defaultValue="1") int pageNum,
-			@RequestParam(defaultValue="1") int order,
-			@RequestParam(defaultValue="") String category,
-			String keyfield,
-			String keyword,Model model) {
+                          @RequestParam(defaultValue="1") int order,
+                          @RequestParam(defaultValue="") String category,
+                          String keyfield,
+                          String keyword,Model model) {
 		log.debug("<<게임 목록 - category>> : "+category);
 		log.debug("<<게임 목록 - order>> : "+order);
-
-		Map<String,Object> map = new HashMap<String,Object>();
+		
+        Map<String,Object> map = new HashMap<String,Object>();
 
 		map.put("category", category);
 		map.put("keyfield", keyfield);
@@ -61,46 +61,44 @@ public class ItemController {
 		int count = itemService.selectRowCount(map);
 
 		//페이지 처리
-		PagingUtil page =
-				new PagingUtil(keyfield,keyword,pageNum,
-						count,20,10,"list",
-						"&category="+category+"&order="+order);
-
-		//////////////////////////
-		List<ItemVO> list = null;
-		if(count > 0) {
+	    PagingUtil page =
+				new PagingUtil(keyfield,keyword,pageNum,count,21,10,"item_main","&order="+order);
+	    
+	    //////////////////////////
+	    List<ItemVO> list = null;
+	    if(count > 0) {
 			map.put("order", order);
 			map.put("start", page.getStartRow());
 			map.put("end", page.getEndRow());
 
 			list = itemService.selectList(map);
 		}
-		List<ItemVO> list2 = null;
-		if(count > 0) {
+	    List<ItemVO> list2 = null;
+	    if(count > 0) {
 			map.put("order", order);
 			map.put("start", page.getStartRow());
 			map.put("end", page.getEndRow());
 
 			list2 = itemService.selectList2(map);
 		}
-		List<ItemVO> list3 = null;
-		if(count > 0) {
+	    List<ItemVO> list3 = null;
+	    if(count > 0) {
 			map.put("order", order);
 			map.put("start", page.getStartRow());
 			map.put("end", page.getEndRow());
 
 			list3 = itemService.selectList3(map);
 		}
-		List<ItemVO> list4 = null;
-		if(count > 0) {
-			map.put("order", order);
-			map.put("start", page.getStartRow());
-			map.put("end", page.getEndRow());
+	    List<ItemVO> list4 = null;
+	    if(count > 0) {
+	    	map.put("order", order);
+	    	map.put("start", page.getStartRow());
+	    	map.put("end", page.getEndRow());
+	    	
+	    	list4 = itemService.selectListByItemGenre(map);  
+	    }
 
-			list4 = itemService.selectListByItemGenre(map);  
-		}
-
-		model.addAttribute("count", count);
+	    model.addAttribute("count", count);
 		model.addAttribute("list", list);
 		model.addAttribute("list2", list2);
 		model.addAttribute("list3", list3);
