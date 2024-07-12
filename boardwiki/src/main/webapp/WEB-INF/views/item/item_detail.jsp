@@ -35,7 +35,7 @@
 	<div class="big-box2">
 	    <div class="midle-box2">
 	        <button>간단설명</button>
-	        <button>대여</button>
+	        <button onclick="location.href='/rent/rent?item_num=${item.item_num}'">대여</button>
 		    <button>중고거래</button>
 		</div>
 		<div class="midle-box3">
