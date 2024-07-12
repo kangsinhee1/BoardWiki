@@ -27,10 +27,7 @@
 					<p>평점:${item.item_average}점</p>
 					<p>재고:${item.item_stock}개</p>
 					<button>바로구매</button>
-					<form:form modelAttribute="cartVO" method="post" action="${pageContext.request.contextPath}/item/item_detail">
-                        <form:hidden path="item_num" value="${item.item_num}" />
-                        <button type="button" onclick="this.form.submit()">장바구니</button>
-                    </form:form>
+					<button>장바구니</button>
 				</div>
 			</div>
 		</div>

@@ -133,7 +133,7 @@ public class ItemController {
 		log.debug("<<장바구니 생성>> : " + cartVO);
 
 		if (result.hasErrors()) {
-			return "item_detail";
+			return "/item/item_detail";
 		}
 
 		CartVO vo = (CartVO) session.getAttribute("cart");
