@@ -24,15 +24,25 @@
 			</li>
 		</ul>
 		<div>
-			<input type="button" onclick="location.href='/member/login/naver'" value="Naver Login">
-
-		</div>
-		<div>
-			<input type="button" onclick="location.href='/member/login/kakao'" value="Kakao Login">
-		</div>
-		<div>
 			<form:button class="login-btn">로그인</form:button>
-		</div>                           
+		</div>     
+		<div class="login_hr">
+			<hr>
+		</div>
+		<div class="button_group">
+			<div>
+			<img src="${pageContext.request.contextPath}/images/naverbanner.png" 
+								onclick="location.href='/member/login/naver'" height="32" width="300">
+			</div>
+			<div>			
+			<img src="${pageContext.request.contextPath}/images/kakaobanner.png" 
+								onclick="location.href='/member/login/kakao'" height="32" width="300">
+			</div>
+			<div>
+			<img src="${pageContext.request.contextPath}/images/googlebanner.png" 
+								onclick="location.href='/member/login/kakao'" height="32" width="300">
+			</div>
+		</div>
 	</form:form>
 	<p class="align-center">
 		<input type="button" value="홈으로"
