@@ -30,6 +30,8 @@ public class BoardVO {
 	private MultipartFile boa_upload; 
 	private String filename;
 	
+	
+	
 	private String mem_email;				
 	private String mem_nickname;		
 	
