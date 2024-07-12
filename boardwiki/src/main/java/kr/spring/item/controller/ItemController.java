@@ -89,7 +89,7 @@ public class ItemController {
 	    	map.put("start", page.getStartRow());
 	    	map.put("end", page.getEndRow());
 	    	
-	    	list4 = itemService.selectListByItemGenre(map);
+	    	list4 = itemService.selectListByItemGenre(map);  
 	    }
 
 	    model.addAttribute("count", count);
