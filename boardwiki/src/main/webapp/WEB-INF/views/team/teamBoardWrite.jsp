@@ -10,7 +10,7 @@
 <script src="${pageContext.request.contextPath}/js/uploadAdapter.js"></script>
 	<h2>모임게시판  글쓰기</h2>
 <div class="">
-	<form:form action="teamWrite" id="team_register"
+	<form:form action="teamBoardWrite" id="team_register"
 	           enctype="multipart/form-data"
 	                            modelAttribute="teamBoardVO">
 		<ul>
@@ -60,7 +60,7 @@
 			<form:button class="default-btn">전송</form:button>
 			<input type="button" value="목록"
 			  class="default-btn"
-			  onclick="location.href='teamList'">
+			  onclick="location.href='teamBoardAdmin'">
 		</div>                           
 	</form:form>
 </div>

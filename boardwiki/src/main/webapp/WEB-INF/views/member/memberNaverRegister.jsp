@@ -4,7 +4,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!-- 회원가입 시작 -->
 <div class="page-main">
-	<h2>네이버 회원가입</h2>
+	<h2>SNS 회원가입</h2>
 	<form:form action="memberNaverRegister" id="member_register"
 	                            modelAttribute="memberVO">
 		<ul>
@@ -14,7 +14,7 @@
 			</li>
 			<li>
 				<form:label path="mem_name">이름</form:label>
-				<form:input path="mem_name" readonly="true"/>
+				<form:input path="mem_name"/>
 			</li>
 			<li>
 				<form:label path="mem_nickName">별명</form:label>
@@ -33,10 +33,6 @@
 				<form:label path="mem_provider"></form:label>
 				<form:hidden path="mem_provider"/>
 			</li>
-			
-			
-			
-			
 		</ul> 
 		<div class="align-center">
 			<form:button class="default-btn">전송</form:button>

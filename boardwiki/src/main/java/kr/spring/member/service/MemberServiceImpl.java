@@ -30,9 +30,4 @@ public class MemberServiceImpl implements MemberService {
 	public MemberVO selectCheckMember(String mem_email) {
 		return memberMapper.selectCheckMember(mem_email);
 	}
-
-	@Override
-	public MemberVO isemailCheck(String mem_email) {
-		return memberMapper.isemailCheck(mem_email);
-	}
 }
