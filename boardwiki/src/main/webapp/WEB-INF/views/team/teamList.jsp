@@ -64,7 +64,7 @@
 			<td class="align-center">${team.tea_num}</td>
 			<td class="align-left"><a href="teamDetail?tea_num=${team.tea_num}">(${fn:substring(team.tea_address1,0,2)}) ${team.tea_name}</a></td>
 			<td class="align-center">
-				${team.mem_email}
+				${team.mem_nickname}
 			</td>
 			<td class="align-center">${team.tea_rdate}</td>
 			<td class="align-center">${team.tea_hit}</td>

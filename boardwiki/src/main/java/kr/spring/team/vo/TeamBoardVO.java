@@ -14,7 +14,8 @@ public class TeamBoardVO {
 	private String teaB_title; //글제목
 	private String teaB_content;//글 내용
 	private String teaB_rdate; //등록일
-	private String teaB_mdate; //등록일
+	private String teaB_mdate; //수정일
+	private String tea_rdate;
 	private Long teaB_category; //카테고리 분류
 	private String filename;
 	private MultipartFile upload; //파일
@@ -24,7 +25,8 @@ public class TeamBoardVO {
 	private long tea_num;
 	private long teaA_auth;
 	private long mem_num;
-	private long mem_email;
+	private String mem_email;
+	private String mem_nickname;
 	private int re_cnt;
 	private int teaB_hit;
 }

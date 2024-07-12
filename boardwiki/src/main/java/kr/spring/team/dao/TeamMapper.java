@@ -106,6 +106,7 @@ public interface TeamMapper {
 		//모임 게시판 등록
 		public void insertTeamBoard(TeamBoardVO teamBoard);
 		//모임 게시판 상세
+		@Select("SELECT * FROM team_board WHERE teaB_num = #{teaB_num}")
 		public TeamBoardVO getTeamBoardDetail(long teaB_num);
 		//모임 게시판 수정
 		public void updateTeamBoard(long teaB_num);
@@ -114,6 +115,7 @@ public interface TeamMapper {
 		//모임 게시판 파일 관리
 		public void deleteTeamBoardFile(long teaB_num);
 		//모임 게시판 조회수
+		@Update("UPDATE team_board SET teaB_hit = teaB_hit+1 WHERE teaB_num=#{teaB_num}")
 		public void updateHitTeamBoard(long teaB_num);
 		// 모임게시판 댓글
 		//댓글 목록

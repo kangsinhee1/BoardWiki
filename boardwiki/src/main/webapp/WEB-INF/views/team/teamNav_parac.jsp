@@ -9,7 +9,7 @@
             <a href="#" class="navbar-logo">내가 가입한 모임</a>
             <ul class="navbar-menu">
                 <c:forEach var="team" items="${list}">
-                    <li class="navbar-item" id="navbar-applied"><a href="${pageContext.request.contextPath}/team/qqq" class="navbar-link">${team.tea_name}</a></li>
+                    <li class="navbar-item" id="navbar-applied"><a href="${pageContext.request.contextPath}/team/teamBoardUser?tea_num=${team.tea_num}" class="navbar-link">${team.tea_name}</a></li>
                 </c:forEach>
             </ul>
         </div>

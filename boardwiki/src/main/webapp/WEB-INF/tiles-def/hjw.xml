@@ -65,6 +65,11 @@
 		<put-attribute name="css" value="/WEB-INF/views/team/teamCSS.jsp"/>
 		<put-attribute name="body" value="/WEB-INF/views/team/teamBoardUser.jsp"/>
 	</definition>
+		<definition name="teamBoardDetail" extends="main">
+		<put-attribute name="title" value="모임글 상세"/>
+		<put-attribute name="css" value="/WEB-INF/views/team/teamCSS.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/team/teamBoardDetail.jsp"/>
+	</definition>
 </tiles-definitions>
 
 

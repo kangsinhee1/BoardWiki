@@ -10,7 +10,7 @@
 <script src="${pageContext.request.contextPath}/js/uploadAdapter.js"></script>
 	<h2>모임게시판  글쓰기</h2>
 <div class="">
-	<form:form action="teamBoardWrite" id="team_register"
+	<form:form action="teamBoardUpdate" id="team_register"
 	           enctype="multipart/form-data"
 	                            modelAttribute="teamBoardVO">
 		<ul>
@@ -18,9 +18,7 @@
 			<li>
 				<form:label path="teaB_category">분류</form:label>
 				<form:select path="teaB_category" >
-				<c:if test="${admin}">
 						<form:option value="1">공지사항</form:option>
-				</c:if>
 						<form:option value="2">잡담</form:option>
 						<form:option value="3">후기	</form:option>
 				</form:select>
@@ -60,12 +58,9 @@
 		</ul> 
 		<div class="align-center">
 			<form:button class="default-btn">전송</form:button>
-		<c:if test="${admin}">
-		<input type="button" value="목록" onclick="location.href='teamBoardAdmin?tea_num=${board.tea_num}'">
-		</c:if>
-		<c:if test="${!admin}">
-		<input type="button" value="목록" onclick="location.href='teamBoardUser?tea_num=${board.tea_num}'">
-		</c:if>
+			<input type="button" value="목록"
+			  class="default-btn"
+			  onclick="location.href='teamBoardAdmin'">
 		</div>                           
 	</form:form>
 </div>

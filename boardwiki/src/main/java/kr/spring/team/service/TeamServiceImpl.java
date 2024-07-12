@@ -141,14 +141,12 @@ public class TeamServiceImpl implements TeamService {
 
 	@Override
 	public List<TeamBoardVO> selectTeamBoardList(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+		return teamMapper.selectTeamBoardList(map);
 	}
 
 	@Override
 	public Integer selectTeamBoardRowCount(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+		return teamMapper.selectTeamBoardRowCount(map);
 	}
 
 	@Override
@@ -158,8 +156,7 @@ public class TeamServiceImpl implements TeamService {
 
 	@Override
 	public TeamBoardVO getTeamBoardDetail(long teaB_num) {
-		// TODO Auto-generated method stub
-		return null;
+		return teamMapper.getTeamBoardDetail(teaB_num);
 	}
 
 	@Override
@@ -182,8 +179,7 @@ public class TeamServiceImpl implements TeamService {
 
 	@Override
 	public void updateHitTeamBoard(long teaB_num) {
-		// TODO Auto-generated method stub
-		
+		teamMapper.updateHitTeamBoard(teaB_num);
 	}
 
 	@Override

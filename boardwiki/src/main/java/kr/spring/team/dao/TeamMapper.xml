@@ -74,9 +74,11 @@
 	      tea_status,
 	      mem_num,
 	      mem_email,
+	      mem_nickname,
 	      fav_cnt
 	      FROM team
 	      JOIN member USING (mem_num) 
+	      LEFT OUTER JOIN member_detail USING(mem_num)
 	      LEFT OUTER JOIN (SELECT count(*) fav_cnt ,tea_num FROM team_fav GROUP BY tea_num) USING(tea_num)
 	      <include refid="teamSearch"></include>
 	      <include refid="teamOrder"></include>	
@@ -151,7 +153,7 @@
 	 	 teaB_content,
 	 	 teaB_rdate,
 	 	 teaB_category,
-	 	teaB_filename,
+	 	 filename,
 	 	 tea_num,
 	 	 mem_num
 	 	)VALUES(
@@ -161,7 +163,7 @@
 	 	 #{teaB_content},
 	 	 SYSDATE,
 	 	 #{teaB_category},
-	 	 #{filename},
+	 	 #{filename , jdbcType=VARCHAR},
 	 	 #{tea_num},
 	 	 #{mem_num}
 	 	)
@@ -193,6 +195,38 @@
 	 	</if>
 	 </sql>
 	  <!-- 모임게시판  등록 -->
+	  
+	   <!-- 모임 목록 -->
+	 <select id="selectTeamBoardRowCount" parameterType="map" resultType="integer">
+	 	SELECT count(*) FROM team_board a WHERE a.tea_num = #{tea_num}
+	 </select>
+	 <select id="selectTeamBoardList" parameterType="map" resultType="teamBoardVO">
+	 	SELECT *FROM
+	 	(SELECT a.*, rownum rnum FROM
+	 	(SELECT teab_num,
+	 	  <![CDATA[
+	         REPLACE(REPLACE(teab_title,'<','&lt;'),'>','&gt;') teab_title,
+	      ]]>
+	      teaB_status,
+	      teaB_content,
+	      teaB_rdate,
+	      teaB_category,
+	      filename,
+	      tea_num,
+	      teaB_hit,
+	      mem_num,
+	      mem_email,
+	      mem_nickname
+	      FROM team_board
+	      JOIN member USING (mem_num)
+	      JOIN member_detail USING (mem_num)
+	      <include refid="teamBoardSearch"></include>
+	      <include refid="teamBoardOrder"></include>	
+	 	)a)
+	 	<![CDATA[
+	 	WHERE rnum >= #{start} AND rnum <= #{end} AND tea_num=#{tea_num}
+	 	]]>	
+	 </select>
 	  
  </mapper>
 

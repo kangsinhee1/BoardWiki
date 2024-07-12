@@ -32,6 +32,7 @@ public class TeamVO {
 
 	private long mem_num; // 회원번호
 	private String mem_email;		//아이디
+	private String mem_nickname;		//아이디
 
 	private int fav_cnt;			//좋아요 개수
 	private long teaA_status;
