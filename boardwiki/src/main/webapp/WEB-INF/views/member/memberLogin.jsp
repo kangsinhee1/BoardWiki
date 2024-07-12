@@ -24,11 +24,11 @@
 			</li>
 		</ul>
 		<div>
-			<a href="<c:url value='/member/login/naver' />">Naver Login</a>
+			<input type="button" onclick="location.href='/member/login/naver'" value="Naver Login">
 
 		</div>
 		<div>
-			<a href="<c:url value='/member/login/kakao' />">Kakao Login</a>
+			<input type="button" onclick="location.href='/member/login/kakao'" value="Kakao Login">
 		</div>
 		<div>
 			<form:button class="login-btn">로그인</form:button>

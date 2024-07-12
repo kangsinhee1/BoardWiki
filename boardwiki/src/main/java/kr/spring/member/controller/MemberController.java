@@ -144,12 +144,9 @@ public class MemberController {
 	}
 	//회원가입 선택 폼 호출
 	@GetMapping("/member/memberRegisterChoice")
-	public String choiceRegister(Model model,HttpSession session) {
-		log.debug("<<로그인페이지 요청>>");
-		String naverAuthUrl = naverLoginUtil.getAuthorizationUrl(session);
-		model.addAttribute("naverUrl", naverAuthUrl);
-		log.debug("<<naverUrl>> :" + naverAuthUrl);
-
+	public String choiceRegister() {
+		log.debug("<<회원가입 플랫폼 선택 창 요청>>");
+		
 		return "memberRegisterChoice";
 	}
 	//일반 회원가입
