@@ -213,7 +213,7 @@ public class MemberController {
 		log.debug("<<pwd>> : " + naver_passwd);
 
 		// 이메일 중복 체크
-		MemberVO result = memberService.isemailCheck(naver_email);
+		MemberVO result = memberService.selectCheckMember(naver_email);
 
 		if(result == null) { // 네이버 메일로 조회해서 일치하는 정보가 없는 경우 회원가입
 		    memberVO.setMem_name(naver_name);
