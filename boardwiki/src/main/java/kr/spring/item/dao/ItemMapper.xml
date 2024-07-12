@@ -29,6 +29,16 @@
 	     SELECT * FROM (SELECT * FROM item ORDER BY item_year DESC) WHERE ROWNUM 
 	     <![CDATA[<= 3]]>
      </select>
+     <insert id="insertCart" parameterType="CartVO">
+        INSERT INTO cart(
+          mem_num,
+          item_num,
+          item_quantity)
+        VALUES (
+          #{mem_num},
+          #{item_num},
+          #{item_quantity})
+     </insert>
      <!-- 상품 목록 -->
 	 <sql id="itemNameSearch">
 		<where>
