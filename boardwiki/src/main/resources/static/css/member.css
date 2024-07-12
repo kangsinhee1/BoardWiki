@@ -86,9 +86,17 @@
 }
 
 .button_group {
-	flex-direction: row;
+	text-align:center;
+	display:flex;
 	justify-content: space-between;
 	align-items: center; /* 아이템들을 세로 가운데 정렬 */
+}
+.button_group div {
+	padding-top: 10px;
+	cursor: pointer;
+}
+.submit-button {
+	padding-top: 10px;
 }
 
 

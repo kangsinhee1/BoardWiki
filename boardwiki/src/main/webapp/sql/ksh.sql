@@ -11,8 +11,8 @@ CREATE SEQUENCE member_seq;
 CREATE TABLE member_detail (
 	mem_num      NUMBER        NOT NULL, -- 회원고유의 번호
 	mem_name     VARCHAR2(30)  NOT NULL, -- 회원 이름
-	mem_nickname VARCHAR2(50)  NULL, -- 회원 별명
-	mem_passwd   VARCHAR2(50)  NOT NULL, -- 회원 비밀번호 (영문+숫자 4~12)
+	mem_nickname VARCHAR2(50)  UNIQUE, -- 회원 별명
+	mem_passwd   VARCHAR2(2000)  NOT NULL, -- 회원 비밀번호 (영문+숫자 4~12)
 	mem_phone    VARCHAR2(15)  NOT NULL, -- 회원 전화번호 (000-0000-0000 형식)
 	mem_provider VARCHAR2(10)  NULL, -- 회원 가입 정보 제공자
 	mem_rdate    DATE          DEFAULT SYSDATE NOT NULL, -- 회원 가입 날짜
