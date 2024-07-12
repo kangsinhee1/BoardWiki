@@ -13,7 +13,7 @@ import javax.validation.Valid;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
@@ -41,6 +41,9 @@ import lombok.extern.slf4j.Slf4j;
 public class MemberController {
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+    private PasswordEncoder passwordEncoder;
 
 	@Autowired
 	private NaverLoginUtil naverLoginUtil;
@@ -104,8 +107,8 @@ public class MemberController {
 
 		//유효성 체크 결과 오류가 있으면 폼 호출
 		//id와 passwd 필드만 체크
-		if(result.hasFieldErrors("id") || 
-				result.hasFieldErrors("passwd")) {
+		if(result.hasFieldErrors("mem_email") || 
+				result.hasFieldErrors("mem_passwd")) {
 			return formLogin();
 		}
 
@@ -117,8 +120,9 @@ public class MemberController {
 			boolean check = false;
 			if(member!=null) {
 				//비밀번호 일치 여부 체크
-				check = member.ischeckedPassword(
-						memberVO.getMem_passwd());
+				check = passwordEncoder.matches(memberVO.getMem_passwd(), member.getMem_passwd());
+				
+				log.debug("<<check : >>" + check);
 			}
 			if(check) {//인증 성공
 				//==== 자동로그인 체크 시작====//
@@ -132,11 +136,9 @@ public class MemberController {
 				log.debug("<<auth>> : " + member.getMem_auth());
 				log.debug("<<au_id>> : " + member.getMem_auth());	
 
-				if(member.getMem_auth() == 9) {//관리자
-					return "redirect:/main/admin";
-				}else {
-					return "redirect:/main/main";
-				}
+				
+				return "redirect:/main/main";
+				
 			}
 
 
