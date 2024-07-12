@@ -35,7 +35,7 @@ public class CartController {
 	/*=========================
 	 * 장바구니에 넣기
 	 *=========================*/
-	@GetMapping("cart/cart")
+	@GetMapping("/item/item_detail")
 	public String submit(@Valid CartVO cartVO,
 			BindingResult result,
 			HttpServletRequest request,
