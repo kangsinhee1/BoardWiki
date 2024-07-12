@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 <h2 class="big-name">${item.item_name}</h2>
 <div>
@@ -26,7 +27,10 @@
 					<p>평점:${item.item_average}점</p>
 					<p>재고:${item.item_stock}개</p>
 					<button>바로구매</button>
-					<button>장바구니</button>
+					<form:form modelAttribute="cartVO" method="post" action="${pageContext.request.contextPath}/item/item_detail">
+                        <form:hidden path="item_num" value="${item.item_num}" />
+                        <button type="button" onclick="this.form.submit()">장바구니</button>
+                    </form:form>
 				</div>
 			</div>
 		</div>

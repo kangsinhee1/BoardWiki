@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -43,14 +44,14 @@ public class ItemController {
 	//인기 게임
 	@GetMapping("/item/item_main")
 	public String getList(@RequestParam(defaultValue="1") int pageNum,
-                          @RequestParam(defaultValue="1") int order,
-                          @RequestParam(defaultValue="") String category,
-                          String keyfield,
-                          String keyword,Model model) {
+			@RequestParam(defaultValue="1") int order,
+			@RequestParam(defaultValue="") String category,
+			String keyfield,
+			String keyword,Model model) {
 		log.debug("<<게임 목록 - category>> : "+category);
 		log.debug("<<게임 목록 - order>> : "+order);
-		
-        Map<String,Object> map = new HashMap<String,Object>();
+
+		Map<String,Object> map = new HashMap<String,Object>();
 
 		map.put("category", category);
 		map.put("keyfield", keyfield);
@@ -60,46 +61,46 @@ public class ItemController {
 		int count = itemService.selectRowCount(map);
 
 		//페이지 처리
-	    PagingUtil page =
+		PagingUtil page =
 				new PagingUtil(keyfield,keyword,pageNum,
 						count,20,10,"list",
 						"&category="+category+"&order="+order);
-	    
-	    //////////////////////////
-	    List<ItemVO> list = null;
-	    if(count > 0) {
+
+		//////////////////////////
+		List<ItemVO> list = null;
+		if(count > 0) {
 			map.put("order", order);
 			map.put("start", page.getStartRow());
 			map.put("end", page.getEndRow());
 
 			list = itemService.selectList(map);
 		}
-	    List<ItemVO> list2 = null;
-	    if(count > 0) {
+		List<ItemVO> list2 = null;
+		if(count > 0) {
 			map.put("order", order);
 			map.put("start", page.getStartRow());
 			map.put("end", page.getEndRow());
 
 			list2 = itemService.selectList2(map);
 		}
-	    List<ItemVO> list3 = null;
-	    if(count > 0) {
+		List<ItemVO> list3 = null;
+		if(count > 0) {
 			map.put("order", order);
 			map.put("start", page.getStartRow());
 			map.put("end", page.getEndRow());
 
 			list3 = itemService.selectList3(map);
 		}
-	    List<ItemVO> list4 = null;
-	    if(count > 0) {
-	    	map.put("order", order);
-	    	map.put("start", page.getStartRow());
-	    	map.put("end", page.getEndRow());
-	    	
-	    	list4 = itemService.selectListByItemGenre(map);  
-	    }
+		List<ItemVO> list4 = null;
+		if(count > 0) {
+			map.put("order", order);
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
 
-	    model.addAttribute("count", count);
+			list4 = itemService.selectListByItemGenre(map);  
+		}
+
+		model.addAttribute("count", count);
 		model.addAttribute("list", list);
 		model.addAttribute("list2", list2);
 		model.addAttribute("list3", list3);
@@ -114,38 +115,37 @@ public class ItemController {
 	@GetMapping("/item/item_detail")
 	public ModelAndView process(Long item_num,Model model) {
 		log.debug("<<게임 상세 - item_num>> : "+item_num);
-		
+
 		ItemVO item = itemService.selectItem(item_num);
-		
+
 		Long mintime = (item.getMin_time() / 60);
 		Long maxtime = (item.getMax_time() / 60);
-		
+
 		model.addAttribute("mintime",mintime);
 		model.addAttribute("maxtime",maxtime);
-		
+
 		return new ModelAndView("item_detail","item",item); 
 	}
-	/*public String submit(@Valid CartVO cartVO,
+	@PostMapping("/item/item_detail")
+	public String submit(@Valid CartVO cartVO,
 			BindingResult result,
 			HttpServletRequest request,
 			HttpSession session,
-			Model model)
-					throws IllegalStateException,
-					IOException{
+			Model model) throws IllegalStateException, IOException {
 		log.debug("<<장바구니 생성>> : " + cartVO);
 
-		if(result.hasErrors()) {
-			return "/item/item_detail";
+		if (result.hasErrors()) {
+			return "item_detail";
 		}
 
-		CartVO vo = (CartVO)session.getAttribute("cart");
+		CartVO vo = (CartVO) session.getAttribute("cart");
 		cartVO.setItem_num(vo.getItem_num());
 
-		model.addAttribute("message","상품이 장바구니에 추가되었습니다.");
-		model.addAttribute("url",request.getContextPath()+"/item/item_detail");
+		model.addAttribute("message", "상품이 장바구니에 추가되었습니다.");
+		model.addAttribute("url", request.getContextPath() + "/item/item_detail");
 
 		return "common/resultAlert";
-	}*/
+	}
 }
 
 
