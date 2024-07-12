@@ -35,7 +35,7 @@ public class CartController {
 	/*=========================
 	 * 장바구니에 넣기
 	 *=========================*/
-	@GetMapping("/item/item_detail")
+	/*@GetMapping("/item/item_detail")
 	public String submit(@Valid CartVO cartVO,
 			BindingResult result,
 			HttpServletRequest request,
@@ -56,5 +56,5 @@ public class CartController {
 		model.addAttribute("url",request.getContextPath()+"/board/list");
 
 		return "common/resultAlert";
-	}
+	}*/
 }
