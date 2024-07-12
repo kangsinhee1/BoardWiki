@@ -51,7 +51,7 @@
 		                console.error( error );
 		            } );
 			    </script> 
-			</li>
+			</li>  
 			<li>
 				<form:label path="upload">파일업로드</form:label>
 				<input type="file" name="upload" id="upload">
