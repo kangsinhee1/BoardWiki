@@ -10,7 +10,8 @@
 	 	   mem_email,
 	 	   mem_auth,
 	 	   mem_nickname,
-	 	   mem_passwd
+	 	   mem_passwd,
+	 	   mem_provider
 	 	FROM member LEFT OUTER JOIN member_detail
 	 	USING (mem_num)
 	 	WHERE mem_email = #{mem_email}

@@ -24,6 +24,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 
 import kr.spring.member.service.MemberService;
@@ -187,7 +189,7 @@ public class MemberController {
 			@RequestParam Map<String,Object> paramMap,
 			@RequestParam String code,
 			@RequestParam String state,
-			HttpSession session) throws IOException {
+			HttpSession session, HttpServletRequest request) throws IOException {
 
 		log.info("callbackNaver");
 
@@ -228,6 +230,16 @@ public class MemberController {
 		    log.debug("<<memberVO>> : " + memberVO);
 		    
 			return formMemberNaverRegister(); // 회원가입 폼으로 리다이렉트
+		}
+		if(!result.getMem_provider().equals("Naver")) {
+			//UI 메시지 처리
+			model.addAttribute("accessTitle", "로그인 오류");
+			model.addAttribute("accessMsg", "회원님의 이메일로 가입된 다른 계정이 있습니다.");
+			model.addAttribute("accessBtn", "확인");
+			model.addAttribute("accessUrl", 
+					request.getContextPath()+"/member/login");
+
+			return "common/resultView";
 		}
 		//
 		MemberVO member = memberService.selectCheckMember(naver_email);
@@ -276,39 +288,41 @@ public class MemberController {
 			@RequestParam Map<String,Object> paramMap,
 			@RequestParam String code,
 			@RequestParam String state,
-			HttpSession session) throws IOException {
+			HttpSession session, HttpServletRequest request) throws IOException {
 
 		log.info("callbackKakao");
 
 		log.debug("paramMap:" + paramMap);
 
-		// 네이버 OAuth Access Token 획득
-		OAuth2AccessToken oauthToken = naverLoginUtil.getAccessToken(session, code, state);
+		// 카카오 OAuth Access Token 획득
+		OAuth2AccessToken oauthToken = kakaoLoginUtil.getAccessToken(session, code, state);
 
-		// 네이버 API를 통해 사용자 프로필 정보 읽어오기
-		String apiResult = naverLoginUtil.getUserProfile(oauthToken);
+		// 카카오 API를 통해 사용자 프로필 정보 읽어오기
+		String apiResult = kakaoLoginUtil.getUserProfile(oauthToken);
 		log.debug("apiResult : " + apiResult);
 
-		// JSON 형식의 응답을 파싱하여 필요한 정보 추출
-		JSONObject responseJson = new JSONObject(apiResult);
-		JSONObject jsonResponse = responseJson.getJSONObject("response");
+		// JSON 응답 파싱
+	    JSONObject jsonObject = new JSONObject(apiResult);
 
-		String naver_name = jsonResponse.getString("name");
-		String naver_email = jsonResponse.getString("email");
-		String naver_passwd = jsonResponse.getString("id");
+	    // 필요한 정보 추출
+	    String kakao_email = jsonObject.optJSONObject("kakao_account").optString("email", null);
+	    String kakao_nickname = jsonObject.optJSONObject("kakao_account").optJSONObject("profile").optString("nickname", null);
+	    String kakao_passwd = jsonObject.optString("id", null);
+
+		
+		log.debug("<<kakao_email>> : " +  kakao_email);
+		log.debug("<<kakao_nickname>> : " +  kakao_nickname);
+		log.debug("<<pwd>> : " +  kakao_passwd);
 		
 
-		log.debug("<<name>> : " + naver_name);
-		log.debug("<<email>> : " + naver_email);
-		log.debug("<<pwd>> : " + naver_passwd);
-
 		// 이메일 중복 체크
-		MemberVO result = memberService.isemailCheck(naver_email);
+		MemberVO result = memberService.selectCheckMember(kakao_email);
 
 		if(result == null) { // 네이버 메일로 조회해서 일치하는 정보가 없는 경우 회원가입
-		    memberVO.setMem_name(naver_name);
-		    memberVO.setMem_email(naver_email);
-		    memberVO.setMem_passwd(naver_passwd);
+		    
+		    memberVO.setMem_email(kakao_email);
+		    memberVO.setMem_passwd(kakao_passwd);
+		    memberVO.setMem_nickName(kakao_nickname);
 		    memberVO.setMem_provider("Kakao");
 		    
 		    model.addAttribute("memberVO", memberVO);
@@ -318,8 +332,19 @@ public class MemberController {
 		    
 			return formMemberNaverRegister(); // 회원가입 폼으로 리다이렉트
 		}
+		
+		if(!result.getMem_provider().equals("Kakao")) {
+			//UI 메시지 처리
+			model.addAttribute("accessTitle", "로그인 오류");
+			model.addAttribute("accessMsg", "회원님의 이메일로 가입된 다른 계정이 있습니다.");
+			model.addAttribute("accessBtn", "확인");
+			model.addAttribute("accessUrl", 
+					request.getContextPath()+"/member/login");
+
+			return "common/resultView";
+		}
 		//
-		MemberVO member = memberService.selectCheckMember(naver_email);
+		MemberVO member = memberService.selectCheckMember(kakao_email);
 		session.setAttribute("user", member);
 
 		log.debug("<<인증 성공>>");
