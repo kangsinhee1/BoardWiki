@@ -2,50 +2,50 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- 상단 시작 -->
-<div class="container">
-	<div class="row">
-		<div class="dropdown">
-		  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		    게임
-		  </button>
-		  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-		    <a class="dropdown-item" href="${pageContext.request.contextPath}/item/item_main">게임 메인</a>
-		    <a class="dropdown-item" href="${pageContext.request.contextPath}/rent/list">게임 대여</a>
-		    <a class="dropdown-item" href="${pageContext.request.contextPath}/rulebook/rulebookList">룰북</a>
-		  </div>
-		</div>
-		<div class="dropdown">
-		  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		    커뮤니티
-		  </button>
-		  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-		    <a class="dropdown-item" href="${pageContext.request.contextPath}/board/list?boa_category=1">자유게시판</a>
-		    <a class="dropdown-item" href="${pageContext.request.contextPath}/board/list?boa_category=2">팁게시판	</a>
-		    <a class="dropdown-item" href="${pageContext.request.contextPath}/board/list?boa_category=3">후기게시판</a>
-		    <a class="dropdown-item" href="${pageContext.request.contextPath}/team/teamList">모임게시판</a>
-		    <a class="dropdown-item" href="${pageContext.request.contextPath}/used/usedList">중고게시판</a>
-		  </div>
-		</div>
-		<div class="dropdown">
-		  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		    공지
-		  </button>
-		  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-		    <a class="dropdown-item" href="${pageContext.request.contextPath}/board/list?boa_category=4">공지</a>
-		    <a class="dropdown-item" href="${pageContext.request.contextPath}/board/list?boa_category=5">QnA</a>
-		  </div>
-		</div>
-		<div class="dropdown">
-		  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		    스트리밍
-		  </button>
-		  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-		    <a class="dropdown-item" href="#">실시간 보드게임</a>
-		    <a class="dropdown-item" href="#">스트리밍</a>
-		  </div>
-		</div>
-	</div>
+<input type="hidden" name="keyfield" id="keyfield"value="1">
+<input type="hidden" name="order" id="order"value="1">
+<div id="button-group">
+	<button type="button" class="btn btn-success" value="격투">격투</button>
+	<button type="button" class="btn btn-success" value="경제">경제</button>
+	<button type="button" class="btn btn-success" value="고대">고대</button>
+	<button type="button" class="btn btn-success" value="도시 건설">도시 건설</button>
+	<button type="button" class="btn btn-success" value="공포">공포</button>
+	<button type="button" class="btn btn-success" value="교육">교육</button>
+	<button type="button" class="btn btn-success" value="동물">동물</button>
+	<button type="button" class="btn btn-success" value="모험">모험</button>
+	<button type="button" class="btn btn-success" value="문명">문명</button>
+	<button type="button" class="btn btn-success" value="미국 서부">미국 서부</button>
+	<button type="button" class="btn btn-success" value="미니어처">미니어처</button>
+	<button type="button" class="btn btn-success" value="산업/제조">산업/제조</button>
+	<button type="button" class="btn btn-success" value="소설 기반">소설 기반</button>
+	<button type="button" class="btn btn-success" value="수집품">수집품</button>
+	<button type="button" class="btn btn-success" value="신화">신화</button>
+	<button type="button" class="btn btn-success" value="여행">여행</button>
+	<button type="button" class="btn btn-success" value="영토 건설">영토 건설</button>
+	<button type="button" class="btn btn-success" value="영화">영화</button>
+	<button type="button" class="btn btn-success" value="우주 탐험">우주 탐험</button>
+	<button type="button" class="btn btn-success" value="운송">운송</button>
+	<button type="button" class="btn btn-success" value="전쟁 게임">전쟁 게임</button>
+	<button type="button" class="btn btn-success" value="정치">정치</button>
+	<button type="button" class="btn btn-success" value="중세">중세</button>
+	<button type="button" class="btn btn-success" value="추리">추리</button>
+	<button type="button" class="btn btn-success" value="카드게임">카드게임</button>
+	<button type="button" class="btn btn-success" value="판타지">판타지</button>
+	<button type="button" class="btn btn-success" value="파이터">파이터</button>
+	<button type="button" class="btn btn-success" value="퍼즐">퍼즐</button>
+	<button type="button" class="btn btn-success" value="항해">항해</button>
+	<button type="button" class="btn btn-success" value="현대전">현대전</button>
+	<button type="button" class="btn btn-success" value="협상">협상</button>
+	<button type="button" class="btn btn-success" value="SF">SF</button>
 </div>
+			<script type="text/javascript">
+				$('.btn-success').click(function(){
+					location.href='item_main?keyfield='
+							         +$('#keyfield').val()+'&keyword='
+							         +$('.btn-success').val()+'&order='
+							         +$('#order').val();
+				});
+			</script>
 <!-- 상단 끝 -->
 
 

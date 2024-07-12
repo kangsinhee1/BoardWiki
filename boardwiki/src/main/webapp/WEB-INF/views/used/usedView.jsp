@@ -21,10 +21,10 @@
 			</c:if>
 		</li>
 		<li>
-			제품 : ${used.item_name};
+			제품 : ${used.item_name}
 		</li>
 		<li>
-			가격 : ${used.use_price };
+			가격 : ${used.use_price }
 		</li>
 	</ul>
 	<c:if test="${!empty used.use_photo}">
@@ -39,8 +39,10 @@
 	<hr size="1" width="100%">
 	<div class="align-right">
 		<c:if test="${!empty user && user.mem_num == used.mem_num}">
+		<c:if test="${used.use_check!=3 }">
 		<input type="button" value="수정"
 		   onclick="location.href='usedUpdate?use_num=${used.use_num}'">
+		</c:if>
 		<input type="button" value="삭제" id="delete_btn">
 		<input type="button" value="목록" class="default-btn" onclick="location.href='usedList'">
 		<script>

@@ -18,7 +18,7 @@ import lombok.ToString;
 @ToString
 public class UsedItemVO {
 	private long use_num;
-	private long mem_num;
+	private long mem_num;  
 	private long item_num;
 	
 	@NotBlank

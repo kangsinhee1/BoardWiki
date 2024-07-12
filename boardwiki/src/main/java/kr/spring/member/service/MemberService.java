@@ -6,5 +6,4 @@ public interface MemberService {
 	public void insertMember(MemberVO memberVO);
 	public MemberVO selectCheckMember(String mem_email);
 	public MemberVO selectMember(Long mem_num);
-	public MemberVO isemailCheck(String mem_email);
 }

@@ -38,7 +38,8 @@ public class ItemController {
 	public String getList(@RequestParam(defaultValue="1") int pageNum,
                           @RequestParam(defaultValue="1") int order,
                           @RequestParam(defaultValue="") String category,
-                          String keyfield,String keyword,Model model) {
+                          String keyfield,
+                          String keyword,Model model) {
 		log.debug("<<게임 목록 - category>> : "+category);
 		log.debug("<<게임 목록 - order>> : "+order);
 		
@@ -82,11 +83,20 @@ public class ItemController {
 
 			list3 = itemService.selectList3(map);
 		}
+	    List<ItemVO> list4 = null;
+	    if(count > 0) {
+	    	map.put("order", order);
+	    	map.put("start", page.getStartRow());
+	    	map.put("end", page.getEndRow());
+	    	
+	    	list4 = itemService.selectListByItemGenre(map);  
+	    }
 
 	    model.addAttribute("count", count);
 		model.addAttribute("list", list);
 		model.addAttribute("list2", list2);
 		model.addAttribute("list3", list3);
+		model.addAttribute("list4", list4);
 		model.addAttribute("page", page.getPage());
 
 		return "item_main";

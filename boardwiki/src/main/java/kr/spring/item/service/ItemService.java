@@ -7,6 +7,7 @@ import kr.spring.item.vo.ItemVO;
 
 public interface ItemService {
 	public List<ItemVO> selectListByKeyword(Map<String,Object> map);
+	public List<ItemVO> selectListByItemGenre(Map<String,Object> map);
 	public List<ItemVO> selectList(Map<String,Object> map);
 	public List<ItemVO> selectList2(Map<String,Object> map);
 	public List<ItemVO> selectList3(Map<String,Object> map);

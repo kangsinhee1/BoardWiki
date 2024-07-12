@@ -11,14 +11,14 @@
 	    	<a href="${pageContext.request.contextPath}/member/memberRegister">보드위키</a>
 	    </div>
 	    <div>
-	    	<img src="${pageContext.request.contextPath}/images/Naver.png" onclick="location.href='${naverUrl}'">
+	    	<img src="${pageContext.request.contextPath}/images/Naver.png" onclick="location.href='/member/login/naver'">
 	    </div>
 	    <div>
 	    	<img src="${pageContext.request.contextPath}/images/Google.png" onclick="location.href='${GoogleUrl}'">
 	    </div>   
 	    <div>
-	    	<img src="${pageContext.request.contextPath}/images/Kakao.png" onclick="location.href='${KakaoUrl}'">
-	    </div>                           
+	    	<img src="${pageContext.request.contextPath}/images/Kakao.png" onclick="location.href='/member/login/kakao'">
+	    </div>                    
 	</form:form>
 	<p class="align-center">
 		<input type="button" value="홈으로"
