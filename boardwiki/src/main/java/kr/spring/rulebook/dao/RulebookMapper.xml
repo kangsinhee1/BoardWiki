@@ -12,7 +12,7 @@
 	 	</where>
 	 </sql>
 	 
-	 <!-- 게시판 글 총레코드수/검색레코드수 -->
+	 <!-- 룰북  총레코드수/검색레코드수 -->
 	 <select id="selectRulebookRowCount" parameterType="map"
 									resultType="integer">
 		SELECT
@@ -20,9 +20,9 @@
 		FROM rulebook JOIN member USING (mem_num)
 		<include refid="rulebookSearch"></include>	 
 	 </select>
-	 <!-- 게시판 전체 목록/검색 목록 -->
+	 <!-- 룰북 전체 목록/검색 목록 -->
 	 <select id="selectRulebookList" parameterType="map"
-	 							resultType="boardVO">
+	 							resultType="rulebookVO">
 	 	SELECT
 	 	   *
 	 	FROM (SELECT
@@ -33,13 +33,24 @@
 	 		   		 FROM rulebook
 	 		   		 JOIN member USING(mem_num)
 	 		   		 JOIN member_detail USING(mem_num)
+	 		   		 JOIN item USING(item_num)
 	 		   		 <include refid="rulebookSearch"></include>
 	 		   		 )a)
 		<![CDATA[
 		WHERE rnum >= #{start} AND rnum <= #{end}
 		]]>
 	</select>
-	 <!-- 글쓰기 -->
+	<!-- 룰북 선택 -->
+	 <select id="selectrulebook" parameterType="map" resultType="rulebookVO">
+	 	SELECT
+	 		 * 
+	 	 FROM rulebook
+	 	 JOIN member USING(mem_num) 
+	 	 LEFT OUTER JOIN member_detail USING(mem_num)
+	 	 LEFT OUTER JOIN item USING(item_num) 
+	 	 WHERE rulB_num=#{rulB_num}
+	 </select>
+	 <!-- 룰북 등록 -->
 	 <insert id="insertRulebook" parameterType="rulebookVO">
 	 	INSERT INTO rulebook(
 	 	  rulB_num,

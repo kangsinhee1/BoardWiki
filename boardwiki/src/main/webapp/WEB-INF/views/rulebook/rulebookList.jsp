@@ -31,14 +31,14 @@
 	<table class="striped-table">
 		<tr>
 			<th>번호</th>
-			<th width="400">제목</th>
-			<th>작성일</th>
+			<th width="400">이름</th>
+			<th>등록일</th>
 		</tr>
 		<c:forEach var="rulebook" items="${list}">
 		<tr>
 			<td class="align-center">${rulebook.rulB_num}</td>
-			<td class="align-left"><a href="detail?rulB_num=${rulebook.rulB_num}">${rulB.item_name}</a></td>
-			<td class="align-center">${rulbook.rulB_rdate}</td>
+			<td class="align-left"><a href="rulebookDetail?rulB_num=${rulebook.rulB_num}">${rulebook.item_name}</a></td>
+			<td class="align-center">${rulebook.rulB_rdate}</td>
 		</tr>
 		</c:forEach>
 	</table>

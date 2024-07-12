@@ -13,11 +13,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
+import kr.spring.board.vo.BoardVO;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.rulebook.service.RulebookService;
 import kr.spring.rulebook.vo.RulebookVO;
@@ -39,7 +42,18 @@ public class RulebookController {
 	 *  룰북 글쓰기
 	 *====================*/
 	@GetMapping("/rulebook/rulebookWrite")
-	public String insertrulebook() {
+	public String insertrulebook(HttpServletRequest request,
+			 HttpSession session,
+			 Model model) {
+		MemberVO member =(MemberVO)session.getAttribute("user");
+		if(member== null) {
+			model.addAttribute("message", "로그인후 작성 가능합니다.");
+			model.addAttribute("url", 
+			request.getContextPath()+"/rulebook/rulebookList");
+			return "common/resultAlert";
+			
+		}
+		model.addAttribute("member", member);
 		return "rulebookWrite";
 	}
 	@PostMapping("/rulebook/rulebookWrite")
@@ -53,7 +67,11 @@ public class RulebookController {
 		log.debug("<<게시판 글 저장>> : " + rulebookVO);
 		
 		if(result.hasErrors()) {
-			return insertrulebook();
+			for(FieldError f : result.getFieldErrors()) {
+				log.debug("에러 필드 : " + f.getField());
+			}
+			log.debug("안됨");
+			return insertrulebook(request, session, model);
 		}
 		
 		MemberVO vo = (MemberVO)session.getAttribute("user");
@@ -99,5 +117,28 @@ public class RulebookController {
 		model.addAttribute("page", page.getPage());
 			
 		return "rulebookList";
+	}
+	/*====================
+	 *  룰북 상세
+	 *====================*/
+	@GetMapping("/rulebook/rulebookDetail")
+	public ModelAndView process(long rulB_num) {
+		
+		RulebookVO rulebook = rulebookService.selectRulebook(rulB_num);
+		
+		return new ModelAndView("rulebookView","rulebook",rulebook);
+	}
+	//파일 다운로드
+	@GetMapping("/rulebook/file")
+	public String download(long rulB_num,HttpServletRequest request, Model model) {
+		RulebookVO rulebook = rulebookService.selectRulebook(rulB_num);
+		byte[] downloadFile = 
+				FileUtil.getBytes(request.getServletContext().getRealPath(
+											"/upload")+"/"+rulebook.getRulB_filename());
+		
+		model.addAttribute("downloadFile", downloadFile);
+		model.addAttribute("rulB_filename", rulebook.getRulB_filename());
+		
+		return "downloadView";
 	}
 }

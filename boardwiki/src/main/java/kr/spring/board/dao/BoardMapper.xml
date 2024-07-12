@@ -78,6 +78,7 @@
 	 		   FROM (SELECT
 	 		   			*
 	 		   		 FROM board
+	 		   		 LEFT OUTER JOIN (SELECT COUNT(*) re_cnt, boa_num FROM board_reply GROUP BY boa_num) USING(boa_num)
 	 		   		 LEFT OUTER JOIN (SELECT COUNT(*) fav_cnt, boa_num FROM board_fav GROUP BY boa_num) USING(boa_num)
 	 		   		 JOIN member USING(mem_num)
 	 		   		 JOIN member_detail USING(mem_num)

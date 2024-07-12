@@ -183,5 +183,32 @@ div#mre_second input{
 	cursor:pointer;
 }
 
+.modal{
+	position:absolute;
+	z-index:5;
+	background:white;
+	left:37%;
+	top:30%;
+	width:500px;
+	margin-bottom:8px !important;
+	padding-bottom:15px;
+	border-radius:15px;
+	border:1px solid #ccc;
+	
+}
 
+.booksh{
+	border:none;
+	margin-bottom:8px;
+}
+.hide {
+	display:none; 
+	width:600px !important;
+	position:fixed;
+	z-index:999 !important;
+	bottom:400px;
+	margin-bottom:400px;
+	border:1px solid #999 !important;
+	background:white;
+}
 

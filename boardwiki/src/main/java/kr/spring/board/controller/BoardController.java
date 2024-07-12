@@ -61,7 +61,7 @@ public class BoardController {
 		MemberVO vo = (MemberVO)session.getAttribute("user");
 		boardVO.setMem_num(vo.getMem_num());
 		
-		boardVO.setBoa_file(FileUtil.createFile(request, boardVO.getUpload()));
+		boardVO.setFilename(FileUtil.createFile(request, boardVO.getBoa_upload()));
 		boardService.insertBoard(boardVO);
 		
 		model.addAttribute("message","성공적으로 글이 등록되었습니다.");
@@ -129,10 +129,10 @@ public class BoardController {
 		BoardVO board = boardService.selectBoard(boa_num);
 		byte[] downloadFile = 
 				FileUtil.getBytes(request.getServletContext().getRealPath(
-											"/upload")+"/"+board.getBoa_file());
+											"/upload")+"/"+board.getFilename());
 		
 		model.addAttribute("downloadFile", downloadFile);
-		model.addAttribute("boa_file", board.getBoa_file());
+		model.addAttribute("boa_file", board.getFilename());
 		
 		return "downloadView";
 	}
@@ -155,17 +155,17 @@ public class BoardController {
 		
 		if(result.hasErrors()) {
 			BoardVO vo = boardService.selectBoard(boardVO.getBoa_num());
-			boardVO.setBoa_file(vo.getBoa_file());
+			boardVO.setFilename(vo.getFilename());
 			return "boardModify";
 		}
 		
 		BoardVO db_board = boardService.selectBoard( boardVO.getBoa_num());
-		boardVO.setBoa_file(FileUtil.createFile(request, boardVO.getUpload()));
+		boardVO.setFilename(FileUtil.createFile(request, boardVO.getBoa_upload()));
 		
 		boardService.updateBoard(boardVO);
 		
-		if(boardVO.getUpload() != null && !boardVO.getUpload().isEmpty()) {
-			FileUtil.removeFile(request, db_board.getBoa_file());
+		if(boardVO.getBoa_upload() != null && !boardVO.getBoa_upload().isEmpty()) {
+			FileUtil.removeFile(request, db_board.getFilename());
 		}
 		
 		model.addAttribute("message", "글 수정 완료!!");
@@ -187,8 +187,8 @@ public class BoardController {
 		
 		boardService.deleteBoard(boa_num);
 		
-		if(db_board.getBoa_file()!=null) {
-			FileUtil.removeFile(request, db_board.getBoa_file());
+		if(db_board.getFilename()!=null) {
+			FileUtil.removeFile(request, db_board.getFilename());
 		}
 		
 		return "redirect:/board/list";

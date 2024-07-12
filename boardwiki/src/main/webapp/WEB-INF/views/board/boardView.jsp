@@ -23,9 +23,9 @@
 			조회 : ${board.boa_hit}
 		</li>
 	</ul>
-	<c:if test="${!empty board.boa_file}">
+	<c:if test="${!empty board.filename}">
 	<ul>
-		<li>첨부파일 : <a href="file?boa_num=${board.boa_num}">${board.boa_file}</a></li>
+		<li>첨부파일 : <a href="file?boa_num=${board.boa_num}">${board.filename}</a></li>
 	</ul>
 	</c:if>
 	<div class="detail-content">

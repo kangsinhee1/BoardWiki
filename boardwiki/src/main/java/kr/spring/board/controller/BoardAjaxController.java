@@ -122,7 +122,7 @@ public class BoardAjaxController {
 			}else {
 				//일치
 				boardService.deleteFile(boa_num);
-				FileUtil.removeFile(request, db_board.getBoa_file());
+				FileUtil.removeFile(request, db_board.getFilename());
 				
 				mapJson.put("result", "success");
 			}

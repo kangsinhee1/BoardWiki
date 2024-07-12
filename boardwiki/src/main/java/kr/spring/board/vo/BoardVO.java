@@ -27,8 +27,8 @@ public class BoardVO {
 	private Date boa_rdate;
 	private Date boa_mdate;
 	private int boa_auth;
-	private MultipartFile upload; 
-	private String boa_file;
+	private MultipartFile boa_upload; 
+	private String filename;
 	
 	private String mem_email;				
 	private String mem_nickname;		

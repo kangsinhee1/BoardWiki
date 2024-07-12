@@ -23,4 +23,6 @@ public class RulebookVO {
 	private String rulB_filename;
 	private Date rulB_rdate;
 	private Date rulB_mdate;
+	
+	private String item_name;
 }
