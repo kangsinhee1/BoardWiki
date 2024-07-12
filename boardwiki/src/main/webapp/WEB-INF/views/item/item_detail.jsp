@@ -27,7 +27,7 @@
 					<p>평점:${item.item_average}점</p>
 					<p>재고:${item.item_stock}개</p>
 					<button>바로구매</button>
-					<button>장바구니</button>
+					<button id="cart_button" data-num="${cart.mem_num}">장바구니</button>
 				</div>
 			</div>
 		</div>
