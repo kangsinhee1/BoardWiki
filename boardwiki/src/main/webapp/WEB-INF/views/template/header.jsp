@@ -47,8 +47,17 @@
 		    스트리밍
 		  </button>
 		  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-		    <a class="dropdown-item" href="#">실시간 보드게임</a>
+		    <a class="dropdown-item" href="${pageContext.request.contextPath}/pointgame/list">실시간 보드게임</a>
 		    <a class="dropdown-item" href="#">스트리밍</a>
+		  </div>
+		</div>
+		<div class="dropdown">
+		  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		    대회/이벤트
+		  </button>
+		  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+		    <a class="dropdown-item" href="#">대회</a>
+		    <a class="dropdown-item" href="#">이벤트</a>
 		  </div>
 		</div>
 	</div>

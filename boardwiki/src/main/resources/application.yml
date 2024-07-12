@@ -18,7 +18,7 @@ spring:
       max-lifetime: 1800000
       
   messages:
-    basename: hjw.properties,ksh.properties,kts.properties,ljy.properties,psk.properties,ysb.properties,ysw.properties
+    basename: messages.hjw,messages.ksh,messages.kts,messages.ljy,messages.psk,messages.ysb,messages.ysw
     encoding: UTF-8
     
   devtools:

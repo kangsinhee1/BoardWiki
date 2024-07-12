@@ -2,6 +2,9 @@ package kr.spring.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
@@ -15,33 +18,33 @@ import kr.spring.util.NaverLoginUtil;
 @Configuration
 public class AppConfig implements WebMvcConfigurer{
 	private LoginCheckInterceptor loginCheck;
-	
+
 	@Bean
 	public LoginCheckInterceptor interceptor2() {
 		loginCheck = new LoginCheckInterceptor();
 		return loginCheck;
 	}
-	
+
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		//LoginCheckInterceptor 설정
 		registry.addInterceptor(loginCheck)
-		        .addPathPatterns("/member/myPage")
-		        .addPathPatterns("/member/update")
-		        .addPathPatterns("/member/chagePassword")
-		        .addPathPatterns("/member/delete")
-		        .addPathPatterns("/board/write")
-		        .addPathPatterns("/board/update")
-		        .addPathPatterns("/board/delete")
-		        .addPathPatterns("/rent/rent")
-		        .addPathPatterns("/rent/list")
-		       ;
+		.addPathPatterns("/member/myPage")
+		.addPathPatterns("/member/update")
+		.addPathPatterns("/member/chagePassword")
+		.addPathPatterns("/member/delete")
+		.addPathPatterns("/board/write")
+		.addPathPatterns("/board/update")
+		.addPathPatterns("/board/delete")
+		.addPathPatterns("/rent/rent")
+		.addPathPatterns("/rent/list")
+		;
 	}
-	
+
 	@Bean
 	public TilesConfigurer tilesConfigurer() {
 		final TilesConfigurer configurer = 
-				                  new TilesConfigurer();
+				new TilesConfigurer();
 		//XML 설정 파일 경로 지정
 		configurer.setDefinitions(new String[] {
 				"/WEB-INF/tiles-def/main.xml",
@@ -59,9 +62,16 @@ public class AppConfig implements WebMvcConfigurer{
 	@Bean
 	public TilesViewResolver tilesViewResolver() {
 		final TilesViewResolver tilesViewResolver = 
-				                  new TilesViewResolver();
+				new TilesViewResolver();
 		tilesViewResolver.setViewClass(TilesView.class);
 		return tilesViewResolver;
+	}
+	@Configuration
+	public class CommonConfig {
+		@Bean
+		public PasswordEncoder passwordEncoder() {
+			return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+		}
 	}
 }
 

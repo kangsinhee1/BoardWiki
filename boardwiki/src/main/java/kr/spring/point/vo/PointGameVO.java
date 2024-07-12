@@ -1,6 +1,7 @@
 package kr.spring.point.vo;
 
 import java.sql.Date;
+import java.util.List;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -31,4 +32,7 @@ public class PointGameVO {
 	
 	//조건 체크용
 	private int poi_ck;//조건체크
+	
+	private List<PointGameVO> options;
+
 }

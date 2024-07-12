@@ -20,10 +20,11 @@
 		<put-attribute name="body" value="/WEB-INF/views/member/myWrite.jsp"/>
 	</definition>
 	<!-- AdminPage -->
-	<definition name="adminPage" template="/WEB-INF/views/template/layout_adminpage.jsp">
+	<definition name="adminPage" extends="myPage">
 		<put-attribute name="title" value="adminpage"/>
-		<put-attribute name="header" value="/WEB-INF/views/template/header.jsp"/>
+		<put-attribute name="css" value="/WEB-INF/views/adminPage/adminCSS.jsp"/>
 		<put-attribute name="top-header" value="/WEB-INF/views/template/top-header.jsp"/>
+		<put-attribute name="header" value="/WEB-INF/views/template/header.jsp"/>
 		<put-attribute name="nav" value="/WEB-INF/views/adminPage/side-nav.jsp"/>
 		<put-attribute name="body" value="/WEB-INF/views/adminPage/adminPageMain.jsp"/>
 		<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp"/>

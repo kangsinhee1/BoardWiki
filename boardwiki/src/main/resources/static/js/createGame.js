@@ -26,12 +26,17 @@ $(document).ready(function() {
             contentType: 'application/json',
             data: JSON.stringify(formData),
             success: function(response) {
-                alert('Game created successfully!');
-                window.location.href = '/game/list';
+                if (response.result == "logout") {
+                    alert('로그인 필요');
+                } else {
+                    alert('게임 생성');
+                    window.location.href = '/pointgame/list';
+                }
             },
             error: function(error) {
-                alert('Error creating game!');
+                alert('게임 생성 에러');
             }
         });
     });
 });
+

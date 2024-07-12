@@ -2,6 +2,8 @@ package kr.spring.member.vo;
 
 import java.sql.Date;
 
+import javax.validation.constraints.Pattern;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -16,6 +18,7 @@ public class MemberVO {
 	
 	private String mem_name;
 	private String mem_nickName;
+	@Pattern(regexp="^[A-Za-z0-9]{4,12}$")
 	private String mem_passwd;
 	private String mem_phone;
 	private String mem_provider;

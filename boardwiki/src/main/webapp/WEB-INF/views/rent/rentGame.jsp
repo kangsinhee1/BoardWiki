@@ -53,6 +53,7 @@ $(function() {
     <div class="form-container">
         <h2>보드게임 대여</h2>
         <form:form action="rent" id="rent_register" modelAttribute="rentVO">
+        	<form:hidden path="item_num"/>
             <div class="form-group">
                 <form:label path="rent_sdate">대여 시작일:</form:label>
                 <form:input path="rent_sdate" id="rent_sdate"/>
@@ -64,7 +65,7 @@ $(function() {
                 <form:errors path="rent_edate" cssClass="error-color"/>
             </div>
             <div class="form-group">
-                <label for="rent_period">대여일 수:</label>
+                <label for="rent_period">대여 기간:</label>
                 <input type="number" id="rent_period" name="rent_period" min="1" max="10" required/>
             </div>
             <div class="align-center">

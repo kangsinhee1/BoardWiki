@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.member.vo.MemberVO;
-import kr.spring.team.vo.TeamVO;
 import kr.spring.used.service.UsedService;
 import kr.spring.used.vo.UsedItemVO;
 import kr.spring.util.FileUtil;

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import kr.spring.member.vo.MemberVO;
 import kr.spring.point.service.PointService;
@@ -78,23 +79,95 @@ public class Pointcontroller {
     }
 	
 	@GetMapping("/pointgame/list")
-    public String gameListPage(Model model) {
-        List<PointVO> games = pointService.selectPointGameList(null); // Adjust as necessary
-        model.addAttribute("games", games);
+    public String gameListPage(@RequestParam(defaultValue="1") int pageNum,
+	        				   @RequestParam(defaultValue="") String poi_status,
+	        				   Integer poi_ck,
+	        				   Model model, HttpSession session) {
+		
+		Map<String,Object> map = new HashMap<String, Object>();
+		
+		if (!poi_status.isEmpty()) {
+		   map.put("poi_status", Integer.parseInt(poi_status));
+		}
+		    
+		// 전체, 검색 레코드 수
+		int count = pointService.selectPointGameRowCount(map);
+		    
+		// 페이지 처리
+		PagingUtil page = new PagingUtil(pageNum, count, 20, 10, "gameList");
+		    
+		List<PointGameVO> list = null;
+		if (count > 0) {
+		     map.put("start", page.getStartRow());
+		     map.put("end", page.getEndRow());
+		        
+		     list = pointService.selectPointGameList(map);
+		}
+		    
+		model.addAttribute("count", count);
+		model.addAttribute("list", list);
+		model.addAttribute("page", page.getPage());
+		
+		poi_ck = 0;
+		
+		if(poi_ck!=0 || poi_ck!=null) {
+			map.put("poi_ck", poi_ck);
+		}
+		
         return "gameList";
     }
 	
-	@GetMapping("/pointgame/participate/{poiG_num}")
-    public String participateGamePage(@PathVariable Long poiG_num, Model model) {
-        PointGameVO game = pointService.selectPointGame(poiG_num);
-        Map<String, Object> params = Map.of("poiG_num", poiG_num);
-        List<PointGameVO> options = pointService.selectPointGameOptionList(params);
+	@GetMapping("/pointgame/participate")
+    public String participateGamePage(@RequestParam(defaultValue="1") int pageNum,
+    								  Long poiG_num, Model model,
+    								  HttpSession session) {
+		Map<String,Object> map = new HashMap<String, Object>();
+		
+		
+			    
+		// 전체, 검색 레코드 수
+		int count = pointService.selectPointGameRowCount(map);
+		
+		PointGameVO game = pointService.selectPointGame(poiG_num);
+			    
+		// 페이지 처리
+		PagingUtil page = new PagingUtil(pageNum, count, 20, 10, "participateGame");
+			    
+		List<PointGameVO> list = null;
+		if (count > 0) {
+			 map.put("start", page.getStartRow());
+			 map.put("end", page.getEndRow());
+			 map.put("poiG_num", poiG_num);
+			       
+			 list = pointService.selectPointGameOptionList(map);
+		}
+			    
+		model.addAttribute("count", count);
+		model.addAttribute("list", list);
+		model.addAttribute("page", page.getPage());
+		
+        
 
         model.addAttribute("game", game);
-        model.addAttribute("options", options);
 
         return "participateGame";
     }
-
 	
+	@GetMapping("/pointgame/manageGames")
+    public String manageGames(@SessionAttribute("user") MemberVO user, Model model) {
+        if (user == null) {
+            return "redirect:/member/login";
+        }
+
+        Long mem_num = user.getMem_num();
+        List<PointGameVO> createdGames = pointService.getCreatedGames(mem_num);
+
+        for (PointGameVO game : createdGames) {
+            List<PointGameVO> options = pointService.getGameOptions(game.getPoiG_num());
+            game.setOptions(options);
+        }
+
+        model.addAttribute("createdGames", createdGames);
+        return "manageGame";
+    }
 }

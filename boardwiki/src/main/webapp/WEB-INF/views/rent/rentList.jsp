@@ -5,15 +5,15 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 <div class="page-main">
 	<h2>대여 목록</h2>
-	<!-- <div>
+	<div>
 		<a href="list">전체</a> | 
 		<a href="list?category=1">자바</a> | 
 		<a href="list?category=2">데이타베이스</a> |
 		<a href="list?category=3">자바스크립트</a> |
 		<a href="list?category=4">기타</a> |
-	</div> -->
+	</div>
 	<form action="list" id="search_form" method="get">
-		<input type="hidden" name="category" value="${param.category}">
+		<input type="hidden" name="item_name" value="${param.item_name}">
 		
 		<ul class="search">
 			<li>
@@ -57,24 +57,26 @@
 	<c:if test="${count > 0 }">
 		<table class="striped-table">
 			<tr>
-				<th>번호</th>
-				<th width="400">제목</th>
-				<th>작성자</th>
-				<th>작성일</th>
-				<th>조회수</th>
+				<th>대여번호</th>
+				<th width="400">보드게임명</th>
+				<th>대여시작일</th>
+				<th>대여종료일</th>
+				<th>대여기간</th>
 				<th>좋아요수</th>
 			</tr>
-			<c:forEach var="board" items="${list}">
+			<c:forEach var="rent" items="${list}">
 				<tr>
-					<td class="align-center">${board.board_num}</td>
-					<td class="align-left"><a href="detail?board_num=${board.board_num}">${board.title}(${board.re_cnt})</a></td>
-					<td class="align-center">
-						<c:if test="${empty board.nick_name}">${board.id}</c:if>
-						<c:if test="${!empty board.nick_name}">${board.nick_name}</c:if>
-					</td>
-					<td class="align-center">${board.reg_date}</td>
-					<td class="align-center">${board.hit}</td>
-					<td class="align-center">${board.fav_cnt}</td>
+					<td class="align-center">${rent.rent_num}</td>
+        			<td>${rent.item_name}</td>
+        			<!-- 디테일 이동 -->
+					<%-- <td class="align-left"><a href="detail?rent_num=${rent.rent_num}">${rent.title}(${rent.re_cnt})</a></td> --%>
+					<%-- <td class="align-center">
+						<c:if test="${empty rent.nick_name}">${rent.id}</c:if>
+						<c:if test="${!empty rent.nick_name}">${rent.nick_name}</c:if>
+					</td> --%>
+					<td class="align-center">${rent.rent_sdate}</td>
+					<td class="align-center">${rent.rent_edate}</td>
+					<td class="align-center">${rent.rent_period}</td>
 				</tr>
 			</c:forEach>
 		</table>

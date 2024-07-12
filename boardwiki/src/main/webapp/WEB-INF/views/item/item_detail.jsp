@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 <h2 class="big-name">${item.item_name}</h2>
 <div>
@@ -34,7 +35,7 @@
 	<div class="big-box2">
 	    <div class="midle-box2">
 	        <button>간단설명</button>
-	        <button>대여</button>
+	        <button onclick="location.href='/rent/rent?item_num=${item.item_num}'">대여</button>
 		    <button>중고거래</button>
 		</div>
 		<div class="midle-box3">

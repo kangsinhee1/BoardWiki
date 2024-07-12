@@ -18,7 +18,9 @@
 			<li>
 				<form:label path="teaB_category">분류</form:label>
 				<form:select path="teaB_category" >
+				<c:if test="${admin}">
 						<form:option value="1">공지사항</form:option>
+				</c:if>
 						<form:option value="2">잡담</form:option>
 						<form:option value="3">후기	</form:option>
 				</form:select>
@@ -58,9 +60,12 @@
 		</ul> 
 		<div class="align-center">
 			<form:button class="default-btn">전송</form:button>
-			<input type="button" value="목록"
-			  class="default-btn"
-			  onclick="location.href='teamBoardAdmin'">
+		<c:if test="${admin}">
+		<input type="button" value="목록" onclick="location.href='teamBoardAdmin?tea_num=${board.tea_num}'">
+		</c:if>
+		<c:if test="${!admin}">
+		<input type="button" value="목록" onclick="location.href='teamBoardUser?tea_num=${board.tea_num}'">
+		</c:if>
 		</div>                           
 	</form:form>
 </div>

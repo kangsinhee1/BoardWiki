@@ -52,4 +52,9 @@ public class ItemServiceImpl implements ItemService{
 		return itemMapper.selectListByItemGenre(map);
 	}
 
+	@Override
+	public Integer selectRowCount2(Map<String, Object> map) {
+		return itemMapper.selectRowCount2(map);
+	}
+
 }

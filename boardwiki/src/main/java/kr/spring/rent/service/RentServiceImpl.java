@@ -18,7 +18,7 @@ public class RentServiceImpl implements RentService {
 
 	@Override
 	public List<RentVO> selectRentList(Map<String, Object> map) {
-		return null;
+		return rentMapper.selectRentList(map);
 	}
 
 	@Override
@@ -28,6 +28,8 @@ public class RentServiceImpl implements RentService {
 
 	@Override
 	public void insertRent(RentVO rent) {
+		rentMapper.insertRent(rent);
+		
 	}
 
 	@Override

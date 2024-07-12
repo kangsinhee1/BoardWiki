@@ -2,9 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- 상단 시작 -->
-<input type="hidden" name="keyfield" id="keyfield"value="1">
-<input type="hidden" name="order" id="order"value="1">
+<input type="hidden" name="keyfield" id="keyfield" value="1">
 <div id="button-group">
+	<button type="button" class="btn btn-success" value="">ALL</button>
 	<button type="button" class="btn btn-success" value="격투">격투</button>
 	<button type="button" class="btn btn-success" value="경제">경제</button>
 	<button type="button" class="btn btn-success" value="고대">고대</button>
@@ -37,15 +37,22 @@
 	<button type="button" class="btn btn-success" value="현대전">현대전</button>
 	<button type="button" class="btn btn-success" value="협상">협상</button>
 	<button type="button" class="btn btn-success" value="SF">SF</button>
+	<button type="button" class="btn btn-success" value="없을떄">없을떄</button>
 </div>
-			<script type="text/javascript">
-				$('.btn-success').click(function(){
-					location.href='item_main?keyfield='
-							         +$('#keyfield').val()+'&keyword='
-							         +$('.btn-success').val()+'&order='
-							         +$('#order').val();
-				});
-			</script>
+<select id="order" name="order">
+	<option value="1"<c:if test="${param.order == 1}">selected</c:if>>인기순</option>
+	<option value="2"<c:if test="${param.order == 2}">selected</c:if>>평점순</option>
+	<option value="3"<c:if test="${param.order == 3}">selected</c:if>>신작순</option>
+</select>
+<script type="text/javascript">
+	$('.btn-success').click(function(){
+		location.href='item_main?keyfield='
+				         +$('#keyfield').val()+'&keyword='
+				         +$(this).val()+'&order='
+				         +$('#order').val();
+	});
+
+</script>
 <!-- 상단 끝 -->
 
 

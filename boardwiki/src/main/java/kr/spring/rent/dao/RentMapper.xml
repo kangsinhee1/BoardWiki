@@ -6,25 +6,28 @@
 <mapper namespace="kr.spring.rent.dao.RentMapper">
     <insert id="insertRent">
         INSERT INTO game_rent (rent_num, rent_sdate, rent_edate, rent_period, mem_num, item_num)
-        VALUES (game_rent_seq.nextval, #{rentSdate}, #{rentEdate}, #{rentPeriod}, #{memNum}, #{itemNum})
+        VALUES (game_rent_seq.nextval, #{rent_sdate}, #{rent_edate}, #{rent_period}, #{mem_num}, #{item_num})
     </insert>
 
-	 <!-- 대여 전체 목록/검색 목록 -->
-    <select id="selectRentList" parameterType="map" resultType="kr.spring.rent.vo.RentVO">
-        SELECT * FROM game_rent
-    </select>
+	<select id="selectRentList" parameterType="map" resultType="RentVO">
+	    SELECT gr.*, i.item_name
+	    FROM game_rent gr
+	    LEFT JOIN item i ON gr.item_num = i.item_num
+	    WHERE gr.mem_num = #{mem_num}
+    <include refid="rentSearch"></include>
+	</select>
     
     <!-- sql 태그와 include 태그를 이용해서 SQL문을 재사용 -->
-	 <sql id="boardSearch">
+	 <sql id="rentSearch">
 	 	<where>
 	 		<if test="keyword !=null and keyword != ''">
 	 			<if test="category !=null and category != ''">
 		 			AND 
 		 		</if>
 		 		<if test="keyfield == 1">
-		 			title LIKE '%' || #{keyword} || '%'
+		 			item_name LIKE '%' || #{keyword} || '%'
 		 		</if>
-		 		<if test="keyfield == 2">
+		 		<!-- <if test="keyfield == 2">
 		 			(id LIKE '%' || #{keyword} || '%' OR
 		 			nick_name LIKE '%' || #{keyword} || '%')
 		 		</if>
@@ -34,14 +37,14 @@
 		 		<if test="keyfield == 4">
 		 			(title LIKE '%' || #{keyword} || '%' OR
 		 			content LIKE '%' || #{keyword} || '%')
-		 		</if>
+		 		</if> -->
 	 		</if>
 	 	</where>
 	 </sql>
 	 
-	 <!-- <sql id="boardOrder">
+	 <!-- <sql id="rentOrder">
 	 	<if test="order == 1">
-	 		ORDER BY board_num DESC
+	 		ORDER BY rent_num DESC
 	 	</if>
 	 	<if test="order == 2">
 	 		ORDER BY hit DESC
@@ -53,24 +56,29 @@
 	 		ORDER BY re_cnt DESC NULLS LAST
 	 	</if>
 	 </sql> -->
-    
+
 
 	<!-- 대여 목록 총 레코드수/검색 레코드수 -->
-	 <select id="selectRowCount" parameterType="map"
-	                                resultType="integer">
-	 	SELECT
-	 	   COUNT(*)
-	 	FROM game_rent JOIN member USING (mem_num)
-	 	<include refid="boardSearch"></include>
-	 </select>
+	<select id="selectRowCount" parameterType="map"
+	resultType="integer">
+		SELECT COUNT(*)
+		FROM game_rent gr
+		JOIN member m ON gr.mem_num = m.mem_num
+		JOIN item i ON gr.item_num = i.item_num
+		<!-- WHERE gr.mem_num = #{mem_num} -->
+	<include refid="rentSearch"></include>
+</select>
+
+
+
 
     <update id="updateRent">
         UPDATE game_rent
-        SET rent_sdate = #{rentSdate},
-            rent_edate = #{rentEdate},
-            rent_period = #{rentPeriod},
-            mem_num = #{memNum},
-            item_num = #{itemNum}
-        WHERE rent_num = #{rentNum}
+        SET rent_sdate = #{rent_sdate},
+            rent_edate = #{rent_edate},
+            rent_period = #{rent-period},
+            mem_num = #{mem_num},
+            item_num = #{item_num}
+        WHERE rent_num = #{rent_num}
     </update>
 </mapper>
