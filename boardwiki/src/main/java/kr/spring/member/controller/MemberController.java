@@ -244,13 +244,13 @@ public class MemberController {
 		}
 		if(!result.getMem_provider().equals("Naver")) {
 			//UI 메시지 처리
-			model.addAttribute("accessTitle", "로그인 오류");
-			model.addAttribute("accessMsg", "회원님의 이메일로 가입된 다른 계정이 있습니다.");
-			model.addAttribute("accessBtn", "확인");
-			model.addAttribute("accessUrl", 
+//			model.addAttribute("accessTitle", "로그인 오류");
+			model.addAttribute("message", "회원님의 이메일로 가입된 다른 계정이 있습니다.");
+//			model.addAttribute("accessBtn", "확인");
+			model.addAttribute("url", 
 					request.getContextPath()+"/member/login");
 
-			return "common/resultView";
+			return "common/resultAlert";
 		}
 		//
 		MemberVO member = memberService.selectCheckMember(naver_email);
@@ -346,13 +346,13 @@ public class MemberController {
 
 		if(!result.getMem_provider().equals("Kakao")) {
 			//UI 메시지 처리
-			model.addAttribute("accessTitle", "로그인 오류");
-			model.addAttribute("accessMsg", "회원님의 이메일로 가입된 다른 계정이 있습니다.");
-			model.addAttribute("accessBtn", "확인");
-			model.addAttribute("accessUrl", 
+//			model.addAttribute("accessTitle", "로그인 오류");
+			model.addAttribute("message", "회원님의 이메일로 가입된 다른 계정이 있습니다.");
+//			model.addAttribute("accessBtn", "확인");
+			model.addAttribute("url", 
 					request.getContextPath()+"/member/login");
 
-			return "common/resultView";
+			return "common/resultAlert";
 		}
 		//
 		MemberVO member = memberService.selectCheckMember(kakao_email);
@@ -423,7 +423,7 @@ public class MemberController {
 	        model.addAttribute("accessUrl", 
 	                request.getContextPath() + "/member/login");
 
-	        return "common/resultView";
+	        return "common/resultAlert";
 	    }
 
 	    // 기존 회원 로그인 처리
