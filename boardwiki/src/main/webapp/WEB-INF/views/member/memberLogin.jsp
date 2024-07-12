@@ -40,7 +40,7 @@
 			</div>
 			<div>
 			<img src="${pageContext.request.contextPath}/images/googlebanner.png" 
-								onclick="location.href='/member/login/kakao'" height="32" width="300">
+								onclick="location.href='/member/login/google'" height="32" width="300">
 			</div>
 		</div>
 	</form:form>
