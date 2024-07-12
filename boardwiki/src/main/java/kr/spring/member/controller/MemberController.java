@@ -76,7 +76,7 @@ public class MemberController {
 	
 	// 로그인 폼 호출
 	@GetMapping("/member/login")
-	public String formLogin(Model model,HttpSession session) {
+	public String formLogin() {
 		log.debug("<<로그인페이지 요청>>");		
 		return "memberLogin";
 	}
@@ -94,7 +94,7 @@ public class MemberController {
 		//id와 passwd 필드만 체크
 		if(result.hasFieldErrors("id") || 
 				result.hasFieldErrors("passwd")) {
-			return formLogin(model, session);
+			return formLogin();
 		}
 
 		//로그인 체크(id,비밀번호 일치 여부 체크)
@@ -139,7 +139,7 @@ public class MemberController {
 			}
 			log.debug("<<인증 실패>>");
 
-			return formLogin(model, session);
+			return formLogin();
 		}
 	}
 	//회원가입 선택 폼 호출
