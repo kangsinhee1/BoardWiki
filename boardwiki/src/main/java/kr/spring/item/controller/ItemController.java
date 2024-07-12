@@ -125,7 +125,7 @@ public class ItemController {
 		
 		return new ModelAndView("item_detail","item",item); 
 	}
-	public String submit(@Valid CartVO cartVO,
+	/*public String submit(@Valid CartVO cartVO,
 			BindingResult result,
 			HttpServletRequest request,
 			HttpSession session,
@@ -145,7 +145,7 @@ public class ItemController {
 		model.addAttribute("url",request.getContextPath()+"/item/item_detail");
 
 		return "common/resultAlert";
-	}
+	}*/
 }
 
 
