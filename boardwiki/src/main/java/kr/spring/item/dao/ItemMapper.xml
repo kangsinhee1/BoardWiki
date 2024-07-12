@@ -11,6 +11,11 @@
        <include refid="itemGenreSearch"></include>
 	   <include refid="itemOrder"></include>
      </select>
+     <select id="selectRowCount2" resultType="integer">
+       SELECT
+          COUNT(*)
+       FROM item
+     </select>
     <!-- 상품 목록 인기 -->
     <select id="selectList" parameterType="map" resultType="itemVO">
 	 	SELECT * FROM

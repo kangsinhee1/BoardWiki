@@ -12,5 +12,6 @@ public interface ItemService {
 	public List<ItemVO> selectList2(Map<String,Object> map);
 	public List<ItemVO> selectList3(Map<String,Object> map);
 	public Integer selectRowCount(Map<String,Object> map);
+	public Integer selectRowCount2(Map<String,Object> map);
 	public ItemVO selectItem(Long item_num);
 }

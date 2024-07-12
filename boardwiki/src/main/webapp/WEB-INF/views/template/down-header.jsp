@@ -37,6 +37,7 @@
 	<button type="button" class="btn btn-success" value="현대전">현대전</button>
 	<button type="button" class="btn btn-success" value="협상">협상</button>
 	<button type="button" class="btn btn-success" value="SF">SF</button>
+	<button type="button" class="btn btn-success" value="없을떄">없을떄</button>
 </div>
 <select id="order" name="order">
 	<option value="1"<c:if test="${param.order == 1}">selected</c:if>>인기순</option>
@@ -50,12 +51,7 @@
 				         +$(this).val()+'&order='
 				         +$('#order').val();
 	});
-/* 	$('#order').change(function(){
-		location.href='item_main?keyfield='
-				         +$('#keyfield').val()+'&keyword='
-				         +$('.btn-success').val()+'&order='
-				         +$('#order').val();
-	}); */
+
 </script>
 <!-- 상단 끝 -->
 

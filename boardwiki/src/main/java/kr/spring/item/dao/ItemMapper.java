@@ -20,6 +20,7 @@ public interface ItemMapper {
 	public List<ItemVO> selectList2(Map<String,Object> map);
 	public List<ItemVO> selectList3(Map<String,Object> map);
 	public Integer selectRowCount(Map<String,Object> map);
+	public Integer selectRowCount2(Map<String,Object> map);
 	@Select("SELECT * FROM item WHERE item_num=#{item_num}")
 	public ItemVO selectItem(Long item_num);
 	@Select("SELECT item_seq.nextval FROM dual")

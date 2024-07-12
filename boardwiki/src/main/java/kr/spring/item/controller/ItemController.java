@@ -59,33 +59,36 @@ public class ItemController {
 
 		//전체, 검색 레코드수
 		int count = itemService.selectRowCount(map);
+		int count2 = itemService.selectRowCount2(map);
 
 		//페이지 처리
 	    PagingUtil page =
 				new PagingUtil(keyfield,keyword,pageNum,count,21,10,"item_main","&order="+order);
+	    PagingUtil page2 =
+	    		new PagingUtil(keyfield,keyword,pageNum,count,21,10,"item_main","&order="+order);
 	    
 	    //////////////////////////
 	    List<ItemVO> list = null;
-	    if(count > 0) {
+	    if(count2 > 0) {
 			map.put("order", order);
-			map.put("start", page.getStartRow());
-			map.put("end", page.getEndRow());
+			map.put("start", page2.getStartRow());
+			map.put("end", page2.getEndRow());
 
 			list = itemService.selectList(map);
 		}
 	    List<ItemVO> list2 = null;
-	    if(count > 0) {
+	    if(count2 > 0) {
 			map.put("order", order);
-			map.put("start", page.getStartRow());
-			map.put("end", page.getEndRow());
+			map.put("start", page2.getStartRow());
+			map.put("end", page2.getEndRow());
 
 			list2 = itemService.selectList2(map);
 		}
 	    List<ItemVO> list3 = null;
-	    if(count > 0) {
+	    if(count2 > 0) {
 			map.put("order", order);
-			map.put("start", page.getStartRow());
-			map.put("end", page.getEndRow());
+			map.put("start", page2.getStartRow());
+			map.put("end", page2.getEndRow());
 
 			list3 = itemService.selectList3(map);
 		}
@@ -99,11 +102,13 @@ public class ItemController {
 	    }
 
 	    model.addAttribute("count", count);
+	    model.addAttribute("count2", count2);
 		model.addAttribute("list", list);
 		model.addAttribute("list2", list2);
 		model.addAttribute("list3", list3);
 		model.addAttribute("list4", list4);
 		model.addAttribute("page", page.getPage());
+		model.addAttribute("pagew", page2.getPage());
 
 		return "item_main";
 	}
