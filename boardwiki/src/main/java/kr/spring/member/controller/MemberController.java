@@ -411,6 +411,7 @@ public class MemberController {
 
 	        return formMemberNaverRegister(); // 회원가입 폼으로 리다이렉트
 	    }
+	    
 
 	    if (!result.getMem_provider().equals("Google")) {
 	        // UI 메시지 처리
