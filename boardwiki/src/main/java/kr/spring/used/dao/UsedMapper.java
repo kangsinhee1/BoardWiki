@@ -12,7 +12,6 @@ import kr.spring.used.vo.UsedItemVO;
 @Mapper
 public interface UsedMapper {
 	//중고글 
-	@Select("SELECT COUNT(*) FROM used_item")
 	public Integer getUsedRowCount(Map<String,Object>map);
 	//중고글 목록
 	public List<UsedItemVO> selectUsedList(Map<String,Object>map);

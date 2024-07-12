@@ -27,7 +27,15 @@
  		</if>
 	 </sql>
 	 <!-- 게시판 전체 목록/검색 목록 -->
-	<!--  <select id="getUsedRowCount" parameterType="map"
+	 <select id="getUsedRowCount" parameterType="map"
+									resultType="integer">
+		SELECT
+			COUNT(*)
+		FROM used_item JOIN item USING (item_num)
+		<include refid="usedSearch"></include>	 
+	 </select>
+	<!-- 중고 글 목록 -->
+	 <select id="selectUsedList" parameterType="map"
 	 							resultType="usedItemVO">
 	 	SELECT
 	 	   *
@@ -38,43 +46,15 @@
 	 		   			*
 	 		   		 FROM used_item
 	 		   		 JOIN item USING(item_num)
+	 		   		 JOIN member USING(mem_num)
+	 		   		 JOIN member_detail USING(mem_num)
 	 		   		 <include refid="usedSearch"></include>
 	 		   		 <include refid="usedOrder"></include>
 	 		   		 )a)
 		<![CDATA[
 		WHERE rnum >= #{start} AND rnum <= #{end}
 		]]>
-	</select> -->
-	<!-- 중고 글 목록 -->
-	 <select id="selectUsedList" parameterType="map" resultType="usedItemVO">
-	 	SELECT *FROM
-	 	(SELECT a.*, rownum rnum FROM
-	 	(SELECT use_num,
-	 	  <![CDATA[
-	         REPLACE(REPLACE(use_title,'<','&lt;'),'>','&gt;') use_title,
-	      ]]>
-	      use_content,
-	      use_comment,
-	      use_grade,
-	      use_photo,
-	      use_price,
-	      use_check,
-	      use_rdate,
-	      use_mdate,
-	      mem_num,
-	      item_num,
-	      item_name,
-	      mem_email,
-	      mem_nickname
-	      FROM used_item
-	      JOIN member USING (mem_num)
-	      LEFT OUTER JOIN item USING (item_num)
-	      LEFT OUTER JOIN member_detail USING (mem_num)
-	 	)a ) 
-	 	<![CDATA[
-	 	WHERE rnum >= #{start} AND rnum <= #{end}
-	 	]]>	
-	 </select>
+	</select>
 	 <!-- 중고글 선택 -->
 	 <select id="selectUsed" parameterType="map" resultType="usedItemVO">
 	 	SELECT

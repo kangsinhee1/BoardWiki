@@ -30,7 +30,7 @@
 			</select>
 			<script type="text/javascript">
 				$('#order').change(function(){
-					location.href='teamList?keyfield='
+					location.href='usedList?keyfield='
 							         +$('#keyfield').val()+'&keyword='
 							         +$('#keyword').val()+'&order='
 							         +$('#order').val();

@@ -9,8 +9,12 @@
 
 <script>
 $(function() {
+    // 오늘 날짜를 가져옵니다.
+    var today = new Date();
+
     $("#rent_sdate").datepicker({
         dateFormat: 'yy-mm-dd',
+        minDate: today, // 오늘 이후의 날짜만 선택 가능하도록 설정합니다.
         onSelect: function(dateText, inst) {
             var startDate = new Date(dateText);
             var endDate = new Date(startDate.getTime() + (9 * 24 * 60 * 60 * 1000)); // 9일 후의 날짜 설정
@@ -29,7 +33,7 @@ $(function() {
         var period = parseInt($("#rent_period").val(), 10);
         if (startDate && !isNaN(period)) {
             var endDate = new Date(startDate.getTime() + ((period - 1) * 24 * 60 * 60 * 1000)); // 대여 기간만큼의 날짜 계산
-            $("#rentEdate").datepicker("setDate", endDate);
+            $("#rent_edate").datepicker("setDate", endDate);
         }
     }
 
@@ -43,33 +47,32 @@ $(function() {
         }
     });
 });
-
-
 </script>
 
 <div class="page-main">
-    <h2>보드게임 대여</h2>
-    <form:form action="rent" id="rent_register" modelAttribute="rentVO">
-        <div class="align-center">
-            <form:label path="rent_sdate">대여 시작일:</form:label>
-            <form:input path="rent_sdate" id="rent_sdate"/>
-            <form:errors path="rent_sdate" cssClass="error-color"/>
-        </div>
-        <div class="align-center">
-            <form:label path="rent_edate">대여 종료일:</form:label>
-            <form:input path="rent_edate" id="rent_edate"/>
-            <form:errors path="rent_edate" cssClass="error-color"/>
-        </div>
-        <div class="align-center">
-             <label for="rent_period">대여일 수:</label>
-    		 <input type="number" id="rent_period" name="rent_period" min="1" max="10" required><br><br>
-        </div>
-       	
-        <div class="align-center">
-            <form:button class="default-btn">전송</form:button>
-            <input type="button" value="목록" class="default-btn" onclick="location.href='list'">
-        </div>
-    </form:form>
+    <div class="form-container">
+        <h2>보드게임 대여</h2>
+        <form:form action="rent" id="rent_register" modelAttribute="rentVO">
+            <div class="form-group">
+                <form:label path="rent_sdate">대여 시작일:</form:label>
+                <form:input path="rent_sdate" id="rent_sdate"/>
+                <form:errors path="rent_sdate" cssClass="error-color"/>
+            </div>
+            <div class="form-group">
+                <form:label path="rent_edate">대여 종료일:</form:label>
+                <form:input path="rent_edate" id="rent_edate"/>
+                <form:errors path="rent_edate" cssClass="error-color"/>
+            </div>
+            <div class="form-group">
+                <label for="rent_period">대여일 수:</label>
+                <input type="number" id="rent_period" name="rent_period" min="1" max="10" required/>
+            </div>
+            <div class="align-center">
+                <form:button class="default-btn">전송</form:button>
+                <input type="button" value="목록" class="default-btn" onclick="location.href='list'">
+            </div>
+        </form:form>
+    </div>
 </div>
 
-<!-- 보드게임 대여 끝 -->  
+<!-- 보드게임 대여 끝 -->

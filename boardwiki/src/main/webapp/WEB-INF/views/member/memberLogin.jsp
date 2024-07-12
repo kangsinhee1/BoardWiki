@@ -24,10 +24,11 @@
 			</li>
 		</ul>
 		<div>
-			<a href="${naverUrl}">naver login</a>
+			<a href="<c:url value='/member/login/naver' />">Naver Login</a>
+
 		</div>
 		<div>
-			<a href="${naverUrl}">kakao Login</a>
+			<a href="<c:url value='/member/login/kakao' />">Kakao Login</a>
 		</div>
 		<div>
 			<form:button class="login-btn">로그인</form:button>
