@@ -34,5 +34,5 @@ public class BoardVO {
 	private String mem_nickname;		
 	
 	private int re_cnt;				
-	private int fav_cnt;
+	private int fav_cnt;  
 }
