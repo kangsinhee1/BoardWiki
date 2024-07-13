@@ -5,20 +5,20 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 <div class="page-main">
 	<h2>대여 목록</h2>
-	<div>
+	<!-- <div>
 		<a href="list">전체</a> | 
 		<a href="list?category=1">자바</a> | 
 		<a href="list?category=2">데이타베이스</a> |
 		<a href="list?category=3">자바스크립트</a> |
 		<a href="list?category=4">기타</a> |
-	</div>
+	</div> -->
 	<form action="list" id="search_form" method="get">
 		<input type="hidden" name="item_name" value="${param.item_name}">
 		
 		<ul class="search">
 			<li>
 				<select name="keyfield" id="keyfield">
-					<option value="1" <c:if test="${param.keyfield == 1}">selected</c:if>>제목</option>
+					<option value="1" <c:if test="${param.keyfield == 1}">selected</c:if>>게임명</option>
 					<option value="2" <c:if test="${param.keyfield == 2}">selected</c:if>>ID+별명</option>
 					<option value="3" <c:if test="${param.keyfield == 3}">selected</c:if>>내용</option>
 					<option value="4" <c:if test="${param.keyfield == 4}">selected</c:if>>제목+내용</option>
@@ -43,10 +43,10 @@
 					location.href='list?category=${param.category}&keyfield='+$('#keyfield').val()+'&keyword='+$('#keyword').val()+'&order='+$('#order').val();
 				});
 			</script>
-		<c:if test="${!empty user}">
+		<%-- <c:if test="${!empty user}">
 			<input type="button" value="대여" onclick="location.href='rent'">
 			
-		</c:if>
+		</c:if> --%>
 		
 		</div>
 
@@ -62,7 +62,7 @@
 				<th>대여시작일</th>
 				<th>대여종료일</th>
 				<th>대여기간</th>
-				<th>좋아요수</th>
+				<th>대출/반납</th>
 			</tr>
 			<c:forEach var="rent" items="${list}">
 				<tr>

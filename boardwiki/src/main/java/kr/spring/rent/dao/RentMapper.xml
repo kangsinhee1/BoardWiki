@@ -65,7 +65,7 @@
 		FROM game_rent gr
 		JOIN member m ON gr.mem_num = m.mem_num
 		JOIN item i ON gr.item_num = i.item_num
-		<!-- WHERE gr.mem_num = #{mem_num} -->
+		WHERE gr.mem_num = #{mem_num}
 	<include refid="rentSearch"></include>
 </select>
 

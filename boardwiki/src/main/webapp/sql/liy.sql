@@ -12,6 +12,9 @@ CONSTRAINT game_rent_fk2 FOREIGN KEY (item_num) REFERENCES item (item_num)
 );
 CREATE SEQUENCE game_rent_seq;
 
+ALTER TABLE game_rent
+ADD rent_status NUMBER;
+
 --ALTER TABLE item
 --ADD min_time NUMBER;
 --

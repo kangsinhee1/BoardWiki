@@ -11,6 +11,7 @@
 $(function() {
     // 오늘 날짜를 가져옵니다.
     var today = new Date();
+    today.setHours(0, 0, 0, 0); // 시간을 0으로 설정하여 날짜만 비교
 
     $("#rent_sdate").datepicker({
         dateFormat: 'yy-mm-dd',
@@ -22,6 +23,10 @@ $(function() {
             $("#rent_edate").datepicker("option", "maxDate", endDate);
             calculateEndDate();
         }
+    });
+
+    $("#rent_sdate").on("change", function() {
+        validateStartDate();
     });
 
     $("#rent_period").on("input", function() {
@@ -37,6 +42,16 @@ $(function() {
         }
     }
 
+    function validateStartDate() {
+        var startDate = $("#rent_sdate").datepicker("getDate");
+        if (startDate && startDate < today) {
+            alert("오늘 날짜 이후의 날짜를 선택해주세요.");
+            $("#rent_sdate").val('');
+            $("#rent_edate").val('');
+            $("#rent_period").val('');
+        }
+    }
+
     $("#rent_edate").datepicker({
         dateFormat: 'yy-mm-dd',
         onSelect: function(dateText, inst) {
@@ -46,6 +61,20 @@ $(function() {
             $("#rent_period").val(days);
         }
     });
+
+    $("#rent_edate").on("change", function() {
+        validateEndDate();
+    });
+
+    function validateEndDate() {
+        var startDate = $("#rent_sdate").datepicker("getDate");
+        var endDate = $("#rent_edate").datepicker("getDate");
+        if (startDate && endDate && endDate < startDate) {
+            alert("종료일은 시작일 이후의 날짜여야 합니다.");
+            $("#rent_edate").val('');
+            $("#rent_period").val('');
+        }
+    }
 });
 </script>
 
@@ -53,7 +82,7 @@ $(function() {
     <div class="form-container">
         <h2>보드게임 대여</h2>
         <form:form action="rent" id="rent_register" modelAttribute="rentVO">
-        	<form:hidden path="item_num"/>
+            <form:hidden path="item_num"/>
             <div class="form-group">
                 <form:label path="rent_sdate">대여 시작일:</form:label>
                 <form:input path="rent_sdate" id="rent_sdate"/>

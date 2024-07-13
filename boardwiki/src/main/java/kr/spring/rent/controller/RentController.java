@@ -95,6 +95,9 @@ public class RentController {
 		    MemberVO vo = (MemberVO) session.getAttribute("user");
 		    int mem_num = (int) vo.getMem_num();
 
+		    // mem_num을 맵에 추가
+		    map.put("mem_num", mem_num);
+
 		    // 검색 조건에 따른 전체 레코드 수 가져오기
 		    int count = rentService.selectRowCount(map);
 
@@ -104,7 +107,6 @@ public class RentController {
 
 		    // 검색 결과가 있는 경우, 해당 결과 리스트 가져오기
 		    if (count > 0) {
-		        map.put("mem_num", mem_num); // 회원 번호 맵에 추가
 		        map.put("start", page.getStartRow());
 		        map.put("end", page.getEndRow());
 		        list = rentService.selectRentList(map);
@@ -118,6 +120,7 @@ public class RentController {
 
 		    return "rentList"; // rentList 뷰 이름 반환
 		}
+
 
 		
 
