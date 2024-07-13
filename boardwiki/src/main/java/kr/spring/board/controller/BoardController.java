@@ -61,7 +61,7 @@ public class BoardController {
 		MemberVO vo = (MemberVO)session.getAttribute("user");
 		boardVO.setMem_num(vo.getMem_num());
 		
-		boardVO.setFilename(FileUtil.createFile(request, boardVO.getBoa_upload()));
+		boardVO.setFilename(FileUtil.createFile(request, boardVO.getUpload()));
 		boardService.insertBoard(boardVO);
 		
 		model.addAttribute("message","성공적으로 글이 등록되었습니다.");
@@ -132,7 +132,7 @@ public class BoardController {
 											"/upload")+"/"+board.getFilename());
 		
 		model.addAttribute("downloadFile", downloadFile);
-		model.addAttribute("boa_file", board.getFilename());
+		model.addAttribute("filename", board.getFilename());
 		
 		return "downloadView";
 	}
@@ -160,11 +160,11 @@ public class BoardController {
 		}
 		
 		BoardVO db_board = boardService.selectBoard( boardVO.getBoa_num());
-		boardVO.setFilename(FileUtil.createFile(request, boardVO.getBoa_upload()));
+		boardVO.setFilename(FileUtil.createFile(request, boardVO.getUpload()));
 		
 		boardService.updateBoard(boardVO);
 		
-		if(boardVO.getBoa_upload() != null && !boardVO.getBoa_upload().isEmpty()) {
+		if(boardVO.getUpload() != null && !boardVO.getUpload().isEmpty()) {
 			FileUtil.removeFile(request, db_board.getFilename());
 		}
 		

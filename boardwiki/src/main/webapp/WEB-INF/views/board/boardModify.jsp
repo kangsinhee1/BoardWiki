@@ -56,7 +56,7 @@
 			<li>
 				<form:label path="upload">파일업로드</form:label>
 				<input type="file" name="upload" id="upload">
-				<c:if test="${!empty boardVO.boa_file}">
+				<c:if test="${!empty boardVO.filename}">
 				<div id="file_detail">
 					(${boardVO.filename})파일이 등록되어 있습니다.
 					<input type="button" value="파일 삭제" id="file_del">
