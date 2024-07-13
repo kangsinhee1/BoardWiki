@@ -5,6 +5,7 @@
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 <tiles-definitions>
+
    <definition name="item_main" template="/WEB-INF/views/template/layout_item.jsp">
 		<put-attribute name="title" value="게임 메인"/>
 		<put-attribute name="css" value="/WEB-INF/views/item/itemCSS.jsp"/>
@@ -14,11 +15,19 @@
 		<put-attribute name="body" value="/WEB-INF/views/item/item_main.jsp"/>
 		<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp"/>
 	</definition>
+	
 	<definition name="item_detail" extends="main">
 		<put-attribute name="title" value="게임 상세"/>
 		<put-attribute name="css" value="/WEB-INF/views/item/itemCSS.jsp"/>
 		<put-attribute name="body" value="/WEB-INF/views/item/item_detail.jsp"/>
 	</definition>
+	<!-- 
+	<definition name="cart" extends="main">
+		<put-attribute name="title" value="장바구니"/>
+		<put-attribute name="css" value="/WEB-INF/views/cart/cartCSS.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/cart/cart.jsp"/>
+	</definition>
+	 -->
 </tiles-definitions>
 
 

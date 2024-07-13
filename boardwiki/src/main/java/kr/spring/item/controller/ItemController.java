@@ -133,31 +133,6 @@ public class ItemController {
 
 		return new ModelAndView("item_detail","item",item); 
 	}
-	/*=========================
-	 * 장바구니에 데이터 담기
-	 *=========================*/
-	@PostMapping("/item/item_detail")
-	public String submit(@Valid CartVO cartVO,
-			BindingResult result,
-			HttpServletRequest request,
-			HttpSession session,
-			Model model) throws IllegalStateException, IOException {
-		log.debug("<<장바구니 생성>> : " + cartVO);
-
-		if (result.hasErrors()) {
-			return "/item/item_detail";
-		}
-
-		MemberVO vo = (MemberVO)session.getAttribute("user");
-		cartVO.setMem_num(vo.getMem_num());
-		
-		cartService.insertCart(cartVO);
-		
-		model.addAttribute("message", "상품이 장바구니에 추가되었습니다.");
-		model.addAttribute("url", request.getContextPath() + "/item/item_detail");
-
-		return "common/resultAlert";
-	}
 }
 
 
