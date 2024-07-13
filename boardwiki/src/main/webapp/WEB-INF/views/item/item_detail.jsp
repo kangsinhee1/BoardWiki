@@ -26,13 +26,13 @@
 					<p>가격:${item.item_price}원</p>
 				</div>
 <%-- 				<c:if test="${member.mem_num != null}"> --%>
-<!-- 				<div class="text-box2" style="display: inline-block; vertical-align: top;"> -->
-<!-- 					<p>개&nbsp;수&nbsp;:&nbsp;</p><input><p>&nbsp;개</p><br> -->
-<!-- 					<button>바로구매</button> -->
-<%-- 					<button onclick="location.href='${pageContext.request.contextPath}/cart/cart?mem_num=${member.mem_num}'"> --%>
-<!-- 					 장바구니 -->
-<!-- 					</button> -->
-<!-- 				</div> -->
+ 				<div class="text-box2" style="display: inline-block; vertical-align: top;">
+					<p>개&nbsp;수&nbsp;:&nbsp;</p><input><p>&nbsp;개</p><br>
+					<button>바로구매</button>
+ 					<button onclick="location.href='${pageContext.request.contextPath}/cart/cart?mem_num=${member.mem_num}'">
+					 장바구니
+ 					</button> 
+ 				</div>
 <%-- 				</c:if> --%>
 <%-- 				<c:if test="${member.mem_num = null}"> --%>
 <!-- 				<div class="text-box2" style="display: inline-block; vertical-align: top;"> -->
