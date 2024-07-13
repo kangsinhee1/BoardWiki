@@ -38,19 +38,17 @@ public class RulebookServiceImpl implements RulebookService{
 
 	@Override
 	public void updateRulebook(RulebookVO rulebook) {
-		
+		rulebookMapper.updateRulebook(rulebook);
 	}
 
 	@Override
 	public void deleteRulebook(Long rulB_num) {
-		// TODO Auto-generated method stub
-		
+		rulebookMapper.deleteRulebook(rulB_num);
 	}
 
 	@Override
 	public void deleteRulebookFile(Long rulB_num) {
-		// TODO Auto-generated method stub
-		
+		rulebookMapper.deleteRulebookFile(rulB_num);
 	}
 
 }

@@ -12,7 +12,7 @@
     <h2>중고 글수정</h2>
     <form:form action="usedUpdate" id="used_modify"
                enctype="multipart/form-data"
-               modelAttribute="usedItemVO" method="post">
+               modelAttribute="usedItemVO">
         <form:hidden path="use_num" value="${used.use_num }"/>
         <ul>
             <li>
@@ -70,7 +70,7 @@
             </li>
         </ul> 
         <div class="align-center">
-            <button type="submit" class="default-btn">글수정하기</button>
+            <button type="submit" class="default-btn">수정하기</button>
             <input type="button" value="목록" class="default-btn" onclick="location.href='usedList'">
         </div>                           
     </form:form>

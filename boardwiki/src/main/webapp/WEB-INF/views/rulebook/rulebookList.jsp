@@ -8,7 +8,9 @@
 	<form action="rulebookList" id="search_form" method="get">
 		<ul class="search">
 			<li>
-				제목
+				<select name="keyfield" id="keyfield">
+					<option value="1" <c:if test="${param.keyfield == 1}">selected</c:if>>게임</option>
+				</select>
 			</li>
 			<li>
 				<input type="search" name="keyword" id="keyword" value="${param.keyword}">
@@ -31,7 +33,7 @@
 	<table class="striped-table">
 		<tr>
 			<th>번호</th>
-			<th width="400">이름</th>
+			<th width="400">게임</th>
 			<th>등록일</th>
 		</tr>
 		<c:forEach var="rulebook" items="${list}">

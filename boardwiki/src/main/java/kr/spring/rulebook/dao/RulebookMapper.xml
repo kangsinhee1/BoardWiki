@@ -6,8 +6,10 @@
 	 <!-- sql 태그와 include 태그를 이용해서 SQL문을 재사용 -->
 	 <sql id="rulebookSearch">
 	 	<where>
-	 		<if test="keyfield == 1">
-	 			item_name LIKE '%' || #{keyword} || '%'
+	 		<if test="keyword !=null and keyword != ''">
+		 		<if test="keyfield == 1">
+		 			item_name LIKE '%' || #{keyword} || '%'
+		 		</if>
 	 		</if>
 	 	</where>
 	 </sql>
@@ -17,7 +19,7 @@
 									resultType="integer">
 		SELECT
 			COUNT(*)
-		FROM rulebook JOIN member USING (mem_num)
+		FROM rulebook JOIN item USING (item_num)
 		<include refid="rulebookSearch"></include>	 
 	 </select>
 	 <!-- 룰북 전체 목록/검색 목록 -->
@@ -40,16 +42,6 @@
 		WHERE rnum >= #{start} AND rnum <= #{end}
 		]]>
 	</select>
-	<!-- 룰북 선택 -->
-	 <select id="selectrulebook" parameterType="map" resultType="rulebookVO">
-	 	SELECT
-	 		 * 
-	 	 FROM rulebook
-	 	 JOIN member USING(mem_num) 
-	 	 LEFT OUTER JOIN member_detail USING(mem_num)
-	 	 LEFT OUTER JOIN item USING(item_num) 
-	 	 WHERE rulB_num=#{rulB_num}
-	 </select>
 	 <!-- 룰북 등록 -->
 	 <insert id="insertRulebook" parameterType="rulebookVO">
 	 	INSERT INTO rulebook(
@@ -65,7 +57,17 @@
 	 	  #{filename,jdbcType=VARCHAR},
 	 	  #{mem_num})
 	 </insert>
-	<!-- 게시판 글 수정 -->
+	<!-- 룰북 수정 -->
+	<update id="updateRulebook" parameterType="rulebookVO">
+ 		UPDATE rulebook SET
+ 		   <if test="filename != null">
+ 		   filename = #{filename},
+ 		   </if>
+ 		   rulB_content = #{rulB_content},
+ 		   rulB_mdate = SYSDATE
+ 		WHERE rulB_num = #{rulB_num}
+ 		
+ 	</update>  
 	  
  </mapper>
 

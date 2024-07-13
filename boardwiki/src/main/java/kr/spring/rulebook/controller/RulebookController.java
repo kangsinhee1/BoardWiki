@@ -141,4 +141,61 @@ public class RulebookController {
 		
 		return "downloadView";
 	}
+	/*====================
+	 *  게시판 글 수정
+	 *====================*/
+	@GetMapping("/rulebook/rulebookUpdate")
+	public String formUpdate(long rulB_num,Model model) {
+		RulebookVO rulebookVO = rulebookService.selectRulebook(rulB_num);
+		model.addAttribute("rulebookVO", rulebookVO);
+		
+		return "rulebookModify";
+	}
+	@PostMapping("/rulebook/rulebookUpdate")
+	public String submitUpdate(@Valid RulebookVO rulebookVO,
+							   BindingResult result,
+							   Model model,
+							   HttpServletRequest request) throws IllegalStateException, IOException {
+		log.debug("<<게시판 글 수정>> : " +  rulebookVO);
+		
+		if(result.hasErrors()) {
+			RulebookVO vo = rulebookService.selectRulebook(rulebookVO.getRulB_num());
+			rulebookVO.setFilename(vo.getFilename());
+			return "rulebookModify";
+		}
+		
+		RulebookVO db_rulebook = rulebookService.selectRulebook( rulebookVO.getRulB_num());
+		rulebookVO.setFilename(FileUtil.createFile(request, rulebookVO.getUpload()));
+		
+		rulebookService.updateRulebook(rulebookVO);
+		
+		if(rulebookVO.getUpload() != null && !rulebookVO.getUpload().isEmpty()) {
+			FileUtil.removeFile(request, db_rulebook.getFilename());
+		}
+		
+		model.addAttribute("message", "글 수정 완료!!");
+		model.addAttribute("url", request.getContextPath() + "/rulebook/rulebookDetail?rulB_num="
+														+rulebookVO.getRulB_num());	
+		
+		
+		return "common/resultAlert";
+	}
+	/*====================
+	 *  게시판 글 삭제
+	 *====================*/
+	@GetMapping("/rulebook/rulebookDelete") 
+	public String submitDelete(long rulB_num, 
+							   HttpServletRequest request) {
+		log.debug("<<게시판 글 삭제 -- rulB_num>> : " + rulB_num);
+		
+		RulebookVO db_rulebook = rulebookService.selectRulebook(rulB_num);
+		
+		rulebookService.deleteRulebook(rulB_num);
+		
+		if(db_rulebook.getFilename()!=null) {
+			FileUtil.removeFile(request, db_rulebook.getFilename());
+		}
+		
+		return "redirect:/rulebook/rulebookList";
+	}
 }

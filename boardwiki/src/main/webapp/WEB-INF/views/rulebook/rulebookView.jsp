@@ -29,14 +29,14 @@
 	<div class="align-right">
 		<c:if test="${!empty user && user.mem_num == rulebook.mem_num}">
 		<input type="button" value="수정"
-		   onclick="location.href='update?rulB_num=${rulebook.rulB_num}'">
+		   onclick="location.href='rulebookUpdate?rulB_num=${rulebook.rulB_num}'">
 		<input type="button" value="삭제" id="delete_btn">
 		<script>
 			const delete_btn = document.getElementById('delete_btn');
 			delete_btn.onclick=function(){
 				const choice = confirm('삭제하시겠습니까?');
 				if(choice){
-					location.replace('delete?rulB_num=${rulebook.rulB_num}');
+					location.replace('rulebookDelete?rulB_num=${rulebook.rulB_num}');
 				}
 			};
 		</script>   

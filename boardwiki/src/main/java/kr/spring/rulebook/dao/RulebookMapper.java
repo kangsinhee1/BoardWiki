@@ -23,6 +23,7 @@ public interface RulebookMapper {
 	public void updateRulebook(RulebookVO rulebook);
 	@Delete("DELETE FROM rulebook WHERE rulB_num=#{rulB_num}")
 	public void deleteRulebook(Long rulB_num);
-	@Update("UPDATE rulebook SET rulB_filename='' WHERE rulB_num=#{rulB_num}")
+	@Update("UPDATE rulebook SET filename='' WHERE rulB_num=#{rulB_num}")
 	public void deleteRulebookFile(Long rulB_num);
+	
 }

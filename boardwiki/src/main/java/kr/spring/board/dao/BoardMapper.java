@@ -26,7 +26,7 @@ public interface BoardMapper {
 	public void updateBoard(BoardVO board);
 	@Delete("DELETE FROM board WHERE boa_num=#{boa_num}")
 	public void deleteBoard(Long boa_num);
-	@Update("UPDATE board SET boa_file='' WHERE boa_num=#{boa_num}")
+	@Update("UPDATE board SET filename='' WHERE boa_num=#{boa_num}")
 	public void deleteFile(Long boa_num);
 	
 	//게시글 좋아요
