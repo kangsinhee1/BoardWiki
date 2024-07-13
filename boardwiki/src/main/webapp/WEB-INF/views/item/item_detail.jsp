@@ -14,18 +14,19 @@
 			<div class="small-box1" style="display: inline-block; vertical-align: top;">
 				<div class="text-box1" style="display: inline-block; vertical-align: top;">
 					<p>장르:${item.item_genre}</p>
-					<p>가격:${item.item_price}원</p>
-					<p>출시연도:${item.item_year}년</p>
-				</div>
-				<div class="text-box2" style="display: inline-block; vertical-align: top;">
-				    <p>최소연령:${item.minage}세</p>
+					<p>최소연령:${item.minage}세</p>
 					<p>참여인원:${item.minplayers}~${item.maxplayers}명</p>
 					<p>플레이 타임:${mintime}~${maxtime}시간</p>
+					<p>출시연도:${item.item_year}년</p>	
 				</div>
-				<div class="text-box3" style="display: inline-block; vertical-align: top;">
-					<p>순위:${item.item_rank}위</p>
+				<div class="text-box1" style="display: inline-block; vertical-align: top;">
+				    <p>순위:${item.item_rank}위</p>
 					<p>평점:${item.item_average}점</p>
 					<p>재고:${item.item_stock}개</p>
+					<p>가격:${item.item_price}원</p>
+				</div>
+				<div class="text-box2" style="display: inline-block; vertical-align: top;">
+					<p>개&nbsp;수&nbsp;:&nbsp;</p><input><p>&nbsp;개</p><br>
 					<button>바로구매</button>
 					<button onclick="location.href='${pageContext.request.contextPath}/cart/cart?mem_num=${member.mem_num}'">
 					 장바구니

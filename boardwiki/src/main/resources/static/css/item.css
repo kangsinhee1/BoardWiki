@@ -11,3 +11,16 @@
 .btn{
 	margin: 4px 0;
 }
+.small-box1 p {
+	margin-bottom: 5px;
+}
+.text-box1 {
+	margin-right: 85px;
+}
+.text-box2 p{
+	display: inline-block; /* inline-block으로 설정하여 너비를 제한할 수 있게 함 */
+}
+.text-box2 input{
+	width:100px;
+	height:25px;
+}
