@@ -19,8 +19,8 @@ public class RulebookVO {
 	private long mem_num;
 	@NotEmpty
 	private String rulB_content;
-	private MultipartFile rulB_upload;
-	private String rulB_filename;
+	private MultipartFile upload;
+	private String filename;
 	private Date rulB_rdate;
 	private Date rulB_mdate;
 	

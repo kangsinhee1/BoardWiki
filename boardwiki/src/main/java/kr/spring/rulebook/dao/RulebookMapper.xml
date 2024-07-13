@@ -56,13 +56,13 @@
 	 	  rulB_num,
 	 	  item_num,
 	 	  rulB_content,
-	 	  rulB_filename,
+	 	  filename,
 	 	  mem_num)
 	 	VALUES(
 	 	  rulebook_rulB_num_seq.nextval,
 	 	  #{item_num},
 	 	  #{rulB_content},
-	 	  #{rulB_filename,jdbcType=VARCHAR},
+	 	  #{filename,jdbcType=VARCHAR},
 	 	  #{mem_num})
 	 </insert>
 	<!-- 게시판 글 수정 -->

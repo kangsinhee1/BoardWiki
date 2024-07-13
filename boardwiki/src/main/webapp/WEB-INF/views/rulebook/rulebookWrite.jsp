@@ -44,8 +44,8 @@
 			    </script> 
 			</li>
 			<li>
-				<form:label path="rulB_upload">파일업로드</form:label>
-				<input type="file" name="rulB_upload" id="rulB_upload">
+				<form:label path="upload">파일업로드</form:label>
+				<input type="file" name="upload" id="upload">
 			</li>
 		</ul> 
 		<div class="align-center">

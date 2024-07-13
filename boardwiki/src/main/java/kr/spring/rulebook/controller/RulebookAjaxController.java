@@ -49,7 +49,7 @@ public class RulebookAjaxController {
 			}else {
 				//일치
 				rulebookService.deleteRulebookFile(rulB_num);
-				FileUtil.removeFile(request, db_rulebook.getRulB_filename());
+				FileUtil.removeFile(request, db_rulebook.getFilename());
 				
 				mapJson.put("result", "success");
 			}

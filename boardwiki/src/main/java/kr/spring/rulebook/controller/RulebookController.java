@@ -77,7 +77,7 @@ public class RulebookController {
 		MemberVO vo = (MemberVO)session.getAttribute("user");
 		rulebookVO.setMem_num(vo.getMem_num());
 		
-		rulebookVO.setRulB_filename(FileUtil.createFile(request, rulebookVO.getRulB_upload()));
+		rulebookVO.setFilename(FileUtil.createFile(request, rulebookVO.getUpload()));
 		rulebookService.insertRulebook(rulebookVO);
 		
 		model.addAttribute("message","성공적으로 글이 등록되었습니다.");
@@ -134,10 +134,10 @@ public class RulebookController {
 		RulebookVO rulebook = rulebookService.selectRulebook(rulB_num);
 		byte[] downloadFile = 
 				FileUtil.getBytes(request.getServletContext().getRealPath(
-											"/upload")+"/"+rulebook.getRulB_filename());
+											"/upload")+"/"+rulebook.getFilename());
 		
 		model.addAttribute("downloadFile", downloadFile);
-		model.addAttribute("rulB_filename", rulebook.getRulB_filename());
+		model.addAttribute("filename", rulebook.getFilename());
 		
 		return "downloadView";
 	}

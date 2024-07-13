@@ -17,9 +17,9 @@
 			</c:if>
 		</li>
 	</ul>
-	<c:if test="${!empty rulebook.rulB_filename}">
+	<c:if test="${!empty rulebook.filename}">
 	<ul>
-		<li>첨부파일 : <a href="file?rulB_num=${rulebook.rulB_num}">${rulebook.rulB_filename}</a></li>
+		<li>첨부파일 : <a href="file?rulB_num=${rulebook.rulB_num}">${rulebook.filename}</a></li>
 	</ul>
 	</c:if>
 	<div class="detail-content">
