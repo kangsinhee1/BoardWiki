@@ -128,7 +128,9 @@ public class ItemController {
 		model.addAttribute("maxtime",maxtime);
 
 		return new ModelAndView("item_detail","item",item); 
-	}
+	}/*=========================
+	 * 장바구니에 데이터 담기
+	 *=========================*/
 	@PostMapping("/item/item_detail")
 	public String submit(@Valid CartVO cartVO,
 			BindingResult result,
