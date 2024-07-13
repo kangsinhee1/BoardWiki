@@ -31,6 +31,9 @@ public interface PointMapper {
 	//포인트 확인
 	@Select("SELECT * FROM point_total WHERE mem_num = #{mem_num}")
 	public Integer selectPointTotal(Long mem_num);
+	//포인트 등록
+	@Insert("INSERT INTO point_total (point_total,mem_num) VALUES (#{point_total},#{mem_num})")
+	public void insertpointtotal(PointVO pointVO);
 	
 	//포인트 게임
 	//포인트게임 번호 생성

@@ -67,5 +67,5 @@ server:
       force: true    
   tomcat:
     max-http-form-post-size: 200MB
-    
+  address: 0.0.0.0
     

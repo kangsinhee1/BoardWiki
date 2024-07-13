@@ -1,5 +1,7 @@
 package kr.spring.member.service;
 
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -7,6 +9,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.member.dao.MemberMapper;
 import kr.spring.member.vo.MemberVO;
+import kr.spring.point.dao.PointMapper;
+import kr.spring.point.vo.PointVO;
+import kr.spring.stream.dao.StreamKeyMapper;
+import kr.spring.stream.vo.StreamKeyVO;
 
 @Service
 @Transactional
@@ -17,6 +23,12 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Autowired
     PasswordEncoder passwordEncoder;
+	
+	@Autowired
+	StreamKeyMapper streamKeyMapper;
+	
+	@Autowired
+	PointMapper pointMapper;
 	
 	@Override
 	public MemberVO selectMember(Long mem_num) {
@@ -35,6 +47,19 @@ public class MemberServiceImpl implements MemberService {
 	    // 회원 정보 저장
 	    memberMapper.insertMember(membervo);
 	    memberMapper.insertMember_detail(membervo);
+	    
+	    //회원 스트림키 부여
+	    String streamKey = UUID.randomUUID().toString();
+        StreamKeyVO key = new StreamKeyVO();
+        key.setMem_num(membervo.getMem_num());
+        key.setStr_key(streamKey);
+        streamKeyMapper.save(key);
+        
+        //회원 포인트 부여
+        PointVO point = new PointVO();
+        point.setPoint_total(1000);
+        point.setMem_num(membervo.getMem_num());
+        pointMapper.insertpointtotal(point);
 	}
 
 	@Override

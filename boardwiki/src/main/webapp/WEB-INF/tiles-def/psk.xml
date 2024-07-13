@@ -25,6 +25,14 @@
 		<put-attribute name="title" value="포인트 게임 관리"/>
 		<put-attribute name="body" value="/WEB-INF/views/point/manageGame.jsp"/>
 	</definition>
+	<definition name="broadcast-list" extends="main">
+		<put-attribute name="title" value="방송 리스트"/>
+		<put-attribute name="body" value="/WEB-INF/views/stream/broadcast-liste.jsp"/>
+	</definition>
+	<definition name="broadcast-page" extends="main">
+		<put-attribute name="title" value="방송"/>
+		<put-attribute name="body" value="/WEB-INF/views/stream/broadcast-page.jsp"/>
+	</definition>
 </tiles-definitions>
 
 
