@@ -1,6 +1,7 @@
 package kr.spring.cart.service;
 
 import java.util.List;
+
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +19,6 @@ public class CartServiceImpl implements CartService{
 	CartMapper cartMapper;
 
 	@Override
-	public CartVO selectCart(Long mem_num) {
-		return cartMapper.selectCart(mem_num);
-	}
-	@Override
 	public void insertCart(CartVO cart) {
 		cartMapper.insertCart(cart);
 	}
@@ -29,5 +26,15 @@ public class CartServiceImpl implements CartService{
 	@Override
 	public void updateCart(CartVO cart) {
 		cartMapper.updateCart(cart);
+	}
+
+	@Override
+	public List<CartVO> selectCartList(Map<String, Object> map) {
+		return cartMapper.selectCartList(map);
+	}
+
+	@Override
+	public Integer selectRowCount(Map<String, Object> map) {
+		return null;
 	}
 }

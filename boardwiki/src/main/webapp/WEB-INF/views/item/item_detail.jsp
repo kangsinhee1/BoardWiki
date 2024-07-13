@@ -25,7 +25,7 @@
 					<p>재고:${item.item_stock}개</p>
 					<p>가격:${item.item_price}원</p>
 				</div>
-<%-- 				<c:if test="${member.mem_num != null}"> --%>
+				<c:if test="${!empty member.mem_num}">
  				<div class="text-box2" style="display: inline-block; vertical-align: top;">
 					<p>개&nbsp;수&nbsp;:&nbsp;</p><input><p>&nbsp;개</p><br>
 					<button>바로구매</button>
@@ -33,8 +33,8 @@
 					 장바구니
  					</button> 
  				</div>
-<%-- 				</c:if> --%>
-<%-- 				<c:if test="${member.mem_num = null}"> --%>
+				</c:if>
+<%-- 				<c:if test="${empty member.mem_num}"> --%>
 <!-- 				<div class="text-box2" style="display: inline-block; vertical-align: top;"> -->
 <!-- 					<p>로그인 후 이용해주세요</p><br> -->
 <!-- 					<button>로그인</button> -->

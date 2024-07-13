@@ -41,12 +41,12 @@ public class CartController {
 	@GetMapping("/cart/cart")
 	public String submit(@Valid CartVO cartVO,
 			BindingResult result,
-			@RequestParam(value = "item_num", required = true) Long item_num,
+			@RequestParam(value = "mem_num", required = true) Long mem_num,
 			HttpServletRequest request,
 			HttpSession session,
 			Model model) throws IllegalStateException, IOException {
 		log.debug("<<장바구니 생성>> : " + cartVO);
-		log.debug("Received mem_num: " + item_num);
+		log.debug("Received mem_num: " + mem_num);
 
 		if (result.hasErrors()) {
 			return "/item/detail";
@@ -54,7 +54,6 @@ public class CartController {
 
 		MemberVO vo = (MemberVO)session.getAttribute("user");
 		cartVO.setMem_num(vo.getMem_num());
-		cartVO.setItem_num(item_num);
 		
 		cartService.insertCart(cartVO);
 		
