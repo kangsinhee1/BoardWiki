@@ -35,6 +35,6 @@ public class CartServiceImpl implements CartService{
 
 	@Override
 	public Integer selectRowCount(Map<String, Object> map) {
-		return null;
+		return cartMapper.selectRowCount(map);
 	}
 }

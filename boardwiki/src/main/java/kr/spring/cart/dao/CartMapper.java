@@ -14,9 +14,9 @@ import kr.spring.cart.vo.CartVO;
 public interface CartMapper {
 	//장바구니
 	public List<CartVO> selectCartList(Map<String,Object> map);
+	public Integer selectRowCount(Map<String, Object> map);
 	@Insert("INSERT INTO cart (mem_num,item_num,item_quantity) VALUES (#{mem_num},#{item_num},#{item_quantity})")
 	public void insertCart(CartVO cart);
 	@Update("UPDATE cart set item_num=#{item_num},item_quantity=#{item_quantity} WHERE mem_num=#{mem_num}")
 	public void updateCart(CartVO cart);
-	
 }

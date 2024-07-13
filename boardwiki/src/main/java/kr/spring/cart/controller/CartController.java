@@ -1,6 +1,9 @@
 package kr.spring.cart.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -21,6 +24,7 @@ import kr.spring.cart.service.CartService;
 import kr.spring.cart.vo.CartVO;
 import kr.spring.item.vo.ItemVO;
 import kr.spring.member.vo.MemberVO;
+import kr.spring.util.PagingUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -30,7 +34,7 @@ public class CartController {
 	@Autowired
 	private CartService cartService;
 
-	//자바빈(vo) 초기화
+	//자바빈(VO) 초기화
 	@ModelAttribute
 	public CartVO initCommand() {
 		return new CartVO();
@@ -38,22 +42,25 @@ public class CartController {
 	/*=========================
 	 * 장바구니에 데이터 담기
 	 *=========================*/
-	@GetMapping("/cart/cart")
+	@PostMapping("/cart/cart")
 	public String submit(@Valid CartVO cartVO,
 			BindingResult result,
-			@RequestParam(value = "mem_num", required = true) Long mem_num,
 			HttpServletRequest request,
 			HttpSession session,
 			Model model) throws IllegalStateException, IOException {
 		log.debug("<<장바구니 생성>> : " + cartVO);
-		log.debug("Received mem_num: " + mem_num);
 
-		if (result.hasErrors()) {
-			return "/item/detail";
-		}
-
+		if(result.hasErrors()) {
+	        model.addAttribute("message", "장바구니 처리 중 오류가 발생했습니다.");
+	        model.addAttribute("url", request.getContextPath() + "/errorPage");
+	        return "common/resultAlert"; // 에러가 발생했을 때 다른 페이지로 리디렉션
+	    }
+		
 		MemberVO vo = (MemberVO)session.getAttribute("user");
+		ItemVO voi = (ItemVO)session.getAttribute("item");
+		
 		cartVO.setMem_num(vo.getMem_num());
+		cartVO.setItem_num(voi.getItem_num());
 		
 		cartService.insertCart(cartVO);
 		
@@ -62,4 +69,5 @@ public class CartController {
 
 		return "common/resultAlert";
 	}
+	
 }

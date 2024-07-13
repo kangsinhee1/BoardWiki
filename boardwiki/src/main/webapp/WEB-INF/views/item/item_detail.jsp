@@ -25,15 +25,15 @@
 					<p>재고:${item.item_stock}개</p>
 					<p>가격:${item.item_price}원</p>
 				</div>
-				<c:if test="${!empty member.mem_num}">
+<%-- 				<c:if test="${!empty member.mem_num}"> --%>
  				<div class="text-box2" style="display: inline-block; vertical-align: top;">
 					<p>개&nbsp;수&nbsp;:&nbsp;</p><input><p>&nbsp;개</p><br>
 					<button>바로구매</button>
- 					<button onclick="location.href='${pageContext.request.contextPath}/cart/cart?mem_num=${member.mem_num}'">
+ 					<button onclick="location.href='${pageContext.request.contextPath}/cart/cart'">
 					 장바구니
  					</button> 
  				</div>
-				</c:if>
+<%-- 				</c:if> --%>
 <%-- 				<c:if test="${empty member.mem_num}"> --%>
 <!-- 				<div class="text-box2" style="display: inline-block; vertical-align: top;"> -->
 <!-- 					<p>로그인 후 이용해주세요</p><br> -->
