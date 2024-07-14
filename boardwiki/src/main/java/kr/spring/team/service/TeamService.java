@@ -79,6 +79,8 @@ public interface TeamService {
 			//모임 게시판 조회수
 			public void updateHitTeamBoard(long teaB_num);
 			// 모임게시판 댓글
+			//댓글 확인
+			public TeamReplyVO getTeamReply(long teaR_num);
 			//댓글 목록
 			public List<TeamReplyVO> selectTeamBoardReplyList(Map<String,Object>map);
 			//댓글 갯수

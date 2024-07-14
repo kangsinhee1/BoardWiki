@@ -246,7 +246,7 @@ public class TeamController {
 			return "common/resultAlert";
 		}
 		teamService.deleteTeamApply(teaA_num);
-		return "redirect:/team/myTeam";
+		return "redirect:/team/myTeam2";
 	}
 
 
@@ -302,18 +302,30 @@ public class TeamController {
 	@GetMapping("/team/teamBoardWrite")
 	public String insertTeamBoard(HttpServletRequest request,
 			HttpSession session,
-			Model model) {
-
-		long teaB_num = (long)session.getAttribute("teaB_num");
+			Model model, TeamBoardVO teamBoardVO) {
+		
+		log.debug("글작성 폼 호출 : " + teamBoardVO);
+		long tea_num = teamBoardVO.getTea_num();
+		
+		
+		
 		MemberVO member =(MemberVO)session.getAttribute("user");
 		if(member== null) {
 			model.addAttribute("message", "로그인후 작성 가능합니다.");
 			model.addAttribute("url", 
 					request.getContextPath()+"/member/login");
-			model.addAttribute("teaB_num",teaB_num);
+			model.addAttribute("teaB_num",tea_num);
 			return "common/resultAlert";
 
 		}
+		TeamVO team1 = teamService.detailTeam(tea_num);
+			if(team1.getMem_num() == member.getMem_num()) {
+				model.addAttribute("admin",true);
+			}else {
+				model.addAttribute("admin",false);
+			}
+		
+		
 		return "teamBoardWrite";
 	}
 
@@ -396,7 +408,6 @@ public class TeamController {
 				map.put("end",page.getEndRow());
 				map.put("tea_num", tea_num);
 				list = teamService.selectTeamBoardList(map);
-	
 			}
 			model.addAttribute("count",count);
 			model.addAttribute("list",list);
@@ -431,7 +442,7 @@ public class TeamController {
 		int count = teamService.selectTeamBoardRowCount(map);
 
 		//페이지 처리
-		PagingUtil page = new PagingUtil(keyfield, keyword, pageNum,count,20,10,"teamBoardAdmin","&order="+order);
+		PagingUtil page = new PagingUtil(keyfield, keyword, pageNum,count,20,10,"teamBoardUser","&order="+order);
 		List<TeamBoardVO> list = null;
 		if(count >0) {
 			map.put("order", order);
@@ -549,6 +560,37 @@ public class TeamController {
 		return "common/resultAlert";
 	}
 	// 글 삭제
+	@GetMapping("/team/teamBoardDelete")
+	public String submitDelete(long teaB_num,
+			                   HttpServletRequest request, Model model) {
+		log.debug("<<게시판 글 삭제 - board_num>> : " + teaB_num);
+		
+		//DB에 저장된 파일 정보 구하기
+		TeamBoardVO db_board = teamService.getTeamBoardDetail(teaB_num);
+		
+		//글 삭제
+		teamService.deleteTeamBoard(teaB_num);
+		
+		if(db_board.getFilename()!=null) {
+			//파일 삭제
+			FileUtil.removeFile(request, db_board.getFilename());
+		}
+		//해당 모임의 관리자만 접속가능하게 처리
+		TeamVO team1 = teamService.detailTeam(db_board.getTea_num());
+		if(team1.getMem_num() != db_board.getMem_num()) {
+			return "redirect:teamBoardUser?tea_num="+db_board.getTea_num();
+		}else {
+			return "redirect:teamBoardAdmin?tea_num="+db_board.getTea_num();
+		}
+	}
+	//모임 관리
+	@GetMapping("/team/teamControl")
+	public String teamControl() {
+		
+		return "teamControl";
+	}
+	
+	
 
 
 

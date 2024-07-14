@@ -121,19 +121,24 @@ public interface TeamMapper {
 		@Update("UPDATE team_board SET teaB_hit = teaB_hit+1 WHERE teaB_num=#{teaB_num}")
 		public void updateHitTeamBoard(long teaB_num);
 		// 모임게시판 댓글
+		//댓글 확인
+		@Select("SELECT * FROM team_reply WHERE teaR_num = #{teaR_num}")
+		public TeamReplyVO getTeamReply(long teaR_num);
 		//댓글 목록
 		public List<TeamReplyVO> selectTeamBoardReplyList(Map<String,Object>map);
 		//댓글 갯수
 		@Select("SELECT COUNT(*) FROM team_reply WHERE teaB_num=#{teaB_num}")
-		
 		public Integer selectTeamBoardReplyCount(Map<String,Object>map);
 		//댓글 등록
 		public void insertTeamBoardReply(TeamReplyVO teamReply);
 		//댓글 수정
+		@Update("UPDATE team_reply SET teaR_content=#{teaR_content},tear_mdate=SYSDATE WHERE teaR_num = #{teaR_num}")
 		public void updateTeamBoardReply(TeamReplyVO teamReply);
 		//댓글 삭제
+		@Delete("DELETE FROM team_reply WHERE teaR_num = #{teaR_num}")
 		public void deleteTeamBoardReply(long teaR_num);
 		//부모글 삭제시 댓글 삭제
+		@Delete("DELETE FROM team_reply WHERE teaB_num = #{teaB_num}")
 		public void deleteTeamBoardReplyByTeamBoardNum(long teaB_num);
 		
 		

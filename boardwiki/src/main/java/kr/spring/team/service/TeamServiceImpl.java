@@ -167,6 +167,7 @@ public class TeamServiceImpl implements TeamService {
 
 	@Override
 	public void deleteTeamBoard(long teaB_num) {
+		teamMapper.deleteTeamBoardReplyByTeamBoardNum(teaB_num);
 		teamMapper.deleteTeamBoard(teaB_num);
 	}
 
@@ -192,29 +193,34 @@ public class TeamServiceImpl implements TeamService {
 
 	@Override
 	public void insertTeamBoardReply(TeamReplyVO teamReply) {
-		// TODO Auto-generated method stub
-		
+		teamMapper.insertTeamBoardReply(teamReply);
 	}
 
 	@Override
 	public void updateTeamBoardReply(TeamReplyVO teamReply) {
+		teamMapper.updateTeamBoardReply(teamReply);
 	}
+	
 
 	@Override
 	public void deleteTeamBoardReply(long teaR_num) {
-		// TODO Auto-generated method stub
+		teamMapper.deleteTeamBoardReply(teaR_num);
 		
 	}
 
 	@Override
 	public void deleteTeamBoardReplyByTeamBoardNum(long teaB_num) {
-		// TODO Auto-generated method stub
-		
+		teamMapper.deleteTeamApplyByTeaNum(teaB_num);
 	}
 
 	@Override
 	public List<TeamApplyVO> selectTeamApplyListByMem_Num (long mem_num) {
 		return teamMapper.selectTeamApplyListByMem_Num(mem_num);
+	}
+
+	@Override
+	public TeamReplyVO getTeamReply(long teaR_num) {
+		return teamMapper.getTeamReply(teaR_num);
 	}
 
 }

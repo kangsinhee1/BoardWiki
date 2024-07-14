@@ -75,6 +75,15 @@
 		<put-attribute name="css" value="/WEB-INF/views/team/teamCSS.jsp"/>
 		<put-attribute name="body" value="/WEB-INF/views/team/teamBoardUpdate.jsp"/>
 	</definition>
+	<definition name="teamControl" template="/WEB-INF/views/template/layout_myteam.jsp">
+		<put-attribute name="title" value="모임 게시판 관리"/>
+		<put-attribute name="css" value="/WEB-INF/views/team/teamCSS.jsp"/>
+		<put-attribute name="top-header" value="/WEB-INF/views/template/top-header.jsp"/>
+		<put-attribute name="header" value="/WEB-INF/views/template/header.jsp"/>
+		<put-attribute name="nav" value="/WEB-INF/views/team/teamControl-nav.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/team/teamControl.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp"/>
+	</definition>
 </tiles-definitions>
 
 

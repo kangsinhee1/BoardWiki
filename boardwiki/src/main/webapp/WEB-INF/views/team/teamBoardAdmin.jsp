@@ -7,7 +7,7 @@
 <div class="page-main">
     <h2>(${TEAM.tea_name}) 모임 게시판</h2>
     <div class="align-right">
-        <input type="button" value="모임관리">
+        <input type="button" value="모임관리" onclick="location.href='${pageContext.request.contextPath}/team/teamControl'">
     </div>
     <hr>
     
@@ -16,7 +16,7 @@
     </div>
     
     <form action="teamBoardAdmin" id="search_form" method="get">
-        <input type="hidden" id="teaB_num" name="teaB_num" value="${teaB_num}">
+        <input type="hidden" id="tea_num" name="tea_num" value="${tea_num}">
         <ul class="search">
             <li>
                 <select name="keyfield" id="keyfield">
@@ -38,7 +38,7 @@
                 <option value="2" <c:if test="${param.order == 2}">selected</c:if>>조회수</option>
                 <option value="3" <c:if test="${param.order == 3}">selected</c:if>>댓글순</option>
             </select>
-            <input type="button" value="글쓰기" onclick="location.href='${pageContext.request.contextPath}/team/teamBoardWrite'">
+            <input type="button" value="글쓰기" onclick="location.href='${pageContext.request.contextPath}/team/teamBoardWrite?tea_num=${tea_num}'">
         </div>
     </form>
 
@@ -77,7 +77,7 @@
                     </td>
                     <td class="align-left">
                         <a href="teamBoardDetail?teaB_num=${team.teaB_num}">
-                            ${team.teaB_title}
+                            ${team.teaB_title}(${team.teaR_cnt})
                         </a>
                     </td>
                     <td class="align-center">${team.mem_nickname}</td>
