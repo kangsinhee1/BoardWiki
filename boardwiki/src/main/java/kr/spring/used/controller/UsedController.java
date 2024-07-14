@@ -47,6 +47,9 @@ public class UsedController {
 			 @RequestParam(defaultValue="1") int order,
 			 String keyfield,String keyword,Model model) {
 		
+		/*
+		 * if(keyword != null || keyword !="") { keyword = keyword.toLowerCase(); }
+		 */
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);

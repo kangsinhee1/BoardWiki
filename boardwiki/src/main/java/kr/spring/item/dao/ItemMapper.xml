@@ -11,10 +11,12 @@
        <include refid="itemGenreSearch"></include>
 	   <include refid="itemOrder"></include>
      </select>
+     
      <select id="selectRowCount2" resultType="integer">
        SELECT
           COUNT(*)
        FROM item
+        <include refid="itemNameSearch"></include>
      </select>
     <!-- 상품 목록 인기 -->
     <select id="selectList" parameterType="map" resultType="itemVO">
@@ -25,17 +27,23 @@
 	 	)a)WHERE rnum >= 1 AND rnum <= 3
 	 	]]>
 	 </select>
+	 
+	 
      <!-- 최고 평점 -->
      <select id="selectList2" parameterType="map" resultType="itemVO">
 	  
 	     SELECT * FROM (SELECT * FROM item ORDER BY item_average DESC) WHERE ROWNUM 
 	     <![CDATA[<= 3]]>
      </select>
+     
+     
      <!-- 신작 게임 -->
      <select id="selectList3" parameterType="map" resultType="itemVO">
 	     SELECT * FROM (SELECT * FROM item ORDER BY item_year DESC) WHERE ROWNUM 
 	     <![CDATA[<= 3]]>
      </select>
+     
+     
      <!-- 장바구니 -->
      <insert id="insertCart" parameterType="cartVO">
         INSERT INTO cart(
@@ -47,12 +55,18 @@
           #{item_num},
           #{item_quantity})
      </insert>
+     
+     
      <!-- 상품 목록 -->
 	 <sql id="itemNameSearch">
 		<where>
+		<if test="keyword !=null and keyword != ''">
 			item_name LIKE '%' || #{keyword} || '%'
+		</if>
 		</where>
 	</sql>
+	
+	
 	
     <select id="selectListByKeyword" parameterType="map" resultType="itemVO">
 	 	SELECT
