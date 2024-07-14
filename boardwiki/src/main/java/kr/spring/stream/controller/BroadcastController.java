@@ -1,11 +1,13 @@
 package kr.spring.stream.controller;
 
 import kr.spring.stream.service.BroadcastService;
+import kr.spring.stream.service.StreamKeyService;
 import kr.spring.stream.vo.BroadcastVO;
+import kr.spring.stream.vo.StreamKeyVO;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -15,6 +17,9 @@ public class BroadcastController {
 
     @Autowired
     private BroadcastService broadcastService;
+    
+    @Autowired
+    private StreamKeyService streamKeyService;
 
     @GetMapping("/streaming/broadcasts")
     public String getBroadcastList(HttpServletRequest request) {
@@ -25,7 +30,9 @@ public class BroadcastController {
 
     @GetMapping("/streaming/broadcast")
     public String getBroadcastPage(Long str_num, HttpServletRequest request) {
-        BroadcastVO broadcast = broadcastService.getBroadcastByUsername(str_num);
+        BroadcastVO broadcast = broadcastService.findByMemNum(str_num);
+        StreamKeyVO streamkey = streamKeyService.selectstream(str_num);
+        request.setAttribute("streamkey", streamkey);
         request.setAttribute("broadcast", broadcast);
         return "broadcast-page";
     }

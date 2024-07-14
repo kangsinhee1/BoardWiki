@@ -16,4 +16,14 @@ public class StreamKeyServiceImpl implements StreamKeyService {
     public StreamKeyVO findByStreamKey(String str_key) {
         return streamKeyMapper.findByStreamKey(str_key);
     }
+
+	@Override
+	public StreamKeyVO findByUsername(Long mem_num) {
+		return streamKeyMapper.findByUsername(mem_num);
+	}
+
+	@Override
+	public StreamKeyVO selectstream(Long str_key) {
+		return streamKeyMapper.selectstream(str_key);
+	}
 }

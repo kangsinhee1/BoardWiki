@@ -6,5 +6,8 @@ import kr.spring.stream.vo.BroadcastVO;
 
 public interface BroadcastService {
     List<BroadcastVO> getAllBroadcasts();
-    BroadcastVO getBroadcastByUsername(Long str_num);
+    BroadcastVO findByUsername(Long str_num);
+    void startStream(BroadcastVO broadcast);
+    void updateBroadcast(BroadcastVO broadcast);
+    BroadcastVO findByMemNum(Long mem_num);
 }

@@ -8,8 +8,8 @@ import lombok.ToString;
 @Setter
 @ToString
 public class BroadcastVO {
-	private Long strD_Num;
+	private Long strD_num;
     private Long mem_num;
-    private String str_key;
-    private boolean isLive;
+    private Long str_num;
+    private int isLive;
 }
