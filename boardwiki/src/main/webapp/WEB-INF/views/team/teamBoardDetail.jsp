@@ -4,10 +4,12 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/videoAdapter.js"></script>
+<script src="${pageContext.request.contextPath}/js/teamBoard.reply.js"></script>
 <!-- 게시판 글 상세 시작 -->
 <div class="page-main">
 	<h2> ${board.teaB_title}</h2>
 	<ul class="detail-info">
+	<li><input type="hidden" id="teaB_num" value="${board.teaB_num}"></li>
 		<li> ${board.mem_nickname} <br>
 			 <c:if test="${empty board.teaB_mdate}">
             작성일 : ${fn:substring(board.teaB_rdate, 0, 10)}
@@ -30,7 +32,7 @@
 	<div class="align-right">
 		<c:if test="${!empty user &&user.mem_num == board.mem_num}">
 			<input type="button" value="수정"
-				onclick="location.href='teamBoardupdate?teaB_num=${board.teaB_num}'">
+				onclick="location.href='teamBoardUpdate?teaB_num=${board.teaB_num}'">
 			<input type="button" value="삭제" id="delete_btn">
 			<script type="text/javascript">
 	 			const delete_btn = document.getElementById('delete_btn');

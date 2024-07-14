@@ -16,7 +16,7 @@
     </div>
     
     <form action="teamBoardAdmin" id="search_form" method="get">
-        <input type="hidden" id="tea_num" name="tea_num" value="${teaB_num}">
+        <input type="hidden" id="teaB_num" name="teaB_num" value="${teaB_num}">
         <ul class="search">
             <li>
                 <select name="keyfield" id="keyfield">
@@ -76,7 +76,7 @@
                         </c:choose>
                     </td>
                     <td class="align-left">
-                        <a href="teamBoardDetail?teab_num=${team.teaB_num}">
+                        <a href="teamBoardDetail?teaB_num=${team.teaB_num}">
                             ${team.teaB_title}
                         </a>
                     </td>

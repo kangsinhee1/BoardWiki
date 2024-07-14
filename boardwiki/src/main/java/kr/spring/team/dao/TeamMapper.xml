@@ -227,6 +227,34 @@
 	 	WHERE rnum >= #{start} AND rnum <= #{end} AND tea_num=#{tea_num}
 	 	]]>	
 	 </select>
+	 <!-- 댓글 목록 --> 
+ 	<select id="selectTeamBoardReplyList" parameterType="map"
+ 	                            resultType="teamReplyVO">
+ 		SELECT
+ 		   *
+ 		FROM (SELECT
+ 		        a.*,
+ 		        rownum rnum
+ 		      FROM (SELECT
+ 		              teaR_num,
+ 		              <![CDATA[
+ 		              REPLACE(REPLACE(teaR_content,'<','&lt;'),'>','&gt;') teaR_content,
+ 		              ]]>
+ 		              teaR_rdate,
+ 		              teaR_mdate,
+ 		              teaB_num,
+ 		              mem_num,
+ 		              mem_nickname,
+ 		              click_num,
+ 		            FROM team_reply
+ 		            JOIN member USING(mem_num)
+ 		            /*로그인 한 상태에서 클릭한 사람의 정보 읽기, 로그인하지 않으면 0 전달*/
+ 		            WHERE teaB_num=#{teaB_num}
+ 		            ORDER BY teaR_num DESC)a)
+ 		<![CDATA[
+ 		WHERE rnum >= #{start} AND rnum <= #{end}
+ 		]]>            
+ 	</select>
 	  
  </mapper>
 

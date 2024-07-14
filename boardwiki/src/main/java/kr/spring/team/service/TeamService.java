@@ -71,7 +71,7 @@ public interface TeamService {
 			//모임 게시판 상세
 			public TeamBoardVO getTeamBoardDetail(long teaB_num);
 			//모임 게시판 수정
-			public void updateTeamBoard(long teaB_num);
+			public void updateTeamBoard(TeamBoardVO teamBoard);
 			//모임 게시판 삭제
 			public void deleteTeamBoard(long teaB_num);
 			//모임 게시판 파일 관리

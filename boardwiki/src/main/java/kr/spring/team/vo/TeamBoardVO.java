@@ -1,5 +1,7 @@
 package kr.spring.team.vo;
 
+import javax.validation.constraints.NotBlank;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Getter;
@@ -11,7 +13,9 @@ import lombok.ToString;
 public class TeamBoardVO {
 	private long teaB_num; //글번호
 	private long teaB_status; //글 상태
+	@NotBlank
 	private String teaB_title; //글제목
+	@NotBlank
 	private String teaB_content;//글 내용
 	private String teaB_rdate; //등록일
 	private String teaB_mdate; //수정일

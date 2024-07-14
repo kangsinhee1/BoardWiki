@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.spring.board.vo.BoardVO;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.team.controller.TeamController;
 import kr.spring.team.service.TeamService;
@@ -363,8 +364,8 @@ public class TeamController {
 				@RequestParam(defaultValue="1") int pageNum,
 				@RequestParam(defaultValue="1") int order,
 				String keyfield,String keyword) {
-			session.setAttribute("teaB_num", tea_num);
-			model.addAttribute("teaB_num",tea_num);
+			session.setAttribute("tea_num", tea_num);
+			model.addAttribute("tea_num",tea_num);
 			MemberVO member =(MemberVO)session.getAttribute("user");
 			if(member== null) {
 				model.addAttribute("message", "로그인 해야 합니다.");
@@ -413,13 +414,13 @@ public class TeamController {
 			@RequestParam(defaultValue="1") int pageNum,
 			@RequestParam(defaultValue="1") int order,
 			String keyfield,String keyword) {
-		session.setAttribute("teaB_num", tea_num);
-		model.addAttribute("teaB_num",tea_num);
+		session.setAttribute("tea_num", tea_num);
+		model.addAttribute("tea_num",tea_num);
 		MemberVO member =(MemberVO)session.getAttribute("user");
 		if(member== null) {
 			model.addAttribute("message", "로그인 해야 합니다.");
 			model.addAttribute("url", 
-					request.getContextPath()+"/team/teamBoardList");
+					request.getContextPath()+"/member/login");
 			return "common/resultAlert";
 
 		}
@@ -451,11 +452,11 @@ public class TeamController {
 	
 	//글 상세 보기
 	@GetMapping("/team/teamBoardDetail")
-	public ModelAndView teamBoardDetail(long teab_num,Model model,HttpSession session) {
+	public ModelAndView teamBoardDetail(long teaB_num,Model model,HttpSession session) {
 		//해당 글의 조회수 증가
-		teamService.updateHitTeamBoard(teab_num);
+		teamService.updateHitTeamBoard(teaB_num);
 		
-		TeamBoardVO board = teamService.getTeamBoardDetail(teab_num);
+		TeamBoardVO board = teamService.getTeamBoardDetail(teaB_num);
 		
 		//해당 모임의 관리자만 접속가능하게 처리
 		TeamVO team1 = teamService.detailTeam(board.getTea_num());	
@@ -478,8 +479,76 @@ public class TeamController {
 		model.addAttribute("filename",board.getFilename());
 		return "downloadView";
 	}
+	//글 수정하기
+	@GetMapping("/team/teamBoardUpdate")
+	public String teamBoardUpdate(long teaB_num,HttpServletRequest request,HttpSession session, Model model) {
+		
+		//로그인 확인
+		MemberVO member =(MemberVO)session.getAttribute("user");
+		if(member== null) {
+			model.addAttribute("message", "로그인 해야 합니다.");
+			model.addAttribute("url", 
+					request.getContextPath()+"/member/login");
+			return "common/resultAlert";
+		}
+		//본인이 작성한글
+		TeamBoardVO board = teamService.getTeamBoardDetail(teaB_num);
+		if(member.getMem_num() != board.getMem_num()) {
+			model.addAttribute("message", "본인이 작성한 글만 수정가능합니다.");
+			model.addAttribute("url", 
+					request.getContextPath()+"/team/teamBoardDetail?teaB_num="+teaB_num);
+		}
+		model.addAttribute("teamBoardVO",board);
+		return "teamBoardUpdate";
+	}
 	
-
+	@PostMapping("/team/teamBoardUpdate")
+	public String updateTeamBoard(@Valid TeamBoardVO teamBoardVO, BindingResult result, HttpServletRequest request,HttpSession session, Model model) throws IllegalStateException, IOException {
+		
+		
+		if(result.hasErrors()) {
+			//title 또는 content가 입력되지 않아서 유효성 체크에 걸리면
+			//파일 정보를 잃어버리기 때문에 폼을 호출할 때 다시 파일 정보를
+			//셋팅해야 함
+			TeamBoardVO vo = teamService.getTeamBoardDetail(
+					teamBoardVO.getTeaB_num());
+			
+			teamBoardVO.setFilename(vo.getFilename());
+			return "teamBoardUpdate";
+		}
+		
+		
+		//로그인 확인
+		MemberVO member =(MemberVO)session.getAttribute("user");
+		if(member== null) {
+			model.addAttribute("message", "로그인 해야 합니다.");
+			model.addAttribute("url", 
+					request.getContextPath()+"/member/login");
+			return "common/resultAlert";
+		}
+		//본인이 작성한글
+		TeamBoardVO board = teamService.getTeamBoardDetail(teamBoardVO.getTeaB_num());
+		log.debug(board+"asdfaksdljfg asdjgklasdj glkasdjglkjlqkjweopitqj woiej");
+		if(member.getMem_num() != board.getMem_num()) {
+			model.addAttribute("message", "본인이 작성한 글만 수정가능합니다.");
+			model.addAttribute("url", 
+					request.getContextPath()+"/team/teamBoardDetail?teaB_num="+teamBoardVO.getTeaB_num());
+		}
+		TeamBoardVO db_teamBoard = teamService.getTeamBoardDetail(teamBoardVO.getTeaB_num());
+		teamBoardVO.setFilename(FileUtil.createFile(request, teamBoardVO.getUpload()));
+		if(teamBoardVO.getUpload()!= null && !teamBoardVO.getUpload().isEmpty()) {
+			FileUtil.removeFile(request, db_teamBoard.getFilename());
+		}
+		teamService.updateTeamBoard(teamBoardVO);
+		
+		model.addAttribute("message", "글 수정 완료!!");
+		model.addAttribute("url", 
+		 request.getContextPath() + "/team/teamBoardDetail?teaB_num="
+		                            +teamBoardVO.getTeaB_num());
+		
+		return "common/resultAlert";
+	}
+	// 글 삭제
 
 
 

@@ -14,7 +14,8 @@
 	           enctype="multipart/form-data"
 	                            modelAttribute="teamBoardVO">
 		<ul>
-			
+	<form:hidden path="mem_num"/>                            
+	<form:hidden path="teaB_num"/>                            
 			<li>
 				<form:label path="teaB_category">분류</form:label>
 				<form:select path="teaB_category" >
@@ -52,15 +53,50 @@
 		            } );
 			    </script> 
 			    <li>
-				<form:label path="upload">파일 업로드</form:label>
+				<form:label path="upload">파일업로드</form:label>
 				<input type="file" name="upload" id="upload">
+				<c:if test="${!empty teamBoardVO.filename}">
+				<div id="file_detail">
+					(${teamBoardVO.filename})파일이 등록되어 있습니다.
+					<input type="button" value="파일 삭제" id="file_del">
+				</div>
+				<script type="text/javascript">
+					$(function(){
+						$('#file_del').click(function(){
+							const choice = confirm('삭제하시겠습니까?');
+							if(choice){
+								$.ajax({
+									url:'deleteFile',
+									data:{teaB_num:${teamBoardVO.teaB_num}},
+									type:'post',
+									dataType:'json',
+									success:function(param){
+										if(param.result == 'logout'){
+											alert('로그인 후 사용하세요');
+										}else if(param.result == 'wrongAccess'){
+											alert('잘못된 접속입니다.');
+										}else if(param.result == 'success'){
+											$('#file_detail').hide();
+										}else{
+											alert('파일 삭제 오류 발생');
+										}
+									},
+									error:function(){
+										alert('네트워크 오류 발생');
+									}
+								});
+							}
+						});
+					});
+				</script>
+				</c:if>
 			</li>
 		</ul> 
 		<div class="align-center">
 			<form:button class="default-btn">전송</form:button>
 			<input type="button" value="목록"
 			  class="default-btn"
-			  onclick="location.href='teamBoardAdmin'">
+			  onclick="location.href='teamBoardAdmin?tea_num=${tea_num}'">
 		</div>                           
 	</form:form>
 </div>

@@ -109,10 +109,13 @@ public interface TeamMapper {
 		@Select("SELECT * FROM team_board WHERE teaB_num = #{teaB_num}")
 		public TeamBoardVO getTeamBoardDetail(long teaB_num);
 		//모임 게시판 수정
-		public void updateTeamBoard(long teaB_num);
+		@Update("UPDATE team_board set teaB_title=#{teaB_title}, teaB_content =#{teaB_content}, teaB_mdate = sysdate, teaB_category= #{teaB_category} ,filename= #{filename, jdbcType=VARCHAR} WHERE teaB_num = #{teaB_num}")
+		public void updateTeamBoard(TeamBoardVO teamBoard);
 		//모임 게시판 삭제
+		@Delete("DELETE FROM team_board WHERE teaB_num = #{teaB_num}")
 		public void deleteTeamBoard(long teaB_num);
 		//모임 게시판 파일 관리
+		@Update("UPDATE team_board set filename='' WHERE teaB_num = #{teaB_num}")
 		public void deleteTeamBoardFile(long teaB_num);
 		//모임 게시판 조회수
 		@Update("UPDATE team_board SET teaB_hit = teaB_hit+1 WHERE teaB_num=#{teaB_num}")
@@ -121,6 +124,8 @@ public interface TeamMapper {
 		//댓글 목록
 		public List<TeamReplyVO> selectTeamBoardReplyList(Map<String,Object>map);
 		//댓글 갯수
+		@Select("SELECT COUNT(*) FROM team_reply WHERE teaB_num=#{teaB_num}")
+		
 		public Integer selectTeamBoardReplyCount(Map<String,Object>map);
 		//댓글 등록
 		public void insertTeamBoardReply(TeamReplyVO teamReply);

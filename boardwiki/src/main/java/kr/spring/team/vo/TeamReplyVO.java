@@ -18,7 +18,7 @@ public class TeamReplyVO {
 	private String teaB_num;
 	private long mem_num;
 	private String mem_email;
-	
+	private String mem_nickname;
 	private long click_num; //클릭한 사람의 회원정보
 	
 	public void setTeaR_rdate(String teaR_rdate) {
