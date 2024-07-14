@@ -13,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import kr.spring.item.service.ItemService;
+import kr.spring.item.vo.ItemVO;
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.PagingUtil;
@@ -21,6 +23,9 @@ import kr.spring.util.PagingUtil;
 public class AdminController {
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private ItemService itemService;
 	
 	
 	@GetMapping("/admin/adminPage")
@@ -57,10 +62,10 @@ public class AdminController {
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
 		
-		int count = memberService.countAllmember(map);
+		int count = memberService.countAllmember(map); 
 		
 		PagingUtil page =
-				new PagingUtil(keyfield,keyword,pageNum,count,20,10,"mainList");
+				new PagingUtil(keyfield,keyword,pageNum,count,10,10,"memberManage");
 		 
 		List<MemberVO> list = null;
 	    if(count > 0) {
@@ -75,5 +80,241 @@ public class AdminController {
 		model.addAttribute("page", page.getPage());
 		
 		return "memberManage";
+	}
+	@GetMapping("/adminPage/gameManage")
+	public String gameManagePage(@RequestParam(defaultValue="1") int pageNum,
+								 @RequestParam(defaultValue="") String category,
+								 String keyfield,	
+								 String keyword,Model model,
+								 HttpSession session,
+								 HttpServletRequest request) {
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user.getMem_auth()!= 9) {
+			model.addAttribute("message","관리자 등급만 접속할 수 있습니다.");
+			model.addAttribute("url",request.getContextPath()+"/main/login");
+			return "common/resultAlert";
+		}
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		map.put("category", category);
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		
+		int count = itemService.selectRowCount2(map);
+		
+		PagingUtil page =
+				new PagingUtil(keyfield,keyword,pageNum,count,20,10,"gameManage");
+		
+		List<ItemVO> list = null;
+		if(count > 0) {
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			
+			
+			list = itemService.selectList(map);  
+		}
+		
+		model.addAttribute("count", count);
+		model.addAttribute("list", list);
+		model.addAttribute("page", page.getPage());
+		
+		return "gameManage";
+	}
+	@GetMapping("/adminPage/orderManage")
+	public String orderManagePage(@RequestParam(defaultValue="1") int pageNum,
+			@RequestParam(defaultValue="") String category,
+			String keyfield,	
+			String keyword,Model model,
+			HttpSession session,
+			HttpServletRequest request) {
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user.getMem_auth()!= 9) {
+			model.addAttribute("message","관리자 등급만 접속할 수 있습니다.");
+			model.addAttribute("url",request.getContextPath()+"/main/login");
+			return "common/resultAlert";
+		}
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		map.put("category", category);
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		
+		int count = itemService.selectRowCount2(map);
+		
+		PagingUtil page =
+				new PagingUtil(keyfield,keyword,pageNum,count,20,10,"gameManage");
+		
+		List<ItemVO> list = null;
+		if(count > 0) {
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			
+			
+			list = itemService.selectList(map);  
+		}
+		
+		model.addAttribute("count", count);
+		model.addAttribute("list", list);
+		model.addAttribute("page", page.getPage());
+		
+		return "orderManage";
+	}
+	@GetMapping("/adminPage/streamingManage")
+	public String streamingManagePage(@RequestParam(defaultValue="1") int pageNum,
+			@RequestParam(defaultValue="") String category,
+			String keyfield,	
+			String keyword,Model model,
+			HttpSession session,
+			HttpServletRequest request) {
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user.getMem_auth()!= 9) {
+			model.addAttribute("message","관리자 등급만 접속할 수 있습니다.");
+			model.addAttribute("url",request.getContextPath()+"/main/login");
+			return "common/resultAlert";
+		}
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		map.put("category", category);
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		
+		int count = itemService.selectRowCount2(map);
+		
+		PagingUtil page =
+				new PagingUtil(keyfield,keyword,pageNum,count,20,10,"gameManage");
+		
+		List<ItemVO> list = null;
+		if(count > 0) {
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			
+			
+			list = itemService.selectList(map);  
+		}
+		
+		model.addAttribute("count", count);
+		model.addAttribute("list", list);
+		model.addAttribute("page", page.getPage());
+		
+		return "streamingManage";
+	}
+	
+	@GetMapping("/adminPage/pointManage")
+	public String pointManagePage(@RequestParam(defaultValue="1") int pageNum,
+			@RequestParam(defaultValue="") String category,
+			String keyfield,	
+			String keyword,Model model,
+			HttpSession session,
+			HttpServletRequest request) {
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user.getMem_auth()!= 9) {
+			model.addAttribute("message","관리자 등급만 접속할 수 있습니다.");
+			model.addAttribute("url",request.getContextPath()+"/main/login");
+			return "common/resultAlert";
+		}
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		map.put("category", category);
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		
+		int count = itemService.selectRowCount2(map);
+		
+		PagingUtil page =
+				new PagingUtil(keyfield,keyword,pageNum,count,20,10,"gameManage");
+		
+		List<ItemVO> list = null;
+		if(count > 0) {
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			
+			
+			list = itemService.selectList(map);  
+		}
+		
+		model.addAttribute("count", count);
+		model.addAttribute("list", list);
+		model.addAttribute("page", page.getPage());
+		
+		return "pointManage";
+	}
+	
+	@GetMapping("/adminPage/reportManage")
+	public String reportManagePage(@RequestParam(defaultValue="1") int pageNum,
+			@RequestParam(defaultValue="") String category,
+			String keyfield,	
+			String keyword,Model model,
+			HttpSession session,
+			HttpServletRequest request) {
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user.getMem_auth()!= 9) {
+			model.addAttribute("message","관리자 등급만 접속할 수 있습니다.");
+			model.addAttribute("url",request.getContextPath()+"/main/login");
+			return "common/resultAlert";
+		}
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		map.put("category", category);
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		
+		int count = itemService.selectRowCount2(map);
+		
+		PagingUtil page =
+				new PagingUtil(keyfield,keyword,pageNum,count,20,10,"gameManage");
+		
+		List<ItemVO> list = null;
+		if(count > 0) {
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			
+			
+			list = itemService.selectList(map);  
+		}
+		
+		model.addAttribute("count", count);
+		model.addAttribute("list", list);
+		model.addAttribute("page", page.getPage());
+		
+		return "reportManage";
+	}
+	@GetMapping("/adminPage/QnaManage")
+	public String QnaManagePage(@RequestParam(defaultValue="1") int pageNum,
+			@RequestParam(defaultValue="") String category,
+			String keyfield,	
+			String keyword,Model model,
+			HttpSession session,
+			HttpServletRequest request) {
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user.getMem_auth()!= 9) {
+			model.addAttribute("message","관리자 등급만 접속할 수 있습니다.");
+			model.addAttribute("url",request.getContextPath()+"/main/login");
+			return "common/resultAlert";
+		}
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		map.put("category", category);
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		
+		int count = itemService.selectRowCount2(map);
+		
+		PagingUtil page =
+				new PagingUtil(keyfield,keyword,pageNum,count,20,10,"gameManage");
+		
+		List<ItemVO> list = null;
+		if(count > 0) {
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			
+			
+			list = itemService.selectList(map);  
+		}
+		
+		model.addAttribute("count", count);
+		model.addAttribute("list", list);
+		model.addAttribute("page", page.getPage());
+		
+		return "QnaManage";
 	}
 }

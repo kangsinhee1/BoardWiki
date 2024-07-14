@@ -33,6 +33,30 @@
 		<put-attribute name="title" value="memberManage"/>
 		<put-attribute name="body" value="/WEB-INF/views/adminPage/memberManage.jsp"/>
 	</definition>
+	<definition name="gameManage" extends="adminPage">
+		<put-attribute name="title" value="gameManage"/>
+		<put-attribute name="body" value="/WEB-INF/views/adminPage/gameManage.jsp"/>
+	</definition>
+	<definition name="orderManage" extends="adminPage">
+		<put-attribute name="title" value="orderManage"/>
+		<put-attribute name="body" value="/WEB-INF/views/adminPage/orderManage.jsp"/>
+	</definition>
+	<definition name="streamingManage" extends="adminPage">
+		<put-attribute name="title" value="streamingManage"/>
+		<put-attribute name="body" value="/WEB-INF/views/adminPage/streamingManage.jsp"/>
+	</definition>
+	<definition name="pointManage" extends="adminPage">
+		<put-attribute name="title" value="pointManage"/>
+		<put-attribute name="body" value="/WEB-INF/views/adminPage/pointManage.jsp"/>
+	</definition>
+	<definition name="reportManage" extends="adminPage">
+		<put-attribute name="title" value="reportManage"/>
+		<put-attribute name="body" value="/WEB-INF/views/adminPage/reportManage.jsp"/>
+	</definition>
+	<definition name="QnaManage" extends="adminPage">
+		<put-attribute name="title" value="QnaManage"/>
+		<put-attribute name="body" value="/WEB-INF/views/adminPage/QnaManage.jsp"/>
+	</definition>
 	<!-- 캘린더 -->
 	<definition name="calendar" extends="myPage">
 		<put-attribute name="title" value="calendar"/>

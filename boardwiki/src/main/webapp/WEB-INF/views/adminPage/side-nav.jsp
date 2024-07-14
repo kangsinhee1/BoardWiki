@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<div id="adminPage-side-bar-name">관리자 페이지</div>
+<div id="adminPage-side-bar-name"><a href="${pageContext.request.contextPath}/adminPage/adminPageMain">관리자 페이지</a></div>
 <nav class="side-nav">
 	<ul>
 		<li><a href="${pageContext.request.contextPath}/adminPage/memberManage">회원관리</a></li>
