@@ -64,6 +64,7 @@ public class RentController {
 		    MemberVO vo = (MemberVO)session.getAttribute("user");
 		    rentVO.setMem_num(vo.getMem_num());
 		    rentVO.setItem_num(item_num);
+		    rentVO.setRent_status(1);
 
 		    rentService.insertRent(rentVO);
 
@@ -120,8 +121,16 @@ public class RentController {
 
 		    return "rentList"; // rentList 뷰 이름 반환
 		}
-
-
+		/*=========================
+		 * 보드게임 반납
+		 *=========================*/
+		@GetMapping("/rent/return")
+	    public String returnRent(@RequestParam("rent_num") Long rent_num) {
+	        rentService.updateRentStatus(rent_num);
+	  
+	        return "redirect:/rent/list"; // 리턴 후 이동할 페이지를 설정하세요.
+	    }
+		
 		
 
 }

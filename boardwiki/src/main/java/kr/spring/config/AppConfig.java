@@ -38,6 +38,8 @@ public class AppConfig implements WebMvcConfigurer{
 		.addPathPatterns("/board/delete")
 		.addPathPatterns("/rent/rent")
 		.addPathPatterns("/rent/list")
+		.addPathPatterns("/rent/return")
+        .addPathPatterns("/rent/rentListAdmin")
 		;
 	}
 

@@ -13,6 +13,9 @@ public interface RentMapper {
 	public Integer selectRowCount(Map<String, Object> map);
 	public void insertRent(RentVO rent);
 	
-    public void updateRent(RentVO rent);
+    public void updateRentStatus(Long rent_num);
     // public void deleteGameRent(Long rentNum);
+    
+    public Integer selectAllMembersRowCount(Map<String, Object> map);
+    public List<RentVO> selectAllMembersRentList(Map<String, Object> map);
 }
