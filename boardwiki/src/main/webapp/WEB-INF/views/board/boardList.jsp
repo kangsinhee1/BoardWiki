@@ -21,13 +21,6 @@
             <h2>QnA</h2>
         </c:when>
     </c:choose>
-	<%-- <div>
-		<a href="list?boa_category=1">자유게시판</a> |
-		<a href="list?boa_category=2">팁게시판</a> |
-		<a href="list?boa_category=3">후기게시판</a> |
-		<a href="${pageContext.request.contextPath}/team/teamList">모임게시판</a> |
-		<a href="${pageContext.request.contextPath}/used/usedList">중고게시판</a>
-	</div>--%>
 	<br>
 	<form action="list" id="search_form" method="get">
 		<input type="hidden" name="boa_category" value="${param.boa_category}">

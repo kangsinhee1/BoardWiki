@@ -20,7 +20,7 @@
 			</li>
 		</ul>
 		<div class="align-right">
-			<c:if test="${!empty user}">
+			<c:if test="${!empty user && user.mem_auth == 9}">
 			<input type="button" value="글쓰기" 
 			                    onclick="location.href='rulebookWrite'">
 			</c:if>
