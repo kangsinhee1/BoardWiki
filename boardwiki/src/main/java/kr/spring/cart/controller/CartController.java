@@ -42,32 +42,29 @@ public class CartController {
 	/*=========================
 	 * 장바구니에 데이터 담기
 	 *=========================*/
-//	@GetMapping("/item/detail")
-//	public String submit(@Valid CartVO cartVO,
-//			BindingResult result,
-//			HttpServletRequest request,
-//			HttpSession session,
-//			Model model) throws IllegalStateException, IOException {
-//		log.debug("<<장바구니 생성>> : " + cartVO);
-//		
-//		MemberVO vo = (MemberVO)session.getAttribute("user");
-//		ItemVO voi = (ItemVO)session.getAttribute("item");
-//		
-//		if(vo == null) {
-//			model.addAttribute("message", "로그인이 필요합니다.");
-//	        model.addAttribute("url", request.getContextPath() + "/login");
-//	        return "common/resultAlert"; // 로그인 페이지로 리디렉션
-//	    }
-//		
-//		cartVO.setMem_num(vo.getMem_num());
-//		cartVO.setItem_num(voi.getItem_num());
-//		
-//		cartService.insertCart(cartVO);
-//		
-//		model.addAttribute("message", "상품이 장바구니에 추가되었습니다.");
-//		model.addAttribute("url", request.getContextPath() + "/cart/cart");
-//
-//		return "common/resultAlert";
-//	}
-	
+	@PostMapping("/item/detail")
+	public String addToCart(@RequestParam Long item_num,
+			HttpSession session, HttpServletRequest request, Model model) {
+		MemberVO member = (MemberVO) session.getAttribute("user");
+		ItemVO item = (ItemVO) session.getAttribute("item");
+
+		if (member == null || item == null) {
+			model.addAttribute("message", "사용자 정보나 상품 정보가 누락되었거나 잘못되었습니다.");
+			model.addAttribute("url", "/item/detail");
+			return "common/resultAlert";
+		}
+
+		CartVO cartVO = new CartVO();
+		cartVO.setMem_num(member.getMem_num());
+		cartVO.setItem_num(item.getItem_num());
+		cartVO.setItem_quantity(1); // 기본 수량을 1로 설정
+
+		cartService.insertCart(cartVO);
+
+		model.addAttribute("message", "상품이 장바구니에 추가되었습니다.");
+		model.addAttribute("url", request.getContextPath() + "/cart/cart");
+
+		return "common/resultAlert";
+	}
+
 }

@@ -8,7 +8,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class CartVO {
-	private long mem_num;
-	private long item_num;
-	private long item_quantity;
+	private Long mem_num;
+	private Long item_num;
+	private int item_quantity;
 }
