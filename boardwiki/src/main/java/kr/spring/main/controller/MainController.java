@@ -40,6 +40,13 @@ public class MainController {
 	public String main() {
 		return "main";//Tiles의 설정명
 	}
+	@GetMapping("item/mainList")
+	public String returnMainList(String keyword) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("keyword", keyword);
+		
+		return "redirect:/main/mainList?keyword=" + keyword;
+	}
 	@GetMapping("/main/mainList")
 	public String mainSearch(@RequestParam(defaultValue="1") int pageNum,
             @RequestParam(defaultValue="") String category,
