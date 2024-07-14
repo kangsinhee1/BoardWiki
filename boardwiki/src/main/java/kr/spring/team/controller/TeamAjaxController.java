@@ -113,6 +113,37 @@ public class TeamAjaxController {
 			
 		return mapJson;
 	}
+	/*================
+	 * 댓글 등록
+	 *================*/
+	@PostMapping("/team/writeBoardReply")
+	@ResponseBody
+	public Map<String,String> writeReply(
+			                   TeamReplyVO teamReplyVO,
+			                   HttpSession session,
+			                   HttpServletRequest request){
+		log.debug("<<댓글 등록>> : " + teamReplyVO);
+		
+		Map<String,String> mapJson = 
+				        new HashMap<String,String>();
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user == null) {
+			//로그인 안 됨
+			mapJson.put("result", "logout");
+		}else {
+			//회원번호 저장
+			teamReplyVO.setMem_num(user.getMem_num());
+			
+			//댓글 등록
+			teamService.insertTeamBoardReply(teamReplyVO);
+			mapJson.put("result", "success");
+		}		
+		return mapJson;
+	}
+	/*================
+	 * 댓글 목록
+	 *================*/
 	
 	@GetMapping("/team/listBoardReply")
 	@ResponseBody
@@ -150,7 +181,6 @@ public class TeamAjaxController {
 		}else {
 			list = Collections.emptyList();
 		}
-		
 		Map<String,Object> mapJson = 
 				        new HashMap<String,Object>();
 		mapJson.put("count", count);
@@ -159,6 +189,70 @@ public class TeamAjaxController {
 			mapJson.put("user_num", user.getMem_num());
 		}
 		
+		return mapJson;
+	}
+	/*================
+	 * 댓글 수정
+	 *================*/	
+	@PostMapping("/team/updateReply")
+	@ResponseBody
+	public Map<String,String> modifyReply(
+							TeamReplyVO teamReplyVO,
+			                HttpSession session,
+			                HttpServletRequest request){
+		log.debug("<<댓글 수정>> : " + teamReplyVO);
+		
+		Map<String,String> mapJson =
+				      new HashMap<String,String>();
+		
+		MemberVO user = 
+				(MemberVO)session.getAttribute("user");
+		
+		TeamReplyVO db_reply = teamService.getTeamReply(teamReplyVO.getTeaR_num());
+			
+		if(user==null) {
+			//로그인이 되지 않은 경우
+			mapJson.put("result", "logout");
+		}else if(user!=null && 
+				user.getMem_num()==db_reply.getMem_num()) {
+			//로그인 회원번호와 작성자 회원번호 일치
+			
+			//댓글 수정
+			mapJson.put("result", "success");
+		}else {
+			//로그인 회원번호와 작성자 회원번호 불일치
+			mapJson.put("result", "wrongAccess");
+		}		
+		return mapJson;
+	}
+	/*================
+	 * 댓글 삭제
+	 *================*/	
+	@PostMapping("/team/deleteReply")
+	@ResponseBody
+	public Map<String,String> deleteReply(long teaR_num,
+			                       HttpSession session){
+		log.debug("<<댓글 삭제 - teaR_num>> : " + teaR_num);
+		
+		Map<String,String> mapJson = 
+				           new HashMap<String,String>();
+		
+		MemberVO user = 
+				(MemberVO)session.getAttribute("user");
+				//db확인
+		TeamReplyVO db_reply = teamService.getTeamReply(teaR_num);
+		if(user==null) {
+			//로그인이 되지 않은 경우
+			mapJson.put("result", "logout");
+		}else if(user!=null &&
+				    user.getMem_num() == db_reply.getMem_num()) {
+			//로그인한 회원번호와 작성자 회원번호 일치
+			teamService.deleteTeamBoardReply(teaR_num);
+			mapJson.put("result", "success");
+		}else {
+			//로그인한 회원번호와 작성자 회원번호 불일치
+			mapJson.put("result", "wrongAccess");
+		}		
 		return mapJson;
 	}
 

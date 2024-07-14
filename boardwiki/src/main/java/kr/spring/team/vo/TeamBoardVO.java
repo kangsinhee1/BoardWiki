@@ -31,6 +31,6 @@ public class TeamBoardVO {
 	private long mem_num;
 	private String mem_email;
 	private String mem_nickname;
-	private int re_cnt;
+	private int teaR_cnt;
 	private int teaB_hit;
 }

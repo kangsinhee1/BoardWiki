@@ -193,10 +193,13 @@
 	 	<if test="order == 2">
 	 		ORDER BY teaB_hit DESC
 	 	</if>
+	 	 	<if test="order == 3">
+	 		ORDER BY teaR_cnt DESC NULLS LAST
+	 	</if>
 	 </sql>
 	  <!-- 모임게시판  등록 -->
 	  
-	   <!-- 모임 목록 -->
+	   <!-- 모임글 목록 -->
 	 <select id="selectTeamBoardRowCount" parameterType="map" resultType="integer">
 	 	SELECT count(*) FROM team_board a WHERE a.tea_num = #{tea_num}
 	 </select>
@@ -216,10 +219,14 @@
 	      teaB_hit,
 	      mem_num,
 	      mem_email,
+	      teaR_cnt,
 	      mem_nickname
 	      FROM team_board
 	      JOIN member USING (mem_num)
 	      JOIN member_detail USING (mem_num)
+	      LEFT OUTER JOIN (SELECT teaB_num, COUNT(*) teaR_cnt 
+ 		                             FROM team_reply GROUP BY teab_num)
+ 		                             USING (teab_num)
 	      <include refid="teamBoardSearch"></include>
 	      <include refid="teamBoardOrder"></include>	
 	 	)a)
@@ -227,6 +234,21 @@
 	 	WHERE rnum >= #{start} AND rnum <= #{end} AND tea_num=#{tea_num}
 	 	]]>	
 	 </select>
+	 <!-- 댓글 등록 -->
+ 	<insert id="insertTeamBoardReply" parameterType="teamReplyVO">
+ 		INSERT INTO team_reply(
+ 			teaR_num,
+ 			teaR_content,
+ 			tear_Rdate,
+ 			teaB_num,
+ 			mem_num)
+ 		VALUES (
+ 			team_reply_seq.nextval,
+ 			#{teaR_content},
+ 			SYSDATE,
+ 			#{teaB_num},
+ 			#{mem_num})	
+ 	</insert>
 	 <!-- 댓글 목록 --> 
  	<select id="selectTeamBoardReplyList" parameterType="map"
  	                            resultType="teamReplyVO">
@@ -244,10 +266,9 @@
  		              teaR_mdate,
  		              teaB_num,
  		              mem_num,
- 		              mem_nickname,
- 		              click_num,
+ 		              mem_nickname
  		            FROM team_reply
- 		            JOIN member USING(mem_num)
+ 		            JOIN member_detail USING(mem_num)
  		            /*로그인 한 상태에서 클릭한 사람의 정보 읽기, 로그인하지 않으면 0 전달*/
  		            WHERE teaB_num=#{teaB_num}
  		            ORDER BY teaR_num DESC)a)

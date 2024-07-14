@@ -14,8 +14,8 @@
         <a href="myTeam2">내 모임 보기</a>
     </div>
     
-    <form action="teamBoardAdmin" id="search_form" method="get">
-        <input type="hidden" id="tea_num" name="tea_num" value="${teaB_num}">
+    <form action="teamBoardUser" id="search_form" method="get">
+                <input type="hidden" id="tea_num" name="tea_num" value="${tea_num}">
         <ul class="search">
             <li>
                 <select name="keyfield" id="keyfield">
@@ -75,8 +75,8 @@
                         </c:choose>
                     </td>
                     <td class="align-left">
-                        <a href="teamBoardDetail?teab_num=${team.teaB_num}">
-                            ${team.teaB_title}
+                        <a href="teamBoardDetail?teaB_num=${team.teaB_num}">
+                            ${team.teaB_title} (${team.teaR_cnt })
                         </a>
                     </td>
                     <td class="align-center">${team.mem_nickname}</td>
@@ -93,14 +93,14 @@
     $(document).ready(function() {
         $('#search_form').submit(function(event) {
             event.preventDefault();
-            location.href = 'teamBoardAdmin?tea_num=' + $('#tea_num').val() +
+            location.href = 'teamBoardUser?tea_num=' + $('#tea_num').val() +
                 '&keyfield=' + $('#keyfield').val() +
                 '&keyword=' + $('#keyword').val() +
                 '&order=' + $('#order').val();
         });
 
         $('#order').change(function() {
-            location.href = 'teamBoardAdmin?tea_num=' + $('#tea_num').val() +
+            location.href = 'teamBoardUser?tea_num=' + $('#tea_num').val() +
                 '&keyfield=' + $('#keyfield').val() +
                 '&keyword=' + $('#keyword').val() +
                 '&order=' + $('#order').val();
