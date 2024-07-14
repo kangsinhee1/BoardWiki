@@ -24,3 +24,19 @@
 	width:100px;
 	height:25px;
 }
+.card{
+	display: inline-block;
+	margin: 10px;
+}
+.card-img-top{
+	width:280px;
+	height:250px;
+}
+.card-title{
+	display: inline-block; /* inline-block으로 설정하여 너비를 제한할 수 있게 함 */
+    max-width: 200px; /* 적절한 너비 설정 */
+	white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 200px; /* 텍스트가 넘칠 경우 적용할 너비 */
+}
