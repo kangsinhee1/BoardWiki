@@ -449,20 +449,5 @@ public class MemberController {
 
 		return "redirect:/main/main";	
 	}
-	/*==============================
-	 * MY페이지
-	 *==============================*/	
-	@GetMapping("/member/myPage")
-	public String process(HttpSession session,Model model) {
-		MemberVO user = 
-				(MemberVO)session.getAttribute("user");
-		//회원정보
-		MemberVO member = 
-				memberService.selectMember(user.getMem_num());
-		log.debug("<<MY페이지>> : " + member);
 
-		model.addAttribute("member", member);
-
-		return "myPage";
-	}
 }

@@ -15,9 +15,38 @@
 		<put-attribute name="body" value="/WEB-INF/views/myPage/myPageMain.jsp"/>
 		<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp"/>
 	</definition>
+	<definition name="myAlert" extends="myPage">
+		<put-attribute name="title" value="myAlert"/>
+		<put-attribute name="body" value="/WEB-INF/views/myPage/myAlert.jsp"/>
+	</definition>
+	<!-- 캘린더 -->
+	<definition name="calendar" extends="myPage">
+		<put-attribute name="title" value="calendar"/>
+		<put-attribute name="body" value="/WEB-INF/views/calendar/calendar.jsp"/>
+	</definition>
+	<definition name="myChat" extends="myPage">
+		<put-attribute name="title" value="myChat"/>
+		<put-attribute name="body" value="/WEB-INF/views/myPage/myChat.jsp"/>
+	</definition>
+	<definition name="myOrder" extends="myPage">
+		<put-attribute name="title" value="myOrder"/>
+		<put-attribute name="body" value="/WEB-INF/views/myPage/myOrder.jsp"/>
+	</definition>
+	<definition name="myLog" extends="myPage">
+		<put-attribute name="title" value="calendar"/>
+		<put-attribute name="body" value="/WEB-INF/views/myPage/myLog.jsp"/>
+	</definition>
 	<definition name="myWrite" extends="myPage">
 		<put-attribute name="title" value="calendar"/>
-		<put-attribute name="body" value="/WEB-INF/views/member/myWrite.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/myPage/myWrite.jsp"/>
+	</definition>
+	<definition name="myPoint" extends="myPage">
+		<put-attribute name="title" value="myPoint"/>
+		<put-attribute name="body" value="/WEB-INF/views/myPage/myPoint.jsp"/>
+	</definition>
+	<definition name="myQna" extends="myPage">
+		<put-attribute name="title" value="myQna"/>
+		<put-attribute name="body" value="/WEB-INF/views/myPage/myQna.jsp"/>
 	</definition>
 	<!-- AdminPage -->
 	<definition name="adminPage" extends="myPage">
@@ -57,11 +86,7 @@
 		<put-attribute name="title" value="QnaManage"/>
 		<put-attribute name="body" value="/WEB-INF/views/adminPage/QnaManage.jsp"/>
 	</definition>
-	<!-- 캘린더 -->
-	<definition name="calendar" extends="myPage">
-		<put-attribute name="title" value="calendar"/>
-		<put-attribute name="body" value="/WEB-INF/views/calendar/calendar.jsp"/>
-	</definition>
+	
 	<!-- 중고 -->
 	<definition name="usedList" extends="main">
 		<put-attribute name="title" value="중고 게시판"/>

@@ -27,7 +27,9 @@ public class AdminController {
 	@Autowired
 	private ItemService itemService;
 	
-	
+	/*==============================
+	 * 관리자 페이지 메인
+	 *==============================*/	
 	@GetMapping("/admin/adminPage")
 	public String adminPage(HttpSession session,
 							HttpServletRequest request,
@@ -41,7 +43,10 @@ public class AdminController {
 		
 		return "adminPage";
 	}
-	
+
+	/*==============================
+	 * 관리자 페이지 (회원관리)
+	 *==============================*/	
 	@GetMapping("/adminPage/memberManage")
 	public String memberManagePage(@RequestParam(defaultValue="1") int pageNum,
             						@RequestParam(defaultValue="") String category,
@@ -81,6 +86,10 @@ public class AdminController {
 		
 		return "memberManage";
 	}
+	
+	/*==============================
+	 * 관리자 페이지 (제품관리)
+	 *==============================*/	
 	@GetMapping("/adminPage/gameManage")
 	public String gameManagePage(@RequestParam(defaultValue="1") int pageNum,
 								 @RequestParam(defaultValue="") String category,
@@ -120,6 +129,10 @@ public class AdminController {
 		
 		return "gameManage";
 	}
+	
+	/*==============================
+	 * 관리자 페이지 (주문관리)
+	 *==============================*/	
 	@GetMapping("/adminPage/orderManage")
 	public String orderManagePage(@RequestParam(defaultValue="1") int pageNum,
 			@RequestParam(defaultValue="") String category,
@@ -159,6 +172,9 @@ public class AdminController {
 		
 		return "orderManage";
 	}
+	/*==============================
+	 * 관리자 페이지 (방송관리)
+	 *==============================*/	
 	@GetMapping("/adminPage/streamingManage")
 	public String streamingManagePage(@RequestParam(defaultValue="1") int pageNum,
 			@RequestParam(defaultValue="") String category,
@@ -198,7 +214,9 @@ public class AdminController {
 		
 		return "streamingManage";
 	}
-	
+	/*==============================
+	 * 관리자 페이지 (포인트 관리)
+	 *==============================*/	
 	@GetMapping("/adminPage/pointManage")
 	public String pointManagePage(@RequestParam(defaultValue="1") int pageNum,
 			@RequestParam(defaultValue="") String category,
@@ -238,7 +256,9 @@ public class AdminController {
 		
 		return "pointManage";
 	}
-	
+	/*==============================
+	 * 관리자 페이지 (신고 관리)
+	 *==============================*/	
 	@GetMapping("/adminPage/reportManage")
 	public String reportManagePage(@RequestParam(defaultValue="1") int pageNum,
 			@RequestParam(defaultValue="") String category,
@@ -278,6 +298,9 @@ public class AdminController {
 		
 		return "reportManage";
 	}
+	/*==============================
+	 * 관리자 페이지 (Qna 관리)
+	 *==============================*/	
 	@GetMapping("/adminPage/QnaManage")
 	public String QnaManagePage(@RequestParam(defaultValue="1") int pageNum,
 			@RequestParam(defaultValue="") String category,

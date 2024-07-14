@@ -40,6 +40,8 @@ public class MainController {
 	public String main() {
 		return "main";//Tiles의 설정명
 	}
+	
+	
 	@GetMapping("item/mainList")
 	public String returnMainList(String keyword) {
 		Map<String,Object> map = new HashMap<String,Object>();

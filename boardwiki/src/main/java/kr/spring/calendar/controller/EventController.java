@@ -13,7 +13,7 @@ public class EventController {
     private final List<Event> events = new ArrayList<>();
     private final AtomicLong counter = new AtomicLong();
 
-    @GetMapping("/member/calendar")
+    @GetMapping("/myPage/calendar")
     public String showCalendar() {
         return "calendar";
     }

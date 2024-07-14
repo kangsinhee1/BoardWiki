@@ -4,7 +4,7 @@
 <!-- 상단 시작 -->
 <div class="align-right">	
     <c:if test="${!empty user && user.mem_auth!=9}">
-    <a href="${pageContext.request.contextPath}/member/myPage">MY페이지</a>
+    <a href="${pageContext.request.contextPath}/myPage/myPage">MY페이지</a>
     <a href="${pageContext.request.contextPath}/member/logout">로그아웃</a>
     </c:if>
     <c:if test="${!empty user && user.mem_auth == 9 }">
