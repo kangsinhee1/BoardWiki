@@ -33,8 +33,18 @@ public class RentServiceImpl implements RentService {
 	}
 
 	@Override
-	public void updateRent(RentVO rent) {
-	}
-	
+    public void updateRentStatus(Long rent_num) {
+        rentMapper.updateRentStatus(rent_num);
+    }
+
+	@Override
+    public Integer selectAllMembersRowCount(Map<String, Object> map) {
+        return rentMapper.selectAllMembersRowCount(map);
+    }
+
+    @Override
+    public List<RentVO> selectAllMembersRentList(Map<String, Object> map) {
+        return rentMapper.selectAllMembersRentList(map);
+    }
 
 }
