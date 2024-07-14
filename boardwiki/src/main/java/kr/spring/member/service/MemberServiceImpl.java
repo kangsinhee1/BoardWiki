@@ -1,5 +1,7 @@
 package kr.spring.member.service;
 
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,5 +67,15 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public MemberVO selectCheckMember(String mem_email) {
 		return memberMapper.selectCheckMember(mem_email);
+	}
+
+	@Override
+	public List<MemberVO> selectAllmember(Map<String,Object> map) {
+		return memberMapper.selectAllmember(map);
+	}
+
+	@Override
+	public Integer countAllmember(Map<String,Object> map) {
+		return memberMapper.countAllmember(map);
 	}
 }
