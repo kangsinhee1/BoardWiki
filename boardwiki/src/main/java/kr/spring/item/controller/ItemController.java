@@ -122,7 +122,7 @@ public class ItemController {
 	 * 게임 상세
 	 *=========================*/
 	@GetMapping("/item/item_detail")
-	public ModelAndView process(Long item_num,Model model, ServletRequest session) {
+	public ModelAndView process(Long item_num,Model model, HttpSession session) {
 		log.debug("<<게임 상세 - item_num>> : "+item_num);
 		
 		MemberVO member = (MemberVO) session.getAttribute("user");
