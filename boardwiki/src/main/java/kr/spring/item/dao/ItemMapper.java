@@ -36,6 +36,6 @@ public interface ItemMapper {
 	//장바구니 관련
 	@Select("SELECT item_stock FROM item WHERE item_num=#{item_num}")
 	public int getItem(Long item_num);
-	@Update("UPDATE item JOIN cart USING(item_num) SET item_stock=item_stock-#{item_quantity} WHERE item_num=#{item_num}")
-	public void pullItem(CartVO item_num);
+	@Update("UPDATE item set item_stock=#{item_stock} WHERE item_num=#{item_num}")
+	public void pullItem(ItemVO item);
 }

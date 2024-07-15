@@ -16,5 +16,5 @@ public interface ItemService {
 	public Integer selectRowCount2(Map<String,Object> map);
 	public ItemVO selectItem(Long item_num);
 	public int getItem(Long item_num);
-	public void pullItem(CartVO item_num);
+	public void pullItem(ItemVO item);
 }

@@ -62,10 +62,8 @@ public class ItemServiceImpl implements ItemService{
 	public int getItem(Long item_num) {
 		return itemMapper.getItem(item_num);
 	}
-
 	@Override
-	public void pullItem(CartVO item_num) {
-		itemMapper.pullItem(item_num);
+	public void pullItem(ItemVO item) {
+		itemMapper.pullItem(item);
 	}
-
 }
