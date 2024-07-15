@@ -283,7 +283,7 @@ public class TeamAjaxController {
 	//모임 신청 처리 및 회원 정지 기능
 		@PostMapping("/team/updateMeetingDate")
 		@ResponseBody
-		public Map<String,String> updateMeetingDate( long tea_num ,String tea_time, HttpSession session){
+		public Map<String,String> updateMeetingDate(long tea_num ,String tea_time, HttpSession session){
 			
 			Map<String,String> mapJson = 
 			           new HashMap<String,String>();
@@ -292,15 +292,36 @@ public class TeamAjaxController {
 			if(user==null) {
 				//로그인이 되지 않은 경우
 				mapJson.put("result", "logout");
-		//}else if(teamApplyVO.getTeaA_auth() != 9) {
-			//	mapJson.put("result", "wrongAccess");
 			}else {
 				teamService.updateTeamSchedule(tea_num, tea_time);
+				// 모임 참석자 모두 미정 처리
+				teamService.deleteTeamApplyAttend(tea_num);
 				mapJson.put("result", "success");
 			}
 			
 			return mapJson;
 		}
-
+	// 모임 취소 기능
+		@PostMapping("/team/deleteMeetingDate")
+		@ResponseBody
+		public Map<String,String> deleteMeetingDate(long tea_num ,String tea_time, HttpSession session){
+			
+			Map<String,String> mapJson = 
+			           new HashMap<String,String>();
+			MemberVO user = 
+					(MemberVO)session.getAttribute("user");
+			if(user==null) {
+				//로그인이 되지 않은 경우
+				mapJson.put("result", "logout");
+			}else {
+				//모임 일정 취소
+				teamService.updateTeamSchedule(tea_num, tea_time);
+				// 모임 참석자 모두 미정 처리
+				teamService.deleteTeamApplyAttend(tea_num);
+				mapJson.put("result", "success");
+			}
+			return mapJson;
+		}
+		
 
 }

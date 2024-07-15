@@ -66,6 +66,8 @@ public interface TeamService {
 			//모임 신청 처리
 			public void updateTeamApplyUser(TeamApplyVO teamApply);
 			
+			public void deleteTeamApplyAttend(long tea_num);
+			
 			//개인별 신청 모임 게시판 확인
 			public List<TeamApplyVO> selectTeamApplyListByMem_Num(long mem_num);
 			//모임 게시판 관리

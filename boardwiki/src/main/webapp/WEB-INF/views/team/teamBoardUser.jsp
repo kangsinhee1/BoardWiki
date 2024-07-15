@@ -7,6 +7,13 @@
 <div class="page-main">
     <h2>(${TEAM.tea_name}) 모임 게시판</h2>
     <div class="align-right">
+    	모임 일정 : <c:choose>
+    	<c:when test="${TEAM.tea_time !=null }"> ${TEAM.tea_time}</c:when>
+    	<c:otherwise> 없습니다.</c:otherwise>
+    	</c:choose>
+    	<c:if test="${TEAM.tea_time != null }">
+        <input type="button" class="teamAttend" value="모임 참석">
+    	</c:if>
     </div>
     <hr>
     
@@ -74,6 +81,7 @@
                             </c:otherwise>
                         </c:choose>
                     </td>
+                    
                     <td class="align-left">
                         <a href="teamBoardDetail?teaB_num=${team.teaB_num}">
                             ${team.teaB_title} (${team.teaR_cnt })
@@ -105,5 +113,6 @@
                 '&keyword=' + $('#keyword').val() +
                 '&order=' + $('#order').val();
         });
+        
     });
 </script>

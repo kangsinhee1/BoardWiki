@@ -107,8 +107,10 @@ public interface TeamMapper {
 		@Update("UPDATE team_apply SET teaA_attend=1 WHERE mem_num = #{mem_num} AND tea_num=#{tea_num}")
 		public void updateTeamApplyUser(TeamApplyVO teamApply);
 		//모임 불참 처리
-		@Update("UPDATE team_apply SET teaA_attend=0 WHERE mem_num = #{mem_num} AND tea_num=#{tea_num}")
+		@Update("UPDATE team_apply SET teaA_attend=2 WHERE mem_num = #{mem_num} AND tea_num=#{tea_num}")
 		public void updateTeamApplyUser2(TeamApplyVO teamApply);
+		@Update("UPDATE team_apply SET teaA_attend=0 WHERE tea_num=#{tea_num}")
+		public void deleteTeamApplyAttend(long tea_num);
 		//모임 참석 회원 확인
 		@Select("SELECT * FROM team_apply JOIN team USING(mem_num) WHERE teaA_attend=1")
 		public void selectTeamApplyATTEND(TeamApplyVO teamApply);

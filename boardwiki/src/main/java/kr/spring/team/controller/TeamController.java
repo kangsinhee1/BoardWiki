@@ -379,6 +379,7 @@ public class TeamController {
 					request.getContextPath()+"/team/teamBoardUser?tea_num="+tea_num);
 		}
 		model.addAttribute("tea_num",tea_num);
+	
 		return "common/resultAlert";
 	}
 	
@@ -471,7 +472,6 @@ public class TeamController {
 		model.addAttribute("list",list);
 		model.addAttribute("page",page.getPage());
 		model.addAttribute("TEAM",teamService.detailTeam(tea_num));
-		
 
 		return "teamBoardUser";
 	}

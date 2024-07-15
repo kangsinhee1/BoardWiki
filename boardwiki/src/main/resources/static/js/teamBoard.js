@@ -25,15 +25,20 @@ function changeStatus(mem_num,teaA_status) {
 }
   $('#meetingDate').on('change', function() {
         var newDate = $(this).val();
+        var tea_num = $(this).attr('data-num');
+       
         $.ajax({
-            url: '${pageContext.request.contextPath}/team/updateMeetingDate',
+            url: 'updateMeetingDate',
             type: 'post',
-            data: {tea_time: newDate},
+            data: {tea_time: newDate,tea_num:tea_num},
             dataType: 'json',
             success: function(param) {
-                if (param.result == 'success') {
+				if(param.result == 'logout'){
+					alert('로그인 해주세요');
+				}else if (param.result == 'success') {
                     alert('모임 일정이 변경되었습니다.');
                     $('#meetingDateDisplay').val('모임 일정 : ' + newDate);
+                     location.reload(); // Refresh the page to update attendance status
                 } else {
                     alert('모임 일정 변경에 실패했습니다.');
                 }
@@ -45,16 +50,26 @@ function changeStatus(mem_num,teaA_status) {
     });
 
     $('#cancelMeeting').on('click', function() {
+		
+		
+		
+		
+		 var tea_num = $(this).parent().find('#meetingDateDisplay').attr('data-num');
         $.ajax({
-            url: '${pageContext.request.contextPath}/team/updateMeetingDate',
+            url: 'deleteMeetingDate',
             type: 'post',
-            data: {tea_time: null},
+            data: {tea_time: null, tea_num:tea_num},
             dataType: 'json',
             success: function(param) {
-                if (param.result == 'success') {
+				if(param.result == 'logout'){
+					alert('로그인 해주세요');
+					
+				}else if (param.result == 'success') {
                     alert('모임이 취소되었습니다.');
+                    
                     $('#meetingDate').val('');
-                    $('#meetingDateDisplay').val('모임 일정 : 없음');
+                    $('#meetingDateDisplay').value="모임 일정이 없습니다.";
+                     location.reload(); // Refresh the page to update attendance status
                 } else {
                     alert('모임 취소에 실패했습니다.');
                 }

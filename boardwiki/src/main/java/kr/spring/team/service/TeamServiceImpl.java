@@ -46,7 +46,7 @@ public class TeamServiceImpl implements TeamService {
 	@Override
 	public void updateTeamSchedule(@Param(value="tea_num")long tea_num,@Param(value="tea_time") String tea_time) {
 		
-		teamMapper.updateTeamSchedule(tea_num, tea_time);
+		teamMapper.updateTeamSchedule(tea_num,tea_time);
 	}
 
 	@Override
@@ -242,6 +242,12 @@ public class TeamServiceImpl implements TeamService {
 	@Override
 	public Integer countTeamApplyList(long tea_num) {
 		return teamMapper.countTeamApplyList(tea_num);
+	}
+
+	@Override
+	public void deleteTeamApplyAttend(long tea_num) {
+		teamMapper.deleteTeamApplyAttend(tea_num);
+		
 	}
 
 }

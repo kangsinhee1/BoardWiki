@@ -7,8 +7,8 @@
 <div class="page-main">
     <div class="align-right">
         모임 일정 설정
-        <input type="date" id="meetingDate" class="submit-date" value="${tea_time}" min="<%= new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date()) %>">
-        <input type="text" id="meetingDateDisplay" value="모임 일정 : ${tea_time}" readonly="readonly">
+        <input type="date" id="meetingDate" class="submit-date"  data-num="${tea_num}"value="${tea_time}" min="<%= new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date()) %>">
+        <input type="text" id="meetingDateDisplay" data-num="${tea_num}" value="모임 일정 : ${tea_time}" readonly="readonly">
         <button id="cancelMeeting" type="button">모임 취소</button>
     </div>
     <h2 class="align-center"> (${tea_name}) 모임 일정 / 참석 회원 목록</h2>
@@ -26,8 +26,9 @@
                     <td class="align-center">${team.mem_nickname}</td>
                     <td class="align-center">
                         <c:choose>
+                            <c:when test="${team.teaA_attend == 0}">미정</c:when>
                             <c:when test="${team.teaA_attend == 1}">참석</c:when>
-                            <c:when test="${team.teaA_attend == 0}">불참</c:when>
+                            <c:when test="${team.teaA_attend == 2}">불참</c:when>
                         </c:choose>
                     </td>
                 </tr>
