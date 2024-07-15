@@ -6,7 +6,7 @@
 <script src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/videoAdapter.js"></script>
 <div class="page-main">
-	<h2>${used.use_title	}</h2>
+	<h2>${used.use_title}</h2>
 	<ul class="detail-info">
 		<li>
 		작성자:
@@ -15,7 +15,7 @@
 			<br>
 			<c:if test="${empty used.use_mdate}">
 			작성일 : ${used.use_rdate}
-			</c:if>
+			</c:if>  
 			<c:if test="${!empty used.use_mdate}">
 			최근 수정일 : ${used.use_mdate}
 			</c:if>

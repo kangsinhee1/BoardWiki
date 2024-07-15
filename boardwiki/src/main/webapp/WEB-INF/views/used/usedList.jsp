@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-	 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 게시판 목록 시작 -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 <div class="page-main">
@@ -24,7 +24,7 @@
 			</li>
 		</ul> 
 		<div class="align-right">
-			<select id="order" name="order">
+			<select id="order" name="order">  
 				<option value="1" <c:if test="${param.order == 1}">selected</c:if>>최신순</option>
 				<option value="2" <c:if test="${param.order == 2}">selected</c:if>>가격순</option>
 			</select>
