@@ -18,7 +18,7 @@ public interface RulebookMapper {
 	public List<RulebookVO> selectRulebookList(Map<String,Object> map);
 	public Integer selectRulebookRowCount(Map<String,Object> map);
 	public void insertRulebook(RulebookVO rulebook);
-	@Select("SELECT * FROM rulebook JOIN member USING(mem_num) LEFT OUTER JOIN member_detail USING(mem_num) WHERE rulB_num=#{rulB_num}")
+	@Select("SELECT * FROM rulebook JOIN member USING(mem_num) LEFT OUTER JOIN member_detail USING(mem_num) LEFT OUTER JOIN item USING(item_num) WHERE rulB_num=#{rulB_num}")
 	public RulebookVO selectRulebook(Long rulB_num);
 	public void updateRulebook(RulebookVO rulebook);
 	@Delete("DELETE FROM rulebook WHERE rulB_num=#{rulB_num}")
