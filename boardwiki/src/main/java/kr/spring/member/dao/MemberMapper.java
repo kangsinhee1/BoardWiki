@@ -19,9 +19,8 @@ public interface MemberMapper {
 	public void insertMember(MemberVO member);
 	public void insertMember_detail(MemberVO member);
 	public MemberVO selectCheckMember(String mem_email);
-	@Select("SELECT * FROM member JOIN member_detail USING(mem_num) ORDER BY mem_rdate desc")
 	public List<MemberVO> selectAllmember(Map<String,Object> map);
-	@Select("SELECT COUNT(*) FROM member JOIN member_detail USING(mem_num)")
+	@Select("SELECT COUNT(*) FROM member JOIN member_detail USING(mem_num) ORDER BY mem_rdate desc")
 	public Integer countAllmember(Map<String,Object> map);
 	
 }

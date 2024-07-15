@@ -75,7 +75,7 @@ public class AdminController {
 		int count = memberService.countAllmember(map); 
 		
 		PagingUtil page =
-				new PagingUtil(keyfield,keyword,pageNum,count,10,10,"memberManage");
+				new PagingUtil(keyfield,keyword,pageNum,count,5,10,"memberManage");
 		 
 		List<MemberVO> list = null;
 	    if(count > 0) {
@@ -114,10 +114,10 @@ public class AdminController {
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
 		
-		int count = itemService.selectRowCount2(map);
+		int count = itemService.selectRowCount(map);
 		
 		PagingUtil page =
-				new PagingUtil(keyfield,keyword,pageNum,count,20,10,"gameManage");
+				new PagingUtil(keyfield,keyword,pageNum,count,10,10,"gameManage");
 		
 		List<ItemVO> list = null;
 		if(count > 0) {

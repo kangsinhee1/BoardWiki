@@ -5,8 +5,8 @@
 <div class="search-bar">
   <form class="form-inline" action="mainList"  method="get">  
 	<a class="navbar-brand">Boardwiki</a>
-    <input id="main_search" class="form-control mr-sm-2" style="width:500px;" type="search" placeholder="Search" aria-label="Search"  type="submit" name="keyword"
-				  id="keyword" value="${param.keyword}">
+    <input id="main_search" class="form-control mr-sm-2" style="width:500px;" type="search" placeholder="Search" aria-label="Search"  type="submit" name="keyword1"
+				  id="keyword1" value="${param.keyword1}">
     <button class="btn btn-outline-success my-2 my-sm-0">Search</button>
   </form>
 </div>

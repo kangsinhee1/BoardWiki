@@ -42,25 +42,25 @@ public class MainController {
 	}
 	
 	
-	@GetMapping("item/mainList")
-	public String returnMainList(String keyword) {
+	@GetMapping("/*/mainList")
+	public String returnMainList(String keyword1) {
 		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("keyword", keyword);
+		map.put("keyword1", keyword1);
 		
-		return "redirect:/main/mainList?keyword=" + keyword;
+		return "redirect:/main/mainList?keyword1=" + keyword1;
 	}
 	@GetMapping("/main/mainList")
 	public String mainSearch(@RequestParam(defaultValue="1") int pageNum,
             @RequestParam(defaultValue="") String category,
             String keyfield,
-            String keyword,Model model) {
+            String keyword1,Model model) {
 			
 			keyfield = "1";
 			Map<String,Object> map = new HashMap<String,Object>();
 
 			map.put("category", category);
 			map.put("keyfield", keyfield);
-			map.put("keyword", keyword);
+			map.put("keyword", keyword1);
 
 			//전체, 검색 레코드수
 			int count = itemService.selectRowCount2(map);
@@ -69,11 +69,11 @@ public class MainController {
 			
 			//페이지 처리
 		    PagingUtil gamePage =
-					new PagingUtil(keyfield,keyword,pageNum,count,21,10,"mainList");
+					new PagingUtil(keyfield,keyword1,pageNum,count,21,10,"mainList");
 		    PagingUtil boardPage =
-		    		new PagingUtil(keyfield,keyword,pageNum,count2,20,10,"mainList");
+		    		new PagingUtil(keyfield,keyword1,pageNum,count2,20,10,"mainList");
 		    PagingUtil usedPage = 
-		    		new PagingUtil(keyfield, keyword, pageNum,count3,20,10,"mainList");
+		    		new PagingUtil(keyfield, keyword1, pageNum,count3,20,10,"mainList");
 		    
 	
 		    List<ItemVO> list = null;

@@ -18,31 +18,19 @@
        FROM item
         <include refid="itemNameSearch"></include>
      </select>
-    <!-- 상품 목록 인기 -->
+    <!-- 상품 목록  -->
     <select id="selectList" parameterType="map" resultType="itemVO">
 	 	SELECT * FROM
 	 	(SELECT a.*, rownum rnum FROM
 	 	(SELECT * FROM item	
 	      <![CDATA[
-	 	)a)WHERE rnum >= 1 AND rnum <= 3
+	 	)a)WHERE rnum >= #{start} AND rnum <= #{end}
 	 	]]>
 	 </select>
 	 
 	 
-     <!-- 최고 평점 -->
-     <select id="selectList2" parameterType="map" resultType="itemVO">
-	  
-	     SELECT * FROM (SELECT * FROM item ORDER BY item_average DESC) WHERE ROWNUM 
-	     <![CDATA[<= 3]]>
-     </select>
-     
-     
-     <!-- 신작 게임 -->
-     <select id="selectList3" parameterType="map" resultType="itemVO">
-	     SELECT * FROM (SELECT * FROM item ORDER BY item_year DESC) WHERE ROWNUM 
-	     <![CDATA[<= 3]]>
-     </select>
-     
+  
+ 
      
      <!-- 장바구니 -->
      <insert id="insertCart" parameterType="cartVO">
