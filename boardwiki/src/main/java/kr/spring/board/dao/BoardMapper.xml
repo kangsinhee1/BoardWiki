@@ -19,7 +19,7 @@
 	 	  #{boa_content},
 	 	  #{filename,jdbcType=VARCHAR},
 	 	  #{mem_num})
-	 </insert>
+	 </insert> 
 	 <!-- sql 태그와 include 태그를 이용해서 SQL문을 재사용 -->
 	 <sql id="boardSearch">
 	 	<where>
