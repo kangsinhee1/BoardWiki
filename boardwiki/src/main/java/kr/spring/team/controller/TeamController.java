@@ -248,6 +248,14 @@ public class TeamController {
 		teamService.deleteTeamApply(teaA_num);
 		return "redirect:/team/myTeam2";
 	}
+	
+	
+	// 모임 신청 목록
+	@GetMapping("/team/listTeamApply")
+	public String listTeamApply() {
+		
+		return "listTeamApply";
+	}
 
 
 	/*=====================
@@ -265,6 +273,7 @@ public class TeamController {
 		Map<String,Object> map = new HashMap<String,Object>();
 		Map<String,Object> map2 = new HashMap<String,Object>();
 		Map<String,Object> map3= new HashMap<String,Object>();
+		Map<String,Object> map4= new HashMap<String,Object>();
 
 
 		//본인이 가입한 모임 목록
@@ -290,12 +299,18 @@ public class TeamController {
 
 		// 신청한 모임 목록
 		map3.put("mem_num",user.getMem_num());
-		map3.put("teaA_status",1);
+		map3.put("teaA_status",1); 
 		List<TeamApplyVO> list3 = null;
 		list3 = teamService.selectTeamListApplied(map3);
 		model.addAttribute("list3",list3);
+		
+		// 신청한 모임 목록
+		map4.put("mem_num",user.getMem_num());
+		List<TeamApplyVO> list4 = null;
+		list4 = teamService.selectTeamListApplied2(map4);
+		model.addAttribute("list4",list4);
 
-		log.debug(""+list3);
+		log.debug(""+list4);
 		return "myTeamprac";
 	}
 	//글작성 폼 호출
@@ -337,7 +352,6 @@ public class TeamController {
 			HttpSession session,
 			Model model)throws IllegalStateException,IOException {
 		
-		log.debug("<<글 모임판 작성>> : " + teamBoardVO);
 		//유효성 체크 결과 오류가 있으면 폼 호출
 		if(result.hasErrors()) {
 			return insertTeam(request, session, model);
@@ -345,25 +359,26 @@ public class TeamController {
 		//회원번호 세팅
 		MemberVO member = (MemberVO)session.getAttribute("user");
 		//모임 게시판 번호 불러오기
-		long teaB_num = (long)session.getAttribute("teaB_num");
+		long tea_num = teamBoardVO.getTea_num();
 		
 
 		teamBoardVO.setFilename(FileUtil.createFile(request, teamBoardVO.getUpload()));
 		
 		teamBoardVO.setMem_num(member.getMem_num());
-		teamBoardVO.setTea_num(teaB_num);
+		teamBoardVO.setTea_num(tea_num);
+		log.debug("<<글 모임판 작성2>> : " + teamBoardVO);
 		//모임글쓰기
 	    teamService.insertTeamBoard(teamBoardVO);
 		//View 메시지 처리
 		model.addAttribute("message", "성공적으로 글이 등록되었습니다.");
-		if(member.getMem_num() == teamService.detailTeam(teaB_num).getMem_num()) {
+		if(member.getMem_num() == teamService.detailTeam(tea_num).getMem_num()) {
 			model.addAttribute("url", 
-					request.getContextPath()+"/team/teamBoardAdmin?tea_num="+teaB_num);
+					request.getContextPath()+"/team/teamBoardAdmin?tea_num="+tea_num);
 		}else {
 			model.addAttribute("url", 
-					request.getContextPath()+"/team/teamBoardUser?tea_num="+teaB_num);
+					request.getContextPath()+"/team/teamBoardUser?tea_num="+tea_num);
 		}
-		model.addAttribute("tea_num",teaB_num);
+		model.addAttribute("tea_num",tea_num);
 		return "common/resultAlert";
 	}
 	
@@ -585,12 +600,38 @@ public class TeamController {
 	}
 	//모임 관리
 	@GetMapping("/team/teamControl")
-	public String teamControl() {
+	public String teamControl(TeamApplyVO teamApplyVO ,Model model) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("tea_num",teamApplyVO.getTea_num());
 		
+		List<TeamApplyVO> list = null;
+		list = teamService.listTeamApply(teamApplyVO);
+		int count  = teamService.countTeamApplyList(teamApplyVO.getTea_num());
+		model.addAttribute("count",count);
+		model.addAttribute("list",list);
+		model.addAttribute("tea_num",teamApplyVO.getTea_num());
+		model.addAttribute("tea_name",teamService.detailTeam(teamApplyVO.getTea_num()).getTea_name());
 		return "teamControl";
 	}
 	
-	
+	//참석 회원 관리
+		@GetMapping("/team/teamCalendar")
+		public String teamCalendar(TeamApplyVO teamApplyVO ,Model model) {
+			Map<String,Object> map = new HashMap<String,Object>();
+			map.put("tea_num",teamApplyVO.getTea_num());
+			
+			List<TeamApplyVO> list = null;
+			
+			list = teamService.listTeamApply(teamApplyVO);
+			int count  = teamService.countTeamApplyList(teamApplyVO.getTea_num());
+			model.addAttribute("count",count);
+			model.addAttribute("list",list);
+			model.addAttribute("tea_num",teamApplyVO.getTea_num());
+			model.addAttribute("tea_name",teamService.detailTeam(teamApplyVO.getTea_num()).getTea_name());
+			model.addAttribute("tea_time",teamService.detailTeam(teamApplyVO.getTea_num()).getTea_time());
+			log.debug("sd flasdj glag jalgj "+teamService.detailTeam(teamApplyVO.getTea_num()));
+			return "teamCalendar";
+		}
 
 
 

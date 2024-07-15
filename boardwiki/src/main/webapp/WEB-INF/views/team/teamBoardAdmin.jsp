@@ -7,7 +7,7 @@
 <div class="page-main">
     <h2>(${TEAM.tea_name}) 모임 게시판</h2>
     <div class="align-right">
-        <input type="button" value="모임관리" onclick="location.href='${pageContext.request.contextPath}/team/teamControl'">
+        <input type="button" value="모임관리" onclick="location.href='${pageContext.request.contextPath}/team/teamControl?tea_num=${tea_num}'">
     </div>
     <hr>
     

@@ -84,6 +84,19 @@
 		<put-attribute name="body" value="/WEB-INF/views/team/teamControl.jsp"/>
 		<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp"/>
 	</definition>
+		<definition name="teamApplyList" extends="teamControl">
+		<put-attribute name="title" value="모임 신청내역 확인"/>
+		<put-attribute name="body" value="/WEB-INF/views/team/teamApplyList.jsp"/>
+	</definition>
+	<definition name="teamCalendar" extends="teamControl">
+		<put-attribute name="title" value="모임 출석인원 확인"/>
+		<put-attribute name="body" value="/WEB-INF/views/team/teamCalendar.jsp"/>
+	</definition>
+	<definition name="teamAttendList" extends="teamControl">
+		<put-attribute name="title" value="모임 출석인원 확인"/>
+		<put-attribute name="body" value="/WEB-INF/views/team/teamAttendList.jsp"/>
+	</definition>
+	
 </tiles-definitions>
 
 

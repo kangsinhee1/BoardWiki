@@ -141,7 +141,10 @@
 	 </insert>
 	 
 	  <select id="selectTeamListApplied" parameterType="map" resultType="teamApplyVO">
-	 	SELECT * FROM team_apply a JOIN team b on a.tea_num=b.tea_num WHERE a.mem_num=#{mem_num} AND a.teaA_status = #{teaA_status}
+	 	SELECT * FROM team_apply a JOIN team b on a.tea_num=b.tea_num WHERE a.mem_num=#{mem_num} AND a.teaA_status = #{teaA_status} AND b.tea_status!=0
+	 </select>
+	 	  <select id="selectTeamListApplied2" parameterType="map" resultType="teamApplyVO">
+	 	SELECT * FROM team_apply a JOIN team b on a.tea_num=b.tea_num WHERE a.mem_num=#{mem_num} AND teaA_status != 9
 	 </select>
 	 
 	 <!--모임 게시판 등록  -->

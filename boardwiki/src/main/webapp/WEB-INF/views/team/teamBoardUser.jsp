@@ -37,7 +37,7 @@
                 <option value="2" <c:if test="${param.order == 2}">selected</c:if>>조회수</option>
                 <option value="3" <c:if test="${param.order == 3}">selected</c:if>>댓글순</option>
             </select>
-            <input type="button" value="글쓰기" onclick="location.href='${pageContext.request.contextPath}/team/teamBoardWrite'">
+            <input type="button" value="글쓰기" onclick="location.href='${pageContext.request.contextPath}/team/teamBoardWrite?tea_num=${tea_num}'">
         </div>
     </form>
 

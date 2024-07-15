@@ -18,6 +18,7 @@ import kr.spring.board.service.BoardService;
 import kr.spring.board.vo.BoardReplyVO;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.team.service.TeamService;
+import kr.spring.team.vo.TeamApplyVO;
 import kr.spring.team.vo.TeamBoardVO;
 import kr.spring.team.vo.TeamFavVO;
 import kr.spring.team.vo.TeamReplyVO;
@@ -255,7 +256,51 @@ public class TeamAjaxController {
 		}		
 		return mapJson;
 	}
-
+	
+	
+	//모임 신청 처리 및 회원 정지 기능
+	@PostMapping("/team/changeStatus")
+	@ResponseBody
+	public Map<String,String> changeStatus( long teaA_num ,long teaA_status, HttpSession session){
+		
+		Map<String,String> mapJson = 
+		           new HashMap<String,String>();
+		MemberVO user = 
+				(MemberVO)session.getAttribute("user");
+		if(user==null) {
+			//로그인이 되지 않은 경우
+			mapJson.put("result", "logout");
+	//}else if(teamApplyVO.getTeaA_auth() != 9) {
+		//	mapJson.put("result", "wrongAccess");
+		}else {
+			teamService.updateTeamApplyStatus(teaA_status,teaA_num);
+			mapJson.put("result", "success");
+		}
+		
+		return mapJson;
+	}
+	
+	//모임 신청 처리 및 회원 정지 기능
+		@PostMapping("/team/updateMeetingDate")
+		@ResponseBody
+		public Map<String,String> updateMeetingDate( long tea_num ,String tea_time, HttpSession session){
+			
+			Map<String,String> mapJson = 
+			           new HashMap<String,String>();
+			MemberVO user = 
+					(MemberVO)session.getAttribute("user");
+			if(user==null) {
+				//로그인이 되지 않은 경우
+				mapJson.put("result", "logout");
+		//}else if(teamApplyVO.getTeaA_auth() != 9) {
+			//	mapJson.put("result", "wrongAccess");
+			}else {
+				teamService.updateTeamSchedule(tea_num, tea_time);
+				mapJson.put("result", "success");
+			}
+			
+			return mapJson;
+		}
 
 
 }

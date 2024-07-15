@@ -1,4 +1,5 @@
 $(function(){
+	
 	let rowCount = 10;
 	let currentPage;
 	let count;

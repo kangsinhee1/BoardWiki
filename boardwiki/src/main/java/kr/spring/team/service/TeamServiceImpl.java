@@ -3,6 +3,7 @@ package kr.spring.team.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -43,8 +44,9 @@ public class TeamServiceImpl implements TeamService {
 	}
 
 	@Override
-	public void updateTeamSchedule(Long tea_num) {
-		teamMapper.updateTeamSchedule(tea_num);
+	public void updateTeamSchedule(@Param(value="tea_num")long tea_num,@Param(value="tea_time") String tea_time) {
+		
+		teamMapper.updateTeamSchedule(tea_num, tea_time);
 	}
 
 	@Override
@@ -103,6 +105,10 @@ public class TeamServiceImpl implements TeamService {
 	public List<TeamApplyVO> selectTeamListApplied(Map<String, Object> map) {
 		
 		return teamMapper.selectTeamListApplied(map);
+	}
+	//회원이 신청한 모든 모임 목록 (결과포함)
+	public List<TeamApplyVO> selectTeamListApplied2(Map<String,Object>map){
+		return teamMapper.selectTeamListApplied2(map);
 	}
 
 	@Override
@@ -221,6 +227,21 @@ public class TeamServiceImpl implements TeamService {
 	@Override
 	public TeamReplyVO getTeamReply(long teaR_num) {
 		return teamMapper.getTeamReply(teaR_num);
+	}
+
+	@Override
+	public List<TeamApplyVO> listTeamApply(TeamApplyVO teamApply) {
+		return teamMapper.listTeamApply(teamApply);
+	}
+
+	@Override
+	public void updateTeamApplyStatus(@Param(value="teaA_status")long teaA_status,@Param(value="teaA_num")long teaA_num) {
+		teamMapper.updateTeamApplyStatus(teaA_status,teaA_num);
+	}
+
+	@Override
+	public Integer countTeamApplyList(long tea_num) {
+		return teamMapper.countTeamApplyList(tea_num);
 	}
 
 }

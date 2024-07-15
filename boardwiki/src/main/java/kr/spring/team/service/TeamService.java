@@ -3,6 +3,10 @@ package kr.spring.team.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+
 import kr.spring.team.vo.TeamApplyVO;
 import kr.spring.team.vo.TeamBoardVO;
 import kr.spring.team.vo.TeamFavVO;
@@ -21,7 +25,7 @@ public interface TeamService {
 			//수정
 			public void updateTeam(TeamVO teamVO);
 			//일정 등록
-			public void updateTeamSchedule(Long tea_num);
+			public void updateTeamSchedule(@Param(value="tea_num")long tea_num,@Param(value="tea_time") String tea_time);
 			//조회수
 			public void updateTeamHit(Long tea_num);
 			//비활성화
@@ -42,11 +46,14 @@ public interface TeamService {
 			public void insertTeamApply(TeamApplyVO teamApply);
 
 			//신청 목록 확인
-			
 			public Integer selectTeamApplyList(TeamApplyVO teamApply);
+			//신청 회원 갯수
+			public Integer countTeamApplyList(long tea_num);
 			
 			// 회원이 가입한 모임
 			public List<TeamApplyVO> selectTeamListApplied(Map<String,Object>map);
+			//회원이 신청한 모든 모임 목록 (결과포함)
+			public List<TeamApplyVO> selectTeamListApplied2(Map<String,Object>map);
 			//모임별 신청회원 확인
 			public TeamApplyVO selectTeamApplyListByTeamNum(long tea_num);
 			//
@@ -94,4 +101,8 @@ public interface TeamService {
 			//부모글 삭제시 댓글 삭제
 			public void deleteTeamBoardReplyByTeamBoardNum(long teaB_num);
 			
+			
+			public List<TeamApplyVO> listTeamApply(TeamApplyVO teamApply);
+			
+			public void updateTeamApplyStatus(@Param(value="teaA_status")long teaA_status,@Param(value="teaA_num")long teaA_num);
 }

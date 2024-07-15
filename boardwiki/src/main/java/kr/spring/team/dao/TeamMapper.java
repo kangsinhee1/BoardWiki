@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -32,7 +33,8 @@ public interface TeamMapper {
 		//수정
 		public void updateTeam(TeamVO team);
 		//일정 등록
-		public void updateTeamSchedule(Long tea_num);
+		@Update("Update team SET tea_time = #{tea_time} WHERE tea_num = #{tea_num}")
+		public void updateTeamSchedule(@Param(value="tea_num")long tea_num,@Param(value="tea_time") String tea_time);
 		//조회수
 		@Update("UPDATE team SET tea_hit= tea_hit+1 WHERE tea_num = #{tea_num}")
 		public void updateTeamHit(Long tea_num);
@@ -58,6 +60,9 @@ public interface TeamMapper {
 
 		// 회원이 가입한 모임
 		public List<TeamApplyVO> selectTeamListApplied(Map<String,Object>map);
+		//회원이 신청한 모든 모임 목록 (결과포함)
+		public List<TeamApplyVO> selectTeamListApplied2(Map<String,Object>map);
+		
 		// 본인이 등록한 모임
 		public List<TeamApplyVO> selectTeamListRegistered(Map<String,Object>map);
 		
@@ -66,6 +71,8 @@ public interface TeamMapper {
 		
 		public void insertTeamApplyByAdmin(TeamVO team);
 		public void insertTeamApply(TeamApplyVO teamApply);
+		
+		// 모임 일정 설정
 		
 		//신청 목록 확인
 		
@@ -87,10 +94,21 @@ public interface TeamMapper {
 		@Delete("DELETE FROM team_apply WHERE tea_num=#{tea_num}")
 		public void deleteTeamApplyByTeaNum(long tea_num);
 		
+		// 모임 신청 회원 목록 확인
+		@Select("SELECT * FROM team_apply JOIN member_detail USING (mem_num) WHERE tea_num = #{tea_num} AND teaA_status != 9")
+		public List<TeamApplyVO> listTeamApply(TeamApplyVO teamApply);
 		
-		//모임 신청 처리
-		@Update("UPDATE team_apply SET teaA_attend=1 WHERE teaA_num=#{teaA_num}")
+		@Update("UPDATE team_apply SET teaA_status=#{teaA_status} WHERE teaA_num = #{teaA_num}")
+		public void updateTeamApplyStatus(@Param(value="teaA_status")long teaA_status,@Param(value="teaA_num")long teaA_num);
+		
+		@Select("SELECT count(*) FROM team_apply WHERE tea_num = #{tea_num}")
+		public Integer countTeamApplyList(long tea_num);
+		//모임 참석 처리
+		@Update("UPDATE team_apply SET teaA_attend=1 WHERE mem_num = #{mem_num} AND tea_num=#{tea_num}")
 		public void updateTeamApplyUser(TeamApplyVO teamApply);
+		//모임 불참 처리
+		@Update("UPDATE team_apply SET teaA_attend=0 WHERE mem_num = #{mem_num} AND tea_num=#{tea_num}")
+		public void updateTeamApplyUser2(TeamApplyVO teamApply);
 		//모임 참석 회원 확인
 		@Select("SELECT * FROM team_apply JOIN team USING(mem_num) WHERE teaA_attend=1")
 		public void selectTeamApplyATTEND(TeamApplyVO teamApply);
