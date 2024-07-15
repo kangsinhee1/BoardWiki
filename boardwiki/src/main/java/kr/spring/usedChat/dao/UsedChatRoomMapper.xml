@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="kr.spring.usedChat.dao.UsedChatRoomMapper"> 
+	<resultMap type="UsedChatRoomVO" id="usedChatMap">
+		<result property="usedChat_textVO.chaC_txt" column="chaC_txt"/>
+		<result property="usedChat_textVO.chaC_time" column="chaC_time"/>
+	</resultMap>
+
+	<sql id="UsedChatSub">
+		FROM UsedChatRoom 
+		LEFT OUTER JOIN (SELECT
+							chaC_num,
+							<![CDATA[
+							REPLACE(REPLACE
+							(REPLACE
+							(chaC_txt,'<','&lt;'),'>','&gt;'),'@{member}@','') chaC_txt,
+							]]>
+							chaC_time,
+							useC_num
+						FROM usedChat_txt WHERE chaC_num IN (SELECT
+														MAX(chaC_num) chaC_num FROM usedChat_txt
+															GROUP BY useC_num))
+		USING(useC_num)
+		WHERE mem_num=#{mem_num}
+		<if test="keyword != null and keyword !=''">
+			AND room_name LIKE '%' || #{keyword} || '%'
+		</if>
+	</sql>
+	
+	<!-- 채팅방 전체/검색 개수 -->
+	<select id="selectRowCount" parameterType="map" resultType="integer">
+		SELECT
+			COUNT(*)
+		<include refid="UsedChatSub"></include>
+	</select>
+	<!-- 채팅방 목록 -->
+	<select id="selectUsedChatRoomList" parameterType="map" resultMap="usedChatMap">
+		SELECT
+			*
+		FROM (SELECT
+				a.*,
+				rownum rnum
+				FROM (SELECT
+						*
+						<include refid="UsedChatSub"></include>
+						ORDER BY chaC_time DESC)a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+	</select>
+	
+ </mapper>
+
+
+
+
+
+
+

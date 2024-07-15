@@ -124,7 +124,6 @@ public class AdminController {
 			map.put("start", page.getStartRow());
 			map.put("end", page.getEndRow());
 			
-			
 			list = itemService.selectList(map);  
 		}
 		
