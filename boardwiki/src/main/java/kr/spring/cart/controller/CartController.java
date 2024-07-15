@@ -60,7 +60,8 @@ public class CartController {
 		cartVO.setItem_quantity(1); // 기본 수량을 1로 설정
 
 		cartService.insertCart(cartVO);
-
+		
+		model.addAttribute("member", member);  // member 객체를 모델에 추가
 		model.addAttribute("message", "상품이 장바구니에 추가되었습니다.");
 		model.addAttribute("url", request.getContextPath() + "/cart/cart");
 
