@@ -45,9 +45,12 @@ public class CartController {
 	@PostMapping("/item/detail")
 	public String addToCart(@RequestParam Long item_num,
 			HttpSession session, HttpServletRequest request, Model model) {
+		
 		MemberVO member = (MemberVO) session.getAttribute("user");
 		ItemVO item = (ItemVO) session.getAttribute("item");
-
+		
+		log.debug("<<게임 목록 - member>> : "+member);
+		
 		if (member == null || item == null) {
 			model.addAttribute("message", "사용자 정보나 상품 정보가 누락되었거나 잘못되었습니다.");
 			model.addAttribute("url", "/item/detail");
@@ -61,7 +64,7 @@ public class CartController {
 
 		cartService.insertCart(cartVO);
 		
-		model.addAttribute("member", member);  // member 객체를 모델에 추가
+		model.addAttribute("member", member); // member 객체를 모델에 추가
 		model.addAttribute("message", "상품이 장바구니에 추가되었습니다.");
 		model.addAttribute("url", request.getContextPath() + "/cart/cart");
 

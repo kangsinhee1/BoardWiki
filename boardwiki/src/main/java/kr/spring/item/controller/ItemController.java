@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -121,62 +122,21 @@ public class ItemController {
 	 * 게임 상세
 	 *=========================*/
 	@GetMapping("/item/item_detail")
-	public ModelAndView process(Long item_num,Model model) {
+	public ModelAndView process(Long item_num,Model model, ServletRequest session) {
 		log.debug("<<게임 상세 - item_num>> : "+item_num);
-
+		
+		MemberVO member = (MemberVO) session.getAttribute("user");
 		ItemVO item = itemService.selectItem(item_num);
 
 		Long mintime = (item.getMin_time() / 60);
 		Long maxtime = (item.getMax_time() / 60);
-
+		
+		model.addAttribute("member", member); // member 객체를 모델에 추가
 		model.addAttribute("mintime",mintime);
 		model.addAttribute("maxtime",maxtime);
 
 		return new ModelAndView("item_detail","item",item); 
 	}
-	
-	/*=========================
-     * 게임 상세 및 장바구니 추가
-     *=========================*/
-//    @GetMapping("/item/item_detail")
-//    public ModelAndView process(Long item_num, 
-//                                @Valid CartVO cartVO, 
-//                                BindingResult result,
-//                                HttpServletRequest request,
-//                                HttpSession session,
-//                                Model model) throws IllegalStateException, IOException {
-//        log.debug("<<게임 상세 - item_num>> : " + item_num);
-//
-//        // 게임 상세 정보 가져오기
-//        ItemVO item = itemService.selectItem(item_num);
-//        Long mintime = item.getMin_time() / 60;
-//        Long maxtime = item.getMax_time() / 60;
-//        model.addAttribute("mintime", mintime);
-//        model.addAttribute("maxtime", maxtime);
-//        model.addAttribute("item", item);
-//
-//        // 게임 정보를 세션에 저장 (장바구니 추가 시 사용)
-//        session.setAttribute("item", item);
-//
-//        // 장바구니 추가 로직
-//        if (cartVO != null && result != null && session != null) {
-//            log.debug("<<장바구니 생성>> : " + cartVO);
-//            MemberVO vo = (MemberVO) session.getAttribute("user");
-//
-//            cartVO.setMem_num(vo.getMem_num());
-//            cartVO.setItem_num(item.getItem_num());
-//
-//            cartService.insertCart(cartVO);
-//
-//            model.addAttribute("message", "상품이 장바구니에 추가되었습니다.");
-//            model.addAttribute("url", request.getContextPath() + "/cart/cart");
-//
-//            return new ModelAndView("common/resultAlert");
-//        }
-//
-//        // 게임 상세 페이지로 이동
-//        return new ModelAndView("item_detail", "item", item);
-//    }
 }
 
 
