@@ -16,12 +16,14 @@
 		<ul>
 			<li>
 				<form:label path="boa_category">분류</form:label>
-				<form:select path="boa_category">
+				<form:select path="boa_category" id="boa_category">
 					<option disabled="disabled" selected>선택하세요</option>
 					<form:option value="1">자유게시판</form:option>
 					<form:option value="2">팁게시판</form:option>
 					<form:option value="3">후기게시판</form:option>
+					<c:if test="${user.mem_auth==9}">
 					<form:option value="4">공지사항</form:option>
+					</c:if>
 					<form:option value="5">QnA</form:option>
 				</form:select>
 				<form:errors path="boa_category" cssClass="error-color"/>                             
@@ -65,6 +67,7 @@
 		</div>                           
 	</form:form>
 </div>
+
 <!-- 게시판 글쓰기 끝 -->
 
 
