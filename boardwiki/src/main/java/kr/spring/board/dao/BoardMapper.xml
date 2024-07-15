@@ -26,10 +26,8 @@
 	 		<if test="boa_category !=null and boa_category != ''">
 	 			boa_category = #{boa_category}
 	 		</if>
-	 		<if test="keyword !=null and keyword != ''">
-	 			<if test="boa_category !=null and boa_category != ''">
+	 		<if test="keyfield !=null and keyfield != ''">
 	 				AND
-	 			</if>
 	 		</if>
 	 		<if test="keyfield == 1">
 	 			boa_title LIKE '%' || #{keyword} || '%'

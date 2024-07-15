@@ -33,7 +33,8 @@ public class BoardVO {
 	
 	
 	private String mem_email;				
-	private String mem_nickname;		
+	private String mem_nickname;
+	private Integer mem_auth;
 	
 	private int re_cnt;				
 	private int fav_cnt;  

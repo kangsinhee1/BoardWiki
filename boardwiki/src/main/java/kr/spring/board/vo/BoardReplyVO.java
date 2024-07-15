@@ -16,6 +16,7 @@ public class BoardReplyVO {
 	private long boa_num;			//부모글 번호
 	private long mem_num;			//작성자 회원번호
 	
+	private Integer mem_auth;
 	private String mem_email;			//아이디
 	private String mem_nickname;		//별명
 	

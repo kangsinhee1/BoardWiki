@@ -43,10 +43,15 @@ $(function(){
 					output +='        <li>';
 					   
 					if(item.mem_nickname){
-						output += item.mem_nickname + '<br>';
+						output += item.mem_nickname;
+						  if (item.mem_auth === 9) {
+            				output += ' (관리자)';
+       					  }
+       					  output += '<br>';
 					}else{
 						output += item.mem_email + '<br>';
 					}
+					
 					if(item.boaR_mdate){
 						output += '<span class="boaR-mdate">최근 수정일 : ' + item.boaR_mdate + '</span>';
 					}else{
