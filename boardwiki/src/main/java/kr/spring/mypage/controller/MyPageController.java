@@ -26,13 +26,13 @@ import lombok.extern.slf4j.Slf4j;
 public class MyPageController {
 	@Autowired
 	private MemberService memberService;
-	
+
 	@Autowired
 	private BoardService boardService;
-	
-	
-	
-	
+
+
+
+
 	/*==============================
 	 * MY페이지
 	 *==============================*/	
@@ -60,9 +60,9 @@ public class MyPageController {
 		MemberVO member = 
 				memberService.selectMember(user.getMem_num());
 		log.debug("<<MY페이지>> : " + member);
-		
+
 		model.addAttribute("member", member);
-		
+
 		return "myAlert";
 	}
 	/*==============================
@@ -76,9 +76,9 @@ public class MyPageController {
 		MemberVO member = 
 				memberService.selectMember(user.getMem_num());
 		log.debug("<<MY페이지>> : " + member);
-		
+
 		model.addAttribute("member", member);
-		
+
 		return "myChat";
 	}
 	/*==============================
@@ -92,9 +92,9 @@ public class MyPageController {
 		MemberVO member = 
 				memberService.selectMember(user.getMem_num());
 		log.debug("<<MY페이지>> : " + member);
-		
+
 		model.addAttribute("member", member);
-		
+
 		return "myOrder";
 	}
 	/*==============================
@@ -108,26 +108,136 @@ public class MyPageController {
 		MemberVO member = 
 				memberService.selectMember(user.getMem_num());
 		log.debug("<<MY페이지>> : " + member);
-		
+
 		model.addAttribute("member", member);
-		
+
 		return "myLog";
 	}
 	/*==============================
-	 * MY페이지 (내가 쓴글 )
+	 * MY페이지 (내가 쓴 글 )
 	 *==============================*/	
+	//자유게시판
 	@GetMapping("/myPage/myWrite")
-	public String myWritePage(HttpSession session,Model model) {
+	public String myWritePage(@RequestParam(defaultValue="1") int pageNum,
+			@RequestParam(defaultValue="1") int order,
+			@RequestParam(defaultValue="1")String boa_category,
+			String keyfield,String keyword,HttpSession session,Model model) {
+
 		MemberVO user = 
 				(MemberVO)session.getAttribute("user");
 		//회원정보
 		MemberVO member = 
 				memberService.selectMember(user.getMem_num());
 		log.debug("<<MY페이지>> : " + member);
-		
+
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("boa_category", boa_category);
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		int count = boardService.selectRowCount(map);
+
+		PagingUtil page = new PagingUtil(keyfield,keyword,pageNum,count,
+				10,10,"myWrite","&boa_category="+boa_category+"&order="+order);
+		model.addAttribute("page", page.getPage());
+		List<BoardVO> list = null;
+		if(count > 0) {
+			map.put("order", order);
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+
+			long mem_num = user.getMem_num();
+			map.put("mem_num", mem_num);
+
+			list = boardService.selectList(map);
+		}
+		model.addAttribute("count", count);
+		model.addAttribute("list", list);
+		model.addAttribute("page", page.getPage());
 		model.addAttribute("member", member);
-		
+
 		return "myWrite";
+	}
+	//팁게시판
+	@GetMapping("/myPage/myWrite2")
+	public String myWritePage2(@RequestParam(defaultValue="1") int pageNum,
+			@RequestParam(defaultValue="1") int order,
+			@RequestParam(defaultValue="2")String boa_category,
+			String keyfield,String keyword,HttpSession session,Model model) {
+
+		MemberVO user = 
+				(MemberVO)session.getAttribute("user");
+		//회원정보
+		MemberVO member = 
+				memberService.selectMember(user.getMem_num());
+		log.debug("<<MY페이지>> : " + member);
+
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("boa_category", boa_category);
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		int count = boardService.selectRowCount(map);
+
+		PagingUtil page = new PagingUtil(keyfield,keyword,pageNum,count,
+				10,10,"myWrite","&boa_category="+boa_category+"&order="+order);
+		model.addAttribute("page", page.getPage());
+		List<BoardVO> list = null;
+		if(count > 0) {
+			map.put("order", order);
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+
+			long mem_num = user.getMem_num();
+			map.put("mem_num", mem_num);
+
+			list = boardService.selectList(map);
+		}
+		model.addAttribute("count", count);
+		model.addAttribute("list", list);
+		model.addAttribute("page", page.getPage());
+		model.addAttribute("member", member);
+
+		return "myWrite2";
+	}
+	//후기게시판
+	@GetMapping("/myPage/myWrite3")
+	public String myWritePage3(@RequestParam(defaultValue="1") int pageNum,
+			@RequestParam(defaultValue="1") int order,
+			@RequestParam(defaultValue="3")String boa_category,
+			String keyfield,String keyword,HttpSession session,Model model) {
+
+		MemberVO user = 
+				(MemberVO)session.getAttribute("user");
+		//회원정보
+		MemberVO member = 
+				memberService.selectMember(user.getMem_num());
+		log.debug("<<MY페이지>> : " + member);
+
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("boa_category", boa_category);
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		int count = boardService.selectRowCount(map);
+
+		PagingUtil page = new PagingUtil(keyfield,keyword,pageNum,count,
+				10,10,"myWrite","&boa_category="+boa_category+"&order="+order);
+		model.addAttribute("page", page.getPage());
+		List<BoardVO> list = null;
+		if(count > 0) {
+			map.put("order", order);
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+
+			long mem_num = user.getMem_num();
+			map.put("mem_num", mem_num);
+
+			list = boardService.selectList(map);
+		}
+		model.addAttribute("count", count);
+		model.addAttribute("list", list);
+		model.addAttribute("page", page.getPage());
+		model.addAttribute("member", member);
+
+		return "myWrite3";
 	}
 	/*==============================
 	 * MY페이지 (내 주문)
@@ -140,9 +250,9 @@ public class MyPageController {
 		MemberVO member = 
 				memberService.selectMember(user.getMem_num());
 		log.debug("<<MY페이지>> : " + member);
-		
+
 		model.addAttribute("member", member);
-		
+
 		return "myPoint";
 	}
 	/*==============================
@@ -163,28 +273,28 @@ public class MyPageController {
 		map.put("boa_category", boa_category);
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
-		
+
 		int count = boardService.selectRowCount(map);
-		
+
 		PagingUtil page = new PagingUtil(keyfield,keyword,pageNum,count,
-							10,10,"list","&boa_category="+boa_category+"&order="+order);
+				10,10,"list","&boa_category="+boa_category+"&order="+order);
 		List<BoardVO> list = null;
 		if(count > 0) {
 			map.put("order", order);
 			map.put("start", page.getStartRow());
 			map.put("end", page.getEndRow());
-			
+
 			long mem_num = user.getMem_num();
-		    map.put("mem_num", mem_num);
-		    
+			map.put("mem_num", mem_num);
+
 			list = boardService.selectList(map);
 		}
-		
+
 		model.addAttribute("count", count);
 		model.addAttribute("list", list);
 		model.addAttribute("page", page.getPage());
 		model.addAttribute("member", member);
-		
+
 		return "myQna";
 	}
 }

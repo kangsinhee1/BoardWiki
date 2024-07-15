@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,7 +42,18 @@ public class BoardController {
 	 *  게시판 글쓰기
 	 *====================*/
 	@GetMapping("/board/write")
-	public String form() {
+	public String form(HttpServletRequest request,
+			 HttpSession session,
+			 Model model) {
+		MemberVO member =(MemberVO)session.getAttribute("user");
+		if(member== null) {
+			model.addAttribute("message", "로그인후 작성 가능합니다.");
+			model.addAttribute("url", 
+			request.getContextPath()+"/used/usedList");
+			return "common/resultAlert";
+			
+		}
+		model.addAttribute("member", member);
 		return "boardWrite";
 	}
 	@PostMapping("/board/write")
@@ -55,7 +67,11 @@ public class BoardController {
 		log.debug("<<게시판 글 저장>> : " + boardVO);
 		
 		if(result.hasErrors()) {
-			return form();
+			for(FieldError f : result.getFieldErrors()) {
+				log.debug("에러 필드 : " + f.getField());
+			}
+			log.debug("안됨");
+			return form(request, session, model);
 		}
 		
 		MemberVO vo = (MemberVO)session.getAttribute("user");

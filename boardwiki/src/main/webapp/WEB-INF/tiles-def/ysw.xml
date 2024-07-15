@@ -40,6 +40,14 @@
 		<put-attribute name="title" value="calendar"/>
 		<put-attribute name="body" value="/WEB-INF/views/myPage/myWrite.jsp"/>
 	</definition>
+	<definition name="myWrite2" extends="myPage">
+		<put-attribute name="title" value="calendar"/>
+		<put-attribute name="body" value="/WEB-INF/views/myPage/myWrite2.jsp"/>
+	</definition>
+	<definition name="myWrite3" extends="myPage">
+		<put-attribute name="title" value="calendar"/>
+		<put-attribute name="body" value="/WEB-INF/views/myPage/myWrite3.jsp"/>
+	</definition>
 	<definition name="myPoint" extends="myPage">
 		<put-attribute name="title" value="myPoint"/>
 		<put-attribute name="body" value="/WEB-INF/views/myPage/myPoint.jsp"/>

@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<h3>내질문</h3>
+<h3>내가 쓴 글</h3>
+<br>
 <div class="page-main">
 	<c:if test="${count==0}">
 		<div class="result-display">표시할 게시물이 없습니다.</div>
 	</c:if>
 	<c:if test="${count > 0}">
+		<h5>후기게시판</h5>
 		<table class="striped-table">
 			<tr>
 				<th>번호</th>
@@ -32,5 +34,6 @@
 				</c:if>
 			</c:forEach>
 		</table>
+		<div class="align-center">${page}</div>
 	</c:if>
 </div>
