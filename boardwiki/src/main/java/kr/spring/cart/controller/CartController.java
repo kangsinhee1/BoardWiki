@@ -68,7 +68,7 @@ public class CartController {
 			
 			
 		    if(db_cart==null) {//동일 상품이 없을 경우
-		    	itemService.pullItem(item);
+                //itemService.pullItem(item);
 				cartService.insertCart(cart);
 				mapAjax.put("result", "success");
 			}else {//동일 상품이 있을 경우
