@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kr.spring.cart.vo.CartVO;
 import kr.spring.item.dao.ItemMapper;
 import kr.spring.item.vo.ItemVO;
 
@@ -60,6 +61,11 @@ public class ItemServiceImpl implements ItemService{
 	@Override
 	public int getItem(Long item_num) {
 		return itemMapper.getItem(item_num);
+	}
+
+	@Override
+	public void pullItem(CartVO item_num) {
+		itemMapper.pullItem(item_num);
 	}
 
 }

@@ -76,6 +76,7 @@ public class CartController {
 			
 			CartVO db_cart = cartService.getCart(cart);
 			
+			
 		    if(db_cart==null) {//동일 상품이 없을 경우
 				cartService.insertCart(cart);
 				mapAjax.put("result", "success");

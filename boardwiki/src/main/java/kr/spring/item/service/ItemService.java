@@ -3,6 +3,7 @@ package kr.spring.item.service;
 import java.util.List;
 import java.util.Map;
 
+import kr.spring.cart.vo.CartVO;
 import kr.spring.item.vo.ItemVO;
 
 public interface ItemService {
@@ -15,4 +16,5 @@ public interface ItemService {
 	public Integer selectRowCount2(Map<String,Object> map);
 	public ItemVO selectItem(Long item_num);
 	public int getItem(Long item_num);
+	public void pullItem(CartVO item_num);
 }
