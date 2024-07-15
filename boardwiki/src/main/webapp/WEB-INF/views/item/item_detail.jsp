@@ -25,38 +25,18 @@
 					<p>재고:${item.item_stock}개</p>
 					<p>가격:${item.item_price}원</p>
 				</div>
-<%-- 				<c:if test="${!empty member.mem_num}"> --%>
-<!--  				<div class="text-box2" style="display: inline-block; vertical-align: top;"> -->
-<!-- 					<p>개&nbsp;수&nbsp;:&nbsp;</p><input><p>&nbsp;개</p><br> -->
-<!-- 					<button>바로구매</button> -->
-<%--  					<button onclick="location.href='${pageContext.request.contextPath}/cart/cart'"> --%>
-<!-- 					 장바구니 -->
-<!--  					</button>  -->
-<!--  				</div> -->
-<%-- 				</c:if> --%>
-<%-- 				<c:if test="${empty member.mem_num}"> --%>
-<!-- 				<div class="text-box2" style="display: inline-block; vertical-align: top;"> -->
-<!-- 					<p>로그인 후 이용해주세요</p><br> -->
-<!-- 					<button>로그인</button> -->
-<!-- 				</div> -->
-<%-- 				</c:if> --%>
-                
                 <c:if test="${!empty member.mem_num}">
                 <div class="text-box2" style="display: inline-block; vertical-align: top;">
-                    <button>바로구매</button>
+           <!-- <button>바로구매</button> -->
                     <form id="addToCart" method="post" action="${pageContext.request.contextPath}/cart/cart">
                         <input type="hidden" name="item" value="${item.item_num}" />
                         <input type="hidden" name="user" value="${member.mem_num}" />
+                        <label for="quantity">수량:</label>
+                        <input type="number" id="quantity" name="item_quantity" value="1" min="1" max="${item.item_stock}"/>
                         <button type="submit">장바구니</button>
                     </form>
                 </div>
-                </c:if> 
-                <c:if test="${empty member.mem_num}">
-                <div class="text-box2" style="display: inline-block; vertical-align: top;">
-                    <p>로그인 후 이용해주세요</p><br>
-                    <button onclick="location.href='${pageContext.request.contextPath}/member/login'">로그인</button>
-                </div>
-                </c:if> 
+                </c:if>
 			</div>
 		</div>
 	</div>

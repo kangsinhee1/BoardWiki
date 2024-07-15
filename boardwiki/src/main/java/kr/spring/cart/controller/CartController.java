@@ -61,6 +61,7 @@ public class CartController {
 		cartVO.setMem_num(member.getMem_num());
 		cartVO.setItem_num(item.getItem_num());
 		cartVO.setItem_quantity(1); // 기본 수량을 1로 설정
+//		cartVO.setItem_quantity(item_quantity); // 사용자가 선택한 수량 설정
 
 		cartService.insertCart(cartVO);
 		
@@ -70,5 +71,9 @@ public class CartController {
 
 		return "common/resultAlert";
 	}
-
+	@PostMapping("/cart/cart")
+	public String CartView(@Valid CartVO cart) {
+		
+		return "cart/cart";
+	}
 }
