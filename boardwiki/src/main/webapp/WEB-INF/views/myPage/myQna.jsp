@@ -5,25 +5,34 @@
 	src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 <h3>내질문</h3>
 <div class="page-main">
-	<table class="striped-table">
-		<tr>
-			<th>번호</th>
-			<th width="400">제목</th>
-			<th>작성자</th>
-			<th>작성일</th>
-			<th>조회수</th>
-			<th>좋아요수</th>
-		</tr>
-		<c:forEach var="board" items="${list}">
+	<c:if test="${count==0}">
+		<div class="result-display">표시할 게시물이 없습니다.</div>
+	</c:if>
+	<c:if test="${count > 0}">
+		<table class="striped-table">
 			<tr>
-				<td class="align-center"></td>
-				<td class="align-left"></td>
-				<td class="align-center"></td>
-				<td class="align-center"></td>
-				<td class="align-center"></td>
-				<td class="align-center"></td>
+				<th>번호</th>
+				<th width="400">제목</th>
+				<th>작성자</th>
+				<th>작성일</th>
+				<th>조회수</th>
+				<th>좋아요수</th>
 			</tr>
-		</c:forEach>
-	</table>
-	
+			<c:forEach var="board" items="${list}">
+				<c:if test="${board.mem_num == member.mem_num}">
+					<tr>
+						<td class="align-center">${board.boa_num}</td>
+						<td class="align-left"><a
+							href="${pageContext.request.contextPath}/board/detail?boa_num=${board.boa_num}">${board.boa_title}(${board.re_cnt})</a></td>
+						<td class="align-center"><c:if
+								test="${empty board.mem_nickname}">${board.mem_email}</c:if> <c:if
+								test="${!empty board.mem_nickname}">${board.mem_nickname}</c:if></td>
+						<td class="align-center">${board.boa_rdate}</td>
+						<td class="align-center">${board.boa_hit}</td>
+						<td class="align-center">${board.fav_cnt}</td>
+					</tr>
+				</c:if>
+			</c:forEach>
+		</table>
+	</c:if>
 </div>

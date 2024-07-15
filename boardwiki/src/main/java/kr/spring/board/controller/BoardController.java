@@ -83,9 +83,6 @@ public class BoardController {
 				@RequestParam(defaultValue="") String boa_category,
 				String keyfield,String keyword,Model model) {
 		
-		log.debug("<<게시판 목록 - boa_category>> : " + boa_category);
-		log.debug("<<게시판 목록 - order>> : " + order);
-		
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("boa_category", boa_category);
 		map.put("keyfield", keyfield);
