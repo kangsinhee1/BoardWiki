@@ -37,4 +37,13 @@ public class CartServiceImpl implements CartService{
 	public Integer selectRowCount(Map<String, Object> map) {
 		return cartMapper.selectRowCount(map);
 	}
+	@Override
+	public void updateCart2(CartVO cart) {
+		cartMapper.updateCart2(cart);
+		
+	}
+	@Override
+	public CartVO getCart(CartVO cart) {
+		return cartMapper.getCart(cart);
+	}
 }

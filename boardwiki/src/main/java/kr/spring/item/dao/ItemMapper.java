@@ -32,6 +32,7 @@ public interface ItemMapper {
 	public void deleteItem(Long item_num);
 	@Delete("DELETE FROM item WHERE item_num=#{item_num}")
 	public void deleteBoard(Long item_num);
-	//상품 상세
-	
+	//장바구니 관련
+	@Select("SELECT item_stock FROM item WHERE item_num=#{item_num}")
+	public int getItem(Long item_num);	
 }

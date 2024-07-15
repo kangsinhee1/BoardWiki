@@ -13,4 +13,6 @@ public interface CartService {
 	public Integer selectRowCount(Map<String, Object> map);
 	public void insertCart(CartVO cart);
 	public void updateCart(CartVO cart);
+	public void updateCart2(CartVO cart);
+	public CartVO getCart(CartVO cart);
 }

@@ -57,4 +57,9 @@ public class ItemServiceImpl implements ItemService{
 		return itemMapper.selectRowCount2(map);
 	}
 
+	@Override
+	public int getItem(Long item_num) {
+		return itemMapper.getItem(item_num);
+	}
+
 }

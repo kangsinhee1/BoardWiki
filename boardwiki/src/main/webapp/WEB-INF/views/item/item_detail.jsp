@@ -27,11 +27,13 @@
 				</div>
                 <c:if test="${!empty member.mem_num}">
                 <div class="text-box2" style="display: inline-block; vertical-align: top;">
-           <!-- <button>바로구매</button> -->
+                <button>바로구매</button>
                     <form id="addToCart" method="post" action="${pageContext.request.contextPath}/cart/cart">
-                        <input type="hidden" name="item" value="${item.item_num}" />
+                        <input type="hidden" name="item_num" value="${item.item_num}" />
                         <input type="hidden" name="user" value="${member.mem_num}" />
-                        <button type="submit">장바구니</button>
+                        <label for="quantity">수량:</label>
+                        <input type="number" id="quantity" name="item_quantity" value="1" min="1" max="${item.item_stock}" />
+                        <button type="button" id="addToCartButton">장바구니</button>
                     </form>
                 </div>
                 </c:if>
@@ -50,3 +52,30 @@
         <button>목록</button>
      </div>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#addToCartButton').click(function() {
+            var item_num = $('input[name="item_num"]').val();
+            var item_quantity = $('input[name="item_quantity"]').val();
+            $.ajax({
+                type: 'POST',
+                url: '/item/addToCart',
+                data: {
+                    item_num: item_num,
+                    item_quantity: item_quantity
+                },
+                dataType: 'json',
+                success: function(response) {
+                    alert(response.message);
+                    if (response.status === 'success') {
+                        window.location.href = '${pageContext.request.contextPath}/cart/cart';
+                    }
+                },
+                error: function(xhr, status, error) {
+                    alert('장바구니에 추가하는 중 오류가 발생했습니다.');
+                }
+            });
+        });
+    });
+</script>
