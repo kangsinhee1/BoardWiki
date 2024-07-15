@@ -22,4 +22,6 @@ public class RentVO {
 	
 	
 	private String item_name;	// 상품이름
+	private String mem_email;
+	private String mem_nickname;
 }

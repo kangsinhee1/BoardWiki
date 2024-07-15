@@ -8,7 +8,7 @@
 
 <div class="page-main">
     <h2>대여 목록(관리자)</h2>
-    <form action="list" id="search_form" method="get">
+    <form action="rentListAdmin" id="search_form" method="get">
         <input type="hidden" name="item_name" value="${param.item_name}">
         
         <ul class="search">
@@ -36,7 +36,7 @@
             </select>
             <script type="text/javascript">
                 $('#order').change(function() {
-                    location.href='list?category=${param.category}&keyfield='+$('#keyfield').val()+'&keyword='+$('#keyword').val()+'&order='+$('#order').val();
+                    location.href='rentListAdmin?category=${param.category}&keyfield='+$('#keyfield').val()+'&keyword='+$('#keyword').val()+'&order='+$('#order').val();
                 });
             </script>
         </div>
@@ -52,7 +52,8 @@
                 <th>대여시작일</th>
                 <th>대여종료일</th>
                 <th>대여기간</th>
-                <!-- <th>대여회원 ID</th> -->
+                <th>대여회원 ID</th>
+                <th>대여회원 닉네임</th>
                 <th>대출/반납</th>
             </tr>
             <c:forEach var="rent" items="${list}">
@@ -62,7 +63,8 @@
                     <td class="align-center">${rent.rent_sdate}</td>
                     <td class="align-center">${rent.rent_edate}</td>
                     <td class="align-center">${rent.rent_period}</td>
-                   <%--  <td class="align-center">${rent.mem_email}</td> <!-- 회원 Email 표시 --> --%>
+                    <td class="align-center">${rent.mem_email}</td> <!-- 회원 Email 표시 -->
+        			<td class="align-center">${rent.mem_nickname}</td> <!-- 회원 Nickname 표시 -->
                     <td class="align-center">
                         <c:choose>
                             <c:when test="${rent.rent_status == 1}">

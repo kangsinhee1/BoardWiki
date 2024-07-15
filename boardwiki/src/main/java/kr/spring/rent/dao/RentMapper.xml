@@ -13,33 +13,31 @@
 		#{mem_num}, #{item_num}, #{rent_status})
 	</insert>
 
-	<select id="selectRentList" parameterType="map"
-		resultType="RentVO">
-		SELECT gr.*, i.item_name
-		FROM game_rent gr
-		LEFT JOIN item i ON
-		gr.item_num = i.item_num
-		WHERE gr.mem_num = #{mem_num}
-		<include refid="rentSearch"></include>
-	</select>
+	<select id="selectRentList" parameterType="map" resultType="RentVO">
+    SELECT gr.*, i.item_name
+    FROM game_rent gr
+    LEFT JOIN item i ON gr.item_num = i.item_num
+    WHERE gr.mem_num = #{mem_num}
+    <include refid="rentSearch"></include>
+</select>
 
-	<!-- sql 태그와 include 태그를 이용해서 SQL문을 재사용 -->
-	<sql id="rentSearch">
-		<where>
-			<if test="keyword !=null and keyword != ''">
-				<if test="category !=null and category != ''">
-					AND
-				</if>
-				<if test="keyfield == 1">
-					item_name LIKE '%' || #{keyword} || '%'
-				</if>
-				<!-- <if test="keyfield == 2"> (id LIKE '%' || #{keyword} || '%' OR nick_name 
-					LIKE '%' || #{keyword} || '%') </if> <if test="keyfield == 3"> content LIKE 
-					'%' || #{keyword} || '%' </if> <if test="keyfield == 4"> (title LIKE '%' 
-					|| #{keyword} || '%' OR content LIKE '%' || #{keyword} || '%') </if> -->
-			</if>
-		</where>
-	</sql>
+<sql id="rentSearch">
+    <if test="keyword != null and keyword != ''">
+        AND i.item_name LIKE '%' || #{keyword} || '%'
+    </if>
+</sql>
+
+ <sql id="rentSearch2">
+        <where>
+            <!-- 필터링 조건 추가 -->
+            <if test="keyword != null and keyword != ''">
+                <if test="keyfield == 1">
+                    AND i.item_name LIKE '%' || #{keyword} || '%'
+                </if>
+                <!-- 다른 필터링 조건 추가 -->
+            </if>
+        </where>
+    </sql>
 
 	<!-- <sql id="rentOrder"> <if test="order == 1"> ORDER BY rent_num DESC 
 		</if> <if test="order == 2"> ORDER BY hit DESC </if> <if test="order == 3"> 
@@ -48,17 +46,14 @@
 
 
 	<!-- 대여 목록 총 레코드수/검색 레코드수 -->
-	<select id="selectRowCount" parameterType="map"
-		resultType="integer">
-		SELECT COUNT(*)
-		FROM game_rent gr
-		JOIN member m ON gr.mem_num =
-		m.mem_num
-		JOIN item i ON gr.item_num = i.item_num
-		WHERE gr.mem_num =
-		#{mem_num}
-		<include refid="rentSearch"></include>
-	</select>
+	<select id="selectRowCount" parameterType="map" resultType="integer">
+    SELECT COUNT(*)
+    FROM game_rent gr
+    JOIN member m ON gr.mem_num = m.mem_num
+    JOIN item i ON gr.item_num = i.item_num
+    WHERE gr.mem_num = #{mem_num}
+    <include refid="rentSearch"></include>
+</select>
 
 	<update id="updateRentStatus">
 		UPDATE game_rent
@@ -69,24 +64,25 @@
 	
 	
 	<!-- 모든 회원의 대여 목록 수 조회 -->
-    <select id="selectAllMembersRowCount"  parameterType="map">
-    SELECT COUNT(*)
-		FROM game_rent gr
-		JOIN member m ON gr.mem_num =
-		m.mem_num
-		JOIN item i ON gr.item_num = i.item_num
-    <include refid="rentSearch"></include>
-	</select>
+    <select id="selectAllMembersRowCount" parameterType="map" resultType="integer">
+        SELECT COUNT(*)
+        FROM game_rent gr
+        JOIN member m ON gr.mem_num = m.mem_num
+        JOIN item i ON gr.item_num = i.item_num
+        <include refid="rentSearch2"></include>
+    </select>
 
     
     <!-- 모든 회원의 대여 목록 조회 -->
-    <select id="selectAllMembersRentList" parameterType="map">
-        SELECT gr.*, i.item_name
+	<select id="selectAllMembersRentList" parameterType="map">
+		SELECT gr.*, i.item_name, m.mem_email, d.mem_nickname
 		FROM game_rent gr
-		LEFT JOIN item i ON
-		gr.item_num = i.item_num
-		<include refid="rentSearch"></include>
-    </select>
+		LEFT JOIN item i ON gr.item_num = i.item_num
+		LEFT JOIN member m ON gr.mem_num = m.mem_num
+		LEFT JOIN member_detail d ON m.mem_num = d.mem_num
+		<include refid="rentSearch2"></include>
+	</select>
+
    
     
     <!-- 다른 필요한 SQL 쿼리들 추가 가능... -->
