@@ -31,8 +31,6 @@
                     <form id="addToCart" method="post" action="${pageContext.request.contextPath}/cart/cart">
                         <input type="hidden" name="item" value="${item.item_num}" />
                         <input type="hidden" name="user" value="${member.mem_num}" />
-                        <label for="quantity">수량:</label>
-                        <input type="number" id="quantity" name="item_quantity" value="1" min="1" max="${item.item_stock}"/>
                         <button type="submit">장바구니</button>
                     </form>
                 </div>

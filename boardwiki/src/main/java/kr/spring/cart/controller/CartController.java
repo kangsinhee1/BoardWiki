@@ -71,9 +71,16 @@ public class CartController {
 
 		return "common/resultAlert";
 	}
-	@PostMapping("/cart/cart")
-	public String CartView(@Valid CartVO cart) {
-		
-		return "cart/cart";
-	}
+//	@PostMapping("/cart/cart")
+//	public String CartView(@Valid CartVO cart,
+//			HttpSession session, HttpServletRequest request, Model model) {
+//		
+//		MemberVO member = (MemberVO) session.getAttribute("user");
+//		ItemVO item = (ItemVO) session.getAttribute("item");
+//		
+//		CartVO.setMem_num(member.getMem_num());
+//		
+//		
+//		return "cart/cart";
+//	}
 }
