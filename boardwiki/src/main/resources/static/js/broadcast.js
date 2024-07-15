@@ -1,6 +1,5 @@
 
     document.addEventListener('DOMContentLoaded', () => {
-        const streamKey = '${streamkey.str_key}';
         const video = document.getElementById('video');
 
         function loadStream() {

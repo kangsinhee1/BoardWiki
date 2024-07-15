@@ -27,7 +27,7 @@ video {
 <c:if test="${broadcast.isLive == 1}">
 <div class="video-container">
     <h1>${broadcast.mem_num}님의 방송</h1>
-    <video id="video" autoplay muted playsinline></video>
+    <video id="video" controls autoplay playsinline></video>
 </div>
 </c:if>
 <c:if test="${broadcast.isLive == null}">
@@ -42,4 +42,7 @@ obs를 설치 후 obs화면을 열고 설정 방송를 누르고 <br>
 위 내용을 입력하고 적용을 누르고 obs로 돌아와 방송시작을 누르세요
 </div>
 </c:if>
-<script src="${pasgeContext.request.contextPath}/js/broadcast.js"></script>
+<script>
+    const streamKey = '${streamkey.str_key}';
+</script>
+<script src="${pageContext.request.contextPath}/js/broadcast.js"></script>

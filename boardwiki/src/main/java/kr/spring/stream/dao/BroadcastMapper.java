@@ -11,7 +11,7 @@ import java.util.List;
 
 @Mapper
 public interface BroadcastMapper {
-    @Select("SELECT * FROM stream_detail WHERE islive = 1")
+    @Select("SELECT * FROM streaming JOIN stream_detail USING(str_num) WHERE islive = 1")
     List<BroadcastVO> findAll();
 
     @Select("SELECT * FROM stream_detail WHERE str_num = #{str_num} AND isLive = 1")

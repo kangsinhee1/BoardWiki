@@ -25,7 +25,7 @@
 	<c:forEach var="broadcast" items="${broadcasts}">
 		<div class="broadcast">
 			<a
-				href="${pageContext.request.contextPath}/streaming/broadcast/${broadcast.mem_num}">
+				href="${pageContext.request.contextPath}/streaming/broadcast?str_num=${broadcast.str_num}">
 				<div class="thumbnail">
 					<img
 						src="${pageContext.request.contextPath}/hls/${broadcast.str_key}/thumbnail.jpg"
