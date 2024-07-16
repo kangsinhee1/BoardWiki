@@ -125,11 +125,15 @@ public class CartController {
 			@RequestParam(defaultValue="1") int pageNum,
 			@RequestParam(defaultValue="1") int order,
 			@RequestParam(defaultValue="") String cart_category,
-			String keyfield,String keyword,Model model,HttpSession session)
+			String keyfield,String keyword,Model model,HttpSession session,CartVO cart)
 			            		  throws IllegalStateException, IOException {
 		
 		MemberVO member = (MemberVO) session.getAttribute("user");
 		Long mem_num = member.getMem_num();
+		cartService.selectCart(mem_num);
+    	Long item_num = cart.getItem_num();
+    	cart.getItem_quantity();
+		itemService.selectItem(item_num);
 		
 		
 		Map<String,Object> map = new HashMap<String,Object>();
