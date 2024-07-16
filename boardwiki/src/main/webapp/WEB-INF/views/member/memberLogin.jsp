@@ -21,13 +21,15 @@
 					id="auto">로그인상태유지</label></li>
 			
 		</ul>
-		<div>
+		<div class="align-center">
 			<form:button class="login-btn">로그인</form:button>
 		</div>
-		<a onclick="location.href='sendPassword'">비밀번호찾기</a>
-		<div class="login_hr">
+		<p class="align-center">
+			<a onclick="location.href='sendPassword'">회원가입</a>
+			<a onclick="location.href='sendPassword'">이메일 찾기</a>
+			<a onclick="location.href='sendPassword'">비밀번호찾기</a>
+		</p>
 			<hr>
-		</div>
 			<div class="button_group">
 				<div>
 					<img src="${pageContext.request.contextPath}/images/Naver.png"
