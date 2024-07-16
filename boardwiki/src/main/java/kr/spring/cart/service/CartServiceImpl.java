@@ -46,4 +46,13 @@ public class CartServiceImpl implements CartService{
 	public CartVO getCart(CartVO cart) {
 		return cartMapper.getCart(cart);
 	}
+
+	@Override
+	public CartVO selectCart(Long mem_num) {
+		return cartMapper.selectCart(mem_num);
+	}
+
+	
+
+	
 }

@@ -1,21 +1,31 @@
 package kr.spring.cart.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.cart.service.CartService;
 import kr.spring.cart.vo.CartVO;
 import kr.spring.item.service.ItemService;
 import kr.spring.item.vo.ItemVO;
 import kr.spring.member.vo.MemberVO;
+import kr.spring.util.PagingUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -107,4 +117,61 @@ public class CartController {
 		log.debug("<<mapAjax 결과>> : " + mapAjax);
 		return mapAjax;
 	}
+	/*=========================
+	 * 장바구니 목록
+	 *=========================*/
+	@GetMapping("/cart/cart")
+	public String getList(
+			@RequestParam(defaultValue="1") int pageNum,
+			@RequestParam(defaultValue="1") int order,
+			@RequestParam(defaultValue="") String cart_category,
+			String keyfield,String keyword,Model model,HttpSession session)
+			            		  throws IllegalStateException, IOException {
+		
+		MemberVO member = (MemberVO) session.getAttribute("user");
+		Long mem_num = member.getMem_num();
+		
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("cart_category", cart_category);
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		
+		int count = cartService.selectRowCount(map);
+		
+		PagingUtil page = new PagingUtil(keyfield,keyword,pageNum,count,
+				10,10,"list","&cart_category="+cart_category+"&order="+order);
+		
+		List<CartVO> list = null;
+		
+		if(count > 0) {
+			map.put("order", order);
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			
+			list = cartService.selectCartList(map);
+		}
+		
+		model.addAttribute("count", count);
+		model.addAttribute("list", list);
+		model.addAttribute("page", page.getPage());
+		
+		return "cart";
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
