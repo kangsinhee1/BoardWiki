@@ -12,7 +12,7 @@
 				<form:label path="mem_email">이메일</form:label>
 				<form:input path="mem_email" placeholder="영문,숫자만 4~12자"
 				                             autocomplete="off"/>
-				<input type="button" id="confirmId" value="ID중복체크"
+				<input type="button" id="confirmId" value="이메일중복체크"
 				                                 class="default-btn">                  
 				<span id="message_id"></span>
 				<form:errors path="mem_email" cssClass="error-color"/>                             
