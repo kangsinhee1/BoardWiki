@@ -10,7 +10,7 @@
 <script src="${pageContext.request.contextPath}/js/uploadAdapter.js"></script>
 <div class="page-main">
 	<h2>게시판 작성</h2>
-	<form:form action="write" id="board_register"
+	<form:form action="write2" id="board_register"
 	           enctype="multipart/form-data"
 	                            modelAttribute="boardVO">
 		<ul>
@@ -18,9 +18,10 @@
 				<form:label path="boa_category">분류</form:label>
 				<form:select path="boa_category" id="boa_category">
 					<option disabled="disabled" selected>선택하세요</option>
-					<form:option value="1">자유게시판</form:option>
-					<form:option value="2">팁게시판</form:option>
-					<form:option value="3">후기게시판</form:option>
+					<c:if test="${user.mem_auth==9}">
+					<form:option value="4">공지사항</form:option>
+					</c:if>
+					<form:option value="5">QnA</form:option>
 				</form:select>
 				<form:errors path="boa_category" cssClass="error-color"/>                             
 			</li>

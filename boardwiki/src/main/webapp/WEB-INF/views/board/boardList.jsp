@@ -55,16 +55,31 @@
 				});
 			</script>
 			<c:choose>
-				<c:when test="${param.boa_category != 4}">
+				<c:when test="${param.boa_category == 1}">
+					<c:if test="${!empty user}">
+						<input type="button" value="글쓰기" onclick="location.href='write'">
+					</c:if>
+	  			</c:when>
+	  			<c:when test="${param.boa_category == 2}">
+					<c:if test="${!empty user}">
+						<input type="button" value="글쓰기" onclick="location.href='write'">
+					</c:if>
+	  			</c:when>
+	  			<c:when test="${param.boa_category == 3}">
 					<c:if test="${!empty user}">
 						<input type="button" value="글쓰기" onclick="location.href='write'">
 					</c:if>
 	  			</c:when>
 	    		<c:when test="${param.boa_category == 4}">
 					<c:if test="${!empty user && user.mem_auth == 9}">
-						<input type="button" value="글쓰기" onclick="location.href='write'">
+						<input type="button" value="글쓰기" onclick="location.href='write2'">
 					</c:if>
-	   			</c:when>    
+	   			</c:when>   
+	   			<c:when test="${param.boa_category == 5}">
+					<c:if test="${!empty user}">
+						<input type="button" value="글쓰기" onclick="location.href='write2'">
+					</c:if>
+	  			</c:when> 
 			</c:choose>
 		</div>
 	</form>

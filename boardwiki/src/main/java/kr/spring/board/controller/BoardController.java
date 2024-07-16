@@ -49,7 +49,7 @@ public class BoardController {
 		if(member== null) {
 			model.addAttribute("message", "로그인후 작성 가능합니다.");
 			model.addAttribute("url", 
-			request.getContextPath()+"/used/usedList");
+			request.getContextPath()+"/board/list");
 			return "common/resultAlert";
 			
 		}
@@ -86,7 +86,51 @@ public class BoardController {
 		
 		return "common/resultAlert";
 	}
-
+	@GetMapping("/board/write2")
+	public String form2(HttpServletRequest request,
+			 HttpSession session,
+			 Model model) {
+		MemberVO member =(MemberVO)session.getAttribute("user");
+		if(member== null) {
+			model.addAttribute("message", "로그인후 작성 가능합니다.");
+			model.addAttribute("url", 
+			request.getContextPath()+"/board/list");
+			return "common/resultAlert";
+			
+		}
+		model.addAttribute("member", member);
+		return "boardWrite";
+	}
+	@PostMapping("/board/write2")
+	public String submit2(@Valid BoardVO boardVO,
+						  BindingResult result,
+						  HttpServletRequest request,
+						  HttpSession session,
+						  Model model) 
+							throws IllegalStateException,
+										IOException{
+		log.debug("<<게시판 글 저장>> : " + boardVO);
+		
+		if(result.hasErrors()) {
+			for(FieldError f : result.getFieldErrors()) {
+				log.debug("에러 필드 : " + f.getField());
+			}
+			log.debug("안됨");
+			return form(request, session, model);
+		}
+		
+		MemberVO vo = (MemberVO)session.getAttribute("user");
+		boardVO.setMem_num(vo.getMem_num());
+		
+		boardVO.setFilename(FileUtil.createFile(request, boardVO.getUpload()));
+		boardService.insertBoard(boardVO);
+		
+		model.addAttribute("message","성공적으로 글이 등록되었습니다.");
+		model.addAttribute("url",request.getContextPath()+"/board/list");
+		
+		
+		return "common/resultAlert";
+	}
 
 	
 	/*====================

@@ -141,7 +141,8 @@
  		              boa_num,
  		              mem_nickname,
  		              mem_email,
- 		              mem_num
+ 		              mem_num,
+ 		              mem_auth
  		            FROM (board_reply
  		            JOIN member USING(mem_num))
  		            JOIN member_detail USING(mem_num)
@@ -150,7 +151,7 @@
  		<![CDATA[
  		WHERE rnum >= #{start} AND rnum <= #{end}
  		]]>            
- 	</select>     
+ 	</select>  
  </mapper>
 
 
