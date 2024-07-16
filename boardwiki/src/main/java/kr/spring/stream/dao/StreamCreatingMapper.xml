@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="kr.spring.stream.dao.StreamCreatingMapper"> 
+	
+    <!-- 채팅방 내역 수 -->
+    <select id="countCreating" parameterType="map" resultType="integer">
+    <![CDATA[
+        SELECT COUNT(*) 
+        FROM streaming_chatroom
+    ]]>
+    </select>
+    
+    <!-- 채팅방 조건문 -->
+    <sql id="countuser">
+    	<where>
+            <if test="keyfled != null and eyfled != ''">
+                <if test="keyfled == 1">
+                mem_num =#{mem_num}
+                </if>
+                <if test="keyfled == 2">
+                str_num = #{str_num}
+                </if>
+            </if>
+        </where>
+    </sql>
+    
+    <!-- 채팅방 수 -->
+    <select id="countCreatinguser" parameterType="map" resultType="integer">
+    <![CDATA[
+        SELECT COUNT(*) 
+        FROM streaming_chatroom
+    ]]>
+    <include refid="countuser"/>
+    
+    </select>
+
+    <!-- 포인트 목록 내역 -->
+    <select id="selectCreatingList" parameterType="map" resultType="StreamCreatingVO">
+        SELECT * 
+        FROM (
+            SELECT a.*, rownum rnum 
+            FROM (
+                SELECT * 
+                FROM streaming_chatroom
+            ) a
+        )
+    <![CDATA[
+       WHERE rnum >= #{start} AND rnum <= #{end}
+    ]]>
+    </select>
+    
+    <!-- 채팅방 목록 내역 -->
+    <select id="selectCreatingListuser" parameterType="map" resultType="StreamCreatingVO">
+        SELECT * 
+        FROM (
+            SELECT a.*, rownum rnum 
+            FROM (
+                SELECT * 
+                FROM streaming_chatroom
+                <include refid="countuser"/>
+            ) a
+        )
+    <![CDATA[
+       WHERE rnum >= #{start} AND rnum <= #{end}
+    ]]>
+    </select>
+    
+    <!-- 메시지 내역 수 -->
+    <select id="countMeassageLive" parameterType="map" resultType="integer">
+    <![CDATA[
+        SELECT COUNT(*) 
+        FROM streaming_chatroom
+    ]]>
+    </select>
+    
+    <!-- 메시지 유저 수 -->
+    <select id="countMeassageuser" parameterType="map" resultType="integer">
+    <![CDATA[
+        SELECT COUNT(*) 
+        FROM streaming_chattage 
+        WHERE mem_num = #{mem_num} AND str_num = #{str_num}
+    ]]>
+    
+    </select>
+
+    <!-- 메시지 목록 내역 -->
+    <select id="selectMessageLive" parameterType="map" resultType="StreamCreatingVO">
+        SELECT * 
+        FROM (
+            SELECT a.*, rownum rnum 
+            FROM (
+                SELECT * 
+                FROM streaming_chattage
+                WHERE strc_num = #{strc_num}
+            ) a
+        )
+    </select>
+    
+    <!-- 메시지 유저 목록 내역 -->
+    <select id="selectMeassageuser" parameterType="map" resultType="StreamCreatingVO">
+        SELECT * 
+        FROM (
+            SELECT a.*, rownum rnum 
+            FROM (
+                SELECT * 
+                FROM streaming_chattage
+                WHERE mem_num = #{mem_num} AND str_num = #{str_num}
+            ) a
+        )
+    <![CDATA[
+       WHERE rnum >= #{start} AND rnum <= #{end}
+    ]]>
+    </select>
+    
+ </mapper>

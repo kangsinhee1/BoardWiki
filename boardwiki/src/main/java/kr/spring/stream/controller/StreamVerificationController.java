@@ -1,11 +1,19 @@
 package kr.spring.stream.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import kr.spring.member.vo.MemberVO;
 import kr.spring.stream.service.BroadcastService;
+import kr.spring.stream.service.StreamCreatingService;
 import kr.spring.stream.service.StreamKeyService;
 import kr.spring.stream.vo.BroadcastVO;
+import kr.spring.stream.vo.StreamCreatingVO;
 import kr.spring.stream.vo.StreamKeyVO;
 import lombok.extern.slf4j.Slf4j;
 @Slf4j
@@ -17,6 +25,9 @@ public class StreamVerificationController {
     
     @Autowired
     private BroadcastService broadcastService;
+    
+    @Autowired
+    private StreamCreatingService streamCreatingService;
 
     @GetMapping("/streaming/verify")
     public String verifyStreamKeyGet(@RequestParam String name) {
@@ -55,5 +66,21 @@ public class StreamVerificationController {
             System.out.println("Invalid mem_num format: " + name);
             return "status=400";
         }
+    }
+    
+    //채팅방
+    @GetMapping("/streaming/messages")
+    public List<StreamCreatingVO> getChatMessages(@RequestParam("strc_num") long strc_num, @RequestParam("str_num") long str_num) {
+        StreamCreatingVO vo = new StreamCreatingVO();
+        vo.setStrc_num(strc_num);
+        return streamCreatingService.selectMessageLive(vo);
+    }
+
+    @PostMapping("/streaming/send")
+    public ResponseEntity<?> sendChatMessage(@RequestBody StreamCreatingVO vo, HttpSession session) {
+        MemberVO user = (MemberVO) session.getAttribute("user");
+        vo.setMem_num(user.getMem_num());
+        streamCreatingService.insertMessage(vo);
+        return ResponseEntity.ok("Message sent successfully");
     }
 }
