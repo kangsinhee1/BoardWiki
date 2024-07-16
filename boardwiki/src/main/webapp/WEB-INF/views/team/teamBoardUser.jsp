@@ -3,16 +3,19 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
-
+<script src="${pageContext.request.contextPath}/js/teamBoard.js"></script>
 <div class="page-main">
     <h2>(${TEAM.tea_name}) 모임 게시판</h2>
     <div class="align-right">
     	모임 일정 : <c:choose>
-    	<c:when test="${TEAM.tea_time !=null }"> ${TEAM.tea_time}</c:when>
+    	<c:when test="${TEAM.tea_time != ''&& TEAM.tea_time != null }"> ${TEAM.tea_time}</c:when>
     	<c:otherwise> 없습니다.</c:otherwise>
     	</c:choose>
-    	<c:if test="${TEAM.tea_time != null }">
-        <input type="button" class="teamAttend" value="모임 참석">
+    	<c:if test="${TEAM.tea_time != ''&& TEAM.tea_time != null && attend ==0}">
+        <input type="button" class="teamAttend" value="모임 참석" data-num="${TEAM.tea_num}" data-attend="${attend}">
+    	</c:if>
+    	<c:if test="${attend == 1}">
+    	 <input type="button" class="teamAttend" value="참석 취소" data-num="${TEAM.tea_num}" data-attend="${attend}">
     	</c:if>
     </div>
     <hr>

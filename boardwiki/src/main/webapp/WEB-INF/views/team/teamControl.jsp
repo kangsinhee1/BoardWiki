@@ -54,7 +54,15 @@ $(function() {
             data: {teaA_num: $(this).attr('data-num'), teaA_status: $(this).val()},
             dataType: 'json',
             success: function(param) {
-                alert('회원 상태가 변경되었습니다.');
+            	if(param.result =='logout'){
+    				alert('로그인 해주세요')
+    			}else if(param.result =='wrongAccess'){
+    				alert('관리자만 가능합니다.')
+    			}else if(param.result =='success'){
+    					 alert('회원 상태가 변경되었습니다.');
+    			}else{
+    				alert('네트워크 오류')
+    			}
                 location.reload();
             },
             error: function() {

@@ -117,9 +117,9 @@ public class TeamServiceImpl implements TeamService {
 	}
 
 	@Override
-	public TeamApplyVO selectTeamApplyListByTeamNum(long tea_num) {
-		// TODO Auto-generated method stub
-		return null;
+	public TeamApplyVO selectTeamApplyListByTeamNum(TeamApplyVO teamApplyVO) {
+		
+		return teamMapper.selectTeamApplyListByTeamNum(teamApplyVO);
 	}
 
 	@Override
@@ -141,8 +141,7 @@ public class TeamServiceImpl implements TeamService {
 
 	@Override
 	public void updateTeamApplyUser(TeamApplyVO teamApply) {
-		// TODO Auto-generated method stub
-		
+		teamMapper.updateTeamApplyUser(teamApply);
 	}
 
 	@Override
@@ -248,6 +247,11 @@ public class TeamServiceImpl implements TeamService {
 	public void deleteTeamApplyAttend(long tea_num) {
 		teamMapper.deleteTeamApplyAttend(tea_num);
 		
+	}
+
+	@Override
+	public TeamApplyVO getTeamApply (@Param(value="tea_num")long teaA_num) {
+		return teamMapper.getTeamApply(teaA_num);
 	}
 
 }

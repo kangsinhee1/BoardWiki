@@ -4,7 +4,6 @@ $(function(){
 	 * 회원 정보 수정
 	 * ======================================================================== */
 function changeStatus(mem_num,teaA_status) {
-	
     $.ajax({
         url: '${pageContext.request.contextPath}/team/changeStatus',
         type: 'post',
@@ -14,8 +13,15 @@ function changeStatus(mem_num,teaA_status) {
         },
         dataType:'json',
         success: function(param) {
-			
-            alert('회원 상태가 변경되었습니다.');
+			if(param.result =='logout'){
+				alert('로그인 해주세요')
+			}else if(param.result =='wrongAccess'){
+				alert('관리자만 가능합니다.')
+			}else if(param.result =='success'){
+					 alert('회원 상태가 변경되었습니다.');
+			}else{
+				alert('네트워크 오류')
+			}
             location.reload();
         },
         error: function() {
@@ -35,6 +41,8 @@ function changeStatus(mem_num,teaA_status) {
             success: function(param) {
 				if(param.result == 'logout'){
 					alert('로그인 해주세요');
+				}else if(param.result == 'wrongAccess'){
+					alert('관리자만 수정 가능합니다.')
 				}else if (param.result == 'success') {
                     alert('모임 일정이 변경되었습니다.');
                     $('#meetingDateDisplay').val('모임 일정 : ' + newDate);
@@ -50,10 +58,6 @@ function changeStatus(mem_num,teaA_status) {
     });
 
     $('#cancelMeeting').on('click', function() {
-		
-		
-		
-		
 		 var tea_num = $(this).parent().find('#meetingDateDisplay').attr('data-num');
         $.ajax({
             url: 'deleteMeetingDate',
@@ -79,6 +83,35 @@ function changeStatus(mem_num,teaA_status) {
             }
         });
     });
+    
+    $('.teamAttend').on('click',function(){
+		var tea_num = $(this).attr('data-num');
+		var attend = $(this).attr('data-attend');
+		console.log(tea_num);
+		console.log(attend);
+		$.ajax({
+			url: 'teamAttend',
+			type:'post',
+			data:{tea_num:tea_num,teaA_attend:attend},
+			dataType:'json',
+			success:function(param){
+				if(param.result=='logout'){
+					alert('로그인후 이용하세요');
+				}else if(param.result =='success1'){
+					alert('참석 신청 완료');
+				}else if(param.result =='success2'){
+					alert('참석 취소 완료');
+				}
+				location.reload();
+			},
+			error:function(){
+				alert('네트워크 오류');
+			}
+		});
+	});
+    
+    
+    
 });
 
 

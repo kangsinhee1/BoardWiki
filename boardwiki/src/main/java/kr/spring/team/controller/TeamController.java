@@ -468,11 +468,16 @@ public class TeamController {
 			list = teamService.selectTeamBoardList(map);
 
 		}
+		TeamApplyVO applyVO = new TeamApplyVO();
+		
+		applyVO.setMem_num(member.getMem_num());
+		applyVO.setTea_num(tea_num);
+		 TeamApplyVO db_apply = teamService.selectTeamApplyListByTeamNum(applyVO);
 		model.addAttribute("count",count);
 		model.addAttribute("list",list);
 		model.addAttribute("page",page.getPage());
 		model.addAttribute("TEAM",teamService.detailTeam(tea_num));
-
+		model.addAttribute("attend",db_apply.getTeaA_attend());
 		return "teamBoardUser";
 	}
 	
@@ -533,9 +538,6 @@ public class TeamController {
 		
 		
 		if(result.hasErrors()) {
-			//title 또는 content가 입력되지 않아서 유효성 체크에 걸리면
-			//파일 정보를 잃어버리기 때문에 폼을 호출할 때 다시 파일 정보를
-			//셋팅해야 함
 			TeamBoardVO vo = teamService.getTeamBoardDetail(
 					teamBoardVO.getTeaB_num());
 			
@@ -554,7 +556,6 @@ public class TeamController {
 		}
 		//본인이 작성한글
 		TeamBoardVO board = teamService.getTeamBoardDetail(teamBoardVO.getTeaB_num());
-		log.debug(board+"asdfaksdljfg asdjgklasdj glkasdjglkjlqkjweopitqj woiej");
 		if(member.getMem_num() != board.getMem_num()) {
 			model.addAttribute("message", "본인이 작성한 글만 수정가능합니다.");
 			model.addAttribute("url", 

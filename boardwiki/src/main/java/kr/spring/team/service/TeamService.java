@@ -55,8 +55,9 @@ public interface TeamService {
 			//회원이 신청한 모든 모임 목록 (결과포함)
 			public List<TeamApplyVO> selectTeamListApplied2(Map<String,Object>map);
 			//모임별 신청회원 확인
-			public TeamApplyVO selectTeamApplyListByTeamNum(long tea_num);
-			//
+			public TeamApplyVO selectTeamApplyListByTeamNum(TeamApplyVO teamApplyVO);
+			//모임 정보 확인
+			public TeamApplyVO getTeamApply (@Param(value="teaA_num")long teaA_num);
 			public void updateTeamApply(TeamApplyVO teamApply);
 			
 			public void deleteTeamApply(long teaA_num);

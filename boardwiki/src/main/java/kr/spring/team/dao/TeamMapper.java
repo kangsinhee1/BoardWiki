@@ -74,6 +74,7 @@ public interface TeamMapper {
 		
 		// 모임 일정 설정
 		
+		
 		//신청 목록 확인
 		
 		@Select("SELECT count(*) FROM team_apply WHERE tea_num=#{tea_num} AND mem_num=#{mem_num}")
@@ -81,7 +82,7 @@ public interface TeamMapper {
 		
 		//모임별 신청회원 확인
 		@Select("SELECT * FROM team_apply WHERE tea_num=#{tea_num} AND mem_num=#{mem_num}")
-		public TeamApplyVO selectTeamApplyListByTeamNum(long tea_num);
+		public TeamApplyVO selectTeamApplyListByTeamNum(TeamApplyVO teamApplyVO);
 		//개인별 신청 모임 게시판 확인
 		
 		@Select("SELECT * FROM team_apply WHERE mem_num=#{mem_num}")
@@ -95,6 +96,10 @@ public interface TeamMapper {
 		public void deleteTeamApplyByTeaNum(long tea_num);
 		
 		// 모임 신청 회원 목록 확인
+		// 모임 신청 별 정보 확인
+		
+		@Select("SELECT * FROM team_apply  JOIN MEMBER USING(mem_num) WHERE teaA_num = #{teaA_num}")
+		public TeamApplyVO getTeamApply (@Param(value="teaA_num")long teaA_num);
 		@Select("SELECT * FROM team_apply JOIN member_detail USING (mem_num) WHERE tea_num = #{tea_num} AND teaA_status != 9")
 		public List<TeamApplyVO> listTeamApply(TeamApplyVO teamApply);
 		
@@ -104,7 +109,7 @@ public interface TeamMapper {
 		@Select("SELECT count(*) FROM team_apply WHERE tea_num = #{tea_num}")
 		public Integer countTeamApplyList(long tea_num);
 		//모임 참석 처리
-		@Update("UPDATE team_apply SET teaA_attend=1 WHERE mem_num = #{mem_num} AND tea_num=#{tea_num}")
+		@Update("UPDATE team_apply SET teaA_attend=#{teaA_attend} WHERE mem_num = #{mem_num} AND tea_num=#{tea_num}")
 		public void updateTeamApplyUser(TeamApplyVO teamApply);
 		//모임 불참 처리
 		@Update("UPDATE team_apply SET teaA_attend=2 WHERE mem_num = #{mem_num} AND tea_num=#{tea_num}")

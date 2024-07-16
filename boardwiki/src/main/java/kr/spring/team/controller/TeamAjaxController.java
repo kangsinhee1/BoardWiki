@@ -261,17 +261,18 @@ public class TeamAjaxController {
 	//모임 신청 처리 및 회원 정지 기능
 	@PostMapping("/team/changeStatus")
 	@ResponseBody
-	public Map<String,String> changeStatus( long teaA_num ,long teaA_status, HttpSession session){
-		
+	public Map<String,String> changeStatus(long teaA_num ,long teaA_status, HttpSession session){
 		Map<String,String> mapJson = 
 		           new HashMap<String,String>();
-		MemberVO user = 
-				(MemberVO)session.getAttribute("user");
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		TeamApplyVO db_applyVO = teamService.getTeamApply(teaA_num);
+		long admin = teamService.detailTeam(db_applyVO.getTea_num()).getMem_num();
 		if(user==null) {
 			//로그인이 되지 않은 경우
 			mapJson.put("result", "logout");
-	//}else if(teamApplyVO.getTeaA_auth() != 9) {
-		//	mapJson.put("result", "wrongAccess");
+		}
+		else if(admin != user.getMem_num()) {
+			mapJson.put("result", "wrongAccess");
 		}else {
 			teamService.updateTeamApplyStatus(teaA_status,teaA_num);
 			mapJson.put("result", "success");
@@ -323,5 +324,35 @@ public class TeamAjaxController {
 			return mapJson;
 		}
 		
-
+		@PostMapping("/team/teamAttend")
+		@ResponseBody
+		public Map<String,String> teamAttend(long tea_num, long teaA_attend, HttpSession session){
+			Map<String,String> mapJson = 
+			           new HashMap<String,String>();
+			MemberVO user = 
+					(MemberVO)session.getAttribute("user");
+			
+			
+			if(user==null) {
+				mapJson.put("result", "logout");
+			}else {
+				if(teaA_attend == 0) {
+					TeamApplyVO applyVO = new TeamApplyVO();
+					applyVO.setTea_num(tea_num);
+					applyVO.setMem_num(user.getMem_num());
+					applyVO.setTeaA_attend(1);
+					teamService.updateTeamApplyUser(applyVO);
+					mapJson.put("result", "success1");
+				}else if(teaA_attend ==1) {
+					TeamApplyVO applyVO2 = new TeamApplyVO();
+					applyVO2.setTea_num(tea_num);
+					applyVO2.setMem_num(user.getMem_num());
+					applyVO2.setTeaA_attend(0);
+					teamService.updateTeamApplyUser(applyVO2);
+					mapJson.put("result", "success2");
+				}
+				
+			}
+			return mapJson;
+		}
 }
