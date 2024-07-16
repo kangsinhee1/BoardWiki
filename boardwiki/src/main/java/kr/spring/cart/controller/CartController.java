@@ -58,6 +58,7 @@ public class CartController {
 			log.debug("<<장바구니 VO - cartVO>> : " + cart);
 			
 			ItemVO item = itemService.selectItem(item_num);
+			
 			if (item == null) {
 	            mapAjax.put("result", "noitem");
 	            return mapAjax;
@@ -68,13 +69,16 @@ public class CartController {
 			
 			
 		    if(db_cart==null) {//동일 상품이 없을 경우
-                //itemService.pullItem(item);
+		    	//재고수를 구하기 위해서 Item get 호출
+				int db_item = itemService.getterItem(item_num);
+		    	
 				cartService.insertCart(cart);
+				itemService.updateStock(item_num, db_item - item_quantity); // 아이템 번호와 재고 수량을 함께 전달
 				mapAjax.put("result", "success");
 			}else {//동일 상품이 있을 경우
 				
 				//재고수를 구하기 위해서 Item get 호출
-				int db_item = itemService.getItem(item_num);
+				int db_item = itemService.getterItem(item_num);
 				
 				//구매수량 합산(기존 장바구니에 저장된 구매수량 + 새로 입력한 구매수량
 				item_quantity = db_cart.getItem_quantity() +
@@ -84,8 +88,8 @@ public class CartController {
 					mapAjax.put("result", "overquantity");
 				}else {
 					cart.setItem_quantity(item_quantity);
-                  //cartService.updateCart(cart);
-					itemService.pullItem(item);
+                    cartService.updateCart(cart);
+                    itemService.updateStock(item_num, db_item - item_quantity); // 아이템 번호와 재고 수량을 함께 전달
 					mapAjax.put("result", "success");
 				}
 			}

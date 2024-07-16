@@ -59,11 +59,11 @@ public class ItemServiceImpl implements ItemService{
 	}
 
 	@Override
-	public int getItem(Long item_num) {
-		return itemMapper.getItem(item_num);
+	public int getterItem(Long item_num) {
+		return itemMapper.getterItem(item_num);
 	}
 	@Override
-	public void pullItem(ItemVO item) {
-		itemMapper.pullItem(item);
-	}
+	public void updateStock(Long item_num, int item_stock) {
+		itemMapper.updateStock(item_num, item_stock);
+	}	
 }
