@@ -26,7 +26,7 @@ public interface TeamMapper {
 		
 		public List<TeamVO> selectTeamList(Map<String,Object>map);
 		//모임 상세
-		@Select("SELECT * FROM team JOIN member USING(mem_num) WHERE tea_num= #{tea_num}") 
+		@Select("SELECT * FROM team JOIN member USING(mem_num)LEFT OUTER JOIN member_detail USING(mem_num) WHERE tea_num= #{tea_num}") 
 		public TeamVO detailTeam(long tea_num);
 		//등록
 		public void insertTeam(TeamVO team);
@@ -131,7 +131,7 @@ public interface TeamMapper {
 		//모임 게시판 등록
 		public void insertTeamBoard(TeamBoardVO teamBoard);
 		//모임 게시판 상세
-		@Select("SELECT * FROM team_board WHERE teaB_num = #{teaB_num}")
+		@Select("SELECT * FROM team_board JOIN member_detail USING(mem_num) WHERE teaB_num = #{teaB_num}")
 		public TeamBoardVO getTeamBoardDetail(long teaB_num);
 		//모임 게시판 수정
 		@Update("UPDATE team_board set teaB_title=#{teaB_title}, teaB_content =#{teaB_content}, teaB_mdate = sysdate, teaB_category= #{teaB_category} ,filename= #{filename, jdbcType=VARCHAR} WHERE teaB_num = #{teaB_num}")

@@ -10,7 +10,7 @@
 	<h2> ${board.teaB_title}</h2>
 	<ul class="detail-info">
 	<li><input type="hidden" id="teaB_num" value="${board.teaB_num}"></li>
-		<li> ${board.mem_nickname} <br>
+		<li> 작성자 : ${board.mem_nickname} <br>
 			 <c:if test="${empty board.teaB_mdate}">
             작성일 : ${fn:substring(board.teaB_rdate, 0, 10)}
         </c:if>

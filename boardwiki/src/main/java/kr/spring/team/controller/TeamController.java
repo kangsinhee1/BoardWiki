@@ -339,6 +339,7 @@ public class TeamController {
 			}else {
 				model.addAttribute("admin",false);
 			}
+			model.addAttribute("tea_num",tea_num);
 		
 		
 		return "teamBoardWrite";
@@ -354,7 +355,7 @@ public class TeamController {
 		
 		//유효성 체크 결과 오류가 있으면 폼 호출
 		if(result.hasErrors()) {
-			return insertTeam(request, session, model);
+			return "teamBoardWrite";
 		}
 		//회원번호 세팅
 		MemberVO member = (MemberVO)session.getAttribute("user");

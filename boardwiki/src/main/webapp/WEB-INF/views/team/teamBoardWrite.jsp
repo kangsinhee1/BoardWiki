@@ -62,10 +62,10 @@
 		<div class="align-center">
 			<form:button class="default-btn">전송</form:button>
 		<c:if test="${admin}">
-		<input type="button" value="목록" onclick="location.href='teamBoardAdmin?tea_num=${board.tea_num}'">
+		<input type="button" value="목록" onclick="location.href='teamBoardAdmin?tea_num=${tea_num}'">
 		</c:if>
 		<c:if test="${!admin}">
-		<input type="button" value="목록" onclick="location.href='teamBoardUser?tea_num=${board.tea_num}'">
+		<input type="button" value="목록" onclick="location.href='teamBoardUser?tea_num=${tea_num}'">
 		</c:if>
 		</div>                           
 	</form:form>

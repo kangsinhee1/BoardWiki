@@ -8,7 +8,7 @@
 <div class="page-main">
 	<h2 class="align-center">${team.tea_name}</h2>
 	<ul class="detail-info align-right">
-		<li>작성자 : ${team.mem_email}</li>
+		<li>작성자 : ${team.mem_nickname}</li>
 		<br>
 		<li>등록일 : ${team.tea_rdate} </li>
 		<li>조회수 : ${team.tea_hit}</li>

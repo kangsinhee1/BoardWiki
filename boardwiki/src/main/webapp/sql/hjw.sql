@@ -67,34 +67,55 @@ CREATE TABLE  team_reply  (
 );
 
 CREATE SEQUENCE team_reply_seq;
-
-CREATE TABLE  chat_member  (
-	 mem_num 	number		NOT NULL,  -- 회원고유의 번호
-	 chaR_num 	number		NOT NULL,  -- 채팅방고유번호
-	CONSTRAINT  chat_member_fk1  FOREIGN KEY ( mem_num ) REFERENCES  member  ( mem_num ),
-	CONSTRAINT  chat_member_fk2  FOREIGN KEY ( chaR_num ) REFERENCES  chatRoom  ( chaR_num )
+-- chat_room 테이블 생성
+CREATE TABLE chat_room (
+    chaR_num number NOT NULL,  -- 채팅방 고유번호
+    chaR_status number(1) DEFAULT 1 NOT NULL,  -- 0:활성화 1:비활성화
+    chaR_name varchar2(900) NOT NULL,  -- 채팅방 이름
+    chaR_date date DEFAULT SYSDATE NOT NULL,  -- 채팅방이 만들어진 날짜
+    tea_num number NOT NULL,  -- 모임번호를 식별하는 번호
+    CONSTRAINT chatRoom_pk PRIMARY KEY (chaR_num),
+    CONSTRAINT chatRoom_fk FOREIGN KEY (tea_num) REFERENCES team (tea_num)
 );
 
+-- chat_room 시퀀스 생성
+CREATE SEQUENCE chat_room_seq;
+
+-- chat_member 테이블 생성
+CREATE TABLE chat_member (
+    mem_num number NOT NULL,  -- 회원 고유 번호
+    chaR_num number NOT NULL,  -- 채팅방 고유번호
+    basic_chat varchar2(900) NOT NULL, -- 채팅멤버 추가시 기본 채팅방 이름을 멤버 이름으로 처리
+    member_date date default sysdate not null, 
+    CONSTRAINT chat_member_fk1 FOREIGN KEY (mem_num) REFERENCES member (mem_num),
+    CONSTRAINT chat_member_fk2 FOREIGN KEY (chaR_num) REFERENCES chat_room (chaR_num)
+);
+
+-- chat_member 시퀀스 생성
 CREATE SEQUENCE chat_member_seq;
-CREATE TABLE  chatRoom  (
-	 chaR_num 	number		NOT NULL,  -- 채팅방고유번호
-	 chaR_status 	number(1)	DEFAULT 1	NOT NULL,  -- 0:활성화 1:비활성화
-	 chaR_name 	varchar2(100)		NOT NULL,  -- 채팅방 이름
-	 chaR_date 	date	DEFAULT SYSDATE	NOT NULL,  -- 채팅방이 만들어진 날짜
-	 tea_num 	number		NOT NULL,  -- 모임번호를 식별하는 번호
-	CONSTRAINT  chatRoom_pk  PRIMARY KEY ( chaR_num ),
-	CONSTRAINT  chatRoom_fk  FOREIGN KEY ( tea_num ) REFERENCES  team  ( tea_num )
+
+-- chat_text 테이블 생성
+CREATE TABLE chat_text (
+    chaT_num number NOT NULL,  -- 메시지 고유번호
+    chaT_txt clob NOT NULL,  -- 메시지 내용
+    chaT_time date DEFAULT SYSDATE NOT NULL,  -- 메시지를 전송한 시간
+    chaT_status number DEFAULT 1 NOT NULL,  -- 신고 시 비활성화
+    chaR_num number NOT NULL,  -- 채팅방 고유번호
+    mem_num number NOT NULL,  -- 회원 고유 번호
+    CONSTRAINT chat_text_pk PRIMARY KEY (chaT_num),
+    CONSTRAINT chat_text_fk1 FOREIGN KEY (chaR_num) REFERENCES chat_room (chaR_num),
+    CONSTRAINT chat_text_fk2 FOREIGN KEY (mem_num) REFERENCES member (mem_num)
 );
 
-CREATE SEQUENCE chatRoom_seq;
-CREATE TABLE  chat_text  (
-	 chaT_num 	number		NOT NULL,  -- 메세지고유번호
-	 chaT_txt 	clob		NOT NULL,  -- 메세지 내용
-	 chaT_time 	date	DEFAULT SYSDATE	NOT NULL,  -- 메세지를 전송한 시간
-	 chaT_status 	number	DEFAULT 1	NOT NULL,  -- 신고시비활성화
-	 chaR_num 	number		NOT NULL,  -- 채팅방고유번호
-	CONSTRAINT  chat_text_pk  PRIMARY KEY ( chaT_num ),
-	CONSTRAINT  chat_text_fk  FOREIGN KEY ( chaR_num ) REFERENCES  chatRoom  ( chaR_num )
-);
-
+-- chat_text 시퀀스 생성
 CREATE SEQUENCE chat_text_seq;
+
+-- chat_read 테이블 생성
+CREATE TABLE chat_read (
+    chaR_num number NOT NULL,  -- 채팅방 고유번호
+    chaT_num number NOT NULL,  -- 메시지 고유번호
+    mem_num number NOT NULL,  -- 회원 고유 번호
+    CONSTRAINT chat_read_fk1 FOREIGN KEY (chaR_num) REFERENCES chat_room (chaR_num),
+    CONSTRAINT chat_read_fk2 FOREIGN KEY (mem_num) REFERENCES member (mem_num),
+    CONSTRAINT chat_read_fk3 FOREIGN KEY (chaT_num) REFERENCES chat_text (chaT_num)
+);
