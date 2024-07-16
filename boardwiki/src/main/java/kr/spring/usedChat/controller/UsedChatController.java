@@ -1,0 +1,128 @@
+package kr.spring.usedChat.controller;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import kr.spring.member.service.MemberService;
+import kr.spring.member.vo.MemberVO;
+import kr.spring.used.service.UsedService;
+import kr.spring.used.vo.UsedItemVO;
+import kr.spring.usedChat.service.UsedChatService;
+import kr.spring.usedChat.vo.UsedChatRoomVO;
+import kr.spring.usedChat.vo.UsedChat_textVO;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@Controller
+public class UsedChatController {
+	
+	@Autowired
+	private UsedChatService usedChatService;
+	
+	@Autowired
+	private UsedService usedService;
+	
+	@Autowired
+	private MemberService memberService;
+	
+	@GetMapping("/used/useChat")
+	public String accessUseChat(Long use_num, UsedChatRoomVO usedChatRoomVO, HttpSession session, Model model, HttpServletRequest request) {
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user==null) {
+			model.addAttribute("message", "로그인후 작성 가능합니다.");
+			model.addAttribute("url", 
+			request.getContextPath()+"/used/usedDetail");
+			return "common/resultAlert";
+		}
+		UsedItemVO usedMember = usedService.selectUsed(use_num);
+		//작성자일 경우
+		if(user.getMem_num()== usedMember.getMem_num()) {
+			return "useChatList";
+		}else {
+			if(usedChatService.selectUsedChatRoom(user.getMem_num(),use_num)!=null) {
+				UsedChatRoomVO alreayUChat = usedChatService.selectChatVOByMemNum(user.getMem_num());
+				String useC_name = alreayUChat.getUseC_name();
+				Long useC_num = alreayUChat.getUseC_num();
+				
+				model.addAttribute("useC_name",useC_name);
+				model.addAttribute("useC_num",useC_num);
+				model.addAttribute("use_num",use_num);
+				
+				return "useChat";
+			}else {
+				log.debug("<<<<<<<<<<<<<<<<use_num" + use_num);
+				log.debug("<<<<<<<<<<<<<<<<user" + user.getMem_num());
+				
+				MemberVO s = memberService.selectMember(usedMember.getMem_num());
+				MemberVO b = memberService.selectMember(user.getMem_num());
+				log.debug("<<<<<<<<<<<<<<<<s" + s);
+				log.debug("<<<<<<<<<<<<<<<<b" + b);
+				
+				usedChatRoomVO.setUseC_name(s.getMem_nickName()+","+b.getMem_nickName());
+				usedChatRoomVO.setUse_num(use_num);
+				usedChatRoomVO.setMem_num(user.getMem_num());
+				
+				usedChatService.insertUsedChatRoom(usedChatRoomVO);
+				
+				UsedChatRoomVO newUChat = usedChatService.selectChatVOByMemNum(user.getMem_num());
+				String useC_name = newUChat.getUseC_name();
+				Long useC_num = newUChat.getUseC_num();
+				
+				model.addAttribute("useC_name",useC_name);
+				model.addAttribute("useC_num",useC_num);
+				model.addAttribute("use_num",use_num);
+				
+				return "useChat";
+			}
+		}
+	}
+	//채팅 메세지 전송
+	@PostMapping("/used/usedChatWrite")
+	@ResponseBody
+	public Map<String,String> writeChatAjax(UsedChat_textVO vo, HttpSession session){
+		log.debug("<<채팅 메시지 전송>> : " + vo);
+		
+		Map<String,String> mapAjax = new HashMap<String,String>();
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user==null) {
+			//로그인이 되지 않은 경우
+			mapAjax.put("result", "logout");
+		}else {
+			//로그인 된 경우
+			vo.setMem_num(user.getMem_num());
+			//메시지 등록
+			usedChatService.insertChat(vo);
+			mapAjax.put("result", "success");
+		}
+		
+		return mapAjax;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

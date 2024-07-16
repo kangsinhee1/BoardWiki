@@ -11,7 +11,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class UsedChat_textVO {
-	private Long chaC_num;		//채팅방 고유번호
+	private long chaC_num;		//채팅방 고유번호
 	private Long useC_num; 		//채팅방 이름
 	private String chaC_txt;	//채팅내용
 	private Date chaC_time;		//채팅 친 시간

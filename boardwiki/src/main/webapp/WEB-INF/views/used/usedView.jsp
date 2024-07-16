@@ -6,6 +6,7 @@
 <script src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/videoAdapter.js"></script>
 <div class="page-main">
+	<input type="hidden" name="useC_name" value="${used.use_title} 중고거래채팅">
 	<h2>${used.use_title}</h2>
 	<ul class="detail-info">
 		<li>
@@ -31,7 +32,7 @@
 		<!-- 사진 넣어야함 -->	
 	</c:if>
 	<div class="align-right">
-		<input type="button" value="1:1채팅하기" onclick="location.href='useChat?mem_num=${used.mem_num}'">
+		<input type="button" value="1:1채팅하기" onclick="location.href='useChat?mem_num=${used.mem_num}&use_num=${used.use_num }'">
 	</div>
 	<div class="detail-content">
 		${used.use_content}
