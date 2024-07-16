@@ -120,6 +120,12 @@
 		<put-attribute name="css" value="/WEB-INF/views/used/usedCSS.jsp"/>
 		<put-attribute name="body" value="/WEB-INF/views/used/usedModify.jsp"/>
 	</definition>
+	<!-- 중고 1:1 -->
+	<definition name="useChat" extends="main">
+		<put-attribute name="title" value="중고 1대1채팅"/>
+		<put-attribute name="css" value="/WEB-INF/views/usedChat/usedChatCSS.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/usedChat/useChat.jsp"/>
+	</definition>
 </tiles-definitions>
 
 

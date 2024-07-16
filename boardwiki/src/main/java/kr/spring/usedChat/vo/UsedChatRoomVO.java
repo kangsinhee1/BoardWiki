@@ -11,7 +11,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class UsedChatRoomVO {
-	private Long useC_num;		//채팅방 고유번호
+	private long useC_num;		//채팅방 고유번호
 	private int useC_status;	//채팅방 활성화 비활성화
 	private String useC_name; 	//채팅방이름
 	private Date userC_date;	//채팅방개설일
