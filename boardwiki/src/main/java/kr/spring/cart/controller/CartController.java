@@ -69,14 +69,22 @@ public class CartController {
 			
 			
 		    if(db_cart==null) {//동일 상품이 없을 경우
+		    	
 		    	//재고수를 구하기 위해서 Item get 호출
 				int db_item = itemService.getterItem(item_num);
-		    	
-				cartService.insertCart(cart);
-				itemService.updateStock(item_num, db_item - item_quantity); // 아이템 번호와 재고 수량을 함께 전달
-				mapAjax.put("result", "success");
-			}else {//동일 상품이 있을 경우
 				
+				if(db_item<item_quantity) {
+					//상품재고 수량보다 장바구니에 담은 구매수량이 더 많음
+					log.debug("<<재고 수량 초과>>");
+					mapAjax.put("result", "overquantity");
+				}else {
+					
+					cartService.insertCart(cart);
+					itemService.updateStock(item_num, db_item - item_quantity); // 아이템 번호와 재고 수량을 함께 전달
+					log.debug("<<장바구니에 상품 추가 성공>>");
+					mapAjax.put("result", "success");
+				}
+			}else {//동일 상품이 있을 경우
 				//재고수를 구하기 위해서 Item get 호출
 				int db_item = itemService.getterItem(item_num);
 				
@@ -85,15 +93,18 @@ public class CartController {
 						           cart.getItem_quantity();
 				if(db_item<item_quantity) {
 					//상품재고 수량보다 장바구니에 담은 구매수량이 더 많음
+					log.debug("<<재고 수량 초과>>");
 					mapAjax.put("result", "overquantity");
 				}else {
 					cart.setItem_quantity(item_quantity);
                     cartService.updateCart(cart);
                     itemService.updateStock(item_num, db_item - item_quantity); // 아이템 번호와 재고 수량을 함께 전달
-					mapAjax.put("result", "success");
+                    log.debug("<<장바구니에 상품 추가 성공>>");
+                    mapAjax.put("result", "success");
 				}
 			}
 		}
+		log.debug("<<mapAjax 결과>> : " + mapAjax);
 		return mapAjax;
 	}
 }

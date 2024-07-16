@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/cart.js"></script>
 <h2 class="big-name">${item.item_name}</h2>
 <div>
 	<div class="big-box1">
@@ -27,13 +28,13 @@
 				</div>
                 <c:if test="${!empty member.mem_num}">
                 <div class="text-box2" style="display: inline-block; vertical-align: top;">
-                <button>바로구매</button>
                     <form id="addToCart" method="post" action="${pageContext.request.contextPath}/cart/cart">
                         <input type="hidden" name="item_num" value="${item.item_num}" />
                         <input type="hidden" name="user" value="${member.mem_num}" />
                         <label for="quantity">수량:</label>
-                        <input type="number" id="quantity" name="item_quantity" value="1" min="1" max="${item.item_stock}" />
+                        <input type="number" id="quantity" name="item_quantity" value="1" min="1" max="${item.item_stock}" /><br>
                         <button type="button" id="addToCartButton">장바구니</button>
+                        <button type="button">바로구매</button>
                     </form>
                 </div>
                 </c:if>
