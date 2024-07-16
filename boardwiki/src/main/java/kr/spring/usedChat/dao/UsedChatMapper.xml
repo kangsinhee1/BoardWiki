@@ -50,7 +50,23 @@
 		WHERE rnum >= #{start} AND rnum <= #{end}
 		]]>
 	</select>
-	
+	<!-- 채팅 메시지 읽기 -->
+	 <select id="selectChatDetail" parameterType="long"
+	                                 resultType="usedChat_textVO">
+	 	SELECT
+	 		<![CDATA[
+	 		REPLACE(REPLACE(chaC_txt,'<','&lt;'),'>','&gt;') chaC_txt,
+	 		]]>
+	 		chaC_time,
+	 		chaC_status,
+	 		mem_num,
+	 		mem_nickname
+	 	FROM usedchat_text
+	    JOIN member 
+	    USING(mem_num)
+	    WHERE useC_num=#{useC_num} 
+	   ORDER BY chat_time ASC                   	               	 
+	 </select>
  </mapper>
 
 

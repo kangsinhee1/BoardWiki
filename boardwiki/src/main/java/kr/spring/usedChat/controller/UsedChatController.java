@@ -1,6 +1,7 @@
 package kr.spring.usedChat.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -41,7 +42,7 @@ public class UsedChatController {
 		if(user==null) {
 			model.addAttribute("message", "로그인후 작성 가능합니다.");
 			model.addAttribute("url", 
-			request.getContextPath()+"/used/usedDetail");
+			request.getContextPath()+"/member/login");
 			return "common/resultAlert";
 		}
 		UsedItemVO usedMember = usedService.selectUsed(use_num);
@@ -50,7 +51,8 @@ public class UsedChatController {
 			return "useChatList";
 		}else {
 			if(usedChatService.selectUsedChatRoom(user.getMem_num(),use_num)!=null) {
-				UsedChatRoomVO alreayUChat = usedChatService.selectChatVOByMemNum(user.getMem_num());
+				UsedChatRoomVO alreayUChat = usedChatService.selectUsedChatRoom(user.getMem_num(),use_num);
+				log.debug("<<<<<<<<<<<<<vovovoovov"+alreayUChat);
 				String useC_name = alreayUChat.getUseC_name();
 				Long useC_num = alreayUChat.getUseC_num();
 				
@@ -74,7 +76,8 @@ public class UsedChatController {
 				
 				usedChatService.insertUsedChatRoom(usedChatRoomVO);
 				
-				UsedChatRoomVO newUChat = usedChatService.selectChatVOByMemNum(user.getMem_num());
+				UsedChatRoomVO newUChat = usedChatService.selectUsedChatRoom(user.getMem_num(),use_num);
+				log.debug("<<<<<<<<<<<<<vovovoovov"+newUChat);
 				String useC_name = newUChat.getUseC_name();
 				Long useC_num = newUChat.getUseC_num();
 				
@@ -106,6 +109,30 @@ public class UsedChatController {
 		}
 		
 		return mapAjax;
+	}
+	//채팅 메시지 읽기
+	@GetMapping("/used/usedChatDetailAjax")
+	@ResponseBody
+	public Map<String,Object> chatDetailAjax(
+			                   long useC_num,
+			                   HttpSession session){
+		Map<String,Object> mapJson = 
+				         new HashMap<String,Object>();
+		MemberVO user = 
+				(MemberVO)session.getAttribute("user");
+		if(user==null) {
+			mapJson.put("result", "logout");
+		}else{
+			Map<String,Long> map = new HashMap<String,Long>();
+			map.put("useC_num",useC_num);
+			map.put("mem_num",user.getMem_num());
+			List<UsedChat_textVO> list = usedChatService.selectChatDetail(map);
+			
+			mapJson.put("result", "success");
+			mapJson.put("list", list);
+			mapJson.put("user_num", user.getMem_num());
+		}		
+		return mapJson;
 	}
 }
 

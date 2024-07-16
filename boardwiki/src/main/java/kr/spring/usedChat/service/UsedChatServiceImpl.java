@@ -34,12 +34,6 @@ public class UsedChatServiceImpl implements UsedChatService{
 		usedChatMapper.insertUsedChatRoom(talkRoomVO);
 	}
 
-
-	@Override
-	public UsedChatRoomVO selectChatVOByMemNum(Long mem_num) {
-		return usedChatMapper.selectChatVOByMemNum(mem_num);
-	}
-
 	@Override
 	public void insertChat(UsedChat_textVO usedChat_textVO) {
 		usedChat_textVO.setChaC_num(usedChatMapper.selectChatNum());
@@ -49,6 +43,11 @@ public class UsedChatServiceImpl implements UsedChatService{
 	@Override
 	public UsedChatRoomVO selectUsedChatRoom(Long mem_num, Long use_num) {
 		return usedChatMapper.selectUsedChatRoom(mem_num, use_num);
+	}
+
+	@Override
+	public List<UsedChat_textVO> selectChatDetail(Map<String, Long> map) {
+		return usedChatMapper.selectChatDetail(map);
 	}
 
 }

@@ -14,6 +14,7 @@ public interface UsedChatService {
 	//채팅방 생성
 	public void insertUsedChatRoom(UsedChatRoomVO talkRoomVO);
 	public UsedChatRoomVO selectUsedChatRoom(Long mem_num, Long use_num);
-	public UsedChatRoomVO selectChatVOByMemNum(Long mem_num);
+
 	public void insertChat(UsedChat_textVO usedChat_textVO);
+	public List<UsedChat_textVO> selectChatDetail(Map<String,Long> map);
 }
