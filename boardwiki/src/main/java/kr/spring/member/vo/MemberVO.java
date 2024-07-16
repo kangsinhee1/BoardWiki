@@ -13,6 +13,7 @@ import lombok.ToString;
 @ToString
 public class MemberVO {
 	private long mem_num;//회원번호
+	@Pattern(regexp="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,6}$")
 	private String mem_email;//회원 이메일(아이디)
 	private Integer mem_auth;//회원 등급
 	

@@ -176,7 +176,7 @@ public class MemberController {
 
 		//유효성 체크 결과 오류가 있으면 폼 호출
 		if(result.hasErrors()) {
-			return formMemberNaverRegister();
+			return formRegister();
 		}
 		//회원 가입
 		memberService.insertMember(memberVO);
@@ -244,9 +244,7 @@ public class MemberController {
 		}
 		if(!result.getMem_provider().equals("Naver")) {
 			//UI 메시지 처리
-//			model.addAttribute("accessTitle", "로그인 오류");
 			model.addAttribute("message", "회원님의 이메일로 가입된 다른 계정이 있습니다.");
-//			model.addAttribute("accessBtn", "확인");
 			model.addAttribute("url", 
 					request.getContextPath()+"/member/login");
 

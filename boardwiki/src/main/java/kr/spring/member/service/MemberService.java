@@ -11,4 +11,5 @@ public interface MemberService {
 	public MemberVO selectMember(Long mem_num);
 	public List<MemberVO> selectAllmember(Map<String,Object> map);
 	public Integer countAllmember(Map<String,Object> map);
+	public MemberVO selectCheckMemberNickName(String mem_nickName);
 }

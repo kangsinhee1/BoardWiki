@@ -78,4 +78,9 @@ public class MemberServiceImpl implements MemberService {
 	public Integer countAllmember(Map<String,Object> map) {
 		return memberMapper.countAllmember(map);
 	}
+
+	@Override
+	public MemberVO selectCheckMemberNickName(String mem_nickName) {
+		return memberMapper.selectCheckMemberNickName(mem_nickName);
+	}
 }

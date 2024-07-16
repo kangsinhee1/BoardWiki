@@ -10,7 +10,7 @@
 		<ul>
 			<li>
 				<form:label path="mem_email">이메일</form:label>
-				<form:input path="mem_email" readonly="true"/>                                                      
+				<form:input path="mem_email" readonly="true"/>                                         
 			</li>
 			<li>
 				<form:label path="mem_name">이름</form:label>

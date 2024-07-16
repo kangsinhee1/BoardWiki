@@ -9,12 +9,24 @@
 	 	   mem_num,
 	 	   mem_email,
 	 	   mem_auth,
-	 	   mem_nickname,
+	 	   mem_nickName,
 	 	   mem_passwd,
 	 	   mem_provider
 	 	FROM member LEFT OUTER JOIN member_detail
 	 	USING (mem_num)
 	 	WHERE mem_email = #{mem_email}
+	 </select>
+	 <select id="selectCheckMemberNickName" parameterType="string" resultType="memberVO">
+	 	SELECT
+	 	   mem_num,
+	 	   mem_email,
+	 	   mem_auth,
+	 	   mem_nickName,
+	 	   mem_passwd,
+	 	   mem_provider
+	 	FROM member LEFT OUTER JOIN member_detail
+	 	USING (mem_num)
+	 	WHERE mem_nickName = #{mem_nickName}
 	 </select>
 	 <!-- 회원가입 -->
 	  <insert id="insertMember_detail" parameterType="memberVO">
