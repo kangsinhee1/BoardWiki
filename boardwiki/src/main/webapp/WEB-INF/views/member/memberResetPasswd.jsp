@@ -22,6 +22,7 @@
 				<form:input path="mem_name"/>
 				<form:errors path="mem_name" cssClass="error-color"/>
 			</li>
+			
 		</ul> 
 		<div class="align-center">
 			<form:button class="default-btn">전송</form:button>
