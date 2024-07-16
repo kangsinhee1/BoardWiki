@@ -41,9 +41,9 @@ import lombok.extern.slf4j.Slf4j;
 public class MemberController {
 	@Autowired
 	private MemberService memberService;
-	
+
 	@Autowired
-    private PasswordEncoder passwordEncoder;
+	private PasswordEncoder passwordEncoder;
 
 	@Autowired
 	private NaverLoginUtil naverLoginUtil;
@@ -121,7 +121,7 @@ public class MemberController {
 			if(member!=null) {
 				//비밀번호 일치 여부 체크
 				check = passwordEncoder.matches(memberVO.getMem_passwd(), member.getMem_passwd());
-				
+
 				log.debug("<<check : >>" + check);
 			}
 			if(check) {//인증 성공
@@ -136,9 +136,9 @@ public class MemberController {
 				log.debug("<<auth>> : " + member.getMem_auth());
 				log.debug("<<au_id>> : " + member.getMem_auth());	
 
-				
+
 				return "redirect:/main/main";
-				
+
 			}
 
 
@@ -250,7 +250,7 @@ public class MemberController {
 
 			return "common/resultAlert";
 		}
-		//
+		// 기존 회원 로그인 처리 
 		MemberVO member = memberService.selectCheckMember(naver_email);
 		session.setAttribute("user", member);
 
@@ -258,7 +258,13 @@ public class MemberController {
 		log.debug("<<id>> : " + member.getMem_email());
 		log.debug("<<auth>> : " + member.getMem_auth());
 
-		return "redirect:/main/main"; // 성공적으로 처리되면 메인 페이지로 리다이렉트
+		//UI 메시지 처리
+		model.addAttribute("message", "Naver 로그인 완료");
+		model.addAttribute("url", 
+				request.getContextPath()+"/main/main");
+
+		return "common/resultAlert";
+
 	}
 
 	@GetMapping("/member/memberNaverRegister")
@@ -327,8 +333,7 @@ public class MemberController {
 		// 이메일 중복 체크
 		MemberVO result = memberService.selectCheckMember(kakao_email);
 
-		if(result == null) { // 네이버 메일로 조회해서 일치하는 정보가 없는 경우 회원가입
-
+		if(result == null) { // 카카오 메일로 조회해서 일치하는 정보가 없는 경우 회원가입
 			memberVO.setMem_email(kakao_email);
 			memberVO.setMem_passwd(kakao_passwd);
 			memberVO.setMem_nickName(kakao_nickname);
@@ -344,15 +349,15 @@ public class MemberController {
 
 		if(!result.getMem_provider().equals("Kakao")) {
 			//UI 메시지 처리
-//			model.addAttribute("accessTitle", "로그인 오류");
+			//			model.addAttribute("accessTitle", "로그인 오류");
 			model.addAttribute("message", "회원님의 이메일로 가입된 다른 계정이 있습니다.");
-//			model.addAttribute("accessBtn", "확인");
+			//			model.addAttribute("accessBtn", "확인");
 			model.addAttribute("url", 
 					request.getContextPath()+"/member/login");
 
 			return "common/resultAlert";
 		}
-		//
+		// 기존 회원 로그인 처리
 		MemberVO member = memberService.selectCheckMember(kakao_email);
 		session.setAttribute("user", member);
 
@@ -360,79 +365,89 @@ public class MemberController {
 		log.debug("<<id>> : " + member.getMem_email());
 		log.debug("<<auth>> : " + member.getMem_auth());
 
-		return "redirect:/main/main"; // 성공적으로 처리되면 메인 페이지로 리다이렉트
+		//UI 메시지 처리
+		model.addAttribute("message", "Kakao 로그인 완료");
+		model.addAttribute("url", 
+				request.getContextPath()+"/main/main");
+
+		return "common/resultAlert";
 	}
 	// 구글 로그인 폼에서 받아온 데이터 처리
 	// 구글 - 구글 로그인 성공시 callback 호출 후 사용자 정보 요청
 	@GetMapping("/member/login/oauth2/code/google")
 	public String callbackGoogle(Model model,
-	        MemberVO memberVO,
-	        @RequestParam Map<String,Object> paramMap,
-	        @RequestParam String code,
-	        @RequestParam String state,
-	        HttpSession session, HttpServletRequest request) throws IOException {
+			MemberVO memberVO,
+			@RequestParam Map<String,Object> paramMap,
+			@RequestParam String code,
+			@RequestParam String state,
+			HttpSession session, HttpServletRequest request) throws IOException {
 
-	    log.info("callbackGoogle");
+		log.info("callbackGoogle");
 
-	    log.debug("paramMap:" + paramMap);
+		log.debug("paramMap:" + paramMap);
 
-	    // 구글 OAuth Access Token 획득
-	    OAuth2AccessToken oauthToken = googleLoginUtil.getAccessToken(session, code, state);
+		// 구글 OAuth Access Token 획득
+		OAuth2AccessToken oauthToken = googleLoginUtil.getAccessToken(session, code, state);
 
-	    // 구글 API를 통해 사용자 프로필 정보 읽어오기
-	    String apiResult = googleLoginUtil.getUserProfile(oauthToken);
-	    log.debug("apiResult : " + apiResult);
+		// 구글 API를 통해 사용자 프로필 정보 읽어오기
+		String apiResult = googleLoginUtil.getUserProfile(oauthToken);
+		log.debug("apiResult : " + apiResult);
 
-	    // JSON 응답 파싱
-	    JSONObject jsonObject = new JSONObject(apiResult);
+		// JSON 응답 파싱
+		JSONObject jsonObject = new JSONObject(apiResult);
 
-	    // 필요한 정보 추출
-	    String google_email = jsonObject.optString("email", null);
-	    String google_name = jsonObject.optString("name", null);
-	    String google_id = jsonObject.optString("id", null);
+		// 필요한 정보 추출
+		String google_email = jsonObject.optString("email", null);
+		String google_name = jsonObject.optString("name", null);
+		String google_id = jsonObject.optString("id", null);
 
-	    log.debug("<<google_email>> : " + google_email);
-	    log.debug("<<google_name>> : " + google_name);
-	    log.debug("<<google_id>> : " + google_id);
+		log.debug("<<google_email>> : " + google_email);
+		log.debug("<<google_name>> : " + google_name);
+		log.debug("<<google_id>> : " + google_id);
 
-	    // 이메일 중복 체크
-	    MemberVO result = memberService.selectCheckMember(google_email);
+		// 이메일 중복 체크
+		MemberVO result = memberService.selectCheckMember(google_email);
 
-	    if (result == null) { // 구글 메일로 조회해서 일치하는 정보가 없는 경우 회원가입
-	        memberVO.setMem_email(google_email);
-	        memberVO.setMem_passwd(google_id); // Google ID를 비밀번호로 사용 (필요에 따라 해싱하여 저장)
-	        memberVO.setMem_name(google_name);
-	        memberVO.setMem_provider("Google");
+		if (result == null) { // 구글 메일로 조회해서 일치하는 정보가 없는 경우 회원가입
+			memberVO.setMem_email(google_email);
+			memberVO.setMem_passwd(google_id); // Google ID를 비밀번호로 사용 (필요에 따라 해싱하여 저장)
+			memberVO.setMem_name(google_name);
+			memberVO.setMem_provider("Google");
 
-	        model.addAttribute("memberVO", memberVO);
+			model.addAttribute("memberVO", memberVO);
 
-	        log.debug("<<model>> : " + model);
-	        log.debug("<<memberVO>> : " + memberVO);
+			log.debug("<<model>> : " + model);
+			log.debug("<<memberVO>> : " + memberVO);
 
-	        return formMemberNaverRegister(); // 회원가입 폼으로 리다이렉트
-	    }
-	    
+			return formMemberNaverRegister(); // 회원가입 폼으로 리다이렉트
+		}
 
-	    if (!result.getMem_provider().equals("Google")) {
-	        // UI 메시지 처리
-	        model.addAttribute("accessTitle", "로그인 오류");
-	        model.addAttribute("accessMsg", "회원님의 이메일로 가입된 다른 계정이 있습니다.");
-	        model.addAttribute("accessBtn", "확인");
-	        model.addAttribute("accessUrl", 
-	                request.getContextPath() + "/member/login");
 
-	        return "common/resultAlert";
-	    }
+		if (!result.getMem_provider().equals("Google")) {
+			// UI 메시지 처리
+			model.addAttribute("accessTitle", "로그인 오류");
+			model.addAttribute("accessMsg", "회원님의 이메일로 가입된 다른 계정이 있습니다.");
+			model.addAttribute("accessBtn", "확인");
+			model.addAttribute("accessUrl", 
+					request.getContextPath() + "/member/login");
 
-	    // 기존 회원 로그인 처리
-	    MemberVO member = memberService.selectCheckMember(google_email);
-	    session.setAttribute("user", member);
+			return "common/resultAlert";
+		}
 
-	    log.debug("<<인증 성공>>");
-	    log.debug("<<id>> : " + member.getMem_email());
-	    log.debug("<<auth>> : " + member.getMem_auth());
+		// 기존 회원 로그인 처리
+		MemberVO member = memberService.selectCheckMember(google_email);
+		session.setAttribute("user", member);
 
-	    return "redirect:/main/main"; // 성공적으로 처리되면 메인 페이지로 리다이렉트
+		log.debug("<<인증 성공>>");
+		log.debug("<<id>> : " + member.getMem_email());
+		log.debug("<<auth>> : " + member.getMem_auth());
+
+		//UI 메시지 처리
+		model.addAttribute("message", "Google 로그인 완료");
+		model.addAttribute("url", 
+				request.getContextPath()+"/main/main");
+
+		return "common/resultAlert";
 	}
 	/*==============================
 	 * 로그아웃
