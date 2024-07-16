@@ -19,6 +19,10 @@
 			<li>
 				<form:label path="mem_nickName">별명</form:label>
 				<form:input path="mem_nickName"/>
+				<input type="button" id="confirmNickname" value="별명중복체크"
+				                                 class="default-btn">                  
+				<span id="message_nickName"></span>
+				<form:errors path="mem_nickName" cssClass="error-color"/>  
 			</li>
 			<li>
 				<form:label path="mem_phone">전화번호</form:label>
