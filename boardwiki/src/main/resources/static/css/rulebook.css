@@ -190,11 +190,13 @@ div#mre_second input{
 	left:37%;
 	top:30%;
 	width:500px;
+	height:600px;
 	margin-bottom:8px !important;
 	padding-bottom:15px;
 	border-radius:15px;
 	border:1px solid #ccc;
-	
+	margin-left:600px;
+	margin-top:200px;
 }
 
 .booksh{

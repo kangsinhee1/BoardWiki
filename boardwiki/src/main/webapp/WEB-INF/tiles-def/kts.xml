@@ -15,6 +15,11 @@
 		<put-attribute name="css" value="/WEB-INF/views/board/boardCSS.jsp"/>
 		<put-attribute name="body" value="/WEB-INF/views/board/boardWrite.jsp"/>
 	</definition>
+	<definition name="boardWrite2" extends="main">
+		<put-attribute name="title" value="글쓰기"/>
+		<put-attribute name="css" value="/WEB-INF/views/board/boardCSS.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/board/boardWrite2.jsp"/>
+	</definition>
 	<definition name="boardView" extends="main">
 		<put-attribute name="title" value="글상세"/>
 		<put-attribute name="css" value="/WEB-INF/views/board/boardCSS.jsp"/>

@@ -86,6 +86,8 @@ public class BoardController {
 		
 		return "common/resultAlert";
 	}
+	
+	
 	@GetMapping("/board/write2")
 	public String form2(HttpServletRequest request,
 			 HttpSession session,
@@ -99,7 +101,7 @@ public class BoardController {
 			
 		}
 		model.addAttribute("member", member);
-		return "boardWrite";
+		return "boardWrite2";
 	}
 	@PostMapping("/board/write2")
 	public String submit2(@Valid BoardVO boardVO,
