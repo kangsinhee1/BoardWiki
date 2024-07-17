@@ -21,9 +21,9 @@
         </div>
         <button id="deleteX">X</button>
          </c:forEach>
-        <form id="addToCart" method="get" action="${pageContext.request.contextPath}/cart/order">
+        <form id="addToCart" method="get" action="${pageContext.request.contextPath}/order/order">
              <input type="button" value="결제하기"
-              onclick="location.href='${pageContext.request.contextPath}/cart/order'">
+              onclick="location.href='${pageContext.request.contextPath}/order/order'">
         </form>
     </div>
 </div>

@@ -28,6 +28,12 @@
 		<put-attribute name="body" value="/WEB-INF/views/cart/cart.jsp"/>
 	</definition>
 	
+	<definition name="order" extends="main">
+		<put-attribute name="title" value="주문"/>
+		<put-attribute name="css" value="/WEB-INF/views/order/orderCSS.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/order/order.jsp"/>
+	</definition>
+	
 </tiles-definitions>
 
 
