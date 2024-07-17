@@ -74,8 +74,7 @@
 	  	use_title,
 	  	use_content,
 	  	use_photo,
-	  	use_price,
-	  	use_check
+	  	use_price
 	  	)
 	   VALUES(
 	   used_item_seq.nextval,
@@ -84,8 +83,7 @@
 	   #{use_title},
 	   #{use_content},
 	   #{use_photo,jdbcType=VARCHAR},
-	   #{use_price},
-	   #{use_check}
+	   #{use_price}
 	   )
 	  </insert>
 	  <update id="updateUsed" parameterType="usedItemVO">
@@ -95,11 +93,11 @@
  		   </if>
  		   use_title = #{use_title},
  		   use_content = #{use_content},
- 		   use_check = #{use_check},
  		   use_price = #{use_price},
  		   use_mdate = SYSDATE
  		WHERE use_num = #{use_num}
- 	</update>  
+ 	</update>
+ 	
  </mapper>
 
 

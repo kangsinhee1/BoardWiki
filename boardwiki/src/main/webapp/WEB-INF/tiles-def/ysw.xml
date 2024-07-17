@@ -126,6 +126,12 @@
 		<put-attribute name="css" value="/WEB-INF/views/usedChat/usedChatCSS.jsp"/>
 		<put-attribute name="body" value="/WEB-INF/views/usedChat/useChat.jsp"/>
 	</definition>
+	<definition name="useChatList" extends="main">
+		<put-attribute name="title" value="채팅방 리스트(판매자)"/>
+		<put-attribute name="css" value="/WEB-INF/views/usedChat/usedChatCSS.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/usedChat/useChatList.jsp"/>
+	</definition>
+	
 </tiles-definitions>
 
 

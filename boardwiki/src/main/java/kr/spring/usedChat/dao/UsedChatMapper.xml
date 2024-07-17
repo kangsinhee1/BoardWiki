@@ -9,24 +9,19 @@
 	</resultMap>
 
 	<sql id="UsedChatSub">
-		FROM UsedChatRoom 
+		FROM usedChatRoom 
 		LEFT OUTER JOIN (SELECT
-							chaC_num,
 							<![CDATA[
-							REPLACE(REPLACE
+							REPLACE
 							(REPLACE
-							(chaC_txt,'<','&lt;'),'>','&gt;'),'@{member}@','') chaC_txt,
+							(chaC_txt,'<','&lt;'),'>','&gt;') chaC_txt,
 							]]>
 							chaC_time,
 							useC_num
-						FROM usedChat_txt WHERE chaC_num IN (SELECT
-														MAX(chaC_num) chaC_num FROM usedChat_txt
+						FROM usedChat_text WHERE chaC_num IN (SELECT
+														MAX(chaC_num) chaC_num FROM usedChat_text
 															GROUP BY useC_num))
 		USING(useC_num)
-		WHERE mem_num=#{mem_num}
-		<if test="keyword != null and keyword !=''">
-			AND room_name LIKE '%' || #{keyword} || '%'
-		</if>
 	</sql>
 	
 	<!-- 채팅방 전체/검색 개수 -->
@@ -34,6 +29,7 @@
 		SELECT
 			COUNT(*)
 		<include refid="UsedChatSub"></include>
+		WHERE use_num = #{use_num}
 	</select>
 	<!-- 채팅방 목록 -->
 	<select id="selectUsedChatRoomList" parameterType="map" resultMap="usedChatMap">
@@ -49,6 +45,7 @@
 		<![CDATA[
 		WHERE rnum >= #{start} AND rnum <= #{end}
 		]]>
+		AND use_num = #{use_num}
 	</select>
 	<!-- 채팅 메시지 읽기 -->
 	 <select id="selectChatDetail" parameterType="long"
@@ -57,16 +54,46 @@
 	 		<![CDATA[
 	 		REPLACE(REPLACE(chaC_txt,'<','&lt;'),'>','&gt;') chaC_txt,
 	 		]]>
+	 		chaC_num,
 	 		chaC_time,
 	 		chaC_status,
+	 		useC_num,
 	 		mem_num,
 	 		mem_nickname
 	 	FROM usedchat_text
-	    JOIN member 
+	    JOIN member_detail
 	    USING(mem_num)
 	    WHERE useC_num=#{useC_num} 
-	   ORDER BY chat_time ASC                   	               	 
+	   ORDER BY chaC_time ASC                   	               	 
 	 </select>
+	<!-- 채팅방 전체/검색 개수 -->
+<!-- 	<select id="selectRowCount" parameterType="map" resultType="integer">
+		SELECT
+			COUNT(*)
+		FROM usedchatRoom 
+		WHERE use_num = #{use_num}
+	</select>
+	
+	채팅방 목록
+	<select id="selectUsedChatRoomList" parameterType="map" resultMap="usedChatMap">
+		SELECT
+			*
+		FROM (SELECT
+				a.*,
+				rownum rnum
+				FROM (SELECT
+						*
+						FROM usedChatRoom
+						JOIN usedChat_txt
+						USING(useC_num)
+						
+						ORDER BY chat_date DESC)a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+		AND use_num= #{use_num} 
+	</select> -->
+	
  </mapper>
 
 

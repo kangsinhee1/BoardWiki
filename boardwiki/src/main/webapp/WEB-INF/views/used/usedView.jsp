@@ -32,7 +32,7 @@
 		<!-- 사진 넣어야함 -->	
 	</c:if>
 	<div class="align-right">
-		<input type="button" value="1:1채팅하기" onclick="location.href='useChat?mem_num=${used.mem_num}&use_num=${used.use_num }'">
+		<input type="button" value=<c:if test="${user.mem_num == used.mem_num}">"채팅 목록"</c:if><c:if test="${user.mem_num != used.mem_num}">"1:1채팅하기"</c:if> onclick="location.href='useChat?mem_num=${used.mem_num}&use_num=${used.use_num }'">	
 	</div>
 	<div class="detail-content">
 		${used.use_content}

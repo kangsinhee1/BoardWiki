@@ -18,14 +18,12 @@ public class UsedChatServiceImpl implements UsedChatService{
 	
 	@Override
 	public List<UsedChatRoomVO> selectUsedChatRoomList(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+		return usedChatMapper.selectUsedChatRoomList(map);
 	}
 
 	@Override
 	public Integer selectRowCount(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+		return usedChatMapper.selectRowCount(map);
 	}
 
 	@Override
@@ -47,6 +45,7 @@ public class UsedChatServiceImpl implements UsedChatService{
 
 	@Override
 	public List<UsedChat_textVO> selectChatDetail(Map<String, Long> map) {
+		
 		return usedChatMapper.selectChatDetail(map);
 	}
 

@@ -3,7 +3,7 @@
 <script src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/usedChat.js"></script>
 <!-- 채팅 메시지 처리 시작 -->
-<div id="usedChat" class="page-main">
+<div id="usedChat" class="page-main" onloadeddata="selectMsg()">
 	<h3 id="chatroom_title"><span id="useC_name">${useC_name}</span> 채팅방</h3> 
 	<div class="align-right">
 </div>  
