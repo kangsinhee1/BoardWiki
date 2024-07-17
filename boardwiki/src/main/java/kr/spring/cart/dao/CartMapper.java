@@ -3,6 +3,7 @@ package kr.spring.cart.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -24,4 +25,6 @@ public interface CartMapper {
 	public void updateCart2(CartVO cart);
 	@Select("SELECT * FROM cart WHERE mem_num=#{mem_num} AND item_num=#{item_num}")
 	public CartVO getCart(CartVO cart);
+	@Delete("DELETE FROM cart WHERE mem_num=#{mem_num} AND item_num=#{item_num}")
+	public void deleteSmallCart(CartVO cart);
 }

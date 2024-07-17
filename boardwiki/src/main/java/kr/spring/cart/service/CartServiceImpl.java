@@ -52,6 +52,11 @@ public class CartServiceImpl implements CartService{
 		return cartMapper.selectCart(mem_num);
 	}
 
+	@Override
+	public void deleteSmallCart(CartVO cart) {
+		cartMapper.deleteSmallCart(cart);
+	}
+
 	
 
 	

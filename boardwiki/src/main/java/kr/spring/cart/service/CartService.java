@@ -16,4 +16,5 @@ public interface CartService {
 	public void updateCart(CartVO cart);
 	public void updateCart2(CartVO cart);
 	public CartVO getCart(CartVO cart);
+	public void deleteSmallCart(CartVO cart);
 }

@@ -90,7 +90,7 @@ public class CartController {
 				}else {
 					
 					cartService.insertCart(cart);
-					itemService.updateStock(item_num, db_item - item_quantity); // 아이템 번호와 재고 수량을 함께 전달
+                  //itemService.updateStock(item_num, db_item - item_quantity); // 아이템 번호와 재고 수량을 함께 전달
 					log.debug("<<장바구니에 상품 추가 성공>>");
 					mapAjax.put("result", "success");
 				}
@@ -108,7 +108,7 @@ public class CartController {
 				}else {
 					cart.setItem_quantity(item_quantity);
                     cartService.updateCart(cart);
-                    itemService.updateStock(item_num, db_item - item_quantity); // 아이템 번호와 재고 수량을 함께 전달
+                  //itemService.updateStock(item_num, db_item - item_quantity); // 아이템 번호와 재고 수량을 함께 전달
                     log.debug("<<장바구니에 상품 추가 성공>>");
                     mapAjax.put("result", "success");
 				}
@@ -122,45 +122,45 @@ public class CartController {
 	 *=========================*/
 	@GetMapping("/cart/cart")
 	public String getList(
-			@RequestParam(defaultValue="1") int pageNum,
-			@RequestParam(defaultValue="1") int order,
-			@RequestParam(defaultValue="") String cart_category,
-			String keyfield,String keyword,Model model,HttpSession session,CartVO cart)
-			            		  throws IllegalStateException, IOException {
+	        Model model,
+	        HttpSession session) throws IllegalStateException, IOException {
+
+	    MemberVO member = (MemberVO) session.getAttribute("user");
+	    
+	    
+	    if (member == null) {
+	        return "redirect:/login"; // 세션에 user가 없으면 로그인 페이지로 리다이렉트
+	    }
+
+	    log.debug("<<유저 - member>> : " + member);
+
+	    Map<String, Object> map = new HashMap<>();
+	    map.put("mem_num", member.getMem_num());
+
+	    List<CartVO> list = null;
+
+	    list = cartService.selectCartList(map);
+	    
+	    model.addAttribute("list", list);
+
+	    return "cart";
+	}
+	/*====================
+	 *  장바구니 품목 삭제
+	 *====================*/
+	@GetMapping("/cart/delete")
+	public String smallDelete(Long mem_num,Long item_num,
+			                  HttpServletRequest request) {
+		log.debug("<<장바구니 품목 삭제 -- item_num,mem_num>>"+ item_num + mem_num);
 		
-		MemberVO member = (MemberVO) session.getAttribute("user");
-		Long mem_num = member.getMem_num();
-		cartService.selectCart(mem_num);
-    	Long item_num = cart.getItem_num();
-    	cart.getItem_quantity();
-		itemService.selectItem(item_num);
+		CartVO cart = new CartVO();
 		
+		cart.setMem_num(mem_num);
+		cart.setItem_num(item_num);
 		
-		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("cart_category", cart_category);
-		map.put("keyfield", keyfield);
-		map.put("keyword", keyword);
+		cartService.deleteSmallCart(cart);
 		
-		int count = cartService.selectRowCount(map);
-		
-		PagingUtil page = new PagingUtil(keyfield,keyword,pageNum,count,
-				10,10,"list","&cart_category="+cart_category+"&order="+order);
-		
-		List<CartVO> list = null;
-		
-		if(count > 0) {
-			map.put("order", order);
-			map.put("start", page.getStartRow());
-			map.put("end", page.getEndRow());
-			
-			list = cartService.selectCartList(map);
-		}
-		
-		model.addAttribute("count", count);
-		model.addAttribute("list", list);
-		model.addAttribute("page", page.getPage());
-		
-		return "cart";
+		return "redirect:/cart/cart";
 	}
 }
 

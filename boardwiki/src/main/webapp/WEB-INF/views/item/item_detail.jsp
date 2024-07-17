@@ -28,7 +28,7 @@
 				</div>
                 <c:if test="${!empty member.mem_num}">
                 <div class="text-box2" style="display: inline-block; vertical-align: top;">
-                    <form id="addToCart" method="post" action="${pageContext.request.contextPath}/cart/cart">
+                    <form id="addToCart" method="get" action="${pageContext.request.contextPath}/cart/cart">
                         <input type="hidden" name="item_num" value="${item.item_num}" />
                         <input type="hidden" name="user" value="${member.mem_num}" />
                         <div>
