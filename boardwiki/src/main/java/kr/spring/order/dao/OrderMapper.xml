@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.spring.order.dao.OrderMapper">
+    <insert id="insertOrder" parameterType="map">
+        INSERT INTO order(
+          order_num,
+          mem_num,
+          item_num,
+          order_name,
+          order_phone,
+          order_zipcode,
+          order_address1,
+          order_address2,
+          order_pay,
+          order_check,
+          order_reg_date) 
+        VALUES(
+	 	  order_order_num_seq.nextval,
+	 	  #{mem_num},
+	 	  #{item_num},
+	 	  #{order_name},
+	 	  #{order_phone},
+	 	  #{order_zipcode},
+	 	  #{order_address1},
+	 	  #{order_address2},
+	 	  #{order_pay},
+	 	  #{order_check},
+	 	  #{order_reg_date})
+    </insert>
+    <select id="selectOrderDetail" parameterType="map" resultType="orderVO">
+        SELECT * FROM order WHERE order_num=#{order_num}
+    </select>
+    <select id="selectOrderUser" parameterType="map" resultType="orderVO">
+        SELECT * FROM order WHERE mem_num=#{mem_num}
+    </select>
+</mapper>
