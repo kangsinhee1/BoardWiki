@@ -107,8 +107,14 @@ public class MemberServiceImpl implements MemberService {
 	    String encryptedPassword = passwordEncoder.encode(member.getMem_passwd());
 	    member.setMem_passwd(encryptedPassword);
 	    
-	    
+	   
 		memberMapper.updatePassword(member);
+		
+	}
+
+	@Override
+	public void updateMember_detail(MemberVO member) {
+		memberMapper.updateMember_detail(member);
 		
 	}
 }

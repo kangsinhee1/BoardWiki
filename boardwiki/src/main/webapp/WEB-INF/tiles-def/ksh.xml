@@ -29,6 +29,10 @@
 		<put-attribute name="title" value="비밀번호 초기화"/>
 		<put-attribute name="body" value="/WEB-INF/views/member/memberChangePassword.jsp"/>
 	</definition>
+	<definition name="memberModify" extends="myPage">
+		<put-attribute name="title" value="회원정보 수정"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/memberModify.jsp"/>
+	</definition>
 	
 </tiles-definitions>
 

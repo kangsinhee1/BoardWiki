@@ -2,19 +2,16 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<!-- 회원가입 시작 -->
+<!-- 회원정보 수정 시작 -->
 <div class="page-main">
-	<h2>SNS 회원가입</h2>
-	<form:form action="memberNaverRegister" id="member_register"
+	<h2>회원정보 수정</h2>
+	<form:form action="memberUpdate" id="member_modify"
 	                            modelAttribute="memberVO">
 		<ul>
 			<li>
-				<form:label path="mem_email">이메일</form:label>
-				<form:input path="mem_email" readonly="true"/>                                         
-			</li>
-			<li>
 				<form:label path="mem_name">이름</form:label>
 				<form:input path="mem_name"/>
+				<form:errors path="mem_name" cssClass="error-color"/>
 			</li>
 			<li>
 				<form:label path="mem_nickName">별명</form:label>
@@ -29,27 +26,24 @@
 				<form:input path="mem_phone"/>
 				<form:errors path="mem_phone" cssClass="error-color"/>
 			</li>
-			<li>
-				<form:label path="mem_passwd"></form:label>
-				<form:hidden path="mem_passwd"/>
-			</li>
-			
-			<li>
-				<form:label path="mem_provider"></form:label>
-				<form:hidden path="mem_provider"/>
-			</li>
 		</ul> 
 		<div class="align-center">
 			<form:button class="default-btn">전송</form:button>
-			<input type="button" value="홈으로"
+			<input type="button" value="MY페이지"
 			  class="default-btn"
-			  onclick="location.href='${pageContext.request.contextPath}/main/main'">
+			  onclick="location.href='myPage'">
 		</div>                           
 	</form:form>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/member.register.js"></script>	
 </div>
-<!-- 회원가입 끝 -->
+<!-- 회원정보 수정 끝 -->
+
+
+
+
+
+
 
 
 

@@ -26,6 +26,7 @@ public interface MemberMapper {
 	public MemberVO selectCheckMemberNickName(String mem_nickName);
 	@Update("UPDATE member_detail SET mem_passwd=#{mem_passwd} WHERE mem_num=#{mem_num}")
 	public void updatePassword(MemberVO member);
+	public void updateMember_detail(MemberVO member);
 	
 	//자동 로그인
 	@Update("UPDATE member_detail SET au_id=#{au_id} WHERE mem_num=#{mem_num}")

@@ -38,7 +38,6 @@
 	        mem_provider,
 	        mem_nickName
 	    )	
-	    
 	    VALUES (
 	        #{mem_num},
 	        #{mem_name},
@@ -63,6 +62,17 @@
 		WHERE rnum >= #{start} AND rnum <= #{end}
 		]]>
 	</select>
+	<!-- 회원정보수정 -->
+	<update id="updateMember_detail" parameterType="memberVO">
+	 	UPDATE member_detail
+	 	SET
+	 	 mem_nickName=#{mem_nickName},
+	 	 mem_name=#{mem_name},
+	 	 mem_phone=#{mem_phone},
+	 	 mem_mdate=SYSDATE
+	 	WHERE mem_num=#{mem_num}
+	 </update>
+	
 </mapper>
 
 

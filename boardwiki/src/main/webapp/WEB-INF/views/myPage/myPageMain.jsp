@@ -18,11 +18,21 @@
 <ul class="mypage-main-content">
 	<li>이름 : ${member.mem_name }</li>
 	<li>이메일 : ${member.mem_email }</li>
+	<li>닉네임 : ${member.mem_nickName}</li>
+	<c:if test="${member.mem_mdate == null}">
 	<li>계정생성일 : ${member.mem_rdate }</li>
-	<li><input type="button" value="회원번호 수정" onclick="location.href='modifyMember'"></li>
+	</c:if>
+	<c:if test="${member.mem_mdate != null}">
+	<li>계정수정일 : ${member.mem_mdate}</li>
+	</c:if>
+	<c:if test="${member.mem_provider != null }">
+	<li>가입 플랫폼 : ${member.mem_provider}</li>
+	</c:if>
+	<li><input type="button" value="회원번호 수정" onclick="location.href='${pageContext.request.contextPath}/member/memberUpdate'"></li>
 	<c:if test="${member.mem_provider == null }">
 		<li><input type="button" value="비밀번호 변경" onclick="location.href='${pageContext.request.contextPath}/member/changePassword'"></li>
 	</c:if>
+	
 </ul>
 <br><br><br><br><br>
 <h6 id="schedule"><a href="${pageContext.request.contextPath}/member/calendar">일정</a></h6>

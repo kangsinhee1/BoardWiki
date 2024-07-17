@@ -501,7 +501,44 @@ public class MemberController {
 
 		return "redirect:/main/main";	
 	}
-
+	
+	/*==============================
+	 * 회원정보 수정
+	 *==============================*/
+	//수정 폼 호출
+	@GetMapping("/member/memberUpdate")
+	public String formUpdate(HttpSession session,Model model) {
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		MemberVO memberVO =
+				memberService.selectMember(user.getMem_num());
+		model.addAttribute("memberVO", memberVO);
+		
+		return "memberModify";
+	}
+	//수정폼에서 전송된 데이터 처리
+	@PostMapping("/member/memberUpdate")
+	public String submitUpdate(@Valid MemberVO memberVO,
+			                   BindingResult result,
+			                   HttpSession session) {
+		log.debug("<<회원정보 수정>> : " + memberVO);
+		
+		//유효성 체크 결과 오류가 있으면 폼 호출
+		if(result.hasErrors()) {
+			return "memberModify";
+		}
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		memberVO.setMem_num(user.getMem_num());
+		
+		//회원정보 수정
+		memberService.updateMember_detail(memberVO);
+		
+		/*
+		 * //세션에 저장된 정보 변경 user.setMem_nickName(memberVO.getMem_nickName());
+		 */		
+		
+		return "redirect:/myPage/myPage";
+	}
 	/*==============================
 	 * 비밀번호 변경
 	 *==============================*/

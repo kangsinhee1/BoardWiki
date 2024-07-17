@@ -16,6 +16,7 @@ public interface MemberService {
 	public Integer countAllmember(Map<String,Object> map);
 	public MemberVO selectCheckMemberNickName(String mem_nickName);
 	public void updatePassword(MemberVO member);
+	public void updateMember_detail(MemberVO member);
 	
 	//자동로그인
 	public void updateAu_id(String au_id,Long mem_num);
