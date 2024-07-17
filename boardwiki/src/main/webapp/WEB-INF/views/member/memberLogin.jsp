@@ -17,8 +17,9 @@
 					placeholder="비밀번호" cssClass="form-input" /> <form:label
 					path="mem_passwd">비밀번호</form:label> <form:errors path="mem_passwd"
 					cssClass="error-color" /></li>
-			<li><label for="auto"><input type="checkbox" name="auto"
-					id="auto">로그인상태유지</label></li>
+			<li>
+				<label for="auto"><input type="checkbox" name="auto" id="auto">로그인상태유지</label>
+			</li>
 			
 		</ul>
 		<div class="align-center">

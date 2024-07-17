@@ -26,6 +26,8 @@ public class MemberVO {
 	private Date mem_rdate;
 	private Date mem_mdate;
 	private String mem_photo;
+	private String auto;
+	private String au_id;
 	
 	//비밀번호 일치 여부 체크
 	public boolean ischeckedPassword(String userPasswd) {

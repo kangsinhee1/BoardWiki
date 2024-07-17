@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import kr.spring.member.vo.MemberVO;
 
@@ -23,4 +24,12 @@ public interface MemberMapper {
 	@Select("SELECT COUNT(*) FROM member JOIN member_detail USING(mem_num) ORDER BY mem_rdate desc")
 	public Integer countAllmember(Map<String,Object> map);
 	public MemberVO selectCheckMemberNickName(String mem_nickName);
+	
+	//자동 로그인
+	@Update("UPDATE member_detail SET au_id=#{au_id} WHERE mem_num=#{mem_num}")
+	public void updateAu_id(String au_id,Long mem_num);
+	@Select("SELECT m.mem_num, m.mem_email, m.mem_auth, d.au_id, d.mem_passwd, d.mem_nickName FROM member m JOIN member_detail d ON m.mem_num=d.mem_num WHERE d.au_id=#{au_id}")
+	public MemberVO selectAu_id(String au_id);
+	@Update("UPDATE member_detail SET au_id='' WHERE mem_num=#{mem_num}")
+	public void deleteAu_id(Long mem_num);
 }

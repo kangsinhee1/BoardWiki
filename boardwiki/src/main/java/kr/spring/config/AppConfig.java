@@ -11,13 +11,21 @@ import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
 import org.springframework.web.servlet.view.tiles3.TilesView;
 import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 
+import kr.spring.interceptor.AutoLoginCheckInterceptor;
 import kr.spring.interceptor.LoginCheckInterceptor;
 import kr.spring.util.NaverLoginUtil;
 
 //자바코드 기반 설정 클래스
 @Configuration
 public class AppConfig implements WebMvcConfigurer{
+	private AutoLoginCheckInterceptor autoLoginCheck;
 	private LoginCheckInterceptor loginCheck;
+
+	@Bean
+	public AutoLoginCheckInterceptor interceptor() {
+		autoLoginCheck = new AutoLoginCheckInterceptor();
+		return autoLoginCheck;
+	}
 
 	@Bean
 	public LoginCheckInterceptor interceptor2() {
@@ -27,6 +35,16 @@ public class AppConfig implements WebMvcConfigurer{
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
+		//AutoLoginCheckInterceptor 설정
+		registry.addInterceptor(autoLoginCheck)
+		.addPathPatterns("/**")
+		.excludePathPatterns("/images/**")
+		.excludePathPatterns("/image_upload/**")
+		.excludePathPatterns("/upload/**")
+		.excludePathPatterns("/css/**")
+		.excludePathPatterns("/js/**")
+		.excludePathPatterns("/member/login")
+		.excludePathPatterns("/member/logout");
 		//LoginCheckInterceptor 설정
 		registry.addInterceptor(loginCheck)
 		.addPathPatterns("/member/myPage")
@@ -39,7 +57,7 @@ public class AppConfig implements WebMvcConfigurer{
 		.addPathPatterns("/rent/rent")
 		.addPathPatterns("/rent/list")
 		.addPathPatterns("/rent/return")
-        .addPathPatterns("/rent/rentListAdmin")
+		.addPathPatterns("/rent/rentListAdmin")
 		;
 	}
 

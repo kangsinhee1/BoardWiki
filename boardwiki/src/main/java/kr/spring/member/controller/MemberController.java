@@ -4,8 +4,9 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import java.util.UUID;
 
-
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -126,7 +127,23 @@ public class MemberController {
 			}
 			if(check) {//인증 성공
 				//==== 자동로그인 체크 시작====//
+				boolean autoLogin = memberVO.getAuto() != null  && memberVO.getAuto().equals("on");
+
+				if(autoLogin) {
+					//자동로그인을 체크한 경우
+					String au_id = memberVO.getAu_id();
+					if(au_id == null) {
+						au_id = UUID.randomUUID().toString();
+						member.setAu_id(au_id);
+						memberService.updateAu_id(member.getAu_id(), member.getMem_num());
+					}
+					Cookie auto_cookie = new Cookie("au-log", au_id);
+					auto_cookie.setMaxAge(60*60*24*7);
+					auto_cookie.setPath("/");
+					response.addCookie(auto_cookie);
+				}
 				//==== 자동로그인 체크 끝=====//
+
 
 				//인증 성공, 로그인 처리
 				session.setAttribute("user", member);
@@ -453,11 +470,17 @@ public class MemberController {
 	 * 로그아웃
 	 *==============================*/
 	@GetMapping("/member/logout")
-	public String processLogout(HttpSession session) {
+	public String processLogout(HttpSession session, HttpServletResponse response) {
 		//로그아웃
 		session.invalidate();
 
 		//====자동로그인 시작====//
+		//클라이언트 쿠키 처리
+		Cookie auto_cookie = new Cookie("au-log","");
+		auto_cookie.setMaxAge(0);//쿠키 삭제
+		auto_cookie.setPath("/");
+
+		response.addCookie(auto_cookie);
 		//====자동로그인 끝=====//
 
 		return "redirect:/main/main";	
