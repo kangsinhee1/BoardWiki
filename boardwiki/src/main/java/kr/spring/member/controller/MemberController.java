@@ -503,7 +503,7 @@ public class MemberController {
 	}
 
 	/*==============================
-	 * 비밀번호 초기화
+	 * 비밀번호 변경
 	 *==============================*/
 	//비밀번호 변경 폼 호출
 	@GetMapping("/member/changePassword")
@@ -556,11 +556,10 @@ public class MemberController {
 		MemberVO db_member = memberService.selectMember(
 				memberVO.getMem_num());
 		//폼에서 전송한 현재 비밀번호와 DB에서 읽어온 비밀번호 일치 여부 체크	
-		if(!db_member.getMem_passwd().equals(
-				memberVO.getNow_passwd())) {
-			result.rejectValue("now_passwd", "invalidPassword");
-			return formChangePassword();
-		}
+		if (!passwordEncoder.matches(memberVO.getNow_passwd(), db_member.getMem_passwd())) {
+            result.rejectValue("now_passwd", "invalidPassword");
+            return formChangePassword();
+        }
 
 		//비밀번호 수정
 		memberService.updatePassword(memberVO);
@@ -572,9 +571,44 @@ public class MemberController {
 		model.addAttribute("message", 
 				"비밀번호 변경 완료(*재접속시 설정되어 있는 자동로그인 기능 해제*)");
 		model.addAttribute("url", 
-				request.getContextPath() + "/member/myPage");
+				request.getContextPath() + "/myPage/myPage");
 
 		return "common/resultAlert";
+	}
+	/*==============================
+	 * 네이버 캡챠 API 사용
+	 *==============================*/	
+	//캡챠 이미지 호출
+	@GetMapping("/member/getCaptcha")
+	public String getCaptcha(Model model,HttpSession session) {
+		
+		String code = "0"; //키 발급시 0, 캡챠 이미지 비교시 1로 세팅
+		String key_apiURL = "https://openapi.naver.com/v1/captcha/nkey?code=" + code;
+		
+		Map<String,String> requestHeaders = 
+				           new HashMap<String,String>();
+		requestHeaders.put("X-Naver-Client-Id", "aGoUsn2QY4b5ZsjIvvn_");
+		requestHeaders.put("X-Naver-Client-Secret", "mdnzHOAtxH");
+		String responseBody = CaptchaUtil.get(
+				                key_apiURL, requestHeaders);
+		log.debug("<<responseBody>> : " + responseBody);
+		
+		JSONObject jObject = new JSONObject(responseBody);
+		try {
+			//https://openapi.naver.com/v1/captcha/nkey 호출로 받은 키값
+			String key = jObject.getString("key");
+			session.setAttribute("captcha_key", key);
+			
+			String apiURL = "https://openapi.naver.com/v1/captcha/ncaptcha.bin?key=" + key;
+			
+			byte[] reponse_byte = CaptchaUtil.getCaptchaImage(
+					                         apiURL, requestHeaders);
+			model.addAttribute("imageFile", reponse_byte);
+			model.addAttribute("filename", "captcha.jpg");
+		}catch(Exception e) {
+			log.error(e.toString());
+		}		
+		return "imageView";
 	}
 
 }
