@@ -32,6 +32,7 @@ import com.github.scribejava.core.model.OAuth2AccessToken;
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.AuthCheckException;
+import kr.spring.util.CaptchaUtil;
 import kr.spring.util.GoogleLoginUtil;
 import kr.spring.util.KakaoLoginUtil;
 import kr.spring.util.NaverLoginUtil;
@@ -499,6 +500,81 @@ public class MemberController {
 		//====자동로그인 끝=====//
 
 		return "redirect:/main/main";	
+	}
+
+	/*==============================
+	 * 비밀번호 초기화
+	 *==============================*/
+	//비밀번호 변경 폼 호출
+	@GetMapping("/member/changePassword")
+	public String formChangePassword() {
+		return "memberChangePassword";
+	}
+	//비밀번호 변경 폼에서 전송된 데이터 처리
+	@PostMapping("/member/changePassword")
+	public String submitChangePasword(
+			@Valid MemberVO memberVO,
+			BindingResult result,
+			HttpSession session,
+			Model model,
+			HttpServletRequest request) {
+		log.debug("<<비밀번호 변경 처리>> : " + memberVO);
+
+		//유효성 체크 결과 오류가 있으면 폼 호출
+		if(result.hasFieldErrors("now_passwd") 
+				|| result.hasFieldErrors("passwd")
+				|| result.hasFieldErrors("captcha_chars")) {
+			return formChangePassword();					
+		}
+
+		//====== 캡챠 문자 체크 시작 ======//
+		String code = "1";//키 발급 0, 캡챠 이미지 비교시 1로 세팅
+		//캡챠 키 발급시 받은 키값
+		String key = (String)session.getAttribute("captcha_key");
+		//사용자가 입력한 캡챠 이미지 글자값
+		String value = memberVO.getCaptcha_chars();
+		String apiURL = "https://openapi.naver.com/v1/captcha/nkey?code=" + code + "&key=" + key + "&value=" + value;
+
+		Map<String,String> requestHeaders = 
+				new HashMap<String,String>();
+		requestHeaders.put("X-Naver-Client-Id", "aGoUsn2QY4b5ZsjIvvn_");
+		requestHeaders.put("X-Naver-Client-Secret", "mdnzHOAtxH");
+		String responseBody = CaptchaUtil.get(
+				apiURL, requestHeaders);
+		log.debug("<<캡챠 결과>> : " + responseBody);
+
+		JSONObject jObject = new JSONObject(responseBody);
+		boolean captcha_result = jObject.getBoolean("result");
+		if(!captcha_result) {
+			result.rejectValue("captcha_chars", "invalidCaptcha");
+			return formChangePassword();
+		}
+		//====== 캡챠 문자 체크 끝 ======//	
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		memberVO.setMem_num(user.getMem_num());
+
+		MemberVO db_member = memberService.selectMember(
+				memberVO.getMem_num());
+		//폼에서 전송한 현재 비밀번호와 DB에서 읽어온 비밀번호 일치 여부 체크	
+		if(!db_member.getMem_passwd().equals(
+				memberVO.getNow_passwd())) {
+			result.rejectValue("now_passwd", "invalidPassword");
+			return formChangePassword();
+		}
+
+		//비밀번호 수정
+		memberService.updatePassword(memberVO);
+
+		//설정되어 있는 자동로그인 기능 해제(모든 브라우저에 설정된 자동로그인 해제)
+		memberService.deleteAu_id(memberVO.getMem_num());
+
+		//View에 표시할 메시지
+		model.addAttribute("message", 
+				"비밀번호 변경 완료(*재접속시 설정되어 있는 자동로그인 기능 해제*)");
+		model.addAttribute("url", 
+				request.getContextPath() + "/member/myPage");
+
+		return "common/resultAlert";
 	}
 
 }

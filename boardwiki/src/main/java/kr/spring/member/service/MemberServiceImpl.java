@@ -99,4 +99,16 @@ public class MemberServiceImpl implements MemberService {
 	public void deleteAu_id(Long mem_num) {
 		memberMapper.deleteAu_id(mem_num);
 	}
+
+	@Override
+	public void updatePassword(MemberVO member) {
+		
+		// 패스워드 암호화
+	    String encryptedPassword = passwordEncoder.encode(member.getMem_passwd());
+	    member.setMem_passwd(encryptedPassword);
+	    
+	    
+		memberMapper.updatePassword(member);
+		
+	}
 }

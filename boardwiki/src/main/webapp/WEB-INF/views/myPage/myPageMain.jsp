@@ -20,6 +20,7 @@
 	<li>이메일 : ${member.mem_email }</li>
 	<li>계정생성일 : ${member.mem_rdate }</li>
 	<li><input type="button" value="회원번호 수정" onclick="location.href='modifyMember'"></li>
+	<li><input type="button" value="비밀번호 변경" onclick="location.href='${pageContext.request.contextPath}/member/changePassword'"></li>
 </ul>
 <br><br><br><br><br>
 <h6 id="schedule"><a href="${pageContext.request.contextPath}/member/calendar">일정</a></h6>

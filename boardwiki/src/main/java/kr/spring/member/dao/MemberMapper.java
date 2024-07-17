@@ -24,6 +24,8 @@ public interface MemberMapper {
 	@Select("SELECT COUNT(*) FROM member JOIN member_detail USING(mem_num) ORDER BY mem_rdate desc")
 	public Integer countAllmember(Map<String,Object> map);
 	public MemberVO selectCheckMemberNickName(String mem_nickName);
+	@Update("UPDATE spmember_detail SET passwd=#{passwd} WHERE mem_num=#{mem_num}")
+	public void updatePassword(MemberVO member);
 	
 	//자동 로그인
 	@Update("UPDATE member_detail SET au_id=#{au_id} WHERE mem_num=#{mem_num}")

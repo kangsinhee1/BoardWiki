@@ -25,6 +25,11 @@
 		<put-attribute name="css" value="/WEB-INF/views/member/memberCSS.jsp"/>
 		<put-attribute name="body" value="/WEB-INF/views/member/memberRegisterChoice.jsp"/>
 	</definition>
+	<definition name="memberChangePassword" extends="myPage">
+		<put-attribute name="title" value="비밀번호 초기화"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/memberChangePassword.jsp"/>
+	</definition>
+	
 </tiles-definitions>
 
 
