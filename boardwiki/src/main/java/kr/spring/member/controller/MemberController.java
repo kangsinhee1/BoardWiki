@@ -123,9 +123,24 @@ public class MemberController {
 				//비밀번호 일치 여부 체크
 				check = passwordEncoder.matches(memberVO.getMem_passwd(), member.getMem_passwd());
 
-				log.debug("<<check : >>" + check);
+				log.debug("<<check:>>" + check);
 			}
 			if(check) {//인증 성공
+
+				// 정지회원 여부 체크
+				if (member.getMem_auth() == 1) {
+					result.reject("noAuthority");
+					log.debug("<<정지회원>>");
+					return formLogin();
+				}
+
+				// 탈퇴회원 여부 체크
+				if (member.getMem_auth() == 0) {
+					result.reject("withdrawnMember");
+					log.debug("<<탈퇴회원>>");
+					return formLogin();
+				}
+
 				//==== 자동로그인 체크 시작====//
 				boolean autoLogin = memberVO.getAuto() != null  && memberVO.getAuto().equals("on");
 
