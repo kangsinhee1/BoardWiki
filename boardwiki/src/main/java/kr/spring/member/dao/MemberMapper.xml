@@ -38,6 +38,7 @@
 	        mem_provider,
 	        mem_nickName
 	    )	
+	    
 	    VALUES (
 	        #{mem_num},
 	        #{mem_name},
