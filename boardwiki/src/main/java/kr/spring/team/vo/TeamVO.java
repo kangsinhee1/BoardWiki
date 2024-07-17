@@ -36,4 +36,6 @@ public class TeamVO {
 
 	private int fav_cnt;			//좋아요 개수
 	private long teaA_status;
+	
+	private String teaA_mdate; // 신청 수정시
 }

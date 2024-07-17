@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.board.vo.BoardVO;
+import kr.spring.chat.service.ChatService;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.team.controller.TeamController;
 import kr.spring.team.service.TeamService;
@@ -36,6 +37,8 @@ import lombok.extern.slf4j.Slf4j;
 public class TeamController {
 	@Autowired
 	private TeamService teamService;
+	@Autowired
+	private ChatService chatService;
 
 	//자바빈(VO) 초기화
 	@ModelAttribute
@@ -430,6 +433,8 @@ public class TeamController {
 			model.addAttribute("list",list);
 			model.addAttribute("page",page.getPage());
 			model.addAttribute("TEAM",teamService.detailTeam(tea_num));
+			model.addAttribute("chaR_num",chatService.selectChatRoom(tea_num).getChaR_num());
+			log.debug("채팅방 번호 가져와! "+chatService.selectChatRoom(tea_num).getChaR_num());
 			return "teamBoardAdmin";
 		}
 
@@ -479,6 +484,7 @@ public class TeamController {
 		model.addAttribute("page",page.getPage());
 		model.addAttribute("TEAM",teamService.detailTeam(tea_num));
 		model.addAttribute("attend",db_apply.getTeaA_attend());
+		model.addAttribute("chaR_num",chatService.selectChatRoom(tea_num).getChaR_num());
 		return "teamBoardUser";
 	}
 	

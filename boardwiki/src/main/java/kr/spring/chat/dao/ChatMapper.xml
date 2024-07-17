@@ -4,11 +4,33 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
 <mapper namespace="kr.spring.chat.dao.ChatMapper"> 
 	
+	<resultMap type="chatRoomVO" id="chatMap">
+	 	<result property ="chatTextVO.chaT_txt" column="chaT_txt"/>
+		<result property ="chatTextVO.chaT_time" column="chaT_time"/>
+		<result property ="chatMemberVO.chaR_name" column="chaR_name"/>
+	 </resultMap>
+
+ 
+ 
+ <sql id="chatSub">
+ 	FROM chat_room r JOIN chat_member m using(chaR_num)
+ 	LEFT OUTER JOIN(SELECT chaR_Num, mem_num, count(*) room_cnt FROM chat_read WHERE mem_num=#{mem_num}
+ 	GROUP BY chaR_num, mem_num) e USING(chaR_num)
+ 	LEFT OUTER JOIN (SELECT chaT_num,
+ 	<![CDATA[
+			REPLACE(REPLACE(REPLACE(chaT_txt,'<','&lt;'),'>','&gt;'),'@{member}@','') chaT_txt,
+	]]>
+	chaT_time,
+	chaT_status,
+	chaR_num
+	FROM chat_text WHERE chaT_num in(SELECT max(chaT_num) chaT_num FROM chat_text GROUP BY chaR_num))
+	USING (chaR_num)
+	WHERE m.mem_num=#{mem_num}
+ </sql>
+
+
+
  </mapper>
-
-
-
-
 
 
 

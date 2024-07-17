@@ -12,6 +12,7 @@ public class TeamApplyVO {
  private long teaA_num;
  private long teaA_status;
  private String teaA_time;
+ private String teaA_mdate;
  private long teaA_attend;
  private String teaA_content;
  private long teaA_auth;

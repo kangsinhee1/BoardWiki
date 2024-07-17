@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.spring.board.service.BoardService;
 import kr.spring.board.vo.BoardReplyVO;
+import kr.spring.chat.service.ChatService;
+import kr.spring.chat.vo.ChatRoomVO;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.team.service.TeamService;
 import kr.spring.team.vo.TeamApplyVO;
@@ -32,6 +34,9 @@ public class TeamAjaxController {
 	@Autowired
 	private TeamService teamService;
 	
+
+	@Autowired
+	private ChatService chatService;
 	/*=====================
 	 * 모임 좋아요 목록
 	 *=====================*/
@@ -267,6 +272,8 @@ public class TeamAjaxController {
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		TeamApplyVO db_applyVO = teamService.getTeamApply(teaA_num);
 		long admin = teamService.detailTeam(db_applyVO.getTea_num()).getMem_num();
+		ChatRoomVO chatRoomVO = chatService.selectChatRoom(db_applyVO.getTea_num());
+		
 		if(user==null) {
 			//로그인이 되지 않은 경우
 			mapJson.put("result", "logout");
@@ -275,6 +282,11 @@ public class TeamAjaxController {
 			mapJson.put("result", "wrongAccess");
 		}else {
 			teamService.updateTeamApplyStatus(teaA_status,teaA_num);
+			if(teaA_status == 2) {
+				chatService.insertChatRoomMemberUser(chatRoomVO.getChaR_num(), chatRoomVO.getChaR_name(), db_applyVO.getMem_num());
+			}else {
+				chatService.deleteChatRoomMemeberUser(db_applyVO.getMem_num(),chatRoomVO.getChaR_num());
+			}
 			mapJson.put("result", "success");
 		}
 		

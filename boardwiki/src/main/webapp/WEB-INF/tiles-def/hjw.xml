@@ -97,6 +97,12 @@
 		<put-attribute name="body" value="/WEB-INF/views/team/teamAttendList.jsp"/>
 	</definition>
 	
+	
+	<definition name="chatDetail" extends="main">
+		<put-attribute name="title" value="모임 출석인원 확인"/>
+		<put-attribute name="css" value="/WEB-INF/views/team/teamCSS.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/chat/chatDetail.jsp"/>
+	</definition>
 </tiles-definitions>
 
 

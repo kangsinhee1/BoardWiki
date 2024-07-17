@@ -21,16 +21,46 @@
 			</tr>
 			<c:forEach var="team" items="${list}">
 				<tr>
+				<c:if test="${team.teaA_status==2}">
 					<td class="align-center">${team.mem_nickname}</td>
 					<td  class="align-center"><a href="#" class="content-link" data-content="${team.teaA_content}">${team.teaA_content}</a></td>
 					<td class="align-center">${fn:substring(team.teaA_time, 0, 10)}</td>
 					 <td class="align-center">
                         <select class="changeStatus2" data-num="${team.teaA_num}">
-                            <option class="status2" value="0" ${team.teaA_status == 0 ? 'selected' : ''}>정지 회원</option>
+                            <option class="status2" value="0" ${team.teaA_status == 0 ? 'selected' : ''}>거부/정지 회원</option>
                             <option class="status2" value="1" ${team.teaA_status == 1 ? 'selected' : ''}>수락 대기회원</option>
                             <option class="status2" value="2" ${team.teaA_status == 2 ? 'selected' : ''}>활동 회원</option>
                         </select>
                     </td>
+				</c:if>
+				</tr>
+			</c:forEach>
+		</table>
+		<div class="align-center">${page}</div>
+	</c:if>
+	<h2 class="align-center">(${tea_name})신청 목록</h2>
+	<c:if test="${count > 0}">
+		<table class="striped-table">
+			<tr>
+				<th>회원 닉네임</th>
+				<th>가입 신청 메시지</th>
+				<th>신청일</th>
+				<th>회원상태</th>
+			</tr>
+			<c:forEach var="team" items="${list}">
+				<tr>
+				<c:if test="${team.teaA_status !=2}">
+					<td class="align-center">${team.mem_nickname}</td>
+					<td  class="align-center"><a href="#" class="content-link" data-content="${team.teaA_content}">${team.teaA_content}</a></td>
+					<td class="align-center">${fn:substring(team.teaA_time, 0, 10)}</td>
+					 <td class="align-center">
+                        <select class="changeStatus2" data-num="${team.teaA_num}">
+                            <option class="status2" value="0" ${team.teaA_status == 0 ? 'selected' : ''}>거부/정지 회원</option>
+                            <option class="status2" value="1" ${team.teaA_status == 1 ? 'selected' : ''}>신청중</option>
+                            <option class="status2" value="2" ${team.teaA_status == 2 ? 'selected' : ''}>활동 회원</option>
+                        </select>
+                    </td>
+				</c:if>
 				</tr>
 			</c:forEach>
 		</table>

@@ -15,7 +15,7 @@
 	                            modelAttribute="teamVO">
 		<ul>
 			<li>
-				<form:label path="tea_name">제목</form:label>
+				<form:label path="tea_name">모임 명</form:label>
 				<form:input path="tea_name" />
 				<form:errors path="tea_name" cssClass="error-color"/>
 			</li>

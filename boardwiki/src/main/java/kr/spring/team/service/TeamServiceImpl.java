@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kr.spring.chat.dao.ChatMapper;
+import kr.spring.chat.vo.ChatMemberVO;
+import kr.spring.chat.vo.ChatRoomVO;
 import kr.spring.team.dao.TeamMapper;
 import kr.spring.team.vo.TeamApplyVO;
 import kr.spring.team.vo.TeamBoardVO;
@@ -20,6 +23,8 @@ import kr.spring.team.vo.TeamVO;
 public class TeamServiceImpl implements TeamService {
 	@Autowired
 	TeamMapper teamMapper;
+	@Autowired
+	ChatMapper chatMapper;
 	
 	@Override
 	public Integer getTeamRowCount(Map<String, Object> map) {
@@ -36,6 +41,14 @@ public class TeamServiceImpl implements TeamService {
 		teamVO.setTea_num(teamMapper.selectTea_num());
 		teamMapper.insertTeam(teamVO);
 		teamMapper.insertTeamApplyByAdmin(teamVO);
+		//채팅방 생성
+		ChatRoomVO chatRoomVO = new ChatRoomVO();
+		chatRoomVO.setChaR_num(chatMapper.selectChatRoomNum());
+		chatRoomVO.setChaR_name(teamVO.getTea_name());
+		chatRoomVO.setTea_num(teamVO.getTea_num());
+		chatMapper.insertChatRoom(chatRoomVO);
+		//채팅멤버 설정 (방장)
+		chatMapper.insertChatRoomMember(chatRoomVO.getChaR_num(),teamVO.getTea_name(), teamVO.getMem_num());
 	}
 
 	@Override
@@ -53,7 +66,7 @@ public class TeamServiceImpl implements TeamService {
 	public void updateTeamHit(Long tea_num) {
 		teamMapper.updateTeamHit(tea_num);
 	}
-
+	
 	@Override
 	public void updateTeamStatus(Long tea_num) {
 		teamMapper.updateTeamStatus(tea_num);

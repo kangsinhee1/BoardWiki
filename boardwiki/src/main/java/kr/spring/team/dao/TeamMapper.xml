@@ -113,14 +113,16 @@
 	 	 tea_num,
 	 	 teaA_auth,
 	 	 teaA_status,
-	 	 mem_num
+	 	 mem_num,
+	 	 teaA_mdate
 	 	)
 	 	VALUES(
 	 	team_apply_seq.nextval,
 	 	#{tea_num},
 	 	9,
 	 	9,
-	 	#{mem_num}
+	 	#{mem_num},
+	 	sysdate
 	 	)
 	 	
 	 </insert>

@@ -29,7 +29,7 @@ public interface TeamMapper {
 		@Select("SELECT * FROM team JOIN member USING(mem_num)LEFT OUTER JOIN member_detail USING(mem_num) WHERE tea_num= #{tea_num}") 
 		public TeamVO detailTeam(long tea_num);
 		//등록
-		public void insertTeam(TeamVO team);
+		public void insertTeam(TeamVO team);  
 		//수정
 		public void updateTeam(TeamVO team);
 		//일정 등록
@@ -76,6 +76,9 @@ public interface TeamMapper {
 		
 		
 		//신청 목록 확인
+		//모임별 활동 회원 목록 확인하기
+		@Select("SELECT mem_num FROM team_apply WHERE tea_num = #{tea_num} AND teaA_status != 1 ||teaA_status != 0")
+		public List<TeamApplyVO> getTeamMemberList(long tea_num);
 		
 		@Select("SELECT count(*) FROM team_apply WHERE tea_num=#{tea_num} AND mem_num=#{mem_num}")
 		public Integer selectTeamApplyList(TeamApplyVO teamApply);
@@ -103,7 +106,7 @@ public interface TeamMapper {
 		@Select("SELECT * FROM team_apply JOIN member_detail USING (mem_num) WHERE tea_num = #{tea_num} AND teaA_status != 9")
 		public List<TeamApplyVO> listTeamApply(TeamApplyVO teamApply);
 		
-		@Update("UPDATE team_apply SET teaA_status=#{teaA_status} WHERE teaA_num = #{teaA_num}")
+		@Update("UPDATE team_apply SET teaA_status=#{teaA_status} , teaA_mdate = sysdate WHERE teaA_num = #{teaA_num}")
 		public void updateTeamApplyStatus(@Param(value="teaA_status")long teaA_status,@Param(value="teaA_num")long teaA_num);
 		
 		@Select("SELECT count(*) FROM team_apply WHERE tea_num = #{tea_num}")

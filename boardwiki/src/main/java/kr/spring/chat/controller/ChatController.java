@@ -2,6 +2,7 @@ package kr.spring.chat.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import kr.spring.chat.service.ChatService;
 import kr.spring.member.service.MemberService;
@@ -20,4 +21,8 @@ public class ChatController {
 	@Autowired
 	private TeamService teamService;
 	
+	@GetMapping("/chat/chatDetail")
+	public  String getChatDetail(long chaR_num) {
+		return "chatDetail"; 
+	}
 }

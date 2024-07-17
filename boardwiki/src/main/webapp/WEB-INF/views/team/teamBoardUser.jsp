@@ -19,10 +19,10 @@
     	</c:if>
     </div>
     <hr>
-    
     <div>
         <a href="myTeam2">내 모임 보기</a>
     </div>
+  	<div><a href="../chat/chatDetail?chaR_num=${chaR_num}">채팅 하기</a></div>
     
     <form action="teamBoardUser" id="search_form" method="get">
                 <input type="hidden" id="tea_num" name="tea_num" value="${tea_num}">
