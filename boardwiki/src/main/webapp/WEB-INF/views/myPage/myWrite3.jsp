@@ -19,7 +19,6 @@
 				<th>좋아요수</th>
 			</tr>
 			<c:forEach var="board" items="${list}">
-				<c:if test="${board.mem_num == member.mem_num}">
 					<tr>
 						<td class="align-center">${board.boa_num}</td>
 						<td class="align-left"><a
@@ -31,7 +30,6 @@
 						<td class="align-center">${board.boa_hit}</td>
 						<td class="align-center">${board.fav_cnt}</td>
 					</tr>
-				</c:if>
 			</c:forEach>
 		</table>
 		<div class="align-center">${page}</div>

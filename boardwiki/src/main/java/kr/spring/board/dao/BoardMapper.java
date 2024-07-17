@@ -17,7 +17,9 @@ import kr.spring.board.vo.BoardVO;
 public interface BoardMapper {
 	//게시글
 	public List<BoardVO> selectList(Map<String,Object> map);
+	public List<BoardVO> selectMyList(Map<String,Object> map);
 	public Integer selectRowCount(Map<String,Object> map);
+	public Integer selectRowmyCount(Map<String,Object> map);
 	public void insertBoard(BoardVO board);
 	@Select("SELECT * FROM board JOIN member USING(mem_num) LEFT OUTER JOIN member_detail USING(mem_num) WHERE boa_num=#{boa_num}")
 	public BoardVO selectBoard(Long boa_num);

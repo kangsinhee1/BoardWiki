@@ -134,7 +134,8 @@ public class MyPageController {
 		map.put("boa_category", boa_category);
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
-		int count = boardService.selectRowCount(map);
+		map.put("mem_num", user.getMem_num());
+		int count = boardService.selectRowmyCount(map);
 
 		PagingUtil page = new PagingUtil(keyfield,keyword,pageNum,count,
 				10,10,"myWrite","&boa_category="+boa_category+"&order="+order);
@@ -145,10 +146,8 @@ public class MyPageController {
 			map.put("start", page.getStartRow());
 			map.put("end", page.getEndRow());
 
-			long mem_num = user.getMem_num();
-			map.put("mem_num", mem_num);
-
-			list = boardService.selectList(map);
+			
+			list = boardService.selectMyList(map);
 		}
 		model.addAttribute("count", count);
 		model.addAttribute("list", list);
@@ -175,10 +174,11 @@ public class MyPageController {
 		map.put("boa_category", boa_category);
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
-		int count = boardService.selectRowCount(map);
+		map.put("mem_num", user.getMem_num());
+		int count = boardService.selectRowmyCount(map);
 
 		PagingUtil page = new PagingUtil(keyfield,keyword,pageNum,count,
-				10,10,"myWrite","&boa_category="+boa_category+"&order="+order);
+				10,10,"myWrite2","&boa_category="+boa_category+"&order="+order);
 		model.addAttribute("page", page.getPage());
 		List<BoardVO> list = null;
 		if(count > 0) {
@@ -186,10 +186,8 @@ public class MyPageController {
 			map.put("start", page.getStartRow());
 			map.put("end", page.getEndRow());
 
-			long mem_num = user.getMem_num();
-			map.put("mem_num", mem_num);
 
-			list = boardService.selectList(map);
+			list = boardService.selectMyList(map);
 		}
 		model.addAttribute("count", count);
 		model.addAttribute("list", list);
@@ -216,10 +214,11 @@ public class MyPageController {
 		map.put("boa_category", boa_category);
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
-		int count = boardService.selectRowCount(map);
+		map.put("mem_num", user.getMem_num());
+		int count = boardService.selectRowmyCount(map);
 
 		PagingUtil page = new PagingUtil(keyfield,keyword,pageNum,count,
-				10,10,"myWrite","&boa_category="+boa_category+"&order="+order);
+				10,10,"myWrite3","&boa_category="+boa_category+"&order="+order);
 		model.addAttribute("page", page.getPage());
 		List<BoardVO> list = null;
 		if(count > 0) {
@@ -227,10 +226,7 @@ public class MyPageController {
 			map.put("start", page.getStartRow());
 			map.put("end", page.getEndRow());
 
-			long mem_num = user.getMem_num();
-			map.put("mem_num", mem_num);
-
-			list = boardService.selectList(map);
+			list = boardService.selectMyList(map);
 		}
 		model.addAttribute("count", count);
 		model.addAttribute("list", list);
@@ -273,21 +269,18 @@ public class MyPageController {
 		map.put("boa_category", boa_category);
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
-
-		int count = boardService.selectRowCount(map);
+		map.put("mem_num", user.getMem_num());
+		int count = boardService.selectRowmyCount(map);
 
 		PagingUtil page = new PagingUtil(keyfield,keyword,pageNum,count,
-				10,10,"list","&boa_category="+boa_category+"&order="+order);
+				10,10,"myQna","&boa_category="+boa_category+"&order="+order);
 		List<BoardVO> list = null;
 		if(count > 0) {
 			map.put("order", order);
 			map.put("start", page.getStartRow());
 			map.put("end", page.getEndRow());
-
-			long mem_num = user.getMem_num();
-			map.put("mem_num", mem_num);
-
-			list = boardService.selectList(map);
+			
+			list = boardService.selectMyList(map);
 		}
 
 		model.addAttribute("count", count);

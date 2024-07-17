@@ -65,6 +65,14 @@
 		FROM board JOIN member USING (mem_num)
 		<include refid="boardSearch"></include>	 
 	 </select>
+	  <select id="selectRowmyCount" parameterType="map"
+									resultType="integer">
+		SELECT
+			COUNT(*)
+		FROM board JOIN member USING (mem_num)
+		<include refid="boardSearch"></include>
+		AND mem_num=#{mem_num} 
+	 </select> 
 	 <!-- 게시판 전체 목록/검색 목록 -->
 	 <select id="selectList" parameterType="map"
 	 							resultType="boardVO">
@@ -92,6 +100,39 @@
 	 		   		 LEFT OUTER JOIN (SELECT COUNT(*) fav_cnt, boa_num FROM board_fav GROUP BY boa_num) USING(boa_num)
 	 		   		 LEFT OUTER JOIN member_detail USING(mem_num)
 	 		   		 <include refid="boardSearch"></include>
+	 		   		 <include refid="boardOrder"></include>
+	 		   		 )a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+	</select>
+	<select id="selectMyList" parameterType="map"
+	 							resultType="boardVO">
+	 	SELECT
+	 	   *
+	 	FROM (SELECT
+	 			a.*,
+	 			rownum rnum
+	 		   FROM (SELECT
+	 		   			 boa_num,
+		                 <![CDATA[
+		                 REPLACE(REPLACE(boa_title,'<','&lt;'),'>','&gt;') boa_title,
+		                 ]]>
+		                 boa_hit,
+		                 filename,
+		                 boa_rdate,
+		                 mem_num,
+		                 mem_email,
+		                 mem_nickname,
+		                 re_cnt,
+		                 fav_cnt
+	 		   		 FROM board
+	 		   		 JOIN member USING(mem_num)
+	 		   		 LEFT OUTER JOIN (SELECT COUNT(*) re_cnt, boa_num FROM board_reply GROUP BY boa_num) USING(boa_num)
+	 		   		 LEFT OUTER JOIN (SELECT COUNT(*) fav_cnt, boa_num FROM board_fav GROUP BY boa_num) USING(boa_num)
+	 		   		 LEFT OUTER JOIN member_detail USING(mem_num)
+	 		   		 <include refid="boardSearch"></include>
+	 		   		 AND mem_num = #{mem_num}
 	 		   		 <include refid="boardOrder"></include>
 	 		   		 )a)
 		<![CDATA[
