@@ -1,6 +1,7 @@
 package kr.spring.board.controller;
 
 import java.io.IOException;
+import java.net.http.HttpClient.Redirect;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.server.reactive.ContextPathCompositeHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -42,95 +44,67 @@ public class BoardController {
 	 *  게시판 글쓰기
 	 *====================*/
 	@GetMapping("/board/write")
-	public String form(HttpServletRequest request,
-			 HttpSession session,
-			 Model model) {
-		MemberVO member =(MemberVO)session.getAttribute("user");
-		if(member== null) {
-			model.addAttribute("message", "로그인후 작성 가능합니다.");
-			model.addAttribute("url", 
-			request.getContextPath()+"/board/list");
-			return "common/resultAlert";
-			
-		}
-		model.addAttribute("member", member);
+	public String form() {
 		return "boardWrite";
 	}
+	//등록 폼에서 전송된 데이터 처리
 	@PostMapping("/board/write")
 	public String submit(@Valid BoardVO boardVO,
-						  BindingResult result,
-						  HttpServletRequest request,
-						  HttpSession session,
-						  Model model) 
-							throws IllegalStateException,
-										IOException{
+			             BindingResult result,
+			             HttpServletRequest request,
+			             HttpSession session,
+			             Model model)
+	                      throws IllegalStateException,
+	                                 IOException{
 		log.debug("<<게시판 글 저장>> : " + boardVO);
-		
+		//유효성 체크 결과 오류가 있으면 폼 호출
 		if(result.hasErrors()) {
-			for(FieldError f : result.getFieldErrors()) {
-				log.debug("에러 필드 : " + f.getField());
-			}
-			log.debug("안됨");
-			return form(request, session, model);
+			return form();
 		}
 		
+		//회원번호 셋팅
 		MemberVO vo = (MemberVO)session.getAttribute("user");
 		boardVO.setMem_num(vo.getMem_num());
-		
-		boardVO.setFilename(FileUtil.createFile(request, boardVO.getUpload()));
+		//파일 업로드
+		boardVO.setFilename(FileUtil.createFile(request, 
+				                      boardVO.getUpload()));
+		//글쓰기
 		boardService.insertBoard(boardVO);
 		
-		model.addAttribute("message","성공적으로 글이 등록되었습니다.");
-		model.addAttribute("url",request.getContextPath()+"/board/list");
-		
-		
+		model.addAttribute("message","성공적으로 글이 등록되었습니다");
+		model.addAttribute("url","/board/list?boa_category=" + boardVO.getBoa_category());
 		return "common/resultAlert";
 	}
-	
-	
 	@GetMapping("/board/write2")
-	public String form2(HttpServletRequest request,
-			 HttpSession session,
-			 Model model) {
-		MemberVO member =(MemberVO)session.getAttribute("user");
-		if(member== null) {
-			model.addAttribute("message", "로그인후 작성 가능합니다.");
-			model.addAttribute("url", 
-			request.getContextPath()+"/board/list");
-			return "common/resultAlert";
-			
-		}
-		model.addAttribute("member", member);
+	public String form2() {
 		return "boardWrite2";
 	}
+	//등록 폼에서 전송된 데이터 처리
 	@PostMapping("/board/write2")
 	public String submit2(@Valid BoardVO boardVO,
-						  BindingResult result,
-						  HttpServletRequest request,
-						  HttpSession session,
-						  Model model) 
-							throws IllegalStateException,
-										IOException{
+			             BindingResult result,
+			             HttpServletRequest request,
+			             HttpSession session,
+			             Model model)
+	                      throws IllegalStateException,
+	                                 IOException{
 		log.debug("<<게시판 글 저장>> : " + boardVO);
-		
+		//유효성 체크 결과 오류가 있으면 폼 호출
 		if(result.hasErrors()) {
-			for(FieldError f : result.getFieldErrors()) {
-				log.debug("에러 필드 : " + f.getField());
-			}
-			log.debug("안됨");
-			return form(request, session, model);
+			return form2();
 		}
 		
+		//회원번호 셋팅
 		MemberVO vo = (MemberVO)session.getAttribute("user");
 		boardVO.setMem_num(vo.getMem_num());
-		
-		boardVO.setFilename(FileUtil.createFile(request, boardVO.getUpload()));
+		//파일 업로드
+		boardVO.setFilename(FileUtil.createFile(request, 
+				                      boardVO.getUpload()));
+		//글쓰기
 		boardService.insertBoard(boardVO);
 		
-		model.addAttribute("message","성공적으로 글이 등록되었습니다.");
-		model.addAttribute("url",request.getContextPath()+"/board/list");
-		
-		
+		model.addAttribute("message","성공적으로 글이 등록되었습니다");
+		model.addAttribute("url","/board/list?boa_category=" + boardVO.getBoa_category());
 		return "common/resultAlert";
 	}
 
