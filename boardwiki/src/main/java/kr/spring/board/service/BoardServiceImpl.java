@@ -108,4 +108,14 @@ public class BoardServiceImpl implements BoardService{
 		boardMapper.deleteReply(boaR_num);
 	}
 
+	@Override
+	public Integer selectRowmyCount(Map<String, Object> map) {
+		return boardMapper.selectRowmyCount(map);
+	}
+
+	@Override
+	public List<BoardVO> selectMyList(Map<String, Object> map) {
+		return boardMapper.selectMyList(map);
+	}
+
 }
