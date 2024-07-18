@@ -115,6 +115,7 @@ public class ChatController {
 				Map<String,Long> map = new HashMap<String,Long>();
 				map.put("chaR_num",chaR_num);
 				map.put("mem_num", user.getMem_num());
+				
 				List<ChatTextVO>list = chatService.selectChatTextDetail(map);
 				mapJson.put("result", "success");
 				mapJson.put("list", list);

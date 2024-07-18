@@ -78,6 +78,7 @@ public class TeamController {
 			map.put("order", order);
 			map.put("start",page.getStartRow());
 			map.put("end",page.getEndRow());
+			map.put("tea_status", 1);
 			list = teamService.selectTeamList(map);
 
 		}
@@ -85,6 +86,36 @@ public class TeamController {
 		model.addAttribute("list",list);
 		model.addAttribute("page",page.getPage());
 		return "teamList";
+	};
+	
+	@GetMapping("/team/teamListAdmin")
+	public String selectListAdmin(
+			@RequestParam(defaultValue="1") int pageNum,
+			@RequestParam(defaultValue="1") int order,
+			String keyfield,String keyword,Model model) {
+
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		
+
+		int count = teamService.getTeamRowCount(map);
+
+		//페이지 처리
+		PagingUtil page = new PagingUtil(keyfield, keyword, pageNum,count,20,10,"teamList","&order="+order);
+		List<TeamVO> list = null;
+		if(count >0) {
+			map.put("order", order);
+			map.put("start",page.getStartRow());
+			map.put("end",page.getEndRow());
+			list = teamService.selectTeamListAdmin(map);
+			log.debug("asdlfk asdlkf ajsdf" + list);
+		}
+		
+		model.addAttribute("count",count);
+		model.addAttribute("list",list);
+		model.addAttribute("page",page.getPage());
+		return "teamListAdmin";
 	};
 	/*=====================
 	 * 모임 게시판 작성

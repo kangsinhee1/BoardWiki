@@ -184,5 +184,14 @@ div#mre_second input{
 }
 
 
-
-
+/*댓글달기 크기 고정*/
+#boaR_content {
+	width: 87%; 
+	height: 100px;
+	resize: none; 
+}
+#mre_content{
+	width: 85%; 
+	height: 100px;
+	resize: none; 
+}
