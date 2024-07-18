@@ -28,8 +28,8 @@
         <div>
             <p id="total_sum_price">총 가격: <span id="total_sum_value">0</span>원</p>
         </div>
-        <form id="addToCart" method="get" action="${pageContext.request.contextPath}/order/order">
-            <input type="button" value="결제하기" onclick="location.href='${pageContext.request.contextPath}/order/order'">
-        </form>
+            <button onclick="location.href='${pageContext.request.contextPath}/order/order?mem_num=${mem_num}'">
+            주문하기
+            </button>
     </div>
 </div>

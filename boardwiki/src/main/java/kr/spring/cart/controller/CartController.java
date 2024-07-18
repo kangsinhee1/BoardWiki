@@ -140,6 +140,7 @@ public class CartController {
 
 	    list = cartService.selectCartList(map);
 	    
+	    model.addAttribute("mem_num", member.getMem_num());
 	    model.addAttribute("list", list);
 
 	    return "cart";
