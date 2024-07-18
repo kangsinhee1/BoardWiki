@@ -94,6 +94,7 @@
  		   use_title = #{use_title},
  		   use_content = #{use_content},
  		   use_price = #{use_price},
+ 		   use_check =#{use_check},
  		   use_mdate = SYSDATE
  		WHERE use_num = #{use_num}
  	</update>
