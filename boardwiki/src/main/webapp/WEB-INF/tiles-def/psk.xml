@@ -33,6 +33,10 @@
 		<put-attribute name="title" value="방송"/>
 		<put-attribute name="body" value="/WEB-INF/views/stream/broadcast-page.jsp"/>
 	</definition>
+	<definition name="attendance" extends="main">
+		<put-attribute name="title" value="출석체크"/>
+		<put-attribute name="body" value="/WEB-INF/views/attendance/attendance.jsp"/>
+	</definition>
 </tiles-definitions>
 
 
