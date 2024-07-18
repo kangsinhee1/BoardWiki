@@ -30,7 +30,6 @@ public interface UsedChatMapper {
 	public UsedChatRoomVO selectUsedChatRoom(@Param(value="mem_num") Long mem_num,@Param(value="use_num") Long use_num);
 	@Select("SELECT * FROM usedChatroom WHERE useC_name LIKE '%'||#{useC_name}||'%' AND use_num =#{use_num}")
 	public UsedChatRoomVO selectUsedChatRoomSeller(@Param(value="useC_name") String useC_name,@Param(value="use_num") Long use_num);
-	@Select("SE")
 	
 	//채팅 메시지 번호 생성
 	@Select("SELECT usedchat_text_seq.nextval FROM dual")
