@@ -2,6 +2,7 @@ $(function(){
 	let rowCount = 10;
 	let currentPage;
 	let count;
+	let admin_reply;
 	/* ========================================================================
 	 * 댓글 목록
 	 * ======================================================================== */
@@ -50,6 +51,7 @@ $(function(){
 					
 					if(item.mem_auth == 9) {
         				output += ' (관리자)';
+        				admin_reply = 'Y';
    					}
        				output += '<br>';
 					
@@ -89,6 +91,7 @@ $(function(){
 					//다음 페이지가 존재
 					$('.paging-button').show();
 				}
+				
 			},
 			error:function(){
 				alert('네트워크 오류');

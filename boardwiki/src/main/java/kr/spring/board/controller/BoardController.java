@@ -165,7 +165,7 @@ public class BoardController {
 		int count = boardService.selectRowCount(map);
 		
 		PagingUtil page = new PagingUtil(keyfield,keyword,pageNum,count,
-							10,10,"list","&boa_category="+boa_category+"&order="+order);
+							10,10,"list2","&boa_category="+boa_category+"&order="+order);
 		List<BoardVO> list = null;
 		if(count > 0) {
 			map.put("order", order);

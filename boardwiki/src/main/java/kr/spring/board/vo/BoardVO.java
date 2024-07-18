@@ -20,7 +20,7 @@ public class BoardVO {
 	@NotBlank
 	private String boa_category;
 	@NotBlank
-	private String boa_title;
+	private String boa_title;	
 	@NotEmpty
 	private String boa_content;
 	private int boa_hit;
@@ -37,5 +37,7 @@ public class BoardVO {
 	private Integer mem_auth;
 	
 	private int re_cnt;				
-	private int fav_cnt;  
+	private int fav_cnt; 
+	
+	private String admin_reply;
 }
