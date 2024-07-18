@@ -39,6 +39,24 @@ public class UsedChatController {
 	@Autowired
 	private MemberService memberService;
 	
+	@GetMapping("/used/useChatSeller")
+	public String accessUseChatSeller(Long use_num, String useC_name, UsedChatRoomVO usedChatRoomVO, HttpSession session, Model model, HttpServletRequest request) {
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		log.debug("<<<<<<<<<<use_num : "+use_num);
+		log.debug("<<<<<<<<<<useC_name : "+useC_name);
+		
+		UsedChatRoomVO alreayUChat = usedChatService.selectUsedChatRoomSeller(useC_name,use_num);
+		log.debug("<<<<<<<<<<<<<vovovoovov"+alreayUChat);
+		Long useC_num = alreayUChat.getUseC_num();
+		
+		model.addAttribute("useC_name",useC_name);
+		model.addAttribute("useC_num",useC_num);
+		model.addAttribute("use_num",use_num);
+		
+		return "useChatSeller";
+	}
+	
+	
 	@GetMapping("/used/useChat")
 	public String accessUseChat(Long use_num, UsedChatRoomVO usedChatRoomVO, HttpSession session, Model model, HttpServletRequest request,
 			@RequestParam(defaultValue="1") int pageNum,
@@ -163,6 +181,7 @@ public class UsedChatController {
 		}		
 		return mapJson;
 	}
+	
 }
 
 

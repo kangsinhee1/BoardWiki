@@ -49,4 +49,9 @@ public class UsedChatServiceImpl implements UsedChatService{
 		return usedChatMapper.selectChatDetail(map);
 	}
 
+	@Override
+	public UsedChatRoomVO selectUsedChatRoomSeller(String useC_name, Long use_num) {
+		return usedChatMapper.selectUsedChatRoomSeller(useC_name, use_num);
+	}
+
 }

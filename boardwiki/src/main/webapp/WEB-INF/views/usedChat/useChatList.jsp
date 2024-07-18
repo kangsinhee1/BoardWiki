@@ -15,7 +15,7 @@
 		<c:forEach var="chat" items="${list}">
 		<tr>
 			<td class="align-center">${chat.useC_num}</td>
-			<td class="align-left"><a href="detail?boa_num=${board.boa_num}">${chat.useC_name}</a></td>
+			<td class="align-left"><a href="${pageContext.request.contextPath}useChatSeller?use_num=${chat.use_num}&useC_name=제너럴충무공,신희">${chat.useC_name}</a></td>
 			<td class="align-center">${chat.useC_date}</td>
 		</tr>
 		</c:forEach>
