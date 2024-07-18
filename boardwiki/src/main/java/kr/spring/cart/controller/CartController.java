@@ -126,8 +126,7 @@ public class CartController {
 	        HttpSession session) throws IllegalStateException, IOException {
 
 	    MemberVO member = (MemberVO) session.getAttribute("user");
-	    
-	    
+
 	    if (member == null) {
 	        return "redirect:/login"; // 세션에 user가 없으면 로그인 페이지로 리다이렉트
 	    }
@@ -145,6 +144,52 @@ public class CartController {
 
 	    return "cart";
 	}
+	
+	/*=========================
+	 * 장바구니 수정
+	 *=========================*/
+	@PostMapping("/cart/cart")
+	@ResponseBody
+	public Map<String, Object> updateCart(@RequestParam Long item_num, @RequestParam Integer item_quantity, HttpSession session) {
+	    Map<String, Object> mapAjax = new HashMap<>();
+
+	    MemberVO member = (MemberVO) session.getAttribute("user");
+
+	    if (member == null) {
+	        mapAjax.put("result", "notloggedin");
+	        return mapAjax;
+	    }
+
+	    CartVO cart = new CartVO();
+	    cart.setMem_num(member.getMem_num());
+	    cart.setItem_num(item_num);
+	    cart.setItem_quantity(item_quantity);
+
+	    ItemVO item = itemService.selectItem(item_num);
+	    if (item == null) {
+	        mapAjax.put("result", "noitem");
+	        return mapAjax;
+	    }
+	    
+	    int db_item = itemService.getterItem(item_num);
+	    
+	    
+		//구매수량 합산(기존 장바구니에 저장된 구매수량 + 새로 입력한 구매수량
+	    item_quantity = cart.getItem_quantity();
+	    
+	    if (db_item < item_quantity) {
+	        mapAjax.put("result", "overquantity");
+	    } else {
+	        cart.setItem_quantity(item_quantity);
+	        cartService.updateCart(cart);
+	        mapAjax.put("result", "success");
+	        mapAjax.put("totalPrice", item.getItem_price() * item_quantity);
+	    }
+
+	    return mapAjax;
+	}
+	
+	
 	/*====================
 	 *  장바구니 품목 삭제
 	 *====================*/

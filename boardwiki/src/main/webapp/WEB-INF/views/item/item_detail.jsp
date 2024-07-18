@@ -33,7 +33,9 @@
                         <input type="hidden" name="user" value="${member.mem_num}" />
                         <div>
                         <label for="quantity">수량:</label>
-                        <input type="number" id="quantity" name="item_quantity" value="1" min="1" max="${item.item_stock}" /><br>
+                        <input type="number" id="quantity" name="item_quantity" 
+                         value="1" min="1" max="${item.item_stock}" />
+                        <br>
                         <button type="button" id="addToCartButton">장바구니에 추가</button>
                         <button onclick="location.href='/cart/cart?mem_num=${member.mem_num}'">장바구니로</button>
                         </div>
