@@ -117,4 +117,9 @@ public class MemberServiceImpl implements MemberService {
 		memberMapper.updateMember_detail(member);
 		
 	}
+
+	@Override
+	public MemberVO findEmail(String mem_name, String mem_phone) {
+		return memberMapper.findEmail(mem_name, mem_phone);
+	}
 }

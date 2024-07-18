@@ -27,7 +27,7 @@
 		</div>
 		<p class="align-center">
 			<a onclick="location.href='sendPassword'">회원가입</a>
-			<a onclick="location.href='sendPassword'">이메일 찾기</a>
+			<a onclick="location.href='memberFindEmail'">이메일 찾기</a>
 			<a onclick="location.href='changePassword'">비밀번호찾기</a>
 		</p>
 			<hr>

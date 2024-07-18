@@ -22,4 +22,7 @@ public interface MemberService {
 	public void updateAu_id(String au_id,Long mem_num);
 	public MemberVO selectAu_id(String au_id);
 	public void deleteAu_id(Long mem_num);
+	
+	//아이디 찾기
+	public MemberVO findEmail(String mem_email, String mem_phone);
 }

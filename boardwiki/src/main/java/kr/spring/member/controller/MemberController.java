@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -501,7 +502,7 @@ public class MemberController {
 
 		return "redirect:/main/main";	
 	}
-	
+
 	/*==============================
 	 * 회원정보 수정
 	 *==============================*/
@@ -512,31 +513,31 @@ public class MemberController {
 		MemberVO memberVO =
 				memberService.selectMember(user.getMem_num());
 		model.addAttribute("memberVO", memberVO);
-		
+
 		return "memberModify";
 	}
 	//수정폼에서 전송된 데이터 처리
 	@PostMapping("/member/memberUpdate")
 	public String submitUpdate(@Valid MemberVO memberVO,
-			                   BindingResult result,
-			                   HttpSession session) {
+			BindingResult result,
+			HttpSession session) {
 		log.debug("<<회원정보 수정>> : " + memberVO);
-		
+
 		//유효성 체크 결과 오류가 있으면 폼 호출
 		if(result.hasErrors()) {
 			return "memberModify";
 		}
-		
+
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		memberVO.setMem_num(user.getMem_num());
-		
+
 		//회원정보 수정
 		memberService.updateMember_detail(memberVO);
-		
+
 		/*
 		 * //세션에 저장된 정보 변경 user.setMem_nickName(memberVO.getMem_nickName());
 		 */		
-		
+
 		return "redirect:/myPage/myPage";
 	}
 	/*==============================
@@ -594,9 +595,9 @@ public class MemberController {
 				memberVO.getMem_num());
 		//폼에서 전송한 현재 비밀번호와 DB에서 읽어온 비밀번호 일치 여부 체크	
 		if (!passwordEncoder.matches(memberVO.getNow_passwd(), db_member.getMem_passwd())) {
-            result.rejectValue("now_passwd", "invalidPassword");
-            return formChangePassword();
-        }
+			result.rejectValue("now_passwd", "invalidPassword");
+			return formChangePassword();
+		}
 
 		//비밀번호 수정
 		memberService.updatePassword(memberVO);
@@ -618,28 +619,28 @@ public class MemberController {
 	//캡챠 이미지 호출
 	@GetMapping("/member/getCaptcha")
 	public String getCaptcha(Model model,HttpSession session) {
-		
+
 		String code = "0"; //키 발급시 0, 캡챠 이미지 비교시 1로 세팅
 		String key_apiURL = "https://openapi.naver.com/v1/captcha/nkey?code=" + code;
-		
+
 		Map<String,String> requestHeaders = 
-				           new HashMap<String,String>();
+				new HashMap<String,String>();
 		requestHeaders.put("X-Naver-Client-Id", "aGoUsn2QY4b5ZsjIvvn_");
 		requestHeaders.put("X-Naver-Client-Secret", "mdnzHOAtxH");
 		String responseBody = CaptchaUtil.get(
-				                key_apiURL, requestHeaders);
+				key_apiURL, requestHeaders);
 		log.debug("<<responseBody>> : " + responseBody);
-		
+
 		JSONObject jObject = new JSONObject(responseBody);
 		try {
 			//https://openapi.naver.com/v1/captcha/nkey 호출로 받은 키값
 			String key = jObject.getString("key");
 			session.setAttribute("captcha_key", key);
-			
+
 			String apiURL = "https://openapi.naver.com/v1/captcha/ncaptcha.bin?key=" + key;
-			
+
 			byte[] reponse_byte = CaptchaUtil.getCaptchaImage(
-					                         apiURL, requestHeaders);
+					apiURL, requestHeaders);
 			model.addAttribute("imageFile", reponse_byte);
 			model.addAttribute("filename", "captcha.jpg");
 		}catch(Exception e) {
@@ -648,4 +649,44 @@ public class MemberController {
 		return "imageView";
 	}
 
+	/*==============================
+	 * 			이메일 찾기
+	 *==============================*/	
+	@GetMapping("/member/memberFindEmail")
+	public String FindEmailForm(Model model) {
+		model.addAttribute("memberVO", new MemberVO());
+		return "memberFindEmail"; //
+	}
+
+	@PostMapping("/member/memberFindEmail")
+	public String processFindEmail(@Valid MemberVO memberVO,
+	                                   BindingResult result, Model model, HttpServletRequest request) {
+	    if (result.hasErrors()) {
+	        // 입력값 유효성 검사 실패 시 처리
+	        model.addAttribute("error", "입력값이 유효하지 않습니다.");
+	        return "findEmailForm"; // 다시 입력 폼으로 이동
+	    }
+
+	    // 이름과 전화번호로 이메일 조회
+	    String mem_name = memberVO.getMem_name();
+	    String mem_phone = memberVO.getMem_phone();
+	    MemberVO foundEmail = memberService.findEmail(mem_name, mem_phone);
+
+	    if (foundEmail != null) {
+	        model.addAttribute("foundEmail", foundEmail.getMem_email());
+	        model.addAttribute("foundProvider", foundEmail.getMem_provider());
+	        return "showEmail"; // 이메일을 보여주는 페이지로 이동
+	    }else {
+	        // 일치하는 정보가 없는 경우 에러 메시지를 모델에 추가하여 resultAlert 화면으로 이동
+	        model.addAttribute("message", "일치하는 정보가 없습니다.");
+	        model.addAttribute("url", request.getContextPath() + "/memberFindEmail");
+	        return "common/resultAlert";
+	    }
+	}
+
+	@GetMapping("/member/showEmail")
+	public String showEmail() {
+	    // 이메일을 보여주는 페이지의 경로를 반환
+	    return "showEmail"; // showEmail.jsp 또는 .html 페이지
+	}
 }
