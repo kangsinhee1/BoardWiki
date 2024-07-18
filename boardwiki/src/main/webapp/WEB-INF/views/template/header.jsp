@@ -39,8 +39,8 @@
 		    공지
 		  </button>
 		  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-		    <a class="dropdown-item" href="${pageContext.request.contextPath}/board/list?boa_category=4">공지</a>
-		    <a class="dropdown-item" href="${pageContext.request.contextPath}/board/list?boa_category=5">QnA</a>
+		    <a class="dropdown-item" href="${pageContext.request.contextPath}/board/list2?boa_category=4">공지</a>
+		    <a class="dropdown-item" href="${pageContext.request.contextPath}/board/list2?boa_category=5">QnA</a>
 		  </div>
 		</div>
 		<div class="dropdown">

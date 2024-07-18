@@ -10,17 +10,18 @@
 <script src="${pageContext.request.contextPath}/js/uploadAdapter.js"></script>
 <div class="page-main">
 	<h2>글 수정</h2>
-	<form:form action="update" id="board_modify"
+	<form:form action="update2" id="board_modify"
 	           enctype="multipart/form-data"
 	                            modelAttribute="boardVO">
 		<form:hidden path="boa_num"/>
 		<ul>
 			<li>
 				<form:label path="boa_category">분류</form:label>
-				<form:select path="boa_category" >
-					<form:option value="1">자유게시판</form:option>
-					<form:option value="2">팁게시판</form:option>
-					<form:option value="3">후기게시판</form:option>
+				<form:select path="boa_category">
+					<c:if test="${user.mem_auth==9}">
+					<form:option value="4">공지사항</form:option>
+					</c:if>
+					<form:option value="5">QnA</form:option>
 					
 				</form:select>
 				<form:errors path="boa_category" cssClass="error-color"/>                             

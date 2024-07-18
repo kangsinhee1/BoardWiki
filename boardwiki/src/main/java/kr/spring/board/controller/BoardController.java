@@ -41,7 +41,7 @@ public class BoardController {
 		return new BoardVO();
 	}
 	/*====================
-	 *  게시판 글쓰기
+	 *  게시판 글쓰기 category 1,2,3
 	 *====================*/
 	@GetMapping("/board/write")
 	public String form() {
@@ -75,6 +75,9 @@ public class BoardController {
 		model.addAttribute("url","/board/list?boa_category=" + boardVO.getBoa_category());
 		return "common/resultAlert";
 	}
+	/*====================
+	 *  게시판 글쓰기 catergory 4,5
+	 *====================*/
 	@GetMapping("/board/write2")
 	public String form2() {
 		return "boardWrite2";
@@ -104,13 +107,13 @@ public class BoardController {
 		boardService.insertBoard(boardVO);
 		
 		model.addAttribute("message","성공적으로 글이 등록되었습니다");
-		model.addAttribute("url","/board/list?boa_category=" + boardVO.getBoa_category());
+		model.addAttribute("url","/board/list2?boa_category=" + boardVO.getBoa_category());
 		return "common/resultAlert";
 	}
 
 	
 	/*====================
-	 *  게시판 목록
+	 *  게시판 목록 category 1,2,3
 	 *====================*/
 	@GetMapping("/board/list")
 	public String getList(
@@ -143,8 +146,43 @@ public class BoardController {
 			
 		return "boardList";
 	}
+	
 	/*====================
-	 *  게시판 글상세
+	 *  게시판 목록 category 4,5
+	 *====================*/
+	@GetMapping("/board/list2")
+	public String getList2(
+				@RequestParam(defaultValue="1") int pageNum,
+				@RequestParam(defaultValue="1") int order,
+				@RequestParam(defaultValue="") String boa_category,
+				String keyfield,String keyword,Model model) {
+		
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("boa_category", boa_category);
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		
+		int count = boardService.selectRowCount(map);
+		
+		PagingUtil page = new PagingUtil(keyfield,keyword,pageNum,count,
+							10,10,"list","&boa_category="+boa_category+"&order="+order);
+		List<BoardVO> list = null;
+		if(count > 0) {
+			map.put("order", order);
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			
+			list = boardService.selectList(map);
+		}
+		
+		model.addAttribute("count", count);
+		model.addAttribute("list", list);
+		model.addAttribute("page", page.getPage());
+			
+		return "boardList2";
+	}
+	/*====================
+	 *  게시판 글상세 category 1,2,3
 	 *====================*/
 	@GetMapping("/board/detail")
 	public ModelAndView process(long boa_num) {
@@ -155,6 +193,19 @@ public class BoardController {
 		BoardVO board = boardService.selectBoard(boa_num);
 		
 		return new ModelAndView("boardView","board",board);
+	}
+	/*====================
+	 *  게시판 글상세 category 4,5
+	 *====================*/
+	@GetMapping("/board/detail2")
+	public ModelAndView process2(long boa_num) {
+		log.debug("<<게시판 글 상세 - boa_num>> : " + boa_num);
+		
+		boardService.updateHit(boa_num);
+		
+		BoardVO board = boardService.selectBoard(boa_num);
+		
+		return new ModelAndView("boardView2","board",board);
 	}
 	//파일 다운로드
 	@GetMapping("/board/file")
@@ -170,7 +221,7 @@ public class BoardController {
 		return "downloadView";
 	}
 	/*====================
-	 *  게시판 글 수정
+	 *  게시판 글 수정 category1,2,3
 	 *====================*/
 	@GetMapping("/board/update")
 	public String formUpdate(long boa_num,Model model) {
@@ -202,9 +253,46 @@ public class BoardController {
 		}
 		
 		model.addAttribute("message", "글 수정 완료!!");
-		model.addAttribute("url", request.getContextPath() + "/board/detail?boa_num="
-														+boardVO.getBoa_num());	
+		model.addAttribute("url","/board/list?boa_category=" + boardVO.getBoa_category());
 		
+		
+		return "common/resultAlert";
+	}
+	
+	/*====================
+	 *  게시판 글 수정 category4,5
+	 *====================*/
+	@GetMapping("/board/update2")
+	public String formUpdate2(long boa_num,Model model) {
+		BoardVO boardVO = boardService.selectBoard(boa_num);
+		model.addAttribute("boardVO", boardVO);
+		
+		return "boardModify2";
+	}
+	@PostMapping("/board/update2")
+	public String submitUpdate2(@Valid BoardVO boardVO,
+							   BindingResult result,
+							   Model model,
+							   HttpServletRequest request) throws IllegalStateException, IOException {
+		log.debug("<<게시판 글 수정>> : " +  boardVO);
+		
+		if(result.hasErrors()) {
+			BoardVO vo = boardService.selectBoard(boardVO.getBoa_num());
+			boardVO.setFilename(vo.getFilename());
+			return "boardModify2";
+		}
+		
+		BoardVO db_board = boardService.selectBoard( boardVO.getBoa_num());
+		boardVO.setFilename(FileUtil.createFile(request, boardVO.getUpload()));
+		
+		boardService.updateBoard(boardVO);
+		
+		if(boardVO.getUpload() != null && !boardVO.getUpload().isEmpty()) {
+			FileUtil.removeFile(request, db_board.getFilename());
+		}
+		
+		model.addAttribute("message", "글 수정 완료!!");
+		model.addAttribute("url","/board/list2?boa_category=" + boardVO.getBoa_category());
 		
 		return "common/resultAlert";
 	}

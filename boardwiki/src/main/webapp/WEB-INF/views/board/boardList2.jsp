@@ -5,18 +5,15 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 <div class="page-main">
 	 <c:choose>
-        <c:when test="${param.boa_category == 1}">
-            <h2>자유게시판</h2>
+        <c:when test="${param.boa_category == 4}">
+            <h2>공지</h2>
         </c:when>
-        <c:when test="${param.boa_category == 2}">
-            <h2>팁게시판</h2>
-        </c:when>
-        <c:when test="${param.boa_category == 3}">
-            <h2>후기게시판</h2>
+        <c:when test="${param.boa_category == 5}">
+            <h2>QnA</h2>
         </c:when>
     </c:choose>
 	<br>
-	<form action="list" id="search_form" method="get">
+	<form action="list2" id="search_form" method="get">
 		<input type="hidden" name="boa_category" value="${param.boa_category}">
 		<ul class="search">
 			<li>
@@ -49,21 +46,16 @@
 				});
 			</script>
 			<c:choose>
-				<c:when test="${param.boa_category == 1}">
-					<c:if test="${!empty user}">
-						<input type="button" value="글쓰기" onclick="location.href='write'">
+	    		<c:when test="${param.boa_category == 4}">
+					<c:if test="${!empty user && user.mem_auth == 9}">
+						<input type="button" value="글쓰기" onclick="location.href='write2'">
 					</c:if>
-	  			</c:when>
-	  			<c:when test="${param.boa_category == 2}">
+	   			</c:when>   
+	   			<c:when test="${param.boa_category == 5}">
 					<c:if test="${!empty user}">
-						<input type="button" value="글쓰기" onclick="location.href='write'">
+						<input type="button" value="글쓰기" onclick="location.href='write2'">
 					</c:if>
-	  			</c:when>
-	  			<c:when test="${param.boa_category == 3}">
-					<c:if test="${!empty user}">
-						<input type="button" value="글쓰기" onclick="location.href='write'">
-					</c:if>
-	  			</c:when>
+	  			</c:when> 
 			</c:choose>
 		</div>
 	</form>
@@ -83,7 +75,7 @@
 		<c:forEach var="board" items="${list}">
 		<tr>
 			<td class="align-center">${board.boa_num}</td>
-			<td class="align-left"><a href="detail?boa_num=${board.boa_num}">${board.boa_title}(${board.re_cnt})</a></td>
+			<td class="align-left"><a href="detail2?boa_num=${board.boa_num}">${board.boa_title}(${board.re_cnt})</a></td>
 			<td class="align-center">
 				<c:if test="${empty board.mem_nickname}">${board.mem_email}</c:if>
 				<c:if test="${!empty board.mem_nickname}">${board.mem_nickname}</c:if>

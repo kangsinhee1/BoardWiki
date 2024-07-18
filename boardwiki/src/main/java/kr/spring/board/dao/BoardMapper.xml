@@ -145,6 +145,7 @@
  		   <if test="filename != null">
  		   filename = #{filename},
  		   </if>
+ 		   boa_category = #{boa_category},
  		   boa_title = #{boa_title},
  		   boa_content = #{boa_content},
  		   boa_mdate = SYSDATE
