@@ -1,8 +1,9 @@
 $(function(){
-	selectMsg();
-/*	------------------------------------
+	let message_socket;
+	connectWebSocket();//웹소켓 생성
+	/*------------------------------------
 		웹소켓 연결
-	------------------------------------
+	------------------------------------*/
 	function connectWebSocket(){
 		message_socket = new WebSocket('ws://localhost:8000/message-ws');//포트 맞추기 (이번경우는 8000)
 		message_socket.onopen=function(evt){
@@ -17,14 +18,14 @@ $(function(){
 			//메시지 읽기
 			let data = evt.data;
 			if($('#talkDetail').length==1 && data.substring(0,3)=='msg'){ // 구별식별자 구하기 위해 substring 사용
-				selectMsg();
 			}
+			selectMsg();
 		};
 		message_socket.onclose=function(evt){
 			//소켓이 종료된 후 부가적인 작성일 있을경우 명시
 			console.log('chat close');
 		}
-	};*/
+	};
 	//채팅 데이터 읽기	
 	function selectMsg(){
 		$.ajax({
@@ -35,7 +36,7 @@ $(function(){
 			success:function(param){
 				if(param.result == 'logout'){
 					alert('로그인 후 사용하세요!');
-					//message_socket.close();
+					message_socket.close();
 				}else if(param.result == 'success'){
 						
 					//메시지 표시 UI 초기화	
@@ -80,7 +81,7 @@ $(function(){
 					});	
 				}else{
 					alert('채팅 메시지 읽기 오류 발생');	
-					//message_socket.close();
+					message_socket.close();
 				}
 			},
 			error:function(){
@@ -114,12 +115,14 @@ $(function(){
 		success:function(param){
 			if(param.result == 'logout'){
 				alert('로그인해야 작성 할 수 있습니다.');
+				message_socket.close();
 			}else if(param.result == 'success'){
 				//폼 초기화
 				$('#message').val('').focus();
-				alert('전송 완료');
+				message_socket.send('msg');
 			}else{
 				alert('채팅메시지 오류 발생');
+				message_socket.close();
 			}
 		},
 		error:function(){
