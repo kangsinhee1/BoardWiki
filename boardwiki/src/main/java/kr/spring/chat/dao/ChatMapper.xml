@@ -27,7 +27,46 @@
 	USING (chaR_num)
 	WHERE m.mem_num=#{mem_num}
  </sql>
-
+ <select id="selectChatRowCount" parameterType="map" resultType="integer">
+ 	SELECT count(*)
+ 	<include refid="chatSub"></include>
+ </select>
+ <select id="selectChatRoomList" parameterType="map" resultMap="chatMap">
+ 	SELECT *FROM (SELECT a.* rownum rnum FROM(SELECT *
+ 	<include refid="chatSub"></include>
+ 	ORDER BY chat_time DESC)a)
+ 	<![CDATA[
+	WHERE rnum >=#{start} AND rnum <=#{end}
+	]]>
+ </select>
+<select id="selectChatMember" parameterType="long" resultType="chatMemberVO">
+	SELECT 	mem_num,
+			mem_email,
+			mem_nickname,
+			basic_name,
+			chaR_num
+			FROM chat_member m
+			JOIN member a USING (mem_num)
+			JOIN member_detail b USING (mem_num)
+			WHERE chaR_num = #{chaR_num}
+</select> 
+	<select id="selectChatTextDetail" parameterType="long" resultType="chatTextVO">
+	SELECT
+	<![CDATA[
+	 	REPLACE(REPLACE(chaT_txt,'<','&lt;'),'>','&gt;') message,
+	 ]]>
+	 chat_time,
+	 read_count,
+	 mem_num,
+	 mem_nickname
+	 FROM chat_text
+	 LEFT OUTER JOIN (select chaT_num, count(*) read_count FROM chat_read GROUP BY chaT_num)
+	 USING (chaT_num)
+	 JOIN member_detail
+	 USING (mem_num)
+	 WHERE chaR_num = #{chaR_num} AND chat_time >= (select member_date FROM chat_member WHERE mem_num=#{mem_num} AND chaR_num = #{chaR_num})
+	ORDER BY chaT_time ASC
+	</select>
 
 
  </mapper>

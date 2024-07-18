@@ -19,7 +19,7 @@ public interface ChatMapper {
 
 		//채팅방 목록
 		public List<ChatRoomVO> selectChatRoomList(Map<String,Object>map);
-		public Integer selectRowCount(Map<String,Object>map);
+		public Integer selectChatRowCount(Map<String,Object>map);
 		//채팅방 정보 불러오기
 		@Select("SELECT  * FROM chat_room WHERE tea_num = #{tea_num}")
 		public ChatRoomVO selectChatRoom(long tea_num);
@@ -40,17 +40,28 @@ public interface ChatMapper {
 		//채팅방 멤버 읽기
 		public List<ChatMemberVO> selectChatMember(Long chaR_num);
 		//채팅 메시지 번호 생성
+		@Select("SELECT chat_text_seq.nextval from dual")
 		public Integer selectChatNum();
 		//채팅 메시지 등록
+		@Insert("INSERT INTO chat_text (chaT_num,chaT_txt,chaR_num,mem_num) VALUES(#{chaT_num},#{message},#{chaR_num},#{mem_num})")
 		public void insertChat(ChatTextVO chatTextVO);
 		//채팅 메시지 읽기
 		public List<ChatTextVO> selectChatTextDetail(Map<String,Long>map);
 		//읽은 채팅 기록 삭제
-		public void deleteChatRead(Map<String,Long>map);
+		@Delete ("DELETE FROM chat_read WHERE mem_num=#{mem_num} AND chaR_num=#{chaR_num}")
+		public void deleteChatReadAdmin(Map<String,Long>map);
 		//채팅 생성시 안읽은 메시지 식별 위한 chat_read생성
+		@Insert("INSERT INTO chat_read (chaR_num,chaT_num,mem_num) VALUES (#{chaR_num},#{chaT_num},#{mem_num})")
 		public void insertChatRead(@Param(value="chaR_num")Long chaR_num,@Param(value="chaT_num")Long chaT_num,@Param(value="mem_num")Long mem_num);
 		//채팅 메시지 한건 불러오기
+		@Select("SELECT * FROM chat_text WHERE chaT_num = #{chaT_num}")
 		public ChatTextVO selectChatText(long chaT_num);
+		
+		
+		@Select("SELECT * FROM chat_room WHERE chaR_num=#{chaR_num}")
+		public ChatRoomVO selectChatRoomBychaRnum(long chaR_num);
+		//신고기능?
+		
 		
 }
 

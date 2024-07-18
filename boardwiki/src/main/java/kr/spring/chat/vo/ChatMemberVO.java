@@ -12,5 +12,6 @@ public class ChatMemberVO {
 	private String chaR_name;// 채팅방 이름
 	private long mem_num; //멤버 회원 번호
 	
+	private String basic_name;
 	private String mem_nickname; //멤버 닉네임
 }

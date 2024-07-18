@@ -25,14 +25,12 @@ public class ChatServiceImpl implements ChatService{
 
 	@Override
 	public List<ChatRoomVO> selectChatRoomList(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+		return chatMapper.selectChatRoomList(map);
 	}
 
 	@Override
 	public Integer selectRowCount(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+		return chatMapper.selectChatRowCount(map);
 	}
 
 
@@ -45,8 +43,7 @@ public class ChatServiceImpl implements ChatService{
 
 	@Override
 	public void insertChatRoomMember(Long chaR_num, String chaR_name, Long mem_num) {
-		// TODO Auto-generated method stub
-		
+		chatMapper.insertChatRoomMember(chaR_num, chaR_name, mem_num);
 	}
 
 	@Override
@@ -62,14 +59,19 @@ public class ChatServiceImpl implements ChatService{
 
 	@Override
 	public void insertChat(ChatTextVO chatTextVO) {
-		// TODO Auto-generated method stub
+		//메시지 생성후 chatread에 뿌리기,멤버 전체에게 
+		chatTextVO.setChaT_num(chatMapper.selectChatNum());
+		chatMapper.insertChat(chatTextVO);
+		for(ChatMemberVO vo : chatMapper.selectChatMember(chatTextVO.getChaR_num())) {
+			chatMapper.insertChatRead(chatTextVO.getChaR_num(),chatTextVO.getChaT_num(),vo.getMem_num());
+		}
 		
 	}
 
 	@Override
 	public List<ChatTextVO> selectChatTextDetail(Map<String, Long> map) {
-		// TODO Auto-generated method stub
-		return null;
+		chatMapper.deleteChatReadAdmin(map);
+		return chatMapper.selectChatTextDetail(map);
 	}
 
 	@Override
@@ -77,17 +79,19 @@ public class ChatServiceImpl implements ChatService{
 		// TODO Auto-generated method stub
 		
 	}
+	@Override
+	public void deleteChatReadAdmin(Map<String, Long> map) {
+		chatMapper.deleteChatReadAdmin(map);
+	}
 
 	@Override
 	public void insertChatRead(Long chaR_num, Long chaT_num, Long mem_num) {
-		// TODO Auto-generated method stub
-		
+		chatMapper.insertChatRead(chaR_num, chaT_num, mem_num);
 	}
 
 	@Override
 	public ChatTextVO selectChatText(long chaT_num) {
-		// TODO Auto-generated method stub
-		return null;
+		return chatMapper.selectChatText(chaT_num);
 	}
 
 	@Override
@@ -103,8 +107,15 @@ public class ChatServiceImpl implements ChatService{
 	@Override
 	public Integer selectChatRoomNum() {
 		// TODO Auto-generated method stub
-		return null;
+		return null;	
 	}
+
+	@Override
+	public ChatRoomVO selectChatRoomBychaRnum(long chaR_num) {
+		return chatMapper.selectChatRoomBychaRnum(chaR_num);
+	}
+
+
 
 	
 }

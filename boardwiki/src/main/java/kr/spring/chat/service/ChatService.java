@@ -41,10 +41,12 @@ public interface ChatService {
 			public List<ChatTextVO> selectChatTextDetail(Map<String,Long>map);
 			//읽은 채팅 기록 삭제
 			public void deleteChatRead(Map<String,Long>map);
+			public void deleteChatReadAdmin(Map<String,Long>map);
 			//채팅 생성시 안읽은 메시지 식별 위한 chat_read생성
 			public void insertChatRead(@Param(value="chaR_num")Long chaR_num,@Param(value="chaT_num")Long chaT_num,@Param(value="mem_num")Long mem_num);
 			//채팅 메시지 한건 불러오기
 			public ChatTextVO selectChatText(long chaT_num);
+			public ChatRoomVO selectChatRoomBychaRnum(long chaR_num);
 			
 
 }

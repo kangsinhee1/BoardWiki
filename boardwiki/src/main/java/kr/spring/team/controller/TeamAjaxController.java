@@ -273,7 +273,10 @@ public class TeamAjaxController {
 		TeamApplyVO db_applyVO = teamService.getTeamApply(teaA_num);
 		long admin = teamService.detailTeam(db_applyVO.getTea_num()).getMem_num();
 		ChatRoomVO chatRoomVO = chatService.selectChatRoom(db_applyVO.getTea_num());
+		Map<String,Long> chatread = new HashMap<String,Long>();
 		
+		chatread.put("mem_num", db_applyVO.getMem_num());
+		chatread.put("chaR_num", chatRoomVO.getChaR_num());
 		if(user==null) {
 			//로그인이 되지 않은 경우
 			mapJson.put("result", "logout");
@@ -284,8 +287,10 @@ public class TeamAjaxController {
 			teamService.updateTeamApplyStatus(teaA_status,teaA_num);
 			if(teaA_status == 2) {
 				chatService.insertChatRoomMemberUser(chatRoomVO.getChaR_num(), chatRoomVO.getChaR_name(), db_applyVO.getMem_num());
+				
 			}else {
 				chatService.deleteChatRoomMemeberUser(db_applyVO.getMem_num(),chatRoomVO.getChaR_num());
+				chatService.deleteChatRead(chatread);
 			}
 			mapJson.put("result", "success");
 		}
