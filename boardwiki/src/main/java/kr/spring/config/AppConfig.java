@@ -122,6 +122,7 @@ public class AppConfig implements WebMvcConfigurer,WebSocketConfigurer{
 	}
 	
 	
+	
 	@Override
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
 		registry.addHandler(new SocketHandler(), "message-ws").setAllowedOrigins("*");
