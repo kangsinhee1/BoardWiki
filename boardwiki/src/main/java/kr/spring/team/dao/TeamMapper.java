@@ -24,6 +24,7 @@ public interface TeamMapper {
 		//목록보기
 		public Integer getTeamRowCount(Map<String,Object>map);
 		
+		public List<TeamVO> selectTeamListAdmin(Map<String,Object>map);
 		public List<TeamVO> selectTeamList(Map<String,Object>map);
 		//모임 상세
 		@Select("SELECT * FROM team JOIN member USING(mem_num)LEFT OUTER JOIN member_detail USING(mem_num) WHERE tea_num= #{tea_num}") 
@@ -41,7 +42,6 @@ public interface TeamMapper {
 		//비활성화
 		@Update("UPDATE team SET tea_status = 0 WHERE tea_num = #{tea_num}")
 		public void updateTeamStatus(Long tea_num);
-		
 		
 		//모임 좋아요 확인
 		@Select("SELECT * FROM team_fav WHERE mem_num=#{mem_num} AND tea_num=#{tea_num}")

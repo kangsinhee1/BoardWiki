@@ -18,6 +18,7 @@ public interface TeamService {
 			//목록보기
 			public Integer getTeamRowCount(Map<String,Object>map);
 			public List<TeamVO> selectTeamList(Map<String,Object>map);
+			public List<TeamVO> selectTeamListAdmin(Map<String,Object>map);
 			//상세
 			public TeamVO detailTeam(long tea_num);
 			//등록

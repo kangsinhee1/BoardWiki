@@ -267,4 +267,9 @@ public class TeamServiceImpl implements TeamService {
 		return teamMapper.getTeamApply(teaA_num);
 	}
 
+	@Override
+	public List<TeamVO> selectTeamListAdmin(Map<String, Object> map) {
+		return teamMapper.selectTeamListAdmin(map);
+	}
+
 }
