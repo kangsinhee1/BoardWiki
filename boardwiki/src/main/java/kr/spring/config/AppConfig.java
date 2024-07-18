@@ -1,7 +1,10 @@
 package kr.spring.config;
 
+import java.util.Properties;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -98,6 +101,26 @@ public class AppConfig implements WebMvcConfigurer,WebSocketConfigurer{
 			return PasswordEncoderFactories.createDelegatingPasswordEncoder();
 		}
 	}
+	
+	@Bean
+	public JavaMailSenderImpl javaMailSenderImpl() {
+		Properties prop = new Properties();
+		prop.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+		prop.put("mail.smtp.starttls.enable", "true");
+		prop.put("mail.transport.protocol", "smtp");
+		prop.put("mail.smtp.auth", "true");
+		prop.put("mail.debug", "true");
+
+		JavaMailSenderImpl javaMail = new JavaMailSenderImpl();
+		javaMail.setHost("smtp.gmail.com");
+		javaMail.setPort(587);
+		javaMail.setDefaultEncoding("utf-8");
+		javaMail.setUsername("tlsgmldi0809@gmail.com");
+		javaMail.setPassword("hkcr nmzh lsem gsnt");
+		javaMail.setJavaMailProperties(prop);
+		return javaMail;
+	}
+	
 	
 	@Override
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {

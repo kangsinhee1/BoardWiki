@@ -43,9 +43,12 @@
 		<put-attribute name="css" value="/WEB-INF/views/member/memberCSS.jsp"/>
 		<put-attribute name="body" value="/WEB-INF/views/member/memberShowEmail.jsp"/>
 	</definition>
-	
+	<definition name="checkResetCode" extends="main">
+		<put-attribute name="title" value="비밀번호 찾기"/>
+		<put-attribute name="css" value="/WEB-INF/views/member/memberCSS.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/memberCheckResetCode.jsp"/>
+	</definition>
 </tiles-definitions>
-
 
 
 

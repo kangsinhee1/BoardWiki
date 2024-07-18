@@ -689,4 +689,13 @@ public class MemberController {
 	    // 이메일을 보여주는 페이지의 경로를 반환
 	    return "showEmail"; // showEmail.jsp 또는 .html 페이지
 	}
+	
+	
+	/*==============================
+	 * 	   비밀번호 초기화 이메일 발송 처리
+	 *==============================*/	
+	@GetMapping("/member/sendResetCode")
+	public String sendResetCodeForm() {
+		return "checkResetCode";
+	}
 }
