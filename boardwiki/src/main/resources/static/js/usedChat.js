@@ -1,16 +1,14 @@
 $(function(){
 	$('#chaC_txt').focus();
 	let message_socket;	//웹소캣 식별자
-	selectMsg();
-	connectWebSocket();
 	/*------------------------------------
 		웹소켓 연결
 	------------------------------------*/
 	function connectWebSocket(){
 		message_socket = new WebSocket('ws://localhost:8000/message-ws');//포트 맞추기 (이번경우는 8000)
 		message_socket.onopen=function(evt){
-			console.log('채팅 페이지 접속' + $('#talkDetail').length);
-			if($('#talkDetail').length ==1){
+			console.log('채팅 페이지 접속' + $('#usedChat').length);
+			if($('#usedChat').length ==1){
 				message_socket.send('msg'); //message_socket.send("msg:안녕하세요"); 데이터 베이스 안쓸경우 원하는 메시지 모두에게 전송, 
 											//이후 구별위한 용도(ex) msg:1, msg:2 (관리자용, 회원용 등)
 			}
@@ -19,7 +17,7 @@ $(function(){
 		message_socket.onmessage=function(evt){
 			//메시지 읽기
 			let data = evt.data;
-			if($('#talkDetail').length==1 && data.substring(0,3)=='msg'){ // 구별식별자 구하기 위해 substring 사용
+			if($('#usedChat').length==1 && data.substring(0,3)=='msg'){ // 구별식별자 구하기 위해 substring 사용
 				selectMsg();
 			}
 		};
@@ -28,6 +26,7 @@ $(function(){
 			console.log('chat close');
 		}
 	};
+	connectWebSocket();
 	/*================
 	*	채팅하기
 	*=================*/
@@ -61,8 +60,7 @@ $(function(){
 					//폼초기화
 					$('#chaC_txt').val('').focus();
 					console.log(form_data);
-					selectMsg();
-					history.go(0);
+					message_socket.send('msg');
 				}else{
 					alert('채팅 메시지 등록 오류발생');
 				}
