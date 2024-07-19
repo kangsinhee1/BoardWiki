@@ -18,7 +18,8 @@
         </div>
         <div class="header-social d-flex justify-content-end">
             <p>Follow us:</p>
-            <a href="#"><i class="fa fa-pinterest"></i></a>
+            <a href="${pageContext.request.contextPath}/myPage/myPage">MyPage</a>
+            <!-- <a href="#"><i class="fa fa-pinterest"></i></a> -->
             <a href="#"><i class="fa fa-facebook"></i></a>
             <a href="#"><i class="fa fa-twitter"></i></a>
             <a href="#"><i class="fa fa-dribbble"></i></a>
