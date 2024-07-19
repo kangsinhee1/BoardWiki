@@ -195,18 +195,19 @@ public class CartController {
 	 *  장바구니 품목 삭제
 	 *====================*/
 	@GetMapping("/cart/delete")
-	public String smallDelete(Long mem_num,Long item_num,
-			                  HttpServletRequest request) {
-		log.debug("<<장바구니 품목 삭제 -- item_num,mem_num>>"+ item_num + mem_num);
-		
-		CartVO cart = new CartVO();
-		
-		cart.setMem_num(mem_num);
-		cart.setItem_num(item_num);
-		
-		cartService.deleteSmallCart(cart);
-		
-		return "redirect:/cart/cart";
+	@ResponseBody
+	public Map<String, String> smallDelete(Long mem_num, Long item_num) {
+	    log.debug("<<장바구니 품목 삭제 -- item_num,mem_num>>" + item_num + mem_num);
+	    
+	    CartVO cart = new CartVO();
+	    cart.setMem_num(mem_num);
+	    cart.setItem_num(item_num);
+	    
+	    cartService.deleteSmallCart(cart);
+	    
+	    Map<String, String> result = new HashMap<>();
+	    result.put("status", "success");
+	    return result;
 	}
 }
 

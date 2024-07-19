@@ -23,7 +23,7 @@
             </select>
             <p id="total_price_${cart.item_num}" class="total-price">${cart.item_quantity * cart.item_price}원</p>
         </div>
-        <button id="deleteX">제거</button>
+        <button class="deleteX" data-item-num="${cart.item_num}" data-mem-num="${cart.mem_num}">제거</button>
         </c:forEach>
         <div>
             <p id="total_sum_price">총 가격: <span id="total_sum_value">0</span>원</p>
