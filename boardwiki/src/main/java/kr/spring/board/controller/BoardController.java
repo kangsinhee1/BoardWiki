@@ -198,11 +198,11 @@ public class BoardController {
 	 *  게시판 글상세 category 4,5
 	 *====================*/
 	@GetMapping("/board/detail2")
-	public ModelAndView process2(long boa_num) {
+	public ModelAndView process2(BoardVO admin_reply,long boa_num) {
 		log.debug("<<게시판 글 상세 - boa_num>> : " + boa_num);
 		
 		boardService.updateHit(boa_num);
-		
+		log.debug("<<<<<<<admin_reply>> : " + admin_reply.getAdmin_reply());
 		BoardVO board = boardService.selectBoard(boa_num);
 		
 		return new ModelAndView("boardView2","board",board);

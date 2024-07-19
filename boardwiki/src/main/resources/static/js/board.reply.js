@@ -2,7 +2,6 @@ $(function(){
 	let rowCount = 10;
 	let currentPage;
 	let count;
-	let admin_reply;
 	/* ========================================================================
 	 * 댓글 목록
 	 * ======================================================================== */
@@ -51,7 +50,6 @@ $(function(){
 					
 					if(item.mem_auth == 9) {
         				output += ' (관리자)';
-        				admin_reply = 'Y';
    					}
        				output += '<br>';
 					

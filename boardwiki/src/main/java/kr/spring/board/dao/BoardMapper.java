@@ -42,6 +42,10 @@ public interface BoardMapper {
 	public void deleteFav(BoardFavVO fav);
 	@Delete("DELETE FROM board_fav WHERE boa_num=#{boa_num}")
 	public void deleteFavByBoardNum(Long boa_num);
+	//관리자 댓글
+	@Select("SELECT COUNT(*) FROM board JOIN (SELECT * FROM board_reply JOIN member USING (mem_num)) USING (boa_num) WHERE boa_num=#{boa_num} AND mem_auth=9 AND boa_category=5")
+	public Integer selectAdminReply(Long boa_num);
+	
 	
 	//댓글
 	public List<BoardReplyVO> selectListReply(Map<String,Object> map);

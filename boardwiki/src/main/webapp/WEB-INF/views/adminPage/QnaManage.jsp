@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>   
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>  
 <h3>질문글 관리</h3>
 <c:if test="${count==0}">
 	<div class="result-display">표시할 게시물이 없습니다.</div>
@@ -27,16 +28,41 @@
 			<td class="align-center">${board.boa_rdate}</td>
 			<td class="align-center">${board.boa_hit}</td>
 			<td class="align-center">${board.fav_cnt}</td>
-				<td class="align-center">
-					<c:if test="${board.admin_reply == 'Y'}">
-						<span style="color: green;">답변 완료</span>
-					</c:if>
-					<c:if test="${board.admin_reply != 'Y'}">
-						<span style="color: red;">미답변</span>
-					</c:if>
+				<td class="align-center" id="answer-${board.boa_num}">
 				</td>
 			</tr>
+			<script>
+			$(document).ready(function() {
+					$.ajax({
+						url : '/adminPage/QnaManage2',
+						dataType : 'json',
+						data : {
+							boa_num : '${board.boa_num}'
+						},
+						type : 'get',
+						success : function(param) {
+							if (param.result == 'true') {
+								$('#answer-${board.boa_num}').text('답변 완료').addClass('answered');
+							} else if (param.result == 'false') {
+								$('#answer-${board.boa_num}').text('미답변').addClass('unanswered');
+							} else {
+								alert('오류발생');
+							}
+						},
+						error : function() {
+							
+						}
+				
+				});
+					
+			});
+		</script>
 		</c:forEach>
 	</table>
+	
+	
+	
+	
+		
 	<div class="align-center">${page}</div>
 </c:if>

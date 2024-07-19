@@ -118,4 +118,10 @@ public class BoardServiceImpl implements BoardService{
 		return boardMapper.selectMyList(map);
 	}
 
+	@Override
+	public Integer selectAdminReply(Long boa_num) {
+		return boardMapper.selectAdminReply(boa_num);
+	}
+
+
 }

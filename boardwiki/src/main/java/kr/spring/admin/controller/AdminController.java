@@ -6,13 +6,14 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.spring.board.service.BoardService;
 import kr.spring.board.vo.BoardVO;
@@ -324,7 +325,7 @@ public class AdminController {
 	map.put("boa_category", boa_category);
 	map.put("keyfield", keyfield);
 	map.put("keyword", keyword);
-	log.debug("<<admin_reply>> : " + admin_reply.getAdmin_reply());
+	log.debug("<<<<admin_reply>> : " + admin_reply.getAdmin_reply());
 	int count = boardService.selectRowCount(map);
 	
 	PagingUtil page = new PagingUtil(keyfield,keyword,pageNum,count,
@@ -344,6 +345,23 @@ public class AdminController {
 	
 		
 	return "QnaManage";
+	}
+	
+	@GetMapping("/adminPage/QnaManage2")
+	@ResponseBody
+	public Map<String,Object> getList3(long boa_num) {
+		Map<String,Object> map = new HashMap<String, Object>();
+		log.debug("<<관리자답변>> : " + boa_num);
+		List<BoardVO> list = null;
+		int reply = boardService.selectAdminReply(boa_num);
+		
+		if(reply!=0) {
+			map.put("result", "true");
+		}else{
+			map.put("result", "false");
+		}
+		
+	return map;
 	}
 	/*=========================
 	 * 관리자 대여 목록 조회

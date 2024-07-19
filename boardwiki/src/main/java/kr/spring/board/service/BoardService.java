@@ -28,6 +28,7 @@ public interface BoardService {
 	public List<BoardReplyVO> selectListReply(Map<String,Object> map);
 	public Integer selectRowCountReply(Map<String,Object> map);
 	public BoardReplyVO selectReply(Long boaR_num);
+	public Integer selectAdminReply(Long boa_num);
 	public void insertReply(BoardReplyVO boardReply);
 	public void updateReply(BoardReplyVO boardReply);
 	public void deleteReply(Long boaR_num);
