@@ -4,8 +4,26 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <!-- 회원로그인 시작 -->
+
+		<!-- Page top section -->
+	<section class="page-top-section set-bg" data-setbg="/img/page-top-bg/4.jpg">
+		<div class="page-info">
+			<h2>Contact</h2>
+			<div class="site-breadcrumb">
+				<a href="">Home</a>  /
+				<span>Contact</span>
+			</div>
+		</div>
+	</section>
+	<!-- Page top end-->
+
+
+	<section class="contact-page">
+		<div class="container">
+		<div class="align-center">
 <div class="page-main">
-	<h2>회원로그인</h2>
+	
+
 	<form:form action="login" id="member_login" modelAttribute="memberVO">
 		<form:errors element="div" cssClass="error-color" />
 		<ul>
@@ -26,9 +44,9 @@
 			<form:button class="login-btn">로그인</form:button>
 		</div>
 		<p class="align-center">
-			<a onclick="location.href='sendPassword'">회원가입</a>
-			<a onclick="location.href='memberFindEmail'">이메일 찾기</a>
-			<a onclick="location.href='sendResetCode'">비밀번호찾기</a>
+			<a onclick="location.href='sendPassword'">회원가입 | </a>
+			<a onclick="location.href='sendPassword'">이메일 찾기 | </a>
+			<a onclick="location.href='changePassword'">비밀번호찾기</a>
 		</p>
 			<hr>
 			<div class="button_group">
@@ -50,7 +68,13 @@
 				</div>
 			</div>
 	</form:form>
+	
 </div>
+</div>
+</div>
+
+</section>
+
 <!-- 회원로그인 끝 -->
 
 

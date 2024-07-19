@@ -1,5 +1,5 @@
 @charset "UTF-8";
-.dropdown{
+/* .dropdown{
 	display : inline-block;
 	margin : 10px;
 }
@@ -11,6 +11,32 @@
 	margin: 50px 0;
 	
 	text-align: center;
+} */
+
+ .align-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }
 
+.search-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
 
+.form-inline {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-inline .form-control {
+    margin-right: 10px;
+}
+
+.form-inline .btn {
+    margin-left: 10px;
+}

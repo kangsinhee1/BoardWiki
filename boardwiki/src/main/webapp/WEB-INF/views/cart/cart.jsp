@@ -3,6 +3,17 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <script src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/cart.js"></script>
+<!-- Page top section -->
+<section class="page-top-section set-bg" data-setbg="/img/page-top-bg/4.jpg">
+	<div class="page-info">
+		<h2>장바구니</h2>
+		<div class="site-breadcrumb">
+			<a href="">Home</a> /
+			<span>Cart</span>
+		</div>
+	</div>
+</section>
+<!-- Page top end-->
 <div class="page-main">
     <h2>장바구니</h2>
     <div class="text-box">

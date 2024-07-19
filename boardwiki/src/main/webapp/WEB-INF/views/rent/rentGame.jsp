@@ -2,10 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+
 
 <script>
 $(function() {
@@ -13,71 +11,89 @@ $(function() {
     var today = new Date();
     today.setHours(0, 0, 0, 0); // 시간을 0으로 설정하여 날짜만 비교
 
-    $("#rent_sdate").datepicker({
-        dateFormat: 'yy-mm-dd',
-        minDate: today, // 오늘 이후의 날짜만 선택 가능하도록 설정합니다.
-        onSelect: function(dateText, inst) {
-            var startDate = new Date(dateText);
-            var endDate = new Date(startDate.getTime() + (9 * 24 * 60 * 60 * 1000)); // 9일 후의 날짜 설정
-            $("#rent_edate").datepicker("option", "minDate", startDate);
-            $("#rent_edate").datepicker("option", "maxDate", endDate);
-            calculateEndDate();
-        }
+    // 공통 설정
+    var datepickerOptions = {
+        format: 'yyyy-mm-dd',
+        startDate: today,
+        autoclose: true,
+        language: 'ko'
+    };
+
+
+    $('#rent_sdate').datepicker(datepickerOptions).on('changeDate', function(e) {
+        var startDate = e.date;
+        var endDate = new Date(startDate.getTime() + (9 * 24 * 60 * 60 * 1000)); // 9일 후의 날짜 설정
+        $('#rent_edate').datepicker('setStartDate', startDate);
+        $('#rent_edate').datepicker('setEndDate', endDate);
+        calculateEndDate();
     });
 
-    $("#rent_sdate").on("change", function() {
+    $('#rent_sdate').on('change', function() {
         validateStartDate();
     });
 
-    $("#rent_period").on("input", function() {
+    $('#rent_period').on('input', function() {
         calculateEndDate();
     });
 
     function calculateEndDate() {
-        var startDate = $("#rent_sdate").datepicker("getDate");
-        var period = parseInt($("#rent_period").val(), 10);
+        var startDate = $('#rent_sdate').datepicker('getDate');
+        var period = parseInt($('#rent_period').val(), 10);
         if (startDate && !isNaN(period)) {
             var endDate = new Date(startDate.getTime() + ((period - 1) * 24 * 60 * 60 * 1000)); // 대여 기간만큼의 날짜 계산
-            $("#rent_edate").datepicker("setDate", endDate);
+            $('#rent_edate').datepicker('setDate', endDate);
         }
     }
 
     function validateStartDate() {
-        var startDate = $("#rent_sdate").datepicker("getDate");
+        var startDate = $('#rent_sdate').datepicker('getDate');
         if (startDate && startDate < today) {
-            alert("오늘 날짜 이후의 날짜를 선택해주세요.");
-            $("#rent_sdate").val('');
-            $("#rent_edate").val('');
-            $("#rent_period").val('');
+            alert('오늘 날짜 이후의 날짜를 선택해주세요.');
+            $('#rent_sdate').val('');
+            $('#rent_edate').val('');
+            $('#rent_period').val('');
         }
     }
 
-    $("#rent_edate").datepicker({
-        dateFormat: 'yy-mm-dd',
-        onSelect: function(dateText, inst) {
-            var startDate = $("#rent_sdate").datepicker("getDate");
-            var endDate = new Date(dateText);
-            var days = Math.floor((endDate - startDate) / (1000 * 60 * 60 * 24)) + 1; // 대여 기간 계산
-            $("#rent_period").val(days);
-        }
+    $('#rent_edate').datepicker(datepickerOptions).on('changeDate', function(e) {
+        var startDate = $('#rent_sdate').datepicker('getDate');
+        var endDate = e.date;
+        var days = Math.floor((endDate - startDate) / (1000 * 60 * 60 * 24)) + 1; // 대여 기간 계산
+        $('#rent_period').val(days);
     });
 
-    $("#rent_edate").on("change", function() {
+    $('#rent_edate').on('change', function() {
         validateEndDate();
     });
 
     function validateEndDate() {
-        var startDate = $("#rent_sdate").datepicker("getDate");
-        var endDate = $("#rent_edate").datepicker("getDate");
+        var startDate = $('#rent_sdate').datepicker('getDate');
+        var endDate = $('#rent_edate').datepicker('getDate');
         if (startDate && endDate && endDate < startDate) {
-            alert("종료일은 시작일 이후의 날짜여야 합니다.");
-            $("#rent_edate").val('');
-            $("#rent_period").val('');
+            alert('종료일은 시작일 이후의 날짜여야 합니다.');
+            $('#rent_edate').val('');
+            $('#rent_period').val('');
         }
     }
 });
 </script>
 
+<!-- Page top section -->
+	<section class="page-top-section set-bg" data-setbg="/img/page-top-bg/4.jpg">
+		<div class="page-info">
+			<h2>대여 목록</h2>
+			<div class="site-breadcrumb">
+				<a href="">Home</a>  /
+				<span>Contact</span>
+			</div>
+		</div>
+	</section>
+	<!-- Page top end-->
+
+<section class="blog-page">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
 <div class="page-main">
     <div class="form-container">
         <h2>보드게임 대여</h2>
@@ -85,12 +101,12 @@ $(function() {
             <form:hidden path="item_num"/>
             <div class="form-group">
                 <form:label path="rent_sdate">대여 시작일:</form:label>
-                <form:input path="rent_sdate" id="rent_sdate"/>
+                <form:input path="rent_sdate" id="rent_sdate" data-provide="datepicker"/>
                 <form:errors path="rent_sdate" cssClass="error-color"/>
             </div>
             <div class="form-group">
                 <form:label path="rent_edate">대여 종료일:</form:label>
-                <form:input path="rent_edate" id="rent_edate"/>
+                <form:input path="rent_edate" id="rent_edate" data-provide="datepicker"/>
                 <form:errors path="rent_edate" cssClass="error-color"/>
             </div>
             <div class="form-group">
@@ -104,5 +120,8 @@ $(function() {
         </form:form>
     </div>
 </div>
+</div>
+</div>
+</div>
+</section>
 
-<!-- 보드게임 대여 끝 -->

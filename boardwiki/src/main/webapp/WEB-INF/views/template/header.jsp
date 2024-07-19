@@ -1,8 +1,88 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<link rel="stylesheet" href="/css/main.css" type="text/css"/>
+
+<!-- Header section -->
+<header class="header-section">
+    <div class="header-warp">
+        <div class="align-center">
+            <div class="search-bar">
+                <form class="form-inline" action="mainList" method="get">
+                    <a class="navbar-brand"></a>
+                    <input id="main_search" class="form-control mr-sm-2" style="width: 500px;" type="search"
+                           placeholder="Search" aria-label="Search" name="keyword1" id="keyword1" value="${param.keyword1}">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+        <div class="header-social d-flex justify-content-end">
+            <p>Follow us:</p>
+            <a href="#"><i class="fa fa-pinterest"></i></a>
+            <a href="#"><i class="fa fa-facebook"></i></a>
+            <a href="#"><i class="fa fa-twitter"></i></a>
+            <a href="#"><i class="fa fa-dribbble"></i></a>
+            <a href="#"><i class="fa fa-behance"></i></a>
+        </div>
+        <div class="header-bar-warp d-flex">
+            <a href="${pageContext.request.contextPath}/main/main" class="site-logo">
+                <img src="/img/logo.png" alt="">
+            </a>
+            <nav class="top-nav-area w-100">
+                <div class="user-panel">
+                    <a href="${pageContext.request.contextPath}/member/login">Login</a> / <a href="${pageContext.request.contextPath}/member/memberRegisterChoice">Register</a>
+                </div>
+                <ul class="main-menu primary-menu">
+                    <li><a href="#">게임메인</a>
+                        <ul class="sub-menu">
+                            <li><a href="${pageContext.request.contextPath}/item/item_main">게임메인</a></li>
+                            <li><a href="${pageContext.request.contextPath}/rent/list">게임 대여</a></li>
+                            <li><a href="${pageContext.request.contextPath}/rulebook/rulebookList">룰북</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">커뮤니티</a>
+                        <ul class="sub-menu">
+                            <li><a href="${pageContext.request.contextPath}/board/list?boa_category=1">자유게시판</a></li>
+                            <li><a href="${pageContext.request.contextPath}/board/list?boa_category=2">팁게시판</a></li>
+                            <li><a href="${pageContext.request.contextPath}/board/list?boa_category=3">후기</a></li>
+                            <li><a href="${pageContext.request.contextPath}/team/teamList">모임게시판</a></li>
+                            <li><a href="${pageContext.request.contextPath}/used/usedList">중고게시판</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">공지</a>
+                        <ul class="sub-menu">
+                            <li><a href="${pageContext.request.contextPath}/board/list?boa_category=4">공지</a></li>
+                            <li><a href="${pageContext.request.contextPath}/board/list?boa_category=5">QnA</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">스트리밍</a>
+                        <ul class="sub-menu">
+                            <li><a href="${pageContext.request.contextPath}/pointgame/list">실시간 보드게임</a></li>
+                            <li><a href="${pageContext.request.contextPath}/streaming/broadcasts">스트리밍</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">대회</a>
+                        <ul class="sub-menu">
+                            <li><a href="#">대회</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">출석체크</a>
+                        <ul class="sub-menu">
+                            <li><a href="#">출석체크</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+<!-- Header section end -->
+
+<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> --%>
 <!-- 상단 시작 -->
-<div class="search-bar">
+<%-- <div class="search-bar">
   <form class="form-inline" action="mainList"  method="get">  
 	<a class="navbar-brand">Boardwiki</a>
     <input id="main_search" class="form-control mr-sm-2" style="width:500px;" type="search" placeholder="Search" aria-label="Search"  type="submit" name="keyword1"
@@ -69,8 +149,10 @@
 		  </div>
 		</div>
 	</div>
-</div>
+</div> --%>
 <!-- 상단 끝 -->
+
+
 
 
 

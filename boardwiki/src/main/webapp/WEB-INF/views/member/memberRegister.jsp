@@ -2,7 +2,30 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
+
+
+<!-- Page top section -->
+	<section class="page-top-section set-bg" data-setbg="/img/page-top-bg/4.jpg">
+		<div class="page-info">
+			<h2>Contact</h2>
+			<div class="site-breadcrumb">
+				<a href="">Home</a>  /
+				<span>Contact</span>
+			</div>
+		</div>
+	</section>
+	<!-- Page top end-->
+
+
 <!-- 회원가입 시작 -->
+		
+<section class="contact-page">
+		<div class="container">
+		<div class="align-center">
+
+
+
 <div class="page-main">
 	<h2>회원가입</h2>
 	<form:form action="memberRegister" id="member_register"
@@ -10,8 +33,7 @@
 		<ul>
 			<li>
 				<form:label path="mem_email">이메일</form:label>
-				<form:input path="mem_email" placeholder="영문,숫자만 4~12자"
-				                             autocomplete="off"/>
+				<form:input path="mem_email" placeholder="영문,숫자만 4~12자" autocomplete="off"/>
 				<input type="button" id="confirmId" value="이메일중복체크"
 				                                 class="default-btn">                  
 				<span id="message_id"></span>
@@ -50,7 +72,12 @@
 	</form:form>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/member.register.js"></script>	
+
 </div>
+</div>
+</div>
+</section>
+
 <!-- 회원가입 끝 -->
 
 

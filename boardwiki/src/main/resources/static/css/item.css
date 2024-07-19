@@ -1,42 +1,97 @@
 @charset "UTF-8";
-/*게임 메인*/
-.name{
-	display: inline-block; /* inline-block으로 설정하여 너비를 제한할 수 있게 함 */
-    max-width: 150px; /* 적절한 너비 설정 */
-	white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    width: 150px; /* 텍스트가 넘칠 경우 적용할 너비 */
+
+.game-single-preview {
+	width: 400px;
+	height: 400px;
+	margin: auto;
 }
-.btn{
+
+.cart_box {
+	align-items: center;
+	gap: 10px; /* input과 button 사이의 간격 */
+}
+
+.addToCartButton {
+	background-color: #503c6e; /* 원하는 색상 코드로 변경 */
+	color: white; /* 텍스트 색상 */
+	border: none;
+	padding: 10px 20px;
+	cursor: pointer;
+	font-size: 16px;
+	border-radius: 5px;
+	margin: 5px;
+}
+
+.addToCartButton:hover {
+	background-color: #c313b7; /* 호버 시 색상 */
+}
+
+/* down header 버튼 */
+.custom-btn-success {
+	background-color: #503c6e; /* 원하는 색상 코드로 변경 */
+	color: white; /* 텍스트 색상 */
+	border: none;
+	padding: 10px 20px;
+	cursor: pointer;
+	font-size: 16px;
+	border-radius: 5px;
+	margin: 5px;
+}
+
+.custom-btn-success:hover {
+	background-color: #c313b7; /* 호버 시 색상 */
+}
+
+/* 게임 메인 */
+.name {
+	display: inline-block; /* inline-block으로 설정하여 너비를 제한할 수 있게 함 */
+	max-width: 150px; /* 적절한 너비 설정 */
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width: 150px; /* 텍스트가 넘칠 경우 적용할 너비 */
+}
+
+.btn {
 	margin: 4px 0;
 }
+
 .small-box1 p {
 	margin-bottom: 5px;
 }
+
 .text-box1 {
-	margin-right: 85px;
+	margin-left: 100px;
 }
-.text-box2 p{
+
+.text-box2 p {
 	display: inline-block; /* inline-block으로 설정하여 너비를 제한할 수 있게 함 */
 }
-.text-box2 input{
-	width:100px;
-	height:25px;
+
+.text-box2 input {
+	width: 100px;
+	height: 25px;
 }
-.card{
+
+.card {
 	display: inline-block;
 	margin: 10px;
 }
-.card-img-top{
-	width:280px;
-	height:250px;
+
+.card-img-top {
+	width: 280px;
+	height: 250px;
 }
-.card-title{
+
+.card-title {
 	display: inline-block; /* inline-block으로 설정하여 너비를 제한할 수 있게 함 */
-    max-width: 200px; /* 적절한 너비 설정 */
+	max-width: 180px; /* 적절한 너비 설정 */
 	white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    width: 200px; /* 텍스트가 넘칠 경우 적용할 너비 */
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width: 180px; /* 텍스트가 넘칠 경우 적용할 너비 */
+}
+
+.card-body {
+	padding: 0;
 }

@@ -73,7 +73,7 @@ public class PagingUtil {
 						break;
 					}
 					if (i == currentPage) {
-						page.append("&nbsp;<b><span style='color:red;'>");
+						page.append("&nbsp;<b><span style='color:#C213B6;'>");
 						page.append(i);
 						page.append("</span></b>");
 					} else {

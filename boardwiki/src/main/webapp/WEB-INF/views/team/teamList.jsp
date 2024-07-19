@@ -4,6 +4,9 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>    
 <!-- 게시판 목록 시작 -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
+<section class="contact-page">
+
+<div class="container">
 <div class="page-main">
 	<h2>모임 신청</h2>
 	<div><a href="myTeam2"> 내 모임 보기</a></div>
@@ -75,6 +78,8 @@
 	<div class="align-center">${page}</div>
 	</c:if>	
 </div>
+</div>
+</section>
 <!-- 게시판 목록 끝 -->
 
 
