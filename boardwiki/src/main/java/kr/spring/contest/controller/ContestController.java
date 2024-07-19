@@ -39,6 +39,8 @@ public class ContestController {
 		return new ContestVO();
 	}
 
+	
+	
 	/*=====================
 	 * 게시판 글쓰기
 	 *=====================*/
