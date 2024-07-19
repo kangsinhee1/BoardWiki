@@ -17,7 +17,12 @@
 					<p>장르:${item.item_genre}</p>
 					<p>최소연령:${item.minage}세</p>
 					<p>참여인원:${item.minplayers}~${item.maxplayers}명</p>
-					<p>플레이 타임:${mintime}~${maxtime}시간</p>
+					<c:if test="${mintime == maxtime}">
+					<p>플레이 타임:${maxtime}분</p>
+					</c:if>
+					<c:if test="${mintime != maxtime}">
+					<p>플레이 타임:${mintime}분~${maxtime}분</p>
+					</c:if>
 					<p>출시연도:${item.item_year}년</p>	
 				</div>
 				<div class="text-box1" style="display: inline-block; vertical-align: top;">

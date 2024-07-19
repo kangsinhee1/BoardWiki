@@ -95,8 +95,8 @@ public class ItemController {
 		MemberVO member = (MemberVO) session.getAttribute("user");
 		ItemVO item = itemService.selectItem(item_num);
 
-		Long mintime = (item.getMin_time() / 60);
-		Long maxtime = (item.getMax_time() / 60);
+		Long mintime = (item.getMin_time());
+		Long maxtime = (item.getMax_time());
 		
 		model.addAttribute("member", member); // member 객체를 모델에 추가
 		model.addAttribute("mintime",mintime);
