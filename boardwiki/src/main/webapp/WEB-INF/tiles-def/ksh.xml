@@ -48,6 +48,11 @@
 		<put-attribute name="css" value="/WEB-INF/views/member/memberCSS.jsp"/>
 		<put-attribute name="body" value="/WEB-INF/views/member/memberCheckResetCode.jsp"/>
 	</definition>
+	<definition name="resetPassword" extends="main">
+		<put-attribute name="title" value="비밀번호 재설정"/>
+		<put-attribute name="css" value="/WEB-INF/views/member/memberCSS.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/memberResetPasswordForm.jsp"/>
+	</definition>
 </tiles-definitions>
 
 

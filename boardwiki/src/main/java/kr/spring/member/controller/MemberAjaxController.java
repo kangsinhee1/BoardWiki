@@ -113,17 +113,16 @@ public class MemberAjaxController {
 	}
 	@PostMapping("/member/checkSendResetCode")
 	@ResponseBody
-	public Map<String, String> checkSendResetCode(@RequestParam String ResetCode, HttpSession session) {
+	public Map<String, String> checkSendResetCode(@RequestParam Integer ResetCode, HttpSession session) {
 		Map<String, String> mapJson = new HashMap<>();
 
-		String checkResetCode = (String) session.getAttribute("ResetCode");
+		Integer checkResetCode = (Integer) session.getAttribute("ResetCode");
 		String mem_email = (String) session.getAttribute("mem_email");
 
 		if (checkResetCode != null && checkResetCode.equals(ResetCode)) {
 			// 인증번호 일치
 			mapJson.put("result", "success");
 			session.removeAttribute("ResetCode"); // 인증번호 세션 삭제
-			session.removeAttribute("mem_email"); // 이메일 세션 삭제
 			session.setAttribute("resetPasswordEmail", mem_email); // 비밀번호 재설정할 이메일 세션에 저장
 		} else {
 			// 인증번호 불일치

@@ -660,42 +660,119 @@ public class MemberController {
 
 	@PostMapping("/member/memberFindEmail")
 	public String processFindEmail(@Valid MemberVO memberVO,
-	                                   BindingResult result, Model model, HttpServletRequest request) {
-	    if (result.hasErrors()) {
-	        // 입력값 유효성 검사 실패 시 처리
-	        model.addAttribute("error", "입력값이 유효하지 않습니다.");
-	        return "findEmailForm"; // 다시 입력 폼으로 이동
-	    }
+			BindingResult result, Model model, HttpServletRequest request) {
+		if (result.hasErrors()) {
+			// 입력값 유효성 검사 실패 시 처리
+			model.addAttribute("error", "입력값이 유효하지 않습니다.");
+			return "findEmailForm"; // 다시 입력 폼으로 이동
+		}
 
-	    // 이름과 전화번호로 이메일 조회
-	    String mem_name = memberVO.getMem_name();
-	    String mem_phone = memberVO.getMem_phone();
-	    MemberVO foundEmail = memberService.findEmail(mem_name, mem_phone);
+		// 이름과 전화번호로 이메일 조회
+		String mem_name = memberVO.getMem_name();
+		String mem_phone = memberVO.getMem_phone();
+		MemberVO foundEmail = memberService.findEmail(mem_name, mem_phone);
 
-	    if (foundEmail != null) {
-	        model.addAttribute("foundEmail", foundEmail.getMem_email());
-	        model.addAttribute("foundProvider", foundEmail.getMem_provider());
-	        return "showEmail"; // 이메일을 보여주는 페이지로 이동
-	    }else {
-	        // 일치하는 정보가 없는 경우 에러 메시지를 모델에 추가하여 resultAlert 화면으로 이동
-	        model.addAttribute("message", "일치하는 정보가 없습니다.");
-	        model.addAttribute("url", request.getContextPath() + "/memberFindEmail");
-	        return "common/resultAlert";
-	    }
+		if (foundEmail != null) {
+			model.addAttribute("foundEmail", foundEmail.getMem_email());
+			model.addAttribute("foundProvider", foundEmail.getMem_provider());
+			return "showEmail"; // 이메일을 보여주는 페이지로 이동
+		}else {
+			// 일치하는 정보가 없는 경우 에러 메시지를 모델에 추가하여 resultAlert 화면으로 이동
+			model.addAttribute("message", "일치하는 정보가 없습니다.");
+			model.addAttribute("url", request.getContextPath() + "/memberFindEmail");
+			return "common/resultAlert";
+		}
 	}
 
 	@GetMapping("/member/showEmail")
 	public String showEmail() {
-	    // 이메일을 보여주는 페이지의 경로를 반환
-	    return "showEmail"; // showEmail.jsp 또는 .html 페이지
+		// 이메일을 보여주는 페이지의 경로를 반환
+		return "showEmail"; // showEmail.jsp 또는 .html 페이지
 	}
-	
-	
+
+
 	/*==============================
-	 * 	   비밀번호 초기화 이메일 발송 처리
+	 * 	   		비밀번호 초기화
 	 *==============================*/	
 	@GetMapping("/member/sendResetCode")
 	public String sendResetCodeForm() {
 		return "checkResetCode";
+	}
+	//비밀번호 재설정 폼
+	@GetMapping("/member/resetPassword")
+	public String resetPasswdForm() {
+		return "resetPassword";
+	}
+
+	@PostMapping("/member/resetPassword")
+	public String submitResetPasswd(@Valid MemberVO memberVO,
+			BindingResult result,
+			HttpSession session,
+			Model model,
+			HttpServletRequest request) {
+		
+		log.debug("<<submitResetPasswd 진입>>");
+
+		//유효성 체크 결과 오류가 있으면 폼 호출
+		if(result.hasFieldErrors("now_passwd") 
+				|| result.hasFieldErrors("passwd")
+				|| result.hasFieldErrors("captcha_chars")) {
+			return formChangePassword();					
+		}
+
+		//====== 캡챠 문자 체크 시작 ======//
+		String code = "1";//키 발급 0, 캡챠 이미지 비교시 1로 세팅
+		//캡챠 키 발급시 받은 키값
+		String key = (String)session.getAttribute("captcha_key");
+		//사용자가 입력한 캡챠 이미지 글자값
+		String value = memberVO.getCaptcha_chars();
+		String apiURL = "https://openapi.naver.com/v1/captcha/nkey?code=" + code + "&key=" + key + "&value=" + value;
+
+		Map<String,String> requestHeaders = 
+				new HashMap<String,String>();
+		requestHeaders.put("X-Naver-Client-Id", "aGoUsn2QY4b5ZsjIvvn_");
+		requestHeaders.put("X-Naver-Client-Secret", "mdnzHOAtxH");
+		String responseBody = CaptchaUtil.get(
+				apiURL, requestHeaders);
+		log.debug("<<캡챠 결과>> : " + responseBody);
+
+		JSONObject jObject = new JSONObject(responseBody);
+		boolean captcha_result = jObject.getBoolean("result");
+		if(!captcha_result) {
+			result.rejectValue("captcha_chars", "invalidCaptcha");
+			return resetPasswdForm();
+		}
+		//====== 캡챠 문자 체크 끝 ======//
+		
+		 // 세션에서 이메일 주소를 문자열로 가져옵니다
+	    String mem_email = (String) session.getAttribute("resetPasswordEmail");
+	    
+	    log.debug("<<mem_email : >>" + mem_email);
+	    if (mem_email == null) {
+	        model.addAttribute("message", "잘못된 접근입니다.");
+	        model.addAttribute("url", request.getContextPath() + "/main/main");
+	        return "common/resultAlert";
+	    }
+	    MemberVO db_member = memberService.selectCheckMember(mem_email);
+	    memberVO.setMem_email(mem_email);
+
+		memberVO.setMem_num(db_member.getMem_num());
+		
+		log.debug("<<memberVO : >>" + memberVO);
+
+		//비밀번호 수정
+		memberService.updatePassword(memberVO);
+
+		//설정되어 있는 자동로그인 기능 해제(모든 브라우저에 설정된 자동로그인 해제)
+		memberService.deleteAu_id(memberVO.getMem_num());
+
+
+		//View에 표시할 메시지
+		model.addAttribute("message", 
+				"비밀번호 재설정 완료(*재접속시 설정되어 있는 자동로그인 기능 해제*)");
+		model.addAttribute("url", 
+				request.getContextPath() + "/main/main");
+
+		return "common/resultAlert";
 	}
 }

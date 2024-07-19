@@ -106,8 +106,6 @@ public class MemberServiceImpl implements MemberService {
 		// 패스워드 암호화
 	    String encryptedPassword = passwordEncoder.encode(member.getMem_passwd());
 	    member.setMem_passwd(encryptedPassword);
-	    
-	   
 		memberMapper.updatePassword(member);
 		
 	}
