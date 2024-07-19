@@ -1,4 +1,4 @@
-package kr.spring.board.vo;
+package kr.spring.tnrboard.vo;
 
 import java.sql.Date;
 
@@ -14,19 +14,20 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class BoardVO {
-	private long boa_num;
+public class TnrboardVO {
+	private long tnr_num;
+	private long item_num;
 	private long mem_num;
 	@NotBlank
-	private String boa_category;
+	private String tnr_category;
 	@NotBlank
-	private String boa_title;	
+	private String tnr_title;	
 	@NotEmpty
-	private String boa_content;
-	private int boa_hit;
-	private Date boa_rdate;
-	private Date boa_mdate;
-	private int boa_auth;
+	private String tnr_content;
+	private int tnr_hit;
+	private Date tnr_rdate;
+	private Date tnr_mdate;
+	private int tnr_auth;
 	private MultipartFile upload; 
 	private String filename;
 	
@@ -35,6 +36,7 @@ public class BoardVO {
 	private String mem_email;				
 	private String mem_nickname;
 	private Integer mem_auth;
+	private String item_name;
 	
 	private int re_cnt;				
 	private int fav_cnt; 
