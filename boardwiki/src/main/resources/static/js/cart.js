@@ -1,4 +1,10 @@
 $(document).ready(function() {
+	window.onload = function(){
+    if (location.href.indexOf('reloaded')==-1) location.replace(location.href+'?reloaded');
+    //if (parent.location.href.indexOf('reloaded')==-1) parent.location.replace(parent.location.href+'?reloaded');
+}
+	
+	
     $('.deleteX').click(function() {
         const mem_num = $(this).data('mem-num');
         const item_num = $(this).data('item-num');
