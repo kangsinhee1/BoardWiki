@@ -64,7 +64,7 @@
                     </li>
                     <li><a href="#">대회</a>
                         <ul class="sub-menu">
-                            <li><a href="#">대회</a></li>
+                            <li><a href="${pageContext.request.contextPath}/contest/contestList">대회</a></li>
                         </ul>
                     </li>
                     <li><a href="#">출석체크</a>
