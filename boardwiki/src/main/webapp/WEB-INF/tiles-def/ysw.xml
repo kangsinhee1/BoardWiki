@@ -94,6 +94,10 @@
 		<put-attribute name="title" value="QnaManage"/>
 		<put-attribute name="body" value="/WEB-INF/views/adminPage/QnaManage.jsp"/>
 	</definition>
+	<definition name="rentListAdmin" extends="adminPage">
+		<put-attribute name="title" value="RentManage"/>
+		<put-attribute name="body" value="/WEB-INF/views/rent/rentListAdmin.jsp"/>
+	</definition>
 	
 	<!-- 중고 -->
 	<definition name="usedList" extends="main">

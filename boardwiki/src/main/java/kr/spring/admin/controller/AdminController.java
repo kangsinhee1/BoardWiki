@@ -382,7 +382,7 @@ public class AdminController {
 	    int count = rentService.selectAllMembersRowCount(map);
 
 	    // 페이지 처리를 위한 페이징 유틸리티 생성
-	    PagingUtil page = new PagingUtil(keyfield, keyword, pageNum, count, 20, 10, "list");
+	    PagingUtil page = new PagingUtil(keyfield, keyword, pageNum, count, 20, 10, "rentListAdmin");
 	    List<RentVO> list = null;
 
 	    // 검색 결과가 있는 경우, 해당 결과 리스트 가져오기
@@ -397,6 +397,6 @@ public class AdminController {
 	    model.addAttribute("list", list);
 	    model.addAttribute("page", page.getPage());
 
-	    return "/rent/rentListAdmin"; // adminRentList 뷰 이름 반환
+	    return "rentListAdmin"; // adminRentList 뷰 이름 반환
 	}
 }

@@ -18,8 +18,12 @@
         </div>
         <div class="header-social d-flex justify-content-end">
             <p>Follow us:</p>
-            <a href="${pageContext.request.contextPath}/myPage/myPage">MyPage</a>
-            <!-- <a href="#"><i class="fa fa-pinterest"></i></a> -->
+          	<c:if test="${user.mem_auth!=9 && user != null}">
+           		<a href="${pageContext.request.contextPath}/myPage/myPage">MyPage</a>
+          	</c:if>
+          	<c:if test="${user.mem_auth==9 && user != null}">
+            	<a href="${pageContext.request.contextPath}/admin/adminPage">관리자 페이지</a>
+          	</c:if>
             <a href="#"><i class="fa fa-facebook"></i></a>
             <a href="#"><i class="fa fa-twitter"></i></a>
             <a href="#"><i class="fa fa-dribbble"></i></a>
@@ -30,9 +34,16 @@
                 <img src="/img/logo.png" alt="">
             </a>
             <nav class="top-nav-area w-100">
+            	<c:if test="${empty user }">
                 <div class="user-panel">
                     <a href="${pageContext.request.contextPath}/member/login">Login</a> / <a href="${pageContext.request.contextPath}/member/memberRegisterChoice">Register</a>
                 </div>
+                </c:if>
+            	<c:if test="${!empty user }">
+                <div class="user-panel">
+                    <a href="${pageContext.request.contextPath}/member/logout">LogOut</a>
+                </div>
+                </c:if>
                 <ul class="main-menu primary-menu">
                     <li><a href="#">게임메인</a>
                         <ul class="sub-menu">
