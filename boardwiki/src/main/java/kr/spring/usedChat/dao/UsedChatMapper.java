@@ -31,8 +31,8 @@ public interface UsedChatMapper {
 	
 	
 	//채팅방 검색
-	@Select("SELECT * FROM usedChatroom WHERE mem_num = #{mem_num}")
-	public List<UsedChatRoomVO> selectUsedChatRoomByMemNum(Map<String,Object> map);
+	@Select("SELECT * FROM usedChatroom WHERE useC_name LIKE '%'||#{mem_nickName}||'%'")
+	public List<UsedChatRoomVO> selectUsedChatRoomByMemNickName(Map<String,Object> map);
 	@Select("SELECT * FROM usedChatroom WHERE mem_num = #{mem_num} AND use_num =#{use_num}")
 	public UsedChatRoomVO selectUsedChatRoom(@Param(value="mem_num") Long mem_num,@Param(value="use_num") Long use_num);
 	@Select("SELECT * FROM usedChatroom WHERE useC_name LIKE '%'||#{useC_name}||'%' AND use_num =#{use_num}")

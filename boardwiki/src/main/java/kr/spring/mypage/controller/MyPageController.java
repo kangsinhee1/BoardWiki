@@ -83,6 +83,7 @@ public class MyPageController {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("keyword",keyword);
 		map.put("mem_num", user.getMem_num());
+		map.put("mem_nickName", user.getMem_nickName());
 		int count = usedChatService.selectRowCountByMemNum(map);
 		
 		//페이지 처리
@@ -91,7 +92,7 @@ public class MyPageController {
 		if(count>0) {
 			map.put("start", page.getStartRow());
 			map.put("end", page.getEndRow());
-			list = usedChatService.selectUsedChatRoomByMemNum(map);
+			list = usedChatService.selectUsedChatRoomByMemNickName(map);
 			model.addAttribute("count",count);
 			model.addAttribute("list",list);
 			model.addAttribute("page",page.getPage());

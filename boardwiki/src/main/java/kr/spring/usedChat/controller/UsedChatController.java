@@ -41,7 +41,6 @@ public class UsedChatController {
 	
 	@GetMapping("/used/useChatSeller")
 	public String accessUseChatSeller(Long use_num, String useC_name, UsedChatRoomVO usedChatRoomVO, HttpSession session, Model model, HttpServletRequest request) {
-		MemberVO user = (MemberVO)session.getAttribute("user");
 		log.debug("<<<<<<<<<<use_num : "+use_num);
 		log.debug("<<<<<<<<<<useC_name : "+useC_name);
 		
@@ -57,12 +56,14 @@ public class UsedChatController {
 	}
 	
 	
-	@GetMapping("/used/useChat")
+	@GetMapping("/*/useChat")
 	public String accessUseChat(Long use_num, UsedChatRoomVO usedChatRoomVO, HttpSession session, Model model, HttpServletRequest request,
 			@RequestParam(defaultValue="1") int pageNum,
 			@RequestParam(defaultValue="1") int order,
 			String keyfield,String keyword	) {
 		MemberVO user = (MemberVO)session.getAttribute("user");
+		UsedItemVO used = usedService.selectUsed(use_num);
+		log.debug("<<<<<<<<<<<used : " + used);
 		if(user==null) {
 			model.addAttribute("message", "로그인후 작성 가능합니다.");
 			model.addAttribute("url", 
@@ -117,7 +118,7 @@ public class UsedChatController {
 				log.debug("<<<<<<<<<<<<<<<<s" + s);
 				log.debug("<<<<<<<<<<<<<<<<b" + b);
 				
-				usedChatRoomVO.setUseC_name(s.getMem_nickName()+","+b.getMem_nickName());
+				usedChatRoomVO.setUseC_name(s.getMem_nickName()+","+b.getMem_nickName()+" ("+used.getItem_name()+")");
 				usedChatRoomVO.setUse_num(use_num);
 				usedChatRoomVO.setMem_num(user.getMem_num());
 				

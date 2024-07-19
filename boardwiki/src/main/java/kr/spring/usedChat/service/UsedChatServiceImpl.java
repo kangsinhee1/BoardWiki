@@ -65,8 +65,8 @@ public class UsedChatServiceImpl implements UsedChatService{
 	}
 
 	@Override
-	public List<UsedChatRoomVO> selectUsedChatRoomByMemNum(Map<String,Object> map) {
-		return usedChatMapper.selectUsedChatRoomByMemNum(map);
+	public List<UsedChatRoomVO> selectUsedChatRoomByMemNickName(Map<String,Object> map) {
+		return usedChatMapper.selectUsedChatRoomByMemNickName(map);
 	}
 
 	@Override

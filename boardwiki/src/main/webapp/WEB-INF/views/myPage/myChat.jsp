@@ -28,7 +28,7 @@
 		<tr>
 			<td>${used.useC_num}</td>
 			<td style="text-align:left;">
-				<a href="chatDetail?chaR_num=${chat.chaR_num}">
+				<a href="${pageContext.request.contextPath}useChat?use_num=${used.use_num}&useC_name=${used.useC_name}">
 					<b>${used.useC_name}</b>
 				</a>
 			</td>

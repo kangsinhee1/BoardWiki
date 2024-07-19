@@ -19,5 +19,6 @@ public class UsedChatRoomVO {
 	private Long use_num;		//중고글 번호
 	private Long mem_num;		//구매의사 보유자
 	
+	private String item_name;
 	private UsedChat_textVO usedChat_textVO;
 }

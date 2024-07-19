@@ -36,7 +36,7 @@
 		SELECT
 			COUNT(*)
 		<include refid="UsedChatSub"></include>
-		WHERE mem_num = #{mem_num}
+		WHERE useC_name LIKE '%'||#{mem_nickName}||'%' 
 	</select>
 	<!-- 채팅방 목록 -->
 	<select id="selectUsedChatRoomList" parameterType="map" resultMap="usedChatMap">
