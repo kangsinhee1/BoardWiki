@@ -25,4 +25,10 @@ public class ContestServiceImpl implements ContestService{
 	public List<ContestVO> selectContestList(Map<String, Object> map) {
 		return contestmapper.selectContestList(map);
 	}
+
+	@Override
+	public void insertContest(ContestVO contest) {
+		contestmapper.insertContest(contest);
+		
+	}
 }

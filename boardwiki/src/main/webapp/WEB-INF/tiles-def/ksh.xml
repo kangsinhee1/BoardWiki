@@ -54,8 +54,12 @@
 		<put-attribute name="body" value="/WEB-INF/views/member/memberResetPasswordForm.jsp"/>
 	</definition>
 	<definition name="contestList" extends="main">
-		<put-attribute name="title" value="모임 게시판"/>
+		<put-attribute name="title" value="대회"/>
 		<put-attribute name="body" value="/WEB-INF/views/contest/contestList.jsp"/>
+	</definition>
+	<definition name="contestWrite" extends="main">
+		<put-attribute name="title" value="대회 글 작성"/>
+		<put-attribute name="body" value="/WEB-INF/views/contest/contestWrite.jsp"/>
 	</definition>
 </tiles-definitions>
 
