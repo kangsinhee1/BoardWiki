@@ -26,7 +26,7 @@
             <p id="item_price_${cart.item_num}" data-price="${cart.item_price}">${cart.item_price}원</p>
         </div>
         <div>
-            <label for="quantity_${cart.item_num}">수량:</label>
+            <label for="quantity_${cart.item_num}">수량</label>
             <select id="quantity_${cart.item_num}" name="item_quantity" class="quantity" data-item-num="${cart.item_num}">
                 <c:forEach begin="1" end="${cart.item_stock}" var="i">
                     <option value="${i}" <c:if test="${i == cart.item_quantity}">selected</c:if>>${i}</option>
@@ -37,7 +37,7 @@
         <button class="deleteX" data-item-num="${cart.item_num}" data-mem-num="${cart.mem_num}">제거</button>
         </c:forEach>
         <div>
-            <p id="total_sum_price">총 가격: <span id="total_sum_value">0</span>원</p>
+            <p id="total_sum_price">총 금액<span id="total_sum_value">0</span>원</p>
         </div>
             <button onclick="location.href='${pageContext.request.contextPath}/order/order?mem_num=${mem_num}'">
             주문하기
