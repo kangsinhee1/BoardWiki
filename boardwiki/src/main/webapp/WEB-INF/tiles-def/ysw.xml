@@ -48,9 +48,9 @@
 		<put-attribute name="title" value="calendar"/>
 		<put-attribute name="body" value="/WEB-INF/views/myPage/myWrite3.jsp"/>
 	</definition>
-	<definition name="myPoint" extends="myPage">
+	<definition name="pointList" extends="myPage">
 		<put-attribute name="title" value="myPoint"/>
-		<put-attribute name="body" value="/WEB-INF/views/myPage/myPoint.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/point/pointList.jsp"/>
 	</definition>
 	<definition name="myQna" extends="myPage">
 		<put-attribute name="title" value="myQna"/>

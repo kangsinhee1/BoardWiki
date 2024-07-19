@@ -16,8 +16,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.spring.board.service.BoardService;
 import kr.spring.board.vo.BoardVO;
+import kr.spring.chat.vo.ChatRoomVO;
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
+import kr.spring.usedChat.service.UsedChatService;
+import kr.spring.usedChat.vo.UsedChatRoomVO;
 import kr.spring.util.PagingUtil;
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,6 +32,9 @@ public class MyPageController {
 
 	@Autowired
 	private BoardService boardService;
+	
+	@Autowired
+	private UsedChatService usedChatService;
 
 
 
@@ -69,14 +75,29 @@ public class MyPageController {
 	 * MY페이지 (내 채팅방)
 	 *==============================*/	
 	@GetMapping("/myPage/myChat")
-	public String myChatPage(HttpSession session,Model model) {
-		MemberVO user = 
-				(MemberVO)session.getAttribute("user");
+	public String myChatPage(HttpSession session,Model model,String keyword, @RequestParam(defaultValue="1" )int pageNum) {
+		MemberVO user = (MemberVO)session.getAttribute("user");
 		//회원정보
-		MemberVO member = 
-				memberService.selectMember(user.getMem_num());
+		MemberVO member = memberService.selectMember(user.getMem_num());
 		log.debug("<<MY페이지>> : " + member);
-
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("keyword",keyword);
+		map.put("mem_num", user.getMem_num());
+		int count = usedChatService.selectRowCountByMemNum(map);
+		
+		//페이지 처리
+		PagingUtil page = new PagingUtil(null,keyword,pageNum,count,20,10,"chatList");
+		List<UsedChatRoomVO> list = null;
+		if(count>0) {
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			list = usedChatService.selectUsedChatRoomByMemNum(map);
+			model.addAttribute("count",count);
+			model.addAttribute("list",list);
+			model.addAttribute("page",page.getPage());
+			log.debug("목록 가져와 ! " + list);
+		}
+		
 		model.addAttribute("member", member);
 
 		return "myChat";

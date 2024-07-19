@@ -12,9 +12,11 @@ public interface UsedChatService {
 	//채팅방 목록
 	public List<UsedChatRoomVO> selectUsedChatRoomList (Map<String,Object> map);
 	public Integer selectRowCount(Map<String,Object> map);
+	public Integer selectRowCountByMemNum(Map<String,Object> map);
 
 	//채팅방
 	public void insertUsedChatRoom(UsedChatRoomVO talkRoomVO);
+	public List<UsedChatRoomVO> selectUsedChatRoomByMemNum(Map<String,Object> map);
 	public UsedChatRoomVO selectUsedChatRoom(Long mem_num, Long use_num);
 	public UsedChatRoomVO selectUsedChatRoomSeller(String useC_name, Long use_num);
 	public void deleteUsedChatRoom(Map<String,Object> map);

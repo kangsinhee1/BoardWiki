@@ -33,7 +33,7 @@ public class Pointcontroller {
 		return new PointVO();
 	}
 	/**포인트 목록*/
-	@GetMapping("/point/list")
+	@GetMapping("/myPage/pointList")
 	public String getList(
 	        @RequestParam(defaultValue="1") int pageNum,
 	        @RequestParam(defaultValue="") String poi_status,

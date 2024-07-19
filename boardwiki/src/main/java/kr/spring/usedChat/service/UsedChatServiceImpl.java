@@ -64,4 +64,14 @@ public class UsedChatServiceImpl implements UsedChatService{
 		usedChatMapper.deleteUsedChatTxt(map);
 	}
 
+	@Override
+	public List<UsedChatRoomVO> selectUsedChatRoomByMemNum(Map<String,Object> map) {
+		return usedChatMapper.selectUsedChatRoomByMemNum(map);
+	}
+
+	@Override
+	public Integer selectRowCountByMemNum(Map<String, Object> map) {
+		return usedChatMapper.selectRowCountByMemNum(map);
+	}
+
 }

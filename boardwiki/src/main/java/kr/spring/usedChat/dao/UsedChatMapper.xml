@@ -31,6 +31,13 @@
 		<include refid="UsedChatSub"></include>
 		WHERE use_num = #{use_num}
 	</select>
+	<!-- 멤버로 검색했을때 -->
+	<select id="selectRowCountByMemNum" parameterType="map" resultType="integer">
+		SELECT
+			COUNT(*)
+		<include refid="UsedChatSub"></include>
+		WHERE mem_num = #{mem_num}
+	</select>
 	<!-- 채팅방 목록 -->
 	<select id="selectUsedChatRoomList" parameterType="map" resultMap="usedChatMap">
 		SELECT
