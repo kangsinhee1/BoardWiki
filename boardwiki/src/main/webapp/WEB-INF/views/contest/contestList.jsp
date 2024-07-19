@@ -4,6 +4,18 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>    
 <!-- 게시판 목록 시작 -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
+	<!-- Page top section -->
+<section class="page-top-section set-bg" data-setbg="/img/page-top-bg/4.jpg">
+	<div class="page-info">
+		<h2>Contact</h2>
+		<div class="site-breadcrumb">
+			<a href="">Home</a>  /
+			<span>Contact</span>
+		</div>
+	</div>
+</section>
+<!-- Page top end-->
+
 <div class="page-main">
 	<h2>대회</h2>
 	<form action="contestList" id="search_form" method="get">
@@ -40,8 +52,10 @@
 			
 			<!--</c:if>
 			-->
+			<c:if test="${user.mem_auth==9}">
 			<input type="button" value="글쓰기" 
-			                    onclick="location.href='teamWrite'">
+			                    onclick="location.href='contestWrite'">
+			</c:if>
 		</div>                     
 	</form>
 	<c:if test="${count == 0}">

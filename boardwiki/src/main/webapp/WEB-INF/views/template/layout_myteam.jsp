@@ -16,9 +16,6 @@
 </head>
 <body>
 <div id="main">
-	<div id="main_top-header">
-		<tiles:insertAttribute name="top-header"/>
-	</div>
 	<div id="main_header">
 		<tiles:insertAttribute name="header"/>
 	</div>

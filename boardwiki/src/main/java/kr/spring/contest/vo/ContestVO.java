@@ -11,15 +11,17 @@ import lombok.ToString;
 @ToString
 public class ContestVO {
 
-    private Long conNum;
-    private Long memNum;
-    private String conName;
-    private String conContent;
-    private String conLocation;
-    private Date conRdate;
-    private Integer conHit;
-    private Integer conStatus;
-    private Integer conFav;
-    private String conSdate;
-    private String conEdate;
+    private Long con_num;
+    private Long mem_num;
+    private String con_name;
+    private String con_content;
+    private String con_location;
+    private Date con_rdate;
+    private Integer con_hit;
+    private Integer con_status;
+    private Integer con_fav;
+    private String con_sdate;
+    private String con_edate;
+    
+    private String mem_auth;
 }

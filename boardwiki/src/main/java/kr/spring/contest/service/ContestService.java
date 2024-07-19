@@ -10,4 +10,6 @@ public interface ContestService {
 	public Integer selectRowCount(Map<String,Object>map);
 	//대회리스트
 	public List<ContestVO> selectContestList(Map<String,Object>map);
+	//대회 작성
+	public void insertContest(ContestVO contest);
 }
