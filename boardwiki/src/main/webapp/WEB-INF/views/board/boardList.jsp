@@ -2,6 +2,15 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 게시판 목록 시작 -->
+<section class="page-top-section set-bg" data-setbg="/img/page-top-bg/4.jpg">
+		<div class="page-info">
+			<h2>자유게시판</h2>
+			<div class="site-breadcrumb">
+				<a href="">Home</a>  /
+				<span>Board</span>
+			</div>
+		</div>
+</section>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 <div class="page-main">
 	 <c:choose>
@@ -71,7 +80,8 @@
 	<div class="result-display">표시할 게시물이 없습니다.</div>
 	</c:if>
 	<c:if test="${count > 0}">
-	<table class="striped-table">
+	<div class="chart-table">
+	<table>
 		<tr>
 			<th>번호</th>
 			<th width="400">제목</th>
@@ -94,6 +104,7 @@
 		</tr>
 		</c:forEach>
 	</table>
+	</div>
 	<div class="align-center">${page}</div>
 	</c:if>
 </div>

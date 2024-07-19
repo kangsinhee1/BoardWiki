@@ -30,9 +30,9 @@
             <a href="#"><i class="fa fa-behance"></i></a>
         </div>
         <div class="header-bar-warp d-flex">
-            <a href="${pageContext.request.contextPath}/main/main" class="site-logo">
+           	<a href="${pageContext.request.contextPath}/main/main" class="site-logo">
                 <img src="/img/logo.png" alt="">
-            </a>
+            </a> 
             <nav class="top-nav-area w-100">
             	<c:if test="${empty user }">
                 <div class="user-panel">
