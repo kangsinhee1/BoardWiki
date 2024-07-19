@@ -315,36 +315,43 @@ public class AdminController {
 	 * 관리자 페이지 (Qna 관리)
 	 *==============================*/	
 	@GetMapping("/adminPage/QnaManage")
-	public String getList2(BoardVO admin_reply,
-			@RequestParam(defaultValue="1") int pageNum,
-			@RequestParam(defaultValue="1") int order,
-			@RequestParam(defaultValue="5") String boa_category,
-			String keyfield,String keyword,Model model) {
-	
-	Map<String,Object> map = new HashMap<String,Object>();
-	map.put("boa_category", boa_category);
-	map.put("keyfield", keyfield);
-	map.put("keyword", keyword);
-	log.debug("<<<<admin_reply>> : " + admin_reply.getAdmin_reply());
-	int count = boardService.selectRowCount(map);
-	
-	PagingUtil page = new PagingUtil(keyfield,keyword,pageNum,count,
-						10,10,"QnaManage","&boa_category="+boa_category+"&order="+order);
-	List<BoardVO> list = null;
-	if(count > 0) {
-		map.put("order", order);
-		map.put("start", page.getStartRow());
-		map.put("end", page.getEndRow());
+	public String QnaManagePage(@RequestParam(defaultValue="1") int pageNum,
+			@RequestParam(defaultValue="") String category,
+			String keyfield,	
+			String keyword,Model model,
+			HttpSession session,
+			HttpServletRequest request) {
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user.getMem_auth()!= 9) {
+			model.addAttribute("message","관리자 등급만 접속할 수 있습니다.");
+			model.addAttribute("url",request.getContextPath()+"/main/login");
+			return "common/resultAlert";
+		}
+		Map<String,Object> map = new HashMap<String,Object>();
 		
-		list = boardService.selectList(map);
-	}
-	
-	model.addAttribute("count", count);
-	model.addAttribute("list", list);
-	model.addAttribute("page", page.getPage());
-	
+		map.put("category", category);
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
 		
-	return "QnaManage";
+		int count = itemService.selectRowCount2(map);
+		
+		PagingUtil page =
+				new PagingUtil(keyfield,keyword,pageNum,count,20,10,"gameManage");
+		
+		List<ItemVO> list = null;
+		if(count > 0) {
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			
+			
+			list = itemService.selectList(map);  
+		}
+		
+		model.addAttribute("count", count);
+		model.addAttribute("list", list);
+		model.addAttribute("page", page.getPage());
+		
+		return "QnaManage";
 	}
 	
 	@GetMapping("/adminPage/QnaManage2")

@@ -20,8 +20,6 @@ public class BoardReplyVO {
 	private String mem_email;			//아이디
 	private String mem_nickname;		//별명
 	
-	private String admin_reply;
-	
 	//로그인 한 상태에서 클릭한 사람의 정보 읽기, 로그인하지 않으면 0 전달
 	private int click_num;		
 	

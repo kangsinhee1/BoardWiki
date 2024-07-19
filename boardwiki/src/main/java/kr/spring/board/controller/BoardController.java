@@ -99,6 +99,11 @@ public class BoardController {
 		
 		//회원번호 셋팅
 		MemberVO vo = (MemberVO)session.getAttribute("user");
+		if (vo == null || vo.getMem_auth() != 9) {
+	        model.addAttribute("message", "관리자만 글을 작성할 수 있습니다.");
+	        model.addAttribute("url", "/");
+	        return "common/resultAlert";
+	    }
 		boardVO.setMem_num(vo.getMem_num());
 		//파일 업로드
 		boardVO.setFilename(FileUtil.createFile(request, 
@@ -198,11 +203,10 @@ public class BoardController {
 	 *  게시판 글상세 category 4,5
 	 *====================*/
 	@GetMapping("/board/detail2")
-	public ModelAndView process2(BoardVO admin_reply,long boa_num) {
+	public ModelAndView process2(long boa_num) {
 		log.debug("<<게시판 글 상세 - boa_num>> : " + boa_num);
 		
 		boardService.updateHit(boa_num);
-		log.debug("<<<<<<<admin_reply>> : " + admin_reply.getAdmin_reply());
 		BoardVO board = boardService.selectBoard(boa_num);
 		
 		return new ModelAndView("boardView2","board",board);
