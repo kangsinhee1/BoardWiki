@@ -15,7 +15,6 @@
 		</div>
 	</div>
 </section>
-
 <section class="blog-page">
 <div class="container">
 
