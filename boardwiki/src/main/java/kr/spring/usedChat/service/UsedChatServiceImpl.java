@@ -54,4 +54,14 @@ public class UsedChatServiceImpl implements UsedChatService{
 		return usedChatMapper.selectUsedChatRoomSeller(useC_name, use_num);
 	}
 
+	@Override
+	public void deleteUsedChatRoom(Map<String,Object> map) {
+		usedChatMapper.deleteUsedChatRoom(map);
+	}
+
+	@Override
+	public void deleteUsedChatTxt(Map<String,Object> map) {
+		usedChatMapper.deleteUsedChatTxt(map);
+	}
+
 }

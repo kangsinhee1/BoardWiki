@@ -188,9 +188,12 @@ public class UsedController {
 							   HttpServletRequest request) {
 		log.debug("<<게시판 글 삭제 -- used_num>> : " + use_num);
 		
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("use_num", use_num);
+		
 		UsedItemVO db_board = usedService.selectUsed(use_num);
 		
-		usedService.deleteUsed(use_num);
+		usedService.deleteUsed(map);
 		
 		if(db_board.getUse_photo()!=null) {
 			FileUtil.removeFile(request, db_board.getUse_photo());

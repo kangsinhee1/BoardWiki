@@ -17,5 +17,5 @@ public interface UsedService {
 	//중고글 수정
 	public void updateUsed(UsedItemVO used);
 	//중고글 삭제
-	public void deleteUsed(long use_num);
+	public void deleteUsed(Map<String,Object> map);
 }

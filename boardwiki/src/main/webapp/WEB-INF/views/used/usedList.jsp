@@ -63,10 +63,10 @@
 			${used.use_title}
 			</a></td>
 			<td class="align-center">
-				<c:if test="${empty mem_nickname}">			
+				<c:if test="${empty used.mem_nickname}">			
 					${used.mem_email}
 				</c:if>
-				<c:if test="${!empty mem_nickname}">			
+				<c:if test="${!empty used.mem_nickname}">			
 					${used.mem_nickname}
 				</c:if>
 			</td>

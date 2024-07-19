@@ -23,6 +23,6 @@ public interface UsedMapper {
 	public void updateUsed(UsedItemVO used);
 	//중고글 삭제
 	@Delete("DELETE FROM used_item WHERE use_num=#{use_num}")
-	public void deleteUsed(long use_num);
+	public void deleteUsed(Map<String,Object> map);
 	
 }

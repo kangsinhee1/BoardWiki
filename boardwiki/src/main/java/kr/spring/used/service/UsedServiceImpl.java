@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.used.dao.UsedMapper;
 import kr.spring.used.vo.UsedItemVO;
+import kr.spring.usedChat.dao.UsedChatMapper;
 
 @Service
 @Transactional
@@ -16,6 +17,8 @@ public class UsedServiceImpl implements UsedService{
 	
 	@Autowired
 	UsedMapper usedMapper;
+	@Autowired
+	UsedChatMapper usedChatMapper;
 
 	@Override
 	public Integer getUsedRowCount(Map<String, Object> map) {
@@ -43,8 +46,9 @@ public class UsedServiceImpl implements UsedService{
 	}
 
 	@Override
-	public void deleteUsed(long use_num) {
-		usedMapper.deleteUsed(use_num);
+	public void deleteUsed(Map<String,Object> map) {
+		usedChatMapper.deleteUsedChatRoom(map);
+		usedMapper.deleteUsed(map);
 	}
 
 }
