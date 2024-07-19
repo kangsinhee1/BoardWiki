@@ -2,7 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/cart.js"></script>
 
 <!-- Page top section -->
 <section class="page-top-section set-bg" data-setbg="/img/page-top-bg/4.jpg">
@@ -47,8 +46,9 @@
                         <div class="cart_box">
                         <p><label for="quantity">수량:</label></p>
                         <input type="number" id="quantity" name="item_quantity" value="1" min="1" max="${item.item_stock}" />
-                        <button type="button" class="addToCartButton" id="addToCartButton">장바구니에 추가</button>
-                        <button class="addToCartButton" onclick="location.href='/cart/cart?mem_num=${member.mem_num}'">장바구니로</button>
+                        <button type="button" id="addToCartButton" 
+                         onclick="location.href='/cart/cart?mem_num=${member.mem_num}'">장바구니에 담기</button>
+<%--                   <button onclick="location.href='/order/order?mem_num=${member.mem_num}'">바로구매</button> --%>
                         </div>
                     </form>
                 </div>

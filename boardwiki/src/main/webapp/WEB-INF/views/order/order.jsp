@@ -6,40 +6,59 @@
 <div class="page-main">
     <h2>상품주문</h2>
     <div class="great-box">
-        <c:forEach var="order" items="${list}">
-        <div class="big-box">
-            <p>${order.item_name}</p>
-            <p>${order.item_quantity}</p>
-            <p>${order.item_price * order.item_quantity}</p>
-        </div>
-        </c:forEach>
-        <form id="addToOrder" method="get" action="${pageContext.request.contextPath}/order/order">
-        <table>
-        <tr>
-        <td>
-        <label for="order_name">수령인:</label>
-        <input type="text" id="order_name">
-        </td>
-        <td>
-        <label for="order_phone">전화번호:</label>
-        <input type="text" id="order_phone">
-        </td>
-        <td>
-        <label for="zipcode">우편번호</label>
-		<input type="text" name="receive_post" id="zipcode" maxlength="5">
-		<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기" class="post_btn">
-        </td>
-        <td>
-		<label for="address1">주소</label>
-		<input type="text" name="receive_address1" id="address1" maxlength="30">
-		</td>
-		<td>
-			<label for="address2">상세주소</label>
-			<input type="text" name="receive_address2" id="address2" maxlength="30">
-		</td>
-        </tr>
-        </table>
-        </form>
+		<script>
+			let all_price = 0;
+			const $qElement = $('p[data-sum]');
+		</script>
+		<c:forEach var="order" items="${list}">
+           <div class="big-box">
+               <p style="display: inline-block; vertical-align: top;">|${order.item_name}|</p>
+               <p style="display: inline-block; vertical-align: top;">|${order.item_quantity}개|</p>
+               <p id="order_all_price"
+                  style="display: inline-block; vertical-align: top;" 
+                  data-sum="${order.item_price * order.item_quantity}">${order.item_price * order.item_quantity}</p>
+               </div>
+			<script>
+				const num2 = Number(num1);
+				all_price = all_price + num2;
+			</script>
+		</c:forEach>
+            <form id="addToOrder" method="get" action="${pageContext.request.contextPath}/order/order">
+			<script type="text/javascript">
+				console.log('11:', all_price);
+				$('total_sum_value').text(all_price);
+			</script>
+			<div>
+               <p id="total_sum_price">총 금액<span id="total_sum_value" >0</span>원</p>
+           </div>
+           <div>
+               <label for="order_name">수령인</label>
+               <input type="text" id="order_name">
+           </div>
+           <div>
+               <label for="order_phone">전화번호</label>
+               <input type="text" id="order_phone">
+           </div>
+           <div>
+               <label for="zipcode">우편번호</label>
+		       <input type="text" name="receive_post" id="zipcode" maxlength="5">
+		       <input type="button" onclick="execDaumPostcode()" value="우편번호 찾기" class="post_btn">
+           </div>
+           <div>
+		       <label for="address1">주소</label>
+		       <input type="text" name="receive_address1" id="address1" maxlength="30">
+		   </div>
+           <div>
+		       <label for="address2">상세주소</label>
+		       <input type="text" name="receive_address2" id="address2" maxlength="30">
+		   </div>
+		   <div>
+		       <label for="order_pay">결제수단</label>
+			   <input type="radio" name="pay_payment" id="pay_payment1"	value="1">계좌입금
+			   <input type="radio" name="pay_payment" id="pay_payment2"	value="2">카드결제
+			   <input type="radio" name="pay_payment" id="pay_payment3"	value="3">카카오페이
+		   </div>
+           </form>
     </div>
 </div>
 <!-- 다음 우편번호 API 시작 -->

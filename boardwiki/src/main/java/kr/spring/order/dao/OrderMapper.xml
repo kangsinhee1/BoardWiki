@@ -13,9 +13,7 @@
           order_zipcode,
           order_address1,
           order_address2,
-          order_pay,
-          order_check,
-          order_reg_date) 
+          order_pay) 
         VALUES(
 	 	  order_order_num_seq.nextval,
 	 	  #{mem_num},
@@ -25,9 +23,7 @@
 	 	  #{order_zipcode},
 	 	  #{order_address1},
 	 	  #{order_address2},
-	 	  #{order_pay},
-	 	  #{order_check},
-	 	  #{order_reg_date})
+	 	  #{order_pay})
     </insert>
     <select id="selectOrderDetail" parameterType="map" resultType="orderVO">
         SELECT * FROM order WHERE order_num=#{order_num}

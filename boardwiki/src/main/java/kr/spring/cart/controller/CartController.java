@@ -55,7 +55,7 @@ public class CartController {
 
 		log.debug("<<유저 - member>> : " + member);
 		log.debug("<<수량 - item_quantity>> : " + item_quantity);
-
+		
 		if (member == null) {
 			mapAjax.put("result", "logout");
 			
