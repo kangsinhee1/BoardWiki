@@ -1,36 +1,43 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!-- 게시판 글쓰기 시작 -->
 <script src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <!-- include ckeditor js -->
 <script src="${pageContext.request.contextPath}/js/ckeditor.js"></script>
 <script src="${pageContext.request.contextPath}/js/uploadAdapter.js"></script>
-<div class="page-main">
-	<h2>모임 글쓰기</h2>
-	<form:form action="teamWrite" id="team_register"
-	           enctype="multipart/form-data"
-	                            modelAttribute="teamVO">
-		<ul>
-			<li>
-				<form:label path="tea_name">모임 명</form:label>
-				<form:input path="tea_name" />
-				<form:errors path="tea_name" cssClass="error-color"/>
-			</li>
-			<li>
-				<form:label path="tea_man">모집 회원수</form:label>
-				<form:input type="number" path="tea_man"  min="2" max="99" defaultValue="2"/>
-				<form:errors path="tea_man" cssClass="error-color"/>
-			</li>
-		
-			
-			<li>
-				<form:label path="tea_content">홍보 내용</form:label>
-				<form:textarea path="tea_content"/>
-				<form:errors path="tea_content" cssClass="error-color"/>
-				<script>
+<!-- Page top section -->
+<section class="page-top-section set-bg"
+	data-setbg="/img/page-top-bg/4.jpg">
+	<div class="page-info">
+		<h2>모임 신청</h2>
+		<div class="site-breadcrumb">
+			<a href="">Home</a> / <span>모임 모집</span>
+		</div>
+	</div>
+</section>
+<!-- Page top end-->
+<section class="blog-page">
+	<div class="container">
+		<div class="row">
+			<div class="page-main">
+				<form:form action="teamWrite" id="team_register"
+					enctype="multipart/form-data" modelAttribute="teamVO">
+					<ul>
+						<li><form:label class="" path="tea_name">모임 명</form:label> <form:input
+								path="tea_name" /> <form:errors path="tea_name"
+								cssClass="error-color" /></li>
+						<li><form:label path="tea_man">모집 회원수</form:label> <form:input
+								type="number" path="tea_man" min="2" max="99" defaultValue="2" />
+							<form:errors path="tea_man" cssClass="error-color" /></li>
+
+
+						<li><form:label path="tea_content">홍보 내용</form:label> <form:textarea
+								path="tea_content" /> <form:errors path="tea_content"
+								cssClass="error-color" /> <script>
 				 function MyCustomUploadAdapterPlugin(editor) {
 					    editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
 					        return new UploadAdapter(loader);
@@ -47,39 +54,39 @@
 		            .catch( error => {
 		                console.error( error );
 		            } );
-			    </script> 
-			</li>
-			
-				<form:label path="tea_zipcode">모임 진행 장소</form:label>
-			<li>
-				<form:input type="hidden" path="tea_zipcode"/>
-				<input type="button" onclick="execDaumPostcode()"
-				               value="주소 찾기" class="default-btn">
-			</li>
-			<li>
-				<form:input path="tea_address1" placeholder="주소" readonly="readonly"/>
-				<form:errors path="tea_address1" cssClass="error-color"/>
-			</li>
-			<li>
-				<form:input path="tea_address2" placeholder="상세주소"/>
-				<form:errors path="tea_address2" cssClass="error-color"/>
-			</li>
-		</ul> 
-		<div class="align-center">
-			<form:button class="default-btn">전송</form:button>
-			<input type="button" value="목록"
-			  class="default-btn"
-			  onclick="location.href='teamList'">
-		</div>                           
-	</form:form>
-</div>
-	<!-- 우편번호 시작 -->
-	<!-- iOS에서는 position:fixed 버그가 있음, 적용하는 사이트에 맞게 position:absolute 등을 이용하여 top,left값 조정 필요 -->
-<div id="layer" style="display:none;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;">
-<img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnCloseLayer" style="cursor:pointer;position:absolute;right:-3px;top:-3px;z-index:1" onclick="closeDaumPostcode()" alt="닫기 버튼">
-</div>
+			    </script></li>
 
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+						<form:label class="label2" path="tea_zipcode" style="color: white;">모임 진행 장소</form:label>
+						<li><form:input type="hidden" path="tea_zipcode" /> <input
+							type="button" onclick="execDaumPostcode()" value="주소 찾기"
+							class="default-btn"></li>
+						<li><form:input path="tea_address1" placeholder="주소"
+								readonly="readonly" /> <form:errors path="tea_address1"
+								cssClass="error-color" /></li>
+						<li><form:input path="tea_address2" placeholder="상세주소" /> <form:errors
+								path="tea_address2" cssClass="error-color" /></li>
+					</ul>
+					<div class="align-center">
+						<form:button class="default-btn">전송</form:button>
+						<input type="button" value="목록" class="default-btn"
+							onclick="location.href='teamList'">
+					</div>
+				</form:form>
+			</div>
+			<!-- 우편번호 시작 -->
+			<!-- iOS에서는 position:fixed 버그가 있음, 적용하는 사이트에 맞게 position:absolute 등을 이용하여 top,left값 조정 필요 -->
+			<div id="layer"
+				style="display: none; position: fixed; overflow: hidden; z-index: 1; -webkit-overflow-scrolling: touch;">
+				<img src="//t1.daumcdn.net/postcode/resource/images/close.png"
+					id="btnCloseLayer"
+					style="cursor: pointer; position: absolute; right: -3px; top: -3px; z-index: 1"
+					onclick="closeDaumPostcode()" alt="닫기 버튼">
+			</div>
+		</div>
+	</div>
+</section>
+<script
+	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
     // 우편번호 찾기 화면을 넣을 element
     var element_layer = document.getElementById('layer');
@@ -170,7 +177,7 @@
         element_layer.style.top = (((window.innerHeight || document.documentElement.clientHeight) - height)/2 - borderWidth) + 'px';
     }
 </script>
-	<!-- 우편번호 끝 -->
+<!-- 우편번호 끝 -->
 <!-- 게시판 글쓰기 끝 -->
 
 

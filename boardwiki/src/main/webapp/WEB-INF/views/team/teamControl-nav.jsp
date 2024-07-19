@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- MyPage 메뉴 시작 -->
 <div class="side-bar">
 	<ul>
@@ -7,7 +8,8 @@
 	&nbsp;
 		
 		<li >
-			<input type="button" class="menu-btn" value="(${tea_name})회원 목록"
+		<input type="hidden" id="tea_status" value="${team.tea_status}">
+			<input type="button" class="menu-btn" value="(${team.tea_name})회원 목록"
 			onclick="location.href='${pageContext.request.contextPath}/team/teamControl?tea_num=${tea_num}'">
 		</li>
 		
@@ -27,9 +29,11 @@
 		&nbsp;
 		</li>
 		<li >
-		<input type="button" value="모임 비활성화" id="delete_btn">
+		<input type="button" style= "display:none"  class="menu-btn" value="모임 비활성화" id="delete_btn">
 		</li>
-		
+		<li>
+		<input type="button" style="display:none" class="menu-btn" value="모임 활성화" id="open_btn">
+		</li>
 	</ul>
 	
 </div>
@@ -37,10 +41,25 @@
 <!-- MyPage 메뉴 끝 -->
 	<script type="text/javascript">
 	 			const delete_btn = document.getElementById('delete_btn');
+	 			const open_btn = document.getElementById('open_btn');
+	 			const tea_status = document.getElementById('tea_status');
+	 			if(tea_status.value==0){
+	 				open_btn.style.display = 'block';
+	 			}
+	 			if(tea_status.value!=0){
+	 				delete_btn.style.display = 'block';
+	 			}
 	 			delete_btn.onclick=function(){
 	 				const choice = confirm('비활성화 하시겠습니까');
 	 				if(choice){
 	 					location.href='${pageContext.request.contextPath}/team/teamDelete?tea_num=${tea_num}'
+	 				}
+	 			}
+	 			
+	 			open_btn.onclick=function(){
+	 				const choice = confirm('활성화 하시겠습니까');
+	 				if(choice){
+	 					location.href='${pageContext.request.contextPath}/team/teamOpen?tea_num=${tea_num}'
 	 				}
 	 			}
 	 		</script>

@@ -42,6 +42,9 @@ public interface TeamMapper {
 		//비활성화
 		@Update("UPDATE team SET tea_status = 0 WHERE tea_num = #{tea_num}")
 		public void updateTeamStatus(Long tea_num);
+		//활성화
+		@Update("UPDATE team SET tea_status = 1 WHERE tea_num = #{tea_num}")
+		public void updateTeamStatusOpen(Long tea_num);
 		
 		//모임 좋아요 확인
 		@Select("SELECT * FROM team_fav WHERE mem_num=#{mem_num} AND tea_num=#{tea_num}")

@@ -113,6 +113,10 @@
 		<put-attribute name="css" value="/WEB-INF/views/team/teamCSS.jsp"/>
 		<put-attribute name="body" value="/WEB-INF/views/chat/chatList.jsp"/>
 	</definition>
+	<definition name="myChat2" extends="myPage">
+		<put-attribute name="title" value="myChat"/>
+		<put-attribute name="body" value="/WEB-INF/views/chat/myChat2.jsp"/>
+	</definition>
 </tiles-definitions>
 
 

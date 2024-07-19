@@ -7,7 +7,7 @@
 	src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/teamBoard.js"></script>
 <div class="page-main">
-	<h2 class="align-center">(${tea_name})회원 목록</h2>
+	<h2 class="align-center">(${team.tea_name})회원 목록</h2>
 	<c:if test="${count == 0}">
 		<div class="result-display">회원이 없습니다.</div>
 	</c:if>
@@ -38,7 +38,7 @@
 		</table>
 		<div class="align-center">${page}</div>
 	</c:if>
-	<h2 class="align-center">(${tea_name})신청 목록</h2>
+	<h2 class="align-center">(${team.tea_name})신청 목록</h2>
 	<c:if test="${count > 0}">
 		<table class="striped-table">
 			<tr>

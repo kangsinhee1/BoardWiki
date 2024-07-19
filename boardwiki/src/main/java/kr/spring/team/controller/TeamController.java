@@ -67,7 +67,7 @@ public class TeamController {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
-		
+
 
 		int count = teamService.getTeamRowCount(map);
 
@@ -87,7 +87,7 @@ public class TeamController {
 		model.addAttribute("page",page.getPage());
 		return "teamList";
 	};
-	
+
 	@GetMapping("/team/teamListAdmin")
 	public String selectListAdmin(
 			@RequestParam(defaultValue="1") int pageNum,
@@ -97,7 +97,7 @@ public class TeamController {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
-		
+
 
 		int count = teamService.getTeamRowCount(map);
 
@@ -109,9 +109,8 @@ public class TeamController {
 			map.put("start",page.getStartRow());
 			map.put("end",page.getEndRow());
 			list = teamService.selectTeamListAdmin(map);
-			log.debug("asdlfk asdlkf ajsdf" + list);
 		}
-		
+
 		model.addAttribute("count",count);
 		model.addAttribute("list",list);
 		model.addAttribute("page",page.getPage());
@@ -218,10 +217,21 @@ public class TeamController {
 	@GetMapping("/team/teamDelete")
 	public String deleteTeam(long tea_num) {
 		//모임장만 비활성화 되게 처리
+		
 		teamService.updateTeamStatus(tea_num);
 		return "redirect:teamList";
 	}
+	
+	@GetMapping("/team/teamOpen")
+	public String openTeam(long tea_num) {
+		//모임장만 비활성화 되게 처리
+		
+		teamService.updateTeamStatusOpen(tea_num);
+		return "redirect:teamList";
+	}
 
+	
+	
 	/*=====================
 	 * 모임 신청
 	 *=====================*/
@@ -282,12 +292,12 @@ public class TeamController {
 		teamService.deleteTeamApply(teaA_num);
 		return "redirect:/team/myTeam2";
 	}
-	
-	
+
+
 	// 모임 신청 목록
 	@GetMapping("/team/listTeamApply")
 	public String listTeamApply() {
-		
+
 		return "listTeamApply";
 	}
 
@@ -301,13 +311,14 @@ public class TeamController {
 	 * 나의 모임 게시판 목록(가입한 모임, 등록한 모임, 신청중 모임)
 	 *=====================*/
 
-	
+
 	@GetMapping("/team/myTeam2")
 	public String getMyTeam2(Model model, HttpSession session,HttpServletRequest request) {
 		Map<String,Object> map = new HashMap<String,Object>();
 		Map<String,Object> map2 = new HashMap<String,Object>();
 		Map<String,Object> map3= new HashMap<String,Object>();
 		Map<String,Object> map4= new HashMap<String,Object>();
+		Map<String,Object> map5= new HashMap<String,Object>();
 
 
 		//본인이 가입한 모임 목록
@@ -319,6 +330,7 @@ public class TeamController {
 
 		}
 		map.put("mem_num",user.getMem_num());
+		map.put("tea_status", 1);
 		map.put("teaA_status",2);
 		List<TeamApplyVO> list = null;
 		list = teamService.selectTeamListApplied(map);
@@ -327,6 +339,7 @@ public class TeamController {
 		//본인이 등록한 모임 목록
 
 		map2.put("mem_num",user.getMem_num());
+		map2.put("tea_status", 1);
 		map2.put("teaA_status",9); 
 		List<TeamApplyVO> list2 = null; list2 = teamService.selectTeamListApplied(map2);
 		model.addAttribute("list2",list2);
@@ -334,17 +347,24 @@ public class TeamController {
 		// 신청한 모임 리스트
 		map3.put("mem_num",user.getMem_num());
 		map3.put("teaA_status",1); 
+		map3.put("tea_status", 1);
 		List<TeamApplyVO> list3 = null;
 		list3 = teamService.selectTeamListApplied(map3);
 		model.addAttribute("list3",list3);
-		
+
 		// 신청한 모임 목록
 		map4.put("mem_num",user.getMem_num());
 		List<TeamApplyVO> list4 = null;
 		list4 = teamService.selectTeamListApplied2(map4);
 		model.addAttribute("list4",list4);
-
-		log.debug(""+list4);
+		// 비활성화 모임 목록
+		map5.put("mem_num",user.getMem_num());
+		map5.put("teaA_status",9); 
+		map5.put("tea_status", 0);
+		List<TeamApplyVO> list5 = null;
+		list5 = teamService.selectTeamListApplied(map5);
+		model.addAttribute("list5",list5);
+		log.debug("list5",list5);
 		return "myTeamprac";
 	}
 	//글작성 폼 호출
@@ -352,12 +372,12 @@ public class TeamController {
 	public String insertTeamBoard(HttpServletRequest request,
 			HttpSession session,
 			Model model, TeamBoardVO teamBoardVO) {
-		
+
 		log.debug("글작성 폼 호출 : " + teamBoardVO);
 		long tea_num = teamBoardVO.getTea_num();
-		
-		
-		
+
+
+
 		MemberVO member =(MemberVO)session.getAttribute("user");
 		if(member== null) {
 			model.addAttribute("message", "로그인후 작성 가능합니다.");
@@ -368,14 +388,14 @@ public class TeamController {
 
 		}
 		TeamVO team1 = teamService.detailTeam(tea_num);
-			if(team1.getMem_num() == member.getMem_num()) {
-				model.addAttribute("admin",true);
-			}else {
-				model.addAttribute("admin",false);
-			}
-			model.addAttribute("tea_num",tea_num);
-		
-		
+		if(team1.getMem_num() == member.getMem_num()) {
+			model.addAttribute("admin",true);
+		}else {
+			model.addAttribute("admin",false);
+		}
+		model.addAttribute("tea_num",tea_num);
+
+
 		return "teamBoardWrite";
 	}
 
@@ -386,7 +406,7 @@ public class TeamController {
 			HttpServletRequest request,
 			HttpSession session,
 			Model model)throws IllegalStateException,IOException {
-		
+
 		//유효성 체크 결과 오류가 있으면 폼 호출
 		if(result.hasErrors()) {
 			return "teamBoardWrite";
@@ -395,15 +415,15 @@ public class TeamController {
 		MemberVO member = (MemberVO)session.getAttribute("user");
 		//모임 게시판 번호 불러오기
 		long tea_num = teamBoardVO.getTea_num();
-		
+
 
 		teamBoardVO.setFilename(FileUtil.createFile(request, teamBoardVO.getUpload()));
-		
+
 		teamBoardVO.setMem_num(member.getMem_num());
 		teamBoardVO.setTea_num(tea_num);
 		log.debug("<<글 모임판 작성2>> : " + teamBoardVO);
 		//모임글쓰기
-	    teamService.insertTeamBoard(teamBoardVO);
+		teamService.insertTeamBoard(teamBoardVO);
 		//View 메시지 처리
 		model.addAttribute("message", "성공적으로 글이 등록되었습니다.");
 		if(member.getMem_num() == teamService.detailTeam(tea_num).getMem_num()) {
@@ -414,60 +434,60 @@ public class TeamController {
 					request.getContextPath()+"/team/teamBoardUser?tea_num="+tea_num);
 		}
 		model.addAttribute("tea_num",tea_num);
-	
+
 		return "common/resultAlert";
 	}
-	
+
 
 	//관리자 게시판
-		@GetMapping("/team/teamBoardAdmin")
-		public String selectTeamBoardAdmin(@RequestParam long tea_num, HttpServletRequest request,
-				HttpSession session,   	
-				Model model,
-				@RequestParam(defaultValue="1") int pageNum,
-				@RequestParam(defaultValue="1") int order,
-				String keyfield,String keyword) {
-			session.setAttribute("tea_num", tea_num);
-			model.addAttribute("tea_num",tea_num);
-			MemberVO member =(MemberVO)session.getAttribute("user");
-			if(member== null) {
-				model.addAttribute("message", "로그인 해야 합니다.");
-				model.addAttribute("url", 
-						request.getContextPath()+"/member/login");
-				return "common/resultAlert";
-			}
-			//해당 모임의 관리자만 접속가능하게 처리
-			TeamVO team1 = teamService.detailTeam(tea_num);
-			if(team1.getMem_num() != member.getMem_num()) {
-				model.addAttribute("message", "관리자가 아닙니다.");
-				model.addAttribute("url", request.getContextPath()+"/member/login");
-				return "common/resultAlert";
-			}
-			
-			Map<String,Object> map = new HashMap<String,Object>();
-			map.put("keyfield", keyfield);
-			map.put("keyword", keyword);
-			map.put("tea_num", tea_num);
-			int count = teamService.selectTeamBoardRowCount(map);
-	
-			//페이지 처리
-			PagingUtil page = new PagingUtil(keyfield, keyword, pageNum,count,20,10,"teamBoardAdmin","&order="+order);
-			List<TeamBoardVO> list = null;
-			if(count >0) {
-				map.put("order", order);
-				map.put("start",page.getStartRow());
-				map.put("end",page.getEndRow());
-				map.put("tea_num", tea_num);
-				list = teamService.selectTeamBoardList(map);
-			}
-			model.addAttribute("count",count);
-			model.addAttribute("list",list);
-			model.addAttribute("page",page.getPage());
-			model.addAttribute("TEAM",teamService.detailTeam(tea_num));
-			model.addAttribute("chaR_num",chatService.selectChatRoom(tea_num).getChaR_num());
-			log.debug("채팅방 번호 가져와! "+chatService.selectChatRoom(tea_num).getChaR_num());
-			return "teamBoardAdmin";
+	@GetMapping("/team/teamBoardAdmin")
+	public String selectTeamBoardAdmin(@RequestParam long tea_num, HttpServletRequest request,
+			HttpSession session,   	
+			Model model,
+			@RequestParam(defaultValue="1") int pageNum,
+			@RequestParam(defaultValue="1") int order,
+			String keyfield,String keyword) {
+		session.setAttribute("tea_num", tea_num);
+		model.addAttribute("tea_num",tea_num);
+		MemberVO member =(MemberVO)session.getAttribute("user");
+		if(member== null) {
+			model.addAttribute("message", "로그인 해야 합니다.");
+			model.addAttribute("url", 
+					request.getContextPath()+"/member/login");
+			return "common/resultAlert";
 		}
+		//해당 모임의 관리자만 접속가능하게 처리
+		TeamVO team1 = teamService.detailTeam(tea_num);
+		if(team1.getMem_num() != member.getMem_num()) {
+			model.addAttribute("message", "관리자가 아닙니다.");
+			model.addAttribute("url", request.getContextPath()+"/member/login");
+			return "common/resultAlert";
+		}
+
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		map.put("tea_num", tea_num);
+		int count = teamService.selectTeamBoardRowCount(map);
+
+		//페이지 처리
+		PagingUtil page = new PagingUtil(keyfield, keyword, pageNum,count,20,10,"teamBoardAdmin","&order="+order);
+		List<TeamBoardVO> list = null;
+		if(count >0) {
+			map.put("order", order);
+			map.put("start",page.getStartRow());
+			map.put("end",page.getEndRow());
+			map.put("tea_num", tea_num);
+			list = teamService.selectTeamBoardList(map);
+		}
+		model.addAttribute("count",count);
+		model.addAttribute("list",list);
+		model.addAttribute("page",page.getPage());
+		model.addAttribute("TEAM",teamService.detailTeam(tea_num));
+		model.addAttribute("chaR_num",chatService.selectChatRoom(tea_num).getChaR_num());
+		log.debug("채팅방 번호 가져와! "+chatService.selectChatRoom(tea_num).getChaR_num());
+		return "teamBoardAdmin";
+	}
 
 
 	//사용자 게시판
@@ -506,10 +526,10 @@ public class TeamController {
 
 		}
 		TeamApplyVO applyVO = new TeamApplyVO();
-		
+
 		applyVO.setMem_num(member.getMem_num());
 		applyVO.setTea_num(tea_num);
-		 TeamApplyVO db_apply = teamService.selectTeamApplyListByTeamNum(applyVO);
+		TeamApplyVO db_apply = teamService.selectTeamApplyListByTeamNum(applyVO);
 		model.addAttribute("count",count);
 		model.addAttribute("list",list);
 		model.addAttribute("page",page.getPage());
@@ -518,18 +538,18 @@ public class TeamController {
 		model.addAttribute("chaR_num",chatService.selectChatRoom(tea_num).getChaR_num());
 		return "teamBoardUser";
 	}
-	
+
 	//글 상세 보기
 	@GetMapping("/team/teamBoardDetail")
 	public ModelAndView teamBoardDetail(long teaB_num,Model model,HttpSession session) {
 		//해당 글의 조회수 증가
 		teamService.updateHitTeamBoard(teaB_num);
-		
+
 		TeamBoardVO board = teamService.getTeamBoardDetail(teaB_num);
-		
+
 		//해당 모임의 관리자만 접속가능하게 처리
 		TeamVO team1 = teamService.detailTeam(board.getTea_num());	
-		
+
 		MemberVO member =(MemberVO)session.getAttribute("user");
 		if(team1.getMem_num() == member.getMem_num()) {
 			model.addAttribute("admin",true);
@@ -538,7 +558,7 @@ public class TeamController {
 		}
 		board.setTeaB_title(StringUtil.useNoHTML(board.getTeaB_title()));
 		return new ModelAndView("teamBoardDetail","board",board);
-		
+
 	}
 	@GetMapping("/team/file")
 	public String download(Long teaB_num, HttpServletRequest request, Model model) {
@@ -551,7 +571,7 @@ public class TeamController {
 	//글 수정하기
 	@GetMapping("/team/teamBoardUpdate")
 	public String teamBoardUpdate(long teaB_num,HttpServletRequest request,HttpSession session, Model model) {
-		
+
 		//로그인 확인
 		MemberVO member =(MemberVO)session.getAttribute("user");
 		if(member== null) {
@@ -570,20 +590,20 @@ public class TeamController {
 		model.addAttribute("teamBoardVO",board);
 		return "teamBoardUpdate";
 	}
-	
+
 	@PostMapping("/team/teamBoardUpdate")
 	public String updateTeamBoard(@Valid TeamBoardVO teamBoardVO, BindingResult result, HttpServletRequest request,HttpSession session, Model model) throws IllegalStateException, IOException {
-		
-		
+
+
 		if(result.hasErrors()) {
 			TeamBoardVO vo = teamService.getTeamBoardDetail(
 					teamBoardVO.getTeaB_num());
-			
+
 			teamBoardVO.setFilename(vo.getFilename());
 			return "teamBoardUpdate";
 		}
-		
-		
+
+
 		//로그인 확인
 		MemberVO member =(MemberVO)session.getAttribute("user");
 		if(member== null) {
@@ -605,26 +625,26 @@ public class TeamController {
 			FileUtil.removeFile(request, db_teamBoard.getFilename());
 		}
 		teamService.updateTeamBoard(teamBoardVO);
-		
+
 		model.addAttribute("message", "글 수정 완료!!");
 		model.addAttribute("url", 
-		 request.getContextPath() + "/team/teamBoardDetail?teaB_num="
-		                            +teamBoardVO.getTeaB_num());
-		
+				request.getContextPath() + "/team/teamBoardDetail?teaB_num="
+						+teamBoardVO.getTeaB_num());
+
 		return "common/resultAlert";
 	}
 	// 글 삭제
 	@GetMapping("/team/teamBoardDelete")
 	public String submitDelete(long teaB_num,
-			                   HttpServletRequest request, Model model) {
+			HttpServletRequest request, Model model) {
 		log.debug("<<게시판 글 삭제 - board_num>> : " + teaB_num);
-		
+
 		//DB에 저장된 파일 정보 구하기
 		TeamBoardVO db_board = teamService.getTeamBoardDetail(teaB_num);
-		
+
 		//글 삭제
 		teamService.deleteTeamBoard(teaB_num);
-		
+
 		if(db_board.getFilename()!=null) {
 			//파일 삭제
 			FileUtil.removeFile(request, db_board.getFilename());
@@ -642,35 +662,36 @@ public class TeamController {
 	public String teamControl(TeamApplyVO teamApplyVO ,Model model) {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("tea_num",teamApplyVO.getTea_num());
-		
+
 		List<TeamApplyVO> list = null;
 		list = teamService.listTeamApply(teamApplyVO);
 		int count  = teamService.countTeamApplyList(teamApplyVO.getTea_num());
 		model.addAttribute("count",count);
 		model.addAttribute("list",list);
 		model.addAttribute("tea_num",teamApplyVO.getTea_num());
-		model.addAttribute("tea_name",teamService.detailTeam(teamApplyVO.getTea_num()).getTea_name());
+		model.addAttribute("team",teamService.detailTeam(teamApplyVO.getTea_num()));
+		log.debug("모임 관련 내용 : " + teamService.detailTeam(teamApplyVO.getTea_num()));
 		return "teamControl";
 	}
-	
+
 	//참석 회원 관리
-		@GetMapping("/team/teamCalendar")
-		public String teamCalendar(TeamApplyVO teamApplyVO ,Model model) {
-			Map<String,Object> map = new HashMap<String,Object>();
-			map.put("tea_num",teamApplyVO.getTea_num());
-			
-			List<TeamApplyVO> list = null;
-			
-			list = teamService.listTeamApply(teamApplyVO);
-			int count  = teamService.countTeamApplyList(teamApplyVO.getTea_num());
-			model.addAttribute("count",count);
-			model.addAttribute("list",list);
-			model.addAttribute("tea_num",teamApplyVO.getTea_num());
-			model.addAttribute("tea_name",teamService.detailTeam(teamApplyVO.getTea_num()).getTea_name());
-			model.addAttribute("tea_time",teamService.detailTeam(teamApplyVO.getTea_num()).getTea_time());
-			log.debug("sd flasdj glag jalgj "+teamService.detailTeam(teamApplyVO.getTea_num()));
-			return "teamCalendar";
-		}
+	@GetMapping("/team/teamCalendar")
+	public String teamCalendar(TeamApplyVO teamApplyVO ,Model model) {
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("tea_num",teamApplyVO.getTea_num());
+
+		List<TeamApplyVO> list = null;
+
+		list = teamService.listTeamApply(teamApplyVO);
+		int count  = teamService.countTeamApplyList(teamApplyVO.getTea_num());
+		model.addAttribute("count",count);
+		model.addAttribute("list",list);
+		model.addAttribute("tea_num",teamApplyVO.getTea_num());
+		model.addAttribute("tea_name",teamService.detailTeam(teamApplyVO.getTea_num()).getTea_name());
+		model.addAttribute("tea_time",teamService.detailTeam(teamApplyVO.getTea_num()).getTea_time());
+		log.debug("sd flasdj glag jalgj "+teamService.detailTeam(teamApplyVO.getTea_num()));
+		return "teamCalendar";
+	}
 
 
 

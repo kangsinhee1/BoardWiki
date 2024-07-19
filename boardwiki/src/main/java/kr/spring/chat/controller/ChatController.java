@@ -130,16 +130,17 @@ public class ChatController {
 		}
 		
 		
-		@GetMapping("/chat/chatList")
+		@GetMapping("/myPage/myChat2")
 		public String getChatList(HttpSession session, Model model, String keyword, @RequestParam(defaultValue="1" )int pageNum) {
 			MemberVO user = (MemberVO)session.getAttribute("user");
 			Map<String,Object> map = new HashMap<String,Object>();
 			map.put("keyword",keyword);
 			map.put("mem_num", user.getMem_num());
 			int count = chatService.selectRowCount(map);
+			log.debug("채팅 개수 ~~~~~~~~~~~~~~~~~~~~~~" + count);
 			
 			//페이지 처리
-			PagingUtil page = new PagingUtil(null,keyword,pageNum,count,20,10,"chatList");
+			PagingUtil page = new PagingUtil(null,keyword,pageNum,count,20,10,"myChat2");
 			List<ChatRoomVO> list= null;
 			if(count>0) {
 				map.put("start", page.getStartRow());
@@ -148,11 +149,10 @@ public class ChatController {
 				model.addAttribute("count",count);
 				model.addAttribute("list",list);
 				model.addAttribute("page",page.getPage());
-				log.debug("목록 가져와 ! " + list);
 			}
 			
 			
-			return "chatList";
+			return "myChat2";
 		}
 		
 }

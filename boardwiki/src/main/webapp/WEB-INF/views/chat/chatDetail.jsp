@@ -16,7 +16,7 @@
 	<c:if test="${team.mem_num!=user.mem_num}">
 	    <input type="button" value="게시판으로" onclick="location.href='${pageContext.request.contextPath}/team/teamBoardUser?tea_num=${team.tea_num}'">
 	</c:if>
-	 <input type="button" value="채팅목록" onclick="location.href='${pageContext.request.contextPath}/chat/chatList'">
+	 <input type="button" value="채팅목록" onclick="location.href='${pageContext.request.contextPath}/myPage/myChat2'">
 	</div>    
 	<p>
 		채팅 멤버 : 

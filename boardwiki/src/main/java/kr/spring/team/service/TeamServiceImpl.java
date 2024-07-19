@@ -71,6 +71,10 @@ public class TeamServiceImpl implements TeamService {
 	public void updateTeamStatus(Long tea_num) {
 		teamMapper.updateTeamStatus(tea_num);
 	}
+	@Override
+	public void updateTeamStatusOpen(Long tea_num) {
+		teamMapper.updateTeamStatusOpen(tea_num);
+	}
 
 	@Override
 	public TeamFavVO selectTeamFav(TeamFavVO tFav) {

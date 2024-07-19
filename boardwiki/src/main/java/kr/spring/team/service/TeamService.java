@@ -31,6 +31,8 @@ public interface TeamService {
 			public void updateTeamHit(Long tea_num);
 			//비활성화
 			public void updateTeamStatus(Long tea_num);
+			//활성화
+			public void updateTeamStatusOpen(Long tea_num);
 			
 			
 			//모임 좋아요 확인
