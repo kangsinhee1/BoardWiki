@@ -4,6 +4,16 @@
 <!-- Add JavaScript for content toggling -->
 
 <div class="align-center">
+	<nav class="navbar">
+        <div class="navbar-container">
+            <a href="#" class="navbar-logo ">내가 신청한 모임</a>
+            <ul class="navbar-menu">
+                <c:forEach var="team" items="${list3}">
+                    <li class="navbar-item" id="navbar-requested"><a href="#" class="navbar-link">${team.tea_name}</a></li>
+                </c:forEach>
+            </ul>
+        </div>
+    </nav>
     <nav class="navbar">
         <div class="navbar-container">
             <a href="#" class="navbar-logo">내가 가입한 모임</a>
@@ -24,15 +34,16 @@
             </ul>
         </div>
     </nav>
-    <nav class="navbar">
+      <nav class="navbar">
         <div class="navbar-container">
-            <a href="#" class="navbar-logo ">내가 신청한 모임</a>
+            <a href="#" class="navbar-logo">비활성화된 모임</a>
             <ul class="navbar-menu">
-                <c:forEach var="team" items="${list3}">
-                    <li class="navbar-item" id="navbar-requested"><a href="#" class="navbar-link">${team.tea_name}</a></li>
-                </c:forEach>
+            <c:forEach var="team" items="${list5}">
+                <li class="navbar-item" id="navbar-authorized"><a href="teamBoardAdmin?tea_num=${team.tea_num}" class="navbar-link">${team.tea_name}</a></li>
+            </c:forEach>
             </ul>
         </div>
     </nav>
+    
 </div>
 

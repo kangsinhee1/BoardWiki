@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.spring.chat.service.ChatService;
@@ -21,6 +22,7 @@ import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.team.service.TeamService;
 import kr.spring.team.vo.TeamVO;
+import kr.spring.util.PagingUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -120,10 +122,37 @@ public class ChatController {
 				mapJson.put("result", "success");
 				mapJson.put("list", list);
 				mapJson.put("user_num", user.getMem_num());
+				log.debug("채팅 가온나  : " + list);
 			}
 			return mapJson;
 			
+			
 		}
 		
+		
+		@GetMapping("/chat/chatList")
+		public String getChatList(HttpSession session, Model model, String keyword, @RequestParam(defaultValue="1" )int pageNum) {
+			MemberVO user = (MemberVO)session.getAttribute("user");
+			Map<String,Object> map = new HashMap<String,Object>();
+			map.put("keyword",keyword);
+			map.put("mem_num", user.getMem_num());
+			int count = chatService.selectRowCount(map);
+			
+			//페이지 처리
+			PagingUtil page = new PagingUtil(null,keyword,pageNum,count,20,10,"chatList");
+			List<ChatRoomVO> list= null;
+			if(count>0) {
+				map.put("start", page.getStartRow());
+				map.put("end", page.getEndRow());
+				list = chatService.selectChatRoomList(map);
+				model.addAttribute("count",count);
+				model.addAttribute("list",list);
+				model.addAttribute("page",page.getPage());
+				log.debug("목록 가져와 ! " + list);
+			}
+			
+			
+			return "chatList";
+		}
 		
 }

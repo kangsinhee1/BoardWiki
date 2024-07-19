@@ -331,7 +331,7 @@ public class TeamController {
 		List<TeamApplyVO> list2 = null; list2 = teamService.selectTeamListApplied(map2);
 		model.addAttribute("list2",list2);
 
-		// 신청한 모임 목록
+		// 신청한 모임 리스트
 		map3.put("mem_num",user.getMem_num());
 		map3.put("teaA_status",1); 
 		List<TeamApplyVO> list3 = null;

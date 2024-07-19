@@ -66,7 +66,7 @@ $(function(){
 								output += item.mem_nickname;
 							}
 							output += '<div class="item">';
-							output += item.read_count + ' <span>' + item.message.replace(/\r\n/g,'<br>').replace(/\r/g,'<br>').replace(/\n/g,'<br>') + '</span>';
+							output += item.chaT_cnt+ ' <span>' + item.message.replace(/\r\n/g,'<br>').replace(/\r/g,'<br>').replace(/\n/g,'<br>') + '</span>';
 							//시간 추출
 							output += '<div class="align-right">' + item.chaT_time.split(' ')[1] + '</div>';
 							output += '</div>';

@@ -10,12 +10,13 @@
 	</h2> 
 	<div class="align-right">
 	<c:if test="${team.mem_num == user.mem_num}">
-	    <input type="button" value="뒤로가기" onclick="location.href='${pageContext.request.contextPath}/team/teamBoardAdmin?tea_num=${team.tea_num}'">
+	    <input type="button" value="게시판으로" onclick="location.href='${pageContext.request.contextPath}/team/teamBoardAdmin?tea_num=${team.tea_num}'">
 	</c:if>
 	
 	<c:if test="${team.mem_num!=user.mem_num}">
-	    <input type="button" value="뒤로가기" onclick="location.href='${pageContext.request.contextPath}/team/teamBoardUser?tea_num=${team.tea_num}'">
+	    <input type="button" value="게시판으로" onclick="location.href='${pageContext.request.contextPath}/team/teamBoardUser?tea_num=${team.tea_num}'">
 	</c:if>
+	 <input type="button" value="채팅목록" onclick="location.href='${pageContext.request.contextPath}/chat/chatList'">
 	</div>    
 	<p>
 		채팅 멤버 : 

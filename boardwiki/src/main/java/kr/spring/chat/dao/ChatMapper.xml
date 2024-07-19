@@ -13,26 +13,41 @@
  
  
  <sql id="chatSub">
- 	FROM chat_room r JOIN chat_member m using(chaR_num)
- 	LEFT OUTER JOIN(SELECT chaR_Num, mem_num, count(*) room_cnt FROM chat_read WHERE mem_num=#{mem_num}
- 	GROUP BY chaR_num, mem_num) e USING(chaR_num)
- 	LEFT OUTER JOIN (SELECT chaT_num,
- 	<![CDATA[
-			REPLACE(REPLACE(REPLACE(chaT_txt,'<','&lt;'),'>','&gt;'),'@{member}@','') chaT_txt,
-	]]>
-	chaT_time,
-	chaT_status,
-	chaR_num
-	FROM chat_text WHERE chaT_num in(SELECT max(chaT_num) chaT_num FROM chat_text GROUP BY chaR_num))
-	USING (chaR_num)
-	WHERE m.mem_num=#{mem_num}
- </sql>
+	FROM chat_room r 
+    JOIN chat_member m ON r.chaR_num = m.chaR_num
+ 	LEFT OUTER JOIN (
+        SELECT chaR_Num, mem_num, count(*) room_cnt 
+        FROM chat_read 
+        WHERE mem_num = #{mem_num}
+        GROUP BY chaR_num, mem_num
+    ) e ON r.chaR_num = e.chaR_num
+ 	LEFT OUTER JOIN (
+        SELECT chaT_num,
+        <![CDATA[
+            REPLACE(REPLACE(REPLACE(chaT_txt,'<','&lt;'),'>','&gt;'),'@{member}@','') chaT_txt,
+        ]]>
+        chaT_time,
+        chaT_status,
+        chaR_num
+        FROM chat_text 
+        WHERE chaT_num IN (
+            SELECT max(chaT_num) chaT_num
+            FROM chat_text 
+            GROUP BY chaR_num
+        )
+    ) t ON r.chaR_num = t.chaR_num
+	WHERE m.mem_num = #{mem_num}
+	<if test="keyword != null and keyword != ''">
+		AND chaR_name LIKE '%' || #{keyword} || '%'
+	</if>
+</sql>
+
  <select id="selectChatRowCount" parameterType="map" resultType="integer">
  	SELECT count(*)
  	<include refid="chatSub"></include>
  </select>
  <select id="selectChatRoomList" parameterType="map" resultMap="chatMap">
- 	SELECT *FROM (SELECT a.* rownum rnum FROM(SELECT *
+ 	SELECT * FROM (SELECT a.*, rownum rnum FROM(SELECT *
  	<include refid="chatSub"></include>
  	ORDER BY chat_time DESC)a)
  	<![CDATA[
@@ -56,11 +71,11 @@
 	 	REPLACE(REPLACE(chaT_txt,'<','&lt;'),'>','&gt;') message,
 	 ]]>
 	 chat_time,
-	 read_count,
+	 chaT_cnt,
 	 mem_num,
 	 mem_nickname
 	 FROM chat_text
-	 LEFT OUTER JOIN (select chaT_num, count(*) read_count FROM chat_read GROUP BY chaT_num)
+	 LEFT OUTER JOIN (select chaT_num, count(*) chaT_cnt FROM chat_read GROUP BY chaT_num)
 	 USING (chaT_num)
 	 JOIN member_detail
 	 USING (mem_num)

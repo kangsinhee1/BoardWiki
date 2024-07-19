@@ -12,12 +12,18 @@ import kr.spring.chat.dao.ChatMapper;
 import kr.spring.chat.vo.ChatMemberVO;
 import kr.spring.chat.vo.ChatRoomVO;
 import kr.spring.chat.vo.ChatTextVO;
+import kr.spring.member.dao.MemberMapper;
+import kr.spring.member.vo.MemberVO;
 
 @Service
 @Transactional
 public class ChatServiceImpl implements ChatService{
 	@Autowired 
 	ChatMapper chatMapper;
+	@Autowired 
+	MemberMapper memberMapper;
+	
+	
 	@Override
 	public ChatRoomVO selectChatRoom(long tea_num) {
 		return chatMapper.selectChatRoom(tea_num);
@@ -44,6 +50,15 @@ public class ChatServiceImpl implements ChatService{
 	@Override
 	public void insertChatRoomMember(Long chaR_num, String chaR_name, Long mem_num) {
 		chatMapper.insertChatRoomMember(chaR_num, chaR_name, mem_num);
+		
+		//입장 메시지 처리
+		ChatTextVO chatTextVO = new ChatTextVO();
+		chatTextVO.setChaT_num(chatMapper.selectChatNum());
+		chatTextVO.setChaR_num(chaR_num);
+		chatTextVO.setMem_num(mem_num);
+		MemberVO member = memberMapper.selectMember(mem_num);
+		chatTextVO.setMessage(member.getMem_nickName()+" 님이 가입하였습니다.");
+		insertChat(chatTextVO);
 	}
 
 	@Override

@@ -17,6 +17,7 @@ public class ChatTextVO {
 	private long chaT_status; //채팅메시지 활성화/신고처리
 	private String chaT_time; // 채팅메시지 작성시간
 	
+	private int chaT_cnt; //메시지당 읽지 않은 수
 	private int read_count; //메시지당 읽지 않은 수
 	private String mem_nickname; //작성자 
 

@@ -286,7 +286,7 @@ public class TeamAjaxController {
 		}else {
 			teamService.updateTeamApplyStatus(teaA_status,teaA_num);
 			if(teaA_status == 2) {
-				chatService.insertChatRoomMemberUser(chatRoomVO.getChaR_num(), chatRoomVO.getChaR_name(), db_applyVO.getMem_num());
+				chatService.insertChatRoomMember(chatRoomVO.getChaR_num(), chatRoomVO.getChaR_name(), db_applyVO.getMem_num());
 				
 			}else {
 				chatService.deleteChatRoomMemeberUser(db_applyVO.getMem_num(),chatRoomVO.getChaR_num());

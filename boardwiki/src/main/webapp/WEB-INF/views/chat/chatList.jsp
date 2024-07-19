@@ -4,37 +4,34 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>  
 <div class="page-main">
 	<h2>채팅리스트</h2>
-	<form action="talkList" id="search_form" method="get">
+	<form action="chatList" id="search_form" method="get">
 		<ul class="search">
 			<li>
 				<input type="search" name="keyword" id="keyword" value="${param.keyword}">
 			</li>
 			<li>
 				<input type="submit" value="찾기">
-				<input type="button" value="목록" onclick="location.href='talkList'">
+				<input type="button" value="목록" onclick="location.href='chatList'">
 			</li>
 		</ul>
 	</form>
-	<div class="align-right">
-		<input type="button" value="채팅방 생성" onclick="location.href='talkRoomWrite'">
-	</div>
 	<c:if test="${count==0}">
 	<div class="result-display">표시할 채팅방이 없습니다.</div>
 	</c:if>
 	<c:if test="${count>0}">
 	<table class="striped-table">
-		<c:forEach var="talk" items="${list}">
+		<c:forEach var="chat" items="${list}">
 		<tr>
 			<td style="text-align:left;">
-				<a href="talkDetail?talkroom_num=${talk.talkroom_num}">
-					<b>${talk.talkMemberVO.room_name}(${talk.room_cnt})</b>
+				<a href="chatDetail?chaR_num=${chat.chaR_num}">
+					<b>${chat.chatMemberVO.chaR_name}(${chat.room_cnt})</b>
 					<br>	
-					<span>${fn:substring(talk.talkVO.message,0,45)}</span>
+					<span>${fn:substring(chat.chatTextVO.chaT_txt,0,45)}</span>
 				</a>
 				</td>
 			<td>
-				<c:if test="${!empty talk.talkVO.chat_date}">${talk.talkVO.chat_date}</c:if>
-				<c:if test="${empty talk.talkVO.chat_date}">${talk.talkroom_date}</c:if>
+				<c:if test="${!empty chat.chatTextVO.chaT_time}">${chat.chatTextVO.chaT_time}</c:if>
+				<c:if test="${empty chat.chatTextVO.chaT_time}">${chat.chaR_date}</c:if>
 			</td>
 		</tr>
 		</c:forEach>

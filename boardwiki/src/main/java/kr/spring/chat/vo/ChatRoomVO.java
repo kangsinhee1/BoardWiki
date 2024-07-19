@@ -16,6 +16,7 @@ public class ChatRoomVO {
 	private long[] members; //채팅 멤버들
 	private long mem_num;	//채팅방 생성자
 	private int chaT_cnt; //해당 채팅방에 읽지 않은 메시지 수 
+	private int room_cnt;
 	
 	private ChatTextVO chatTextVO;
 	private ChatMemberVO chatMemberVO;
