@@ -140,3 +140,22 @@ CREATE TABLE  point  (
 );
 
 CREATE SEQUENCE point_seq;
+
+주사위 굴리기
+CREATE TABLE dice (
+    dice_num NUMBER PRIMARY KEY,
+    dice_chance NUMBER not null,
+    mem_num NUMBER not null,
+    CONSTRAINT fk_mem_num FOREIGN KEY (mem_num) REFERENCES member(mem_num)
+);
+CREATE SEQUENCE dice_seq;
+
+CREATE TABLE dice_value (
+    dice_value_num NUMBER PRIMARY KEY,
+    dice_num NUMBER not null,
+    dice_val NUMBER not null,
+    dice_date DATE DEFAULT SYSDATE not null,
+    CONSTRAINT fk_dice_num FOREIGN KEY (dice_num) REFERENCES dice(dice_num)
+);
+
+CREATE SEQUENCE dice_value_seq;
