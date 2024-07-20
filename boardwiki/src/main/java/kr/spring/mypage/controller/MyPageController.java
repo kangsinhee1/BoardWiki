@@ -83,7 +83,7 @@ public class MyPageController {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("keyword",keyword);
 		map.put("mem_num", user.getMem_num());
-		map.put("mem_nickName", user.getMem_nickName());
+		map.put("mem_nickName", ","+user.getMem_nickName());
 		int count = usedChatService.selectRowCountByMemNum(map);
 		
 		//페이지 처리
