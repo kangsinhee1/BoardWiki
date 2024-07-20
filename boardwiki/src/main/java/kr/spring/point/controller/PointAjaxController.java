@@ -151,6 +151,7 @@ public class PointAjaxController {
             pointVO.setMem_num(userId);
             pointVO.setPoi_use(existingBet.getBet_point());
             pointVO.setPoi_increase(2); // 2: Gain points
+            pointVO.setPoi_status(1);
             pointService.processPointTransaction(pointVO);
 
             map.put("result", "success");
@@ -222,6 +223,7 @@ public class PointAjaxController {
                 pointVO.setMem_num(bet.getMem_num());
                 pointVO.setPoi_use(pointsWon);
                 pointVO.setPoi_increase(2); // 2: Gain points
+                pointVO.setPoi_status(1);
 
                 pointService.processPointTransaction(pointVO);
             }

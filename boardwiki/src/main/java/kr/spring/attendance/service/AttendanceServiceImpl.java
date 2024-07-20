@@ -8,13 +8,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.spring.attendance.dao.AttendanceMapper;
+import kr.spring.attendance.dao.DiceMapper;
 import kr.spring.attendance.vo.AttendanceVO;
+import kr.spring.attendance.vo.DiceVO;
 
 @Service
 public class AttendanceServiceImpl implements AttendanceService{
 
 	@Autowired
 	AttendanceMapper attendanceMapper;
+	
+	@Autowired
+    private DiceMapper diceMapper;
 
 	@Override
 	public List<AttendanceVO> getMonthlyAttendance(Long mem_num) {
@@ -41,6 +46,16 @@ public class AttendanceServiceImpl implements AttendanceService{
 			attendanceMapper.insertAttendance(vo);
 		}
 		attendanceMapper.markAttendance(vo);
+		DiceVO dice = new DiceVO();
+        int count = diceMapper.selectDiceCunt(vo.getMem_num());
+        dice.setMem_num(vo.getMem_num());
+        if(count == 1) {
+        	diceMapper.updateDice(dice);
+        }else {
+        	dice.setDice_num(diceMapper.selectItem_num());
+            dice.setDice_chance(2);
+            diceMapper.insertDice(dice);
+        }
 	}
 
 }
