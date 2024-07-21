@@ -294,7 +294,7 @@ public class TeamController {
 	public String deleteTeamApply(HttpSession session,@RequestParam long teaA_num, HttpServletRequest request ,Model model ) {
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		if (user==null) {
-			model.addAttribute("message", "회원만 신청가능합니다.");
+			model.addAttribute("message", "로그인이 필요합니다.");
 			model.addAttribute("url", request.getContextPath()+"/team/teamList");
 			return "common/resultAlert";
 		}
@@ -677,12 +677,14 @@ public class TeamController {
 
 		List<TeamApplyVO> list = null;
 		list = teamService.listTeamApply(teamApplyVO);
-		int count  = teamService.countTeamApplyList(teamApplyVO.getTea_num());
-		model.addAttribute("count",count);
+		int count1  = teamService.countTeamApplyList(teamApplyVO.getTea_num());
+		int count2 = teamService.countTeamApplyList(teamApplyVO.getTea_num());
+		model.addAttribute("count",count1);
+		model.addAttribute("count",count2);
 		model.addAttribute("list",list);
 		model.addAttribute("tea_num",teamApplyVO.getTea_num());
-		model.addAttribute("team",teamService.detailTeam(teamApplyVO.getTea_num()));
-		log.debug("모임 관련 내용 : " + teamService.detailTeam(teamApplyVO.getTea_num()));
+		model.addAttribute("Team",teamService.detailTeam(teamApplyVO.getTea_num()));
+		log.debug("모임 관련 내용 : " + count1 +" "+ count2);
 		return "teamControl";
 	}
 
@@ -699,9 +701,7 @@ public class TeamController {
 		model.addAttribute("count",count);
 		model.addAttribute("list",list);
 		model.addAttribute("tea_num",teamApplyVO.getTea_num());
-		model.addAttribute("tea_name",teamService.detailTeam(teamApplyVO.getTea_num()).getTea_name());
-		model.addAttribute("tea_time",teamService.detailTeam(teamApplyVO.getTea_num()).getTea_time());
-		log.debug("sd flasdj glag jalgj "+teamService.detailTeam(teamApplyVO.getTea_num()));
+		model.addAttribute("Team",teamService.detailTeam(teamApplyVO.getTea_num()));
 		return "teamCalendar";
 	}
 

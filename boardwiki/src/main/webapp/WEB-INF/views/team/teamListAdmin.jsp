@@ -10,9 +10,8 @@
 	<div class="page-info">
 		<h2>모임 신청</h2>
 		<div class="site-breadcrumb">
-			<a href="">Home</a>  /
-			<span>모임신청</span> /
-			<span><a href="myTeam2"> 내 모임 보기</a></span>
+			<a href="teamListAdmin">Home</a>  /
+			<span>모임신청</span> 
 		</div>
 	</div>
 </section>
@@ -23,14 +22,12 @@
 		<div class="col-lg-12">
 <div class="page-main">
 	<h2>모임 신청(관리자)</h2>
-	<div><a href="myTeam2"> 내 모임 보기</a></div>
-	
 	<form action="teamListAdmin" id="search_form" method="get">
 		<ul class="search">
 			<li>
 				<select name="keyfield" id="keyfield">
-					<option value="1" <c:if test="${param.keyfield == 1}">selected</c:if>>모임명</option>
-					<option value="2" <c:if test="${param.keyfield == 2}">selected</c:if>>지역</option>
+					<option value="1" <c:if test="${param.keyfield == 1}">selected</c:if>>모임명&nbsp;</option>
+					<option value="2" <c:if test="${param.keyfield == 2}">selected</c:if>>지역&nbsp;</option>
 				</select>
 			</li>
 			<li>
@@ -43,9 +40,9 @@
 		</ul> 
 		<div class="align-right">
 			<select id="order" name="order" class="form-control">
-				<option value="1" <c:if test="${param.order == 1}">selected</c:if>>최신순</option>
-				<option value="2" <c:if test="${param.order == 2}">selected</c:if>>조회수</option>
-				<option value="3" <c:if test="${param.order == 3}">selected</c:if>>좋아요</option>
+				<option value="1" <c:if test="${param.order == 1}">selected</c:if>>최신순&nbsp;</option>
+				<option value="2" <c:if test="${param.order == 2}">selected</c:if>>조회수&nbsp;</option>
+				<option value="3" <c:if test="${param.order == 3}">selected</c:if>>좋아요&nbsp;</option>
 			</select>
 			<script type="text/javascript">
 				$('#order').change(function(){

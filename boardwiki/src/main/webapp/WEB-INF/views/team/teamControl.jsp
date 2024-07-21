@@ -2,41 +2,77 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+  <style>
+    /* Modal container */
+    .modal {
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      z-index: 5; /* Sit on top */
+      left: 0;
+      top: 50%;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgb(0,0,0); /* Fallback color */
+      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Modal content */
+    .modal-content {
+      background-color: #fefefe;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%; /* Can be adjusted */
+      max-width: 300px; /* Maximum width */
+      text-align: center;
+      border-radius: 10px; /* Optional: rounded corners */
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3); /* Optional: shadow */
+    }
+
+    /* Close button */
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  </style>
 <!-- 게시판 목록 시작 -->
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/teamBoard.js"></script>
-
-	<!-- Page top section -->
-<section class="page-top-section set-bg" data-setbg="/img/page-top-bg/4.jpg">
-	<div class="page-info">
-		<h2>모임 신청</h2>
-		<div class="site-breadcrumb">
-			<a href="">Home</a>  /
-			<span>모임신청</span> /
-			<span><a href="myTeam2"> 내 모임 보기</a></span>
-		</div>
-	</div>
-</section>
-<!-- Page top end-->
 <section class="blog-page">
 <div class="container">
 	<div class="row">
 		<div class="col-lg-12">
 <div class="page-main">
-	<h2 class="align-center">(${team.tea_name})회원 목록</h2>
+	<h2 class="align-center">(${Team.tea_name})회원 목록</h2>
 	<c:if test="${count == 0}">
 		<div class="result-display">회원이 없습니다.</div>
 	</c:if>
 	<c:if test="${count > 0}">
-		<table class="striped-table">
+		<table class="chart-table">
+		<thead>
 			<tr>
 				<th>회원 닉네임</th>
 				<th>가입 신청 메시지</th>
 				<th>신청일</th>
 				<th>회원상태</th>
 			</tr>
+			</thead>
 			<c:forEach var="team" items="${list}">
+				<tbody>
 				<tr>
 				<c:if test="${team.teaA_status==2}">
 					<td class="align-center">${team.mem_nickname}</td>
@@ -51,13 +87,17 @@
                     </td>
 				</c:if>
 				</tr>
+				</tbody>
 			</c:forEach>
 		</table>
 		<div class="align-center">${page}</div>
 	</c:if>
-	<h2 class="align-center">(${team.tea_name})신청 목록</h2>
+	<h2 class="align-center">(${Team.tea_name})신청 목록</h2>
+	<c:if test="${count == 0}">
+		<div class="result-display">회원이 없습니다.</div>
+	</c:if>
 	<c:if test="${count > 0}">
-		<table class="striped-table">
+		<table class="chart-table">
 			<tr>
 				<th>회원 닉네임</th>
 				<th>가입 신청 메시지</th>
@@ -141,6 +181,7 @@ $(function() {
     };
 });
 </script>
+
 </div>
 </div>
 </div>
