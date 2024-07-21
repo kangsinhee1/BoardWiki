@@ -2,25 +2,35 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<!-- 게시판 글쓰기 시작 -->
 <script src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <!-- include ckeditor js -->
 <script src="${pageContext.request.contextPath}/js/ckeditor.js"></script>
 <script src="${pageContext.request.contextPath}/js/uploadAdapter.js"></script>
-<div class="page-main">
 <section class="page-top-section set-bg"
 	data-setbg="/img/page-top-bg/4.jpg">
 	<div class="page-info">
-		<h2>룰북 작성</h2>
+		<h2>게시판 작성</h2>
 		<div class="site-breadcrumb">
-			<a href="">Home</a> / <span>룰북 작성</span>
+			<a href="">Home</a> / <span>게시판 작성</span>
 		</div>
 	</div>
 </section>
-	<form:form action="rulebookWrite" id="rulebook_register"
+<div class="page-main">
+	<form:form action="tnrwrite" id="board_register"
 	           enctype="multipart/form-data"
-	                            modelAttribute="rulebookVO">
+	                            modelAttribute="tnrboardVO">
 		<ul>
+			<li>
+				<form:label path="tnr_category">분류</form:label>
+				<form:select path="tnr_category" id="tnr_category">
+					<option disabled="disabled" selected>선택하세요</option>
+					<form:option value="1">팁게시판</form:option>
+					<form:option value="2">후기게시판</form:option>
+				</form:select>
+				<form:errors path="tnr_category" cssClass="error-color"/>                             
+			</li>
 			 <li>
                 제품명
                 <form:input type="hidden" path="item_num" id="item_num"/>
@@ -30,8 +40,12 @@
                      
             </li>
 			<li>
-				<form:textarea path="rulB_content"/>
-				<form:errors path="rulB_content" cssClass="error-color"/>
+				<form:input path="tnr_title" placeholder="제목을 입력하세요"/>
+				<form:errors path="tnr_title" cssClass="error-color"/>
+			</li>
+			<li>
+				<form:textarea path="tnr_content"/>
+				<form:errors path="tnr_content" cssClass="error-color"/>
 				<script>
 				 function MyCustomUploadAdapterPlugin(editor) {
 					    editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
@@ -40,7 +54,7 @@
 					}
 				 
 				 ClassicEditor
-		            .create( document.querySelector( '#rulB_content' ),{
+		            .create( document.querySelector( '#tnr_content' ),{
 		            	extraPlugins: [MyCustomUploadAdapterPlugin]
 		            })
 		            .then( editor => {
@@ -50,7 +64,7 @@
 		                console.error( error );
 		            } );
 			    </script> 
-			</li>
+			</li>  
 			<li>
 				<form:label path="upload">파일업로드</form:label>
 				<input type="file" name="upload" id="upload">
@@ -60,7 +74,7 @@
 			<form:button class="default-btn">전송</form:button>
 			<input type="button" value="목록"
 			  class="default-btn"
-			  onclick="location.href='rulebookList'">
+			  onclick="location.href='tnrboardList'">
 		</div>                           
 	</form:form>
 </div>
@@ -162,9 +176,11 @@
 			        });
 			    });
 			    </script>
+				
+<!-- 게시판 글쓰기 끝 -->
 
 
-
+  
 
 
 

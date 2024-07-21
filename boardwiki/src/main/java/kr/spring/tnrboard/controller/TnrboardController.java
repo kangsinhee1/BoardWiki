@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,13 +40,24 @@ public class TnrboardController {
 	/*====================
 	 *  게시판 글쓰기 category 1,2
 	 *====================*/
-	@GetMapping("/tnrboard/write")
-	public String form() {
+	@GetMapping("/tnrboard/tnrwrite")
+	public String insertTnrBoard(HttpServletRequest request,
+			 HttpSession session,
+			 Model model) {
+		MemberVO member =(MemberVO)session.getAttribute("user");
+		if(member== null) {
+			model.addAttribute("message", "로그인후 작성 가능합니다.");
+			model.addAttribute("url", 
+			request.getContextPath()+"/tnrboard/tnrboardList");
+			return "common/resultAlert";
+			
+		}
+		model.addAttribute("member", member);
 		return "tnrboardWrite";
 	}
 	//등록 폼에서 전송된 데이터 처리
-	@PostMapping("/tnrboard/write")
-	public String submit(@Valid TnrboardVO tnrboardVO,
+	@PostMapping("/tnrboard/tnrwrite")
+	public String submittnrboard(@Valid TnrboardVO tnrboardVO,
 			             BindingResult result,
 			             HttpServletRequest request,
 			             HttpSession session,
@@ -55,27 +67,30 @@ public class TnrboardController {
 		log.debug("<<게시판 글 저장>> : " + tnrboardVO);
 		//유효성 체크 결과 오류가 있으면 폼 호출
 		if(result.hasErrors()) {
-			return form();
+			for(FieldError f : result.getFieldErrors()) {
+				log.debug("에러 필드 : " + f.getField());
+			}
+			log.debug("안됨");
+			return insertTnrBoard(request, session, model);
 		}
 		
 		//회원번호 셋팅
 		MemberVO vo = (MemberVO)session.getAttribute("user");
 		tnrboardVO.setMem_num(vo.getMem_num());
 		//파일 업로드
-		tnrboardVO.setFilename(FileUtil.createFile(request, 
-				tnrboardVO.getUpload()));
+		tnrboardVO.setFilename(FileUtil.createFile(request, tnrboardVO.getUpload()));
 		//글쓰기
 		tnrboardService.insertTnrBoard(tnrboardVO);
 		
 		model.addAttribute("message","성공적으로 글이 등록되었습니다");
-		model.addAttribute("url","/tnrboard/list?tnr_category=" + tnrboardVO.getTnr_category());
+		model.addAttribute("url","/tnrboard/tnrboardList?tnr_category=" + tnrboardVO.getTnr_category());
 		return "common/resultAlert";
 	}
 	
 	/*====================
 	 *  게시판 목록 category 1,2
 	 *====================*/
-	@GetMapping("/tnrboard/list")
+	@GetMapping("/tnrboard/tnrboardList")
 	public String getList(
 				@RequestParam(defaultValue="1") int pageNum,
 				@RequestParam(defaultValue="1") int order,
@@ -90,7 +105,7 @@ public class TnrboardController {
 		int count = tnrboardService.selectTnrRowCount(map);
 		
 		PagingUtil page = new PagingUtil(keyfield,keyword,pageNum,count,
-							10,10,"list","&tnr_category="+tnr_category+"&order="+order);
+							10,10,"tnrboardList","&tnr_category="+tnr_category+"&order="+order);
 		List<TnrboardVO> list = null;
 		if(count > 0) {
 			map.put("order", order);
@@ -109,17 +124,17 @@ public class TnrboardController {
 	
 	
 	/*====================
-	 *  게시판 글상세 category 1,2,3
+	 *  게시판 글상세 category 1,2
 	 *====================*/
-	@GetMapping("/tnrboard/detail")
+	@GetMapping("/tnrboard/tnrboardDetail")
 	public ModelAndView process(long tnr_num) {
 		log.debug("<<게시판 글 상세 - tnr_num>> : " + tnr_num);
 		
 		tnrboardService.updateTnrHit(tnr_num);
 		
-		TnrboardVO board = tnrboardService.selectTnrBoard(tnr_num);
+		TnrboardVO tnrboard = tnrboardService.selectTnrBoard(tnr_num);
 		
-		return new ModelAndView("boardView","board",board);
+		return new ModelAndView("tnrboardView","tnrboard",tnrboard);
 	}
 	
 	//파일 다운로드
@@ -136,16 +151,16 @@ public class TnrboardController {
 		return "downloadView";
 	}
 	/*====================
-	 *  게시판 글 수정 category1,2,3
+	 *  게시판 글 수정 category1,2
 	 *====================*/
-	@GetMapping("/tnrboard/update")
+	@GetMapping("/tnrboard/tnrboardUpdate")
 	public String formUpdate(long tnr_num,Model model) {
 		TnrboardVO tnrboardVO = tnrboardService.selectTnrBoard(tnr_num);
 		model.addAttribute("tnrboardVO", tnrboardVO);
 		
-		return "boardModify";
+		return "tnrboardModify";
 	}
-	@PostMapping("/tnrboard/update")
+	@PostMapping("/tnrboard/tnrboardUpdate")
 	public String submitUpdate(@Valid TnrboardVO tnrboardVO,
 							   BindingResult result,
 							   Model model,
@@ -168,7 +183,7 @@ public class TnrboardController {
 		}
 		
 		model.addAttribute("message", "글 수정 완료!!");
-		model.addAttribute("url","/tnrboard/list?tnr_category=" + tnrboardVO.getTnr_category());
+		model.addAttribute("url","/tnrboard/tnrboardList?tnr_category=" + tnrboardVO.getTnr_category());
 		
 		
 		return "common/resultAlert";
@@ -178,8 +193,10 @@ public class TnrboardController {
 	/*====================
 	 *  게시판 글 삭제
 	 *====================*/
-	@GetMapping("/tnrboard/delete") 
-	public String submitDelete(long tnr_num, 
+	@GetMapping("/tnrboard/tnrboardDelete") 
+	public String submitDelete(@Valid TnrboardVO tnrboardVO,
+							   long tnr_num,
+							   Model model,
 							   HttpServletRequest request) {
 		log.debug("<<게시판 글 삭제 -- tnr_num>> : " + tnr_num);
 		
@@ -191,7 +208,10 @@ public class TnrboardController {
 			FileUtil.removeFile(request, db_board.getFilename());
 		}
 		
-		return "redirect:/tnrboard/list";
+		model.addAttribute("message", "글 삭제 완료!!");
+		model.addAttribute("url","/tnrboard/tnrboardList?tnr_category=" + tnrboardVO.getTnr_category());
+		
+		return "common/resultAlert";
 	}
 }
 

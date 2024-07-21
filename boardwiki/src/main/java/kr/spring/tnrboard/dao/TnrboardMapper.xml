@@ -3,7 +3,204 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
 <mapper namespace="kr.spring.tnrboard.dao.TnrboardMapper"> 
-	
+	 <!-- sql 태그와 include 태그를 이용해서 SQL문을 재사용 -->
+	 <sql id="tnrboardSearch">
+	 	<where>
+	 		<if test="tnr_category !=null and tnr_category != ''">
+	 			tnr_category = #{tnr_category}
+	 		</if>
+	 		<if test="keyfield !=null and keyfield != ''">
+	 				AND
+	 		</if>
+	 		<if test="keyfield == 1">
+	 			tnr_title LIKE '%' || #{keyword} || '%'
+	 		</if>
+	 		<if test="keyfield == 2">
+	 			tnr_content LIKE '%' || #{keyword} || '%'
+	 		</if>
+	 		<if test="keyfield == 3">
+	 			(tnr_title LIKE '%' || #{keyword} || '%' OR
+	 			tnr_content LIKE '%' || #{keyword} || '%')
+	 		</if>
+	 	</where>
+	 </sql>
+	 
+	 <sql id="tnrboardOrder">
+ 		<if test="order == 1">
+ 			ORDER BY tnr_num DESC
+ 		</if>
+ 		<if test="order == 2">
+ 			ORDER BY tnr_hit DESC
+ 		</if>
+ 		<if test="order == 3">
+ 			ORDER BY fav_cnt DESC NULLS LAST
+ 		</if>
+ 		<if test="order == 4">
+ 			ORDER BY re_cnt DESC NULLS LAST
+ 		</if>
+	 </sql>
+	 
+	 <!-- 게시판 글 총레코드수/검색레코드수 -->
+	 <select id="selectTnrRowCount" parameterType="map"
+									resultType="integer">
+		SELECT
+			COUNT(*)
+		FROM tnrboard
+		JOIN member USING (mem_num)
+		JOIN item USING (item_num)
+		<include refid="tnrboardSearch"></include>	 
+	 </select>
+	  <select id="selectTnrRowmyCount" parameterType="map"
+									resultType="integer">
+		SELECT
+			COUNT(*)
+		FROM tnrboard
+		JOIN member USING (mem_num)
+		JOIN item USING (item_num)
+		<include refid="tnrboardSearch"></include>
+		AND mem_num=#{mem_num} 
+	 </select> 
+	 <!-- 게시판 전체 목록/검색 목록 -->
+	 <select id="selectTnrList" parameterType="map"
+	 							resultType="tnrboardVO">
+	 	SELECT
+	 	   *
+	 	FROM (SELECT
+	 			a.*,
+	 			rownum rnum
+	 		   FROM (SELECT
+	 		   			 tnr_num,
+		                 <![CDATA[
+		                 REPLACE(REPLACE(tnr_title,'<','&lt;'),'>','&gt;') tnr_title,
+		                 ]]>
+		                 tnr_hit,
+		                 filename,
+		                 tnr_rdate,
+		                 mem_num,
+		                 mem_email,
+		                 mem_nickname,
+		                 re_cnt,
+		                 fav_cnt
+	 		   		 FROM tnrboard
+	 		   		 JOIN member USING(mem_num)
+	 		   		 JOIN item USING(item_num)
+	 		   		 LEFT OUTER JOIN (SELECT COUNT(*) re_cnt, tnr_num FROM tnrboard_reply GROUP BY tnr_num) USING(tnr_num)
+	 		   		 LEFT OUTER JOIN (SELECT COUNT(*) fav_cnt, tnr_num FROM tnrboard_fav GROUP BY tnr_num) USING(tnr_num)
+	 		   		 LEFT OUTER JOIN member_detail USING(mem_num)
+	 		   		 <include refid="tnrboardSearch"></include>
+	 		   		 <include refid="tnrboardOrder"></include>
+	 		   		 )a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+	</select>
+	<select id="selectTnrMyList" parameterType="map"
+	 							resultType="tnrboardVO">
+	 	SELECT
+	 	   *
+	 	FROM (SELECT
+	 			a.*,
+	 			rownum rnum
+	 		   FROM (SELECT
+	 		   			 tnr_num,
+		                 <![CDATA[
+		                 REPLACE(REPLACE(tnr_title,'<','&lt;'),'>','&gt;') tnr_title,
+		                 ]]>
+		                 tnr_hit,
+		                 filename,
+		                 tnr_rdate,
+		                 mem_num,
+		                 mem_email,
+		                 mem_nickname,
+		                 re_cnt,
+		                 fav_cnt
+	 		   		 FROM tnrboard
+	 		   		 JOIN member USING(mem_num)
+	 		   		 LEFT OUTER JOIN (SELECT COUNT(*) re_cnt, tnr_num FROM tnrboard_reply GROUP BY tnr_num) USING(tnr_num)
+	 		   		 LEFT OUTER JOIN (SELECT COUNT(*) fav_cnt, tnr_num FROM tnrboard_fav GROUP BY tnr_num) USING(tnr_num)
+	 		   		 LEFT OUTER JOIN member_detail USING(mem_num)
+	 		   		 <include refid="tnrboardSearch"></include>
+	 		   		 AND mem_num = #{mem_num}
+	 		   		 <include refid="tnrboardOrder"></include>
+	 		   		 )a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+	</select>
+	 <!-- 글쓰기 -->
+	 <insert id="insertTnrBoard" parameterType="tnrboardVO">
+	 	INSERT INTO tnrboard(
+	 	  tnr_num,
+	 	  item_num,
+	 	  tnr_category,
+	 	  tnr_title,
+	 	  tnr_content,
+	 	  filename,
+	 	  mem_num)
+	 	VALUES(
+	 	  tnrboard_tnr_num_seq.nextval,
+	 	  #{item_num},
+	 	  #{tnr_category},
+	 	  #{tnr_title},
+	 	  #{tnr_content},
+	 	  #{filename,jdbcType=VARCHAR},
+	 	  #{mem_num})
+	 </insert> 
+	<!-- 게시판 글 수정 -->
+	<update id="updateTnrBoard" parameterType="tnrboardVO">
+ 		UPDATE tnrboard SET
+ 		   <if test="filename != null">
+ 		   filename = #{filename},
+ 		   </if>
+ 		   tnr_category = #{tnr_category},
+ 		   tnr_title = #{tnr_title},
+ 		   tnr_content = #{tnr_content},
+ 		   tnr_mdate = SYSDATE
+ 		WHERE tnr_num = #{tnr_num}
+ 	</update>  
+ 	
+	<!-- 댓글 등록 -->
+	<insert id="insertTnrReply" parameterType="tnrboardReplyVO">
+ 		INSERT INTO tnrboard_reply(
+ 			tnrR_num,
+ 			tnrR_content,
+ 			tnr_num,
+ 			mem_num)
+ 		VALUES (
+ 			tnrboard_reply_tnrR_num_seq.nextval,
+ 			#{tnrR_content},
+ 			#{tnr_num},
+ 			#{mem_num})	
+ 	</insert>
+	<!-- 댓글 목록 --> 
+ 	<select id="selectTnrListReply" parameterType="map"
+ 	                            resultType="tnrboardReplyVO">
+ 		SELECT
+ 		   *
+ 		FROM (SELECT
+ 		        a.*,
+ 		        rownum rnum
+ 		      FROM (SELECT
+ 		              tnrR_num,
+ 		              <![CDATA[
+ 		              REPLACE(REPLACE(tnrR_content,'<','&lt;'),'>','&gt;') tnrR_content,
+ 		              ]]>
+ 		              tnrR_rdate,
+ 		              tnrR_mdate,
+ 		              tnr_num,
+ 		              mem_nickname,
+ 		              mem_email,
+ 		              mem_num,
+ 		              mem_auth
+ 		            FROM (tnrboard_reply
+ 		            JOIN member USING(mem_num))
+ 		            JOIN member_detail USING(mem_num)
+ 		            WHERE tnr_num=#{tnr_num}
+ 		            ORDER BY tnrR_num DESC)a)
+ 		<![CDATA[
+ 		WHERE rnum >= #{start} AND rnum <= #{end}
+ 		]]>            
+ 	</select>  
  </mapper>
 
 
