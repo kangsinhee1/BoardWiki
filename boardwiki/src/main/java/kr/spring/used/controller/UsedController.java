@@ -57,7 +57,7 @@ public class UsedController {
 		int count = usedService.getUsedRowCount(map);
 		
 		//페이지 처리
-		PagingUtil page = new PagingUtil(keyfield, keyword, pageNum,count,20,10,"usedList","&order="+order);
+		PagingUtil page = new PagingUtil(keyfield, keyword, pageNum,count,10,10,"usedList","&order="+order);
 		List<UsedItemVO> list = null;
 		if(count >0) {
 			map.put("order", order);

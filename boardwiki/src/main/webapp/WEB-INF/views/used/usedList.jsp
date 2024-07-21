@@ -3,8 +3,23 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 게시판 목록 시작 -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
+<section class="page-top-section set-bg" data-setbg="/img/page-top-bg/4.jpg">
+		<div class="page-info">
+			<h2>중고 목록</h2>
+			<div class="site-breadcrumb">
+				<a href="">Home</a>  /
+				<span>Contact</span>
+			</div>
+		</div>
+	</section>
+	<!-- Page top end-->
+
+<script src="${pageContext.request.contextPath}/js/usedChat.js"></script>
+<section class="blog-page">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
 <div class="page-main">
-	<h2>중고 목록</h2>
 	
 	<form action="usedList" id="search_form" method="get">
 		<ul class="search">
@@ -46,7 +61,7 @@
 	<table class="striped-table">
 		<tr>
 			<th>번호</th>
-			<th width="400">제목</th>
+			<th width="300">제목</th>
 			<th>작성자</th>
 			<th>작성일</th>
 			<th>제품명</th>
@@ -79,4 +94,10 @@
 	<div class="align-center">${page}</div>
 	</c:if>	
 </div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
 <!-- 게시판 목록 끝 -->

@@ -111,7 +111,7 @@ table td, table th {
   임의 추가
 -------------------------*/
 table th {
-	background: #060606;
+	background:#610994;
 	font-size: 14px;
 	color: #ffffff;
 	font-weight: 500;
@@ -162,7 +162,7 @@ input[type="button"] {
 	font-size: 14px;
 	padding: 6px 13px 6px;
 	color: #ffffff;
-	background: transparent;
+	background:#C213B6;
 	line-height: normal;
 	letter-spacing: 1px;
 	text-transform: uppercase;
@@ -259,7 +259,6 @@ div.chart-table h6 {
 }
 
 .chart-table table {
-	
 	border: none;
 	width: 100%;
 	font-family: "NanumSquareNeo", sans-serif;
@@ -282,13 +281,10 @@ div.chart-table h6 {
 	font-family: "NanumSquareNeo", sans-serif;
 }
 
-.chart-table table tbody tr:nth-child(even) {
-	background: #111111;
-}
 
 .chart-table table tbody tr td {
 	font-size: 14px;
-	color: #c4c4c4;
+	color: black;
 	padding: 17px 0;
 	border-left: none;
 	border-right: none;
@@ -356,7 +352,7 @@ div.chart-table h6 {
 /* selectbox
 ---------------------*/
 select {
-    width: 120px;
+    width: 130px;
     padding: 6px 13px 6px;
     font-size: 13px;
     border: 1px solid #ccc;
