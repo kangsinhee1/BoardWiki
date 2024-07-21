@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <style>
+	div #daub {
+        background-color: #8330B3;
+    }
     table.calendar {
         width: 100%;
         border-collapse: collapse;
@@ -22,7 +25,10 @@
         background-color: #ffcdd2;
     }
 </style>
-<h1>Monthly Attendance</h1>
+<section class="page-top-section set-bg" data-setbg="/img/page-top-bg/4.jpg" style="background-image: url(&quot;/img/page-top-bg/4.jpg&quot;);">
+<h1>출석 체크</h1>
+</section>
+<div id="daub">
 <div id="calendar"></div>
 
 <form action="${pageContext.request.contextPath}/attendance/check" method="post">
@@ -32,7 +38,7 @@
 <button id="rollDiceButton" onclick="rollDice()" <c:if test="${dice == 0}">disabled</c:if>>주사위 굴리기</button>
 <p id="diceResult"></p>
 <img id="diceImage" src="${pageContext.request.contextPath}/images/dice1.png" alt="Dice" width="100" height="100">
-
+</div>
 <script>
     const attendances = JSON.parse('${attendancesJson}');
 

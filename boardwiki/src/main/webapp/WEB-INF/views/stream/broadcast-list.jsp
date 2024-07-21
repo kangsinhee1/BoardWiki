@@ -2,6 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+
+<section class="page-top-section set-bg" data-setbg="/img/page-top-bg/4.jpg" style="background-image: url(&quot;/img/page-top-bg/4.jpg&quot;);">
+
+<h1>Live Broadcasts</h1>
+</section>
 <style>
 .broadcast {
 	display: inline-block;
@@ -20,8 +25,8 @@
 	font-size: 18px;
 }
 </style>
-<h1>Live Broadcasts</h1>
-<div>
+<div class="container">
+<div class="game-main">
 	<c:forEach var="broadcast" items="${broadcasts}">
 		<div class="broadcast">
 			<a
@@ -35,6 +40,7 @@
 			</a>
 		</div>
 	</c:forEach>
+</div>
 </div>
 
 
