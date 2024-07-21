@@ -5,8 +5,23 @@
 <!-- 게시판 글상세 시작 -->
 <script src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/videoAdapter.js"></script>
+<section class="page-top-section set-bg" data-setbg="/img/page-top-bg/4.jpg">
+		<div class="page-info">
+			<h2>${used.use_title}</h2>
+			<div class="site-breadcrumb">
+				<a href="">Home</a>  /
+				<span>Contact</span>
+			</div>
+		</div>
+	</section>
+	<!-- Page top end-->
+
+<section class="blog-page">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
 <div class="page-main">
-	<input type="hidden" name="useC_name" value="${used.use_title} 중고거래채팅">
+  <input type="hidden" name="useC_name" value="${used.use_title} 중고거래채팅">
 	<h2>${used.use_title}</h2>
 	<ul class="detail-info">
 		<li>
@@ -60,6 +75,10 @@
 		</c:if>
 	</div>
 </div>
+</div>
+</div>
+</div>
+</section>
 <!-- 게시판 글상세 끝 -->
 
 

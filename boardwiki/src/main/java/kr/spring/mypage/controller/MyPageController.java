@@ -86,6 +86,7 @@ public class MyPageController {
 		map.put("mem_nickName", ","+user.getMem_nickName());
 		int count = usedChatService.selectRowCountByMemNum(map);
 		
+		
 		//페이지 처리
 		PagingUtil page = new PagingUtil(null,keyword,pageNum,count,20,10,"chatList");
 		List<UsedChatRoomVO> list = null;
@@ -98,6 +99,7 @@ public class MyPageController {
 			model.addAttribute("page",page.getPage());
 			log.debug("목록 가져와 ! " + list);
 		}
+		
 		
 		model.addAttribute("member", member);
 
