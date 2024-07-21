@@ -55,8 +55,8 @@
                     <li><a href="#">커뮤니티</a>
                         <ul class="sub-menu">
                             <li><a href="${pageContext.request.contextPath}/board/list?boa_category=1">자유게시판</a></li>
-                            <li><a href="${pageContext.request.contextPath}/board/list?boa_category=2">팁게시판</a></li>
-                            <li><a href="${pageContext.request.contextPath}/board/list?boa_category=3">후기</a></li>
+                            <li><a href="${pageContext.request.contextPath}/tnrboard/tnrboardList?tnr_category=1">팁게시판</a></li>
+                            <li><a href="${pageContext.request.contextPath}/tnrboard/tnrboardList?tnr_category=2">후기</a></li>
                             <li><a href="${pageContext.request.contextPath}/team/teamList">모임게시판</a></li>
                             <li><a href="${pageContext.request.contextPath}/used/usedList">중고게시판</a></li>
                         </ul>

@@ -7,6 +7,15 @@
 <script src="${pageContext.request.contextPath}/js/videoAdapter.js"></script>
 <script src="${pageContext.request.contextPath}/js/board.fav.js"></script>
 <script src="${pageContext.request.contextPath}/js/board.reply.js"></script>
+<section class="page-top-section set-bg" data-setbg="/img/page-top-bg/4.jpg">
+		<div class="page-info">
+			<h2>${board.boa_title}</h2>
+			<div class="site-breadcrumb">
+				<a href="">Home</a>  /
+				<span>Contact</span>
+			</div>
+		</div>
+	</section>
 <div class="page-main">
 	<h2>${board.boa_title}</h2>
 	<ul class="detail-info">

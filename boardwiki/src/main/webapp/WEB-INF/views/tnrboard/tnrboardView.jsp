@@ -5,11 +5,11 @@
 <!-- 게시판 글상세 시작 -->
 <script src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/videoAdapter.js"></script>
-<script src="${pageContext.request.contextPath}/js/board.fav.js"></script>
-<script src="${pageContext.request.contextPath}/js/board.reply.js"></script>
+<script src="${pageContext.request.contextPath}/js/tnrboard.fav.js"></script>
+<script src="${pageContext.request.contextPath}/js/tnrboard.reply.js"></script>
 <section class="page-top-section set-bg" data-setbg="/img/page-top-bg/4.jpg">
 		<div class="page-info">
-			<h2>${board.boa_title}</h2>
+			<h2>${tnrboard.tnr_title}</h2>
 			<div class="site-breadcrumb">
 				<a href="">Home</a>  /
 				<span>Contact</span>
@@ -17,32 +17,32 @@
 		</div>
 	</section>
 <div class="page-main">
-	<h2>${board.boa_title}</h2>
+	<h2>${tnrboard.tnr_title}</h2>
 	<ul class="detail-info">
 		<li>
-			<c:if test="${empty board.mem_nickname}">${board.mem_email}</c:if>
-			<c:if test="${!empty board.mem_nickname}">${board.mem_nickname}</c:if>
+			<c:if test="${empty tnrboard.mem_nickname}">${tnrboard.mem_email}</c:if>
+			<c:if test="${!empty tnrboard.mem_nickname}">${tnrboard.mem_nickname}</c:if>
 			<br>
-			<c:if test="${empty board.boa_mdate}">
-			작성일 : ${board.boa_rdate}
+			<c:if test="${empty tnrboard.tnr_mdate}">
+			작성일 : ${tnrboard.tnr_rdate}
 			</c:if>
-			<c:if test="${!empty board.boa_mdate}">
-			최근 수정일 : ${board.boa_mdate}
+			<c:if test="${!empty tnrboard.tnr_mdate}">
+			최근 수정일 : ${tnrboard.tnr_mdate}
 			</c:if>
-			조회 : ${board.boa_hit}
+			조회 : ${tnrboard.tnr_hit}
 		</li>
 	</ul>
-	<c:if test="${!empty board.filename}">
+	<c:if test="${!empty tnrboard.filename}">
 	<ul>
-		<li>첨부파일 : <a href="file?boa_num=${board.boa_num}">${board.filename}</a></li>
+		<li>첨부파일 : <a href="file?tnr_num=${tnrboard.tnr_num}">${tnrboard.filename}</a></li>
 	</ul>
 	</c:if>
 	<div class="detail-content">
-		${board.boa_content}
+		${tnrboard.tnr_content}
 	</div>
 	<div>
 		<%-- 좋아요 --%>
-		<img id="output_fav" data-num="${board.boa_num}"
+		<img id="output_fav" data-num="${tnrboard.tnr_num}"
 		    src="${pageContext.request.contextPath}/images/fav01.gif">
 		<span id="output_fcount"></span>    
 		<%-- 댓글수 --%>
@@ -50,26 +50,26 @@
 	</div>
 	<hr size="1" width="100%">
 	<div class="align-right">
-		<c:if test="${!empty user && user.mem_num == board.mem_num || user.mem_auth == 9}">
+		<c:if test="${!empty user && user.mem_num == tnrboard.mem_num || user.mem_auth == 9}">
 		<input type="button" value="수정"
-		   onclick="location.href='update2?boa_num=${board.boa_num}'">
+		   onclick="location.href='tnrboardUpdate?tnr_num=${tnrboard.tnr_num}'">
 		<input type="button" value="삭제" id="delete_btn">
 		<script>
 			const delete_btn = document.getElementById('delete_btn');
 			delete_btn.onclick=function(){
 				const choice = confirm('삭제하시겠습니까?');
 				if(choice){
-					location.replace('delete?boa_num=${board.boa_num}');
+					location.replace('tnrboardDelete?tnr_num=${tnrboard.tnr_num}');
 				}
 			};
 		</script>   
 		</c:if>
 		<c:choose>
-			<c:when test="${board.boa_category == 4}">
-				<input type="button" value="목록" onclick="location.href='list?boa_category=4'">
+			<c:when test="${tnrboard.tnr_category == 1}">
+				<input type="button" value="목록" onclick="location.href='tnrboardList?tnr_category=1'">
 		    </c:when>
-		    <c:when test="${board.boa_category == 5}">
-				<input type="button" value="목록" onclick="location.href='list?boa_category=5'">
+		    <c:when test="${tnrboard.tnr_category == 2}">
+				<input type="button" value="목록" onclick="location.href='tnrboardList?tnr_category=2'">
 		    </c:when> 
 		</c:choose>
 	</div>
@@ -78,10 +78,10 @@
 	<div id="reply_div">
 		<span class="re-title">댓글 달기</span>
 		<form id="re_form">
-			<input type="hidden" name="boa_num"
-			          value="${board.boa_num}" id="boa_num">
-			<textarea rows="3" cols="50" name="boaR_content"
-			      id="boaR_content" class="rep-content"
+			<input type="hidden" name="tnr_num"
+			          value="${tnrboard.tnr_num}" id="tnr_num">
+			<textarea rows="3" cols="50" name="tnrR_content"
+			      id="tnrR_content" class="rep-content"
 			      <c:if test="${empty user}">disabled="disabled"</c:if>
 			><c:if test="${empty user}">로그인해야 작성할 수 있습니다.</c:if></textarea>          
 			<c:if test="${!empty user}">

@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<!-- 룰북 수정 시작 -->
+<!-- 게시판 글 수정 시작 -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <!-- include ckeditor js -->
@@ -14,15 +14,26 @@
 		</div>
 </section>
 <div class="page-main">
-	<h2>글 수정</h2>
-	<form:form action="rulebookUpdate" id="rulebook_modify"
+	<form:form action="tnrboardUpdate" id="tnrboard_modify"
 	           enctype="multipart/form-data"
-	                            modelAttribute="rulebookVO" >
-		<form:hidden path="rulB_num"/>
+	                            modelAttribute="tnrboardVO">
+		<form:hidden path="tnr_num"/>
 		<ul>
 			<li>
-				<form:textarea path="rulB_content"/>
-				<form:errors path="rulB_content" cssClass="error-color"/>
+				<form:label path="tnr_category">분류</form:label>
+				<form:select path="tnr_category" >
+					<form:option value="1">팁게시판</form:option>
+					<form:option value="2">후기게시판</form:option>
+				</form:select>
+				<form:errors path="tnr_category" cssClass="error-color"/>                             
+			</li>
+			<li>
+				<form:input path="tnr_title" placeholder="제목을 입력하세요"/>
+				<form:errors path="tnr_title" cssClass="error-color"/>
+			</li>
+			<li>
+				<form:textarea path="tnr_content"/>
+				<form:errors path="tnr_content" cssClass="error-color"/>
 				<script>
 				 function MyCustomUploadAdapterPlugin(editor) {
 					    editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
@@ -31,7 +42,7 @@
 					}
 				 
 				 ClassicEditor
-		            .create( document.querySelector( '#rulB_content' ),{
+		            .create( document.querySelector( '#tnr_content' ),{
 		            	extraPlugins: [MyCustomUploadAdapterPlugin]
 		            })
 		            .then( editor => {
@@ -45,9 +56,9 @@
 			<li>
 				<form:label path="upload">파일업로드</form:label>
 				<input type="file" name="upload" id="upload">
-				<c:if test="${!empty rulebookVO.filename}">
+				<c:if test="${!empty tnrboardVO.filename}">
 				<div id="file_detail">
-					(${rulebookVO.filename})파일이 등록되어 있습니다.
+					(${tnrboardVO.filename})파일이 등록되어 있습니다.
 					<input type="button" value="파일 삭제" id="file_del">
 				</div>
 				<script type="text/javascript">
@@ -56,8 +67,8 @@
 							const choice = confirm('삭제하시겠습니까?');
 							if(choice){
 								$.ajax({
-									url:'deleteRulebookFile',
-									data:{rulB_num:${rulebookVO.rulB_num}},
+									url:'deleteTnrboardFile',
+									data:{tnr_num:${tnrboardVO.tnr_num}},
 									type:'post',
 									dataType:'json',
 									success:function(param){
@@ -84,14 +95,30 @@
 		</ul> 
 		<div class="align-center">
 			<form:button class="default-btn">전송</form:button>
-			<input type="button" value="목록"
-			  class="default-btn"
-			  onclick="location.href='rulebookList'">
+			<input type="button" value="목록" class="default-btn" onclick="ListPage()">
 		</div>                           
 	</form:form>
 </div>
-
-<!-- 룰북 수정 끝 -->
+<script type="text/javascript">
+    function ListPage() {
+        // 현재 선택된 카테고리 가져오기
+        var category = document.getElementById("tnr_category").value;
+        
+        // 각 카테고리에 따라 다른 목록 페이지로 이동
+        switch(category) {
+            case '1':
+            	location.href='tnrboardList?tnr_category=1'; // 팁게시판 목록 페이지 URL
+                break;
+            case '2':
+            	location.href='tnrboardList?tnr_category=2'; // 후기게시판 목록 페이지 URL
+                break;
+            default:
+                location.href = 'tnrboardList'; // 기본적으로 list 페이지로 이동
+                break;
+        }
+    }
+</script>
+<!-- 게시판 글 수정 끝 -->
 
 
 
