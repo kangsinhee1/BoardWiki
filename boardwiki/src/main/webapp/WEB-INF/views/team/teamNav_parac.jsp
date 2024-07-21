@@ -3,6 +3,17 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!-- Add JavaScript for content toggling -->
 
+	<!-- Page top section -->
+<section class="page-top-section set-bg" data-setbg="/img/page-top-bg/4.jpg">
+	<div class="page-info">
+		<h2>모임 신청</h2>
+		<div class="site-breadcrumb">
+			<a href="">Home</a>  /
+			<span>모임신청</span> /
+			<span><a href="myTeam2"> 내 모임 보기</a></span>
+		</div>
+	</div>
+</section>
 <div class="align-center">
 	<nav class="navbar">
         <div class="navbar-container">

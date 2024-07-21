@@ -4,6 +4,23 @@
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 
+	<!-- Page top section -->
+<section class="page-top-section set-bg" data-setbg="/img/page-top-bg/4.jpg">
+	<div class="page-info">
+		<h2>모임 신청</h2>
+		<div class="site-breadcrumb">
+			<a href="">Home</a>  /
+			<span>모임신청</span> /
+			<span><a href="myTeam2"> 내 모임 보기</a></span>
+		</div>
+	</div>
+</section>
+<!-- Page top end-->
+<section class="blog-page">
+<div class="container">
+	<div class="row">
+		<div class="col-lg-12">
+
 <div class="page-main">
     <h2>(${TEAM.tea_name}) 모임 게시판</h2>
     <div class="align-right">
@@ -14,7 +31,7 @@
     <div>
         <a href="myTeam2">내 모임 보기</a>
     </div>
-    <div><a href="../chat/chatDetail?chaR_num=${chaR_num}">채팅 하기</a></div>
+    <div><a href="${pageContext.request.contextPath}/chat/chatDetail?chaR_num=${chaR_num}">채팅 하기</a></div>
     <form action="teamBoardAdmin" id="search_form" method="get">
         <input type="hidden" id="tea_num" name="tea_num" value="${tea_num}">
         <ul class="search">
@@ -89,6 +106,10 @@
         <div class="align-center">${page}</div>
     </c:if>
 </div>
+</div>
+</div>
+</div>
+</section>
 
 <script type="text/javascript">
     $(document).ready(function() {

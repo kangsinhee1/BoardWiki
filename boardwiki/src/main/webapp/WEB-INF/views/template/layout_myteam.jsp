@@ -12,6 +12,8 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/common.css" type="text/css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css" type="text/css">
+<jsp:include page="/WEB-INF/views/template/css_plugins.jsp"/>
+<jsp:include page="/WEB-INF/views/template/js_plugins.jsp"/>
 <tiles:insertAttribute name="css" ignore="true"/>
 </head>
 <body>

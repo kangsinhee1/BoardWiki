@@ -4,6 +4,9 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>    
 <!-- 게시판 목록 시작 -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
+<style>
+
+</style>
 
 	<!-- Page top section -->
 <section class="page-top-section set-bg" data-setbg="/img/page-top-bg/4.jpg">
@@ -74,8 +77,8 @@
 			<th>좋아요수</th>
 		</tr>
 		</thead>
-		<tbody>
 		<c:forEach var="team" items="${list}">
+		<tbody>
 		<tr>
 			<td >${team.tea_num}</td>
 			<td><a href="teamDetail?tea_num=${team.tea_num}">(${fn:substring(team.tea_address1,0,2)}) ${team.tea_name}</a></td>
@@ -86,8 +89,8 @@
 			<td >${team.tea_hit}</td>
 			<td >${team.fav_cnt}</td>
 		</tr>
-		</c:forEach>
 		</tbody>
+		</c:forEach>
 	</table>
 	<div class="align-center">
 	<div class="blog-pagination">${page}</div>

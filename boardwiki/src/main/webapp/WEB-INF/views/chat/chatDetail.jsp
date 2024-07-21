@@ -5,6 +5,22 @@
 <!-- 채팅 메시지 처리 시작 -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/message.chat.js"></script>
+	<!-- Page top section -->
+<section class="page-top-section set-bg" data-setbg="/img/page-top-bg/4.jpg">
+	<div class="page-info">
+		<h2>모임 신청</h2>
+		<div class="site-breadcrumb">
+			<a href="">Home</a>  /
+			<span>모임신청</span> /
+			<span><a href="myTeam2"> 내 모임 보기</a></span>
+		</div>
+	</div>
+</section>
+<!-- Page top end-->
+<section class="blog-page">
+<div class="container">
+	<div class="row">
+		<div class="col-lg-12">
 <div id="talkDetail" class="page-main">
 	<h2 id="chatroom_title"><span id="chatroom_name">${room_name}</span> 채팅방
 	</h2> 
@@ -31,6 +47,10 @@
 		</div>
 	</form>
 </div>
+</div>
+</div>
+</div>
+</section>
 <!-- 채팅 메시지 처리 끝 -->
 
 

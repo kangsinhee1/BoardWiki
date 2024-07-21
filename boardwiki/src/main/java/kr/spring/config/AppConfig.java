@@ -17,6 +17,7 @@ import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 
+import kr.spring.interceptor.AuthCheckInterceptor;
 import kr.spring.interceptor.AutoLoginCheckInterceptor;
 import kr.spring.interceptor.LoginCheckInterceptor;
 import kr.spring.util.NaverLoginUtil;
@@ -28,6 +29,7 @@ import kr.spring.websocket.SocketHandler;
 public class AppConfig implements WebMvcConfigurer,WebSocketConfigurer{
 	private AutoLoginCheckInterceptor autoLoginCheck;
 	private LoginCheckInterceptor loginCheck;
+	private AuthCheckInterceptor authCheck;
 
 	@Bean
 	public AutoLoginCheckInterceptor interceptor() {
@@ -39,6 +41,12 @@ public class AppConfig implements WebMvcConfigurer,WebSocketConfigurer{
 	public LoginCheckInterceptor interceptor2() {
 		loginCheck = new LoginCheckInterceptor();
 		return loginCheck;
+	}
+	
+	@Bean
+	public AuthCheckInterceptor interceptor4() {
+		authCheck = new AuthCheckInterceptor();
+		return authCheck;
 	}
 
 	@Override
@@ -66,7 +74,17 @@ public class AppConfig implements WebMvcConfigurer,WebSocketConfigurer{
 		.addPathPatterns("/rent/list")
 		.addPathPatterns("/rent/return")
 		.addPathPatterns("/rent/rentListAdmin")
-		;
+		.addPathPatterns("/team/**")
+		.addPathPatterns("/chat/**")
+		.excludePathPatterns("/team/teamFav")
+		.excludePathPatterns("/team/teamDetail")
+		.excludePathPatterns("/team/teamList");
+		
+		//authCheckInterceptor설정
+		registry.addInterceptor(authCheck)
+		.addPathPatterns("/team/teamListAdmin")
+		.addPathPatterns("/team/teamDetailAdmin");
+		
 	}
 
 	@Bean
@@ -86,6 +104,10 @@ public class AppConfig implements WebMvcConfigurer,WebSocketConfigurer{
 		});
 		configurer.setCheckRefresh(true);
 		return configurer;
+	}
+	@Override
+	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
+		registry.addHandler(new SocketHandler(), "message-ws").setAllowedOrigins("*");
 	}
 	@Bean
 	public TilesViewResolver tilesViewResolver() {
@@ -123,10 +145,7 @@ public class AppConfig implements WebMvcConfigurer,WebSocketConfigurer{
 	
 	
 	
-	@Override
-	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-		registry.addHandler(new SocketHandler(), "message-ws").setAllowedOrigins("*");
-	}
+	
 }
 
 

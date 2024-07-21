@@ -5,7 +5,7 @@ $(function(){
 		웹소켓 연결
 	------------------------------------*/
 	function connectWebSocket(){
-		message_socket = new WebSocket('ws://192.168.10.85:8000/message-ws');//포트 맞추기 (이번경우는 8000)
+		message_socket = new WebSocket('ws://localhost:8000/message-ws');//포트 맞추기 (이번경우는 8000)
 		message_socket.onopen=function(evt){
 			console.log('채팅 페이지 접속' + $('#talkDetail').length);
 			if($('#talkDetail').length ==1){

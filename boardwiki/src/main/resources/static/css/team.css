@@ -229,5 +229,9 @@ div.item{
   text-decoration: none;
   cursor: pointer;
 }
+table tbody tr td{
+color:white;
+text-align:center;
+}
 
 

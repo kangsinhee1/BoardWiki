@@ -102,7 +102,7 @@ public class TeamController {
 		int count = teamService.getTeamRowCount(map);
 
 		//페이지 처리
-		PagingUtil page = new PagingUtil(keyfield, keyword, pageNum,count,20,10,"teamList","&order="+order);
+		PagingUtil page = new PagingUtil(keyfield, keyword, pageNum,count,20,10,"teamListAdmin","&order="+order);
 		List<TeamVO> list = null;
 		if(count >0) {
 			map.put("order", order);
@@ -168,6 +168,15 @@ public class TeamController {
 		return new ModelAndView("teamDetail","team",team);
 
 	}
+	//관리자
+	@GetMapping("/team/teamDetailAdmin")
+	public ModelAndView teamDetailAdmin(long tea_num) {
+		TeamVO team =  teamService.detailTeam(tea_num);
+		return new ModelAndView("teamDetailAdmin","team",team);
+
+	}
+
+
 	/*=====================
 	 * 모임 게시판 수정
 	 *=====================*/
@@ -217,21 +226,21 @@ public class TeamController {
 	@GetMapping("/team/teamDelete")
 	public String deleteTeam(long tea_num) {
 		//모임장만 비활성화 되게 처리
-		
+
 		teamService.updateTeamStatus(tea_num);
 		return "redirect:teamList";
 	}
-	
+
 	@GetMapping("/team/teamOpen")
 	public String openTeam(long tea_num) {
 		//모임장만 비활성화 되게 처리
-		
+
 		teamService.updateTeamStatusOpen(tea_num);
 		return "redirect:teamList";
 	}
 
-	
-	
+
+
 	/*=====================
 	 * 모임 신청
 	 *=====================*/
@@ -449,8 +458,8 @@ public class TeamController {
 			String keyfield,String keyword) {
 		session.setAttribute("tea_num", tea_num);
 		model.addAttribute("tea_num",tea_num);
-		MemberVO member =(MemberVO)session.getAttribute("user");
-		if(member== null) {
+		MemberVO user =(MemberVO)session.getAttribute("user");
+		if(user== null) {
 			model.addAttribute("message", "로그인 해야 합니다.");
 			model.addAttribute("url", 
 					request.getContextPath()+"/member/login");
@@ -458,10 +467,13 @@ public class TeamController {
 		}
 		//해당 모임의 관리자만 접속가능하게 처리
 		TeamVO team1 = teamService.detailTeam(tea_num);
-		if(team1.getMem_num() != member.getMem_num()) {
-			model.addAttribute("message", "관리자가 아닙니다.");
-			model.addAttribute("url", request.getContextPath()+"/member/login");
-			return "common/resultAlert";
+		if(user.getMem_auth()!=9) {
+			if(team1.getMem_num() != user.getMem_num()) {
+				System.out.println(user.getMem_auth());
+				model.addAttribute("message", "관리자가 아닙니다.");
+				model.addAttribute("url", request.getContextPath()+"/member/login");
+				return "common/resultAlert";
+			}
 		}
 
 		Map<String,Object> map = new HashMap<String,Object>();
