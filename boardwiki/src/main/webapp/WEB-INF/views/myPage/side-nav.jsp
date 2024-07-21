@@ -1,12 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<h1 id="mypage-side-bar-name"><a href="${pageContext.request.contextPath}/myPage/myPageMain">MyPage</a></h1>
 <nav class="side-nav">
 	<ul>
 		<li><a href="${pageContext.request.contextPath}/myPage/myAlert">알림</a></li>
 		<li><a href="${pageContext.request.contextPath}/myPage/calendar">일정</a></li>
-		<li><a href="${pageContext.request.contextPath}/myPage/myChat">중고 채팅(구매)</a></li>
-		<li><a href="${pageContext.request.contextPath}/myPage/useChatSeller">중고 채팅(판매)</a></li>
+		<li><a href="${pageContext.request.contextPath}/myPage/myChat">중고 채팅(구매/판매)</a></li>
 		<li><a href="${pageContext.request.contextPath}/myPage/myChat2">모임 채팅</a></li>
 		<%-- <li>
 			<div class="dropdown">

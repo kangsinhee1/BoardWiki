@@ -51,4 +51,14 @@ public class UsedServiceImpl implements UsedService{
 		usedMapper.deleteUsed(map);
 	}
 
+	@Override
+	public List<UsedItemVO> selectUsedListByMemNum(Map<String, Object> map) {
+		return usedMapper.selectUsedListByMemNum(map);
+	}
+
+	@Override
+	public Integer getUsedRowCountByMemNum(Map<String, Object> map) {
+		return usedMapper.getUsedRowCountByMemNum(map);
+	}
+
 }

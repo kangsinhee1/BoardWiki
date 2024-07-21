@@ -3,6 +3,8 @@ package kr.spring.used.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Select;
+
 import kr.spring.used.vo.UsedItemVO;
 
 public interface UsedService {
@@ -18,4 +20,9 @@ public interface UsedService {
 	public void updateUsed(UsedItemVO used);
 	//중고글 삭제
 	public void deleteUsed(Map<String,Object> map);
+	
+	//내중고글 찾기
+	public List<UsedItemVO> selectUsedListByMemNum(Map<String,Object>map);
+	//내 중고글 갯수 
+	public Integer getUsedRowCountByMemNum(Map<String,Object>map);
 }

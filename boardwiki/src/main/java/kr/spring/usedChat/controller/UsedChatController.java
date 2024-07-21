@@ -39,7 +39,7 @@ public class UsedChatController {
 	@Autowired
 	private MemberService memberService;
 	
-	@GetMapping("/used/useChatSeller")
+	@GetMapping("/*/useChatSeller")
 	public String accessUseChatSeller(Long use_num, String useC_name, UsedChatRoomVO usedChatRoomVO, HttpSession session, Model model, HttpServletRequest request) {
 		log.debug("<<<<<<<<<<use_num : "+use_num);
 		log.debug("<<<<<<<<<<useC_name : "+useC_name);

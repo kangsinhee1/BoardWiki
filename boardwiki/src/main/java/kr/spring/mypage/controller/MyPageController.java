@@ -16,9 +16,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.spring.board.service.BoardService;
 import kr.spring.board.vo.BoardVO;
-import kr.spring.chat.vo.ChatRoomVO;
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
+import kr.spring.used.service.UsedService;
+import kr.spring.used.vo.UsedItemVO;
 import kr.spring.usedChat.service.UsedChatService;
 import kr.spring.usedChat.vo.UsedChatRoomVO;
 import kr.spring.util.PagingUtil;
@@ -35,6 +36,9 @@ public class MyPageController {
 	
 	@Autowired
 	private UsedChatService usedChatService;
+
+	@Autowired
+	private UsedService usedService;
 
 
 
@@ -88,7 +92,7 @@ public class MyPageController {
 		
 		
 		//페이지 처리
-		PagingUtil page = new PagingUtil(null,keyword,pageNum,count,20,10,"chatList");
+		PagingUtil page = new PagingUtil(null,keyword,pageNum,count,10,10,"myChat");
 		List<UsedChatRoomVO> list = null;
 		if(count>0) {
 			map.put("start", page.getStartRow());
@@ -99,7 +103,19 @@ public class MyPageController {
 			model.addAttribute("page",page.getPage());
 			log.debug("목록 가져와 ! " + list);
 		}
+		int count2 = usedService.getUsedRowCountByMemNum(map);
 		
+		PagingUtil page2 = new PagingUtil(null,keyword,pageNum,count,10,10,"myChat");
+		List<UsedItemVO> list2 = null;
+		if(count>0) {
+			map.put("start", page2.getStartRow());
+			map.put("end", page2.getEndRow());
+			list2 = usedService.selectUsedListByMemNum(map);
+			model.addAttribute("count2",count2);
+			model.addAttribute("list2",list2);
+			model.addAttribute("page2",page2.getPage());
+			log.debug("목록 가져와 ! " + list2);
+		}
 		
 		model.addAttribute("member", member);
 
