@@ -93,9 +93,7 @@
 									<li>가격<span>${item.item_price}원</span></li>
 									
 								</ul>
-								<div class="rating">
-									<h5><i>평점</i><span>${item.item_average}</span> / 10</h5>
-								</div>
+								
 							</div>
 						</div>
 					</div>

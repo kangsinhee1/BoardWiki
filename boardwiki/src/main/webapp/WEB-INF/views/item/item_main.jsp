@@ -37,7 +37,6 @@
 <section class="games-section">
 	<div class="container">
 
-		<div class="row">
 
 			<div class="game-main">
 				<c:if test="${count > 0}">
@@ -69,9 +68,8 @@
 				</c:forEach>
 			</div>
 
-		</div>
-
-		<div class="align-center">${page}</div>
+		
+		<div class="align-center" style= "text-align : center">${page}</div>
 		</c:if>
 
 		<c:if test="${count == 0}">
