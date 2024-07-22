@@ -3,14 +3,14 @@
 	position:absolute;
 	z-index:5;
 	background:white;
-	left:50%;
-	top:80%;
+	margin-top: 500px;
+	margin-left: 800px;
 	margin-bottom:8px !important;
 	padding-bottom:15px;
 	border-radius:10px;
 	border:1px solid #ccc;
 	width:400px;  
-    height:600px; 
+    height:500px; 
     padding:40px;  
 	text-align: center;
     box-shadow:0 2px 3px 0 rgba(34,36,38,0.15);

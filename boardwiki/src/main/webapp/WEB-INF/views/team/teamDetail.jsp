@@ -36,6 +36,7 @@
 	</div>
 	<hr size="1" width="100%">
 	<div class="align-right">
+	<input type="button" value="신고" id="report_btn">
 	<input type="button" value="목록" onclick="location.href='teamList'">
 		<c:if test="${!empty user &&user.mem_num == team.mem_num}">
 			<input type="button" value="수정"
@@ -113,4 +114,76 @@ geocoder.addressSearch(address, function(result, status) {
     } 
 });    
 </script>
+<div class="modal" style="">
+	<form id="reportForm">
+		<h4>신고하기</h4>
+			<input type="hidden" id="report_type" name="report_type" value="6">
+			<input type="hidden" id="report_typeDetail" name="report_typeDetail" value="${team.tea_num }">
+			<textarea rows="10" cols="30" id="report_content" name="report_content" placeholder="신고 사유를 적어주세요"></textarea>
+		<h6>신고 사유</h6>
+		<div>
+			<input type="radio" name="report_category" value="1" checked />욕설/혐오/차별표현<br>
+			<input type="radio" name="report_category" value="2" />부적절한 게시물<br>
+			<input type="radio" name="report_category" value="3" />불법정보를 포함<br>
+			<input type="radio" name="report_category" value="4" />도배/스팸
+		</div>
+		<div>
+			<input type="submit" id="sbm_btn" value="완료"> 
+			<input type="button" value="취소" id="cancel">
+		</div>
+	</form>
+</div>
 
+<script type="text/javascript">
+    $(document).ready(function() {
+        let cnt = 0;
+        $('#report_btn').click(function() {
+            if (cnt === 0) {
+                $('.modal').show();
+                cnt = 1;
+            } else {
+                $('.modal').hide();
+                cnt = 0;    
+            }
+        });
+        $('#cancel').click(function() {
+            $('.modal').hide();
+            cnt = 0;
+        });
+        $('#reportForm').submit(function(event){
+            if($('#report_content').val().trim()==''){
+                alert('내용을 입력하세요');
+                $('#report_content').val('').focus();
+                return false;
+            }
+            
+            let form_data = $(this).serialize();
+            console.log(form_data);
+            
+            //서버와 통신
+            $.ajax({
+                url: 'insertReport',
+                type: 'post',
+                data: form_data,
+                dataType: 'json',
+                success: function(param){
+                    if(param.result === 'logout'){
+                        alert('로그인해야 작성할 수 있습니다.');
+                    } else if(param.result === 'success'){
+                        alert('신고 완료');
+                        $('.modal').hide();
+                        cnt = 0;
+                    } else {
+                        alert('신고 접수 오류 발생');
+                    }
+                },
+                error: function(){
+                    alert('네트워크 오류 발생');
+                }
+            });
+            
+            //기본 이벤트 제거
+            event.preventDefault();
+        });
+    });
+</script>
