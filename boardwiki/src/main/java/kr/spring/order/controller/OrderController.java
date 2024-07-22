@@ -96,6 +96,7 @@ public class OrderController {
     		orderService.insertOrder(order);
     		mapAjax.put("result", "success");
     	}
+    	log.debug("<<mapAjax 결과>> : " + mapAjax);
     	return mapAjax;
     }
 }
