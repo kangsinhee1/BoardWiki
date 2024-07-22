@@ -18,13 +18,13 @@ $(function(){
 		});
 	}
 	
-	/*----------------------
+	/*----------------------	
 	 * 좋아요 등록/삭제
 	 *---------------------*/
 	$('#output_fav').click(function(){
 		//서버와 통신
 		$.ajax({
-			url:'writeFav',
+			url:'writeTnrFav',
 			type:'post',
 			data:{tnr_num:$('#output_fav').attr('data-num')},
 			dataType:'json',

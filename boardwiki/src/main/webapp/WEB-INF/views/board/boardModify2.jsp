@@ -8,6 +8,26 @@
 <!-- include ckeditor js -->
 <script src="${pageContext.request.contextPath}/js/ckeditor.js"></script>
 <script src="${pageContext.request.contextPath}/js/uploadAdapter.js"></script>
+<section class="page-top-section set-bg"
+	data-setbg="/img/page-top-bg/4.jpg">
+	<div class="page-info">
+		<c:choose>
+        	<c:when test="${param.boa_category == 4}">
+           		 <h2>공지</h2>
+       		 </c:when>
+        	<c:when test="${param.boa_category == 5}">
+           		 <h2>QnA</h2>
+       		 </c:when>
+    	</c:choose>
+		<div class="site-breadcrumb">
+			<a href="">Home</a> / <span>자유게시판 수정</span>
+		</div>
+	</div>
+</section>
+<section class="blog-page">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
 <div class="page-main">
 	<h2>글 수정</h2>
 	<form:form action="update2" id="board_modify"
@@ -100,6 +120,10 @@
 		</div>                           
 	</form:form>
 </div>
+</div>
+</div>
+</div>
+</section>
 <!-- 게시판 글 수정 끝 -->
 
 

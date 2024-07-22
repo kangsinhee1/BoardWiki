@@ -13,10 +13,20 @@
            		 <h2>후기게시판</h2>
        		 </c:when>
     	</c:choose>
-			<div class="site-breadcrumb">
+			<c:choose>
+        	<c:when test="${param.tnr_category == 1}">
+           		 <div class="site-breadcrumb">
 				<a href="">Home</a>  /
-				<span>board</span>
+				<span>Tip</span>
 			</div>
+       		 </c:when>
+        	<c:when test="${param.tnr_category == 2}">
+           		<div class="site-breadcrumb">
+				<a href="">Home</a>  /
+				<span>Review</span>
+			</div>
+       		 </c:when>
+    	</c:choose>
 		</div>
 </section>
 <section class="blog-page">

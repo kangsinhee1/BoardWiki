@@ -16,6 +16,10 @@
 			</div>
 		</div>
 	</section>
+<section class="blog-page">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
 <div class="page-main">
 	<h2>${board.boa_title}</h2>
 	<ul class="detail-info">
@@ -104,6 +108,10 @@
 	</div>
 	<!-- 댓글 UI 끝 -->
 </div>
+</div>
+</div>
+</div>
+</section>
 <!-- 게시판 글상세 끝 -->
 
 

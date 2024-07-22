@@ -18,6 +18,8 @@ import kr.spring.board.service.BoardService;
 import kr.spring.board.vo.BoardVO;
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
+import kr.spring.tnrboard.service.TnrboardService;
+import kr.spring.tnrboard.vo.TnrboardVO;
 import kr.spring.used.service.UsedService;
 import kr.spring.used.vo.UsedItemVO;
 import kr.spring.usedChat.service.UsedChatService;
@@ -40,7 +42,8 @@ public class MyPageController {
 	@Autowired
 	private UsedService usedService;
 
-
+	@Autowired
+	private TnrboardService tnrboardService;
 
 
 	/*==============================
@@ -200,7 +203,7 @@ public class MyPageController {
 	@GetMapping("/myPage/myWrite2")
 	public String myWritePage2(@RequestParam(defaultValue="1") int pageNum,
 			@RequestParam(defaultValue="1") int order,
-			@RequestParam(defaultValue="2")String boa_category,
+			@RequestParam(defaultValue="1")String tnr_category,
 			String keyfield,String keyword,HttpSession session,Model model) {
 
 		MemberVO user = 
@@ -211,23 +214,23 @@ public class MyPageController {
 		log.debug("<<MY페이지>> : " + member);
 
 		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("boa_category", boa_category);
+		map.put("tnr_category", tnr_category);
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
 		map.put("mem_num", user.getMem_num());
-		int count = boardService.selectRowmyCount(map);
+		int count = tnrboardService.selectTnrRowmyCount(map);
 
 		PagingUtil page = new PagingUtil(keyfield,keyword,pageNum,count,
-				10,10,"myWrite2","&boa_category="+boa_category+"&order="+order);
+				10,10,"myWrite2","&tnr_category="+tnr_category+"&order="+order);
 		model.addAttribute("page", page.getPage());
-		List<BoardVO> list = null;
+		List<TnrboardVO> list = null;
 		if(count > 0) {
 			map.put("order", order);
 			map.put("start", page.getStartRow());
 			map.put("end", page.getEndRow());
 
 
-			list = boardService.selectMyList(map);
+			list = tnrboardService.selectTnrMyList(map);
 		}
 		model.addAttribute("count", count);
 		model.addAttribute("list", list);
@@ -240,7 +243,7 @@ public class MyPageController {
 	@GetMapping("/myPage/myWrite3")
 	public String myWritePage3(@RequestParam(defaultValue="1") int pageNum,
 			@RequestParam(defaultValue="1") int order,
-			@RequestParam(defaultValue="3")String boa_category,
+			@RequestParam(defaultValue="2")String tnr_category,
 			String keyfield,String keyword,HttpSession session,Model model) {
 
 		MemberVO user = 
@@ -251,22 +254,22 @@ public class MyPageController {
 		log.debug("<<MY페이지>> : " + member);
 
 		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("boa_category", boa_category);
+		map.put("tnr_category", tnr_category);
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
 		map.put("mem_num", user.getMem_num());
-		int count = boardService.selectRowmyCount(map);
+		int count = tnrboardService.selectTnrRowmyCount(map);
 
 		PagingUtil page = new PagingUtil(keyfield,keyword,pageNum,count,
-				10,10,"myWrite3","&boa_category="+boa_category+"&order="+order);
+				10,10,"myWrite3","&tnr_category="+tnr_category+"&order="+order);
 		model.addAttribute("page", page.getPage());
-		List<BoardVO> list = null;
+		List<TnrboardVO> list = null;
 		if(count > 0) {
 			map.put("order", order);
 			map.put("start", page.getStartRow());
 			map.put("end", page.getEndRow());
 
-			list = boardService.selectMyList(map);
+			list = tnrboardService.selectTnrMyList(map);
 		}
 		model.addAttribute("count", count);
 		model.addAttribute("list", list);

@@ -14,6 +14,10 @@
 			</div>
 		</div>
 </section>
+<section class="blog-page">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
 <div class="page-main">
 	<h2>${rulebook.item_name}</h2>
 	<ul class="detail-info">
@@ -54,6 +58,10 @@
 	</div>
 	<hr size="1" width="100%">
 </div>
+</div>
+</div>
+</div>
+</section>
 <!-- 룰북 상세 끝 -->
 
 

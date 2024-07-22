@@ -17,6 +17,10 @@
 		</div>
 	</div>
 </section>
+<section class="blog-page">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
 <div class="page-main">
 	<form:form action="tnrwrite" id="board_register"
 	           enctype="multipart/form-data"
@@ -78,6 +82,10 @@
 		</div>                           
 	</form:form>
 </div>
+</div>
+</div>
+</div>
+</section>
 				<div class="modal">
                     <form id="searchform">
                         <h4>제품 검색</h4>

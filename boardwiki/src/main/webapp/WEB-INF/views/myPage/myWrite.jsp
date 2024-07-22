@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<section class="blog-page">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
 <h3>내가 쓴 글</h3>
 <br>
 <div class="page-main">
@@ -35,3 +39,7 @@
 		<div class="align-center">${page}</div>
 	</c:if>
 </div>
+</div>
+</div>
+</div>
+</section>

@@ -17,6 +17,10 @@
 		</div>
 	</div>
 </section>
+<section class="blog-page">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
 <div class="page-main">
 	<form:form action="write" id="board_register"
 	           enctype="multipart/form-data"
@@ -65,11 +69,14 @@
 			<form:button class="default-btn">전송</form:button>
 			<input type="button" value="목록"
 			  class="default-btn"
-			  onclick="location.href='list'">
+			  onclick="location.href='list?boa_category=1'">
 		</div>                           
 	</form:form>
 </div>
-				
+</div>
+</div>
+</div>
+</section>				
 <!-- 게시판 글쓰기 끝 -->
 
 

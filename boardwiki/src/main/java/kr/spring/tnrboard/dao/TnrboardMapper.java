@@ -37,7 +37,7 @@ public interface TnrboardMapper {
 	public TnrboardFavVO selectTnrFav(TnrboardFavVO fav);
 	@Select("SELECT COUNT(*) FROM tnrboard_fav WHERE tnr_num=#{tnr_num}")
 	public Integer selectTnrFavCount(Long tnr_num);
-	@Insert("INSERT INTO tnrboard_fav (tnr_num,mem_num) VALUES (#{tnr_num},#{tnr_num})")
+	@Insert("INSERT INTO tnrboard_fav (tnr_num,mem_num) VALUES (#{tnr_num},#{mem_num})")
 	public void insertTnrFav(TnrboardFavVO fav);
 	@Delete("DELETE FROM tnrboard_fav WHERE tnr_num=#{tnr_num} AND mem_num=#{mem_num}")
 	public void deleteTnrFav(TnrboardFavVO fav);

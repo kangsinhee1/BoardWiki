@@ -16,6 +16,10 @@
 			</div>
 		</div>
 	</section>
+<section class="blog-page">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
 <div class="page-main">
 	<h2>${tnrboard.tnr_title}</h2>
 	<ul class="detail-info">
@@ -127,7 +131,10 @@
 		</div>
 	</form>
 </div>
-
+</div>
+</div>
+</div>
+</section>
 <script type="text/javascript">
     $(document).ready(function() {
         let cnt = 0;

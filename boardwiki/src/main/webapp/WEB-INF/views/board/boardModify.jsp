@@ -17,8 +17,11 @@
 		</div>
 	</div>
 </section>
+<section class="blog-page">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
 <div class="page-main">
-	<h2>글 수정</h2>
 	<form:form action="update" id="board_modify"
 	           enctype="multipart/form-data"
 	                            modelAttribute="boardVO">
@@ -105,6 +108,10 @@
 		</div>                           
 	</form:form>
 </div>
+</div>
+</div>
+</div>
+</section>
 <!-- 게시판 글 수정 끝 -->
 
 
