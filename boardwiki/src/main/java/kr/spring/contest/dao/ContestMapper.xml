@@ -3,87 +3,104 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.spring.contest.dao.ContestMapper">
-<!-- 글쓰기 -->
-	 <insert id="insertBoard" parameterType="boardVO">
-	 	INSERT INTO contest(
-	 	  con_num,
-	 	  con_name,
-	 	  con_content,
-	 	  con_location,
-	 	  con_sdate,
-	 	  con_edate,
-	 	  mem_num)
-	 	VALUES (
-	 	  content_seq.nextval,
-	 	  #{con_name},
-	 	  #{con_content},
-	 	  #{con_location},
-	 	  #{con_sdate},
-	 	  #{con_edate},
-	 	  #{mem_num})
-	 </insert>
-<!--
-	 <sql id="contestSearch">
-	 	<where>
-	 		<if test="keyword !=null and keyword != ''">
-		 		<if test="keyfield == 1">
-		 			con_name LIKE '%' || #{keyword} || '%'
-		 		</if>
-		 		<if test="keyfield == 2">
-		 			con_location LIKE '%' || #{keyword} || '%'
-		 		</if>
-	 		</if>
-	 	</where>
-	 </sql>
-	 <sql id="contestOrder">
-	 	<if test="order == 1">
-	 		ORDER BY con_num DESC
-	 	</if>
-	 	<if test="order == 2">
-	 		ORDER BY con_hit DESC
-	 	</if>
-	 	<if test="order == 3">
-	 		WHERE con_status = 0
-	 	</if>
-	 	<if test="order == 4">
-	 		WHERE con_status = 1
-	 	</if>
-	 </sql> -->
-	<select id="selectRowCount" parameterType="map" resultType="integer">
+	<!-- 글쓰기 -->
+	<insert id="insertContest" parameterType="contestVO">
+		INSERT INTO contest(
+		con_num,
+		con_name,
+		con_content,
+		con_zipcode,
+		con_address1,
+		con_address2,
+		con_sdate,
+		con_edate,
+		con_maxman,
+		mem_num)
+		VALUES (
+		contest_seq.nextval,
+		#{con_name},
+		#{con_content},
+		#{con_zipcode},
+		#{con_address1},
+		#{con_address2},
+		#{con_sdate},
+		#{con_edate},
+		#{con_maxman},
+		#{mem_num})
+	</insert>
+	<sql id="contestSearch">
+		<where>
+			<if test="keyword !=null and keyword != ''">
+				<if test="keyfield == 1">
+					con_name LIKE '%' || #{keyword} || '%'
+				</if>
+				<if test="keyfield == 2">
+					con_address1 LIKE '%' || #{keyword} || '%'
+				</if>
+			</if>
+		</where>
+	</sql>
+	<sql id="contestOrder">
+		<if test="order == 1">
+			ORDER BY con_num DESC
+		</if>
+		<if test="order == 2">
+			ORDER BY con_hit DESC
+		</if>
+		<if test="order == 3">
+			WHERE con_status = 0
+		</if>
+		<if test="order == 4">
+			WHERE con_status = 1
+		</if>
+	</sql>
+	<select id="selectRowCount" parameterType="map"
+		resultType="integer">
 		SELECT COUNT(*) FROM contest
 	</select>
 	<!-- 게시판 전체 목록/검색 목록 -->
-	<select id="selectContestList" parameterType="map" resultType="contestVO">
+	<select id="selectContestList" parameterType="map"
+		resultType="contestVO">
 		SELECT
 		*
 		FROM (SELECT
 		a.*,
 		rownum rnum
 		FROM (SELECT
-		boa_num,
+		con_num,
 		                 <![CDATA[
-		                 REPLACE(REPLACE(boa_title,'<','&lt;'),'>','&gt;') boa_title,
+		                 REPLACE(REPLACE(con_name,'<','&lt;'),'>','&gt;') con_name,
 		                 ]]>
-		boa_hit,
-		filename,
-		boa_rdate,
+		con_hit,
+		con_status,
+		con_rdate,
+		con_man,
 		mem_num,
 		mem_email,
-		mem_nickname,
-		re_cnt,
-		fav_cnt
-		FROM board
-		JOIN member USING(mem_num)
-		LEFT OUTER JOIN (SELECT COUNT(*) re_cnt, boa_num FROM board_reply GROUP BY
-		boa_num) USING(boa_num)
-		LEFT OUTER JOIN (SELECT COUNT(*) fav_cnt, boa_num FROM board_fav GROUP BY
-		boa_num) USING(boa_num)
-		LEFT OUTER JOIN member_detail USING(mem_num)
-<!-- 		<include refid="contestSearch"></include>
-		<include refid="contestOrder"></include> -->
+		mem_nickname
+		FROM contest
+		JOIN
+		member USING(mem_num)
+		LEFT OUTER JOIN member_detail
+		USING(mem_num)
+		<include refid="contestSearch"></include>
+		<include refid="contestOrder"></include>
 		)a)
 		<![CDATA[
 		WHERE rnum >= #{start} AND rnum <= #{end}
 		]]>
 	</select>
+
+	<insert id="applyForContest" parameterType="contestApplyVO">
+		INSERT INTO
+		contest_apply (
+		conA_num,
+		con_num,
+		mem_num) 
+		VALUES (
+		contest_apply_seq.nextval,
+		#{con_num},
+		#{mem_num}
+		)
+	</insert>
 </mapper>

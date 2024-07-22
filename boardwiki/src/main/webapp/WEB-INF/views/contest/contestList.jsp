@@ -37,8 +37,9 @@
         <div class="align-right">
             <select id="order" name="order" class="form-control">
                 <option value="1" <c:if test="${param.order == 1}">selected</c:if>>최신순</option>
-                <option value="2" <c:if test="${param.order == 2}">selected</c:if>>진행중대회</option>
-                <option value="3" <c:if test="${param.order == 3}">selected</c:if>>종료된대회</option>
+                <option value="2" <c:if test="${param.order == 2}">selected</c:if>>조회순</option>
+                <option value="3" <c:if test="${param.order == 3}">selected</c:if>>진행중대회</option>
+                <option value="4" <c:if test="${param.order == 4}">selected</c:if>>종료된대회</option>
             </select>
             <script type="text/javascript">
                 $('#order').change(function(){
@@ -72,10 +73,15 @@
         <c:forEach var="contest" items="${list}">
         <tr>
             <td class="align-center">${contest.con_num}</td>
-            <td class="align-left"><a href="contestDetail?con_num=${contest.con_num}">(${fn:substring(contest.con_location1,0,2)}) ${contest.con_name}</a></td>
+            <td class="align-left"><a href="contestDetail?con_num=${contest.con_num}">(${fn:substring(contest.con_address1,0,2)}) ${contest.con_name}</a></td>
             <td class="align-center">${contest.con_rdate}</td>
             <td class="align-center">${contest.con_hit}</td>
-            <td class="align-center">${contest.con_status}</td>
+            <c:if test="${contest.con_status==0}">
+            	<td>진행중</td>
+            </c:if>
+            <c:if test="${contest.con_status==1}">
+            	<td>종료</td>
+            </c:if>
         </tr>
         </c:forEach>
         </tbody>

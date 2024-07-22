@@ -17,10 +17,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.board.controller.BoardController;
 import kr.spring.board.vo.BoardVO;
 import kr.spring.contest.service.ContestService;
+import kr.spring.contest.vo.ContestApplyVO;
 import kr.spring.contest.vo.ContestVO;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.team.vo.TeamVO;
@@ -39,14 +41,24 @@ public class ContestController {
 		return new ContestVO();
 	}
 
-	
-	
+
+
 	/*=====================
 	 * 게시판 글쓰기
 	 *=====================*/
 	//등록 폼 호출
 	@GetMapping("/contest/contestWrite")
-	public String writeform() {
+	public String writeform(ContestVO contestVO, HttpServletRequest request,
+			HttpSession session,
+			Model model) {
+		MemberVO member =(MemberVO)session.getAttribute("user");
+		if(member == null && member.getMem_auth() < 9 ) {
+			model.addAttribute("message", "잘못된 접근입니다.");
+			model.addAttribute("url", 
+					request.getContextPath()+"/main/main");
+
+			return "common/resultAlert";
+		}
 		return "contestWrite";
 	}
 	//등록 폼에서 전송된 데이터 처리
@@ -59,30 +71,23 @@ public class ContestController {
 					throws IllegalStateException,
 					IOException{
 		log.debug("<<게시판 글 저장>> : " + contestVO);
-		
+
 		//유효성 체크 결과 오류가 있으면 폼 호출
-				if(result.hasErrors()) {
-					return writeform();
-				}
+		if(result.hasErrors()) {
+			return writeform(contestVO, request, session, model);
+		}
 
 		//회원번호 셋팅
 		MemberVO member = (MemberVO)session.getAttribute("user");
 		contestVO.setMem_num(member.getMem_num());
-		
-		if(member == null || member.getMem_auth() < 9 ) {
-			model.addAttribute("message", "잘못된 접근입니다.");
-			model.addAttribute("url", 
-					request.getContextPath()+"/main/main");
 
-			return "common/resultAlert";
-		}
 		//글쓰기
 		contestservice.insertContest(contestVO);
 
 		//View 메시지 처리
 		model.addAttribute("message", "성공적으로 글이 등록되었습니다.");
 		model.addAttribute("url", 
-				request.getContextPath()+"/board/list");
+				request.getContextPath()+"/contest/contestList");
 
 		return "common/resultAlert";
 	}
@@ -94,15 +99,12 @@ public class ContestController {
 	public String getList(
 			@RequestParam(defaultValue="1") int pageNum,
 			@RequestParam(defaultValue="1") int order,
-			@RequestParam(defaultValue="") String category,
 			String keyfield,String keyword,Model model) {
 
-		log.debug("<<게시판 목록 - category>> : " + category);
 		log.debug("<<게시판 목록 - order>> : " + order);
 
 		Map<String,Object> map = 
 				new HashMap<String,Object>();
-		map.put("category", category);
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
 
@@ -112,8 +114,8 @@ public class ContestController {
 		//페이지 처리
 		PagingUtil page = 
 				new PagingUtil(keyfield,keyword,pageNum,
-						count,20,10,"list",
-						"&category="+category+"&order="+order);
+						count,20,10,"contestList",
+						"&order="+order);
 		List<ContestVO> list = null;
 		if(count > 0) {
 			map.put("order", order);
@@ -128,5 +130,45 @@ public class ContestController {
 		model.addAttribute("page", page.getPage());
 
 		return "contestList";
+	}
+
+	/*=====================
+	 * 	   대회 상세
+	 *=====================*/
+	@GetMapping("/contest/contestDetail")
+	public ModelAndView contestDetail(long con_num) {
+
+		contestservice.updateContestHit(con_num);
+
+		ContestVO contest =  contestservice.detailContest(con_num);
+
+		return new ModelAndView("contestDetail","contest",contest);
+	}
+
+
+	/*=====================
+	 * 	    대회 신청 처리
+	 *=====================*/
+	@GetMapping("/contest/contestApply")
+	public String submitApply(long con_num,
+			HttpServletRequest request, HttpSession session, ContestApplyVO contestApplyVO, Model model) {
+
+		MemberVO member = (MemberVO)session.getAttribute("user");
+		contestApplyVO.setMem_num(member.getMem_num());
+		contestApplyVO.setCon_num(con_num);
+
+		//이전에 신청한 기록이 있으면 신청한 기록이 있다고 확인시켜주기
+		contestApplyVO.setMem_num(member.getMem_num());
+		if(contestservice.selectContestApplyList(contestApplyVO)>0){
+			model.addAttribute("message","이미 신청한 기록이 있습니다.");
+			model.addAttribute("url",request.getContextPath()+"contestDetail?con_num="+contestApplyVO.getCon_num());
+			return "common/resultAlert";
+		}
+
+		contestservice.applyForContest(contestApplyVO);
+		model.addAttribute("message","신청  완료");
+		model.addAttribute("url",request.getContextPath()+"contestDetail?con_num="+contestApplyVO.getCon_num());
+		
+		return "common/resultAlert";
 	}
 }
