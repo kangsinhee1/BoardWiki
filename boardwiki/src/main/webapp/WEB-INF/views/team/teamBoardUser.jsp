@@ -4,11 +4,29 @@
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/teamBoard.js"></script>
+
+	<!-- Page top section -->
+<section class="page-top-section set-bg" data-setbg="/img/page-top-bg/4.jpg">
+	<div class="page-info">
+		<h2>모임 신청</h2>
+		<div class="site-breadcrumb">
+			<a href="teamList">Home</a>  /
+			<span>모임신청</span> /
+			<span><a href="myTeam2"> 내 모임 보기</a></span>/
+				<span><a href="teamBoardAdmin?tea_num=${tea_num}">${TEAM.tea_name}</a></span>
+		</div>
+	</div>
+</section>
+<!-- Page top end-->
+<section class="blog-page">
+<div class="container">
+	<div class="row">
+		<div class="col-lg-12">
 <div class="page-main">
     <h2>(${TEAM.tea_name}) 모임 게시판</h2>
     <div class="align-right">
     	모임 일정 : <c:choose>
-    	<c:when test="${TEAM.tea_time != ''&& TEAM.tea_time != null }"> ${TEAM.tea_time}</c:when>
+    	<c:when test="${TEAM.tea_time != ''&& TEAM.tea_time != null }"> ${TEAM.tea_time} </c:when>
     	<c:otherwise> 없습니다.</c:otherwise>
     	</c:choose>
     	<c:if test="${TEAM.tea_time != ''&& TEAM.tea_time != null && attend ==0}">
@@ -19,18 +37,15 @@
     	</c:if>
     </div>
     <hr>
-    <div>
-        <a href="myTeam2">내 모임 보기</a>
-    </div>
-  	<div><a href="../chat/chatDetail?chaR_num=${chaR_num}">채팅 하기</a></div>
+  	<div><a href="${pageContext.request.contextPath}/chat/chatDetail?chaR_num=${chaR_num}">채팅 하기</a></div>
     
     <form action="teamBoardUser" id="search_form" method="get">
                 <input type="hidden" id="tea_num" name="tea_num" value="${tea_num}">
         <ul class="search">
             <li>
                 <select name="keyfield" id="keyfield">
-                    <option value="1" <c:if test="${param.keyfield == 1}">selected</c:if>>제목</option>
-                    <option value="2" <c:if test="${param.keyfield == 2}">selected</c:if>>내용</option>
+                    <option value="1" <c:if test="${param.keyfield == 1}">selected</c:if>>제목 &nbsp;</option>
+                    <option value="2" <c:if test="${param.keyfield == 2}">selected</c:if>>내용 &nbsp;</option>
                 </select>
             </li>
             <li>
@@ -43,9 +58,9 @@
 
         <div class="align-right">
             <select id="order" name="order">
-                <option value="1" <c:if test="${param.order == 1}">selected</c:if>>최신순</option>
-                <option value="2" <c:if test="${param.order == 2}">selected</c:if>>조회수</option>
-                <option value="3" <c:if test="${param.order == 3}">selected</c:if>>댓글순</option>
+                <option value="1" <c:if test="${param.order == 1}">selected</c:if>>최신순 &nbsp;</option>
+                <option value="2" <c:if test="${param.order == 2}">selected</c:if>>조회수 &nbsp;</option>
+                <option value="3" <c:if test="${param.order == 3}">selected</c:if>>댓글순 &nbsp;</option>
             </select>
             <input type="button" value="글쓰기" onclick="location.href='${pageContext.request.contextPath}/team/teamBoardWrite?tea_num=${tea_num}'">
         </div>
@@ -99,6 +114,11 @@
         <div class="align-center">${page}</div>
     </c:if>
 </div>
+</div>
+</div>
+</div>
+</section>
+
 
 <script type="text/javascript">
     $(document).ready(function() {

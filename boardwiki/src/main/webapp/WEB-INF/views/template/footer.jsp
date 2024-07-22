@@ -10,10 +10,8 @@
 	<footer class="footer-section">
 		<div class="container">
 			<div class="footer-left-pic">
-				<img src="/img/footer-left-pic.png" alt="">
 			</div>
 			<div class="footer-right-pic">
-				<img src="/img/footer-right-pic.png" alt="">
 			</div>
 			<a href="#" class="footer-logo">
 				<img src="/img/logo.png" alt="">

@@ -5,6 +5,23 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/videoAdapter.js"></script>
 <script src="${pageContext.request.contextPath}/js/teamBoard.reply.js"></script>
+
+	<!-- Page top section -->
+<section class="page-top-section set-bg" data-setbg="/img/page-top-bg/4.jpg">
+	<div class="page-info">
+		<h2>모임 신청</h2>
+		<div class="site-breadcrumb">
+			<a href="">Home</a>  /
+			<span>모임신청</span> /
+			<span><a href="myTeam2"> 내 모임 보기</a></span>
+		</div>
+	</div>
+</section>
+<!-- Page top end-->
+<section class="blog-page">
+<div class="container">
+	<div class="row">
+		<div class="col-lg-12">
 <!-- 게시판 글 상세 시작 -->
 <div class="page-main">
 	<h2> ${board.teaB_title}</h2>
@@ -81,3 +98,7 @@
 	<!--  댓글 ui  끝 -->
 </div>
 <!-- 게시판 글 상세 끝 -->
+</div>
+</div>
+</div>
+</section>

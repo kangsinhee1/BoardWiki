@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.spring.report.dao.ReportMapper">
+	<insert id="insertReport" parameterType="reportVO">
+ 		INSERT INTO report 
+ 			(report_num, 
+ 			reporter_num, 
+ 			report_content, 
+ 			report_type, 
+ 			report_typeDetail, 
+ 			report_category
+ 			) VALUES(
+ 			report_seq.nextval,
+ 			#{reporter_num},
+ 			#{report_content},
+ 			#{report_type},
+ 			#{report_typeDetail},
+ 			#{report_category}
+ 			)
+ 	</insert>
+	<select id="getReportRowCount" parameterType="map"
+									resultType="integer">
+		SELECT
+			COUNT(*)
+		FROM report
+	 </select>
+	  <select id="selectReportList" parameterType="map"
+	 							resultType="reportVO">
+	 	SELECT
+	 	   *
+	 	FROM (SELECT
+	 			a.*,
+	 			rownum rnum
+	 		   FROM (SELECT
+	 		   			*
+	 		   		 FROM report r
+	 		   		 LEFT OUTER JOIN board b ON r.report_typeDetail = b.boa_num
+	 		   		 )a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+	</select>
+</mapper>

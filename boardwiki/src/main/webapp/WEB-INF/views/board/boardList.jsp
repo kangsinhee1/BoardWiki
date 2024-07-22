@@ -12,19 +12,11 @@
 		</div>
 </section>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
+<section class="blog-page">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
 <div class="page-main">
-	 <c:choose>
-        <c:when test="${param.boa_category == 1}">
-            <h2>자유게시판</h2>
-        </c:when>
-        <c:when test="${param.boa_category == 2}">
-            <h2>팁게시판</h2>
-        </c:when>
-        <c:when test="${param.boa_category == 3}">
-            <h2>후기게시판</h2>
-        </c:when>
-    </c:choose>
-	<br>
 	<form action="list" id="search_form" method="get">
 		<input type="hidden" name="boa_category" value="${param.boa_category}">
 		<ul class="search">
@@ -59,16 +51,6 @@
 			</script>
 			<c:choose>
 				<c:when test="${param.boa_category == 1}">
-					<c:if test="${!empty user}">
-						<input type="button" value="글쓰기" onclick="location.href='write'">
-					</c:if>
-	  			</c:when>
-	  			<c:when test="${param.boa_category == 2}">
-					<c:if test="${!empty user}">
-						<input type="button" value="글쓰기" onclick="location.href='write'">
-					</c:if>
-	  			</c:when>
-	  			<c:when test="${param.boa_category == 3}">
 					<c:if test="${!empty user}">
 						<input type="button" value="글쓰기" onclick="location.href='write'">
 					</c:if>
@@ -108,6 +90,10 @@
 	<div class="align-center">${page}</div>
 	</c:if>
 </div>
+</div>
+</div>
+</div>
+</section>
 <!-- 게시판 목록 끝 -->
 
 

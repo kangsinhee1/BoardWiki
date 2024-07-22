@@ -33,6 +33,15 @@
 		<put-attribute name="title" value="출석체크"/>
 		<put-attribute name="body" value="/WEB-INF/views/attendance/attendance.jsp"/>
 	</definition>
+	<definition name="broadcast" template="/WEB-INF/views/template/layout_broadcast.jsp">
+		<put-attribute name="body" value="/WEB-INF/views/stream/donationForm.jsp"/>
+	</definition>
+	<definition name="strlist" extends="broadcast">
+		<put-attribute name="body" value="/WEB-INF/views/stream/donationListByStream.jsp"/>
+	</definition>
+	<definition name="userlist" extends="broadcast">
+		<put-attribute name="body" value="/WEB-INF/views/stream/donationListByMember.jsp"/>
+	</definition>
 </tiles-definitions>
 
 

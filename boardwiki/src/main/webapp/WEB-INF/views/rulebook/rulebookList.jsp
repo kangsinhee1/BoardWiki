@@ -12,8 +12,11 @@
 </section>
 <!-- 룰북 목록 시작 -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
+<section class="blog-page">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
 <div class="page-main">
-	<h2>룰북</h2>
 	<form action="rulebookList" id="search_form" method="get">
 		<ul class="search">
 			<li>
@@ -58,6 +61,10 @@
 	<div class="align-center">${page}</div>
 	</c:if>
 </div>
+</div>
+</div>
+</div>
+</section>
 <!-- 게시판 목록 끝 -->
 
 

@@ -5,24 +5,12 @@
 <!-- 게시판 목록 시작 -->
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
-	<section class="page-top-section set-bg" data-setbg="/img/page-top-bg/4.jpg">
-	<div class="page-info">
-		<h2>모임 신청</h2>
-		<div class="site-breadcrumb">
-			<a href="">Home</a>  /
-			<span>모임신청</span> /
-			<span><a href="myTeam2"> 내 모임 보기</a></span>
-		</div>
-	</div>
-</section>
-<section class="blog-page">
-<div class="container">
-
 <div class="page-main">
 	<div class="content-container" id="content">
 		<!-- Content for 내가 신청한 모임 -->
 		<h2>내가 신청한 모임 목록</h2>
-		<table class="table">
+		<div class="chart-table">
+		<table >
 			<thead>
 				<tr>
 					<th>모임 이름</th>
@@ -54,8 +42,10 @@
 				</c:forEach>
 			</tbody>
 		</table>
+		</div>
 		<h2>내가 가입한 모임 목록</h2>
-		<table class="table">
+		<div class="chart-table">
+		<table>
 			<thead>
 				<tr>
 					<th>모임 이름</th>
@@ -88,12 +78,9 @@
 				</c:forEach>
 			</tbody>
 		</table>
+		</div>
 	</div>
-
-
 </div>
-</div>
-</section>
 <script type="text/javascript">
 $(document).on('click','.delete_btn',function(){
 	 let teaA_num = $(this).attr('data-num');

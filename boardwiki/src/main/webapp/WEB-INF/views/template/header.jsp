@@ -55,16 +55,21 @@
                     <li><a href="#">커뮤니티</a>
                         <ul class="sub-menu">
                             <li><a href="${pageContext.request.contextPath}/board/list?boa_category=1">자유게시판</a></li>
-                            <li><a href="${pageContext.request.contextPath}/board/list?boa_category=2">팁게시판</a></li>
-                            <li><a href="${pageContext.request.contextPath}/board/list?boa_category=3">후기</a></li>
+                            <li><a href="${pageContext.request.contextPath}/tnrboard/tnrboardList?tnr_category=1">팁게시판</a></li>
+                            <li><a href="${pageContext.request.contextPath}/tnrboard/tnrboardList?tnr_category=2">후기</a></li>
+                           <c:if test="${user.mem_auth==9 && user != null}">
+            				<li><a href="${pageContext.request.contextPath}/team/teamListAdmin">모임게시판(관리자)</a></li>
+          					</c:if>
+          					 <c:if test="${user.mem_auth!=9}">
                             <li><a href="${pageContext.request.contextPath}/team/teamList">모임게시판</a></li>
+                            </c:if>
                             <li><a href="${pageContext.request.contextPath}/used/usedList">중고게시판</a></li>
                         </ul>
                     </li>
                     <li><a href="#">공지</a>
                         <ul class="sub-menu">
-                            <li><a href="${pageContext.request.contextPath}/board/list?boa_category=4">공지</a></li>
-                            <li><a href="${pageContext.request.contextPath}/board/list?boa_category=5">QnA</a></li>
+                            <li><a href="${pageContext.request.contextPath}/board/list2?boa_category=4">공지</a></li>
+                            <li><a href="${pageContext.request.contextPath}/board/list2?boa_category=5">QnA</a></li>
                         </ul>
                     </li>
                     <li><a href="#">스트리밍</a>

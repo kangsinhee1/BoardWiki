@@ -12,6 +12,8 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/common.css" type="text/css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css" type="text/css">
+<jsp:include page="/WEB-INF/views/template/css_plugins.jsp"/>
+<jsp:include page="/WEB-INF/views/template/js_plugins.jsp"/>
 <tiles:insertAttribute name="css" ignore="true"/>
 </head>
 <body>
@@ -19,6 +21,17 @@
 	<div id="main_header">
 		<tiles:insertAttribute name="header"/>
 	</div>
+<section class="page-top-section set-bg" data-setbg="/img/page-top-bg/4.jpg">
+	<div class="page-info">
+		<h2>모임 신청</h2>
+		<div class="site-breadcrumb">
+			<a href="">Home</a>  /
+			<span>모임신청</span> /
+			<span><a href="myTeam2"> 내 모임 보기</a></span> /
+			<span><a href="teamBoardAdmin?tea_num=${tea_num}">${TEAM.tea_name}</a></span>
+		</div>
+	</div>
+</section>
 	<div class="side-height">
 		<div id="page_nav">
 			<tiles:insertAttribute name="nav"/>

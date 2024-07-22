@@ -25,4 +25,10 @@ public interface UsedMapper {
 	@Delete("DELETE FROM used_item WHERE use_num=#{use_num}")
 	public void deleteUsed(Map<String,Object> map);
 	
+	//중고글 찾기
+	@Select("SELECT * FROM used_item WHERE mem_num = #{mem_num}")
+	public List<UsedItemVO> selectUsedListByMemNum(Map<String,Object>map);
+	//내 중고글 갯수 
+	@Select("SELECT COUNT(*) FROM used_item WHERE mem_num = #{mem_num}")
+	public Integer getUsedRowCountByMemNum(Map<String,Object>map);
 }

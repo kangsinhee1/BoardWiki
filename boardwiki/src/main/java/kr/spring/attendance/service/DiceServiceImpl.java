@@ -16,29 +16,32 @@ public class DiceServiceImpl implements DiceService{
 	
 	@Autowired
     private DiceMapper diceMapper;
-	
-	public int rollDice() {
-        return new Random().nextInt(6) + 1;
+
+	@Override
+    public int rollDice(Long mem_num) {
+        int diceVal = new Random().nextInt(6) + 1;
+        long dice_num = diceMapper. getDiceByNum(mem_num);
+        int cont = diceMapper.selectDicechanec(mem_num);
+        if(cont >0) {
+        	DiceVO diceValue = new DiceVO();
+        	diceValue.setDice_num(dice_num);
+            diceValue.setDice_val(diceVal);
+            diceValue.setDice_date(LocalDate.now());
+            diceMapper.insertDiceValue(diceValue);
+            diceMapper.updateDicedown(mem_num);
+        }
+
+        return diceVal;
     }
 
 	@Override
-	public void insertDice(DiceVO dice) {
-		int diceVal = new Random().nextInt(6) + 1;
-        dice.setDice_chance(1); // 주사위를 굴릴 기회를 1로 설정
-        dice.setDice_date(LocalDate.now());
-
-		
-	}
-
-	@Override
-	public void insertDiceValue(Long dice_num, int dice_val) {
+	public void insertDiceValue(DiceVO dice) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public DiceVO getDiceByNum(Long dice_num) {
-		// TODO Auto-generated method stub
+	public Integer getDiceByNum(Long mem_num) {
 		return null;
 	}
 
@@ -46,5 +49,16 @@ public class DiceServiceImpl implements DiceService{
 	public List<DiceVO> selectDice(Map<String, Object> map) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void insertDice(DiceVO dice) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Integer selectDicechanec(Long mem_num) {
+		return diceMapper.selectDicechanec(mem_num);
 	}
 }

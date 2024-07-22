@@ -5,6 +5,15 @@
 <!-- 룰북 상세 시작 -->
 <script src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/videoAdapter.js"></script>
+<section class="page-top-section set-bg" data-setbg="/img/page-top-bg/4.jpg">
+		<div class="page-info">
+			<h2>${rulebook.item_name}</h2>
+			<div class="site-breadcrumb">
+				<a href="">Home</a>  /
+				<span>Contact</span>
+			</div>
+		</div>
+</section>
 <div class="page-main">
 	<h2>${rulebook.item_name}</h2>
 	<ul class="detail-info">

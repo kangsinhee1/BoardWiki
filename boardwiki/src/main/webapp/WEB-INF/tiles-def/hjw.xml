@@ -28,6 +28,11 @@
 		<put-attribute name="css" value="/WEB-INF/views/team/teamCSS.jsp"/>
 		<put-attribute name="body" value="/WEB-INF/views/team/teamDetail.jsp"/>
 	</definition>
+	<definition name="teamDetailAdmin" extends="main">
+		<put-attribute name="title" value="모임글 상세"/>
+		<put-attribute name="css" value="/WEB-INF/views/team/teamCSS.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/team/teamDetailAdmin.jsp"/>
+	</definition>
 		<definition name="teamUpdate" extends="main">
 		<put-attribute name="title" value="모임글 상세"/>
 		<put-attribute name="css" value="/WEB-INF/views/team/teamCSS.jsp"/>
@@ -43,7 +48,6 @@
 	</definition>
 	<definition name="myTeamprac" template="/WEB-INF/views/template/layout_myteam.jsp">
 		<put-attribute name="title" value="나의 모임"/>
-		<put-attribute name="top-header" value="/WEB-INF/views/template/top-header.jsp"/>
 		<put-attribute name="header" value="/WEB-INF/views/template/header.jsp"/>
 		<put-attribute name="body" value="/WEB-INF/views/team/myTeam.jsp"/>
 		<put-attribute name="nav" value="/WEB-INF/views/team/teamNav_parac.jsp"/>
@@ -82,7 +86,6 @@
 	<definition name="teamControl" template="/WEB-INF/views/template/layout_myteam.jsp">
 		<put-attribute name="title" value="모임 게시판 관리"/>
 		<put-attribute name="css" value="/WEB-INF/views/team/teamCSS.jsp"/>
-		<put-attribute name="top-header" value="/WEB-INF/views/template/top-header.jsp"/>
 		<put-attribute name="header" value="/WEB-INF/views/template/header.jsp"/>
 		<put-attribute name="nav" value="/WEB-INF/views/team/teamControl-nav.jsp"/>
 		<put-attribute name="body" value="/WEB-INF/views/team/teamControl.jsp"/>

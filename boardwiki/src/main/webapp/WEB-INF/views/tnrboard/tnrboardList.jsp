@@ -3,21 +3,29 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 게시판 목록 시작 -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
+<section class="page-top-section set-bg" data-setbg="/img/page-top-bg/4.jpg">
+		<div class="page-info">
+		<c:choose>
+        	<c:when test="${param.tnr_category == 1}">
+           		 <h2>팁게시판</h2>
+       		 </c:when>
+        	<c:when test="${param.tnr_category == 2}">
+           		 <h2>후기게시판</h2>
+       		 </c:when>
+    	</c:choose>
+			<div class="site-breadcrumb">
+				<a href="">Home</a>  /
+				<span>board</span>
+			</div>
+		</div>
+</section>
+<section class="blog-page">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
 <div class="page-main">
-	 <c:choose>
-        <c:when test="${param.boa_category == 1}">
-            <h2>자유게시판</h2>
-        </c:when>
-        <c:when test="${param.boa_category == 2}">
-            <h2>팁게시판</h2>
-        </c:when>
-        <c:when test="${param.boa_category == 3}">
-            <h2>후기게시판</h2>
-        </c:when>
-    </c:choose>
-	<br>
-	<form action="list" id="search_form" method="get">
-		<input type="hidden" name="boa_category" value="${param.boa_category}">
+	<form action="tnrboardList" id="search_form" method="get">
+		<input type="hidden" name="tnr_category" value="${param.tnr_category}">
 		<ul class="search">
 			<li>
 				<select name="keyfield" id="keyfield">
@@ -42,26 +50,21 @@
 			</select>
 			<script type="text/javascript">
 				$('#order').change(function(){
-					location.href='list?boa_category=${param.boa_category}&keyfield='
+					location.href='tnrboardList?tnr_category=${param.tnr_category}&keyfield='
 							+$('#keyfield').val()+'&keyword='
 							+$('#keyword').val()+'&order='
 							+$('#order').val();
 				});
 			</script>
 			<c:choose>
-				<c:when test="${param.boa_category == 1}">
+				<c:when test="${param.tnr_category == 1}">
 					<c:if test="${!empty user}">
-						<input type="button" value="글쓰기" onclick="location.href='write'">
+						<input type="button" value="글쓰기" onclick="location.href='tnrwrite'">
 					</c:if>
 	  			</c:when>
-	  			<c:when test="${param.boa_category == 2}">
+	  			<c:when test="${param.tnr_category == 2}">
 					<c:if test="${!empty user}">
-						<input type="button" value="글쓰기" onclick="location.href='write'">
-					</c:if>
-	  			</c:when>
-	  			<c:when test="${param.boa_category == 3}">
-					<c:if test="${!empty user}">
-						<input type="button" value="글쓰기" onclick="location.href='write'">
+						<input type="button" value="글쓰기" onclick="location.href='tnrwrite'">
 					</c:if>
 	  			</c:when>
 			</c:choose>
@@ -80,23 +83,27 @@
 			<th>조회수</th>
 			<th>좋아요수</th>
 		</tr>
-		<c:forEach var="board" items="${list}">
+		<c:forEach var="tnrboard" items="${list}">
 		<tr>
-			<td class="align-center">${board.boa_num}</td>
-			<td class="align-left"><a href="detail?boa_num=${board.boa_num}">${board.boa_title}(${board.re_cnt})</a></td>
+			<td class="align-center">${tnrboard.tnr_num}</td>
+			<td class="align-left"><a href="tnrboardDetail?tnr_num=${tnrboard.tnr_num}">${tnrboard.tnr_title}(${tnrboard.re_cnt})</a></td>
 			<td class="align-center">
-				<c:if test="${empty board.mem_nickname}">${board.mem_email}</c:if>
-				<c:if test="${!empty board.mem_nickname}">${board.mem_nickname}</c:if>
+				<c:if test="${empty tnrboard.mem_nickname}">${tnrboard.mem_email}</c:if>
+				<c:if test="${!empty tnrboard.mem_nickname}">${tnrboard.mem_nickname}</c:if>
 			</td>
-			<td class="align-center">${board.boa_rdate}</td>
-			<td class="align-center">${board.boa_hit}</td>
-			<td class="align-center">${board.fav_cnt}</td>
+			<td class="align-center">${tnrboard.tnr_rdate}</td>
+			<td class="align-center">${tnrboard.tnr_hit}</td>
+			<td class="align-center">${tnrboard.fav_cnt}</td>
 		</tr>
 		</c:forEach>
 	</table>
 	<div class="align-center">${page}</div>
 	</c:if>
 </div>
+</div>
+</div>
+</div>
+</section>
 <!-- 게시판 목록 끝 -->
 
 

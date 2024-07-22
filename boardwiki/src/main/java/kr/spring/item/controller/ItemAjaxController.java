@@ -114,5 +114,48 @@ public class ItemAjaxController {
 		
 		return mapJson;
 	}
-	
+	/*==============
+	 * 팁/후기 보드게임검색
+	 *==============*/
+	@GetMapping("/tnrboard/searchItem")
+	@ResponseBody
+	public Map<String,Object> getList3(String keyword,
+									  int pageNum,
+									  int rowCount,
+									  HttpSession session){
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("keyword", keyword);
+		
+		//총글의 개수
+		int count = itemService.selectRowCount(map);
+		PagingUtil page = new PagingUtil(pageNum,count,rowCount);
+		map.put("start", page.getStartRow());
+		map.put("end", page.getEndRow());
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user != null) {
+			map.put("mem_num", user.getMem_num());
+		}else {
+			map.put("mem_num", 0);
+		}
+		
+		Map<String,Object> mapJson = new HashMap<String,Object>();
+		List<ItemVO> list = null;
+		if(count > 0) {
+			list = itemService.selectListByKeyword(map);
+		}else {
+			list = Collections.emptyList();
+			mapJson.put("result", "none");
+		}
+		
+		mapJson.put("count", count);
+		mapJson.put("list", list);
+		mapJson.put("result", "success");
+		
+		if(user!=null) {
+			mapJson.put("user_num", user.getMem_num());
+		}
+		
+		return mapJson;
+	}
 }

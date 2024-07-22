@@ -7,7 +7,9 @@ import kr.spring.attendance.vo.DiceVO;
 
 public interface DiceService {
 	void insertDice(DiceVO dice);
-    void insertDiceValue(Long dice_num, int dice_val);
-    DiceVO getDiceByNum(Long dice_num);
+    void insertDiceValue(DiceVO dice);
+    Integer getDiceByNum(Long mem_num);
     List<DiceVO> selectDice(Map<String, Object>map);
+    int rollDice(Long mem_num);
+    Integer selectDicechanec(Long mem_num);
 }

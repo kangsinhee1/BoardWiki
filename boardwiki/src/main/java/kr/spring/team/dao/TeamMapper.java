@@ -80,7 +80,7 @@ public interface TeamMapper {
 		
 		//신청 목록 확인
 		//모임별 활동 회원 목록 확인하기
-		@Select("SELECT mem_num FROM team_apply WHERE tea_num = #{tea_num} AND teaA_status != 1 ||teaA_status != 0")
+		@Select("SELECT mem_num FROM team_apply WHERE tea_num = #{tea_num} AND teaA_status >1")
 		public List<TeamApplyVO> getTeamMemberList(long tea_num);
 		
 		@Select("SELECT count(*) FROM team_apply WHERE tea_num=#{tea_num} AND mem_num=#{mem_num}")

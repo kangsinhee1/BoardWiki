@@ -8,7 +8,15 @@
 <script src="${pageContext.request.contextPath}/js/ckeditor.js"></script>
 <script src="${pageContext.request.contextPath}/js/uploadAdapter.js"></script>
 <div class="page-main">
-	<h2>룰북 작성</h2>
+<section class="page-top-section set-bg"
+	data-setbg="/img/page-top-bg/4.jpg">
+	<div class="page-info">
+		<h2>룰북 작성</h2>
+		<div class="site-breadcrumb">
+			<a href="">Home</a> / <span>룰북 작성</span>
+		</div>
+	</div>
+</section>
 	<form:form action="rulebookWrite" id="rulebook_register"
 	           enctype="multipart/form-data"
 	                            modelAttribute="rulebookVO">

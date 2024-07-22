@@ -4,13 +4,16 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>    
 <!-- 게시판 목록 시작 -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
+<style>
+
+</style>
 
 	<!-- Page top section -->
 <section class="page-top-section set-bg" data-setbg="/img/page-top-bg/4.jpg">
 	<div class="page-info">
 		<h2>모임 신청</h2>
 		<div class="site-breadcrumb">
-			<a href="">Home</a>  /
+			<a href="teamList">Home</a>  /
 			<span>모임신청</span> /
 			<span><a href="myTeam2"> 내 모임 보기</a></span>
 		</div>
@@ -63,7 +66,8 @@
 	<div class="alert alert-info mt-3">표시할 게시물이 없습니다.</div>
 	</c:if>
 	<c:if test="${count > 0}">
-	<table class="chart-table">
+	<div class="chart-table">
+	<table>
 		<thead>
 		<tr>
 			<th>번호</th>
@@ -74,8 +78,8 @@
 			<th>좋아요수</th>
 		</tr>
 		</thead>
-		<tbody>
 		<c:forEach var="team" items="${list}">
+		<tbody>
 		<tr>
 			<td >${team.tea_num}</td>
 			<td><a href="teamDetail?tea_num=${team.tea_num}">(${fn:substring(team.tea_address1,0,2)}) ${team.tea_name}</a></td>
@@ -86,9 +90,10 @@
 			<td >${team.tea_hit}</td>
 			<td >${team.fav_cnt}</td>
 		</tr>
-		</c:forEach>
 		</tbody>
+		</c:forEach>
 	</table>
+	</div>
 	<div class="align-center">
 	<div class="blog-pagination">${page}</div>
 	</div>

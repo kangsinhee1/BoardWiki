@@ -8,6 +8,21 @@
 <!-- include ckeditor js -->
 <script src="${pageContext.request.contextPath}/js/ckeditor.js"></script>
 <script src="${pageContext.request.contextPath}/js/uploadAdapter.js"></script>
+<section class="page-top-section set-bg" data-setbg="/img/page-top-bg/4.jpg">
+		<div class="page-info">
+			<h2>${used.use_title}</h2>
+			<div class="site-breadcrumb">
+				<a href="">Home</a>  /
+				<span>Contact</span>
+			</div>
+		</div>
+	</section>
+	<!-- Page top end-->
+
+<section class="blog-page">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
 <div class="page-main">
     <h2>중고 글쓰기</h2>
     <form:form action="usedWrite" id="used_write"
@@ -67,10 +82,15 @@
         </div>                           
     </form:form>
 </div>
+</div>
+</div>
+</div>
+</section>
+
 				<div class="modal">
                     <form id="searchform">
                         <h4>제품 검색</h4>
-                        <input type="text" name="search" class="inputcheck input-style2" id="search" maxlength="30" placeholder="제목을 입력하세요">
+                        <input type="text" name="search" class="inputcheck input-style2" id="search" maxlength="30" placeholder="제목을 입력하세요"><br>
                         <input id="itembtn" type="button" value="검색" class="button2">
                         <input id="itembtn2" type="button" value="취소" class="button2">
                         <div id="add"></div>

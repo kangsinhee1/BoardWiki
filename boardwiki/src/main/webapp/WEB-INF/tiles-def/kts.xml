@@ -15,7 +15,6 @@
 		<put-attribute name="css" value="/WEB-INF/views/board/boardCSS.jsp"/>
 		<put-attribute name="body" value="/WEB-INF/views/board/boardList2.jsp"/>
 	</definition>
-	
 	<definition name="boardWrite" extends="main">
 		<put-attribute name="title" value="글쓰기"/>
 		<put-attribute name="css" value="/WEB-INF/views/board/boardCSS.jsp"/>
@@ -65,6 +64,26 @@
 		<put-attribute name="title" value="룰북 수정"/>
 		<put-attribute name="css" value="/WEB-INF/views/rulebook/rulebookCSS.jsp"/>
 		<put-attribute name="body" value="/WEB-INF/views/rulebook/rulebookModify.jsp"/>
+	</definition>
+	<definition name="tnrboardList" extends="main">
+		<put-attribute name="title" value="팁후기게시판 목록"/>
+		<put-attribute name="css" value="/WEB-INF/views/tnrboard/tnrboardCSS.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/tnrboard/tnrboardList.jsp"/>
+	</definition>
+	<definition name="tnrboardWrite" extends="main">
+		<put-attribute name="title" value="글쓰기"/>
+		<put-attribute name="css" value="/WEB-INF/views/tnrboard/tnrboardCSS.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/tnrboard/tnrboardWrite.jsp"/>
+	</definition>
+	<definition name="tnrboardView" extends="main">
+		<put-attribute name="title" value="글상세"/>
+		<put-attribute name="css" value="/WEB-INF/views/tnrboard/tnrboardCSS.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/tnrboard/tnrboardView.jsp"/>
+	</definition>
+	<definition name="tnrboardModify" extends="main">
+		<put-attribute name="title" value="글 수정"/>
+		<put-attribute name="css" value="/WEB-INF/views/tnrboard/tnrboardCSS.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/tnrboard/tnrboardModify.jsp"/>
 	</definition>
 </tiles-definitions>
 

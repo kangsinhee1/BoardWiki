@@ -8,6 +8,15 @@
 <!-- include ckeditor js -->
 <script src="${pageContext.request.contextPath}/js/ckeditor.js"></script>
 <script src="${pageContext.request.contextPath}/js/uploadAdapter.js"></script>
+<section class="page-top-section set-bg"
+	data-setbg="/img/page-top-bg/4.jpg">
+	<div class="page-info">
+		<h2>자유게시판 수정</h2>
+		<div class="site-breadcrumb">
+			<a href="">Home</a> / <span>자유게시판 수정</span>
+		</div>
+	</div>
+</section>
 <div class="page-main">
 	<h2>글 수정</h2>
 	<form:form action="update" id="board_modify"
@@ -19,9 +28,6 @@
 				<form:label path="boa_category">분류</form:label>
 				<form:select path="boa_category" >
 					<form:option value="1">자유게시판</form:option>
-					<form:option value="2">팁게시판</form:option>
-					<form:option value="3">후기게시판</form:option>
-					
 				</form:select>
 				<form:errors path="boa_category" cssClass="error-color"/>                             
 			</li>

@@ -17,6 +17,7 @@ import lombok.ToString;
 public class BoardVO {
 	private long boa_num;
 	private long mem_num;
+	private long item_num;
 	@NotBlank
 	private String boa_category;
 	@NotBlank
@@ -35,6 +36,7 @@ public class BoardVO {
 	private String mem_email;				
 	private String mem_nickname;
 	private Integer mem_auth;
+	private String item_name;
 	
 	private int re_cnt;				
 	private int fav_cnt; 
