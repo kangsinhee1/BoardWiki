@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -23,6 +22,7 @@ import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.rent.service.RentService;
 import kr.spring.rent.vo.RentVO;
+import kr.spring.report.service.ReportService;
 import kr.spring.util.PagingUtil;
 import lombok.extern.slf4j.Slf4j;
 
@@ -41,6 +41,8 @@ public class AdminController {
 	@Autowired
 	private BoardService boardService;
 	
+	@Autowired
+	private ReportService reportService;
 	/*==============================
 	 * 관리자 페이지 메인
 	 *==============================*/	
@@ -291,10 +293,10 @@ public class AdminController {
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
 		
-		int count = itemService.selectRowCount2(map);
+		int count = reportService.getReportRowCount(map);
 		
 		PagingUtil page =
-				new PagingUtil(keyfield,keyword,pageNum,count,20,10,"gameManage");
+				new PagingUtil(keyfield,keyword,pageNum,count,20,10,"reportManage");
 		
 		List<ItemVO> list = null;
 		if(count > 0) {

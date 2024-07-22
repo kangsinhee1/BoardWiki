@@ -112,7 +112,7 @@ $(function(){
 						output += '<div class="item">';
 						output += ' <span>' + item.chaC_txt.replace(/\r\n/g,'<br>').replace(/\r/g,'<br>').replace(/\n/g,'<br>') + '</span>';
 						//시간 추출
-						output += '<div class="align-right">' + item.chaC_time.split(' ')[1] + '</div>';
+						output += '<div class="align-right">' + item.chaC_time.split(' ')[1] + ' </div>';
 						output += '</div>';
 						output += '</div><div class="space-clear"></div>';
 						output += '</div>';
@@ -134,6 +134,7 @@ $(function(){
 	}
 	// 1초마다 selectMsg 함수 호출
     //setInterval(selectMsg, 500);
+    
 });
 
 

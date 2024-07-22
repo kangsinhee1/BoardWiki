@@ -1,5 +1,7 @@
 package kr.spring.report.service;
 
+import java.util.Map;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,12 @@ public class ReportServiceImpl implements ReportService {
 	@Override
 	public void insertReport(ReportVO reportVO) {
 		reportMapper.insertReport(reportVO);
+	}
+
+
+	@Override
+	public Integer getReportRowCount(Map<String, Object> map) {
+		return reportMapper.getReportRowCount(map);
 	}
 
 }

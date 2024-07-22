@@ -47,8 +47,8 @@
 		<!-- 사진 넣어야함 -->	
 	</c:if>
 	<div class="align-right">
-		<input type="button" value="신고" id="report_btn"> 
 	<c:if test="${used.use_check !=3 }">
+	<input type="button" value="신고" id="report_btn"> 
 		<input type="button" value=<c:if test="${user.mem_num == used.mem_num}">"채팅 목록"</c:if><c:if test="${user.mem_num != used.mem_num}">"1:1채팅하기"</c:if> onclick="location.href='useChat?mem_num=${used.mem_num}&use_num=${used.use_num }'">	
 	</c:if>
 	</div>
@@ -63,6 +63,7 @@
 		   onclick="location.href='usedUpdate?use_num=${used.use_num}'">
 		</c:if>
 		<input type="button" value="삭제" id="delete_btn">
+		
 		<input type="button" value="목록" class="default-btn" onclick="location.href='usedList'">
 		<script>
 			const delete_btn = document.getElementById('delete_btn');

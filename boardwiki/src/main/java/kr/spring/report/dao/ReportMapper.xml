@@ -21,5 +21,26 @@
  			#{report_category}
  			)
  	</insert>
-
+	<select id="getReportRowCount" parameterType="map"
+									resultType="integer">
+		SELECT
+			COUNT(*)
+		FROM report
+	 </select>
+	  <select id="selectReportList" parameterType="map"
+	 							resultType="reportVO">
+	 	SELECT
+	 	   *
+	 	FROM (SELECT
+	 			a.*,
+	 			rownum rnum
+	 		   FROM (SELECT
+	 		   			*
+	 		   		 FROM report r
+	 		   		 LEFT OUTER JOIN board b ON r.report_typeDetail = b.boa_num
+	 		   		 )a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+	</select>
 </mapper>
