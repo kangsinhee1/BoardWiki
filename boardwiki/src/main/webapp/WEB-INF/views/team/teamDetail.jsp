@@ -146,6 +146,9 @@ geocoder.addressSearch(address, function(result, status) {
                 cnt = 0;    
             }
         });
+        function initForm(){
+    		$('textarea').val('');
+    	}
         $('#cancel').click(function() {
             $('.modal').hide();
             cnt = 0;
@@ -171,8 +174,10 @@ geocoder.addressSearch(address, function(result, status) {
                         alert('로그인해야 작성할 수 있습니다.');
                     } else if(param.result === 'success'){
                         alert('신고 완료');
+                        
                         $('.modal').hide();
                         cnt = 0;
+						initForm();                        
                     } else {
                         alert('신고 접수 오류 발생');
                     }

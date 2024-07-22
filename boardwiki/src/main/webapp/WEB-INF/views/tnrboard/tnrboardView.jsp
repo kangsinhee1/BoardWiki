@@ -144,6 +144,9 @@
             $('.modal').hide();
             cnt = 0;
         });
+        function initForm(){
+    		$('textarea').val('');
+    	}
         $('#reportForm').submit(function(event){
             if($('#report_content').val().trim()==''){
                 alert('내용을 입력하세요');
@@ -167,6 +170,7 @@
                         alert('신고 완료');
                         $('.modal').hide();
                         cnt = 0;
+                        initForm();
                     } else {
                         alert('신고 접수 오류 발생');
                     }
