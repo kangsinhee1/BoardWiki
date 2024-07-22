@@ -23,7 +23,7 @@ public class RulebookVO {
 	private String filename;
 	private Date rulB_rdate;
 	private Date rulB_mdate;
-	
+
 	private String mem_email;
 	private String item_name;
 	private String mem_nickname;

@@ -19,19 +19,19 @@ import kr.spring.stream.vo.StreamKeyVO;
 @Service
 @Transactional
 public class MemberServiceImpl implements MemberService {
-	
+
 	@Autowired
 	MemberMapper memberMapper;
-	
+
 	@Autowired
     PasswordEncoder passwordEncoder;
-	
+
 	@Autowired
 	StreamKeyMapper streamKeyMapper;
-	
+
 	@Autowired
 	PointMapper pointMapper;
-	
+
 	@Override
 	public MemberVO selectMember(Long mem_num) {
 		return memberMapper.selectMember(mem_num);
@@ -41,22 +41,22 @@ public class MemberServiceImpl implements MemberService {
 	public void insertMember(MemberVO membervo) {
 	    // 회원 번호 조회
 	    membervo.setMem_num(memberMapper.selectMem_num());
-	    
+
 	    // 패스워드 암호화
 	    String encryptedPassword = passwordEncoder.encode(membervo.getMem_passwd());
 	    membervo.setMem_passwd(encryptedPassword);
-	    
+
 	    // 회원 정보 저장
 	    memberMapper.insertMember(membervo);
 	    memberMapper.insertMember_detail(membervo);
-	    
+
 	    //회원 스트림키 부여
 	    String streamKey = UUID.randomUUID().toString();
         StreamKeyVO key = new StreamKeyVO();
         key.setMem_num(membervo.getMem_num());
         key.setStr_key(streamKey);
         streamKeyMapper.save(key);
-        
+
         //회원 포인트 부여
         PointVO point = new PointVO();
         point.setPoint_total(1000);
@@ -87,7 +87,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void updateAu_id(String au_id, Long mem_num) {
 		memberMapper.updateAu_id(au_id, mem_num);
-		
+
 	}
 
 	@Override
@@ -102,18 +102,18 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public void updatePassword(MemberVO member) {
-		
+
 		// 패스워드 암호화
 	    String encryptedPassword = passwordEncoder.encode(member.getMem_passwd());
 	    member.setMem_passwd(encryptedPassword);
 		memberMapper.updatePassword(member);
-		
+
 	}
 
 	@Override
 	public void updateMember_detail(MemberVO member) {
 		memberMapper.updateMember_detail(member);
-		
+
 	}
 
 	@Override

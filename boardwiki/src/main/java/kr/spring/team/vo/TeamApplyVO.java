@@ -8,7 +8,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class TeamApplyVO {
- 
+
  private long teaA_num;
  private long teaA_status;
  private String teaA_time;
@@ -22,5 +22,5 @@ public class TeamApplyVO {
  private String mem_nickname;
  private String tea_name;
  private long tea_status; 	//신고처리시 모임 비활성화(기본1,비활:0)
- 
+
 }

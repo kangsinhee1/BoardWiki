@@ -1,6 +1,5 @@
 package kr.spring.point.service;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -169,5 +168,5 @@ public class PointServiceImpl implements PointService {
 	public Integer selectPointTotal(Long mem_num) {
 		return pointMapper.selectPointTotal(mem_num);
 	}
-	
+
 }

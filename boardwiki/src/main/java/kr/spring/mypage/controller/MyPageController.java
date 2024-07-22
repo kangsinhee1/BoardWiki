@@ -35,7 +35,7 @@ public class MyPageController {
 
 	@Autowired
 	private BoardService boardService;
-	
+
 	@Autowired
 	private UsedChatService usedChatService;
 
@@ -48,13 +48,13 @@ public class MyPageController {
 
 	/*==============================
 	 * MY페이지
-	 *==============================*/	
+	 *==============================*/
 	@GetMapping("/myPage/myPage")
 	public String process(HttpSession session,Model model) {
-		MemberVO user = 
+		MemberVO user =
 				(MemberVO)session.getAttribute("user");
 		//회원정보
-		MemberVO member = 
+		MemberVO member =
 				memberService.selectMember(user.getMem_num());
 		log.debug("<<MY페이지>> : " + member);
 
@@ -64,13 +64,13 @@ public class MyPageController {
 	}
 	/*==============================
 	 * MY페이지 (내 알람)
-	 *==============================*/	
+	 *==============================*/
 	@GetMapping("/myPage/myAlert")
 	public String myAlertPage(HttpSession session,Model model) {
-		MemberVO user = 
+		MemberVO user =
 				(MemberVO)session.getAttribute("user");
 		//회원정보
-		MemberVO member = 
+		MemberVO member =
 				memberService.selectMember(user.getMem_num());
 		log.debug("<<MY페이지>> : " + member);
 
@@ -80,20 +80,20 @@ public class MyPageController {
 	}
 	/*==============================
 	 * MY페이지 (내 채팅방)
-	 *==============================*/	
+	 *==============================*/
 	@GetMapping("/myPage/myChat")
 	public String myChatPage(HttpSession session,Model model,String keyword, @RequestParam(defaultValue="1" )int pageNum) {
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		//회원정보
 		MemberVO member = memberService.selectMember(user.getMem_num());
 		log.debug("<<MY페이지>> : " + member);
-		Map<String,Object> map = new HashMap<String,Object>();
+		Map<String,Object> map = new HashMap<>();
 		map.put("keyword",keyword);
 		map.put("mem_num", user.getMem_num());
 		map.put("mem_nickName", ","+user.getMem_nickName());
 		int count = usedChatService.selectRowCountByMemNum(map);
-		
-		
+
+
 		//페이지 처리
 		PagingUtil page = new PagingUtil(null,keyword,pageNum,count,10,10,"myChat");
 		List<UsedChatRoomVO> list = null;
@@ -107,7 +107,7 @@ public class MyPageController {
 			log.debug("목록 가져와 ! " + list);
 		}
 		int count2 = usedService.getUsedRowCountByMemNum(map);
-		
+
 		PagingUtil page2 = new PagingUtil(null,keyword,pageNum,count,10,10,"myChat");
 		List<UsedItemVO> list2 = null;
 		if(count>0) {
@@ -119,20 +119,20 @@ public class MyPageController {
 			model.addAttribute("page2",page2.getPage());
 			log.debug("목록 가져와 ! " + list2);
 		}
-		
+
 		model.addAttribute("member", member);
 
 		return "myChat";
 	}
 	/*==============================
 	 * MY페이지 (내 주문)
-	 *==============================*/	
+	 *==============================*/
 	@GetMapping("/myPage/myOrder")
 	public String myOrderPage(HttpSession session,Model model) {
-		MemberVO user = 
+		MemberVO user =
 				(MemberVO)session.getAttribute("user");
 		//회원정보
-		MemberVO member = 
+		MemberVO member =
 				memberService.selectMember(user.getMem_num());
 		log.debug("<<MY페이지>> : " + member);
 
@@ -142,13 +142,13 @@ public class MyPageController {
 	}
 	/*==============================
 	 * MY페이지 (내 전적)
-	 *==============================*/	
+	 *==============================*/
 	@GetMapping("/myPage/myLog")
 	public String myLogPage(HttpSession session,Model model) {
-		MemberVO user = 
+		MemberVO user =
 				(MemberVO)session.getAttribute("user");
 		//회원정보
-		MemberVO member = 
+		MemberVO member =
 				memberService.selectMember(user.getMem_num());
 		log.debug("<<MY페이지>> : " + member);
 
@@ -158,7 +158,7 @@ public class MyPageController {
 	}
 	/*==============================
 	 * MY페이지 (내가 쓴 글 )
-	 *==============================*/	
+	 *==============================*/
 	//자유게시판
 	@GetMapping("/myPage/myWrite")
 	public String myWritePage(@RequestParam(defaultValue="1") int pageNum,
@@ -166,14 +166,14 @@ public class MyPageController {
 			@RequestParam(defaultValue="1")String boa_category,
 			String keyfield,String keyword,HttpSession session,Model model) {
 
-		MemberVO user = 
+		MemberVO user =
 				(MemberVO)session.getAttribute("user");
 		//회원정보
-		MemberVO member = 
+		MemberVO member =
 				memberService.selectMember(user.getMem_num());
 		log.debug("<<MY페이지>> : " + member);
 
-		Map<String,Object> map = new HashMap<String,Object>();
+		Map<String,Object> map = new HashMap<>();
 		map.put("boa_category", boa_category);
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
@@ -189,7 +189,7 @@ public class MyPageController {
 			map.put("start", page.getStartRow());
 			map.put("end", page.getEndRow());
 
-			
+
 			list = boardService.selectMyList(map);
 		}
 		model.addAttribute("count", count);
@@ -206,14 +206,14 @@ public class MyPageController {
 			@RequestParam(defaultValue="1")String tnr_category,
 			String keyfield,String keyword,HttpSession session,Model model) {
 
-		MemberVO user = 
+		MemberVO user =
 				(MemberVO)session.getAttribute("user");
 		//회원정보
-		MemberVO member = 
+		MemberVO member =
 				memberService.selectMember(user.getMem_num());
 		log.debug("<<MY페이지>> : " + member);
 
-		Map<String,Object> map = new HashMap<String,Object>();
+		Map<String,Object> map = new HashMap<>();
 		map.put("tnr_category", tnr_category);
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
@@ -246,14 +246,14 @@ public class MyPageController {
 			@RequestParam(defaultValue="2")String tnr_category,
 			String keyfield,String keyword,HttpSession session,Model model) {
 
-		MemberVO user = 
+		MemberVO user =
 				(MemberVO)session.getAttribute("user");
 		//회원정보
-		MemberVO member = 
+		MemberVO member =
 				memberService.selectMember(user.getMem_num());
 		log.debug("<<MY페이지>> : " + member);
 
-		Map<String,Object> map = new HashMap<String,Object>();
+		Map<String,Object> map = new HashMap<>();
 		map.put("tnr_category", tnr_category);
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
@@ -280,13 +280,13 @@ public class MyPageController {
 	}
 	/*==============================
 	 * MY페이지 (내 주문)
-	 *==============================*/	
+	 *==============================*/
 	@GetMapping("/myPage/myPoint")
 	public String myPointPage(HttpSession session,Model model) {
-		MemberVO user = 
+		MemberVO user =
 				(MemberVO)session.getAttribute("user");
 		//회원정보
-		MemberVO member = 
+		MemberVO member =
 				memberService.selectMember(user.getMem_num());
 		log.debug("<<MY페이지>> : " + member);
 
@@ -296,19 +296,19 @@ public class MyPageController {
 	}
 	/*==============================
 	 * MY페이지 (내 Qna)
-	 *==============================*/	
+	 *==============================*/
 	@GetMapping("/myPage/myQna")
 	public String myQnaPage(@RequestParam(defaultValue="1") int pageNum,
 			@RequestParam(defaultValue="1") int order,
 			@RequestParam(defaultValue="5") String boa_category,
 			String keyfield,String keyword,HttpSession session,Model model) {
-		MemberVO user = 
+		MemberVO user =
 				(MemberVO)session.getAttribute("user");
 		//회원정보
-		MemberVO member = 
+		MemberVO member =
 				memberService.selectMember(user.getMem_num());
 		log.debug("<<MY페이지>> : " + member);
-		Map<String,Object> map = new HashMap<String,Object>();
+		Map<String,Object> map = new HashMap<>();
 		map.put("boa_category", boa_category);
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
@@ -322,7 +322,7 @@ public class MyPageController {
 			map.put("order", order);
 			map.put("start", page.getStartRow());
 			map.put("end", page.getEndRow());
-			
+
 			list = boardService.selectMyList(map);
 		}
 

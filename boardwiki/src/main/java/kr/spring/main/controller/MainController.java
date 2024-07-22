@@ -24,29 +24,29 @@ import lombok.extern.slf4j.Slf4j;
 public class MainController {
 	@Autowired
 	public ItemService itemService;
-	
+
 	@Autowired
 	private BoardService boardService;
-	
+
 	@Autowired
 	private UsedService usedService;
-	
+
 	@GetMapping("/")
 	public String init() {
-		return "redirect:/main/main";  
+		return "redirect:/main/main";
 	}
-	
+
 	@GetMapping("/main/main")
 	public String main() {
 		return "main";//Tiles의 설정명
 	}
-	
-	
+
+
 	@GetMapping("/*/mainList")
 	public String returnMainList(String keyword1) {
-		Map<String,Object> map = new HashMap<String,Object>();
+		Map<String,Object> map = new HashMap<>();
 		map.put("keyword1", keyword1);
-		
+
 		return "redirect:/main/mainList?keyword1=" + keyword1;
 	}
 	@GetMapping("/main/mainList")
@@ -54,9 +54,9 @@ public class MainController {
             @RequestParam(defaultValue="") String category,
             String keyfield,
             String keyword1,Model model) {
-			
+
 			keyfield = "1";
-			Map<String,Object> map = new HashMap<String,Object>();
+			Map<String,Object> map = new HashMap<>();
 
 			map.put("category", category);
 			map.put("keyfield", keyfield);
@@ -66,29 +66,29 @@ public class MainController {
 			int count = itemService.selectRowCount2(map);
 			int count2 = boardService.selectRowCount(map);
 			int count3 = usedService.getUsedRowCount(map);
-			
+
 			//페이지 처리
 		    PagingUtil gamePage =
 					new PagingUtil(keyfield,keyword1,pageNum,count,21,10,"mainList");
 		    PagingUtil boardPage =
 		    		new PagingUtil(keyfield,keyword1,pageNum,count2,20,10,"mainList");
-		    PagingUtil usedPage = 
+		    PagingUtil usedPage =
 		    		new PagingUtil(keyfield, keyword1, pageNum,count3,20,10,"mainList");
-		    
-	
+
+
 		    List<ItemVO> list = null;
 		    if(count > 0) {
 		    	map.put("start", gamePage.getStartRow());
 		    	map.put("end", gamePage.getEndRow());
-		    	
-		    	list = itemService.selectListByKeyword(map);  
+
+		    	list = itemService.selectListByKeyword(map);
 		    }
 		    List<BoardVO> list2 = null;
 		    if(count2 > 0) {
 		    	map.put("start", boardPage.getStartRow());
 		    	map.put("end", boardPage.getEndRow());
-		    	
-		    	list2 = boardService.selectList(map);  
+
+		    	list2 = boardService.selectList(map);
 		    }
 		    List<UsedItemVO> list3 = null;
 			if(count3 >0) {
@@ -106,8 +106,8 @@ public class MainController {
 			model.addAttribute("page", gamePage.getPage());
 			model.addAttribute("page2", boardPage.getPage());
 			model.addAttribute("page3", usedPage.getPage());
-		
-		
+
+
 		return "mainList";
 	}
 }

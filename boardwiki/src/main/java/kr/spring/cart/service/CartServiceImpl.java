@@ -1,7 +1,6 @@
 package kr.spring.cart.service;
 
 import java.util.List;
-
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,7 @@ import kr.spring.cart.vo.CartVO;
 @Service
 @Transactional
 public class CartServiceImpl implements CartService{
-	
+
 	@Autowired
 	CartMapper cartMapper;
 
@@ -40,7 +39,7 @@ public class CartServiceImpl implements CartService{
 	@Override
 	public void updateCart2(CartVO cart) {
 		cartMapper.updateCart2(cart);
-		
+
 	}
 	@Override
 	public CartVO getCart(CartVO cart) {
@@ -57,7 +56,7 @@ public class CartServiceImpl implements CartService{
 		cartMapper.deleteSmallCart(cart);
 	}
 
-	
 
-	
+
+
 }

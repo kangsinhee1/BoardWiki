@@ -29,7 +29,7 @@ public class RentServiceImpl implements RentService {
 	@Override
 	public void insertRent(RentVO rent) {
 		rentMapper.insertRent(rent);
-		
+
 	}
 
 	@Override

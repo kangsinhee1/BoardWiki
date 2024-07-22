@@ -29,7 +29,7 @@ public class RentAjaxController {
 	public Map<String, String> returnRent(RentVO rentVO, HttpSession session, HttpServletRequest request) {
 		log.debug("<<게임 반납 - RentVO>> : " + rentVO);
 
-		Map<String, String> mapJson = new HashMap<String, String>();
+		Map<String, String> mapJson = new HashMap<>();
 		MemberVO user = (MemberVO) session.getAttribute("user");
 
 		if (user == null) {

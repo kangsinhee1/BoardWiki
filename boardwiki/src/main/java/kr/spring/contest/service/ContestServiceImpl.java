@@ -30,7 +30,7 @@ public class ContestServiceImpl implements ContestService{
 	@Override
 	public void insertContest(ContestVO contest) {
 		contestmapper.insertContest(contest);
-		
+
 	}
 
 	@Override
@@ -42,13 +42,13 @@ public class ContestServiceImpl implements ContestService{
 	@Override
 	public void updateContestHit(Long con_num) {
 		contestmapper.updateContestHit(con_num);
-		
+
 	}
 
 	@Override
 	public void applyForContest(ContestApplyVO contestApplyVO) {
 		contestmapper.applyForContest(contestApplyVO);
-		
+
 	}
 
 	@Override

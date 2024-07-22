@@ -17,7 +17,6 @@ import kr.spring.member.email.Email;
 import kr.spring.member.email.EmailSender;
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
-import kr.spring.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -37,7 +36,7 @@ public class MemberAjaxController {
 
 		log.debug("<<이메일 중복 체크>> : " + mem_email);
 
-		Map<String,String> mapAjax = new HashMap<String,String>();
+		Map<String,String> mapAjax = new HashMap<>();
 
 		MemberVO member = memberService.selectCheckMember(mem_email);
 		if(member!=null) {
@@ -51,7 +50,7 @@ public class MemberAjaxController {
 				//패턴이 일치하면서 아이디 미중복
 				mapAjax.put("result", "idNotFound");
 			}
-		}		
+		}
 		return mapAjax;
 	}
 	//닉네임 중복 체크
@@ -61,7 +60,7 @@ public class MemberAjaxController {
 
 		log.debug("<<닉네임 중복 체크>> : " + mem_nickName);
 
-		Map<String,String> mapAjax = new HashMap<String,String>();
+		Map<String,String> mapAjax = new HashMap<>();
 
 		MemberVO member = memberService.selectCheckMemberNickName(mem_nickName);
 		if(member!=null) {
@@ -69,7 +68,7 @@ public class MemberAjaxController {
 			mapAjax.put("result", "idDuplicated");
 		}else {
 			mapAjax.put("result", "idNotFound");
-		}		
+		}
 		return mapAjax;
 	}
 	//패스워드 재설정 인증

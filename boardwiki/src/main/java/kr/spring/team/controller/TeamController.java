@@ -19,10 +19,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import kr.spring.board.vo.BoardVO;
 import kr.spring.chat.service.ChatService;
 import kr.spring.member.vo.MemberVO;
-import kr.spring.team.controller.TeamController;
 import kr.spring.team.service.TeamService;
 import kr.spring.team.vo.TeamApplyVO;
 import kr.spring.team.vo.TeamBoardVO;
@@ -64,7 +62,7 @@ public class TeamController {
 			@RequestParam(defaultValue="1") int order,
 			String keyfield,String keyword,Model model) {
 
-		Map<String,Object> map = new HashMap<String,Object>();
+		Map<String,Object> map = new HashMap<>();
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
 
@@ -86,7 +84,7 @@ public class TeamController {
 		model.addAttribute("list",list);
 		model.addAttribute("page",page.getPage());
 		return "teamList";
-	};
+	}
 
 	@GetMapping("/team/teamListAdmin")
 	public String selectListAdmin(
@@ -94,7 +92,7 @@ public class TeamController {
 			@RequestParam(defaultValue="1") int order,
 			String keyfield,String keyword,Model model) {
 
-		Map<String,Object> map = new HashMap<String,Object>();
+		Map<String,Object> map = new HashMap<>();
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
 
@@ -115,7 +113,7 @@ public class TeamController {
 		model.addAttribute("list",list);
 		model.addAttribute("page",page.getPage());
 		return "teamListAdmin";
-	};
+	}
 	/*=====================
 	 * 모임 게시판 작성
 	 *=====================*/
@@ -126,7 +124,7 @@ public class TeamController {
 		MemberVO member =(MemberVO)session.getAttribute("user");
 		if(member== null) {
 			model.addAttribute("message", "로그인후 작성 가능합니다.");
-			model.addAttribute("url", 
+			model.addAttribute("url",
 					request.getContextPath()+"/team/teamList");
 			return "common/resultAlert";
 
@@ -152,7 +150,7 @@ public class TeamController {
 		teamService.insertTeam(teamVO);
 		//View 메시지 처리
 		model.addAttribute("message", "성공적으로 글이 등록되었습니다.");
-		model.addAttribute("url", 
+		model.addAttribute("url",
 				request.getContextPath()+"/team/teamList");
 		return "common/resultAlert";
 	}
@@ -323,11 +321,11 @@ public class TeamController {
 
 	@GetMapping("/team/myTeam2")
 	public String getMyTeam2(Model model, HttpSession session,HttpServletRequest request) {
-		Map<String,Object> map = new HashMap<String,Object>();
-		Map<String,Object> map2 = new HashMap<String,Object>();
-		Map<String,Object> map3= new HashMap<String,Object>();
-		Map<String,Object> map4= new HashMap<String,Object>();
-		Map<String,Object> map5= new HashMap<String,Object>();
+		Map<String,Object> map = new HashMap<>();
+		Map<String,Object> map2 = new HashMap<>();
+		Map<String,Object> map3= new HashMap<>();
+		Map<String,Object> map4= new HashMap<>();
+		Map<String,Object> map5= new HashMap<>();
 
 
 		//본인이 가입한 모임 목록
@@ -349,13 +347,13 @@ public class TeamController {
 
 		map2.put("mem_num",user.getMem_num());
 		map2.put("tea_status", 1);
-		map2.put("teaA_status",9); 
+		map2.put("teaA_status",9);
 		List<TeamApplyVO> list2 = null; list2 = teamService.selectTeamListApplied(map2);
 		model.addAttribute("list2",list2);
 
 		// 신청한 모임 리스트
 		map3.put("mem_num",user.getMem_num());
-		map3.put("teaA_status",1); 
+		map3.put("teaA_status",1);
 		map3.put("tea_status", 1);
 		List<TeamApplyVO> list3 = null;
 		list3 = teamService.selectTeamListApplied(map3);
@@ -368,7 +366,7 @@ public class TeamController {
 		model.addAttribute("list4",list4);
 		// 비활성화 모임 목록
 		map5.put("mem_num",user.getMem_num());
-		map5.put("teaA_status",9); 
+		map5.put("teaA_status",9);
 		map5.put("tea_status", 0);
 		List<TeamApplyVO> list5 = null;
 		list5 = teamService.selectTeamListApplied(map5);
@@ -390,7 +388,7 @@ public class TeamController {
 		MemberVO member =(MemberVO)session.getAttribute("user");
 		if(member== null) {
 			model.addAttribute("message", "로그인후 작성 가능합니다.");
-			model.addAttribute("url", 
+			model.addAttribute("url",
 					request.getContextPath()+"/member/login");
 			model.addAttribute("teaB_num",tea_num);
 			return "common/resultAlert";
@@ -436,10 +434,10 @@ public class TeamController {
 		//View 메시지 처리
 		model.addAttribute("message", "성공적으로 글이 등록되었습니다.");
 		if(member.getMem_num() == teamService.detailTeam(tea_num).getMem_num()) {
-			model.addAttribute("url", 
+			model.addAttribute("url",
 					request.getContextPath()+"/team/teamBoardAdmin?tea_num="+tea_num);
 		}else {
-			model.addAttribute("url", 
+			model.addAttribute("url",
 					request.getContextPath()+"/team/teamBoardUser?tea_num="+tea_num);
 		}
 		model.addAttribute("tea_num",tea_num);
@@ -451,7 +449,7 @@ public class TeamController {
 	//관리자 게시판
 	@GetMapping("/team/teamBoardAdmin")
 	public String selectTeamBoardAdmin(@RequestParam long tea_num, HttpServletRequest request,
-			HttpSession session,   	
+			HttpSession session,
 			Model model,
 			@RequestParam(defaultValue="1") int pageNum,
 			@RequestParam(defaultValue="1") int order,
@@ -461,7 +459,7 @@ public class TeamController {
 		MemberVO user =(MemberVO)session.getAttribute("user");
 		if(user== null) {
 			model.addAttribute("message", "로그인 해야 합니다.");
-			model.addAttribute("url", 
+			model.addAttribute("url",
 					request.getContextPath()+"/member/login");
 			return "common/resultAlert";
 		}
@@ -476,7 +474,7 @@ public class TeamController {
 			}
 		}
 
-		Map<String,Object> map = new HashMap<String,Object>();
+		Map<String,Object> map = new HashMap<>();
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
 		map.put("tea_num", tea_num);
@@ -505,7 +503,7 @@ public class TeamController {
 	//사용자 게시판
 	@GetMapping("/team/teamBoardUser")
 	public String selectTeamBoardUser(@RequestParam long tea_num, HttpServletRequest request,
-			HttpSession session,   	
+			HttpSession session,
 			Model model,
 			@RequestParam(defaultValue="1") int pageNum,
 			@RequestParam(defaultValue="1") int order,
@@ -515,12 +513,12 @@ public class TeamController {
 		MemberVO member =(MemberVO)session.getAttribute("user");
 		if(member== null) {
 			model.addAttribute("message", "로그인 해야 합니다.");
-			model.addAttribute("url", 
+			model.addAttribute("url",
 					request.getContextPath()+"/member/login");
 			return "common/resultAlert";
 
 		}
-		Map<String,Object> map = new HashMap<String,Object>();
+		Map<String,Object> map = new HashMap<>();
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
 		map.put("tea_num", tea_num);
@@ -560,7 +558,7 @@ public class TeamController {
 		TeamBoardVO board = teamService.getTeamBoardDetail(teaB_num);
 
 		//해당 모임의 관리자만 접속가능하게 처리
-		TeamVO team1 = teamService.detailTeam(board.getTea_num());	
+		TeamVO team1 = teamService.detailTeam(board.getTea_num());
 
 		MemberVO member =(MemberVO)session.getAttribute("user");
 		if(team1.getMem_num() == member.getMem_num()) {
@@ -588,7 +586,7 @@ public class TeamController {
 		MemberVO member =(MemberVO)session.getAttribute("user");
 		if(member== null) {
 			model.addAttribute("message", "로그인 해야 합니다.");
-			model.addAttribute("url", 
+			model.addAttribute("url",
 					request.getContextPath()+"/member/login");
 			return "common/resultAlert";
 		}
@@ -596,7 +594,7 @@ public class TeamController {
 		TeamBoardVO board = teamService.getTeamBoardDetail(teaB_num);
 		if(member.getMem_num() != board.getMem_num()) {
 			model.addAttribute("message", "본인이 작성한 글만 수정가능합니다.");
-			model.addAttribute("url", 
+			model.addAttribute("url",
 					request.getContextPath()+"/team/teamBoardDetail?teaB_num="+teaB_num);
 		}
 		model.addAttribute("teamBoardVO",board);
@@ -620,7 +618,7 @@ public class TeamController {
 		MemberVO member =(MemberVO)session.getAttribute("user");
 		if(member== null) {
 			model.addAttribute("message", "로그인 해야 합니다.");
-			model.addAttribute("url", 
+			model.addAttribute("url",
 					request.getContextPath()+"/member/login");
 			return "common/resultAlert";
 		}
@@ -628,7 +626,7 @@ public class TeamController {
 		TeamBoardVO board = teamService.getTeamBoardDetail(teamBoardVO.getTeaB_num());
 		if(member.getMem_num() != board.getMem_num()) {
 			model.addAttribute("message", "본인이 작성한 글만 수정가능합니다.");
-			model.addAttribute("url", 
+			model.addAttribute("url",
 					request.getContextPath()+"/team/teamBoardDetail?teaB_num="+teamBoardVO.getTeaB_num());
 		}
 		TeamBoardVO db_teamBoard = teamService.getTeamBoardDetail(teamBoardVO.getTeaB_num());
@@ -639,7 +637,7 @@ public class TeamController {
 		teamService.updateTeamBoard(teamBoardVO);
 
 		model.addAttribute("message", "글 수정 완료!!");
-		model.addAttribute("url", 
+		model.addAttribute("url",
 				request.getContextPath() + "/team/teamBoardDetail?teaB_num="
 						+teamBoardVO.getTeaB_num());
 
@@ -672,7 +670,7 @@ public class TeamController {
 	//모임 관리
 	@GetMapping("/team/teamControl")
 	public String teamControl(TeamApplyVO teamApplyVO ,Model model) {
-		Map<String,Object> map = new HashMap<String,Object>();
+		Map<String,Object> map = new HashMap<>();
 		map.put("tea_num",teamApplyVO.getTea_num());
 
 		List<TeamApplyVO> list = null;
@@ -691,7 +689,7 @@ public class TeamController {
 	//참석 회원 관리
 	@GetMapping("/team/teamCalendar")
 	public String teamCalendar(TeamApplyVO teamApplyVO ,Model model) {
-		Map<String,Object> map = new HashMap<String,Object>();
+		Map<String,Object> map = new HashMap<>();
 		map.put("tea_num",teamApplyVO.getTea_num());
 
 		List<TeamApplyVO> list = null;

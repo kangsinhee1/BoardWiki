@@ -2,6 +2,7 @@ package kr.spring.util;
 
 import java.io.IOException;
 import java.util.UUID;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -17,13 +18,13 @@ import com.github.scribejava.core.oauth.OAuth20Service;
 
 @Component
 public class NaverLoginUtil {
-    
+
     @Value("${spring.oauth2.client.registration.naver.client-id}")
     private String clientId;
 
     @Value("${spring.oauth2.client.registration.naver.client-secret}")
     private String clientSecret;
-    
+
     @Value("${spring.oauth2.client.registration.naver.redirect-uri}")
     private String redirect_uri;
 

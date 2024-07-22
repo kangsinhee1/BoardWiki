@@ -28,8 +28,8 @@ public interface UsedChatMapper {
 	//채팅방 삭제
 	@Delete("DELETE FROM usedChatRoom WHERE use_num = #{use_num}")
 	public void deleteUsedChatRoom(Map<String,Object> map);
-	
-	
+
+
 	//채팅방 검색
 	@Select("SELECT * FROM usedChatroom WHERE useC_name LIKE '%'||#{mem_nickName}||'%'")
 	public List<UsedChatRoomVO> selectUsedChatRoomByMemNickName(Map<String,Object> map);
@@ -46,8 +46,8 @@ public interface UsedChatMapper {
 	//채팅 메시지 삭제
 	@Delete("DELETE FROM usedchat_txt WHERE useC_num=#{useC_num}")
 	public void deleteUsedChatTxt(Map<String,Object> map);
-	
+
 	//채팅 메시지 읽기
 	public List<UsedChat_textVO> selectChatDetail(Map<String,Long> map);
-	
+
 }

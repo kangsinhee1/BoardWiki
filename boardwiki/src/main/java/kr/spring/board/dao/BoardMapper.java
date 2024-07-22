@@ -30,7 +30,7 @@ public interface BoardMapper {
 	public void deleteBoard(Long boa_num);
 	@Update("UPDATE board SET filename='' WHERE boa_num=#{boa_num}")
 	public void deleteFile(Long boa_num);
-	
+
 	//게시글 좋아요
 	@Select("SELECT * FROM board_fav WHERE boa_num=#{boa_num} AND mem_num=#{mem_num}")
 	public BoardFavVO selectFav(BoardFavVO fav);
@@ -45,8 +45,8 @@ public interface BoardMapper {
 	//관리자 댓글
 	@Select("SELECT COUNT(*) FROM board JOIN (SELECT * FROM board_reply JOIN member USING (mem_num)) USING (boa_num) WHERE boa_num=#{boa_num} AND mem_auth=9 AND boa_category=5")
 	public Integer selectAdminReply(Long boa_num);
-	
-	
+
+
 	//댓글
 	public List<BoardReplyVO> selectListReply(Map<String,Object> map);
 	@Select("SELECT COUNT(*) FROM board_reply WHERE boa_num=#{boa_num}")

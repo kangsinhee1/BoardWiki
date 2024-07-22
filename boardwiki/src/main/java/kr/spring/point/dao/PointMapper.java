@@ -34,7 +34,7 @@ public interface PointMapper {
 	//포인트 등록
 	@Insert("INSERT INTO point_total (point_total,mem_num) VALUES (#{point_total},#{mem_num})")
 	public void insertpointtotal(PointVO pointVO);
-	
+
 	//포인트 게임
 	//포인트게임 번호 생성
 	@Select("SELECT point_game_seq.nextval FROM dual")
@@ -58,7 +58,7 @@ public interface PointMapper {
 	//포인트 게임 종료
 	@Update("UPDATE point_game SET poiG_end = SYSDATE WHERE poiG_num = #{poiG_num}")
 	public void updatePointGame(@Param("poiG_num") Long poiG_num);
-	
+
 	//포인트 게임 옵션
 	//포인트 게임 옵션 등록
 	@Insert("INSERT INTO point_game_option (poiO_num,poiO_content,poiO_no,poiG_num) VALUES (point_game_option_seq.nextval,#{poiO_content},#{poiO_no},#{poiG_num})")
@@ -76,7 +76,7 @@ public interface PointMapper {
 	//포인트 게임 - 포인트게임의 옵션 전부 삭제
 	@Delete("DELETE FROM point_game_option WHERE poiG_num=#{poiG_num}")
 	public void deletePointGameOption(Long poiG_num);
-	
+
 	//포인트 게임 배팅
 	//포인트 게임 배팅 등록
 	@Insert("INSERT INTO point_game_betting (bet_num,bet_point,poiO_num,mem_num,poiG_num) VALUES (point_game_betting_seq.nextval,#{bet_point},#{poiO_num},#{mem_num},#{poiG_num})")

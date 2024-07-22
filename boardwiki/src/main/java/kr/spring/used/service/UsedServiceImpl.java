@@ -14,7 +14,7 @@ import kr.spring.usedChat.dao.UsedChatMapper;
 @Service
 @Transactional
 public class UsedServiceImpl implements UsedService{
-	
+
 	@Autowired
 	UsedMapper usedMapper;
 	@Autowired

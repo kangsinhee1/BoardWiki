@@ -6,12 +6,11 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import kr.spring.report.vo.ReportVO;
-import kr.spring.used.vo.UsedItemVO;
 
 @Mapper
 public interface ReportMapper {
-	
-	
+
+
 	//신고 접수
 	public void insertReport(ReportVO reportVO);
 	//신고 모음

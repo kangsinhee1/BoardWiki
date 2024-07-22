@@ -1,30 +1,36 @@
 package kr.spring.point.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
 import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import kr.spring.member.vo.MemberVO;
 import kr.spring.point.service.PointService;
 import kr.spring.point.vo.PointGameVO;
 import kr.spring.point.vo.PointVO;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.List;
-
 @Slf4j
 @Controller
 public class PointAjaxController {
     @Autowired
     private PointService pointService;
-    
+
     @PostMapping("/point/getpoint")
     @ResponseBody
     public Map<String, String> getpoint(PointVO pointVO, HttpSession session) {
         Map<String, String> mapJson = new HashMap<>();
-        
+
         MemberVO user = (MemberVO) session.getAttribute("user");
         if (user == null) {
             mapJson.put("result", "logout");
@@ -35,7 +41,7 @@ public class PointAjaxController {
         }
         return mapJson;
     }
-    
+
     @PostMapping("/pointgame/create")
     @ResponseBody
     public Map<String, Object> createGame(@RequestBody Map<String, Object> payload, HttpSession session) {
@@ -88,13 +94,13 @@ public class PointAjaxController {
         String poiO_numStr = (String) payload.get("poiO_num");
         String betPointStr = (String) payload.get("bet_point");
         String poiG_numStr = (String) payload.get("poiG_num");
-        
+
         Long poiG_num = Long.valueOf(poiG_numStr);
         int betPoint = Integer.valueOf(betPointStr);
         Long poiO_num = Long.valueOf(poiO_numStr);
-        
+
         PointGameVO user_num = pointService.selectPointGame(poiG_num);
-        
+
         if(mem_num == user_num.getMem_num()) {
         	map.put("result", "autolet");
         	return map;
@@ -103,9 +109,9 @@ public class PointAjaxController {
         	map.put("result", "error");
         	return map;
         }
-        
+
         log.debug("회원"+mem_num+"옵션값"+poiO_num);
-        
+
         if(pointService.selectPointGameBetting(mem_num, poiO_num)!=null) {
         	map.put("result", "regame");
         	return map;

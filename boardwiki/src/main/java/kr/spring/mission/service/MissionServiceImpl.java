@@ -13,10 +13,10 @@ import kr.spring.mission.vo.MissionVO;
 @Service
 @Transactional
 public class MissionServiceImpl implements MissionService{
-	
+
 	@Autowired
     private MissionMapper missionMapper;
-	
+
 	@Override
 	public void addMission(MissionVO mission) {
 		missionMapper.insertMission(mission);
@@ -51,5 +51,5 @@ public class MissionServiceImpl implements MissionService{
 	public Integer selectcountmember(Map<String, Object> map) {
 		return missionMapper.selectcountmember(map);
 	}
-	
+
 }

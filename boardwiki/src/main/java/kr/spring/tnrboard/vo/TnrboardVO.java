@@ -21,24 +21,24 @@ public class TnrboardVO {
 	@NotBlank
 	private String tnr_category;
 	@NotBlank
-	private String tnr_title;	
+	private String tnr_title;
 	@NotEmpty
 	private String tnr_content;
 	private int tnr_hit;
 	private Date tnr_rdate;
 	private Date tnr_mdate;
 	private int tnr_auth;
-	private MultipartFile upload; 
+	private MultipartFile upload;
 	private String filename;
-	
-	
-	
-	private String mem_email;				
+
+
+
+	private String mem_email;
 	private String mem_nickname;
 	private Integer mem_auth;
 	private String item_name;
-	
-	private int re_cnt;				
-	private int fav_cnt; 
-	
+
+	private int re_cnt;
+	private int fav_cnt;
+
 }

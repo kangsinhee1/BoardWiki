@@ -19,14 +19,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import kr.spring.board.controller.BoardController;
-import kr.spring.board.vo.BoardVO;
 import kr.spring.contest.service.ContestService;
 import kr.spring.contest.vo.ContestApplyVO;
 import kr.spring.contest.vo.ContestVO;
 import kr.spring.member.vo.MemberVO;
-import kr.spring.team.vo.TeamVO;
-import kr.spring.util.FileUtil;
 import kr.spring.util.PagingUtil;
 import lombok.extern.slf4j.Slf4j;
 
@@ -54,7 +50,7 @@ public class ContestController {
 		MemberVO member =(MemberVO)session.getAttribute("user");
 		if(member == null && member.getMem_auth() < 9 ) {
 			model.addAttribute("message", "잘못된 접근입니다.");
-			model.addAttribute("url", 
+			model.addAttribute("url",
 					request.getContextPath()+"/main/main");
 
 			return "common/resultAlert";
@@ -86,7 +82,7 @@ public class ContestController {
 
 		//View 메시지 처리
 		model.addAttribute("message", "성공적으로 글이 등록되었습니다.");
-		model.addAttribute("url", 
+		model.addAttribute("url",
 				request.getContextPath()+"/contest/contestList");
 
 		return "common/resultAlert";
@@ -103,8 +99,8 @@ public class ContestController {
 
 		log.debug("<<게시판 목록 - order>> : " + order);
 
-		Map<String,Object> map = 
-				new HashMap<String,Object>();
+		Map<String,Object> map =
+				new HashMap<>();
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
 
@@ -112,7 +108,7 @@ public class ContestController {
 		int count = contestservice.selectRowCount(map);
 
 		//페이지 처리
-		PagingUtil page = 
+		PagingUtil page =
 				new PagingUtil(keyfield,keyword,pageNum,
 						count,20,10,"contestList",
 						"&order="+order);
@@ -168,7 +164,7 @@ public class ContestController {
 		contestservice.applyForContest(contestApplyVO);
 		model.addAttribute("message","신청  완료");
 		model.addAttribute("url",request.getContextPath()+"contestDetail?con_num="+contestApplyVO.getCon_num());
-		
+
 		return "common/resultAlert";
 	}
 }

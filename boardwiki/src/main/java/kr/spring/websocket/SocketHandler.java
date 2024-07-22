@@ -13,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class SocketHandler extends TextWebSocketHandler {
 
-	private Map<String, WebSocketSession> users = new ConcurrentHashMap<String, WebSocketSession>();
+	private Map<String, WebSocketSession> users = new ConcurrentHashMap<>();
 
 	/*
 	 * 클라이언트가 연결되면, 클라이언트와 관련된 WebSocketSession을 users 맵에 저장한다. 이 users 맵은
@@ -45,7 +45,7 @@ public class SocketHandler extends TextWebSocketHandler {
 	protected void handleTextMessage(
 			WebSocketSession session, TextMessage message) throws Exception {
 		log.debug(session.getId() + "로부터 메시지 수신: " + message.getPayload());
-		
+
 		log.debug("[접속 user 수 : " + users.values().size()+"]");
 		for (WebSocketSession s : users.values()) {
 			s.sendMessage(message);

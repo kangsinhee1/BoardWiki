@@ -5,7 +5,6 @@ import java.util.Properties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -20,7 +19,6 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 import kr.spring.interceptor.AuthCheckInterceptor;
 import kr.spring.interceptor.AutoLoginCheckInterceptor;
 import kr.spring.interceptor.LoginCheckInterceptor;
-import kr.spring.util.NaverLoginUtil;
 import kr.spring.websocket.SocketHandler;
 
 //자바코드 기반 설정 클래스
@@ -42,7 +40,7 @@ public class AppConfig implements WebMvcConfigurer,WebSocketConfigurer{
 		loginCheck = new LoginCheckInterceptor();
 		return loginCheck;
 	}
-	
+
 	@Bean
 	public AuthCheckInterceptor interceptor4() {
 		authCheck = new AuthCheckInterceptor();
@@ -79,17 +77,17 @@ public class AppConfig implements WebMvcConfigurer,WebSocketConfigurer{
 		.excludePathPatterns("/team/teamFav")
 		.excludePathPatterns("/team/teamDetail")
 		.excludePathPatterns("/team/teamList");
-		
+
 		//authCheckInterceptor설정
 		registry.addInterceptor(authCheck)
 		.addPathPatterns("/team/teamListAdmin")
 		.addPathPatterns("/team/teamDetailAdmin");
-		
+
 	}
 
 	@Bean
 	public TilesConfigurer tilesConfigurer() {
-		final TilesConfigurer configurer = 
+		final TilesConfigurer configurer =
 				new TilesConfigurer();
 		//XML 설정 파일 경로 지정
 		configurer.setDefinitions(new String[] {
@@ -111,7 +109,7 @@ public class AppConfig implements WebMvcConfigurer,WebSocketConfigurer{
 	}
 	@Bean
 	public TilesViewResolver tilesViewResolver() {
-		final TilesViewResolver tilesViewResolver = 
+		final TilesViewResolver tilesViewResolver =
 				new TilesViewResolver();
 		tilesViewResolver.setViewClass(TilesView.class);
 		return tilesViewResolver;
@@ -123,7 +121,7 @@ public class AppConfig implements WebMvcConfigurer,WebSocketConfigurer{
 			return PasswordEncoderFactories.createDelegatingPasswordEncoder();
 		}
 	}
-	
+
 	@Bean
 	public JavaMailSenderImpl javaMailSenderImpl() {
 		Properties prop = new Properties();
@@ -142,10 +140,10 @@ public class AppConfig implements WebMvcConfigurer,WebSocketConfigurer{
 		javaMail.setJavaMailProperties(prop);
 		return javaMail;
 	}
-	
-	
-	
-	
+
+
+
+
 }
 
 

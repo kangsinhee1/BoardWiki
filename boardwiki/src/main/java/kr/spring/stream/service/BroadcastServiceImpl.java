@@ -1,13 +1,12 @@
 package kr.spring.stream.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kr.spring.board.dao.BoardMapper;
 import kr.spring.stream.dao.BroadcastMapper;
 import kr.spring.stream.vo.BroadcastVO;
-
-import java.util.List;
 
 @Service
 public class BroadcastServiceImpl implements BroadcastService {
@@ -31,7 +30,7 @@ public class BroadcastServiceImpl implements BroadcastService {
 	}
 
 	@Override
-	public void updateBroadcast(BroadcastVO broadcast) {	
+	public void updateBroadcast(BroadcastVO broadcast) {
 		broadcastMapper.updateBroadcast(broadcast);
 	}
 

@@ -20,7 +20,7 @@ public interface CartMapper {
 	@Insert("INSERT INTO cart (mem_num,item_num,item_quantity,cart_price) VALUES (#{mem_num},#{item_num},#{item_quantity},#{cart_price})")
 	public void insertCart(CartVO cart);
 	@Update("UPDATE cart set item_quantity=#{item_quantity},cart_price=#{cart_price} WHERE mem_num=#{mem_num} AND item_num=#{item_num}")
-	public void updateCart(CartVO cart);	
+	public void updateCart(CartVO cart);
 	@Update("UPDATE cart set item_quantity=#{item_quantity},cart_price=#{cart_price} WHERE mem_num=#{mem_num} AND item_num=#{item_num}")
 	public void updateCart2(CartVO cart);
 	@Select("SELECT * FROM cart WHERE mem_num=#{mem_num} AND item_num=#{item_num}")

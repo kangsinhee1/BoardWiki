@@ -19,7 +19,7 @@ public interface TnrboardService {
 	public void updateTnrBoard(TnrboardVO tnrboard);
 	public void deleteTnrBoard(Long tnr_num);
 	public void deleteTnrboardFile(Long tnr_num);
-	
+
 	//부모글 좋아요
 	public TnrboardFavVO selectTnrFav(TnrboardFavVO fav);
 	public Integer selectTnrFavCount(Long tnr_num);
@@ -32,5 +32,5 @@ public interface TnrboardService {
 	public void insertTnrReply(TnrboardReplyVO tnrboardReply);
 	public void updateTnrReply(TnrboardReplyVO tnrboardReply);
 	public void deleteTnrReply(Long tnrR_num);
-	
+
 }

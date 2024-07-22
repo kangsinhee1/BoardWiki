@@ -20,22 +20,22 @@ import kr.spring.util.PagingUtil;
 
 @Controller
 public class DonationController {
-	
+
 	    @Autowired
 	    private DonationService donationService;
-	    
+
 	    @GetMapping("/donation/form")
 	    public String donationfrom() {
 	    	return "broadcast";
 	    }
-	    
+
 	    @GetMapping("/donation/add")
 	    @ResponseBody
 	    public Map<String, String> addDonation(long str_num,String don_content,int don_point, HttpSession session) {
 	    	Map<String, String> mapJson = new HashMap<>();
 	    	DonationVO donation = new DonationVO();
 	    	MemberVO user = (MemberVO) session.getAttribute("user");
-	    	
+
 	    	if(user==null) {
 	    		mapJson.put("result", "logout");
 	    	}else {
@@ -46,59 +46,59 @@ public class DonationController {
 	    		donationService.addDonation(donation);
 	    		mapJson.put("result", "success");
 	    	}
-	        
+
 	        return mapJson;
 	    }
 
 	    @GetMapping("/donation/strlist")
 	    public String getDonationsByStream(long str_num, @RequestParam(defaultValue="1") int pageNum,Model model) {
-	    	Map<String,Object> map = new HashMap<String, Object>();
+	    	Map<String,Object> map = new HashMap<>();
 	    	map.put("str_num", str_num);
 	    	int count = donationService.SelectDonationscount(map);
-	    	
+
 	    	PagingUtil page = new PagingUtil(pageNum, count, 20, 10, "strlist");
-	    	
+
 	    	List<DonationVO> list = null;
-	    	
+
 	    	if (count > 0) {
 			     map.put("start", page.getStartRow());
 			     map.put("end", page.getEndRow());
-			        
+
 			     list = donationService.getDonationsByStream(map);
 			}
-	    	
+
 	    	model.addAttribute("count", count);
 			model.addAttribute("list", list);
 			model.addAttribute("page", page.getPage());
-	    	
+
 	        return "strlist";
 	    }
 
 	    @GetMapping("/donation/userlist")
 	    public String getDonationsByMember(HttpSession session,long str_num, @RequestParam(defaultValue="1") int pageNum,Model model) {
-	    	Map<String,Object> map = new HashMap<String, Object>();
+	    	Map<String,Object> map = new HashMap<>();
 	    	MemberVO user = (MemberVO) session.getAttribute("user");
 	    	map.put("mem_num", user.getMem_num());
 	    	map.put("str_num", str_num);
-	    	
+
 	    	int count = donationService.SelectDonationcount(map);
-	    	
+
 	    	PagingUtil page = new PagingUtil(pageNum, count, 20, 10, "userlist");
-	    	
+
 	    	List<DonationVO> list = null;
-	    	
+
 	    	if (count > 0) {
 			     map.put("start", page.getStartRow());
 			     map.put("end", page.getEndRow());
-			        
+
 			     list = donationService.getDonationsByMember(map);
 			}
-	    	
+
 	    	model.addAttribute("count", count);
 			model.addAttribute("list", list);
 			model.addAttribute("page", page.getPage());
-	    	
+
 	    	return "userlist";
 	    }
-	
+
 }

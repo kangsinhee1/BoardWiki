@@ -12,12 +12,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import kr.spring.board.vo.BoardReplyVO;
 import kr.spring.item.service.ItemService;
 import kr.spring.item.vo.ItemVO;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.util.PagingUtil;
-import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -25,7 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 public class ItemAjaxController {
 	@Autowired
 	ItemService itemService;
-	
+
 	/*==============
 	 * 답글 목록
 	 *==============*/
@@ -35,23 +33,23 @@ public class ItemAjaxController {
 									  int pageNum,
 									  int rowCount,
 									  HttpSession session){
-		Map<String,Object> map = new HashMap<String,Object>();
+		Map<String,Object> map = new HashMap<>();
 		map.put("keyword", keyword);
-		
+
 		//총글의 개수
 		int count = itemService.selectRowCount(map);
 		PagingUtil page = new PagingUtil(pageNum,count,rowCount);
 		map.put("start", page.getStartRow());
 		map.put("end", page.getEndRow());
-		
+
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		if(user != null) {
 			map.put("mem_num", user.getMem_num());
 		}else {
 			map.put("mem_num", 0);
 		}
-		
-		Map<String,Object> mapJson = new HashMap<String,Object>();
+
+		Map<String,Object> mapJson = new HashMap<>();
 		List<ItemVO> list = null;
 		if(count > 0) {
 			list = itemService.selectListByKeyword(map);
@@ -59,15 +57,15 @@ public class ItemAjaxController {
 			list = Collections.emptyList();
 			mapJson.put("result", "none");
 		}
-		
+
 		mapJson.put("count", count);
 		mapJson.put("list", list);
 		mapJson.put("result", "success");
-		
+
 		if(user!=null) {
 			mapJson.put("user_num", user.getMem_num());
 		}
-		
+
 		return mapJson;
 	}
 	/*==============
@@ -79,23 +77,23 @@ public class ItemAjaxController {
 									  int pageNum,
 									  int rowCount,
 									  HttpSession session){
-		Map<String,Object> map = new HashMap<String,Object>();
+		Map<String,Object> map = new HashMap<>();
 		map.put("keyword", keyword);
-		
+
 		//총글의 개수
 		int count = itemService.selectRowCount(map);
 		PagingUtil page = new PagingUtil(pageNum,count,rowCount);
 		map.put("start", page.getStartRow());
 		map.put("end", page.getEndRow());
-		
+
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		if(user != null) {
 			map.put("mem_num", user.getMem_num());
 		}else {
 			map.put("mem_num", 0);
 		}
-		
-		Map<String,Object> mapJson = new HashMap<String,Object>();
+
+		Map<String,Object> mapJson = new HashMap<>();
 		List<ItemVO> list = null;
 		if(count > 0) {
 			list = itemService.selectListByKeyword(map);
@@ -103,15 +101,15 @@ public class ItemAjaxController {
 			list = Collections.emptyList();
 			mapJson.put("result", "none");
 		}
-		
+
 		mapJson.put("count", count);
 		mapJson.put("list", list);
 		mapJson.put("result", "success");
-		
+
 		if(user!=null) {
 			mapJson.put("user_num", user.getMem_num());
 		}
-		
+
 		return mapJson;
 	}
 	/*==============
@@ -123,23 +121,23 @@ public class ItemAjaxController {
 									  int pageNum,
 									  int rowCount,
 									  HttpSession session){
-		Map<String,Object> map = new HashMap<String,Object>();
+		Map<String,Object> map = new HashMap<>();
 		map.put("keyword", keyword);
-		
+
 		//총글의 개수
 		int count = itemService.selectRowCount(map);
 		PagingUtil page = new PagingUtil(pageNum,count,rowCount);
 		map.put("start", page.getStartRow());
 		map.put("end", page.getEndRow());
-		
+
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		if(user != null) {
 			map.put("mem_num", user.getMem_num());
 		}else {
 			map.put("mem_num", 0);
 		}
-		
-		Map<String,Object> mapJson = new HashMap<String,Object>();
+
+		Map<String,Object> mapJson = new HashMap<>();
 		List<ItemVO> list = null;
 		if(count > 0) {
 			list = itemService.selectListByKeyword(map);
@@ -147,15 +145,15 @@ public class ItemAjaxController {
 			list = Collections.emptyList();
 			mapJson.put("result", "none");
 		}
-		
+
 		mapJson.put("count", count);
 		mapJson.put("list", list);
 		mapJson.put("result", "success");
-		
+
 		if(user!=null) {
 			mapJson.put("user_num", user.getMem_num());
 		}
-		
+
 		return mapJson;
 	}
 }

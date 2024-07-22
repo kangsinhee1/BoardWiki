@@ -28,7 +28,7 @@ import lombok.extern.slf4j.Slf4j;
 public class TnrboardAjaxController {
 	@Autowired
 	private TnrboardService tnrboardService;
-	
+
 	/*================
 	 * 부모글 좋아요
 	 *================*/
@@ -38,10 +38,10 @@ public class TnrboardAjaxController {
 	public Map<String,Object> getFav(TnrboardFavVO fav,
 			                         HttpSession session){
 		log.debug("<<게시판 좋아요 - TnrboardFavVO>> : " + fav);
-		
-		Map<String,Object> mapJson = 
-				          new HashMap<String,Object>();
-		
+
+		Map<String,Object> mapJson =
+				          new HashMap<>();
+
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		if(user==null) {
 			mapJson.put("status", "noFav");
@@ -49,7 +49,7 @@ public class TnrboardAjaxController {
 			//로그인된 회원번호 셋팅
 			fav.setMem_num(user.getMem_num());
 			TnrboardFavVO tnrboardFav = tnrboardService.selectTnrFav(fav);
-			
+
 			if(tnrboardFav!=null) {
 				mapJson.put("status", "yesFav");
 			}else {
@@ -57,7 +57,7 @@ public class TnrboardAjaxController {
 			}
 		}
 		mapJson.put("count", tnrboardService.selectTnrFavCount(
-				                     fav.getTnr_num()));		
+				                     fav.getTnr_num()));
 		return mapJson;
 	}
 	//부모글 좋아요 등록/삭제
@@ -66,18 +66,18 @@ public class TnrboardAjaxController {
 	public Map<String,Object> writeTnrFav(TnrboardFavVO fav,
 			                          HttpSession session){
 		log.debug("<<게시판 좋아요 - 등록>> : " + fav);
-		
-		Map<String,Object> mapJson = 
-				new HashMap<String,Object>();
-		
-		MemberVO user = 
+
+		Map<String,Object> mapJson =
+				new HashMap<>();
+
+		MemberVO user =
 				 (MemberVO)session.getAttribute("user");
 		if(user==null) {
 			mapJson.put("result", "logout");
 		}else {
 			//로그인된 회원번호 셋팅
 			fav.setMem_num(user.getMem_num());
-			
+
 			TnrboardFavVO tnrboardFav = tnrboardService.selectTnrFav(fav);
 			if(tnrboardFav!=null) {
 				//등록 -> 삭제
@@ -90,13 +90,13 @@ public class TnrboardAjaxController {
 			}
 			mapJson.put("result", "success");
 			mapJson.put("count", tnrboardService.selectTnrFavCount(
-					                      fav.getTnr_num()));			
-		}		
+					                      fav.getTnr_num()));
+		}
 		return mapJson;
 	}
-	
-	
-	
+
+
+
 	/*================
 	 * 부모글 데이터 처리
 	 *================*/
@@ -107,14 +107,14 @@ public class TnrboardAjaxController {
 			              long tnr_num,
 			              HttpSession session,
 			              HttpServletRequest request){
-		Map<String,String> mapJson = 
-				      new HashMap<String,String>();
-		MemberVO user = 
+		Map<String,String> mapJson =
+				      new HashMap<>();
+		MemberVO user =
 				(MemberVO)session.getAttribute("user");
 		if(user==null) {
 			mapJson.put("result", "logout");
 		}else {
-			TnrboardVO db_tnrboard = tnrboardService.selectTnrBoard(tnr_num); 
+			TnrboardVO db_tnrboard = tnrboardService.selectTnrBoard(tnr_num);
 			//로그인한 회원번호와 작성자 회원번호 일치 여부 체크
 			if(user.getMem_num() != db_tnrboard.getMem_num()) {
 				//불일치
@@ -123,11 +123,11 @@ public class TnrboardAjaxController {
 				//일치
 				tnrboardService.deleteTnrboardFile(tnr_num);
 				FileUtil.removeFile(request, db_tnrboard.getFilename());
-				
+
 				mapJson.put("result", "success");
 			}
 		}
-		
+
 		return mapJson;
 	}
 	/*================
@@ -140,10 +140,10 @@ public class TnrboardAjaxController {
 			                   HttpSession session,
 			                   HttpServletRequest request){
 		log.debug("<<댓글 등록>> : " + tnrboardReplyVO);
-		
-		Map<String,String> mapJson = 
-				        new HashMap<String,String>();
-		
+
+		Map<String,String> mapJson =
+				        new HashMap<>();
+
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		if(user == null) {
 			//로그인 안 됨
@@ -151,11 +151,11 @@ public class TnrboardAjaxController {
 		}else {
 			//회원번호 저장
 			tnrboardReplyVO.setMem_num(user.getMem_num());
-			
+
 			//댓글 등록
 			tnrboardService.insertTnrReply(tnrboardReplyVO);
 			mapJson.put("result", "success");
-		}		
+		}
 		return mapJson;
 	}
 	/*================
@@ -170,47 +170,47 @@ public class TnrboardAjaxController {
 		log.debug("<<댓글 목록 - tnr_num>> : " + tnr_num);
 		log.debug("<<댓글 목록 - pageNum>> : " + pageNum);
 		log.debug("<<댓글 목록 - rowCount>> : " + rowCount);
-		
-		Map<String,Object> map = 
-				new HashMap<String,Object>();
+
+		Map<String,Object> map =
+				new HashMap<>();
 		map.put("tnr_num", tnr_num);
-		
+
 		//총글의 개수
 		int count = tnrboardService.selectTnrRowCountReply(map);
-		
+
 		//페이지 처리
-		PagingUtil page = 
+		PagingUtil page =
 				new PagingUtil(pageNum,count,rowCount);
 		map.put("start", page.getStartRow());
 		map.put("end", page.getEndRow());
-		
+
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		if(user!=null) {
 			map.put("mem_num", user.getMem_num());
 		}else {
 			map.put("mem_num", 0);
 		}
-		
+
 		List<TnrboardReplyVO> list = null;
 		if(count > 0) {
 			list = tnrboardService.selectTnrListReply(map);
 		}else {
 			list = Collections.emptyList();
 		}
-		
-		Map<String,Object> mapJson = 
-				        new HashMap<String,Object>();
+
+		Map<String,Object> mapJson =
+				        new HashMap<>();
 		mapJson.put("count", count);
 		mapJson.put("list",list);
 		if(user!=null) {
 			mapJson.put("user_num", user.getMem_num());
 		}
-		
+
 		return mapJson;
 	}
 	/*================
 	 * 댓글 수정
-	 *================*/	
+	 *================*/
 	@PostMapping("/tnrboard/updateReply")
 	@ResponseBody
 	public Map<String,String> modifyReply(
@@ -218,47 +218,47 @@ public class TnrboardAjaxController {
 			                HttpSession session,
 			                HttpServletRequest request){
 		log.debug("<<댓글 수정>> : " + tnrboardReplyVO);
-		
+
 		Map<String,String> mapJson =
-				      new HashMap<String,String>();
-		
-		MemberVO user = 
+				      new HashMap<>();
+
+		MemberVO user =
 				(MemberVO)session.getAttribute("user");
-		
-		TnrboardReplyVO db_reply = 
+
+		TnrboardReplyVO db_reply =
 				tnrboardService.selectTnrReply(
 						   tnrboardReplyVO.getTnrR_num());
 		if(user==null) {
 			//로그인이 되지 않은 경우
 			mapJson.put("result", "logout");
-		}else if(user!=null && 
+		}else if(user!=null &&
 				user.getMem_num()==db_reply.getMem_num()) {
 			//로그인 회원번호와 작성자 회원번호 일치
-			
+
 			//댓글 수정
 			tnrboardService.updateTnrReply(tnrboardReplyVO);
 			mapJson.put("result", "success");
 		}else {
 			//로그인 회원번호와 작성자 회원번호 불일치
 			mapJson.put("result", "wrongAccess");
-		}		
+		}
 		return mapJson;
 	}
 	/*================
 	 * 댓글 삭제
-	 *================*/	
+	 *================*/
 	@PostMapping("/tnrboard/deleteReply")
 	@ResponseBody
 	public Map<String,String> deleteReply(long tnrR_num,
 			                       HttpSession session){
 		log.debug("<<댓글 삭제 - tnrR_num>> : " + tnrR_num);
-		
-		Map<String,String> mapJson = 
-				           new HashMap<String,String>();
-		
-		MemberVO user = 
+
+		Map<String,String> mapJson =
+				           new HashMap<>();
+
+		MemberVO user =
 				(MemberVO)session.getAttribute("user");
-		TnrboardReplyVO db_reply = 
+		TnrboardReplyVO db_reply =
 				         tnrboardService.selectTnrReply(tnrR_num);
 		if(user==null) {
 			//로그인이 되지 않은 경우
@@ -271,8 +271,8 @@ public class TnrboardAjaxController {
 		}else {
 			//로그인한 회원번호와 작성자 회원번호 불일치
 			mapJson.put("result", "wrongAccess");
-		}		
+		}
 		return mapJson;
 	}
-	
+
 }

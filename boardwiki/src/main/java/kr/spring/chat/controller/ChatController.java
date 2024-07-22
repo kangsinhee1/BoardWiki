@@ -30,38 +30,38 @@ import lombok.extern.slf4j.Slf4j;
 public class ChatController {
 	@Autowired
 	private ChatService chatService;
-	
+
 	@Autowired
 	private MemberService memberService;
-	
+
 	@Autowired
 	private TeamService teamService;
 
 		/*=============================
-		 * 
+		 *
 		 * 채팅방 목록
-		 * =============================*/	
-		
-		
+		 * =============================*/
+
+
 		/*=============================
-		 * 
+		 *
 		 * 채팅방 생성
 		 * =============================*/
-		
-		
-		
+
+
+
 		/*=============================
-		 * 
+		 *
 		 * 채팅 메시지 처리
 		 * =============================*/
-	
-	
+
+
 		@GetMapping("/chat/chatDetail")
 		public  String getChatDetail(long chaR_num, Model model,HttpSession session) {
 			MemberVO user = (MemberVO)session.getAttribute("user");
 			String room_name="";
 			String chatMember="";
-			
+
 			ChatRoomVO roomvo = chatService.selectChatRoomBychaRnum(chaR_num);
 			TeamVO team = teamService.detailTeam(roomvo.getTea_num());
 			List<ChatMemberVO> list = chatService.selectChatMember(chaR_num);
@@ -71,9 +71,11 @@ public class ChatController {
 				if(user.getMem_num() == vo.getMem_num()) {
 					room_name=vo.getBasic_name();
 				}
-				if(i>0)chatMember+=",";
+				if(i>0) {
+					chatMember+=",";
+				}
 				chatMember+= list.get(i).getMem_nickname();
-				
+
 			}
 			//채팅 멤버 id
  			model.addAttribute("chatMember",chatMember);
@@ -82,14 +84,14 @@ public class ChatController {
  			//로그인한 회원의 채티방 이름
  			model.addAttribute("room_name",room_name);
  			model.addAttribute("team",team);
- 			return "chatDetail"; 
+ 			return "chatDetail";
 		}
-		
-		
+
+
 		@PostMapping("/chat/writeChat")
 		@ResponseBody
 		public Map<String,String> writeChat(ChatTextVO chatTextVO, HttpSession session){
-			Map<String,String> mapJson = new HashMap<String,String>();
+			Map<String,String> mapJson = new HashMap<>();
 			MemberVO user = (MemberVO)session.getAttribute("user");
 			if(user==null) {
 				mapJson.put("result", "logout");
@@ -103,21 +105,21 @@ public class ChatController {
 			}
 			return mapJson;
 		}
-		
- 		
-		
+
+
+
 		@GetMapping("/chat/chatDetailAjax")
 		@ResponseBody
 		public Map<String,Object> chatDetailAjax(Long chaR_num,HttpSession session){
-			Map<String,Object> mapJson = new HashMap<String,Object>();
+			Map<String,Object> mapJson = new HashMap<>();
 			MemberVO user = (MemberVO)session.getAttribute("user");
 			if(user==null) {
 				mapJson.put("result", "logout");
 			}else {
-				Map<String,Long> map = new HashMap<String,Long>();
+				Map<String,Long> map = new HashMap<>();
 				map.put("chaR_num",chaR_num);
 				map.put("mem_num", user.getMem_num());
-				
+
 				List<ChatTextVO>list = chatService.selectChatTextDetail(map);
 				mapJson.put("result", "success");
 				mapJson.put("list", list);
@@ -125,20 +127,20 @@ public class ChatController {
 				log.debug("채팅 가온나  : " + list);
 			}
 			return mapJson;
-			
-			
+
+
 		}
-		
-		
+
+
 		@GetMapping("/myPage/myChat2")
 		public String getChatList(HttpSession session, Model model, String keyword, @RequestParam(defaultValue="1" )int pageNum) {
 			MemberVO user = (MemberVO)session.getAttribute("user");
-			Map<String,Object> map = new HashMap<String,Object>();
+			Map<String,Object> map = new HashMap<>();
 			map.put("keyword",keyword);
 			map.put("mem_num", user.getMem_num());
 			int count = chatService.selectRowCount(map);
 			log.debug("채팅 개수 ~~~~~~~~~~~~~~~~~~~~~~" + count);
-			
+
 			//페이지 처리
 			PagingUtil page = new PagingUtil(null,keyword,pageNum,count,20,10,"myChat2");
 			List<ChatRoomVO> list= null;
@@ -150,9 +152,9 @@ public class ChatController {
 				model.addAttribute("list",list);
 				model.addAttribute("page",page.getPage());
 			}
-			
-			
+
+
 			return "myChat2";
 		}
-		
+
 }

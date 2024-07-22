@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import kr.spring.board.service.BoardService;
-import kr.spring.board.vo.BoardReplyVO;
 import kr.spring.chat.service.ChatService;
 import kr.spring.chat.vo.ChatRoomVO;
 import kr.spring.member.vo.MemberVO;
@@ -33,7 +31,7 @@ public class TeamAjaxController {
 
 	@Autowired
 	private TeamService teamService;
-	
+
 
 	@Autowired
 	private ChatService chatService;
@@ -43,7 +41,7 @@ public class TeamAjaxController {
 	@GetMapping("/team/teamFav")
 	@ResponseBody
 	public Map<String,Object> teamFav(TeamFavVO teamFav, HttpSession session){
-		Map<String, Object> mapJson = new HashMap<String,Object>();
+		Map<String, Object> mapJson = new HashMap<>();
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		if(user==null) {
 			mapJson.put("status", "noFav");
@@ -68,7 +66,7 @@ public class TeamAjaxController {
 	@PostMapping("/team/writeTeamFav")
 	@ResponseBody
 	public Map<String,Object> writeTeamFav(HttpSession session, TeamFavVO teamFav){
-		Map<String, Object> mapJson = new HashMap<String,Object>();
+		Map<String, Object> mapJson = new HashMap<>();
 		MemberVO user = (MemberVO)session.getAttribute("user");
 
 		if(user==null) {
@@ -95,13 +93,13 @@ public class TeamAjaxController {
 	/*=====================
 	 * 업로드 파일 삭제
 	 *=====================*/
-	
+
 	@PostMapping("/team/deleteFile")
 	@ResponseBody
 	public Map<String,String> deleteFile (long teaB_num, HttpSession session,
             HttpServletRequest request){
-		Map<String,String> mapJson = 
-				new HashMap<String,String>();
+		Map<String,String> mapJson =
+				new HashMap<>();
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		if(user==null) {
 			mapJson.put("result", "logout");
@@ -116,7 +114,7 @@ public class TeamAjaxController {
 					mapJson.put("result", "success");
 				}
 			}
-			
+
 		return mapJson;
 	}
 	/*================
@@ -129,10 +127,10 @@ public class TeamAjaxController {
 			                   HttpSession session,
 			                   HttpServletRequest request){
 		log.debug("<<댓글 등록>> : " + teamReplyVO);
-		
-		Map<String,String> mapJson = 
-				        new HashMap<String,String>();
-		
+
+		Map<String,String> mapJson =
+				        new HashMap<>();
+
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		if(user == null) {
 			//로그인 안 됨
@@ -140,17 +138,17 @@ public class TeamAjaxController {
 		}else {
 			//회원번호 저장
 			teamReplyVO.setMem_num(user.getMem_num());
-			
+
 			//댓글 등록
 			teamService.insertTeamBoardReply(teamReplyVO);
 			mapJson.put("result", "success");
-		}		
+		}
 		return mapJson;
 	}
 	/*================
 	 * 댓글 목록
 	 *================*/
-	
+
 	@GetMapping("/team/listBoardReply")
 	@ResponseBody
 	public Map<String,Object> getList(int teaB_num,
@@ -160,46 +158,46 @@ public class TeamAjaxController {
 		log.debug("<<댓글 목록 - teaB_num>> : " + teaB_num);
 		log.debug("<<댓글 목록 - pageNum>> : " + pageNum);
 		log.debug("<<댓글 목록 - rowCount>> : " + rowCount);
-		
-		Map<String,Object> map = 
-				new HashMap<String,Object>();
+
+		Map<String,Object> map =
+				new HashMap<>();
 		map.put("teaB_num", teaB_num);
-		
+
 		//총글의 개수
 		int count = teamService.selectTeamBoardReplyCount(map);
-		
+
 		//페이지 처리
-		PagingUtil page = 
+		PagingUtil page =
 				new PagingUtil(pageNum,count,rowCount);
 		map.put("start", page.getStartRow());
 		map.put("end", page.getEndRow());
-		
+
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		if(user!=null) {
 			map.put("mem_num", user.getMem_num());
 		}else {
 			map.put("mem_num", 0);
 		}
-		
+
 		List<TeamReplyVO> list = null;
 		if(count > 0) {
 			list = teamService.selectTeamBoardReplyList(map);
 		}else {
 			list = Collections.emptyList();
 		}
-		Map<String,Object> mapJson = 
-				        new HashMap<String,Object>();
+		Map<String,Object> mapJson =
+				        new HashMap<>();
 		mapJson.put("count", count);
 		mapJson.put("list",list);
 		if(user!=null) {
 			mapJson.put("user_num", user.getMem_num());
 		}
-		
+
 		return mapJson;
 	}
 	/*================
 	 * 댓글 수정
-	 *================*/	
+	 *================*/
 	@PostMapping("/team/updateReply")
 	@ResponseBody
 	public Map<String,String> modifyReply(
@@ -207,43 +205,43 @@ public class TeamAjaxController {
 			                HttpSession session,
 			                HttpServletRequest request){
 		log.debug("<<댓글 수정>> : " + teamReplyVO);
-		
+
 		Map<String,String> mapJson =
-				      new HashMap<String,String>();
-		
-		MemberVO user = 
+				      new HashMap<>();
+
+		MemberVO user =
 				(MemberVO)session.getAttribute("user");
-		
+
 		TeamReplyVO db_reply = teamService.getTeamReply(teamReplyVO.getTeaR_num());
-			
+
 		if(user==null) {
 			//로그인이 되지 않은 경우
 			mapJson.put("result", "logout");
-		}else if(user!=null && 
+		}else if(user!=null &&
 				user.getMem_num()==db_reply.getMem_num()) {
 			//로그인 회원번호와 작성자 회원번호 일치
-			
+
 			//댓글 수정
 			mapJson.put("result", "success");
 		}else {
 			//로그인 회원번호와 작성자 회원번호 불일치
 			mapJson.put("result", "wrongAccess");
-		}		
+		}
 		return mapJson;
 	}
 	/*================
 	 * 댓글 삭제
-	 *================*/	
+	 *================*/
 	@PostMapping("/team/deleteReply")
 	@ResponseBody
 	public Map<String,String> deleteReply(long teaR_num,
 			                       HttpSession session){
 		log.debug("<<댓글 삭제 - teaR_num>> : " + teaR_num);
-		
-		Map<String,String> mapJson = 
-				           new HashMap<String,String>();
-		
-		MemberVO user = 
+
+		Map<String,String> mapJson =
+				           new HashMap<>();
+
+		MemberVO user =
 				(MemberVO)session.getAttribute("user");
 				//db확인
 		TeamReplyVO db_reply = teamService.getTeamReply(teaR_num);
@@ -258,23 +256,23 @@ public class TeamAjaxController {
 		}else {
 			//로그인한 회원번호와 작성자 회원번호 불일치
 			mapJson.put("result", "wrongAccess");
-		}		
+		}
 		return mapJson;
 	}
-	
-	
+
+
 	//모임 신청 처리 및 회원 정지 기능
 	@PostMapping("/team/changeStatus")
 	@ResponseBody
 	public Map<String,String> changeStatus(long teaA_num ,long teaA_status, HttpSession session){
-		Map<String,String> mapJson = 
-		           new HashMap<String,String>();
+		Map<String,String> mapJson =
+		           new HashMap<>();
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		TeamApplyVO db_applyVO = teamService.getTeamApply(teaA_num);
 		long admin = teamService.detailTeam(db_applyVO.getTea_num()).getMem_num();
 		ChatRoomVO chatRoomVO = chatService.selectChatRoom(db_applyVO.getTea_num());
-		Map<String,Long> chatread = new HashMap<String,Long>();
-		
+		Map<String,Long> chatread = new HashMap<>();
+
 		chatread.put("mem_num", db_applyVO.getMem_num());
 		chatread.put("chaR_num", chatRoomVO.getChaR_num());
 		if(user==null) {
@@ -287,25 +285,25 @@ public class TeamAjaxController {
 			teamService.updateTeamApplyStatus(teaA_status,teaA_num);
 			if(teaA_status == 2) {
 				chatService.insertChatRoomMember(chatRoomVO.getChaR_num(), chatRoomVO.getChaR_name(), db_applyVO.getMem_num());
-				
+
 			}else {
 				chatService.deleteChatRoomMemeberUser(db_applyVO.getMem_num(),chatRoomVO.getChaR_num());
 				chatService.deleteChatRead(chatread);
 			}
 			mapJson.put("result", "success");
 		}
-		
+
 		return mapJson;
 	}
-	
+
 	//모임 신청 처리 및 회원 정지 기능
 		@PostMapping("/team/updateMeetingDate")
 		@ResponseBody
 		public Map<String,String> updateMeetingDate(long tea_num ,String tea_time, HttpSession session){
-			
-			Map<String,String> mapJson = 
-			           new HashMap<String,String>();
-			MemberVO user = 
+
+			Map<String,String> mapJson =
+			           new HashMap<>();
+			MemberVO user =
 					(MemberVO)session.getAttribute("user");
 			if(user==null) {
 				//로그인이 되지 않은 경우
@@ -316,17 +314,17 @@ public class TeamAjaxController {
 				teamService.deleteTeamApplyAttend(tea_num);
 				mapJson.put("result", "success");
 			}
-			
+
 			return mapJson;
 		}
 	// 모임 취소 기능
 		@PostMapping("/team/deleteMeetingDate")
 		@ResponseBody
 		public Map<String,String> deleteMeetingDate(long tea_num ,String tea_time, HttpSession session){
-			
-			Map<String,String> mapJson = 
-			           new HashMap<String,String>();
-			MemberVO user = 
+
+			Map<String,String> mapJson =
+			           new HashMap<>();
+			MemberVO user =
 					(MemberVO)session.getAttribute("user");
 			if(user==null) {
 				//로그인이 되지 않은 경우
@@ -340,16 +338,16 @@ public class TeamAjaxController {
 			}
 			return mapJson;
 		}
-		
+
 		@PostMapping("/team/teamAttend")
 		@ResponseBody
 		public Map<String,String> teamAttend(long tea_num, long teaA_attend, HttpSession session){
-			Map<String,String> mapJson = 
-			           new HashMap<String,String>();
-			MemberVO user = 
+			Map<String,String> mapJson =
+			           new HashMap<>();
+			MemberVO user =
 					(MemberVO)session.getAttribute("user");
-			
-			
+
+
 			if(user==null) {
 				mapJson.put("result", "logout");
 			}else {
@@ -368,7 +366,7 @@ public class TeamAjaxController {
 					teamService.updateTeamApplyUser(applyVO2);
 					mapJson.put("result", "success2");
 				}
-				
+
 			}
 			return mapJson;
 		}

@@ -16,13 +16,13 @@ import lombok.extern.slf4j.Slf4j;
 public class AutoLoginCheckInterceptor implements HandlerInterceptor{
 	@Autowired
 	MemberService memberService;
-	
+
 	@Override
 	public boolean preHandle(HttpServletRequest request,
 			                 HttpServletResponse response,
 			                 Object handler)throws Exception{
 		log.debug("<<AutoLoginCheckInterceptor 진입>>");
-		
+
 		HttpSession session = request.getSession();
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		if(user==null) {
@@ -38,24 +38,24 @@ public class AutoLoginCheckInterceptor implements HandlerInterceptor{
 				}
 			}
 		}
-		
+
 		return true;
 	}
-	
+
 	private Cookie findCookie(Cookie[] cookies, String name) {
 		if(cookies == null || cookies.length == 0) {
 			return null;
 		}else {
-			for(int i=0;i<cookies.length;i++) {
-				String cookie_name = cookies[i].getName();
+			for (Cookie element : cookies) {
+				String cookie_name = element.getName();
 				if(cookie_name.equals(name)) {
-					return cookies[i];
+					return element;
 				}
 			}
 			return null;
 		}
 	}
-	
+
 }
 
 

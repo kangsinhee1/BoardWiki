@@ -18,12 +18,12 @@ import kr.spring.member.vo.MemberVO;
 @Service
 @Transactional
 public class ChatServiceImpl implements ChatService{
-	@Autowired 
+	@Autowired
 	ChatMapper chatMapper;
-	@Autowired 
+	@Autowired
 	MemberMapper memberMapper;
-	
-	
+
+
 	@Override
 	public ChatRoomVO selectChatRoom(long tea_num) {
 		return chatMapper.selectChatRoom(tea_num);
@@ -50,7 +50,7 @@ public class ChatServiceImpl implements ChatService{
 	@Override
 	public void insertChatRoomMember(Long chaR_num, String chaR_name, Long mem_num) {
 		chatMapper.insertChatRoomMember(chaR_num, chaR_name, mem_num);
-		
+
 		//입장 메시지 처리
 		ChatTextVO chatTextVO = new ChatTextVO();
 		chatTextVO.setChaT_num(chatMapper.selectChatNum());
@@ -74,13 +74,13 @@ public class ChatServiceImpl implements ChatService{
 
 	@Override
 	public void insertChat(ChatTextVO chatTextVO) {
-		//메시지 생성후 chatread에 뿌리기,멤버 전체에게 
+		//메시지 생성후 chatread에 뿌리기,멤버 전체에게
 		chatTextVO.setChaT_num(chatMapper.selectChatNum());
 		chatMapper.insertChat(chatTextVO);
 		for(ChatMemberVO vo : chatMapper.selectChatMember(chatTextVO.getChaR_num())) {
 			chatMapper.insertChatRead(chatTextVO.getChaR_num(),chatTextVO.getChaT_num(),vo.getMem_num());
 		}
-		
+
 	}
 
 	@Override
@@ -92,7 +92,7 @@ public class ChatServiceImpl implements ChatService{
 	@Override
 	public void deleteChatRead(Map<String, Long> map) {
 		// TODO Auto-generated method stub
-		
+
 	}
 	@Override
 	public void deleteChatReadAdmin(Map<String, Long> map) {
@@ -122,7 +122,7 @@ public class ChatServiceImpl implements ChatService{
 	@Override
 	public Integer selectChatRoomNum() {
 		// TODO Auto-generated method stub
-		return null;	
+		return null;
 	}
 
 	@Override
@@ -132,5 +132,5 @@ public class ChatServiceImpl implements ChatService{
 
 
 
-	
+
 }

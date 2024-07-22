@@ -19,6 +19,6 @@ public interface ContestService {
 	public void updateContestHit(Long con_num);
 	//유저 대회 신청
 	public void applyForContest(ContestApplyVO contestApplyVO);
-	
+
 	public Integer selectContestApplyList(ContestApplyVO contestApplyVO);
 }

@@ -27,7 +27,7 @@ public interface MemberMapper {
 	@Update("UPDATE member_detail SET mem_passwd=#{mem_passwd} WHERE mem_num=#{mem_num}")
 	public void updatePassword(MemberVO member);
 	public void updateMember_detail(MemberVO member);
-	
+
 	//자동 로그인
 	@Update("UPDATE member_detail SET au_id=#{au_id} WHERE mem_num=#{mem_num}")
 	public void updateAu_id(String au_id,Long mem_num);
@@ -35,7 +35,7 @@ public interface MemberMapper {
 	public MemberVO selectAu_id(String au_id);
 	@Update("UPDATE member_detail SET au_id='' WHERE mem_num=#{mem_num}")
 	public void deleteAu_id(Long mem_num);
-	
+
 	//아이디 찾기
 	@Select("SELECT * FROM member JOIN member_detail USING(mem_num) WHERE mem_name = #{mem_name} AND mem_phone = #{mem_phone}")
 	public MemberVO findEmail(String mem_name, String mem_phone);

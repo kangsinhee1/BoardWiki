@@ -1,17 +1,19 @@
 package kr.spring.util;
 
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.DocumentBuilder;
-import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
-import org.w3c.dom.Element;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathFactory;
-import javax.xml.xpath.XPathExpression;
-import javax.xml.xpath.XPathConstants;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpression;
+import javax.xml.xpath.XPathFactory;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
 public class BggGameInfo {
 
@@ -76,8 +78,8 @@ public class BggGameInfo {
 //		}
 
 		// 결과 출력(description)
-		for (int i = 0; i < gameDescriptions.size(); i++) {
-			System.out.println(gameDescriptions.get(i));
+		for (String gameDescription : gameDescriptions) {
+			System.out.println(gameDescription);
 		}
 	}
 }

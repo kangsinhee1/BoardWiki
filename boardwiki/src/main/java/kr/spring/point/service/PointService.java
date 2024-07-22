@@ -3,11 +3,6 @@ package kr.spring.point.service;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
-
 import kr.spring.point.vo.PointGameVO;
 import kr.spring.point.vo.PointVO;
 
@@ -16,7 +11,7 @@ public interface PointService {
 	public PointVO selectPoint(PointVO pointVO);
 	public List<PointVO> selectPointList(Map<String,Object> map);
 	public Integer selectRowCount(Map<String,Object> map);
-	
+
 	//포인트 게임
 	//포인트 게임 등록
 	public void insertPointGame(PointGameVO pointGameVO);
@@ -30,7 +25,7 @@ public interface PointService {
 	public void deletePointGame(Long poiG_num);
 	//포인트 게임 종료
 	public void updatePointGame(Long poiG_num);
-		
+
 	//포인트 게임 옵션
 	//포인트 게임 옵션 등록
 	public void insertPointOption(PointGameVO pointGameVO);
@@ -40,7 +35,7 @@ public interface PointService {
 	public List<PointGameVO> selectPointGameOptionList(Map<String,Object> map);
 	//포인트 게임 옵션 카운트
 	public Integer selectPointGameOptionRowCount(Map<String,Object> map);
-		
+
 	//포인트 게임 배팅
 	//포인트 게임 배팅 등록
 	public void insertPointBetting(PointGameVO pointGameVO);
@@ -52,15 +47,15 @@ public interface PointService {
 	public Integer selectPointGameBettingRowCount(Map<String,Object> map);
 	//포인트 게임 배팅 삭제
 	public void deletePointGameBetting(Long mem_num,Long poiO_num);
-	
+
 	public long getNextPointGameSeq();
-	
+
 	public void closeGame(Long poiG_num, Long winningOption);
-	
+
 	List<PointGameVO> getCreatedGames(Long mem_num);
-	
+
     List<PointGameVO> getGameOptions(Long poiG_num);
-    
+
     public List<PointGameVO> selectPointBettingList(Long poiO_num);
     public Integer selectPointTotal(Long mem_num);
 }

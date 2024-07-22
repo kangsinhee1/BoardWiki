@@ -32,21 +32,21 @@ import lombok.extern.slf4j.Slf4j;
 public class AdminController {
 	@Autowired
 	private MemberService memberService;
-	
+
 	@Autowired
 	private ItemService itemService;
-	
+
 	@Autowired
 	private RentService rentService;
-	
+
 	@Autowired
 	private BoardService boardService;
-	
+
 	@Autowired
 	private ReportService reportService;
 	/*==============================
 	 * 관리자 페이지 메인
-	 *==============================*/	
+	 *==============================*/
 	@GetMapping("/admin/adminPage")
 	public String adminPage(HttpSession session,
 							HttpServletRequest request,
@@ -57,17 +57,17 @@ public class AdminController {
 			model.addAttribute("url",request.getContextPath()+"/main/main");
 			return "common/resultAlert";
 		}
-		
+
 		return "adminPage";
 	}
 
 	/*==============================
 	 * 관리자 페이지 (회원관리)
-	 *==============================*/	
+	 *==============================*/
 	@GetMapping("/adminPage/memberManage")
 	public String memberManagePage(@RequestParam(defaultValue="1") int pageNum,
             						@RequestParam(defaultValue="") String category,
-            						String keyfield,	
+            						String keyfield,
             						String keyword,Model model,
             						HttpSession session,
             						HttpServletRequest request
@@ -78,39 +78,39 @@ public class AdminController {
 			model.addAttribute("url",request.getContextPath()+"/main/login");
 			return "common/resultAlert";
 		}
-		Map<String,Object> map = new HashMap<String,Object>();
+		Map<String,Object> map = new HashMap<>();
 
 		map.put("category", category);
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
-		
-		int count = memberService.countAllmember(map); 
-		
+
+		int count = memberService.countAllmember(map);
+
 		PagingUtil page =
 				new PagingUtil(keyfield,keyword,pageNum,count,5,10,"memberManage");
-		 
+
 		List<MemberVO> list = null;
 	    if(count > 0) {
 	    	map.put("start", page.getStartRow());
 	    	map.put("end", page.getEndRow());
-	    	
-	    	list = memberService.selectAllmember(map);  
+
+	    	list = memberService.selectAllmember(map);
 	    }
 
 	    model.addAttribute("count", count);
 		model.addAttribute("list", list);
 		model.addAttribute("page", page.getPage());
-		
+
 		return "memberManage";
 	}
-	
+
 	/*==============================
 	 * 관리자 페이지 (제품관리)
-	 *==============================*/	
+	 *==============================*/
 	@GetMapping("/adminPage/gameManage")
 	public String gameManagePage(@RequestParam(defaultValue="1") int pageNum,
 								 @RequestParam(defaultValue="") String category,
-								 String keyfield,	
+								 String keyfield,
 								 String keyword,Model model,
 								 HttpSession session,
 								 HttpServletRequest request) {
@@ -120,39 +120,39 @@ public class AdminController {
 			model.addAttribute("url",request.getContextPath()+"/main/login");
 			return "common/resultAlert";
 		}
-		Map<String,Object> map = new HashMap<String,Object>();
-		
+		Map<String,Object> map = new HashMap<>();
+
 		map.put("category", category);
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
-		
+
 		int count = itemService.selectRowCount(map);
-		
+
 		PagingUtil page =
 				new PagingUtil(keyfield,keyword,pageNum,count,10,10,"gameManage");
-		
+
 		List<ItemVO> list = null;
 		if(count > 0) {
 			map.put("start", page.getStartRow());
 			map.put("end", page.getEndRow());
-			
-			list = itemService.selectList(map);  
+
+			list = itemService.selectList(map);
 		}
-		
+
 		model.addAttribute("count", count);
 		model.addAttribute("list", list);
 		model.addAttribute("page", page.getPage());
-		
+
 		return "gameManage";
 	}
-	
+
 	/*==============================
 	 * 관리자 페이지 (주문관리)
-	 *==============================*/	
+	 *==============================*/
 	@GetMapping("/adminPage/orderManage")
 	public String orderManagePage(@RequestParam(defaultValue="1") int pageNum,
 			@RequestParam(defaultValue="") String category,
-			String keyfield,	
+			String keyfield,
 			String keyword,Model model,
 			HttpSession session,
 			HttpServletRequest request) {
@@ -162,39 +162,39 @@ public class AdminController {
 			model.addAttribute("url",request.getContextPath()+"/main/login");
 			return "common/resultAlert";
 		}
-		Map<String,Object> map = new HashMap<String,Object>();
-		
+		Map<String,Object> map = new HashMap<>();
+
 		map.put("category", category);
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
-		
+
 		int count = itemService.selectRowCount2(map);
-		
+
 		PagingUtil page =
 				new PagingUtil(keyfield,keyword,pageNum,count,20,10,"gameManage");
-		
+
 		List<ItemVO> list = null;
 		if(count > 0) {
 			map.put("start", page.getStartRow());
 			map.put("end", page.getEndRow());
-			
-			
-			list = itemService.selectList(map);  
+
+
+			list = itemService.selectList(map);
 		}
-		
+
 		model.addAttribute("count", count);
 		model.addAttribute("list", list);
 		model.addAttribute("page", page.getPage());
-		
+
 		return "orderManage";
 	}
 	/*==============================
 	 * 관리자 페이지 (방송관리)
-	 *==============================*/	
+	 *==============================*/
 	@GetMapping("/adminPage/streamingManage")
 	public String streamingManagePage(@RequestParam(defaultValue="1") int pageNum,
 			@RequestParam(defaultValue="") String category,
-			String keyfield,	
+			String keyfield,
 			String keyword,Model model,
 			HttpSession session,
 			HttpServletRequest request) {
@@ -204,39 +204,39 @@ public class AdminController {
 			model.addAttribute("url",request.getContextPath()+"/main/login");
 			return "common/resultAlert";
 		}
-		Map<String,Object> map = new HashMap<String,Object>();
-		
+		Map<String,Object> map = new HashMap<>();
+
 		map.put("category", category);
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
-		
+
 		int count = itemService.selectRowCount2(map);
-		
+
 		PagingUtil page =
 				new PagingUtil(keyfield,keyword,pageNum,count,20,10,"gameManage");
-		
+
 		List<ItemVO> list = null;
 		if(count > 0) {
 			map.put("start", page.getStartRow());
 			map.put("end", page.getEndRow());
-			
-			
-			list = itemService.selectList(map);  
+
+
+			list = itemService.selectList(map);
 		}
-		
+
 		model.addAttribute("count", count);
 		model.addAttribute("list", list);
 		model.addAttribute("page", page.getPage());
-		
+
 		return "streamingManage";
 	}
 	/*==============================
 	 * 관리자 페이지 (포인트 관리)
-	 *==============================*/	
+	 *==============================*/
 	@GetMapping("/adminPage/pointManage")
 	public String pointManagePage(@RequestParam(defaultValue="1") int pageNum,
 			@RequestParam(defaultValue="") String category,
-			String keyfield,	
+			String keyfield,
 			String keyword,Model model,
 			HttpSession session,
 			HttpServletRequest request) {
@@ -246,39 +246,39 @@ public class AdminController {
 			model.addAttribute("url",request.getContextPath()+"/main/login");
 			return "common/resultAlert";
 		}
-		Map<String,Object> map = new HashMap<String,Object>();
-		
+		Map<String,Object> map = new HashMap<>();
+
 		map.put("category", category);
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
-		
+
 		int count = itemService.selectRowCount2(map);
-		
+
 		PagingUtil page =
 				new PagingUtil(keyfield,keyword,pageNum,count,20,10,"gameManage");
-		
+
 		List<ItemVO> list = null;
 		if(count > 0) {
 			map.put("start", page.getStartRow());
 			map.put("end", page.getEndRow());
-			
-			
-			list = itemService.selectList(map);  
+
+
+			list = itemService.selectList(map);
 		}
-		
+
 		model.addAttribute("count", count);
 		model.addAttribute("list", list);
 		model.addAttribute("page", page.getPage());
-		
+
 		return "pointManage";
 	}
 	/*==============================
 	 * 관리자 페이지 (신고 관리)
-	 *==============================*/	
+	 *==============================*/
 	@GetMapping("/adminPage/reportManage")
 	public String reportManagePage(@RequestParam(defaultValue="1") int pageNum,
 			@RequestParam(defaultValue="") String category,
-			String keyfield,	
+			String keyfield,
 			String keyword,Model model,
 			HttpSession session,
 			HttpServletRequest request) {
@@ -288,48 +288,48 @@ public class AdminController {
 			model.addAttribute("url",request.getContextPath()+"/main/login");
 			return "common/resultAlert";
 		}
-		Map<String,Object> map = new HashMap<String,Object>();
-		
+		Map<String,Object> map = new HashMap<>();
+
 		map.put("category", category);
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
-		
+
 		int count = reportService.getReportRowCount(map);
-		
+
 		PagingUtil page =
 				new PagingUtil(keyfield,keyword,pageNum,count,10,10,"reportManage");
-		
+
 		List<ReportVO> list = null;
 		if(count > 0) {
 			map.put("start", page.getStartRow());
 			map.put("end", page.getEndRow());
-			
-			
-			list = reportService.selectReportList(map);  
+
+
+			list = reportService.selectReportList(map);
 		}
-		
+
 		model.addAttribute("count", count);
 		model.addAttribute("list", list);
 		model.addAttribute("page", page.getPage());
-		
+
 		return "reportManage";
 	}
 	/*==============================
 	 * 관리자 페이지 (Qna 관리)
-	 *==============================*/	
+	 *==============================*/
 	@GetMapping("/adminPage/QnaManage")
 	public String getList2(
 			@RequestParam(defaultValue="1") int pageNum,
 			@RequestParam(defaultValue="1") int order,
 			@RequestParam(defaultValue="5") String boa_category,
 			String keyfield,String keyword,Model model) {
-	
-	Map<String,Object> map = new HashMap<String,Object>();
+
+	Map<String,Object> map = new HashMap<>();
 	map.put("boa_category", boa_category);
 	map.put("keyfield", keyfield);
 	map.put("keyword", keyword);
 	int count = boardService.selectRowCount(map);
-	
+
 	PagingUtil page = new PagingUtil(keyfield,keyword,pageNum,count,
 						10,10,"QnaManage","&boa_category="+boa_category+"&order="+order);
 	List<BoardVO> list = null;
@@ -337,32 +337,32 @@ public class AdminController {
 		map.put("order", order);
 		map.put("start", page.getStartRow());
 		map.put("end", page.getEndRow());
-		
+
 		list = boardService.selectList(map);
 	}
-	
+
 	model.addAttribute("count", count);
 	model.addAttribute("list", list);
 	model.addAttribute("page", page.getPage());
-	
-		
+
+
 	return "QnaManage";
 	}
-	
+
 	@GetMapping("/adminPage/QnaManage2")
 	@ResponseBody
 	public Map<String,Object> getList3(long boa_num) {
-		Map<String,Object> map = new HashMap<String, Object>();
+		Map<String,Object> map = new HashMap<>();
 		log.debug("<<관리자답변>> : " + boa_num);
 		List<BoardVO> list = null;
 		int reply = boardService.selectAdminReply(boa_num);
-		
+
 		if(reply!=0) {
 			map.put("result", "true");
 		}else{
 			map.put("result", "false");
 		}
-		
+
 	return map;
 	}
 	/*=========================

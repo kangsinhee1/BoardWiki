@@ -15,7 +15,7 @@ import kr.spring.rulebook.vo.RulebookVO;
 public class RulebookServiceImpl implements RulebookService{
 	@Autowired
 	RulebookMapper rulebookMapper;
-	
+
 	@Override
 	public List<RulebookVO> selectRulebookList(Map<String, Object> map) {
 		return rulebookMapper.selectRulebookList(map);

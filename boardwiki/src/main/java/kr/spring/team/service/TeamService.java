@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
 
 import kr.spring.team.vo.TeamApplyVO;
 import kr.spring.team.vo.TeamBoardVO;
@@ -33,8 +31,8 @@ public interface TeamService {
 			public void updateTeamStatus(Long tea_num);
 			//활성화
 			public void updateTeamStatusOpen(Long tea_num);
-			
-			
+
+
 			//모임 좋아요 확인
 			public TeamFavVO selectTeamFav(TeamFavVO tFav);
 			//모임 좋아요 개수
@@ -52,7 +50,7 @@ public interface TeamService {
 			public Integer selectTeamApplyList(TeamApplyVO teamApply);
 			//신청 회원 갯수
 			public Integer countTeamApplyList(long tea_num);
-			
+
 			// 회원이 가입한 모임
 			public List<TeamApplyVO> selectTeamListApplied(Map<String,Object>map);
 			//회원이 신청한 모든 모임 목록 (결과포함)
@@ -62,16 +60,16 @@ public interface TeamService {
 			//모임 정보 확인
 			public TeamApplyVO getTeamApply (@Param(value="teaA_num")long teaA_num);
 			public void updateTeamApply(TeamApplyVO teamApply);
-			
+
 			public void deleteTeamApply(long teaA_num);
-			
+
 			public void deleteTeamApplyByTeaNum(long tea_num);
-			
+
 			//모임 신청 처리
 			public void updateTeamApplyUser(TeamApplyVO teamApply);
-			
+
 			public void deleteTeamApplyAttend(long tea_num);
-			
+
 			//개인별 신청 모임 게시판 확인
 			public List<TeamApplyVO> selectTeamApplyListByMem_Num(long mem_num);
 			//모임 게시판 관리
@@ -106,9 +104,9 @@ public interface TeamService {
 			public void deleteTeamBoardReply(long teaR_num);
 			//부모글 삭제시 댓글 삭제
 			public void deleteTeamBoardReplyByTeamBoardNum(long teaB_num);
-			
-			
+
+
 			public List<TeamApplyVO> listTeamApply(TeamApplyVO teamApply);
-			
+
 			public void updateTeamApplyStatus(@Param(value="teaA_status")long teaA_status,@Param(value="teaA_num")long teaA_num);
 }

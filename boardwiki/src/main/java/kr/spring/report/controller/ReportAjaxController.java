@@ -19,18 +19,18 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 public class ReportAjaxController {
-	
+
 	@Autowired
 	ReportService reportService;
-	
+
 	//신고접수
 	@PostMapping("/*/insertReport")
 	@ResponseBody
 	public Map<String, String> insertReport(ReportVO reportVO,
 										   HttpSession session,
 										   HttpServletRequest request){
-		Map<String,String> mapJson = 
-				new HashMap<String,String>();
+		Map<String,String> mapJson =
+				new HashMap<>();
 		log.debug("<<<<<<<<<<<<<<reportVO : " + reportVO);
 
 		MemberVO user = (MemberVO)session.getAttribute("user");
@@ -45,10 +45,10 @@ public class ReportAjaxController {
 			reportService.insertReport(reportVO);
 			//댓글 등록
 			mapJson.put("result", "success");
-		}		
+		}
 		return mapJson;
 
-	}	
-	
-	
+	}
+
+
 }

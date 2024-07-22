@@ -17,22 +17,22 @@ public class PointGameVO {
 	private Date poiG_start;//게임시작 날짜
 	private Date poiG_end;//게임종료 날짜
 	private int str_num; //방송 구별 번호
-	
-	
+
+
 	//포인트 게임 선택지
 	private Long poiO_num;//선택지 고유번호
 	private String poiO_content;//선택지 내용
 	private int poiO_no; //선택지번호
-	
+
 	//포인트 게임 배팅
 	private Long bet_num;//배팅 고유 번호
 	private int bet_point;//배팅 포인트
 	private Date bet_date;//배팅 날짜
 	private Long mem_num;//회원 구분
-	
+
 	//조건 체크용
 	private int poi_ck;//조건체크
-	
+
 	private List<PointGameVO> options;
 
 }

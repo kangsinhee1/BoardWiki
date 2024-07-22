@@ -11,10 +11,10 @@ import kr.spring.stream.vo.StreamCreatingVO;
 
 @Service
 public class StreamCreatingServiceImpl implements StreamCreatingService{
-	
+
 	@Autowired
 	StreamCreatingMapper streamCreatingMapper;
-	
+
 	@Override
 	public void inrsertCreating(long str_num) {
 		streamCreatingMapper.inrsertCreating(str_num);
@@ -69,5 +69,5 @@ public class StreamCreatingServiceImpl implements StreamCreatingService{
 	public Integer countMeassageuser(Map<String, Object> map) {
 		return streamCreatingMapper.countMeassageuser(map);
 	}
-	
+
 }

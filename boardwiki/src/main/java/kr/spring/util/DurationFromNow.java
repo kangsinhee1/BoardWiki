@@ -14,7 +14,7 @@ public class DurationFromNow {
 	public static String getTimeDiffLabel(String date1) {
 		try {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			
+
 			return getTimeDiffLabel(sdf.parse(date1), new Date());
 		} catch (ParseException e) {
 			return "-";
@@ -54,14 +54,22 @@ public class DurationFromNow {
 	public static String getTimeDiffLabel(Date d1, Date d2) {
 		long diff = d2.getTime() - d1.getTime();
 		int sec = (int)(diff / 1000);
-		if (sec < 5) return "5초미만";
-		if (sec < 60) return sec + "초 전";
+		if (sec < 5) {
+			return "5초미만";
+		}
+		if (sec < 60) {
+			return sec + "초 전";
+		}
 
-		int min = (int)(sec / 60);
-		if (min < 60) return min + "분 전";
+		int min = sec / 60;
+		if (min < 60) {
+			return min + "분 전";
+		}
 
-		int hour = (int)(min / 60);
-		if (hour < 24) return hour + "시간 전";
+		int hour = min / 60;
+		if (hour < 24) {
+			return hour + "시간 전";
+		}
 
 		Calendar c1 = Calendar.getInstance();
 		Calendar c2 = (Calendar) c1.clone();
@@ -74,18 +82,30 @@ public class DurationFromNow {
 		}
 
 		if (hour/24 < 30) {
-			if (day == 1) return "어제";
-			if (day == 2) return "2일전";
+			if (day == 1) {
+				return "어제";
+			}
+			if (day == 2) {
+				return "2일전";
+			}
 			return day + "일전";
 		}
 
 		int month = hour / 24 / 30;
-		if (month == 1) return "한 달전";
-		if (month == 2) return "두 달전";
-		if (month < 12) return month + "달전";
+		if (month == 1) {
+			return "한 달전";
+		}
+		if (month == 2) {
+			return "두 달전";
+		}
+		if (month < 12) {
+			return month + "달전";
+		}
 
 		int year = month / 12;
-		if (year == 1) return "작년";
+		if (year == 1) {
+			return "작년";
+		}
 		return year + "년전";
 
 	}

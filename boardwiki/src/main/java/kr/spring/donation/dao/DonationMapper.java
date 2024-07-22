@@ -21,7 +21,7 @@ public interface DonationMapper {
 	Integer SelectDonationscount(Map<String,Object> map);
 	@Select("SELECT COUNT(*) FROM donation WHERE mem_num = #{mem_num} AND str_num = #{str_num}")
 	Integer SelectDonationcount(Map<String,Object> map);
-	
+
 	@Select("SELECT * FROM (SELECT a.*, rownum rnum FROM (SELECT * FROM donation WHERE mem_num = #{mem_num})a) WHERE rnum >= #{start} AND rnum <= #{end}")
     List<DonationVO> getDonations(Map<String,Object> map);
 	@Select("SELECT COUNT(*) FROM donation WHERE mem_num = #{mem_num}")

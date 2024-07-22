@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
-import kr.spring.member.vo.MemberVO;
-  
 @Controller
 public class EventController {
 
@@ -46,12 +44,12 @@ public class EventController {
     @PutMapping("/events/{user}/{id}")
     @ResponseBody
     public Event updateEvent(@SessionAttribute("user") Long user, @PathVariable Long id, @RequestBody Event event, HttpSession session) {
-    	
+
         Event existingEvent = events.stream()
             .filter(e -> e.getId().equals(user))
             .findFirst()
             .orElseThrow(() -> new RuntimeException("Event not found"));
-        
+
         existingEvent.setTitle(event.getTitle());
         existingEvent.setStart(event.getStart());
         existingEvent.setEnd(event.getEnd());

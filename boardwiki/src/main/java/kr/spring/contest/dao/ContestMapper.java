@@ -9,8 +9,6 @@ import org.apache.ibatis.annotations.Update;
 
 import kr.spring.contest.vo.ContestApplyVO;
 import kr.spring.contest.vo.ContestVO;
-import kr.spring.team.vo.TeamApplyVO;
-import kr.spring.team.vo.TeamVO;
 
 @Mapper
 public interface ContestMapper {
@@ -22,16 +20,16 @@ public interface ContestMapper {
 	public void insertContest(ContestVO contest);
 
 	//대회 상세
-	@Select("SELECT * FROM contest JOIN member USING(mem_num)LEFT OUTER JOIN member_detail USING(mem_num) WHERE con_num= #{con_num}") 
+	@Select("SELECT * FROM contest JOIN member USING(mem_num)LEFT OUTER JOIN member_detail USING(mem_num) WHERE con_num= #{con_num}")
 	public ContestVO detailContest(long con_num);
 
 	//조회수
 	@Update("UPDATE contest SET con_hit= con_hit+1 WHERE con_num = #{con_num}")
 	public void updateContestHit(Long con_num);
-	
+
 	//대회 신청
 	public void applyForContest(ContestApplyVO contestApplyVO);
-	
+
 	//중복 신청 확인
 	@Select("SELECT count(*) FROM contest_apply WHERE con_num=#{con_num} AND mem_num=#{mem_num}")
 	public Integer selectContestApplyList(ContestApplyVO contestApplyVO);

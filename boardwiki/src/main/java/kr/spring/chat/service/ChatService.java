@@ -3,7 +3,6 @@ package kr.spring.chat.service;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -13,7 +12,7 @@ import kr.spring.chat.vo.ChatRoomVO;
 import kr.spring.chat.vo.ChatTextVO;
 
 public interface ChatService {
-	
+
 	//채팅방 목록
 			public List<ChatRoomVO> selectChatRoomList(Map<String,Object>map);
 			public Integer selectRowCount(Map<String,Object>map);
@@ -47,6 +46,6 @@ public interface ChatService {
 			//채팅 메시지 한건 불러오기
 			public ChatTextVO selectChatText(long chaT_num);
 			public ChatRoomVO selectChatRoomBychaRnum(long chaR_num);
-			
+
 
 }

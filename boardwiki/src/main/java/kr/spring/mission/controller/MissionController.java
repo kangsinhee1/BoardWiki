@@ -21,7 +21,7 @@ import kr.spring.util.PagingUtil;
 
 @Controller
 public class MissionController {
-	
+
 	@Autowired
     private MissionService missionService;
 
@@ -33,7 +33,7 @@ public class MissionController {
     @GetMapping("/mission/add")
     @ResponseBody
     public Map<String, String> addMission(long str_num, String mis_content, int mis_point,HttpSession session) {
-    	Map<String,String> map = new HashMap<String, String>();
+    	Map<String,String> map = new HashMap<>();
     	MemberVO user = (MemberVO)session.getAttribute("user");
     	if(user==null) {
     		map.put("result", "logout");
@@ -51,7 +51,7 @@ public class MissionController {
 
     @GetMapping("/mission/strlist")
     public String getMissionListByStream(long str_num,@RequestParam(defaultValue="1") int pageNum,Model model) {
-    	Map<String, Object> map = new HashMap<String, Object>();
+    	Map<String, Object> map = new HashMap<>();
         List<MissionVO> list = null;
         map.put("str_num", str_num);
         int count = missionService.selectcountstream(map);
@@ -61,39 +61,39 @@ public class MissionController {
     	if (count > 0) {
 		     map.put("start", page.getStartRow());
 		     map.put("end", page.getEndRow());
-		        
+
 		     list = missionService.getMissionsByStream(map);
 		}
-    	
+
     	model.addAttribute("count", count);
 		model.addAttribute("list", list);
 		model.addAttribute("page", page.getPage());
-        
+
         missionService.getMissionsByStream(map);
-        
+
         return "misstreamlist";
     }
 
     @GetMapping("/mission/userlist")
     public String getMissionListByMember(HttpSession session,long str_num, @RequestParam(defaultValue="1") int pageNum,Model model) {
-    	Map<String,Object> map = new HashMap<String, Object>();
+    	Map<String,Object> map = new HashMap<>();
     	MemberVO user = (MemberVO) session.getAttribute("user");
     	map.put("mem_num", user.getMem_num());
     	map.put("str_num", str_num);
-    	
+
     	int count = missionService.selectcountmember(map);
-    	
+
     	PagingUtil page = new PagingUtil(pageNum, count, 20, 10, "mismemberlist");
-    	
+
     	List<MissionVO> list = null;
-    	
+
     	if (count > 0) {
 		     map.put("start", page.getStartRow());
 		     map.put("end", page.getEndRow());
-		        
+
 		     list = missionService.getMissionsByMember(map);
 		}
-    	
+
     	model.addAttribute("count", count);
 		model.addAttribute("list", list);
 		model.addAttribute("page", page.getPage());
@@ -104,7 +104,7 @@ public class MissionController {
     @ResponseBody
     public Map<String, String> updateMissionStatus(long mis_num, int mis_status) {
     	MissionVO vo = new MissionVO();
-    	Map<String, String> map = new HashMap<String, String>();
+    	Map<String, String> map = new HashMap<>();
     	vo.setMis_status(mis_status);
     	vo.setMis_num(mis_num);
     	missionService.updateMissionStatus(vo);
@@ -115,7 +115,7 @@ public class MissionController {
     @PostMapping("/mission/delete")
     @ResponseBody
     public Map<String, String> deleteMission(long mis_num) {
-    	Map<String, String> map = new HashMap<String, String>();
+    	Map<String, String> map = new HashMap<>();
         missionService.deleteMission(mis_num);
         map.put("result", "success");
         return map;

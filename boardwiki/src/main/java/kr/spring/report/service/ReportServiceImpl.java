@@ -10,15 +10,14 @@ import org.springframework.stereotype.Service;
 
 import kr.spring.report.dao.ReportMapper;
 import kr.spring.report.vo.ReportVO;
-import kr.spring.used.vo.UsedItemVO;
 
 @Service
 @Transactional
 public class ReportServiceImpl implements ReportService {
-	
+
 	@Autowired
 	ReportMapper reportMapper;
-	
+
 
 	@Override
 	public void insertReport(ReportVO reportVO) {

@@ -16,7 +16,7 @@ public class UsedChat_textVO {
 	private String chaC_time;		//채팅 친 시간
 	private int chaC_status;	//활성화비활성화
 	private int chaC_check;		//확인
-	
+
 	private Long mem_num;		//구매의사 보유자
 	private String mem_nickname;//닉네임
 }

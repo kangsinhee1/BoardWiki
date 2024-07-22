@@ -1,6 +1,7 @@
 package kr.spring.team.vo;
 
 import java.sql.Date;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -29,13 +30,13 @@ public class TeamVO {
 	private long tea_man; 	// 최대 모집인원 설정 가능(최대 99)
 	private long tea_hit; //	모임창 클릭 조회수
 	private long tea_status; 	//신고처리시 모임 비활성화(기본1,비활:0)
-	
+
 	private long mem_num; // 회원번호
 	private String mem_email;		//아이디
 	private String mem_nickname;		//아이디
 
 	private int fav_cnt;			//좋아요 개수
 	private long teaA_status;
-	
+
 	private String teaA_mdate; // 신청 수정시
 }

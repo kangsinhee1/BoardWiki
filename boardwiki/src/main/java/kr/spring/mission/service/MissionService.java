@@ -3,8 +3,6 @@ package kr.spring.mission.service;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Select;
-
 import kr.spring.mission.vo.MissionVO;
 
 public interface MissionService {

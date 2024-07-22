@@ -18,10 +18,10 @@ public class ImageView extends AbstractView{
 	@Override
 	protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		
+
 		byte[] file = (byte[])model.get("imageFile");
 		String filename = (String)model.get("filename");
-		
+
 		String ext = filename.substring(
 				               filename.lastIndexOf("."));
 		if(ext.equalsIgnoreCase(".gif")) {
@@ -31,17 +31,17 @@ public class ImageView extends AbstractView{
 		}else {
 			ext = "image/jpeg";
 		}
-		
+
 		response.setContentType(ext);
 		response.setContentLength(file.length);
-		
+
 		String file_name = new String(
 				  filename.getBytes("utf-8"),"iso-8859-1");
-		
-		response.setHeader("Content-Disposition", 
+
+		response.setHeader("Content-Disposition",
 				   "attachment; filename=\"" + file_name + "\";");
 		response.setHeader("Content-Transfer-Encoding", "binary");
-		
+
 		OutputStream out = response.getOutputStream();
 		InputStream input = null;
 		try {
@@ -49,9 +49,13 @@ public class ImageView extends AbstractView{
 			IOUtils.copy(input, out);
 			out.flush();
 		}finally {
-			if(out!=null)out.close();
-			if(input!=null)input.close();
-		}		
+			if(out!=null) {
+				out.close();
+			}
+			if(input!=null) {
+				input.close();
+			}
+		}
 	}
 }
 

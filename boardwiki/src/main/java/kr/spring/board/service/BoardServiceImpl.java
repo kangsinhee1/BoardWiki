@@ -17,7 +17,7 @@ import kr.spring.board.vo.BoardVO;
 public class BoardServiceImpl implements BoardService{
 	@Autowired
 	BoardMapper boardMapper;
-	
+
 	@Override
 	public List<BoardVO> selectList(Map<String, Object> map) {
 		return boardMapper.selectList(map);

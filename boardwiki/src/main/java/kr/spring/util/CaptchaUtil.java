@@ -31,7 +31,7 @@ public class CaptchaUtil {
 			con.disconnect();
 		}
 	}
-	
+
 	//캡차 이미지 반환
 	public static byte[] getCaptchaImage(String apiUrl, Map<String, String> requestHeaders){
         HttpURLConnection con = connect(apiUrl);
@@ -44,7 +44,7 @@ public class CaptchaUtil {
             int responseCode = con.getResponseCode();
             if (responseCode == HttpURLConnection.HTTP_OK) { // 정상 호출
                 return getImage(con.getInputStream());
-            } 
+            }
             else { // 에러 발생
             //    return error(con.getErrorStream());
             	return null;
@@ -55,7 +55,7 @@ public class CaptchaUtil {
             con.disconnect();
         }
     }
-	
+
 	private static byte[] getImage(InputStream is){
         try{
         	byte[] bytes = new byte[is.available()];
@@ -64,7 +64,9 @@ public class CaptchaUtil {
         } catch (IOException e) {
             throw new RuntimeException("이미지 캡차 파일 생성에 실패 했습니다.",e);
         }finally {
-        	if(is!=null)try {is.close();} catch (IOException e) {}
+        	if(is!=null) {
+				try {is.close();} catch (IOException e) {}
+			}
         }
     }
 

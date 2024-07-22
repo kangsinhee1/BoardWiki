@@ -13,7 +13,7 @@ import kr.spring.attendance.vo.DiceVO;
 
 @Service
 public class DiceServiceImpl implements DiceService{
-	
+
 	@Autowired
     private DiceMapper diceMapper;
 
@@ -37,7 +37,7 @@ public class DiceServiceImpl implements DiceService{
 	@Override
 	public void insertDiceValue(DiceVO dice) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -54,7 +54,7 @@ public class DiceServiceImpl implements DiceService{
 	@Override
 	public void insertDice(DiceVO dice) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override

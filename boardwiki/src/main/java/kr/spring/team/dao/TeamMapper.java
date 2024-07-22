@@ -23,14 +23,14 @@ public interface TeamMapper {
 		public Long selectTea_num();
 		//목록보기
 		public Integer getTeamRowCount(Map<String,Object>map);
-		
+
 		public List<TeamVO> selectTeamListAdmin(Map<String,Object>map);
 		public List<TeamVO> selectTeamList(Map<String,Object>map);
 		//모임 상세
-		@Select("SELECT * FROM team JOIN member USING(mem_num)LEFT OUTER JOIN member_detail USING(mem_num) WHERE tea_num= #{tea_num}") 
+		@Select("SELECT * FROM team JOIN member USING(mem_num)LEFT OUTER JOIN member_detail USING(mem_num) WHERE tea_num= #{tea_num}")
 		public TeamVO detailTeam(long tea_num);
 		//등록
-		public void insertTeam(TeamVO team);  
+		public void insertTeam(TeamVO team);
 		//수정
 		public void updateTeam(TeamVO team);
 		//일정 등록
@@ -45,7 +45,7 @@ public interface TeamMapper {
 		//활성화
 		@Update("UPDATE team SET tea_status = 1 WHERE tea_num = #{tea_num}")
 		public void updateTeamStatusOpen(Long tea_num);
-		
+
 		//모임 좋아요 확인
 		@Select("SELECT * FROM team_fav WHERE mem_num=#{mem_num} AND tea_num=#{tea_num}")
 		public TeamFavVO selectTeamFav(TeamFavVO tFav);
@@ -65,53 +65,53 @@ public interface TeamMapper {
 		public List<TeamApplyVO> selectTeamListApplied(Map<String,Object>map);
 		//회원이 신청한 모든 모임 목록 (결과포함)
 		public List<TeamApplyVO> selectTeamListApplied2(Map<String,Object>map);
-		
+
 		// 본인이 등록한 모임
 		public List<TeamApplyVO> selectTeamListRegistered(Map<String,Object>map);
-		
-		
+
+
 		// 모임 신청 및 관리
-		
+
 		public void insertTeamApplyByAdmin(TeamVO team);
 		public void insertTeamApply(TeamApplyVO teamApply);
-		
+
 		// 모임 일정 설정
-		
-		
+
+
 		//신청 목록 확인
 		//모임별 활동 회원 목록 확인하기
 		@Select("SELECT mem_num FROM team_apply WHERE tea_num = #{tea_num} AND teaA_status >1")
 		public List<TeamApplyVO> getTeamMemberList(long tea_num);
-		
+
 		@Select("SELECT count(*) FROM team_apply WHERE tea_num=#{tea_num} AND mem_num=#{mem_num}")
 		public Integer selectTeamApplyList(TeamApplyVO teamApply);
-		
+
 		//모임별 신청회원 확인
 		@Select("SELECT * FROM team_apply WHERE tea_num=#{tea_num} AND mem_num=#{mem_num}")
 		public TeamApplyVO selectTeamApplyListByTeamNum(TeamApplyVO teamApplyVO);
 		//개인별 신청 모임 게시판 확인
-		
+
 		@Select("SELECT * FROM team_apply WHERE mem_num=#{mem_num}")
 		public List<TeamApplyVO> selectTeamApplyListByMem_Num(long mem_num);
-		
+
 		@Update("UPDATE team_apply SET teaA_content = #{teaA_content} WHERE teaA_num = #{teaA_num}")
 		public 	void updateTeamApply(TeamApplyVO teamApply);
 		@Delete("DELETE FROM team_apply WHERE teaA_num=#{teaA_num}")
 		public void deleteTeamApply(long teaA_num);
 		@Delete("DELETE FROM team_apply WHERE tea_num=#{tea_num}")
 		public void deleteTeamApplyByTeaNum(long tea_num);
-		
+
 		// 모임 신청 회원 목록 확인
 		// 모임 신청 별 정보 확인
-		
+
 		@Select("SELECT * FROM team_apply  JOIN MEMBER USING(mem_num) WHERE teaA_num = #{teaA_num}")
 		public TeamApplyVO getTeamApply (@Param(value="teaA_num")long teaA_num);
 		@Select("SELECT * FROM team_apply JOIN member_detail USING (mem_num) WHERE tea_num = #{tea_num} AND teaA_status != 9")
 		public List<TeamApplyVO> listTeamApply(TeamApplyVO teamApply);
-		
+
 		@Update("UPDATE team_apply SET teaA_status=#{teaA_status} , teaA_mdate = sysdate WHERE teaA_num = #{teaA_num}")
 		public void updateTeamApplyStatus(@Param(value="teaA_status")long teaA_status,@Param(value="teaA_num")long teaA_num);
-		
+
 		@Select("SELECT count(*) FROM team_apply WHERE tea_num = #{tea_num}")
 		public Integer countTeamApplyList(long tea_num);
 		//모임 참석 처리
@@ -125,14 +125,14 @@ public interface TeamMapper {
 		//모임 참석 회원 확인
 		@Select("SELECT * FROM team_apply JOIN team USING(mem_num) WHERE teaA_attend=1")
 		public void selectTeamApplyATTEND(TeamApplyVO teamApply);
-		
+
 		//모임 게시판 관리
-		
+
 		//모임 게시판 목록
-		
+
 		public List<TeamBoardVO> selectTeamBoardList(Map<String,Object>map);
 		//모임 게시판 개수
-		
+
 		public Integer selectTeamBoardRowCount(Map<String,Object>map);
 		//모임 게시판 등록
 		public void insertTeamBoard(TeamBoardVO teamBoard);
@@ -171,8 +171,8 @@ public interface TeamMapper {
 		//부모글 삭제시 댓글 삭제
 		@Delete("DELETE FROM team_reply WHERE teaB_num = #{teaB_num}")
 		public void deleteTeamBoardReplyByTeamBoardNum(long teaB_num);
-		
-		
-		
+
+
+
 
 }

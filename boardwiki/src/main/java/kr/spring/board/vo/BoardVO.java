@@ -21,24 +21,24 @@ public class BoardVO {
 	@NotBlank
 	private String boa_category;
 	@NotBlank
-	private String boa_title;	
+	private String boa_title;
 	@NotEmpty
 	private String boa_content;
 	private int boa_hit;
 	private Date boa_rdate;
 	private Date boa_mdate;
 	private int boa_auth;
-	private MultipartFile upload; 
+	private MultipartFile upload;
 	private String filename;
-	
-	
-	
-	private String mem_email;				
+
+
+
+	private String mem_email;
 	private String mem_nickname;
 	private Integer mem_auth;
 	private String item_name;
-	
-	private int re_cnt;				
-	private int fav_cnt; 
-	
+
+	private int re_cnt;
+	private int fav_cnt;
+
 }

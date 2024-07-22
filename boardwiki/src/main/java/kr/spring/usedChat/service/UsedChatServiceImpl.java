@@ -15,7 +15,7 @@ public class UsedChatServiceImpl implements UsedChatService{
 
 	@Autowired
 	UsedChatMapper usedChatMapper;
-	
+
 	@Override
 	public List<UsedChatRoomVO> selectUsedChatRoomList(Map<String, Object> map) {
 		return usedChatMapper.selectUsedChatRoomList(map);
@@ -45,7 +45,7 @@ public class UsedChatServiceImpl implements UsedChatService{
 
 	@Override
 	public List<UsedChat_textVO> selectChatDetail(Map<String, Long> map) {
-		
+
 		return usedChatMapper.selectChatDetail(map);
 	}
 

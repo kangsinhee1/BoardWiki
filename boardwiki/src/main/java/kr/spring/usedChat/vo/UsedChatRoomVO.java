@@ -15,10 +15,10 @@ public class UsedChatRoomVO {
 	private int useC_status;	//채팅방 활성화 비활성화
 	private String useC_name; 	//채팅방이름
 	private Date useC_date;		//채팅방개설일
-	
+
 	private Long use_num;		//중고글 번호
 	private Long mem_num;		//구매의사 보유자
-	
+
 	private String item_name;
 	private UsedChat_textVO usedChat_textVO;
 }

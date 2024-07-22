@@ -35,8 +35,12 @@ public class PagingUtil {
 
 		if(count >= 0) {
 			String sub_url = "";
-			if(keyword != null) sub_url = "&keyfield="+keyfield+"&keyword="+keyword;
-			if(addKey != null) sub_url += addKey;
+			if(keyword != null) {
+				sub_url = "&keyfield="+keyfield+"&keyword="+keyword;
+			}
+			if(addKey != null) {
+				sub_url += addKey;
+			}
 
 			// 전체 페이지 수
 			int totalPage = (int) Math.ceil((double) count / rowCount);
@@ -50,18 +54,18 @@ public class PagingUtil {
 			// 현재 페이지의 처음과 마지막 글의 번호 가져오기.
 			startRow = (currentPage - 1) * rowCount + 1;
 			endRow = currentPage * rowCount;
-			
+
 			// 이전 block 페이지
 			page = new StringBuffer();
 			if(pageCount > 0) {
 				// 시작 페이지와 마지막 페이지 값 구하기.
-				int startPage = (int) ((currentPage - 1) / pageCount) * pageCount + 1;
+				int startPage = (currentPage - 1) / pageCount * pageCount + 1;
 				int endPage = startPage + pageCount - 1;
 				// 마지막 페이지가 전체 페이지 수보다 크면 전체 페이지 수로 설정
 				if (endPage > totalPage) {
 					endPage = totalPage;
 				}
-				
+
 				if (currentPage > pageCount) {
 					page.append("<a href="+pageUrl+"?pageNum="+ (startPage - 1) + sub_url +">");
 					page.append("[이전]");

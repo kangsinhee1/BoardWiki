@@ -3,7 +3,6 @@ package kr.spring.member.controller;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 import java.util.UUID;
 
 import javax.servlet.http.Cookie;
@@ -17,17 +16,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 
 import kr.spring.member.service.MemberService;
@@ -95,7 +89,7 @@ public class MemberController {
 	// 로그인 폼 호출
 	@GetMapping("/member/login")
 	public String formLogin() {
-		log.debug("<<로그인페이지 요청>>");		
+		log.debug("<<로그인페이지 요청>>");
 		return "memberLogin";
 	}
 
@@ -110,7 +104,7 @@ public class MemberController {
 
 		//유효성 체크 결과 오류가 있으면 폼 호출
 		//id와 passwd 필드만 체크
-		if(result.hasFieldErrors("mem_email") || 
+		if(result.hasFieldErrors("mem_email") ||
 				result.hasFieldErrors("mem_passwd")) {
 			return formLogin();
 		}
@@ -168,7 +162,7 @@ public class MemberController {
 				log.debug("<<인증 성공>>");
 				log.debug("<<id>> : " + member.getMem_email());
 				log.debug("<<auth>> : " + member.getMem_auth());
-				log.debug("<<au_id>> : " + member.getMem_auth());	
+				log.debug("<<au_id>> : " + member.getMem_auth());
 
 
 				return "redirect:/main/main";
@@ -219,7 +213,7 @@ public class MemberController {
 		model.addAttribute("accessTitle", "회원 가입");
 		model.addAttribute("accessMsg", "회원 가입이 완료되었습니다.");
 		model.addAttribute("accessBtn", "홈으로");
-		model.addAttribute("accessUrl", 
+		model.addAttribute("accessUrl",
 				request.getContextPath()+"/main/main");
 
 		return "common/resultView";
@@ -279,12 +273,12 @@ public class MemberController {
 		if(!result.getMem_provider().equals("Naver")) {
 			//UI 메시지 처리
 			model.addAttribute("message", "회원님의 이메일로 가입된 다른 계정이 있습니다.");
-			model.addAttribute("url", 
+			model.addAttribute("url",
 					request.getContextPath()+"/member/login");
 
 			return "common/resultAlert";
 		}
-		// 기존 회원 로그인 처리 
+		// 기존 회원 로그인 처리
 		MemberVO member = memberService.selectCheckMember(naver_email);
 		session.setAttribute("user", member);
 
@@ -294,7 +288,7 @@ public class MemberController {
 
 		//UI 메시지 처리
 		model.addAttribute("message", "Naver 로그인 완료");
-		model.addAttribute("url", 
+		model.addAttribute("url",
 				request.getContextPath()+"/main/main");
 
 		return "common/resultAlert";
@@ -324,7 +318,7 @@ public class MemberController {
 		model.addAttribute("accessTitle", "회원 가입");
 		model.addAttribute("accessMsg", "회원 가입이 완료되었습니다.");
 		model.addAttribute("accessBtn", "홈으로");
-		model.addAttribute("accessUrl", 
+		model.addAttribute("accessUrl",
 				request.getContextPath()+"/main/main");
 
 		return "common/resultView";
@@ -386,7 +380,7 @@ public class MemberController {
 			//			model.addAttribute("accessTitle", "로그인 오류");
 			model.addAttribute("message", "회원님의 이메일로 가입된 다른 계정이 있습니다.");
 			//			model.addAttribute("accessBtn", "확인");
-			model.addAttribute("url", 
+			model.addAttribute("url",
 					request.getContextPath()+"/member/login");
 
 			return "common/resultAlert";
@@ -401,7 +395,7 @@ public class MemberController {
 
 		//UI 메시지 처리
 		model.addAttribute("message", "Kakao 로그인 완료");
-		model.addAttribute("url", 
+		model.addAttribute("url",
 				request.getContextPath()+"/main/main");
 
 		return "common/resultAlert";
@@ -462,7 +456,7 @@ public class MemberController {
 			model.addAttribute("accessTitle", "로그인 오류");
 			model.addAttribute("accessMsg", "회원님의 이메일로 가입된 다른 계정이 있습니다.");
 			model.addAttribute("accessBtn", "확인");
-			model.addAttribute("accessUrl", 
+			model.addAttribute("accessUrl",
 					request.getContextPath() + "/member/login");
 
 			return "common/resultAlert";
@@ -478,7 +472,7 @@ public class MemberController {
 
 		//UI 메시지 처리
 		model.addAttribute("message", "Google 로그인 완료");
-		model.addAttribute("url", 
+		model.addAttribute("url",
 				request.getContextPath()+"/main/main");
 
 		return "common/resultAlert";
@@ -500,7 +494,7 @@ public class MemberController {
 		response.addCookie(auto_cookie);
 		//====자동로그인 끝=====//
 
-		return "redirect:/main/main";	
+		return "redirect:/main/main";
 	}
 
 	/*==============================
@@ -536,7 +530,7 @@ public class MemberController {
 
 		/*
 		 * //세션에 저장된 정보 변경 user.setMem_nickName(memberVO.getMem_nickName());
-		 */		
+		 */
 
 		return "redirect:/myPage/myPage";
 	}
@@ -559,10 +553,10 @@ public class MemberController {
 		log.debug("<<비밀번호 변경 처리>> : " + memberVO);
 
 		//유효성 체크 결과 오류가 있으면 폼 호출
-		if(result.hasFieldErrors("now_passwd") 
+		if(result.hasFieldErrors("now_passwd")
 				|| result.hasFieldErrors("passwd")
 				|| result.hasFieldErrors("captcha_chars")) {
-			return formChangePassword();					
+			return formChangePassword();
 		}
 
 		//====== 캡챠 문자 체크 시작 ======//
@@ -573,8 +567,8 @@ public class MemberController {
 		String value = memberVO.getCaptcha_chars();
 		String apiURL = "https://openapi.naver.com/v1/captcha/nkey?code=" + code + "&key=" + key + "&value=" + value;
 
-		Map<String,String> requestHeaders = 
-				new HashMap<String,String>();
+		Map<String,String> requestHeaders =
+				new HashMap<>();
 		requestHeaders.put("X-Naver-Client-Id", "aGoUsn2QY4b5ZsjIvvn_");
 		requestHeaders.put("X-Naver-Client-Secret", "mdnzHOAtxH");
 		String responseBody = CaptchaUtil.get(
@@ -587,13 +581,13 @@ public class MemberController {
 			result.rejectValue("captcha_chars", "invalidCaptcha");
 			return formChangePassword();
 		}
-		//====== 캡챠 문자 체크 끝 ======//	
+		//====== 캡챠 문자 체크 끝 ======//
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		memberVO.setMem_num(user.getMem_num());
 
 		MemberVO db_member = memberService.selectMember(
 				memberVO.getMem_num());
-		//폼에서 전송한 현재 비밀번호와 DB에서 읽어온 비밀번호 일치 여부 체크	
+		//폼에서 전송한 현재 비밀번호와 DB에서 읽어온 비밀번호 일치 여부 체크
 		if (!passwordEncoder.matches(memberVO.getNow_passwd(), db_member.getMem_passwd())) {
 			result.rejectValue("now_passwd", "invalidPassword");
 			return formChangePassword();
@@ -606,16 +600,16 @@ public class MemberController {
 		memberService.deleteAu_id(memberVO.getMem_num());
 
 		//View에 표시할 메시지
-		model.addAttribute("message", 
+		model.addAttribute("message",
 				"비밀번호 변경 완료(*재접속시 설정되어 있는 자동로그인 기능 해제*)");
-		model.addAttribute("url", 
+		model.addAttribute("url",
 				request.getContextPath() + "/myPage/myPage");
 
 		return "common/resultAlert";
 	}
 	/*==============================
 	 * 네이버 캡챠 API 사용
-	 *==============================*/	
+	 *==============================*/
 	//캡챠 이미지 호출
 	@GetMapping("/member/getCaptcha")
 	public String getCaptcha(Model model,HttpSession session) {
@@ -623,8 +617,8 @@ public class MemberController {
 		String code = "0"; //키 발급시 0, 캡챠 이미지 비교시 1로 세팅
 		String key_apiURL = "https://openapi.naver.com/v1/captcha/nkey?code=" + code;
 
-		Map<String,String> requestHeaders = 
-				new HashMap<String,String>();
+		Map<String,String> requestHeaders =
+				new HashMap<>();
 		requestHeaders.put("X-Naver-Client-Id", "aGoUsn2QY4b5ZsjIvvn_");
 		requestHeaders.put("X-Naver-Client-Secret", "mdnzHOAtxH");
 		String responseBody = CaptchaUtil.get(
@@ -645,13 +639,13 @@ public class MemberController {
 			model.addAttribute("filename", "captcha.jpg");
 		}catch(Exception e) {
 			log.error(e.toString());
-		}		
+		}
 		return "imageView";
 	}
 
 	/*==============================
 	 * 			이메일 찾기
-	 *==============================*/	
+	 *==============================*/
 	@GetMapping("/member/memberFindEmail")
 	public String FindEmailForm(Model model) {
 		model.addAttribute("memberVO", new MemberVO());
@@ -693,7 +687,7 @@ public class MemberController {
 
 	/*==============================
 	 * 	   		비밀번호 초기화
-	 *==============================*/	
+	 *==============================*/
 	@GetMapping("/member/sendResetCode")
 	public String sendResetCodeForm() {
 		return "checkResetCode";
@@ -710,14 +704,14 @@ public class MemberController {
 			HttpSession session,
 			Model model,
 			HttpServletRequest request) {
-		
+
 		log.debug("<<submitResetPasswd 진입>>");
 
 		//유효성 체크 결과 오류가 있으면 폼 호출
-		if(result.hasFieldErrors("now_passwd") 
+		if(result.hasFieldErrors("now_passwd")
 				|| result.hasFieldErrors("passwd")
 				|| result.hasFieldErrors("captcha_chars")) {
-			return formChangePassword();					
+			return formChangePassword();
 		}
 
 		//====== 캡챠 문자 체크 시작 ======//
@@ -728,8 +722,8 @@ public class MemberController {
 		String value = memberVO.getCaptcha_chars();
 		String apiURL = "https://openapi.naver.com/v1/captcha/nkey?code=" + code + "&key=" + key + "&value=" + value;
 
-		Map<String,String> requestHeaders = 
-				new HashMap<String,String>();
+		Map<String,String> requestHeaders =
+				new HashMap<>();
 		requestHeaders.put("X-Naver-Client-Id", "aGoUsn2QY4b5ZsjIvvn_");
 		requestHeaders.put("X-Naver-Client-Secret", "mdnzHOAtxH");
 		String responseBody = CaptchaUtil.get(
@@ -743,10 +737,10 @@ public class MemberController {
 			return resetPasswdForm();
 		}
 		//====== 캡챠 문자 체크 끝 ======//
-		
+
 		 // 세션에서 이메일 주소를 문자열로 가져옵니다
 	    String mem_email = (String) session.getAttribute("resetPasswordEmail");
-	    
+
 	    log.debug("<<mem_email : >>" + mem_email);
 	    if (mem_email == null) {
 	        model.addAttribute("message", "잘못된 접근입니다.");
@@ -757,7 +751,7 @@ public class MemberController {
 	    memberVO.setMem_email(mem_email);
 
 		memberVO.setMem_num(db_member.getMem_num());
-		
+
 		log.debug("<<memberVO : >>" + memberVO);
 
 		//비밀번호 수정
@@ -768,9 +762,9 @@ public class MemberController {
 
 
 		//View에 표시할 메시지
-		model.addAttribute("message", 
+		model.addAttribute("message",
 				"비밀번호 재설정 완료(*재접속시 설정되어 있는 자동로그인 기능 해제*)");
-		model.addAttribute("url", 
+		model.addAttribute("url",
 				request.getContextPath() + "/main/main");
 
 		return "common/resultAlert";

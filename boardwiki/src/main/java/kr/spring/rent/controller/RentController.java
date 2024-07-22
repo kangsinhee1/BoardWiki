@@ -29,14 +29,14 @@ import lombok.extern.slf4j.Slf4j;
 public class RentController {
 	@Autowired
 	private RentService rentService;
-	
+
 	// 자바빈(VO) 초기화
 		@ModelAttribute
 		public RentVO initCommand() {
 			return new RentVO();
 		}
-		
-		
+
+
 		/*=========================
 		 * 보드게임 대여
 		 *=========================*/
@@ -52,7 +52,7 @@ public class RentController {
 		                      @RequestParam(value = "item_num", required = true) int item_num,
 		                      HttpServletRequest request,
 		                      HttpSession session,
-		                      Model model) 
+		                      Model model)
 		                      throws IllegalStateException, IOException {
 		    log.debug("<<대여 저장>> : " + rentVO);
 		    log.debug("Received item_num: " + item_num);
@@ -73,8 +73,8 @@ public class RentController {
 
 		    return "common/resultAlert";
 		}
-		
-		
+
+
 		/*=========================
 		 * 대여 목록
 		 *=========================*/
@@ -127,10 +127,10 @@ public class RentController {
 		@GetMapping("/rent/return")
 	    public String returnRent(@RequestParam("rent_num") Long rent_num) {
 	        rentService.updateRentStatus(rent_num);
-	  
+
 	        return "redirect:/rent/list"; // 리턴 후 이동할 페이지를 설정하세요.
 	    }
-		
-		
+
+
 
 }

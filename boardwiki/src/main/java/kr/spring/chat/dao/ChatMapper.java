@@ -56,12 +56,12 @@ public interface ChatMapper {
 		//채팅 메시지 한건 불러오기
 		@Select("SELECT * FROM chat_text WHERE chaT_num = #{chaT_num}")
 		public ChatTextVO selectChatText(long chaT_num);
-		
-		
+
+
 		@Select("SELECT * FROM chat_room WHERE chaR_num=#{chaR_num}")
 		public ChatRoomVO selectChatRoomBychaRnum(long chaR_num);
 		//신고기능?
-		
-		
+
+
 }
 

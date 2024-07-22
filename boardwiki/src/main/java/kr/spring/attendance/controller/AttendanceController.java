@@ -38,18 +38,18 @@ public class AttendanceController {
 
     @GetMapping("/attendance/attendance")
     public String getAttendance(HttpSession session, Model model) {
-    	
+
         MemberVO user = (MemberVO) session.getAttribute("user");
         if (user != null) {
             long mem_num = user.getMem_num();
             int dice = 0;
             dice = diceService.selectDicechanec(mem_num);
-            
+
             model.addAttribute("dice",dice);
             List<AttendanceVO> attendance = attendanceService.getMonthlyAttendance(mem_num);
-            for(int i=0; i<attendance.size(); i++) {
-            	if(attendance.get(i).getAtt_status() == 1) {
-            		model.addAttribute("att_status",attendance.get(i).getAtt_status());
+            for (AttendanceVO element : attendance) {
+            	if(element.getAtt_status() == 1) {
+            		model.addAttribute("att_status",element.getAtt_status());
             	}
             }
             try {
@@ -60,7 +60,7 @@ public class AttendanceController {
                 model.addAttribute("attendancesJson", "[]");
             }
         }
-        
+
         return "attendance";
     }
 
@@ -73,12 +73,12 @@ public class AttendanceController {
             vo.setAtt_date(LocalDate.now());
             attendanceService.checkAndInsertAttendance(vo);
         }
-        
+
         model.addAttribute("message","출서체크 완료");
 		model.addAttribute("url","/attendance/attendance");
 		return "common/resultAlert";
     }
-    
+
     @GetMapping("/attendance/roll-dice")
     @ResponseBody
     public ResponseEntity<Integer> rollDice(HttpSession session,Model model) {
@@ -86,7 +86,7 @@ public class AttendanceController {
         if (user != null) {
             Long mem_num = user.getMem_num();
             int diceRollResult = diceService.rollDice(mem_num);
-            
+
             PointVO pointVO = new PointVO();
             pointVO.setMem_num(mem_num);
             pointVO.setPoi_use(diceRollResult * 100);

@@ -2,10 +2,13 @@ package kr.spring.util;
 
 import java.io.IOException;
 import java.util.UUID;
+
 import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
+
 import com.github.scribejava.core.builder.ServiceBuilder;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.github.scribejava.core.model.OAuthRequest;
@@ -21,7 +24,7 @@ public class GoogleLoginUtil {
 
     @Value("${oauth2.client.registration.google.client-secret}")
     private String clientSecret;
-    
+
     @Value("${oauth2.client.registration.google.redirect-uri}")
     private String redirectUri;
 

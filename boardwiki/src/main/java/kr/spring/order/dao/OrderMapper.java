@@ -12,9 +12,9 @@ import kr.spring.order.vo.OrderVO;
 public interface OrderMapper {
 	//상품주문
 	public void insertOrder(OrderVO order);
-	
+
 	public OrderVO selectOrderDetail(Long order_num);
-	
+
 	public OrderVO selectOrderUser(Long mem_num);
 	@Select("SELECT * FROM order WHERE mem_num=#{mem_num}")
 	public List<OrderVO> selectOrderList(Long mem_num);

@@ -1,6 +1,7 @@
 package kr.spring.util;
 
 import org.springframework.stereotype.Component;
+
 import com.github.scribejava.core.builder.api.DefaultApi20;
 
 @Component

@@ -13,10 +13,10 @@ public class LoginCheckInterceptor implements HandlerInterceptor{
 	@Override
 	public boolean preHandle(HttpServletRequest request,
 			                 HttpServletResponse response,
-			                 Object handler) 
+			                 Object handler)
 	                                throws Exception{
 		log.debug("<<LoginCheckInterceptor 진입>>");
-		
+
 		HttpSession session = request.getSession();
 		//로그인 여부 검사
 		if(session.getAttribute("user")==null) {

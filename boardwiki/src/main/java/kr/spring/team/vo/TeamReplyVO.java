@@ -1,7 +1,5 @@
 package kr.spring.team.vo;
 
-import java.sql.Date;
-
 import kr.spring.util.DurationFromNow;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,9 +18,9 @@ public class TeamReplyVO {
 	private String mem_email;
 	private String mem_nickname;
 	private long click_num; //클릭한 사람의 회원정보
-	
+
 	private long teaR_cnt; //댓글수
-	
+
 	public void setTeaR_rdate(String teaR_rdate) {
 		this.teaR_rdate = DurationFromNow.getTimeDiffLabel(teaR_rdate);
 	}

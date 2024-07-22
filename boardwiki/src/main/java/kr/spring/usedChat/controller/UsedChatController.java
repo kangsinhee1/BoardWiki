@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import kr.spring.board.vo.BoardVO;
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.used.service.UsedService;
@@ -29,33 +28,33 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 public class UsedChatController {
-	
+
 	@Autowired
 	private UsedChatService usedChatService;
-	
+
 	@Autowired
 	private UsedService usedService;
-	
+
 	@Autowired
 	private MemberService memberService;
-	
+
 	@GetMapping("/*/useChatSeller")
 	public String accessUseChatSeller(Long use_num, String useC_name, UsedChatRoomVO usedChatRoomVO, HttpSession session, Model model, HttpServletRequest request) {
 		log.debug("<<<<<<<<<<use_num : "+use_num);
 		log.debug("<<<<<<<<<<useC_name : "+useC_name);
-		
+
 		UsedChatRoomVO alreayUChat = usedChatService.selectUsedChatRoomSeller(useC_name,use_num);
 		log.debug("<<<<<<<<<<<<<vovovoovov"+alreayUChat);
 		Long useC_num = alreayUChat.getUseC_num();
-		
+
 		model.addAttribute("useC_name",useC_name);
 		model.addAttribute("useC_num",useC_num);
 		model.addAttribute("use_num",use_num);
-		
+
 		return "useChatSeller";
 	}
-	
-	
+
+
 	@GetMapping("/*/useChat")
 	public String accessUseChat(Long use_num, UsedChatRoomVO usedChatRoomVO, HttpSession session, Model model, HttpServletRequest request,
 			@RequestParam(defaultValue="1") int pageNum,
@@ -66,20 +65,20 @@ public class UsedChatController {
 		log.debug("<<<<<<<<<<<used : " + used);
 		if(user==null) {
 			model.addAttribute("message", "로그인후 작성 가능합니다.");
-			model.addAttribute("url", 
+			model.addAttribute("url",
 			request.getContextPath()+"/member/login");
 			return "common/resultAlert";
 		}
 		UsedItemVO usedMember = usedService.selectUsed(use_num);
 		//작성자일 경우
 		if(user.getMem_num()== usedMember.getMem_num()) {
-			
-			Map<String,Object> map = new HashMap<String,Object>();
+
+			Map<String,Object> map = new HashMap<>();
 			map.put("keyfield", keyfield);
 			map.put("keyword", keyword);
 			map.put("use_num", use_num);
 			int count = usedChatService.selectRowCount(map);
-			
+
 			PagingUtil page = new PagingUtil(keyfield,keyword,pageNum,count,
 								10,10,"useChatList");
 			List<UsedChatRoomVO> list = null;
@@ -87,15 +86,15 @@ public class UsedChatController {
 				map.put("order", order);
 				map.put("start", page.getStartRow());
 				map.put("end", page.getEndRow());
-				
+
 				list = usedChatService.selectUsedChatRoomList(map);
 			}
-			
+
 			log.debug("<<<<<<<<<<<<<list"+list);
 			model.addAttribute("count", count);
 			model.addAttribute("list", list);
 			model.addAttribute("page", page.getPage());
-			
+
 			return "useChatList";
 		}else {
 			if(usedChatService.selectUsedChatRoom(user.getMem_num(),use_num)!=null) {
@@ -103,36 +102,36 @@ public class UsedChatController {
 				log.debug("<<<<<<<<<<<<<vovovoovov"+alreayUChat);
 				String useC_name = alreayUChat.getUseC_name();
 				Long useC_num = alreayUChat.getUseC_num();
-				
+
 				model.addAttribute("useC_name",useC_name);
 				model.addAttribute("useC_num",useC_num);
 				model.addAttribute("use_num",use_num);
-				
+
 				return "useChat";
 			}else {
 				log.debug("<<<<<<<<<<<<<<<<use_num" + use_num);
 				log.debug("<<<<<<<<<<<<<<<<user" + user.getMem_num());
-				
+
 				MemberVO s = memberService.selectMember(usedMember.getMem_num());
 				MemberVO b = memberService.selectMember(user.getMem_num());
 				log.debug("<<<<<<<<<<<<<<<<s" + s);
 				log.debug("<<<<<<<<<<<<<<<<b" + b);
-				
+
 				usedChatRoomVO.setUseC_name(s.getMem_nickName()+","+b.getMem_nickName()+" ("+used.getItem_name()+")");
 				usedChatRoomVO.setUse_num(use_num);
 				usedChatRoomVO.setMem_num(user.getMem_num());
-				
+
 				usedChatService.insertUsedChatRoom(usedChatRoomVO);
-				
+
 				UsedChatRoomVO newUChat = usedChatService.selectUsedChatRoom(user.getMem_num(),use_num);
 				log.debug("<<<<<<<<<<<<<vovovoovov"+newUChat);
 				String useC_name = newUChat.getUseC_name();
 				Long useC_num = newUChat.getUseC_num();
-				
+
 				model.addAttribute("useC_name",useC_name);
 				model.addAttribute("useC_num",useC_num);
 				model.addAttribute("use_num",use_num);
-				
+
 				return "useChat";
 			}
 		}
@@ -142,8 +141,8 @@ public class UsedChatController {
 	@ResponseBody
 	public Map<String,String> writeChatAjax(UsedChat_textVO vo, HttpSession session){
 		log.debug("<<채팅 메시지 전송>> : " + vo);
-		
-		Map<String,String> mapAjax = new HashMap<String,String>();
+
+		Map<String,String> mapAjax = new HashMap<>();
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		if(user==null) {
 			//로그인이 되지 않은 경우
@@ -155,7 +154,7 @@ public class UsedChatController {
 			usedChatService.insertChat(vo);
 			mapAjax.put("result", "success");
 		}
-		
+
 		return mapAjax;
 	}
 	//채팅 메시지 읽기
@@ -164,14 +163,14 @@ public class UsedChatController {
 	public Map<String,Object> chatDetailAjax(
 			                   long useC_num,
 			                   HttpSession session){
-		Map<String,Object> mapJson = 
-				         new HashMap<String,Object>();
-		MemberVO user = 
+		Map<String,Object> mapJson =
+				         new HashMap<>();
+		MemberVO user =
 				(MemberVO)session.getAttribute("user");
 		if(user==null) {
 			mapJson.put("result", "logout");
 		}else{
-			Map<String,Long> map = new HashMap<String,Long>();
+			Map<String,Long> map = new HashMap<>();
 			map.put("useC_num",useC_num);
 			map.put("mem_num",user.getMem_num());
 			List<UsedChat_textVO> list = usedChatService.selectChatDetail(map);
@@ -179,10 +178,10 @@ public class UsedChatController {
 			mapJson.put("result", "success");
 			mapJson.put("list", list);
 			mapJson.put("user_num", user.getMem_num());
-		}		
+		}
 		return mapJson;
 	}
-	
+
 }
 
 

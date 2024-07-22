@@ -120,6 +120,6 @@ public class TnrboardServiceImpl implements TnrboardService{
 		tnrboardMapper.deleteTnrReply(tnrR_num);
 	}
 
-	
+
 
 }

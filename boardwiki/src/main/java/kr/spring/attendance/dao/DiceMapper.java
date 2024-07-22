@@ -26,10 +26,10 @@ public interface DiceMapper {
     void updateDice(DiceVO dice);
     @Select("SELECT COUNT(*) FROM dice WHERE mem_num=#{mem_num}")
     Integer selectDiceCunt(Long mem_num);
-    
+
     @Select("SELECT dice_chance FROM dice where mem_num=#{mem_num}")
     Integer selectDicechanec(Long mem_num);
     @Update("UPDATE dice SET dice_chance = dice_chance - 1 WHERE mem_num=#{mem_num}")
     void updateDicedown(Long mem_num);
-    
+
 }

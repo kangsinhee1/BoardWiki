@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.chat.dao.ChatMapper;
-import kr.spring.chat.vo.ChatMemberVO;
 import kr.spring.chat.vo.ChatRoomVO;
 import kr.spring.team.dao.TeamMapper;
 import kr.spring.team.vo.TeamApplyVO;
@@ -25,7 +24,7 @@ public class TeamServiceImpl implements TeamService {
 	TeamMapper teamMapper;
 	@Autowired
 	ChatMapper chatMapper;
-	
+
 	@Override
 	public Integer getTeamRowCount(Map<String, Object> map) {
 		return teamMapper.getTeamRowCount(map);
@@ -58,7 +57,7 @@ public class TeamServiceImpl implements TeamService {
 
 	@Override
 	public void updateTeamSchedule(@Param(value="tea_num")long tea_num,@Param(value="tea_time") String tea_time) {
-		
+
 		teamMapper.updateTeamSchedule(tea_num,tea_time);
 	}
 
@@ -66,7 +65,7 @@ public class TeamServiceImpl implements TeamService {
 	public void updateTeamHit(Long tea_num) {
 		teamMapper.updateTeamHit(tea_num);
 	}
-	
+
 	@Override
 	public void updateTeamStatus(Long tea_num) {
 		teamMapper.updateTeamStatus(tea_num);
@@ -115,15 +114,16 @@ public class TeamServiceImpl implements TeamService {
 	@Override
 	public void insertTeamApplyByAdmin(TeamVO team) {
 		teamMapper.insertTeamApplyByAdmin(team);
-		
+
 	}
 
 	@Override
 	public List<TeamApplyVO> selectTeamListApplied(Map<String, Object> map) {
-		
+
 		return teamMapper.selectTeamListApplied(map);
 	}
 	//회원이 신청한 모든 모임 목록 (결과포함)
+	@Override
 	public List<TeamApplyVO> selectTeamListApplied2(Map<String,Object>map){
 		return teamMapper.selectTeamListApplied2(map);
 	}
@@ -135,14 +135,14 @@ public class TeamServiceImpl implements TeamService {
 
 	@Override
 	public TeamApplyVO selectTeamApplyListByTeamNum(TeamApplyVO teamApplyVO) {
-		
+
 		return teamMapper.selectTeamApplyListByTeamNum(teamApplyVO);
 	}
 
 	@Override
 	public void updateTeamApply(TeamApplyVO teamApply) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -153,7 +153,7 @@ public class TeamServiceImpl implements TeamService {
 	@Override
 	public void deleteTeamApplyByTeaNum(long tea_num) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -184,7 +184,7 @@ public class TeamServiceImpl implements TeamService {
 	@Override
 	public void updateTeamBoard(TeamBoardVO teamBoard) {
 		teamMapper.updateTeamBoard(teamBoard);
-		
+
 	}
 
 	@Override
@@ -222,12 +222,12 @@ public class TeamServiceImpl implements TeamService {
 	public void updateTeamBoardReply(TeamReplyVO teamReply) {
 		teamMapper.updateTeamBoardReply(teamReply);
 	}
-	
+
 
 	@Override
 	public void deleteTeamBoardReply(long teaR_num) {
 		teamMapper.deleteTeamBoardReply(teaR_num);
-		
+
 	}
 
 	@Override
@@ -263,7 +263,7 @@ public class TeamServiceImpl implements TeamService {
 	@Override
 	public void deleteTeamApplyAttend(long tea_num) {
 		teamMapper.deleteTeamApplyAttend(tea_num);
-		
+
 	}
 
 	@Override

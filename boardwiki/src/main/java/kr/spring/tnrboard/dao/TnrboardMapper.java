@@ -9,7 +9,6 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
-import kr.spring.board.vo.BoardReplyVO;
 import kr.spring.tnrboard.vo.TnrboardFavVO;
 import kr.spring.tnrboard.vo.TnrboardReplyVO;
 import kr.spring.tnrboard.vo.TnrboardVO;
@@ -31,7 +30,7 @@ public interface TnrboardMapper {
 	public void deleteTnrBoard(Long tnr_num);
 	@Update("UPDATE tnrboard SET filename='' WHERE tnr_num=#{tnr_num}")
 	public void deleteTnrboardFile(Long tnr_num);
-	
+
 	//게시글 좋아요
 	@Select("SELECT * FROM tnrboard_fav WHERE tnr_num=#{tnr_num} AND mem_num=#{mem_num}")
 	public TnrboardFavVO selectTnrFav(TnrboardFavVO fav);
@@ -43,7 +42,7 @@ public interface TnrboardMapper {
 	public void deleteTnrFav(TnrboardFavVO fav);
 	@Delete("DELETE FROM tnrboard_fav WHERE tnr_num=#{tnr_num}")
 	public void deleteFavByTnrboardNum(Long tnr_num);
-	
+
 	//댓글
 	public List<TnrboardReplyVO> selectTnrListReply(Map<String,Object> map);
 	@Select("SELECT COUNT(*) FROM tnrboard_reply WHERE tnr_num=#{tnr_num}")
@@ -59,7 +58,7 @@ public interface TnrboardMapper {
 	//부모글 삭제시 댓글이 존재하면 부모글 삭제전 댓글 삭제
 	@Delete("DELETE FROM tnrboard_reply WHERE tnr_num=#{tnr_num}")
 	public void deleteReplyByTnrboardNum(Long tnr_num);
-	
+
 }
 
 

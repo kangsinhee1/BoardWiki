@@ -14,10 +14,10 @@ import kr.spring.order.vo.OrderVO;
 @Service
 @Transactional
 public class OrderServiceImpl implements OrderService{
-	
+
 	@Autowired
 	OrderMapper orderMapper;
-	
+
 	@Override
 	public void insertOrder(OrderVO order) {
 		orderMapper.insertOrder(order);
@@ -42,5 +42,5 @@ public class OrderServiceImpl implements OrderService{
 	public List<CartVO> selectCartList(Long mem_num) {
 		return orderMapper.selectCartList(mem_num);
 	}
-	
+
 }

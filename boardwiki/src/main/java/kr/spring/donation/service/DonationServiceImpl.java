@@ -13,7 +13,7 @@ import kr.spring.donation.vo.DonationVO;
 @Service
 @Transactional
 public class DonationServiceImpl implements DonationService{
-	
+
 	@Autowired
     private DonationMapper donationMapper;
 

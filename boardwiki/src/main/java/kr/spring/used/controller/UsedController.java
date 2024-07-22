@@ -32,7 +32,7 @@ import lombok.extern.slf4j.Slf4j;
 public class UsedController {
 	@Autowired
 	UsedService usedService;
-	
+
 	//자바빈(VO) 초기화
 	@ModelAttribute
 	public UsedItemVO initCommand() {
@@ -46,16 +46,16 @@ public class UsedController {
 			 @RequestParam(defaultValue="1") int pageNum,
 			 @RequestParam(defaultValue="1") int order,
 			 String keyfield,String keyword,Model model) {
-		
-		
+
+
 		if(keyword != null) { keyword = keyword.toLowerCase(); }
-		 
-		Map<String,Object> map = new HashMap<String,Object>();
+
+		Map<String,Object> map = new HashMap<>();
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
-		
+
 		int count = usedService.getUsedRowCount(map);
-		
+
 		//페이지 처리
 		PagingUtil page = new PagingUtil(keyfield, keyword, pageNum,count,10,10,"usedList","&order="+order);
 		List<UsedItemVO> list = null;
@@ -65,12 +65,12 @@ public class UsedController {
 			map.put("end",page.getEndRow());
 			list = usedService.selectUsedList(map);
 		}
-		
+
 		model.addAttribute("count",count);
 		model.addAttribute("list",list);
 		model.addAttribute("page",page.getPage());
 		return "usedList";
-	};
+	}
 	/*=====================
 	 * 중고 게시판 작성
 	 *=====================*/
@@ -81,10 +81,10 @@ public class UsedController {
 		MemberVO member =(MemberVO)session.getAttribute("user");
 		if(member== null) {
 			model.addAttribute("message", "로그인후 작성 가능합니다.");
-			model.addAttribute("url", 
+			model.addAttribute("url",
 			request.getContextPath()+"/used/usedList");
 			return "common/resultAlert";
-			
+
 		}
 		model.addAttribute("member", member);
 		return "usedWrite";
@@ -116,7 +116,7 @@ public class UsedController {
 		//View 메시지 처리
 		model.addAttribute("message", "성공적으로 글이 등록되었습니다.");
 		model.addAttribute("url", request.getContextPath()+"/used/usedList");
-		
+
 		return "common/resultAlert";
 	}
 	/*=====================
@@ -125,10 +125,10 @@ public class UsedController {
 	@GetMapping("/used/usedDetail")
 	public ModelAndView process(long use_num) {
 		log.debug("<<게시판 글 상세 - use_num>> : " + use_num);
-		
-		
+
+
 		UsedItemVO used = usedService.selectUsed(use_num);
-		
+
 		return new ModelAndView("usedView","used",used);
 	}
 	/*====================
@@ -137,9 +137,9 @@ public class UsedController {
 	@GetMapping("/used/usedUpdate")
 	public String formUpdate(long use_num,HttpServletRequest request,HttpSession session, Model model) {
 		MemberVO member = (MemberVO)session.getAttribute("user");
-		
-		
-		
+
+
+
 		UsedItemVO used = usedService.selectUsed(use_num);
 		// 작성자 일치여부 확인
 				if(member.getMem_num()!= used.getMem_num()) {
@@ -147,7 +147,7 @@ public class UsedController {
 					model.addAttribute("url", request.getContextPath()+"/team/teamList");
 					return "common/resultAlert";
 				}
-		
+
 		model.addAttribute("used",used);
 		return "usedModify";
 	}
@@ -157,48 +157,48 @@ public class UsedController {
 							   Model model,
 							   HttpServletRequest request) throws IllegalStateException, IOException {
 		log.debug("<<게시판 글 수정>> : " +  usedVO);
-		
+
 		if(result.hasErrors()) {
 			UsedItemVO vo = usedService.selectUsed(usedVO.getUse_num());
 			usedVO.setUse_photo(vo.getUse_photo());
 			return "usedModify";
 		}
-		
+
 		UsedItemVO db_board = usedService.selectUsed( usedVO.getUse_num());
 		usedVO.setUse_photo(FileUtil.createFile(request, usedVO.getUse_upload()));
-		
+
 		usedService.updateUsed(usedVO);
-		
+
 		if(usedVO.getUse_upload() != null && !usedVO.getUse_upload().isEmpty()) {
 			FileUtil.removeFile(request, db_board.getUse_photo());
 		}
-		
+
 		model.addAttribute("message", "글 수정 완료!!");
 		model.addAttribute("url", request.getContextPath() + "/used/usedDetail?use_num="
-														+usedVO.getUse_num());	
-		
-		
+														+usedVO.getUse_num());
+
+
 		return "common/resultAlert";
 	}
 	/*====================
 	 *  게시판 글 삭제
 	 *====================*/
-	@GetMapping("/used/usedDelete") 
-	public String submitDelete(long use_num, 
+	@GetMapping("/used/usedDelete")
+	public String submitDelete(long use_num,
 							   HttpServletRequest request) {
 		log.debug("<<게시판 글 삭제 -- used_num>> : " + use_num);
-		
-		Map<String,Object> map = new HashMap<String,Object>();
+
+		Map<String,Object> map = new HashMap<>();
 		map.put("use_num", use_num);
-		
+
 		UsedItemVO db_board = usedService.selectUsed(use_num);
-		
+
 		usedService.deleteUsed(map);
-		
+
 		if(db_board.getUse_photo()!=null) {
 			FileUtil.removeFile(request, db_board.getUse_photo());
 		}
-		
+
 		return "redirect:/used/usedList";
 	}
 }
