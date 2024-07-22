@@ -97,7 +97,6 @@
 </div>
 </div>
 </div>
-</div>
 </section>
 
 <!-- 게시판 목록 끝 -->

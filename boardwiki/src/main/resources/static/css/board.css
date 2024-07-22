@@ -195,3 +195,39 @@ div#mre_second input{
 	height: 100px;
 	resize: none; 
 }
+
+.modal{
+	position:absolute;
+	z-index:5;
+	background:white;
+	left:50%;
+	top:80%;
+	margin-top: 400px;
+	margin-left: 700px;
+	margin-bottom:8px !important;
+	padding-bottom:15px;
+	border-radius:10px;
+	border:1px solid #ccc;
+	width:400px;  
+    height:600px; 
+    padding:40px;  
+	text-align: center;
+    box-shadow:0 2px 3px 0 rgba(34,36,38,0.15);
+    transform:translateY(-50%);
+	
+}
+	
+
+.itemsh{
+	width:300px;
+}
+.hide {
+	display:none; 
+	width:600px !important;
+	position:fixed;
+	z-index:999 !important;
+	bottom:400px;
+	margin-bottom:400px;
+	border:1px solid #999 !important;
+	background:white;
+}

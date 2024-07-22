@@ -186,21 +186,24 @@ div#mre_second input{
 	position:absolute;
 	z-index:5;
 	background:white;
-	left:37%;
-	top:30%;
-	width:500px;
-	height:600px;
+	left:50%;
+	top:80%;
 	margin-bottom:8px !important;
 	padding-bottom:15px;
-	border-radius:15px;
+	border-radius:10px;
 	border:1px solid #ccc;
-	margin-left:600px;
-	margin-top:200px;
+	width:400px;  
+    height:600px; 
+    padding:40px;  
+	text-align: center;
+    box-shadow:0 2px 3px 0 rgba(34,36,38,0.15);
+    transform:translateY(-50%);
+	
 }
+	
 
-.booksh{
-	border:none;
-	margin-bottom:8px;
+.itemsh{
+	width:300px;
 }
 .hide {
 	display:none; 
