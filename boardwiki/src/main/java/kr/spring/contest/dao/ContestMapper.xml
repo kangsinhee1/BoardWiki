@@ -75,6 +75,7 @@
 		con_status,
 		con_rdate,
 		con_man,
+		con_address1,
 		mem_num,
 		mem_email,
 		mem_nickname
