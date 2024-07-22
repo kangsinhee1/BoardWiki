@@ -42,6 +42,15 @@
 	<definition name="userlist" extends="broadcast">
 		<put-attribute name="body" value="/WEB-INF/views/stream/donationListByMember.jsp"/>
 	</definition>
+	<definition name="missionForm" extends="broadcast">
+		<put-attribute name="body" value="/WEB-INF/views/stream/missionForm.jsp"/>
+	</definition>
+	<definition name="mismemberlist" extends="broadcast">
+		<put-attribute name="body" value="/WEB-INF/views/stream/missionListByMember.jsp"/>
+	</definition>
+	<definition name="misstreamlist" extends="broadcast">
+		<put-attribute name="body" value="/WEB-INF/views/stream/missionListByStream.jsp"/>
+	</definition>
 </tiles-definitions>
 
 

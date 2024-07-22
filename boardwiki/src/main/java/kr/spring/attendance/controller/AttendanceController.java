@@ -42,7 +42,9 @@ public class AttendanceController {
         MemberVO user = (MemberVO) session.getAttribute("user");
         if (user != null) {
             long mem_num = user.getMem_num();
-            int dice = diceService.selectDicechanec(mem_num);
+            int dice = 0;
+            dice = diceService.selectDicechanec(mem_num);
+            
             model.addAttribute("dice",dice);
             List<AttendanceVO> attendance = attendanceService.getMonthlyAttendance(mem_num);
             for(int i=0; i<attendance.size(); i++) {
