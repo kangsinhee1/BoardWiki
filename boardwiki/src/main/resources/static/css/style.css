@@ -172,6 +172,7 @@ input[type="button"] {
 	border: 2px solid #C213B6;
     border-radius: 5px;
     cursor: pointer;
+    margin:2px;
     transition: background-color 0.3s;
 }
 input[type="button"]:hover {
@@ -286,7 +287,7 @@ div.chart-table h6 {
 
 .chart-table table tbody tr td {
 	font-size: 14px;
-	color: black;
+	color: #ffffff;
 	padding: 17px 0;
 	border-left: none;
 	border-right: none;
@@ -365,8 +366,8 @@ select {
     appearance: none; /* 기본 화살표 제거 (모든 브라우저에서 일관되게 보이게 하기 위해) */
     -webkit-appearance: none; /* 사파리/크롬 */
     -moz-appearance: none; /* 파이어폭스 */
-    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%204%205%22%3E%3Cpath%20fill%3D%22%23333%22%20d%3D%22M2%205L0%203h4zM2%200l2%202H0z%22/%3E%3C/svg%3E');
-    background-repeat: no-repeat;
+/*     background-image: url('data:/image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%204%205%22%3E%3Cpath%20fill%3D%22%23333%22%20d%3D%22M2%205L0%203h4zM2%200l2%202H0z%22/%3E%3C/svg%3E');
+ */    background-repeat: no-repeat;
     background-position: right 10px center;
     background-size: 10px; /* 화살표 아이콘 크기 조절 */
 }
@@ -404,8 +405,8 @@ input[type="search"]::-webkit-search-cancel-button {
     -webkit-appearance: none;
     height: 12px;
     width: 12px;
-    background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTJweCIgaGVpZ2h0PSIxMnB4IiB2aWV3Qm94PSIwIDAgMTIgMTIiIHZlcnNpb249IjEuMSIgdG9vbGJveD0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcigZmlsbD0iI2YzNjEwMCIgZmlsbC1vcGFjaXR5PSIwIiBzdHJva2U9IiNmMzYxMDAiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIj4gPHBhdGggZD0iTTMwLDMwIEwwLDBNMzAsMCBMMzAsMzAiIHRyYW5zZm9ybT0icm90YXRlKDIxNSwgMTUgMTUpIj48L3BhdGg+PC9zdmc+');
-    background-size: 12px;
+/*     background: url('data:/image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTJweCIgaGVpZ2h0PSIxMnB4IiB2aWV3Qm94PSIwIDAgMTIgMTIiIHZlcnNpb249IjEuMSIgdG9vbGJveD0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcigZmlsbD0iI2YzNjEwMCIgZmlsbC1vcGFjaXR5PSIwIiBzdHJva2U9IiNmMzYxMDAiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIj4gPHBhdGggZD0iTTMwLDMwIEwwLDBNMzAsMCBMMzAsMzAiIHRyYW5zZm9ybT0icm90YXRlKDIxNSwgMTUgMTUpIj48L3BhdGg+PC9zdmc+');
+ */    background-size: 12px;
     background-repeat: no-repeat;
     background-position: center;
     cursor: pointer;
@@ -1163,7 +1164,7 @@ ol {
 	display: inline-block;
 	position: relative;
 	font-size: 16px;
-	color: #68647d;
+	color: #ffffff;
 	font-weight: 500;
 	margin-bottom: 15px;
 	padding-right: 19px;
@@ -1459,8 +1460,8 @@ ol {
 .copyright {
 	font-size: 12px;
 	font-weight: 500;
-	color: #9190a5;
-	opacity: 0.20;
+	color: #C313B7;
+	opacity: 0.90;
 }
 
 .copyright a {
@@ -1647,16 +1648,16 @@ ol {
 .contact-page {
 	padding: 50px 0;
 	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#501755+0,2d1854+100 */
-	background: #501755;
+	background: #321854;
 	/* Old browsers */
 	/* FF3.6-15 */
-	background: -webkit-linear-gradient(45deg, #501755 0%, #2d1854 100%);
-	/* Chrome10-25,Safari5.1-6 */
-	background: -o-linear-gradient(45deg, #501755 0%, #2d1854 100%);
-	background: linear-gradient(45deg, #501755 0%, #2d1854 100%);
+/* 	background: -webkit-linear-gradient(45deg, #501755 0%, #2d1854 100%);
+ */	/* Chrome10-25,Safari5.1-6 */
+	/* background: -o-linear-gradient(45deg, #501755 0%, #2d1854 100%);
+	background: linear-gradient(45deg, #501755 0%, #2d1854 100%); */
 	/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#501755', endColorstr='#2d1854', GradientType=1);
-	/* IE6-9 fallback on horizontal gradient */
+/* 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#501755', endColorstr='#2d1854', GradientType=1);
+ */	/* IE6-9 fallback on horizontal gradient */
 }
 
 .game-single-preview {

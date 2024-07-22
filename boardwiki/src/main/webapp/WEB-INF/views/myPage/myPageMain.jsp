@@ -41,8 +41,9 @@
 
 
     <script>
-        $(document).ready(function() {
-            $('#calendar').fullCalendar({
+    var jb = jQuery.noConflict();
+        jb(document).ready(function() {
+            jb('#calendar').fullCalendar({
                 editable: true,
                 events: '/events',
                 selectable: true,
@@ -62,11 +63,11 @@
                             contentType: 'application/json',
                             data: JSON.stringify(eventData),
                             success: function() {
-                                $('#calendar').fullCalendar('refetchEvents');
+                                jb('#calendar').fullCalendar('refetchEvents');
                             }
                         });
                     }
-                    $('#calendar').fullCalendar('unselect');
+                    jb('#calendar').fullCalendar('unselect');
                 },
                 eventDrop: function(event) {
                     var eventData = {
@@ -80,7 +81,7 @@
                         contentType: 'application/json',
                         data: JSON.stringify(eventData),
                         success: function() {
-                            $('#calendar').fullCalendar('refetchEvents');
+                            jb('#calendar').fullCalendar('refetchEvents');
                         }
                     });
                 },
@@ -96,7 +97,7 @@
                         contentType: 'application/json',
                         data: JSON.stringify(eventData),
                         success: function() {
-                            $('#calendar').fullCalendar('refetchEvents');
+                            jb('#calendar').fullCalendar('refetchEvents');
                         }
                     });
                 },
@@ -106,7 +107,7 @@
                             url: '/events/' + event.id,
                             type: 'DELETE',
                             success: function() {
-                                $('#calendar').fullCalendar('refetchEvents');
+                                jb('#calendar').fullCalendar('refetchEvents');
                             }
                         });
                     }

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<nav class="side-nav">
+<div class="widget-item">
+<div class="categories-widget">
+<!-- <nav class="side-nav"> -->
 	<ul>
 		<li><a href="${pageContext.request.contextPath}/myPage/myAlert">알림</a></li>
 		<li><a href="${pageContext.request.contextPath}/myPage/calendar">일정</a></li>
@@ -36,4 +38,6 @@
 		<li><a href="${pageContext.request.contextPath}/myPage/pointList">포인트</a></li>
 		<li><a href="${pageContext.request.contextPath}/myPage/myQna">내QnA</a></li>	
 	</ul>
-</nav>
+<!-- </nav> -->
+</div>
+</div>

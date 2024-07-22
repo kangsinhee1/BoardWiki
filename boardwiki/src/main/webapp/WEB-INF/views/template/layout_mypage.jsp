@@ -21,9 +21,13 @@
 	</div>
 	<section class="page-top-section set-bg" data-setbg="/img/page-top-bg/4.jpg">
 		<div class="page-info">
-			<h2>Mypage	</h2>
+			<h2>Mypage</h2>
 		</div>
 	</section>
+	<section class="blog-page">
+		<div class="container">
+			<div class="row">
+				<div class="col-xl-9 col-lg-8 col-md-7">
 	<div class="side-height">
 		<div id="page_nav">
 			<tiles:insertAttribute name="nav"/>
@@ -32,6 +36,10 @@
 			<tiles:insertAttribute name="body"/>
 		</div>
 	</div>
+	</div>
+	</div>
+	</div>
+	</section>
 	<div id="main_footer" class="page-clear">
 		<tiles:insertAttribute name="footer"/>
 	</div>

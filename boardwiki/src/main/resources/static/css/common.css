@@ -144,7 +144,7 @@ input,select{
 .side-height{
 	/*사이드바의 높이가 컨텐트의 높이와 동이라하게 자동 조절하기 위해 흘러넘친 배경색은 숨김*/
 	overflow:hidden;
-	margin-bottom:10px;
+	background-color: #321854; 
 }
 #page_nav{
 	float:left;
