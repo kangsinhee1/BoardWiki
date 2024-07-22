@@ -23,25 +23,29 @@
 	<div class="row">
 		<div class="col-lg-12">
 <div class="page-main">
+	<div class="align-center">
 	<h2 class="">${team.tea_name}</h2>
+	</div>
+	<div class="align-right">
 	<ul class="detail-info">
 		<li>작성자 : ${team.mem_nickname}</li>
 		<li>등록일 : ${team.tea_rdate} </li>
 		<li>조회수 : ${team.tea_hit}</li>
 	</ul>
+	</div>
 		<%--좋아요 --%>
-	<div>
+	<div class="align-right">
 		<img id="output_fav" data-num="${team.tea_num}" src="${pageContext.request.contextPath}/images/fav01.gif">
 		<span id="output_fcount"></span>
 	</div>
 	<hr size="1" width="100%">
 	<div class="align-right">
-	<input type="button" value="신고" id="report_btn">
-	<input type="button" value="목록" onclick="location.href='teamList'">
+	<input type="button" value="신고" id="report_btn" class="default_btn2">
+	<input type="button" value="목록" class="default_btn2" onclick="location.href='teamList'">
 		<c:if test="${!empty user &&user.mem_num == team.mem_num}">
-			<input type="button" value="수정"
+			<input type="button" value="수정" class="default_btn2"
 				onclick="location.href='teamUpdate?tea_num=${team.tea_num}'">
-			<input type="button" value="삭제" id="delete_btn">
+			<input type="button" value="삭제" id="delete_btn" class="default_btn2">
 			<script type="text/javascript">
 	 			const delete_btn = document.getElementById('delete_btn');
 	 			delete_btn.onclick=function(){
@@ -55,16 +59,17 @@
 		</div>
 		<div class="detail-content">${team.tea_content}</div>
 		<hr>
-<div>모임 주소: ${team.tea_address1} ${team.tea_address2}</>
+<div>
+<div class="font-white">모임 주소: ${team.tea_address1} ${team.tea_address2}</div>
 <div id="map" style="width:100%;height:350px;"></div>
 
 <br>
 <c:if test="${team.mem_num != user.mem_num }">
-<p class="align-center">
+<div class="align-center">
 		<input type="button" value="가입하기"
 			  class="default-btn"
 			  onclick="location.href='teamApply?tea_num=${team.tea_num}'">	
-	</p>
+	</div>
 </c:if>
 </div>
 </div>

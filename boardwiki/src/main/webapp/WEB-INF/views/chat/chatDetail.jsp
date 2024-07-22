@@ -21,10 +21,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-lg-12">
-<div id="talkDetail" class="page-main">
-	<h2 id="chatroom_title"><span id="chatroom_name">${room_name}</span> 채팅방
-	</h2> 
-	<div class="align-right">
+		<div class="align-right">
 	<c:if test="${team.mem_num == user.mem_num}">
 	    <input type="button" value="게시판으로" onclick="location.href='${pageContext.request.contextPath}/team/teamBoardAdmin?tea_num=${team.tea_num}'">
 	</c:if>
@@ -33,7 +30,11 @@
 	    <input type="button" value="게시판으로" onclick="location.href='${pageContext.request.contextPath}/team/teamBoardUser?tea_num=${team.tea_num}'">
 	</c:if>
 	 <input type="button" value="채팅목록" onclick="location.href='${pageContext.request.contextPath}/myPage/myChat2'">
-	</div>    
+	</div>  
+<div id="talkDetail">
+	<h2 id="chatroom_title"><span id="chatroom_name">${room_name}</span> 채팅방
+	</h2> 
+	  
 	<p>
 		채팅 멤버 : 
 		<span id="chat_member">${chatMember}</span><span id="chat_mcount">(${chatCount}명)</span>
@@ -43,7 +44,7 @@
 		<input type="hidden" name="chaR_num" id="chaR_num" value="${param.chaR_num}">	
 	    <textarea rows="5" cols="40" name="message" id="message"></textarea>
 		<div id="message_btn">
-			<input type="submit" value="전송">
+			<input type="submit" class="default-btn" value="전송">
 		</div>
 	</form>
 </div>

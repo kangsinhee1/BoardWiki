@@ -27,7 +27,7 @@
 				<form:form action="teamWrite" id="team_register"
 					enctype="multipart/form-data" modelAttribute="teamVO">
 					<ul>
-						<li><form:label class="" path="tea_name">모임 명</form:label> <form:input
+						<li><form:label class="font-white" path="tea_name">모임 명</form:label> <form:input
 								path="tea_name" /> <form:errors path="tea_name"
 								cssClass="error-color" /></li>
 						<li><form:label path="tea_man">모집 회원수</form:label> <form:input

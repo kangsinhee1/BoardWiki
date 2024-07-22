@@ -58,12 +58,12 @@ $(function(){
 						}else{
 							//멤버등록/탈퇴 메시지가 아닌 일반 메시지
 							if(item.mem_num == param.user_num){
-								output += '<div class="from-position">'+item.mem_nickname;
+								output += '<div class="from-position "><div class="font-white"'+item.mem_nickname+'></div>';
 								output += '<div>';
 							}else{	
 								output += '<div class="to-position">';
 								output += '<div class="space-message">';
-								output += item.mem_nickname;
+								output += '<div class="font-white">'+item.mem_nickname+'</div>';
 							}
 							output += '<div class="item">';
 							output += item.chaT_cnt+ ' <span>' + item.message.replace(/\r\n/g,'<br>').replace(/\r/g,'<br>').replace(/\n/g,'<br>') + '</span>';

@@ -107,12 +107,23 @@ form#detail_form{
 	border:none;
 	width:682px;
 	padding:0;
+	margin:auto;
 	overflow:hidden;
 }
 #message{
 	width:100%;
 	margin:0;
 }
+textarea#chaC_txt{
+	width:660px;
+}
 #message_btn input{
-	width:100%;
+	width:660px;
+}
+div.page-main h3{
+	color:white;
+	
+}
+div.font-white {
+	color:white;
 }

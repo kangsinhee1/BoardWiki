@@ -43,6 +43,9 @@ ul.detail-info li:last-child{
 .detail-content img{
 	max-width:940px;
 }
+.detail-content p{
+	color:white;
+}
 #output_fav, .output_rfav{
 	cursor:pointer;
 }
@@ -101,6 +104,9 @@ div#loading{
 	display:flex;
 	justify-content:center;/*가로 정렬*/
 	align-items:center;/*세로 정렬*/
+}
+p .align-center{
+	text-align:center;
 }
 .modify-btn,.delete-btn{
 	padding:4px 20px;
@@ -229,9 +235,82 @@ div.item{
   text-decoration: none;
   cursor: pointer;
 }
-table tbody tr td{
-color:white;
-text-align:center;
+
+
+/* .default-btn{
+	padding:4px 20px;
+	border:1px solid #09aa5c;
+	border-radius:2px;
+	color:#fff;
+	background-color:#09aa5c;
+	font-weight:bold;
+	cursor:pointer;
+} */
+
+
+/* 수정중 ~~~~~~~~~~~~~~~~ */
+.page-main ul.detail-info li{
+	color:white;
+	font-size:15px;
+}
+.page-main div.font-white {
+	color:white;
+}
+.page-main h4 {
+	color:white;
+}
+.page-main label{
+	color:white;
+}
+
+.page-main div.align-center{
+	text-align:center;
+}
+.page-main ul.detail-info li{
+	display:flex;
+}
+.fav-container {
+    display: flex;
+}
+#output_fcount {
+	color:white;
+}
+img#output_fav{
+	width:50px;
 }
 
 
+
+.modal{
+	position:absolute;
+	z-index:5;
+	background:white;
+	margin-top: 500px;
+	margin-left: 800px;
+	margin-bottom:8px !important;
+	padding-bottom:15px;
+	border-radius:10px;
+	border:1px solid #ccc;
+	width:400px;  
+    height:500px; 
+    padding:40px;  
+	text-align: center;
+    box-shadow:0 2px 3px 0 rgba(34,36,38,0.15);
+    transform:translateY(-50%);
+	
+}
+	
+
+.itemsh{
+	width:300px;
+}
+.hide {
+	display:none; 
+	width:600px !important;
+	position:fixed;
+	z-index:999 !important;
+	bottom:400px;
+	margin-bottom:400px;
+	border:1px solid #999 !important;
+	background:white;
+}

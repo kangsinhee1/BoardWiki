@@ -47,7 +47,6 @@ ul#search_area li{
 	width:660px;
 	height:300px;
 	margin:0 auto;
-	padding:10px;
 	overflow:auto;
 }
 .date-position{
@@ -112,12 +111,32 @@ form#detail_form{
 	border:none;
 	width:682px;
 	padding:0;
+	margin:auto;
 	overflow:hidden;
 }
 #message{
-	width:100%;
+	width:660px;
 	margin:0;
 }
+textarea{
+	padding:0;
+}
 #message_btn input{
-	width:100%;
+	width:660px;
+}
+
+/* 수정중~~~~~~~~~~~~~ */
+div.font-white {
+	color:white;
+}
+div#talkDetail h2{
+	color:white;
+}
+div#talkDetail p{
+	color:white;
+}
+
+
+.page-main div.align-center{
+	text-align:center;
 }

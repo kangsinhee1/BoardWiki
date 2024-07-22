@@ -11,7 +11,7 @@
 		<h2>모임 신청</h2>
 		<div class="site-breadcrumb">
 			<a href="teamListAdmin">Home</a>  /
-			<span>모임신청(관리자)</span> 
+			<span>모임신청</span> 
 		</div>
 	</div>
 </section>
@@ -63,7 +63,8 @@
 	<div class="alert alert-info mt-3">표시할 게시물이 없습니다.</div>
 	</c:if>
 	<c:if test="${count > 0}">
-	<table class="chart-table">
+	<div class="chart-table">
+	<table >
 	<thead>
 		<tr>
 			<th>번호</th>
@@ -90,6 +91,7 @@
 		</c:forEach>
 		</tbody>
 	</table>
+	</div>
 	<div class="align-center">
 	<div class="blog-pagination">${page}</div>
 	</div>

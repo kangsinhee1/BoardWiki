@@ -105,9 +105,9 @@ $(function(){
 						}else{	
 							output += '<div class="to-position">';
 							output += '<div class="space-photo">';
-							output += item.mem_num
+							output += '<div class="font-white">'+item.mem_num+'</div>';
 							output += '</div><div class="space-message">';
-							output += item.mem_nickname;
+							output += '<div class="font-white">'+item.mem_nickname+'</div>';
 						}
 						output += '<div class="item">';
 						output += ' <span>' + item.chaC_txt.replace(/\r\n/g,'<br>').replace(/\r/g,'<br>').replace(/\n/g,'<br>') + '</span>';
