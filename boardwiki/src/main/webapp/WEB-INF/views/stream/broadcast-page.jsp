@@ -59,6 +59,9 @@
                     <button class="donation-button" onclick="openDonationModal()">도네이션 보내기</button>
                     <button class="donation-list-button" onclick="openDonationListByStream()">도네이션 목록 보기 (스트림 기준)</button>
                     <button class="donation-list-button" onclick="openDonationListByMember()">도네이션 목록 보기 (회원 기준)</button>
+                	<button class="mission-button" onclick="openMissionRequest()">미션 신청</button>
+                    <button class="mission-button" onclick="openMissionListByStream()">방송용 미션 목록</button>
+                    <button class="mission-button" onclick="openMissionListByMember()">유저용 미션 목록</button>
                 </div>
             </div>
             <div class="chat-section">
@@ -96,6 +99,18 @@
 
     function openDonationListByMember() {
         window.open("/donation/userlist?str_num="+${param.str_num}, "donationListByMember", "width=600,height=400");
+    }
+    
+    function openMissionRequest() {
+        window.open("/mission/form?str_num=" + ${param.str_num}, "missionRequest", "width=400,height=300");
+    }
+
+    function openMissionListByStream() {
+        window.open("/mission/strlist?str_num=" + ${param.str_num}, "missionListByStream", "width=600,height=400");
+    }
+
+    function openMissionListByMember() {
+        window.open("/mission/userlist?str_num=" + ${param.str_num}, "missionListByMember", "width=600,height=400");
     }
 </script>
 

@@ -36,6 +36,7 @@
                     success: function(param){
                         if(param.result == 'success'){
                             alert('도네이션 성공');
+                            window.close();
                         }
                     },
                     error: function(){
