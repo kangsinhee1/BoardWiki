@@ -41,7 +41,7 @@ public class BoardController {
 		return new BoardVO();
 	}
 	/*====================
-	 *  게시판 글쓰기 category 1,2,3
+	 *  게시판 글쓰기 category 1
 	 *====================*/
 	@GetMapping("/board/write")
 	public String form() {
@@ -118,7 +118,7 @@ public class BoardController {
 
 	
 	/*====================
-	 *  게시판 목록 category 1,2,3
+	 *  게시판 목록 category 1
 	 *====================*/
 	@GetMapping("/board/list")
 	public String getList(
@@ -187,7 +187,7 @@ public class BoardController {
 		return "boardList2";
 	}
 	/*====================
-	 *  게시판 글상세 category 1,2,3
+	 *  게시판 글상세 category 1
 	 *====================*/
 	@GetMapping("/board/detail")
 	public ModelAndView process(long boa_num) {
@@ -225,7 +225,7 @@ public class BoardController {
 		return "downloadView";
 	}
 	/*====================
-	 *  게시판 글 수정 category1,2,3
+	 *  게시판 글 수정 category1
 	 *====================*/
 	@GetMapping("/board/update")
 	public String formUpdate(long boa_num,Model model) {

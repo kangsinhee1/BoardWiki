@@ -11,9 +11,9 @@
 <section class="page-top-section set-bg"
 	data-setbg="/img/page-top-bg/4.jpg">
 	<div class="page-info">
-		<h2>게시판 작성</h2>
+		<h2>자유게시판 작성</h2>
 		<div class="site-breadcrumb">
-			<a href="">Home</a> / <span>게시판 작성</span>
+			<a href="">Home</a> / <span>자유게시판 작성</span>
 		</div>
 	</div>
 </section>
@@ -27,8 +27,6 @@
 				<form:select path="boa_category" id="boa_category">
 					<option disabled="disabled" selected>선택하세요</option>
 					<form:option value="1">자유게시판</form:option>
-					<form:option value="2">팁게시판</form:option>
-					<form:option value="3">후기게시판</form:option>
 				</form:select>
 				<form:errors path="boa_category" cssClass="error-color"/>                             
 			</li>

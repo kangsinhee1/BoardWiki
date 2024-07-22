@@ -68,8 +68,8 @@
                     </li>
                     <li><a href="#">공지</a>
                         <ul class="sub-menu">
-                            <li><a href="${pageContext.request.contextPath}/board/list?boa_category=4">공지</a></li>
-                            <li><a href="${pageContext.request.contextPath}/board/list?boa_category=5">QnA</a></li>
+                            <li><a href="${pageContext.request.contextPath}/board/list2?boa_category=4">공지</a></li>
+                            <li><a href="${pageContext.request.contextPath}/board/list2?boa_category=5">QnA</a></li>
                         </ul>
                     </li>
                     <li><a href="#">스트리밍</a>

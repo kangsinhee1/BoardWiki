@@ -5,23 +5,25 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 <section class="page-top-section set-bg" data-setbg="/img/page-top-bg/4.jpg">
 		<div class="page-info">
-			<h2>게시판</h2>
+		<c:choose>
+        	<c:when test="${param.tnr_category == 1}">
+           		 <h2>팁게시판</h2>
+       		 </c:when>
+        	<c:when test="${param.tnr_category == 2}">
+           		 <h2>후기게시판</h2>
+       		 </c:when>
+    	</c:choose>
 			<div class="site-breadcrumb">
 				<a href="">Home</a>  /
 				<span>board</span>
 			</div>
 		</div>
 </section>
+<section class="blog-page">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
 <div class="page-main">
-	 <c:choose>
-        <c:when test="${param.tnr_category == 1}">
-            <h2>팁게시판</h2>
-        </c:when>
-        <c:when test="${param.tnr_category == 2}">
-            <h2>후기게시판</h2>
-        </c:when>
-    </c:choose>
-	<br>
 	<form action="tnrboardList" id="search_form" method="get">
 		<input type="hidden" name="tnr_category" value="${param.tnr_category}">
 		<ul class="search">
@@ -98,6 +100,10 @@
 	<div class="align-center">${page}</div>
 	</c:if>
 </div>
+</div>
+</div>
+</div>
+</section>
 <!-- 게시판 목록 끝 -->
 
 

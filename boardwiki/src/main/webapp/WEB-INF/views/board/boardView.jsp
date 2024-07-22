@@ -64,21 +64,9 @@
 			};
 		</script>   
 		</c:if>
-		<c:choose>
-			<c:when test="${board.boa_category == 1}">
-				<input type="button" value="신고" id="report_btn"> 
-				<input type="button" value="목록" onclick="location.href='list?boa_category=1'">
-		    </c:when>
-		    <c:when test="${board.boa_category == 2}">
-				<input type="button" value="신고" id="report_btn"> 
-				<input type="button" value="목록" onclick="location.href='list?boa_category=2'">
-		    </c:when> 
-		    <c:when test="${board.boa_category == 3}">
-				<input type="button" value="신고" id="report_btn"> 
-				<input type="button" value="목록" onclick="location.href='list?boa_category=3'">
-		    </c:when>      
-		</c:choose>
-	</div>
+			<input type="button" value="신고" id="report_btn"> 
+			<input type="button" value="목록" onclick="location.href='list?boa_category=1'">
+</div>
 	<hr size="1" width="100%">
 	<!-- 댓글 UI 시작 -->
 	<div id="reply_div">
