@@ -20,6 +20,6 @@ public class OrderVO {
 	private String order_address1;
 	private String order_address2;
 	private int order_pay;
-	private int order_check;
 	private Date order_reg_date;
+	private Long order_price;
 }

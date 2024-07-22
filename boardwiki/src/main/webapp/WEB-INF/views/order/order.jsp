@@ -3,6 +3,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <script src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
+<!-- Page top section -->
+<section class="page-top-section set-bg" data-setbg="/img/page-top-bg/4.jpg">
+	<div class="page-info">
+		<h2>주문</h2>
+		<div class="site-breadcrumb">
+			<a href="">Home</a> /
+			<span>Cart</span>
+		</div>
+	</div>
+</section>
+<!-- Page top end-->
 <div class="page-main">
     <h2>상품주문</h2>
     <div class="great-box">
@@ -10,8 +21,10 @@
 			let all_price = 0;
 			const $qElement = $('p[data-sum]');
 		</script>
+		<form id="GetToOrder" method="get" action="${pageContext.request.contextPath}/order/order">
 		<c:forEach var="order" items="${list}">
            <div class="big-box">
+               <input type="hidden" value="${order.item_num}" name="item_num">
                <p style="display: inline-block; vertical-align: top;">|${order.item_name}|</p>
                <p style="display: inline-block; vertical-align: top;">|${order.item_quantity}개|</p>
                <p id="order_all_price"
@@ -23,7 +36,6 @@
 				all_price = all_price + num2;
 			</script>
 		</c:forEach>
-            <form id="addToOrder" method="get" action="${pageContext.request.contextPath}/order/order">
 			<script type="text/javascript">
 				console.log('11:', all_price);
 				$('total_sum_value').text(all_price);
@@ -52,12 +64,7 @@
 		       <label for="address2">상세주소</label>
 		       <input type="text" name="receive_address2" id="address2" maxlength="30">
 		   </div>
-		   <div>
-		       <label for="order_pay">결제수단</label>
-			   <input type="radio" name="pay_payment" id="pay_payment1"	value="1">계좌입금
-			   <input type="radio" name="pay_payment" id="pay_payment2"	value="2">카드결제
-			   <input type="radio" name="pay_payment" id="pay_payment3"	value="3">카카오페이
-		   </div>
+		   <button type="submit">주문하기</button>
            </form>
     </div>
 </div>

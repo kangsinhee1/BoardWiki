@@ -17,11 +17,11 @@ public interface CartMapper {
 	public List<CartVO> selectCartList(Map<String,Object> map);
 	public Integer selectRowCount(Map<String, Object> map);
 	public CartVO selectCart(Long mem_num);
-	@Insert("INSERT INTO cart (mem_num,item_num,item_quantity) VALUES (#{mem_num},#{item_num},#{item_quantity})")
+	@Insert("INSERT INTO cart (mem_num,item_num,item_quantity,cart_price) VALUES (#{mem_num},#{item_num},#{item_quantity},#{cart_price})")
 	public void insertCart(CartVO cart);
-	@Update("UPDATE cart set item_quantity=#{item_quantity} WHERE mem_num=#{mem_num} AND item_num=#{item_num}")
+	@Update("UPDATE cart set item_quantity=#{item_quantity},cart_price=#{cart_price} WHERE mem_num=#{mem_num} AND item_num=#{item_num}")
 	public void updateCart(CartVO cart);	
-	@Update("UPDATE cart set item_quantity=#{item_quantity} WHERE mem_num=#{mem_num} AND item_num=#{item_num}")
+	@Update("UPDATE cart set item_quantity=#{item_quantity},cart_price=#{cart_price} WHERE mem_num=#{mem_num} AND item_num=#{item_num}")
 	public void updateCart2(CartVO cart);
 	@Select("SELECT * FROM cart WHERE mem_num=#{mem_num} AND item_num=#{item_num}")
 	public CartVO getCart(CartVO cart);

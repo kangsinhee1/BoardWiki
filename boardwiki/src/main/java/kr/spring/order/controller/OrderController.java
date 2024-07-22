@@ -20,6 +20,7 @@ import kr.spring.cart.service.CartService;
 import kr.spring.cart.vo.CartVO;
 import kr.spring.item.service.ItemService;
 import kr.spring.member.vo.MemberVO;
+import kr.spring.order.service.OrderService;
 import kr.spring.order.vo.OrderVO;
 import lombok.extern.slf4j.Slf4j;
 
@@ -30,6 +31,8 @@ public class OrderController {
 	private CartService cartService;
 	@Autowired
 	private ItemService itemService;
+	@Autowired
+	private OrderService orderService;
 	
 	//자바빈(VO) 초기화
     @ModelAttribute
@@ -41,7 +44,7 @@ public class OrderController {
 	 * 장바구니에서 데이터 불러오기
 	 *=========================*/
     @GetMapping("/order/order")
-    public String addToOrder(Model model,Long mem_num, HttpSession session){
+    public String GetToOrder(Model model,Long mem_num, HttpSession session){
     	
     	MemberVO member = (MemberVO) session.getAttribute("user");
     	
@@ -66,30 +69,33 @@ public class OrderController {
 	 *=========================*/
     @PostMapping("/order/order")
     @ResponseBody
-    public Map<String, Object> addTOOrder(@RequestParam Long mem_num,OrderVO orderVO,
-    		                              HttpSession session){
+    public Map<String, Object> addToOrder(@RequestParam Long mem_num,@RequestParam Integer item_quantity,
+    		                              @RequestParam Long item_num,OrderVO orderVO,HttpSession session){
     	Map<String, Object> mapAjax = new HashMap<String, Object>();
     	
+    	
+    	
     	log.debug("<<유저 - mem_num>>" + mem_num);
+    	log.debug("<<주문 VO - orderVO>> : " + orderVO);
+    	CartVO cart = cartService.selectCart(mem_num);
     	
     	if (mem_num == null) {
     		mapAjax.put("result", "logout");
-    	}else {
+    		return mapAjax;
+    	}else {   		
+    		OrderVO order = new OrderVO();
+    		order.setMem_num(mem_num);
+    		order.setItem_num(item_num);
+    		order.setOrder_name(orderVO.getOrder_name());
+    		order.setOrder_phone(orderVO.getOrder_phone());
+    		order.setOrder_zipcode(orderVO.getOrder_zipcode());
+    		order.setOrder_address1(orderVO.getOrder_address1());
+    		order.setOrder_address2(orderVO.getOrder_address2());
+    		order.setOrder_price(cart.getCart_price());
     		
-//    		OrderVO order = new OrderVO();
-//    		order.setMem_num(mem_num);
-//    		order.setItem_num();
-//    		order.setOrder_name();
-//    		order.setOrder_phone();
-//    		order.setOrder_zipcode();
-//    		order.setOrder_address1();
-//    		order.setOrder_address2();
-//    		order.setOrder_pay();
-//    		order.setOrder_check();
-//    		
-//    		log.debug("<<주문 VO - orderVO>> : " + order);
+    		orderService.insertOrder(order);
+    		mapAjax.put("result", "success");
     	}
-    	
     	return mapAjax;
     }
 }

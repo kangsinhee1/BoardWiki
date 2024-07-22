@@ -48,7 +48,7 @@ public class CartController {
 	@PostMapping("/item/addToCart")
 	@ResponseBody
 	public Map<String, Object> addToCart(@RequestParam Long item_num, @RequestParam Integer item_quantity,
-			HttpSession session) {
+			                             HttpSession session) {
 		Map<String, Object> mapAjax = new HashMap<String, Object>();
 
 		MemberVO member = (MemberVO) session.getAttribute("user");
@@ -60,23 +60,18 @@ public class CartController {
 			mapAjax.put("result", "logout");
 			
 		}else {
+			
+			ItemVO item = itemService.selectItem(item_num);
+			
 			CartVO cart = new CartVO();
 			cart.setMem_num(member.getMem_num());
 			cart.setItem_num(item_num);
 			cart.setItem_quantity(item_quantity); // 사용자가 선택한 수량 설정
+			cart.setCart_price(item_quantity * item.getItem_price());
 			
 			log.debug("<<장바구니 VO - cartVO>> : " + cart);
 			
-			ItemVO item = itemService.selectItem(item_num);
-			
-			if (item == null) {
-	            mapAjax.put("result", "noitem");
-	            return mapAjax;
-	        }
-			
-			CartVO db_cart = cartService.getCart(cart);
-			
-			
+			CartVO db_cart = cartService.getCart(cart);				
 			
 		    if(db_cart==null) {//동일 상품이 없을 경우
 		    	
@@ -160,17 +155,13 @@ public class CartController {
 	        mapAjax.put("result", "notloggedin");
 	        return mapAjax;
 	    }
-
+	    ItemVO item = itemService.selectItem(item_num);
+	    
 	    CartVO cart = new CartVO();
 	    cart.setMem_num(member.getMem_num());
 	    cart.setItem_num(item_num);
 	    cart.setItem_quantity(item_quantity);
-
-	    ItemVO item = itemService.selectItem(item_num);
-	    if (item == null) {
-	        mapAjax.put("result", "noitem");
-	        return mapAjax;
-	    }
+	    cart.setCart_price(item_quantity * item.getItem_price());
 	    
 	    int db_item = itemService.getterItem(item_num);
 	    

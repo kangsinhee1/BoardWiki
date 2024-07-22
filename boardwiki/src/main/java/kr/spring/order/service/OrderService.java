@@ -1,23 +1,15 @@
-package kr.spring.order.dao;
+package kr.spring.order.service;
 
 import java.util.List;
-
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
 
 import kr.spring.cart.vo.CartVO;
 import kr.spring.order.vo.OrderVO;
 
-@Mapper
-public interface OrderMapper {
-	//상품주문
+public interface OrderService {
+    
 	public void insertOrder(OrderVO order);
-	
 	public OrderVO selectOrderDetail(Long order_num);
-	
 	public OrderVO selectOrderUser(Long mem_num);
-	@Select("SELECT * FROM order WHERE mem_num=#{mem_num}")
 	public List<OrderVO> selectOrderList(Long mem_num);
-	@Select("SELECT * FROM cart WHERE mem_num=#{mem_num}")
 	public List<CartVO> selectCartList(Long mem_num);
 }
