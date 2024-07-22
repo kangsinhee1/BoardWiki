@@ -66,7 +66,8 @@
 	<div class="alert alert-info mt-3">표시할 게시물이 없습니다.</div>
 	</c:if>
 	<c:if test="${count > 0}">
-	<table class="chart-table">
+	<div class="chart-table">
+	<table>
 		<thead>
 		<tr>
 			<th>번호</th>
@@ -92,6 +93,7 @@
 		</tbody>
 		</c:forEach>
 	</table>
+	</div>
 	<div class="align-center">
 	<div class="blog-pagination">${page}</div>
 	</div>

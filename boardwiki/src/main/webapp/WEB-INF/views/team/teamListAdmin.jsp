@@ -11,7 +11,7 @@
 		<h2>모임 신청</h2>
 		<div class="site-breadcrumb">
 			<a href="teamListAdmin">Home</a>  /
-			<span>모임신청</span> 
+			<span>모임신청(관리자)</span> 
 		</div>
 	</div>
 </section>
@@ -21,7 +21,6 @@
 	<div class="row">
 		<div class="col-lg-12">
 <div class="page-main">
-	<h2>모임 신청(관리자)</h2>
 	<form action="teamListAdmin" id="search_form" method="get">
 		<ul class="search">
 			<li>

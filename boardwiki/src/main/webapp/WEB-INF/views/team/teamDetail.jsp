@@ -23,15 +23,14 @@
 	<div class="row">
 		<div class="col-lg-12">
 <div class="page-main">
-	<h2 class="align-center">${team.tea_name}</h2>
-	<ul class="detail-info align-right">
+	<h2 class="">${team.tea_name}</h2>
+	<ul class="detail-info">
 		<li>작성자 : ${team.mem_nickname}</li>
-		<br>
 		<li>등록일 : ${team.tea_rdate} </li>
 		<li>조회수 : ${team.tea_hit}</li>
 	</ul>
-	<div>
 		<%--좋아요 --%>
+	<div>
 		<img id="output_fav" data-num="${team.tea_num}" src="${pageContext.request.contextPath}/images/fav01.gif">
 		<span id="output_fcount"></span>
 	</div>
@@ -55,7 +54,7 @@
 		</div>
 		<div class="detail-content">${team.tea_content}</div>
 		<hr>
-<h4>모임 주소: ${team.tea_address1} ${team.tea_address2}</h4>
+<div>모임 주소: ${team.tea_address1} ${team.tea_address2}</>
 <div id="map" style="width:100%;height:350px;"></div>
 
 <br>
@@ -66,6 +65,7 @@
 			  onclick="location.href='teamApply?tea_num=${team.tea_num}'">	
 	</p>
 </c:if>
+</div>
 </div>
 </div>
 </div>

@@ -9,7 +9,8 @@
 	<div class="content-container" id="content">
 		<!-- Content for 내가 신청한 모임 -->
 		<h2>내가 신청한 모임 목록</h2>
-		<table class="table">
+		<div class="chart-table">
+		<table >
 			<thead>
 				<tr>
 					<th>모임 이름</th>
@@ -41,8 +42,10 @@
 				</c:forEach>
 			</tbody>
 		</table>
+		</div>
 		<h2>내가 가입한 모임 목록</h2>
-		<table class="table">
+		<div class="chart-table">
+		<table>
 			<thead>
 				<tr>
 					<th>모임 이름</th>
@@ -75,12 +78,9 @@
 				</c:forEach>
 			</tbody>
 		</table>
+		</div>
 	</div>
-
-
 </div>
-</div>
-</section>
 <script type="text/javascript">
 $(document).on('click','.delete_btn',function(){
 	 let teaA_num = $(this).attr('data-num');
