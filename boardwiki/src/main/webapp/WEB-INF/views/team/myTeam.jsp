@@ -8,7 +8,9 @@
 <div class="page-main">
 	<div class="content-container" id="content">
 		<!-- Content for 내가 신청한 모임 -->
+		<div class="font-white">
 		<h2>내가 신청한 모임 목록</h2>
+		</div>
 		<div class="chart-table">
 		<table >
 			<thead>
@@ -43,6 +45,7 @@
 			</tbody>
 		</table>
 		</div>
+		<br>
 		<h2>내가 가입한 모임 목록</h2>
 		<div class="chart-table">
 		<table>

@@ -24,16 +24,16 @@
 <div class="container">
 	<div class="row">
 		<div class="col-lg-12">
-	<form action="teamList" id="search_form" method="get">
+	<form action="teamList" id="search_form"   method="get">
 		<ul class="search">
 			<li>
 				<select name="keyfield" id="keyfield" class="form-control" >
-					<option value="1" <c:if test="${param.keyfield == 1}">selected</c:if>> 모임명 &nbsp; </option>
+					<option value="1" <c:if test="${param.keyfield == 1}">selected</c:if>> 모임명 </option>
 					<option value="2" <c:if test="${param.keyfield == 2}">selected</c:if>> 지역 </option>
 				</select>
 			</li>
 			<li>
-				<input type="search" name="keyword" class="form-control"
+				<input type="search" name="keyword"
 				  id="keyword" value="${param.keyword}">
 			</li>
 			<li>
@@ -67,7 +67,7 @@
 	</c:if>
 	<c:if test="${count > 0}">
 	<div class="chart-table">
-	<table>
+	<table>  
 		<thead>
 		<tr>
 			<th>번호</th>
@@ -93,9 +93,9 @@
 		</tbody>
 		</c:forEach>
 	</table>
-	</div>
 	<div class="align-center">
 	<div class="blog-pagination">${page}</div>
+	</div>
 	</div>
 	</c:if>	
 </div>

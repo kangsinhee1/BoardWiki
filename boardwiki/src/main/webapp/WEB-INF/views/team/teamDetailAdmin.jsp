@@ -24,22 +24,25 @@
 		<div class="col-lg-12">
 <div class="page-main">
 	<h2 class="align-center">${team.tea_name}</h2>
-	<ul class="detail-info align-right">
+		<div class="align-right">
+	<ul class="detail-info">
 		<li>작성자 : ${team.mem_nickname}</li>
-		<br>
 		<li>등록일 : ${team.tea_rdate} </li>
 		<li>조회수 : ${team.tea_hit}</li>
 	</ul>
+	</div>
 	<hr size="1" width="100%">
 	<div class="align-right">
 	<input type="button" value="목록" onclick="location.href='teamListAdmin'">
 	
-	<input type="button" value="게시판 " onclick="location.href='teamBoardAdmin?tea_num=${team.tea_num}'">
+	<input type="button" value="게시판" onclick="location.href='teamBoardAdmin?tea_num=${team.tea_num}'">
 		</div>
 		<div class="detail-content">${team.tea_content}</div>
 		<hr>
+<div class="mapsize">
 <h4>모임 주소: ${team.tea_address1} ${team.tea_address2}</h4>
 <div id="map" style="width:100%;height:350px;"></div>
+</div>
 
 <br>
 

@@ -36,11 +36,13 @@
 		<%--좋아요 --%>
 	<div class="align-right">
 		<img id="output_fav" data-num="${team.tea_num}" src="${pageContext.request.contextPath}/images/fav01.gif">
-		<span id="output_fcount"></span>
+		&nbsp;<span id="output_fcount"></span>
 	</div>
 	<hr size="1" width="100%">
 	<div class="align-right">
+	<c:if test="${!empty user &&user.mem_num != team.mem_num}">
 	<input type="button" value="신고" id="report_btn" class="default_btn2">
+	</c:if>
 	<input type="button" value="목록" class="default_btn2" onclick="location.href='teamList'">
 		<c:if test="${!empty user &&user.mem_num == team.mem_num}">
 			<input type="button" value="수정" class="default_btn2"
@@ -60,8 +62,10 @@
 		<div class="detail-content">${team.tea_content}</div>
 		<hr>
 <div>
-<div class="font-white">모임 주소: ${team.tea_address1} ${team.tea_address2}</div>
+<div class="mapsize">
+<h4>모임 주소: ${team.tea_address1} ${team.tea_address2}</h4>
 <div id="map" style="width:100%;height:350px;"></div>
+</div>
 
 <br>
 <c:if test="${team.mem_num != user.mem_num }">

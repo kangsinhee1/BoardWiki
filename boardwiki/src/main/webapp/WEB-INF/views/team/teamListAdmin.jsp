@@ -24,7 +24,7 @@
 	<form action="teamListAdmin" id="search_form" method="get">
 		<ul class="search">
 			<li>
-				<select name="keyfield" id="keyfield">
+				<select name="keyfield" id="keyfield"  class="form-control">
 					<option value="1" <c:if test="${param.keyfield == 1}">selected</c:if>>모임명&nbsp;</option>
 					<option value="2" <c:if test="${param.keyfield == 2}">selected</c:if>>지역&nbsp;</option>
 				</select>
@@ -80,7 +80,7 @@
 		<tr>
 		
 			<td class="">${team.tea_num}</td>
-			<td class=""><a href="teamDetailAdmin?tea_num=${team.tea_num}">(${fn:substring(team.tea_address1,0,2)}) ${team.tea_name} <c:if test="${team.tea_status == 0}">(정지) </c:if></a></td>
+			<td class="link"><a class="link" href="teamDetailAdmin?tea_num=${team.tea_num}">(${fn:substring(team.tea_address1,0,2)}) ${team.tea_name} <c:if test="${team.tea_status == 0}">(정지) </c:if></a></td>
 			<td class="">
 				${team.mem_nickname}
 			</td>
@@ -91,10 +91,11 @@
 		</c:forEach>
 		</tbody>
 	</table>
-	</div>
 	<div class="align-center">
 	<div class="blog-pagination">${page}</div>
 	</div>
+	</div>
+	
 	</c:if>	
 </div>
 </div>

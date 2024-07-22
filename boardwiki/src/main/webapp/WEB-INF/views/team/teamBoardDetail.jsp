@@ -25,27 +25,6 @@
 <!-- 게시판 글 상세 시작 -->
 <div class="page-main">
 	<h2> ${board.teaB_title}</h2>
-	<ul class="detail-info">
-	<li><input type="hidden" id="teaB_num" value="${board.teaB_num}"></li>
-		<li> 작성자 : ${board.mem_nickname} <br>
-			 <c:if test="${empty board.teaB_mdate}">
-            작성일 : ${fn:substring(board.teaB_rdate, 0, 10)}
-        </c:if>
-        <c:if test="${!empty board.teaB_mdate}">
-            최근 수정일 : ${fn:substring(board.teaB_mdate, 0, 10)}
-        </c:if>  조회 : ${board.teaB_hit}</li>
-	</ul>
-	<c:if test="${!empty board.filename}">
-		<ul>
-			<li>첨부 파일 : <a href="file?teaB_num=${board.teaB_num}">${board.filename}</a></li>
-		</ul>
-	</c:if>
-	<hr>
-	<div class="detail-content">${board.teaB_content}</div>
-	<div>
-		<span id="output_rcount"></span>
-	</div>
-	<hr size="1" width="100%">
 	<div class="align-right">
 		<c:if test="${!empty user &&user.mem_num == board.mem_num}">
 			<input type="button" value="수정"
@@ -68,7 +47,27 @@
 		<input type="button" value="목록" onclick="location.href='teamBoardUser?tea_num=${board.tea_num}'">
 		</c:if>
 	</div>
-	<hr size="1" width="100%">
+	<ul class="detail-info">
+	<li><input type="hidden" id="teaB_num" value="${board.teaB_num}"></li>
+		<li> 작성자 : ${board.mem_nickname} <br>
+			 <c:if test="${empty board.teaB_mdate}">
+            작성일 : ${fn:substring(board.teaB_rdate, 0, 10)}
+        </c:if>
+        <c:if test="${!empty board.teaB_mdate}">
+            최근 수정일 : ${fn:substring(board.teaB_mdate, 0, 10)}
+        </c:if>  조회 : ${board.teaB_hit}</li>
+	</ul>
+	<c:if test="${!empty board.filename}">
+		<ul class="detail-info">
+			<li>첨부 파일 :  <a href=" file?teaB_num=${board.teaB_num}">${board.filename}</a></li>
+		</ul>
+	</c:if>
+	<hr>
+	<div class="detail-content">${board.teaB_content}</div>
+	<hr>
+	<div class="font-white">
+		<span id="output_rcount"></span>
+	</div>
 	<!-- 	 댓글 ui 시작-->
 	<div id="reply_div">
 		<span class="re-title align-center">댓글달기</span>

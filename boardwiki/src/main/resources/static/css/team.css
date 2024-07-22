@@ -46,6 +46,7 @@ ul.detail-info li:last-child{
 .detail-content p{
 	color:white;
 }
+
 #output_fav, .output_rfav{
 	cursor:pointer;
 }
@@ -53,51 +54,7 @@ ul.detail-info li:last-child{
 	width:50px;
 	display:inline-block;
 }
-div#reply_div{
-	padding:5px 10px 40px 10px;
-	margin-top:10px;
-	background-color:#EEEEEE;
-}
-form#re_form{
-	width:650px;
-	border:none;
-}
-span.re-title{
-	color:#000;
-	font-size:12pt;
-	line-height:200%;
-}
-span.letter-count{
-	font-size:10pt;
-	color:#999;
-}
-textarea.rep-content{
-	width:90%;
-	height:50px;
-	margin:10px;
-}
-div#re_first, div#mre_first, div#mresp_first{
-	float:left;
-	width:70%;
-	padding-left:15px;
-	margin-bottom:10px;
-}
-div#re_second, div#mre_second, div#mresp_second{
-	float:left;
-	width:19%;
-	margin-bottom:10px;
-}
-div#resp_first{
-	float:left;
-	width:70%;
-	padding-left:15px;
-	margin-bottom:10px;
-}
-div#resp_second{
-	float:left;
-	width:26%;
-	margin-bottom:10px;
-}
+
 div#loading{
 	width:100%;
 	height:50px;
@@ -201,7 +158,7 @@ div.item{
 .content-container.active {
         display: block;
     }
-.modal {
+.modal2 {
   display: none;
   position: fixed;
   z-index: 1;
@@ -215,6 +172,13 @@ div.item{
 }
 
 .modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 30%;
+}
+.modal2-content {
   background-color: #fefefe;
   margin: 15% auto;
   padding: 20px;
@@ -237,6 +201,7 @@ div.item{
 }
 
 
+
 /* .default-btn{
 	padding:4px 20px;
 	border:1px solid #09aa5c;
@@ -256,18 +221,28 @@ div.item{
 .page-main div.font-white {
 	color:white;
 }
+.page-main div.font-white h2{
+	color:white;
+}
 .page-main h4 {
 	color:white;
 }
 .page-main label{
 	color:white;
 }
-
+.page-main h2{
+	text-align:center;
+	color:white;
+}
 .page-main div.align-center{
 	text-align:center;
 }
 .page-main ul.detail-info li{
 	display:flex;
+}
+.page-main div.mapsize {
+	width:800px;
+	margin: 0 auto;
 }
 .fav-container {
     display: flex;
@@ -278,9 +253,9 @@ div.item{
 img#output_fav{
 	width:50px;
 }
-
-
-
+div.align-center2{
+	text-align:center;
+}
 .modal{
 	position:absolute;
 	z-index:5;
@@ -299,7 +274,6 @@ img#output_fav{
     transform:translateY(-50%);
 	
 }
-	
 
 .itemsh{
 	width:300px;
@@ -313,4 +287,56 @@ img#output_fav{
 	margin-bottom:400px;
 	border:1px solid #999 !important;
 	background:white;
+}
+/* 댓글*/
+div#reply_div{
+	padding:5px 10px 50px 10px;
+	margin-top:10px;
+	background-color:#EEEEEE;
+	width:625px;
+	border-radius: 10px 10px 10px 10px;
+}
+
+form#re_form{
+	width:650px;
+	border:none;
+}
+span.re-title{
+	color:#000;
+	font-size:12pt;
+	line-height:200%;
+}
+span.letter-count{
+	font-size:10pt;
+	color:#999;
+}
+textarea.rep-content{
+	width:90%;
+	height:50px;
+	margin:10px;
+}
+div#re_first, div#mre_first, div#mresp_first{
+	float:left;
+	width:70%;
+	padding-left:15px;
+	margin-bottom:10px;
+}
+div#re_second, div#mre_second, div#mresp_second{
+	float:left;
+	width:20%;
+	margin-bottom:10px;
+}
+div#resp_first{
+	float:left;
+	width:70%;
+	padding-left:15px;
+	margin-bottom:10px;
+}
+div#resp_second{
+	float:left;
+	width:26%;
+	margin-bottom:10px;
+}
+div.sub-item p{
+	color:white;
 }

@@ -42,6 +42,7 @@
 		<put-attribute name="title" value="나의 모임"/>
 		<put-attribute name="top-header" value="/WEB-INF/views/template/top-header.jsp"/>
 		<put-attribute name="header" value="/WEB-INF/views/template/header.jsp"/>
+		<put-attribute name="css" value="/WEB-INF/views/team/teamCSS.jsp"/>
 		<put-attribute name="body" value="/WEB-INF/views/team/myTeam.jsp"/>
 		<put-attribute name="nav" value="/WEB-INF/views/team/myTeam-nav.jsp"/>
 		<put-attribute name="footer" value="/WEB-INF/views/template/footer.jsp"/>

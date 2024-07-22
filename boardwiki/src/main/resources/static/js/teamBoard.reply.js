@@ -47,7 +47,7 @@ $(function(){
 					if(item.mem_nickname){
 						output += item.mem_nickname + '<br>';
 					}else{
-						output += item.id + '<br>';
+						output += item.id + '<br><br>;';
 					}
 					if(item.re_mdate){
 						output += '<span class="modify-date">최근 수정일 : ' + item.teaR_mdate + '</span>';

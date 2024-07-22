@@ -30,11 +30,6 @@
 						<li><form:label class="font-white" path="tea_name">모임 명</form:label> <form:input
 								path="tea_name" /> <form:errors path="tea_name"
 								cssClass="error-color" /></li>
-						<li><form:label path="tea_man">모집 회원수</form:label> <form:input
-								type="number" path="tea_man" min="2" max="99" defaultValue="2" />
-							<form:errors path="tea_man" cssClass="error-color" /></li>
-
-
 						<li><form:label path="tea_content">홍보 내용</form:label> <form:textarea
 								path="tea_content" /> <form:errors path="tea_content"
 								cssClass="error-color" /> <script>

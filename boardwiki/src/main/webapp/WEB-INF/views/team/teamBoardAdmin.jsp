@@ -61,7 +61,8 @@
     </c:if>
 
     <c:if test="${count > 0}">
-        <table class="striped-table">
+    <div class="chart-table">
+        <table>
             <tr>
                 <th>번호</th>
                 <th>분류</th>
@@ -100,6 +101,7 @@
                 </tr>
             </c:forEach>
         </table>
+    </div>
         <div class="align-center">${page}</div>
     </c:if>
 </div>
