@@ -18,5 +18,4 @@ public class ReportVO {
 	private int report_category;	//신고 유형
 	private int report_type;		//신고 분류(게시판)
 	private	Long report_typeDetail;	//신고된 글이나 댓글 고유 번호
-	
 }

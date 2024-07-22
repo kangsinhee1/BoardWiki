@@ -23,6 +23,7 @@ import kr.spring.member.vo.MemberVO;
 import kr.spring.rent.service.RentService;
 import kr.spring.rent.vo.RentVO;
 import kr.spring.report.service.ReportService;
+import kr.spring.report.vo.ReportVO;
 import kr.spring.util.PagingUtil;
 import lombok.extern.slf4j.Slf4j;
 
@@ -296,15 +297,15 @@ public class AdminController {
 		int count = reportService.getReportRowCount(map);
 		
 		PagingUtil page =
-				new PagingUtil(keyfield,keyword,pageNum,count,20,10,"reportManage");
+				new PagingUtil(keyfield,keyword,pageNum,count,10,10,"reportManage");
 		
-		List<ItemVO> list = null;
+		List<ReportVO> list = null;
 		if(count > 0) {
 			map.put("start", page.getStartRow());
 			map.put("end", page.getEndRow());
 			
 			
-			list = itemService.selectList(map);  
+			list = reportService.selectReportList(map);  
 		}
 		
 		model.addAttribute("count", count);

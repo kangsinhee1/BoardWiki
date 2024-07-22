@@ -25,8 +25,26 @@
 									resultType="integer">
 		SELECT
 			COUNT(*)
-		FROM report
+		FROM 		
 	 </select>
+	 <sql id="category">
+	 	<if test="report_category == 1">
+	 		(SELECT * FROM report WHERE report_type=1) r
+	 		   		 LEFT OUTER JOIN board b ON r.report_typeDetail = b.boa_num
+	 	</if>
+	 	<if test="report_category == 5">
+	 		(SELECT * FROM report WHERE report_type=5) r
+	 		   		 LEFT OUTER JOIN board b ON r.report_typeDetail = b.boa_num
+	 	</if>
+	 	<if test="report_category == 6">
+	 		(SELECT * FROM report WHERE report_type=6) r
+	 		   		 LEFT OUTER JOIN board b ON r.report_typeDetail = b.boa_num
+	 	</if>
+	 	<if test="report_category == 7">
+	 		(SELECT * FROM report WHERE report_type=7) r
+	 		   		 LEFT OUTER JOIN board b ON r.report_typeDetail = b.boa_num
+	 	</if>
+	 </sql>
 	  <select id="selectReportList" parameterType="map"
 	 							resultType="reportVO">
 	 	SELECT
@@ -36,11 +54,12 @@
 	 			rownum rnum
 	 		   FROM (SELECT
 	 		   			*
-	 		   		 FROM report r
-	 		   		 LEFT OUTER JOIN board b ON r.report_typeDetail = b.boa_num
+	 		   		 FROM 
+	 		   		 <include refid="category"></include>
 	 		   		 )a)
 		<![CDATA[
 		WHERE rnum >= #{start} AND rnum <= #{end}
 		]]>
 	</select>
+	  
 </mapper>
