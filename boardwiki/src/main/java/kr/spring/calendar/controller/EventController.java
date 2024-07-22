@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import kr.spring.member.vo.MemberVO;
-
+  
 @Controller
 public class EventController {
 
