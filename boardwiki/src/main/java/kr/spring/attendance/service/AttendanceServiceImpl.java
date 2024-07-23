@@ -46,7 +46,8 @@ public class AttendanceServiceImpl implements AttendanceService{
 		}
 		attendanceMapper.markAttendance(vo);
 		DiceVO dice = new DiceVO();
-        int count = diceMapper.selectDiceCunt(vo.getMem_num());
+        Integer count = 0;
+        count = diceMapper.selectDiceCunt(vo.getMem_num());
         dice.setMem_num(vo.getMem_num());
         if(count == 1) {
         	diceMapper.updateDice(dice);

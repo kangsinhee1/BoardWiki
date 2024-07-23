@@ -21,8 +21,9 @@ public class DiceServiceImpl implements DiceService{
     public int rollDice(Long mem_num) {
         int diceVal = new Random().nextInt(6) + 1;
         long dice_num = diceMapper. getDiceByNum(mem_num);
-        int cont = diceMapper.selectDicechanec(mem_num);
-        if(cont >0) {
+        Integer cont = 0;
+        cont = diceMapper.selectDicechanec(mem_num);
+        if(cont > 0) {
         	DiceVO diceValue = new DiceVO();
         	diceValue.setDice_num(dice_num);
             diceValue.setDice_val(diceVal);

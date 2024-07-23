@@ -42,7 +42,7 @@ public class AttendanceController {
         MemberVO user = (MemberVO) session.getAttribute("user");
         if (user != null) {
             long mem_num = user.getMem_num();
-            int dice = 0;
+            Integer dice = 0;
             dice = diceService.selectDicechanec(mem_num);
 
             model.addAttribute("dice",dice);
@@ -59,6 +59,8 @@ public class AttendanceController {
                 e.printStackTrace();
                 model.addAttribute("attendancesJson", "[]");
             }
+        }else {
+            model.addAttribute("attendancesJson", "[]");
         }
 
         return "attendance";
@@ -72,10 +74,14 @@ public class AttendanceController {
             vo.setMem_num(user.getMem_num());
             vo.setAtt_date(LocalDate.now());
             attendanceService.checkAndInsertAttendance(vo);
+            model.addAttribute("message","출서체크 완료");
+    		model.addAttribute("url","/attendance/attendance");
+        }else {
+        	model.addAttribute("message","로그인이 필요합니다.");
+        	model.addAttribute("url","/member/login");
         }
 
-        model.addAttribute("message","출서체크 완료");
-		model.addAttribute("url","/attendance/attendance");
+        
 		return "common/resultAlert";
     }
 

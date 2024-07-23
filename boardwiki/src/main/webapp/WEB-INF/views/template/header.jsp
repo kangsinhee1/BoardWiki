@@ -85,7 +85,7 @@
                     </li>
                     <li><a href="#">출석체크</a>
                         <ul class="sub-menu">
-                            <li><a href="#">출석체크</a></li>
+                            <li><a href="${pageContext.request.contextPath}/attendance/attendance">출석체크</a></li>
                         </ul>
                     </li>
                 </ul>
