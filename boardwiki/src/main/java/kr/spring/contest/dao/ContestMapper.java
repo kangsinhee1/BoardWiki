@@ -41,4 +41,8 @@ public interface ContestMapper {
 	
 	@Select("SELECT COUNT(*) FROM contest_APPLY WHERE con_num = #{con_num}")
 	public Integer countContestMan(Long con_num);
+	
+	//대회 리스트 숨김 처리
+	@Update("UPDATE contest set con_status = 3 WHERE con_num = #{con_num}")
+	public void deleteContest(Long con_num);
 }

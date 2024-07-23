@@ -195,4 +195,26 @@ public class ContestController {
 		return "common/resultAlert";
 	}
 	
+	/*=====================
+	 * 	  대회 삭체 처리
+	 *=====================*/
+	@GetMapping("/contest/deleteContest")
+	public String deleteContest(@RequestParam Long con_num,
+			HttpServletRequest request, HttpSession session, ContestVO contestVO, Model model) {
+
+		MemberVO member = (MemberVO) session.getAttribute("user");
+		
+		if(member.getMem_auth() < 9) {
+			model.addAttribute("message", "잘못된 접근입니다.");
+			model.addAttribute("url", request.getContextPath() + "/main/main");
+			return "common/resultAlert";
+		}
+
+		contestservice.deleteContest(con_num);
+		
+		model.addAttribute("message", "삭제되었습니다.");
+		model.addAttribute("url", request.getContextPath() + "/contest/contestList");
+		
+		return "common/resultAlert";
+	}
 }

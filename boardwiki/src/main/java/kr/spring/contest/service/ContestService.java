@@ -25,4 +25,6 @@ public interface ContestService {
 	public void cancelContestApply(ContestApplyVO contestApplyVO);
 	
 	public Integer countContestMan(Long con_num);
+	
+	public void deleteContest(Long con_num);
 }

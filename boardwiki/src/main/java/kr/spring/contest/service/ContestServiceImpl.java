@@ -65,4 +65,10 @@ public class ContestServiceImpl implements ContestService{
 	public Integer countContestMan(Long con_num) {
 		return contestmapper.countContestMan(con_num);
 	}
+
+	@Override
+	public void deleteContest(Long con_num) {
+		contestmapper.deleteContest(con_num);
+		
+	}
 }

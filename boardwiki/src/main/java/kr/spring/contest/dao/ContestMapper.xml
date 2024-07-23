@@ -85,6 +85,7 @@
 		LEFT OUTER JOIN
 		member_detail
 		USING(mem_num)
+		WHERE con_status = 0 OR con_status = 1
 		<include refid="contestSearch"></include>
 		<include refid="contestOrder"></include>
 		)a)
