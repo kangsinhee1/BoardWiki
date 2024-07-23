@@ -15,6 +15,7 @@
 		con_sdate,
 		con_edate,
 		con_maxman,
+		con_status,
 		mem_num)
 		VALUES (
 		contest_seq.nextval,
@@ -26,6 +27,7 @@
 		#{con_sdate},
 		#{con_edate},
 		#{con_maxman},
+		#{con_status},
 		#{mem_num})
 	</insert>
 	<sql id="contestSearch">
@@ -85,7 +87,7 @@
 		LEFT OUTER JOIN
 		member_detail
 		USING(mem_num)
-		WHERE con_status = 0 OR con_status = 1
+		WHERE con_status = 0 OR con_status = 1 OR con_status = 2
 		<include refid="contestSearch"></include>
 		<include refid="contestOrder"></include>
 		)a)
@@ -111,7 +113,7 @@
 
     <!-- 컨테스트 참가자 수 업데이트 -->
     <update id="updateContestManCount" parameterType="contestApplyVO">
-        UPDATE contest 
+        UPDATE contest
         SET con_man = con_man + 1
         WHERE con_num = #{con_num}
     </update>

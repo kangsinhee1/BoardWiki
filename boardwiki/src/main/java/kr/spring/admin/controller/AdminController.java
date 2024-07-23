@@ -442,7 +442,7 @@ public class AdminController {
 		int count = contestService.countAllcontest(map);
 
 		PagingUtil page =
-				new PagingUtil(keyfield,keyword,pageNum,count,5,10,"contestList");
+				new PagingUtil(keyfield,keyword,pageNum,count,5,10,"contestAdminList");
 
 		List<ContestVO> list = null;
 	    if(count > 0) {

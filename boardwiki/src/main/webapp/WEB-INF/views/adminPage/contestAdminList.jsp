@@ -33,6 +33,9 @@
 					<c:if test="${contest.con_status == 1 }">
 						종료
 					</c:if>
+					<c:if test="${contest.con_status == 2 }">
+						진행예정
+					</c:if>
 					<c:if test="${contest.con_status == 3 }">
 						삭제
 					</c:if>

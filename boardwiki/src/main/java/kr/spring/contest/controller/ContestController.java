@@ -1,9 +1,11 @@
 package kr.spring.contest.controller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -67,7 +69,7 @@ public class ContestController {
 					throws IllegalStateException,
 					IOException{
 		log.debug("<<게시판 글 저장>> : " + contestVO);
-
+		
 		//유효성 체크 결과 오류가 있으면 폼 호출
 		if(result.hasErrors()) {
 			return writeform(contestVO, request, session, model);
@@ -76,7 +78,26 @@ public class ContestController {
 		//회원번호 셋팅
 		MemberVO member = (MemberVO)session.getAttribute("user");
 		contestVO.setMem_num(member.getMem_num());
-
+		contestVO.getCon_sdate();
+		
+		// 현재 날짜와 비교하여 con_sdate가 오늘보다 크면 con_status를 2로 설정
+	    Date now = new Date();
+	    
+	    SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+	    
+	    String nowTime = sdf1.format(now);
+	    
+	    String sdate = contestVO.getCon_sdate();
+	    
+	    int compare = sdate.compareTo(nowTime);
+	    
+	    System.out.println("**********************"+compare+"*********************");
+	    
+	    if (compare > 0) {
+	        contestVO.setCon_status(2);
+	    }else {
+	    	contestVO.setCon_status(0);
+	    }
 		//글쓰기
 		contestservice.insertContest(contestVO);
 
@@ -95,24 +116,26 @@ public class ContestController {
 	public String getList(
 			@RequestParam(defaultValue="1") int pageNum,
 			@RequestParam(defaultValue="1") int order,
+			@RequestParam(defaultValue="") String category,
 			String keyfield,String keyword,Model model) {
 
 		log.debug("<<대회 목록 진입>>");
 
 		Map<String,Object> map =
 				new HashMap<>();
+		map.put("category", category);
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
 
 		//전체,검색 레코드수
-		int count = contestservice.selectRowCount(map);
+		int count = contestservice.countAllcontest(map);
 
 		//페이지 처리
-		PagingUtil page =
-				new PagingUtil(keyfield,keyword,pageNum,
-						count,20,10,"contestList",
-						"&order="+order);
+		PagingUtil page = new PagingUtil(keyfield,keyword,pageNum,count,20,10,"contestList","&order="+order);
+		
+		
 		List<ContestVO> list = null;
+		
 		if(count > 0) {
 			map.put("order", order);
 			map.put("start", page.getStartRow());
@@ -127,7 +150,6 @@ public class ContestController {
 
 		return "contestList";
 	}
-
 	/*=====================
 	 * 	   대회 상세
 	 *=====================*/

@@ -82,6 +82,9 @@
             <c:if test="${contest.con_status==1}">
             	<td>종료</td>
             </c:if>
+            <c:if test="${contest.con_status==2}">
+            	<td>진행예정</td>
+            </c:if>
         </tr>
         </c:forEach>
         </tbody>
