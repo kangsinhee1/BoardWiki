@@ -8,6 +8,16 @@
 <!-- include ckeditor js -->
 <script src="${pageContext.request.contextPath}/js/ckeditor.js"></script>
 <script src="${pageContext.request.contextPath}/js/uploadAdapter.js"></script>
+<section class="page-top-section set-bg" data-setbg="/img/page-top-bg/4.jpg">
+	<div class="page-info">
+		<h2>모임 신청</h2>
+		<div class="site-breadcrumb">
+			<a href="">Home</a>  /
+			<span></span> /
+			<span><a > </a></span>
+		</div>
+	</div>
+</section>
 <div class="page-main">
     <h2>중고 글수정</h2>
     <form:form action="usedUpdate" id="used_modify"

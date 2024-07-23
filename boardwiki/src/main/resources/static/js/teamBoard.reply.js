@@ -161,6 +161,7 @@ $(function(){
 			modifyUI += '      <input type="submit" value="수정">';
 			modifyUI += '      <input type="button" value="취소" class="re-reset">';
 			modifyUI += '   </div>';
+			modifyUI += '   <br>';
 			modifyUI += '   <hr size="1" noshade width="96%">';
 			modifyUI += '</form>';
 	

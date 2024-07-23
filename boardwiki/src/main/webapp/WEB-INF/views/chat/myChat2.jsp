@@ -21,8 +21,16 @@
 	<div class="result-display">표시할 채팅방이 없습니다.</div>
 	</c:if>
 	<c:if test="${count>0}">
-	<table class="striped-table">
+	<div class="chart-table">
+	<table>
+	<thead>
+		<tr>
+			<th>모임명</th>
+			<th>메시지시간</th>
+		</tr>
+	</thead>
 		<c:forEach var="chat" items="${list}">
+		<tbody>
 		<tr>
 			<td style="text-align:left;">
 				<a href="${pageContext.request.contextPath}/chat/chatDetail?chaR_num=${chat.chaR_num}">
@@ -36,9 +44,13 @@
 				<c:if test="${empty chat.chatTextVO.chaT_time}">${chat.chaR_date}</c:if>
 			</td>
 		</tr>
+		</tbody>
 		</c:forEach>
 	</table>
-	<div class="align-center">${page}</div>
+	<div class="align-center">
+	<div class="blog-pagination">${page}</div>
+	</div>
+	</div>
 	</c:if>
 </div>
 

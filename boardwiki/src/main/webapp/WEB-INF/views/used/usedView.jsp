@@ -24,6 +24,13 @@
   <input type="hidden" name="useC_name" value="${used.use_title} 중고거래채팅">
 	<h2>${used.use_title}</h2>
 	<ul class="detail-info">
+	
+	<c:if test="${used.useC_grade == -1}">
+   		 <li>온도점수 : 아직 거래내역이 없습니다.</li>
+   </c:if>
+	<c:if test="${used.useC_grade != -1}">
+   		 <li>온도점수 : ${used.useC_grade} 점</li>
+	</c:if>
 		<li>
 		작성자:
 			<c:if test="${empty used.mem_nickname}">${used.mem_email}</c:if>

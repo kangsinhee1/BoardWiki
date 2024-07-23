@@ -230,7 +230,7 @@ div.item{
 .page-main label{
 	color:white;
 }
-.page-main h2{
+div.page-main h2{
 	text-align:center;
 	color:white;
 }
@@ -339,4 +339,7 @@ div#resp_second{
 }
 div.sub-item p{
 	color:white;
+}
+div.chart-table table  tbody tr td.link a{
+	color:pink;
 }

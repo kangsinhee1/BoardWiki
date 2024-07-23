@@ -3,6 +3,9 @@ package kr.spring.usedChat.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+
 import kr.spring.usedChat.vo.UsedChatRoomVO;
 import kr.spring.usedChat.vo.UsedChat_textVO;
 
@@ -23,4 +26,15 @@ public interface UsedChatService {
 	public void insertChat(UsedChat_textVO usedChat_textVO);
 	public List<UsedChat_textVO> selectChatDetail(Map<String,Long> map);
 	public void deleteUsedChatTxt(Map<String,Object> map);
+
+	//구매완료 처리및 구매 기록
+	//구매 완료 처리
+	public void updateUseC_status (long useC_num);
+	//구매 완료된 목록 보기
+	public List<UsedChatRoomVO> selectChatRoomstatus2(long mem_num);
+	// 판매자 평점 확인
+	public Long selectAvgGrade(Long mem_num);	
+	//판매자 평점 처리
+	public void updateUseC_grade(UsedChatRoomVO usedChatRoomVO);
+	
 }

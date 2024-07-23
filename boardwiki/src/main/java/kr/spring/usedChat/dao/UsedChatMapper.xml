@@ -100,6 +100,21 @@
 		]]>
 		AND use_num= #{use_num} 
 	</select> -->
+	<select id="selectAvgGrade" parameterType="Long"
+		resultType="Long">
+		SELECT
+		ROUND(AVG(a.usec_grade),0) AS avg_grade
+		FROM
+		usedChatRoom a
+		JOIN
+		used_item b
+		ON
+		a.use_num = b.use_num
+		WHERE
+		b.mem_num = #{mem_num}
+		GROUP BY
+		b.mem_num
+	</select>
 	
  </mapper>
 

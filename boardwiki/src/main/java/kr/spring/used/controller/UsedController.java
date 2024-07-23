@@ -23,6 +23,8 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.used.service.UsedService;
 import kr.spring.used.vo.UsedItemVO;
+import kr.spring.usedChat.service.UsedChatService;
+import kr.spring.usedChat.vo.UsedChatRoomVO;
 import kr.spring.util.FileUtil;
 import kr.spring.util.PagingUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -32,7 +34,8 @@ import lombok.extern.slf4j.Slf4j;
 public class UsedController {
 	@Autowired
 	UsedService usedService;
-
+	@Autowired
+	UsedChatService usedChatService;
 	//자바빈(VO) 초기화
 	@ModelAttribute
 	public UsedItemVO initCommand() {
@@ -125,10 +128,13 @@ public class UsedController {
 	@GetMapping("/used/usedDetail")
 	public ModelAndView process(long use_num) {
 		log.debug("<<게시판 글 상세 - use_num>> : " + use_num);
-
-
 		UsedItemVO used = usedService.selectUsed(use_num);
-
+		log.debug("게시판 작성자 누구야~  " + used);
+		if(usedChatService.selectAvgGrade(used.getMem_num())==null) {
+			used.setUseC_grade(-1L);
+		}else {
+			used.setUseC_grade(usedChatService.selectAvgGrade(used.getMem_num()));
+		}
 		return new ModelAndView("usedView","used",used);
 	}
 	/*====================

@@ -30,6 +30,9 @@
 		<div id="message_btn">
 			<input type="submit" value="전송">
 		</div>
+		<div id="deal">
+			<input type="button" value="거래완료" onclick="location.href='finishDeal?useC_num=${useC_num}'">
+		</div>
 	</form>
 </div>
 </div>

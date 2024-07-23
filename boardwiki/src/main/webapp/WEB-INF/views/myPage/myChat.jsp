@@ -54,3 +54,29 @@
 	<div class="align-center">${page2}</div>
 	</c:if>
 </div>
+<h2> 구매 완료 목록</h2>
+	<c:if test="${count3==0}">
+	<div class="result-display">표시할 채팅방이 없습니다.</div>
+	</c:if>
+	<c:if test="${count3>0}">
+	<table class="striped-table">
+		<tr>
+			<th>중고글 번호</th>
+			<th>중고글 제목</th>
+			<th>평점 주기</th>
+		</tr>
+		<c:forEach var="used" items="${list3}">
+		<tr>
+			<td>${used.use_num}</td>
+			<td style="text-align:left;">
+				<a href="${pageContext.request.contextPath}useChat?use_num=${used.use_num}">
+					<b>${used.useC_name}</b>
+				</a>
+			</td>
+			<td><a href="usedGrade?useC_num=${used.useC_num}">평점주러가기</a></td>
+		</tr>
+		</c:forEach>
+	</table>
+	<div class="align-center">${page2}</div>
+	</c:if>
+</div>

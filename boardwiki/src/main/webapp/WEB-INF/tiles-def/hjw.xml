@@ -121,6 +121,12 @@
 		<put-attribute name="title" value="myChat"/>
 		<put-attribute name="body" value="/WEB-INF/views/chat/myChat2.jsp"/>
 	</definition>
+	<definition name="usedGrade" extends="main">
+		<put-attribute name="title" value="Grade"/>
+		<put-attribute name="body" value="/WEB-INF/views/usedChat/usedGrade.jsp"/>
+	</definition>
+	
+	
 </tiles-definitions>
 
 

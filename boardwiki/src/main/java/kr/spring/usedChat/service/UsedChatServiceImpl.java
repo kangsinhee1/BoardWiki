@@ -74,4 +74,25 @@ public class UsedChatServiceImpl implements UsedChatService{
 		return usedChatMapper.selectRowCountByMemNum(map);
 	}
 
+	@Override
+	public void updateUseC_status(long useC_num) {
+		usedChatMapper.updateUseC_status(useC_num);
+		
+	}
+
+	@Override
+	public List<UsedChatRoomVO> selectChatRoomstatus2(long mem_num) {
+		return usedChatMapper.selectChatRoomstatus2(mem_num);
+	}
+
+	@Override
+	public Long selectAvgGrade(Long mem_num) {
+		return usedChatMapper.selectAvgGrade(mem_num);
+	}
+
+	@Override
+	public void updateUseC_grade(UsedChatRoomVO usedChatRoomVO) {
+		usedChatMapper.updateUseC_grade(usedChatRoomVO);
+	}
+
 }

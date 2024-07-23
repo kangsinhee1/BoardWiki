@@ -119,6 +119,21 @@ public class MyPageController {
 			model.addAttribute("page2",page2.getPage());
 			log.debug("목록 가져와 ! " + list2);
 		}
+		
+		int count3 = usedService.getUsedRowCountByMemNum(map);
+		PagingUtil page3 = new PagingUtil(null,keyword,pageNum,count3,10,10,"myChat");
+		List<UsedChatRoomVO> list3 = null;
+		if(count>0) {
+			map.put("start", page3.getStartRow());
+			map.put("end", page3.getEndRow());
+			list3 = usedChatService.selectChatRoomstatus2(user.getMem_num());
+			model.addAttribute("count3",count3);
+			model.addAttribute("list3",list3);
+			model.addAttribute("page2",page2.getPage());
+			log.debug("목록 가져와222 ! " + list3);
+		}
+		
+		
 
 		model.addAttribute("member", member);
 

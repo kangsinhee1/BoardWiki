@@ -26,7 +26,7 @@
 	<div class="align-center">
 	<h2 class="">${team.tea_name}</h2>
 	</div>
-	<div class="align-right">
+	<div class="align-left">
 	<ul class="detail-info">
 		<li>작성자 : ${team.mem_nickname}</li>
 		<li>등록일 : ${team.tea_rdate} </li>

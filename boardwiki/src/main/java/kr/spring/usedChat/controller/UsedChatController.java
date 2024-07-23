@@ -53,7 +53,24 @@ public class UsedChatController {
 
 		return "useChatSeller";
 	}
-
+	@GetMapping("/*/finishDeal")
+	public String finishDeal(long useC_num) {
+		usedChatService.updateUseC_status(useC_num);
+		return "myPage";
+	}
+	@GetMapping("/myPage/usedGrade")
+	public String usedGrade(long useC_num) {
+		
+		return "usedGrade";
+	}
+	@PostMapping("/myPage/usedGrade")
+	public String submitGrade(UsedChatRoomVO usedChatRoomVO ,HttpSession session, Model model) {
+		System.out.println("전송처리?");
+		log.debug("정보가 뭐가있을까요?" + usedChatRoomVO);
+		usedChatService.updateUseC_grade(usedChatRoomVO);
+		
+		return "myChat";
+	}
 
 	@GetMapping("/*/useChat")
 	public String accessUseChat(Long use_num, UsedChatRoomVO usedChatRoomVO, HttpSession session, Model model, HttpServletRequest request,

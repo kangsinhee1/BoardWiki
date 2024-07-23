@@ -73,6 +73,7 @@
     <c:if test="${count > 0}">
     <div class="chart-table">
         <table >
+        <thead>
             <tr>
                 <th>번호</th>
                 <th>분류</th>
@@ -81,6 +82,7 @@
                 <th>작성일</th>
                 <th>조회수</th>
             </tr>
+            </thead>
             <c:forEach var="team" items="${list}">
                 <tr>
                     <td class="align-center">${team.teaB_num}</td>

@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import kr.spring.usedChat.vo.UsedChatRoomVO;
 import kr.spring.usedChat.vo.UsedChat_textVO;
@@ -49,5 +50,23 @@ public interface UsedChatMapper {
 
 	//채팅 메시지 읽기
 	public List<UsedChat_textVO> selectChatDetail(Map<String,Long> map);
-
+	
+	
+	
+	//구매 완료 처리
+	@Update("UPDATE usedChatROOM set usec_status = 2 WHERE useC_num = #{useC_num}")
+	public void updateUseC_status (long useC_num);
+	//구매 완료된 목록 보기
+	@Select("SELECT * FROM UsedChatROOM WHERE usec_status =2 AND MEM_NUM = #{mem_num} ")
+	public List<UsedChatRoomVO> selectChatRoomstatus2(long mem_num);
+	
+	
+	// 판매자 평가하기
+	@Update("UPDATE usedChatRoom SET useC_grade = #{useC_grade} WHERE useC_num = #{useC_num}")
+	public void updateUseC_grade(UsedChatRoomVO usedChatRoomVO);
+	
+	// 판매자 평점
+	public Long selectAvgGrade(long mem_num);
+	
+	
 }
