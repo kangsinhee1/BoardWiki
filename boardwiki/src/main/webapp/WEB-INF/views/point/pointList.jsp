@@ -52,7 +52,7 @@
             <a href="${pageContext.request.contextPath}/myPage/pointList?poi_status=2">출석체크</a>
             <a href="${pageContext.request.contextPath}/myPage/pointList?poi_status=3">후원</a>
             <a href="${pageContext.request.contextPath}/myPage/pointList?poi_status=4">미션후원</a>
-        </div>
+        </div> 
     </div>
 
     <c:if test="${count == 0}">
