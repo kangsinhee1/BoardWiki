@@ -109,13 +109,13 @@
             #{con_num},
             #{mem_num}
         )
-    </insert>
-
+    </insert>	
+	
     <!-- 컨테스트 참가자 수 업데이트 -->
     <update id="updateContestManCount" parameterType="contestApplyVO">
-        UPDATE contest
-        SET con_man = con_man + 1
-        WHERE con_num = #{con_num}
+       UPDATE contest
+       SET con_man = (SELECT COUNT(*) FROM contest_apply WHERE con_num = #{con_num})
+       WHERE con_num = #{con_num}
     </update>
     
      <!-- 컨테스트 신청 취소 -->
