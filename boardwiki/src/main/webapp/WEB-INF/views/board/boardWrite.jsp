@@ -27,7 +27,8 @@
 	                            modelAttribute="boardVO">
 		<ul>
 			<li>
-				<form:label path="boa_category">분류</form:label>
+				분류
+				<form:label path="boa_category"></form:label>
 				<form:select path="boa_category" id="boa_category">
 					<option disabled="disabled" selected>선택하세요</option>
 					<form:option value="1">자유게시판</form:option>

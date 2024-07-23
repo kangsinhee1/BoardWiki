@@ -43,36 +43,7 @@ ul.detail-info li:last-child{
 .detail-content img{
 	max-width:940px;
 }
-#output_fav, .output_rfav{
-	cursor:pointer;
-}
-#output_fcount{
-	width:50px;
-	display:inline-block;
-}
-div#reply_div{
-	padding:5px 10px 40px 10px;
-	margin-top:10px;
-	background-color:#EEEEEE;
-}
-form#re_form{
-	width:650px;
-	border:none;
-}
-span.re-title{
-	color:#000;
-	font-size:12pt;
-	line-height:200%;
-}
-span.letter-count{
-	font-size:10pt;
-	color:#999;
-}
-textarea.rep-content{
-	width:90%;
-	height:50px;
-	margin:10px;
-}
+
 div#re_first, div#mre_first, div#mresp_first{
 	float:left;
 	width:70%;
@@ -216,4 +187,26 @@ div#mre_second input{
 	margin-bottom:400px;
 	border:1px solid #999 !important;
 	background:white;
+}
+
+.page-main h2{
+ 	color:white;
+ 
+ }
+.page-main ul.detail-info li{
+	color:white;
+	font-size:15px;
+}
+.page-main div.detail-content p{
+	color:white;
+	font-size:30px;
+}
+
+.page-main div{
+	color:white;
+}
+
+.page-main ul li{
+	color:white;
+	font-size:15px;
 }

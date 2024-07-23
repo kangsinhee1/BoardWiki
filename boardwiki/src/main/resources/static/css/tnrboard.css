@@ -53,7 +53,7 @@ ul.detail-info li:last-child{
 div#reply_div{
 	padding:5px 10px 40px 10px;
 	margin-top:10px;
-	background-color:#EEEEEE;
+	background-color: rgb(76,1,128);
 }
 form#re_form{
 	width:650px;
@@ -233,3 +233,27 @@ div#mre_second input{
      max-width: 40px; /* 이미지 최대 너비 설정 */
      height: auto; /* 높이 자동 조정 */
  }
+ 
+.page-main h2{
+ 	color:white;
+ 
+ }
+.page-main ul.detail-info li{
+	color:white;
+	font-size:15px;
+}
+.page-main div.detail-content p{
+	color:white;
+	font-size:30px;
+}
+
+.page-main div{
+	color:white;
+}
+.page-main ul li{
+	color:white;
+	font-size:15px;
+}
+select#tnr_category{
+	color:black;
+}
