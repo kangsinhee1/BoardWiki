@@ -47,7 +47,7 @@ public class ContestServiceImpl implements ContestService{
 	}
 
 	@Override
-	public void applyForContest(ContestApplyVO contestApplyVO) {
+	public void applyForContest(ContestApplyVO contestApplyVO){
 		contestmapper.applyForContest(contestApplyVO);
 		contestmapper.updateContestManCount(contestApplyVO);
 	}
