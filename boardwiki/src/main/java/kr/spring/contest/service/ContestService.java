@@ -5,10 +5,12 @@ import java.util.Map;
 
 import kr.spring.contest.vo.ContestApplyVO;
 import kr.spring.contest.vo.ContestVO;
+import kr.spring.member.vo.MemberVO;
 
 public interface ContestService {
 	//목록보기
 	public Integer selectRowCount(Map<String,Object>map);
+	public List<ContestVO> selectAllcontest(Map<String,Object> map);
 	//대회리스트
 	public List<ContestVO> selectContestList(Map<String,Object>map);
 	//대회 작성
@@ -27,4 +29,6 @@ public interface ContestService {
 	public Integer countContestMan(Long con_num);
 	
 	public void deleteContest(Long con_num);
+	
+	public Integer countAllcontest(Map<String,Object> map);
 }

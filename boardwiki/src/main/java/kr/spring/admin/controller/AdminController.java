@@ -17,6 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.board.service.BoardService;
 import kr.spring.board.vo.BoardVO;
+import kr.spring.contest.service.ContestService;
+import kr.spring.contest.vo.ContestVO;
 import kr.spring.item.service.ItemService;
 import kr.spring.item.vo.ItemVO;
 import kr.spring.member.service.MemberService;
@@ -45,6 +47,9 @@ public class AdminController {
 
 	@Autowired
 	private ReportService reportService;
+	
+	@Autowired
+	private ContestService contestService;
 	/*==============================
 	 * 관리자 페이지 메인
 	 *==============================*/
@@ -410,4 +415,48 @@ public class AdminController {
 
 	    return "rentListAdmin"; // adminRentList 뷰 이름 반환
 	}
+	
+	/*==============================
+	 * 		관리자 페이지 (대회목록)
+	 *==============================*/
+	@GetMapping("/adminPage/contestAdminList")
+	public String contestList(@RequestParam(defaultValue="1") int pageNum,
+            						@RequestParam(defaultValue="") String category,
+            						String keyfield,
+            						String keyword,Model model,
+            						HttpSession session,
+            						HttpServletRequest request
+            						) {
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user != null && user.getMem_auth()!= 9) {
+			model.addAttribute("message","관리자 등급만 접속할 수 있습니다.");
+			model.addAttribute("url",request.getContextPath()+"/main/login");
+			return "common/resultAlert";
+		}
+		Map<String,Object> map = new HashMap<>();
+
+		map.put("category", category);
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+
+		int count = contestService.countAllcontest(map);
+
+		PagingUtil page =
+				new PagingUtil(keyfield,keyword,pageNum,count,5,10,"contestList");
+
+		List<ContestVO> list = null;
+	    if(count > 0) {
+	    	map.put("start", page.getStartRow());
+	    	map.put("end", page.getEndRow());
+
+	    	list = contestService.selectAllcontest(map);
+	    }
+
+	    model.addAttribute("count", count);
+		model.addAttribute("list", list);
+		model.addAttribute("page", page.getPage());
+
+		return "contestAdminList";
+	}
+
 }

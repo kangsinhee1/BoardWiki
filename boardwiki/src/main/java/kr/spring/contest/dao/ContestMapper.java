@@ -9,15 +9,20 @@ import org.apache.ibatis.annotations.Update;
 
 import kr.spring.contest.vo.ContestApplyVO;
 import kr.spring.contest.vo.ContestVO;
+import kr.spring.member.vo.MemberVO;
 
 @Mapper
 public interface ContestMapper {
 	//목록보기
 	public Integer selectRowCount(Map<String,Object>map);
+	public List<ContestVO> selectAllcontest(Map<String,Object> map);
 	//대회리스트
 	public List<ContestVO> selectContestList(Map<String,Object>map);
 	//대회 작성
 	public void insertContest(ContestVO contest);
+	
+	@Select("SELECT COUNT(*) FROM contest")
+	public Integer countAllcontest(Map<String,Object> map);
 
 	//대회 상세
 	@Select("SELECT * FROM contest JOIN member USING(mem_num)LEFT OUTER JOIN member_detail USING(mem_num) WHERE con_num= #{con_num}")

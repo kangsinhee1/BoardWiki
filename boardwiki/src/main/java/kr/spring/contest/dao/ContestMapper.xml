@@ -121,4 +121,19 @@
         DELETE FROM contest_apply 
         WHERE con_num = #{con_num} AND mem_num = #{mem_num}
     </delete>
+    <!-- 전체 대회 목록 보기 -->
+    <select id="selectAllcontest" parameterType="map" resultType="contestVO">
+	SELECT
+	 	   *
+	 	FROM (SELECT
+	 			a.*,
+	 			rownum rnum
+	 		   FROM (SELECT
+	 		   			*
+	 		   		 FROM contest
+	 		   		 )a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+	</select>
 </mapper>

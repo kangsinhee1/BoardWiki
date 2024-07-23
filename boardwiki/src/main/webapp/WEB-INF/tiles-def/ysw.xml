@@ -102,6 +102,10 @@
 		<put-attribute name="title" value="RentManage"/>
 		<put-attribute name="body" value="/WEB-INF/views/rent/rentListAdmin.jsp"/>
 	</definition>
+	<definition name="contestAdminList" extends="adminPage">
+		<put-attribute name="title" value="관리자 대회 조회"/>
+		<put-attribute name="body" value="/WEB-INF/views/adminPage/contestAdminList.jsp"/>
+	</definition>
 	
 	<!-- 중고 -->
 	<definition name="usedList" extends="main">
