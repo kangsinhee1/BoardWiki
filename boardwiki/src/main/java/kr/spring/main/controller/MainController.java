@@ -1,5 +1,8 @@
 package kr.spring.main.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,11 +46,18 @@ public class MainController {
 
 
 	@GetMapping("/*/mainList")
-	public String returnMainList(String keyword1) {
-		Map<String,Object> map = new HashMap<>();
-		map.put("keyword1", keyword1);
+	public String returnMainList(@RequestParam String keyword1) {
+	    Map<String, Object> map = new HashMap<>();
+	    map.put("keyword1", keyword1);
 
-		return "redirect:/main/mainList?keyword1=" + keyword1;
+	    String encodedKeyword = null;
+	    try {
+	        encodedKeyword = URLEncoder.encode(keyword1, StandardCharsets.UTF_8.toString());
+	    } catch (UnsupportedEncodingException e) {
+	        e.printStackTrace(); // 로깅 또는 예외 처리
+	    }
+
+	    return "redirect:/main/mainList?keyword1=" + encodedKeyword;
 	}
 	@GetMapping("/main/mainList")
 	public String mainSearch(@RequestParam(defaultValue="1") int pageNum,

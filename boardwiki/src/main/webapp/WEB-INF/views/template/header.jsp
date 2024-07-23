@@ -4,6 +4,7 @@
 <!-- <link rel="stylesheet" href="/css/main.css" type="text/css"/> -->
 
 <!-- Header section -->
+<meta charset="UTF-8">
 <header class="header-section">
     <div class="header-warp">
         <div class="align-center">
