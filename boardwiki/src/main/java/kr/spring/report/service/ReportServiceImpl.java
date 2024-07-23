@@ -36,4 +36,10 @@ public class ReportServiceImpl implements ReportService {
 		return reportMapper.selectReportList(map);
 	}
 
+
+	@Override
+	public ReportVO selectReportDetail(Long report_typeDetail, int report_type) {
+		return reportMapper.selectReportDetail(report_typeDetail, report_type);
+	}
+
 }

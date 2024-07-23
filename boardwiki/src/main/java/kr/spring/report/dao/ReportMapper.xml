@@ -25,24 +25,24 @@
 									resultType="integer">
 		SELECT
 			COUNT(*)
-		FROM 		
+		FROM report
 	 </select>
-	 <sql id="category">
-	 	<if test="report_category == 1">
-	 		(SELECT * FROM report WHERE report_type=1) r
+	 <sql id="type">
+	 	<if test="report_type == 1">
 	 		   		 LEFT OUTER JOIN board b ON r.report_typeDetail = b.boa_num
+	 		   		 where report_type = #{report_type} AND b.boa_num = #{report_typeDetail}
 	 	</if>
-	 	<if test="report_category == 5">
-	 		(SELECT * FROM report WHERE report_type=5) r
-	 		   		 LEFT OUTER JOIN board b ON r.report_typeDetail = b.boa_num
+	 	<if test="report_type == 5">
+	 		   		 LEFT OUTER JOIN used_item u ON r.report_typeDetail = u.use_num
+	 		   		 where report_type = #{report_type} AND u.use_num = #{report_typeDetail}
 	 	</if>
-	 	<if test="report_category == 6">
-	 		(SELECT * FROM report WHERE report_type=6) r
-	 		   		 LEFT OUTER JOIN board b ON r.report_typeDetail = b.boa_num
+	 	<if test="report_type == 6">
+	 		   		 LEFT OUTER JOIN team t ON r.report_typeDetail = t.tea_num
+	 		   		 where report_type = #{report_type} AND t.tea_num = #{report_typeDetail}
 	 	</if>
-	 	<if test="report_category == 7">
-	 		(SELECT * FROM report WHERE report_type=7) r
-	 		   		 LEFT OUTER JOIN board b ON r.report_typeDetail = b.boa_num
+	 	<if test="report_type == 7">
+	 		   		 LEFT OUTER JOIN tnrboard tnr ON r.report_typeDetail = tnr.tnr_num
+	 		   		 where report_type = #{report_type} AND tnr.tnr_num = #{report_typeDetail}
 	 	</if>
 	 </sql>
 	  <select id="selectReportList" parameterType="map"
@@ -55,11 +55,22 @@
 	 		   FROM (SELECT
 	 		   			*
 	 		   		 FROM 
-	 		   		 <include refid="category"></include>
+	 		   		 	report r JOIN member_detail m
+	 		   		 	ON r.reporter_num = m.mem_num
+	 		   		 	
+	 		   		 	ORDER BY report_num DESC
 	 		   		 )a)
 		<![CDATA[
 		WHERE rnum >= #{start} AND rnum <= #{end}
 		]]>
+		
+	</select>
+	  <select id="selectReportDetail" parameterType="map"
+	 							resultType="reportVO">
+	 							
+	 	SELECT * FROM report r LEFT OUTER JOIN member_detail m ON r.reporter_num = m.mem_num
+	 	
+		<include refid="type"></include>
 	</select>
 	  
 </mapper>

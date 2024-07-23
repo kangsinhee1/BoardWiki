@@ -90,6 +90,10 @@
 		<put-attribute name="title" value="reportManage"/>
 		<put-attribute name="body" value="/WEB-INF/views/adminPage/reportManage.jsp"/>
 	</definition>
+	<definition name="reportDetail" extends="adminPage">
+		<put-attribute name="title" value="reportDetail"/>
+		<put-attribute name="body" value="/WEB-INF/views/adminPage/reportDetail.jsp"/>
+	</definition>
 	<definition name="QnaManage" extends="adminPage">
 		<put-attribute name="title" value="QnaManage"/>
 		<put-attribute name="body" value="/WEB-INF/views/adminPage/QnaManage.jsp"/>

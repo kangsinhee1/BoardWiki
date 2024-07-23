@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import kr.spring.board.service.BoardService;
 import kr.spring.board.vo.BoardVO;
@@ -313,6 +314,14 @@ public class AdminController {
 		model.addAttribute("page", page.getPage());
 
 		return "reportManage";
+	}
+	@GetMapping("/adminPage/reportDetail")
+	public ModelAndView reportDetailPage(Long report_typeDetail,
+								   int report_type) {
+		
+		ReportVO report = reportService.selectReportDetail(report_typeDetail, report_type);
+		
+		return new ModelAndView("reportDetail","report",report);
 	}
 	/*==============================
 	 * 관리자 페이지 (Qna 관리)
