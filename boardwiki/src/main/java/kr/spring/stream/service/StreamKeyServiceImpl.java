@@ -26,4 +26,14 @@ public class StreamKeyServiceImpl implements StreamKeyService {
 	public StreamKeyVO selectstream(Long str_key) {
 		return streamKeyMapper.selectstream(str_key);
 	}
+
+	@Override
+	public Integer streamingNumber(long mem_num) {
+		return streamKeyMapper.streamingNumber(mem_num);
+	}
+
+	@Override
+	public Integer streamingNum(Long str_num) {
+		return streamKeyMapper.streamingNum(str_num);
+	}
 }

@@ -50,14 +50,16 @@ public class AttendanceController {
             	model.addAttribute("dice", 0);
             }
             
-            List<AttendanceVO> attendance = attendanceService.getMonthlyAttendance(mem_num);
-            for (AttendanceVO element : attendance) {
-            	if(element.getAtt_status() == 1) {
-            		model.addAttribute("att_status",element.getAtt_status());
-            	}
+            AttendanceVO attendance = null;
+            attendance = attendanceService.getAttendance(mem_num);
+            List<AttendanceVO> attendances = attendanceService.getMonthlyAttendance(mem_num);
+            if(attendance != null) {
+            	model.addAttribute("att_status",1);
+            }else {
+            	model.addAttribute("att_status",0);
             }
             try {
-                String attendancesJson = objectMapper.writeValueAsString(attendance);
+                String attendancesJson = objectMapper.writeValueAsString(attendances);
                 model.addAttribute("attendancesJson", attendancesJson);
             } catch (JsonProcessingException e) {
                 e.printStackTrace();
@@ -84,8 +86,6 @@ public class AttendanceController {
         	model.addAttribute("message","로그인이 필요합니다.");
         	model.addAttribute("url","/member/login");
         }
-
-        
 		return "common/resultAlert";
     }
 

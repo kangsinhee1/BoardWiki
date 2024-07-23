@@ -19,7 +19,7 @@ public interface PointMapper {
 	/**총 포인트 감소/증가 sql*/
 	public void updatepointtotal(PointVO pointVO);
 	/**포인트 획득/감소 sql*/
-	@Insert("INSERT INTO point (poi_num,poi_status,poi_use,poi_date,mem_num,poi_increase) VALUES (point_seq.nextval,#{poi_status},#{poi_use},SYSDATE,#{mem_num},#{poi_increase})")
+	@Insert("INSERT INTO point (poi_num,poi_status,poi_use,poi_date,mem_num,poi_increase,poi_re) VALUES (point_seq.nextval,#{poi_status},#{poi_use},SYSDATE,#{mem_num},#{poi_increase},#{poi_re})")
 	public void insertpoint(PointVO pointVO);
 	/**포인트 사용 상세 내역 sql*/
 	@Select("SELECT * FROM point JOIN point_total USING(mem_num) WHERE mem_num=#{mem_num}")
@@ -29,7 +29,7 @@ public interface PointMapper {
 	/**포인트 카운트*/
 	public Integer selectRowCount(Map<String,Object> map);
 	//포인트 확인
-	@Select("SELECT * FROM point_total WHERE mem_num = #{mem_num}")
+	@Select("SELECT point_total FROM point_total WHERE mem_num = #{mem_num}")
 	public Integer selectPointTotal(Long mem_num);
 	//포인트 등록
 	@Insert("INSERT INTO point_total (point_total,mem_num) VALUES (#{point_total},#{mem_num})")

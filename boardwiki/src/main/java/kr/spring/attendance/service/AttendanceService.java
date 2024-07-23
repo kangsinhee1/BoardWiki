@@ -10,5 +10,6 @@ public interface AttendanceService {
     void markAttendance(AttendanceVO vo);
     void insertAttendance(AttendanceVO vo);
     void checkAndInsertAttendance(AttendanceVO vo);
+    AttendanceVO getAttendance(Long mem_num);
 
 }

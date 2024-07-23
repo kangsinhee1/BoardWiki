@@ -2,6 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <style>
+	div.point {
+	color: white;
+	}
     .dropdown {
         position: relative;
         display: inline-block;
@@ -37,27 +40,18 @@
 </style>
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('.dropdown-content a').on('click', function(event) {
-            event.preventDefault();
-            var url = $(this).attr('href');
-            window.location.href = url;
-        });
-    });
-</script>
-
+<script src="${pageContext.request.contextPath}/js/"></script>
 <div class="page-main">
     <h2>게시판 목록</h2>
     <div class="dropdown">
+        <div class="point">현재 포인트 : ${point}</div>
         <button class="dropbtn">메뉴 선택</button>
         <div class="dropdown-content">
-            <a href="list">전체</a>
-            <a href="list?poi_status=1">후원</a>
-            <a href="list?poi_status=2">미션후원</a>
-            <a href="list?poi_status=3">포인트게임</a>
-            <a href="list?poi_status=4">출석체크</a>
-            <a href="list?poi_status=5">시청시간뽀너스</a>
+            <a href="${pageContext.request.contextPath}/myPage/pointList">전체</a>
+            <a href="${pageContext.request.contextPath}/myPage/pointList?poi_status=1">포인트게임</a>
+            <a href="${pageContext.request.contextPath}/myPage/pointList?poi_status=2">출석체크</a>
+            <a href="${pageContext.request.contextPath}/myPage/pointList?poi_status=3">후원</a>
+            <a href="${pageContext.request.contextPath}/myPage/pointList?poi_status=4">미션후원</a>
         </div>
     </div>
 
@@ -71,13 +65,20 @@
                 <th>번호</th>
                 <th>사용처</th>
                 <th>포인트</th>
-                <th>총 포인트</th>
+                <th>변동 포인트</th>
                 <th>사용일</th>
             </tr>
             <c:forEach var="point" items="${list}">
                 <tr>
                     <td class="align-center">${point.poi_num}</td>
-                    <td class="align-left">${point.poi_status}</td>
+                    <td class="align-left">
+                        <c:choose>
+                            <c:when test="${point.poi_status == 1}">포인트 게임</c:when>
+                            <c:when test="${point.poi_status == 2}">출석체크</c:when>
+                            <c:when test="${point.poi_status == 3}">후원</c:when>
+                            <c:when test="${point.poi_status == 4}">미션후원</c:when>
+                        </c:choose>
+                    </td>
                     <td class="align-center">
                         <c:choose>
                             <c:when test="${point.poi_increase == 1}">
@@ -91,10 +92,10 @@
                     <td class="align-center">
                         <c:choose>
                             <c:when test="${point.poi_increase == 1}">
-                                ${point.point_total}(-${point.poi_use})
+                                ${point.poi_re}(-${point.poi_use})
                             </c:when>
                             <c:when test="${point.poi_increase == 2}">
-                                ${point.point_total}(+${point.poi_use})
+                                ${point.poi_re}(+${point.poi_use})
                             </c:when>
                         </c:choose>
                     </td>
@@ -103,5 +104,5 @@
             </c:forEach>
         </table>
         <div class="align-center">${page}</div>
-    </c:if>    
+    </c:if>
 </div>
