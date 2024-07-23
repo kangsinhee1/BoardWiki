@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script src="${pageContext.request.contextPath}/js/reportChangeAuth.js"></script>
 
 <hr size="1" noshade="noshade" width="100%">
 신고자 : ${report.mem_nickName}<br>
@@ -38,7 +39,53 @@ ${report.tnr_title }
 
 <hr size="1" noshade="noshade" width="100%">
 
-<form id="change_auth">
+<c:if test="${report.report_type == 1 }">
+<form class="change_auth">
+	<input type="hidden" name="report_typeDetail" value="${report.report_typeDetail }">
+	<input type="hidden" name="report_type" value="${report.report_type }">
+	<input type="hidden" name="boa_num" value="${report.report_typeDetail }">
+	<input type="radio" name="boa_auth" value=0 
+	<c:if test="${report.boa_auth== 0 }">checked</c:if>/>활성화 
+	<input type="radio" name="boa_auth" value=1 
+	<c:if test="${report.boa_auth== 1 }">checked</c:if>/>비활성화
+	<button type="submit">완료</button>
 </form>
+</c:if>
+
+<c:if test="${report.report_type == 5 }">
+<form class="change_auth">
+	<input type="hidden" name="report_type" value="${report.report_type }">
+	<input type="hidden" name="use_num" value="${report.report_typeDetail }">
+	<input type="radio" name="use_auth" value=0 
+	<c:if test="${report.use_auth== 0 }">checked</c:if>/>활성화 
+	<input type="radio" name="use_auth" value=1 
+	<c:if test="${report.use_auth== 1 }">checked</c:if>/>비활성화
+	<button type="submit">완료</button>
+</form>
+</c:if>
+
+<c:if test="${report.report_type == 6 }">
+<form class="change_auth">
+	<input type="hidden" name="report_type" value="${report.report_type }">
+	<input type="hidden" name="tea_num" value="${report.report_typeDetail }">
+	<input type="radio" name="tea_status" value=0 
+	<c:if test="${report.tea_status== 1 }">checked</c:if>/>활성화 
+	<input type="radio" name="tea_status" value=1 
+	<c:if test="${report.tea_status== 2 }">checked</c:if>/>비활성화
+	<button type="submit">완료</button>
+</form>
+</c:if>
+
+<c:if test="${report.report_type == 7 }">
+<form class="change_auth">
+	<input type="hidden" name="report_type" value="${report.report_type }">
+	<input type="hidden" name="tnr_num" value="${report.report_typeDetail }">
+	<input type="radio" name="tnr_auth" value=0 
+	<c:if test="${report.tnr_auth== 0 }">checked</c:if>/>활성화 
+	<input type="radio" name="tnr_auth" value=1 
+	<c:if test="${report.tnr_auth== 1 }">checked</c:if>/>비활성화
+	<button type="submit">완료</button>
+</form>
+</c:if>
 
 

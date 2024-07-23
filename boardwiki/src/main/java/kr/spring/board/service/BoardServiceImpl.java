@@ -123,5 +123,10 @@ public class BoardServiceImpl implements BoardService{
 		return boardMapper.selectAdminReply(boa_num);
 	}
 
+	@Override
+	public void updateBoardAuth(Long boa_num, Long boa_auth) {
+		boardMapper.updateBoardAuth(boa_num, boa_auth);
+	}
+
 
 }

@@ -19,6 +19,7 @@ public class UsedItemVO {
 	private long use_num;
 	private long mem_num;
 	private long item_num;
+	private int use_auth;
 
 	@NotBlank
 	private String use_title;

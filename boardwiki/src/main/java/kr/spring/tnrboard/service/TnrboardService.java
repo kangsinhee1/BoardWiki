@@ -32,5 +32,7 @@ public interface TnrboardService {
 	public void insertTnrReply(TnrboardReplyVO tnrboardReply);
 	public void updateTnrReply(TnrboardReplyVO tnrboardReply);
 	public void deleteTnrReply(Long tnrR_num);
+	
+	public void updateBoardAuth(Long tnr_num, Long tnr_auth);
 
 }

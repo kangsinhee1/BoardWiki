@@ -62,6 +62,10 @@ public interface BoardMapper {
 	//부모글 삭제시 댓글이 존재하면 부모글 삭제전 댓글 삭제
 	@Delete("DELETE FROM board_reply WHERE boa_num=#{boa_num}")
 	public void deleteReplyByBoardNum(Long boa_num);
+	
+	//등급 수정
+	@Update("UPDATE board SET boa_auth=#{boa_auth} WHERE boa_num=#{boa_num}")
+	public void updateBoardAuth(Long boa_num, Long boa_auth);
 }
 
 

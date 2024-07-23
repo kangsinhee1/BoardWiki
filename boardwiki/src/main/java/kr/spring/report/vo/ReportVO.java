@@ -27,16 +27,20 @@ public class ReportVO {
 	//board
 	private String boa_title;
 	private Long boa_num;
+	private int boa_auth;
 	
 	//team
 	private String tea_name;
 	private Long tea_num;
+	private int tea_status;
 	
 	//used
 	private String use_title;
 	private Long use_num;
+	private int use_auth;
 	
 	//tnr
 	private String tnr_title;
 	private Long tnr_num;
+	private int tnr_auth;
 }

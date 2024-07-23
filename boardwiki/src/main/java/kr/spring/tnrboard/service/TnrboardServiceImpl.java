@@ -120,6 +120,11 @@ public class TnrboardServiceImpl implements TnrboardService{
 		tnrboardMapper.deleteTnrReply(tnrR_num);
 	}
 
+	@Override
+	public void updateBoardAuth(Long tnr_num, Long tnr_auth) {
+		tnrboardMapper.updateBoardAuth(tnr_num, tnr_auth);
+	}
+
 
 
 }
