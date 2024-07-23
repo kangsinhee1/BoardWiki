@@ -3,9 +3,8 @@
 <div class="widget-item">
 <div class="categories-widget">
 <!-- <nav class="side-nav"> -->
+	<h4 class="widget-title">마이페이지</h4>
 	<ul>
-		<li><a href="${pageContext.request.contextPath}/myPage/myAlert">알림</a></li>
-		<li><a href="${pageContext.request.contextPath}/myPage/calendar">일정</a></li>
 		<li><a href="${pageContext.request.contextPath}/myPage/myChat">중고 채팅(구매/판매)</a></li>
 		<li><a href="${pageContext.request.contextPath}/myPage/myChat2">모임 채팅</a></li>
 		<%-- <li>

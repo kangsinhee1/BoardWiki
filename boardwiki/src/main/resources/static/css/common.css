@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
 /* 전체 레이아웃
 ---------------------*/
+
 *{
 	font-family:"Noto Sans KR", sans-serif;
 }
@@ -154,6 +155,7 @@ input,select{
 #page_body{
 	width:75%;
 	float:left;
+	color:#ffffff;
 }
 .page-clear{
 	clear:both;

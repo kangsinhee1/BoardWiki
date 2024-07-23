@@ -36,23 +36,7 @@
 						<a href="#">목록</a>
 						
 					</div>
-					<c:if test="${!empty member.mem_num}">
-					
-                <div class="text-box2" style="display: inline-block; vertical-align: top;">
-                    <form id="addToCart" method="get" action="${pageContext.request.contextPath}/cart/cart">
-                        <input type="hidden" name="item_num" value="${item.item_num}" />
-                        <input type="hidden" name="user" value="${member.mem_num}" />
-                        
-                        <div class="cart_box">
-                        <p><label for="quantity">수량:</label></p>
-                        <input type="number" id="quantity" name="item_quantity" value="1" min="1" max="${item.item_stock}" />
-                        <button type="button" id="addToCartButton" 
-                         onclick="location.href='/cart/cart?mem_num=${member.mem_num}'">장바구니에 담기</button>
-<%--                   <button onclick="location.href='/order/order?mem_num=${member.mem_num}'">바로구매</button> --%>
-                        </div>
-                    </form>
-                </div>
-                </c:if>
+
 				
 					
 					<h4>장르</h4>
@@ -76,6 +60,8 @@
 									<li>플레이 타임<span>${mintime}분~${maxtime}분</span></li>
 									</c:if>
 									<li>출시연도<span>${item.item_year}년</span></li>
+									<li>순위<span>${item.item_rank}위</span></li>
+									
 									
 								</ul>
 								<div class="rating">
@@ -85,12 +71,27 @@
 						</div>
 						<div class="widget-item">
 							<div class="rating-widget">
-								<h4 class="widget-title">Info</h4>
+								<h4 class="widget-title">Cart Info</h4>
 								<ul>
-									<li>순위<span>${item.item_rank}위</span></li>
-									<li>평점<span>${item.item_average}점</span></li>
 									<li>재고<span>${item.item_stock}개</span></li>
 									<li>가격<span>${item.item_price}원</span></li>
+														<c:if test="${!empty member.mem_num}">
+					
+                <div class="text-box2" style="display: inline-block; vertical-align: top;">
+                    <form id="addToCart" method="get" action="${pageContext.request.contextPath}/cart/cart">
+                        <input type="hidden" name="item_num" value="${item.item_num}" />
+                        <input type="hidden" name="user" value="${member.mem_num}" />
+                        
+                        <div class="cart_box">
+                        <p><label class ="quantity_label" for="quantity">수량</label></p>
+                        <input type="number" id="quantity" name="item_quantity" value="1" min="1" max="${item.item_stock}" />
+                        <button type="button" class="addToCartButton" id="addToCartButton" 
+                         onclick="location.href='/cart/cart?mem_num=${member.mem_num}'">장바구니에 담기</button>
+<%--                   <button onclick="location.href='/order/order?mem_num=${member.mem_num}'">바로구매</button> --%>
+                        </div>
+                    </form>
+                </div>
+                </c:if>
 									
 								</ul>
 								

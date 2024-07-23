@@ -1,5 +1,19 @@
 @charset "UTF-8";
 
+
+.addToCartButton {
+}
+
+.quantity_label {
+	display: block;
+    font-size: 16px;
+    color: #b01ba5;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+
+
 .game-single-preview {
 	width: 400px;
 	height: 400px;
@@ -20,6 +34,8 @@
 	font-size: 16px;
 	border-radius: 5px;
 	margin: 5px;
+	float: right;
+	
 }
 
 .addToCartButton:hover {
@@ -69,8 +85,10 @@
 }
 
 .text-box2 input {
-	width: 100px;
+	width: 80px;
 	height: 25px;
+	float: right;
+	text-align: right;
 }
 
 .card {
@@ -79,9 +97,18 @@
 }
 
 .card-img-top {
-	width: 280px;
-	height: 250px;
+    width: 280px;
+    height: 250px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* 애니메이션 효과를 부드럽게 적용 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 기본 그림자 효과 */
 }
+
+.card-img-top:hover {
+    cursor: pointer; /* 커서를 포인터로 변경 */
+    transform: scale(1.05); /* 이미지를 살짝 확대 */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* hover 시 그림자 효과 강화 */
+}
+
 
 .card-title {
 	display: inline-block; /* inline-block으로 설정하여 너비를 제한할 수 있게 함 */
