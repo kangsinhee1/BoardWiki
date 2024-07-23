@@ -6,7 +6,7 @@
 		<div class="page-info">
 			<h2>자유게시판</h2>
 			<div class="site-breadcrumb">
-				<a href="">Home</a>  /
+				<a href=list?boa_category=1>Home</a>  /
 				<span>Board</span>
 			</div>
 		</div>

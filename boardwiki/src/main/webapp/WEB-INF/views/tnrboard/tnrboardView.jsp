@@ -10,10 +10,20 @@
 <section class="page-top-section set-bg" data-setbg="/img/page-top-bg/4.jpg">
 		<div class="page-info">
 			<h2>${tnrboard.tnr_title}</h2>
-			<div class="site-breadcrumb">
-				<a href="">Home</a>  /
-				<span>Contact</span>
+			<c:choose>
+        	<c:when test="${tnrboard.tnr_category == 1}">
+           		 <div class="site-breadcrumb">
+				<a href="tnrboardList?tnr_category=1">Home</a>  /
+				<span>Tip</span>
 			</div>
+       		 </c:when>
+        	<c:when test="${tnrboard.tnr_category == 2}">
+           		<div class="site-breadcrumb">
+				<a href="tnrboardList?tnr_category=2">Home</a>  /
+				<span>Review</span>
+			</div>
+       		 </c:when>
+    		</c:choose>
 		</div>
 	</section>
 <section class="blog-page">
@@ -47,7 +57,7 @@
 	<div>
 		<%-- 좋아요 --%>
 		<img id="output_fav" data-num="${tnrboard.tnr_num}"
-		    src="${pageContext.request.contextPath}/images/fav01.gif">
+		    src="${pageContext.request.contextPath}/images/heart2.png">
 		<span id="output_fcount"></span>    
 		<%-- 댓글수 --%>
 		<span id="output_rcount"></span>

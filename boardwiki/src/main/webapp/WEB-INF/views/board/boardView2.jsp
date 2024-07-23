@@ -10,12 +10,22 @@
 <section class="page-top-section set-bg" data-setbg="/img/page-top-bg/4.jpg">
 		<div class="page-info">
 			<h2>${board.boa_title}</h2>
-			<div class="site-breadcrumb">
-				<a href="">Home</a>  /
-				<span>Contact</span>
+			<c:choose>
+        	<c:when test="${board.boa_category == 4}">
+           		 <div class="site-breadcrumb">
+				<a href="list2?boa_category=4">Home</a>  /
+				<span>Notice</span>
 			</div>
+       		 </c:when>
+        	<c:when test="${board.boa_category == 5}">
+           		<div class="site-breadcrumb">
+				<a href="list2?boa_category=5">Home</a>  /
+				<span>QnA</span>
+			</div>
+       		 </c:when>
+    		</c:choose>
 		</div>
-	</section>
+</section>
 <section class="blog-page">
 		<div class="container">
 			<div class="row">
@@ -47,7 +57,7 @@
 	<div>
 		<%-- 좋아요 --%>
 		<img id="output_fav" data-num="${board.boa_num}"
-		    src="${pageContext.request.contextPath}/images/fav01.gif">
+		    src="${pageContext.request.contextPath}/images/heart2.png">
 		<span id="output_fcount"></span>    
 		<%-- 댓글수 --%>
 		<span id="output_rcount"></span>

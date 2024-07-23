@@ -16,13 +16,13 @@
 			<c:choose>
         	<c:when test="${param.tnr_category == 1}">
            		 <div class="site-breadcrumb">
-				<a href="">Home</a>  /
+				<a href="tnrboardList?tnr_category=1">Home</a>  /
 				<span>Tip</span>
 			</div>
        		 </c:when>
         	<c:when test="${param.tnr_category == 2}">
            		<div class="site-breadcrumb">
-				<a href="">Home</a>  /
+				<a href="tnrboardList?tnr_category=2">Home</a>  /
 				<span>Review</span>
 			</div>
        		 </c:when>
@@ -69,12 +69,12 @@
 			<c:choose>
 				<c:when test="${param.tnr_category == 1}">
 					<c:if test="${!empty user}">
-						<input type="button" value="글쓰기" onclick="location.href='tnrwrite'">
+						<input type="button" value="글쓰기" onclick="location.href='tnrwrite?tnr_category=1'">
 					</c:if>
 	  			</c:when>
 	  			<c:when test="${param.tnr_category == 2}">
 					<c:if test="${!empty user}">
-						<input type="button" value="글쓰기" onclick="location.href='tnrwrite'">
+						<input type="button" value="글쓰기" onclick="location.href='tnrwrite?tnr_category=2'">
 					</c:if>
 	  			</c:when>
 			</c:choose>

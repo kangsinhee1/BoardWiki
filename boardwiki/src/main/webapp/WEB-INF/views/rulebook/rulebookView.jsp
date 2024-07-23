@@ -9,7 +9,7 @@
 		<div class="page-info">
 			<h2>${rulebook.item_name}</h2>
 			<div class="site-breadcrumb">
-				<a href="">Home</a>  /
+				<a href="rulebookList">Home</a>  /
 				<span>Contact</span>
 			</div>
 		</div>

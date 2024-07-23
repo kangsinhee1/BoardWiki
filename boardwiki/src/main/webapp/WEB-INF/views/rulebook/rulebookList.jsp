@@ -5,9 +5,10 @@
 		<div class="page-info">
 			<h2>룰북</h2>
 			<div class="site-breadcrumb">
-				<a href="">Home</a>  /
+				<a href="rulebookList">Home</a>  /
 				<span>RuleBook</span>
 			</div>
+			
 		</div>
 </section>
 <!-- 룰북 목록 시작 -->

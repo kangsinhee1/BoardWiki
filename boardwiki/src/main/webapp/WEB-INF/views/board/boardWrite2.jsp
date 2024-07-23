@@ -70,10 +70,19 @@
 		</ul> 
 		<div class="align-center">
 			<form:button class="default-btn">전송</form:button>
-			<input type="button" value="목록"
-			  class="default-btn"
-			  onclick="location.href='list'">
-		</div>                           
+			<c:choose>
+	    		<c:when test="${param.boa_category == 4}">
+					<input type="button" value="목록" class="default-btn"
+			 			 onclick="location.href='list2?boa_category=4'">
+	   			</c:when>   
+	   			<c:when test="${param.boa_category == 5}">
+						<input type="button" value="목록" class="default-btn"
+			 			 onclick="location.href='list2?boa_category=5'">
+	  			</c:when> 
+	  			
+			</c:choose>   
+		</div>       
+		                 
 	</form:form>
 </div>
 </div>

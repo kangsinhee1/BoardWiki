@@ -11,9 +11,9 @@
 <section class="page-top-section set-bg"
 	data-setbg="/img/page-top-bg/4.jpg">
 	<div class="page-info">
-		<h2>게시판 작성</h2>
+		<h2>게시글 작성</h2>
 		<div class="site-breadcrumb">
-			<a href="">Home</a> / <span>게시판 작성</span>
+			<a href="">Home</a> / <span>게시글 작성</span>
 		</div>
 	</div>
 </section>
@@ -76,9 +76,17 @@
 		</ul> 
 		<div class="align-center">
 			<form:button class="default-btn">전송</form:button>
-			<input type="button" value="목록"
-			  class="default-btn"
-			  onclick="location.href='tnrboardList'">
+				<c:choose>
+	    		<c:when test="${param.tnr_category == 1}">
+					<input type="button" value="목록" class="default-btn"
+			 			 onclick="location.href='tnrboardList?tnr_category=1'">
+	   			</c:when>   
+	   			<c:when test="${param.tnr_category == 2}">
+						<input type="button" value="목록" class="default-btn"
+			 			 onclick="location.href='tnrboardList?tnr_category=2'">
+	  			</c:when> 
+	  			
+			</c:choose>     
 		</div>                           
 	</form:form>
 </div>

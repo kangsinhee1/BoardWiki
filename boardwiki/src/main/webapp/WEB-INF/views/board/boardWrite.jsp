@@ -13,7 +13,7 @@
 	<div class="page-info">
 		<h2>자유게시판 작성</h2>
 		<div class="site-breadcrumb">
-			<a href="">Home</a> / <span>자유게시판 작성</span>
+			<a href="list?boa_category=1">Home</a> / <span>자유게시판 작성</span>
 		</div>
 	</div>
 </section>

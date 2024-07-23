@@ -16,13 +16,13 @@
     	<c:choose>
         	<c:when test="${param.boa_category == 4}">
            		 <div class="site-breadcrumb">
-				<a href="">Home</a>  /
+				<a href="list2?boa_category=4">Home</a>  /
 				<span>Notice</span>
 			</div>
        		 </c:when>
         	<c:when test="${param.boa_category == 5}">
            		<div class="site-breadcrumb">
-				<a href="">Home</a>  /
+				<a href="list2?boa_category=5">Home</a>  /
 				<span>QnA</span>
 			</div>
        		 </c:when>
@@ -69,12 +69,12 @@
 			<c:choose>
 	    		<c:when test="${param.boa_category == 4}">
 					<c:if test="${!empty user && user.mem_auth == 9}">
-						<input type="button" value="글쓰기" onclick="location.href='write2'">
+						<input type="button" value="글쓰기" onclick="location.href='write2?boa_category=4'">
 					</c:if>
 	   			</c:when>   
 	   			<c:when test="${param.boa_category == 5}">
 					<c:if test="${!empty user}">
-						<input type="button" value="글쓰기" onclick="location.href='write2'">
+						<input type="button" value="글쓰기" onclick="location.href='write2?boa_category=5'">
 					</c:if>
 	  			</c:when> 
 			</c:choose>

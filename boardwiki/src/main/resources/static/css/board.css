@@ -231,3 +231,8 @@ div#mre_second input{
 	border:1px solid #999 !important;
 	background:white;
 }
+
+ #output_fav {
+     max-width: 40px; /* 이미지 최대 너비 설정 */
+     height: auto; /* 높이 자동 조정 */
+ }

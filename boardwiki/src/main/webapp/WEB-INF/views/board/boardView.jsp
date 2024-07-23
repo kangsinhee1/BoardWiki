@@ -11,7 +11,7 @@
 		<div class="page-info">
 			<h2>${board.boa_title}</h2>
 			<div class="site-breadcrumb">
-				<a href="">Home</a>  /
+				<a href="list?boa_category=1">Home</a>  /
 				<span>Contact</span>
 			</div>
 		</div>
@@ -47,7 +47,7 @@
 	<div>
 		<%-- 좋아요 --%>
 		<img id="output_fav" data-num="${board.boa_num}"
-		    src="${pageContext.request.contextPath}/images/fav01.gif">
+		    src="${pageContext.request.contextPath}/images/heart2.png">
 		<span id="output_fcount"></span>    
 		<%-- 댓글수 --%>
 		<span id="output_rcount"></span>
