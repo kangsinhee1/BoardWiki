@@ -27,7 +27,7 @@ ${report.use_title }
 </a><br>
 </c:if>
 <c:if test="${report.report_type == 6 }">
-<a href="${pageContext.request.contextPath}/team/teamEetail?tea_num=${report.tea_num}">
+<a href="${pageContext.request.contextPath}/team/teamDetail?tea_num=${report.tea_num}">
 ${report.tea_name}
 </a><br>
 </c:if>
@@ -69,9 +69,9 @@ ${report.tnr_title }
 	<input type="hidden" name="report_type" value="${report.report_type }">
 	<input type="hidden" name="tea_num" value="${report.report_typeDetail }">
 	<input type="radio" name="tea_status" value=0 
-	<c:if test="${report.tea_status== 1 }">checked</c:if>/>활성화 
+	<c:if test="${report.tea_status== 0 }">checked</c:if>/>활성화 
 	<input type="radio" name="tea_status" value=1 
-	<c:if test="${report.tea_status== 2 }">checked</c:if>/>비활성화
+	<c:if test="${report.tea_status== 1 }">checked</c:if>/>비활성화
 	<button type="submit">완료</button>
 </form>
 </c:if>

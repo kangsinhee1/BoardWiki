@@ -19,5 +19,5 @@ public interface ReportMapper {
 	public List<ReportVO> selectReportList(Map<String,Object>map);
 	
 	//신고 상세 내용 찾기
-	public ReportVO selectReportDetail(Long report_typeDetail, int report_type);
+	public ReportVO selectReportDetail(Long report_typeDetail, int report_type, Long report_num);
 }

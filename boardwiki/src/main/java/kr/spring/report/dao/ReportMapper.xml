@@ -31,18 +31,22 @@
 	 	<if test="report_type == 1">
 	 		   		 LEFT OUTER JOIN board b ON r.report_typeDetail = b.boa_num
 	 		   		 where report_type = #{report_type} AND b.boa_num = #{report_typeDetail}
+	 		   		 AND report_num = #{report_num}
 	 	</if>
 	 	<if test="report_type == 5">
 	 		   		 LEFT OUTER JOIN used_item u ON r.report_typeDetail = u.use_num
 	 		   		 where report_type = #{report_type} AND u.use_num = #{report_typeDetail}
+	 		   		 AND report_num = #{report_num}
 	 	</if>
 	 	<if test="report_type == 6">
 	 		   		 LEFT OUTER JOIN team t ON r.report_typeDetail = t.tea_num
 	 		   		 where report_type = #{report_type} AND t.tea_num = #{report_typeDetail}
+	 		   		 AND report_num = #{report_num}
 	 	</if>
 	 	<if test="report_type == 7">
 	 		   		 LEFT OUTER JOIN tnrboard tnr ON r.report_typeDetail = tnr.tnr_num
 	 		   		 where report_type = #{report_type} AND tnr.tnr_num = #{report_typeDetail}
+	 		   		 AND report_num = #{report_num}
 	 	</if>
 	 </sql>
 	  <select id="selectReportList" parameterType="map"

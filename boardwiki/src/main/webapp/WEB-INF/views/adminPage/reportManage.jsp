@@ -33,7 +33,7 @@
 		<tr>
 			<td class="align-center">${report.report_num}</td>
 			<td class="align-left">
-			<a href="${pageContext.request.contextPath}/adminPage/reportDetail?report_type=${report.report_type}&report_typeDetail=${report.report_typeDetail}">${report.report_content}</a>
+			<a href="${pageContext.request.contextPath}/adminPage/reportDetail?report_type=${report.report_type}&report_typeDetail=${report.report_typeDetail}&report_num=${report.report_num}">${report.report_content}</a>
 			</td>
 			<td class="align-center">${report.mem_nickName}</td>
 			<td class="align-center">

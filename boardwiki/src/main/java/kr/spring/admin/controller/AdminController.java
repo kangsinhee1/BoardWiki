@@ -322,9 +322,9 @@ public class AdminController {
 	}
 	@GetMapping("/adminPage/reportDetail")
 	public ModelAndView reportDetailPage(Long report_typeDetail,
-								   int report_type) {
+								   int report_type, Long report_num) {
 		
-		ReportVO report = reportService.selectReportDetail(report_typeDetail, report_type);
+		ReportVO report = reportService.selectReportDetail(report_typeDetail, report_type, report_num);
 		
 		return new ModelAndView("reportDetail","report",report);
 	}
