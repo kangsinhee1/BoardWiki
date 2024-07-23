@@ -50,7 +50,7 @@
 <div class="page-main">
     <h2>게시판 목록</h2>
     <div class="dropdown">
-        <button class="dropbtn">메뉴 선택</button>
+        <button>메뉴 선택</button>
         <div class="dropdown-content">
             <a href="list">전체</a>
             <a href="list?poi_status=1">후원</a>

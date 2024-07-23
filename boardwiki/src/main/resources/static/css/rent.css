@@ -1,6 +1,24 @@
 @charset "UTF-8";
 /* 게시판 목록
 ---------------------*/
+
+.rent_btn {
+    display: inline-block;
+    font-size: 14px;
+    padding: 6px 13px 6px;
+    color: #ffffff;
+    background: #C213B6;
+    line-height: normal;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 600;
+    border: 2px solid #C213B6;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 2px;
+    transition: background-color 0.3s;
+}
+
 form#search_form #order{
 	height:32px;
 }

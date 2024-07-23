@@ -3,6 +3,9 @@
 
 /* side-bar */
 /* 사이드바 */
+h5 {
+	color:black;
+}
 #page_nav{
 	height: 700px;
 	width: 240px;

@@ -40,7 +40,7 @@
                     <c:if test="${!empty member.mem_photo }">
                         <img src="${pageContext.request.contextPath}/images/${member.mem_photo}" class="profile-img mb-3" alt="Profile Image">
                     </c:if>
-                    <h5 class="card-title">${member.mem_name}</h5>
+                    <h5>${member.mem_name}</h5>
                     <p class="card-text">이메일: ${member.mem_email}</p>
                     <p class="card-text">닉네임: ${member.mem_nickName}</p>
                     <c:if test="${member.mem_mdate == null}">

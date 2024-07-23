@@ -1,7 +1,24 @@
 @charset "UTF-8";
 
 
-.addToCartButton {
+.btn-primary {
+	display: inline-block;
+	font-size: 14px;
+	padding: 8px 15px 8px;
+	color: #ffffff;
+	background: transparent;
+	line-height: normal;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	font-weight: 600;
+	border: 2px solid #b01ba5;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.btn-primary:hover {
+	background: #C213B6;
+	border: 2px solid #b01ba5;
 }
 
 .quantity_label {
@@ -118,6 +135,7 @@
 	text-overflow: ellipsis;
 	width: 180px; /* 텍스트가 넘칠 경우 적용할 너비 */
 }
+
 
 .card-body {
 	padding: 0;

@@ -50,7 +50,7 @@
                                 <input type="number" id="rent_period" name="rent_period" min="1" max="10" required/>
                             </div>
                             <div class="align-center">
-                                <form:button class="default-btn">전송</form:button>
+                                <form:button class="rent_btn">전송</form:button>
                                 <input type="button" value="목록" class="default-btn" onclick="location.href='list'">
                             </div>
                         </form:form>

@@ -5,6 +5,25 @@
  ------------------------------------
  ====================================*/
  
+.dropbtn {
+	display: inline-block;
+	font-size: 14px;
+	padding: 8px 15px 8px;
+	color: #ffffff;
+	background: transparent;
+	line-height: normal;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	font-weight: 600;
+	border: 2px solid #C213B6;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.dropbtn:hover {
+	background : #C213B6;
+}
+ 
 a {
     color: #C213B6;
     text-decoration: none;
@@ -143,6 +162,27 @@ button {
 	font-size: 14px;
 	padding: 8px 15px 8px;
 	color: #ffffff;
+	background: transparent;
+	line-height: normal;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	font-weight: 600;
+	border: 2px solid #C213B6;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+	background: #C213B6;
+}
+
+
+.btn-primary {
+	display: inline-block;
+	font-size: 14px;
+	padding: 8px 15px 8px;
+	color: #ffffff;
 	background: #C213B6;
 	line-height: normal;
 	letter-spacing: 1px;
@@ -153,6 +193,10 @@ button {
     cursor: pointer;
     transition: background-color 0.3s;
 }
+.btn-primary {
+	background: #C213B6;
+}
+
 input[type="submit"] {
 	display: inline-block;
 	font-size: 14px;
