@@ -43,4 +43,14 @@ public class OrderServiceImpl implements OrderService{
 		return orderMapper.selectCartList(mem_num);
 	}
 
+	@Override
+	public List<CartVO> getnumList(Long mem_num) {
+		return orderMapper.getnumList(mem_num);
+	}
+
+	@Override
+	public List<CartVO> getpriceList(Long mem_num) {
+		return orderMapper.getpriceList(mem_num);
+	}
+
 }

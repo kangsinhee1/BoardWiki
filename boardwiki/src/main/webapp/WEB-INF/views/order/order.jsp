@@ -3,6 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <script src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
+
+<!-- include ckeditor js -->
+<script src="${pageContext.request.contextPath}/js/ckeditor.js"></script>
+<script src="${pageContext.request.contextPath}/js/uploadAdapter.js"></script>
 <!-- Page top section -->
 <section class="page-top-section set-bg" data-setbg="/img/page-top-bg/4.jpg">
 	<div class="page-info">
@@ -21,8 +25,10 @@
 			let all_price = 0;
 			const $qElement = $('p[data-sum]');
 		</script>
-		<form id="GetToOrder" method="get" action="${pageContext.request.contextPath}/order/order">
+		<form id="GetToOrder" method="post" action="${pageContext.request.contextPath}/order/order1">
 		<c:forEach var="order" items="${list}">
+		<input type="hidden" name="mem_num" value="${mem_num}">
+		<input type="hidden" name="item_quantity" value="${order.item_quantity}">
            <div class="big-box">
                <input type="hidden" value="${order.item_num}" name="item_num">
                <p style="display: inline-block; vertical-align: top;">|${order.item_name}|</p>
@@ -36,13 +42,23 @@
 				all_price = all_price + num2;
 			</script>
 		</c:forEach>
+		
+		<c:forEach var="order" items="${list2}">
+		<input type="hidden" name="mem_num" value="${mem_num}">
+		</c:forEach>
+		
+		<c:forEach var="order" items="${list3}">
+		<input type="hidden" name="mem_num" value="${mem_num}">
+		</c:forEach>
 			<script type="text/javascript">
 				console.log('11:', all_price);
 				$('total_sum_value').text(all_price);
 			</script>
-			<div>
-               <p id="total_sum_price">총 금액<span id="total_sum_value" >0</span>원</p>
-           </div>
+<!-- 			<div> -->
+<!--                <p id="total_sum_price">총 금액<span id="total_sum_value" >0</span>원</p> -->
+<!--            </div> -->
+           <input type="hidden" name="mem_num" value="${mem_num}">
+           
            <div>
                <label for="order_name">수령인</label>
                <input type="text" id="order_name">
@@ -52,19 +68,19 @@
                <input type="text" id="order_phone">
            </div>
            <div>
-               <label for="zipcode">우편번호</label>
-		       <input type="text" name="receive_post" id="zipcode" maxlength="5">
+               <label for="order_zipcode">우편번호</label>
+		       <input type="text" name="receive_post" id="order_zipcode" maxlength="5">
 		       <input type="button" onclick="execDaumPostcode()" value="우편번호 찾기" class="post_btn">
            </div>
            <div>
-		       <label for="address1">주소</label>
-		       <input type="text" name="receive_address1" id="address1" maxlength="30">
+		       <label for="order_address1">주소</label>
+		       <input type="text" name="receive_address1" id="order_address1" maxlength="30">
 		   </div>
            <div>
-		       <label for="address2">상세주소</label>
-		       <input type="text" name="receive_address2" id="address2" maxlength="30">
+		       <label for="order_address2">상세주소</label>
+		       <input type="text" name="receive_address2" id="order_address2" maxlength="30">
 		   </div>
-		   <button type="submit">주문하기</button>
+		   <button type="submit" onclick="location.href='${pageContext.request.contextPath}/order/pay?mem_num=${mem_num}'">주문하기</button>
            </form>
     </div>
 </div>
@@ -126,11 +142,11 @@
                 //(수정) }
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('zipcode').value = data.zonecode;
+                document.getElementById('order_zipcode').value = data.zonecode;
                 //(수정) + extraAddr를 추가해서 address1에 참고항목이 보여지도록 수정
-                document.getElementById("address1").value = addr + extraAddr;
+                document.getElementById("order_address1").value = addr + extraAddr;
                 // 커서를 상세주소 필드로 이동한다.
-                document.getElementById("address2").focus();
+                document.getElementById("order_address2").focus();
 
                 // iframe을 넣은 element를 안보이게 한다.
                 // (autoClose:false 기능을 이용한다면, 아래 코드를 제거해야 화면에서 사라지지 않는다.)
