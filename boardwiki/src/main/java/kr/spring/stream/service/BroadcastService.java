@@ -10,4 +10,5 @@ public interface BroadcastService {
     void startStream(BroadcastVO broadcast);
     void updateBroadcast(BroadcastVO broadcast);
     BroadcastVO findByMemNum(Long mem_num);
+	
 }

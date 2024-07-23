@@ -58,4 +58,9 @@ public class AttendanceServiceImpl implements AttendanceService{
         }
 	}
 
+	@Override
+	public AttendanceVO getAttendance(Long mem_num) {
+		return attendanceMapper.getAttendance(mem_num);
+	}
+
 }

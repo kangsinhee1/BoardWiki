@@ -1,17 +1,22 @@
 package kr.spring.order.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -56,9 +61,16 @@ public class OrderController {
 
     	List<CartVO> list = null;
     	list = cartService.selectCartList(map);
-
+    	
+    	List<CartVO> list2 = null;
+    	list2 = orderService.getnumList(mem_num);
+    	List<CartVO> list3 = null;
+    	list3 = orderService.getpriceList(mem_num);
+    	
     	model.addAttribute("mem_num",mem_num);
     	model.addAttribute("list",list);
+    	model.addAttribute("list2",list2);
+    	model.addAttribute("list3",list3);
 
     	return "order";
     }
@@ -66,45 +78,41 @@ public class OrderController {
     /*=========================
 	 * 주문창에 데이터 담기
 	 *=========================*/
-    @PostMapping("/order/order")
-    @ResponseBody
-    public Map<String, Object> addToOrder(@RequestParam Long mem_num,@RequestParam Integer item_quantity,
-    		                              @RequestParam Long item_num,OrderVO orderVO,HttpSession session){
-    	Map<String, Object> mapAjax = new HashMap<>();
+  @PostMapping("/order/order1")
+  @ResponseBody
+  public String addToOrder(Long mem_num,Integer item_quantity,
+  		                              Long item_num,String order_name,String order_phone,Long order_zipcode,
+  		                              String order_address1,String order_address2,
+  		                              HttpSession session,Model model){
+  	
+  	log.debug("<<유저 - mem_num>>" + mem_num);
+  	CartVO cart = cartService.selectCart(mem_num);
 
+  	if (mem_num == null) {
+  		model.addAttribute("message", "로그인후 작성 가능합니다.");
+		model.addAttribute("url","/item/item_detail");
+		return "common/resultAlert";
+		
+  	}else {
+  		OrderVO order = new OrderVO();
+  		order.setMem_num(mem_num);
+  		order.setItem_num(item_num);
+  		order.setOrder_name(order_name);
+  		order.setOrder_phone(order_phone);
+  		order.setOrder_zipcode(order_zipcode);
+  		order.setOrder_address1(order_address1);
+  		order.setOrder_address2(order_address2);
+  		order.setOrder_price(cart.getCart_price());
 
-
-    	log.debug("<<유저 - mem_num>>" + mem_num);
-    	log.debug("<<주문 VO - orderVO>> : " + orderVO);
-    	CartVO cart = cartService.selectCart(mem_num);
-
-    	if (mem_num == null) {
-    		mapAjax.put("result", "logout");
-    		return mapAjax;
-    	}else {
-    		OrderVO order = new OrderVO();
-    		order.setMem_num(mem_num);
-    		order.setItem_num(item_num);
-    		order.setOrder_name(orderVO.getOrder_name());
-    		order.setOrder_phone(orderVO.getOrder_phone());
-    		order.setOrder_zipcode(orderVO.getOrder_zipcode());
-    		order.setOrder_address1(orderVO.getOrder_address1());
-    		order.setOrder_address2(orderVO.getOrder_address2());
-    		order.setOrder_price(cart.getCart_price());
-
-    		orderService.insertOrder(order);
-    		mapAjax.put("result", "success");
-    	}
-    	log.debug("<<mapAjax 결과>> : " + mapAjax);
-    	return mapAjax;
-    }
+  		orderService.insertOrder(order);
+  		
+  		model.addAttribute("message", "결재창으로 넘어갑니다.");
+		model.addAttribute("url","/order/pay");
+  		
+		return "common/resultAlert";
+  	} 	
+  }
 }
-
-
-
-
-
-
 
 
 

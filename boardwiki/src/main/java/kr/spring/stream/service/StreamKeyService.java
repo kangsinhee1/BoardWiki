@@ -8,4 +8,8 @@ public interface StreamKeyService {
 	StreamKeyVO findByUsername(Long mem_num);
 
 	StreamKeyVO selectstream(Long str_key);
+	
+	Integer streamingNumber(long mem_num);
+	
+	Integer streamingNum(Long str_num);
 }

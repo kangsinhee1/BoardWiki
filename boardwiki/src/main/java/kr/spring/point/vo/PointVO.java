@@ -17,4 +17,5 @@ public class PointVO {
 	private int poi_increase;   //1:사용, 2:획득
 	private int poi_use;		//사용 포인트
 	private Date poi_date;		//사용일
+	private long poi_re;         //변경전 포인트
 }

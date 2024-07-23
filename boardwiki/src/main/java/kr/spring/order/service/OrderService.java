@@ -2,6 +2,8 @@ package kr.spring.order.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Select;
+
 import kr.spring.cart.vo.CartVO;
 import kr.spring.order.vo.OrderVO;
 
@@ -12,4 +14,6 @@ public interface OrderService {
 	public OrderVO selectOrderUser(Long mem_num);
 	public List<OrderVO> selectOrderList(Long mem_num);
 	public List<CartVO> selectCartList(Long mem_num);
+	public List<CartVO> getnumList(Long mem_num);
+	public List<CartVO> getpriceList(Long mem_num);
 }

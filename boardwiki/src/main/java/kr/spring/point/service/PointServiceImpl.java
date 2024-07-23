@@ -20,6 +20,9 @@ public class PointServiceImpl implements PointService {
 
     @Override
     public void processPointTransaction(PointVO pointVO) {
+    	Integer point = 0;
+    	point = pointMapper.selectPointTotal(pointVO.getMem_num());
+    	pointVO.setPoi_re(point);
         pointMapper.insertpoint(pointVO);
         pointMapper.updatepointtotal(pointVO);
     }

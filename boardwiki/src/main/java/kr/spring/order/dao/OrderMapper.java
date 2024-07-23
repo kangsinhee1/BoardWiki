@@ -20,4 +20,8 @@ public interface OrderMapper {
 	public List<OrderVO> selectOrderList(Long mem_num);
 	@Select("SELECT * FROM cart WHERE mem_num=#{mem_num}")
 	public List<CartVO> selectCartList(Long mem_num);
+	@Select("SELECT item_num FROM cart WHERE mem_num=#{mem_num}")
+	public List<CartVO> getnumList(Long mem_num);
+	@Select("SELECT cart_price FROM cart WHERE mem_num=#{mem_num}")
+	public List<CartVO> getpriceList(Long mem_num);
 }

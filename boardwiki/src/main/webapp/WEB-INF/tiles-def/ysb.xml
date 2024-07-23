@@ -33,6 +33,10 @@
 		<put-attribute name="css" value="/WEB-INF/views/order/orderCSS.jsp"/>
 		<put-attribute name="body" value="/WEB-INF/views/order/order.jsp"/>
 	</definition>
+	<definition name="pay" extends="main">
+		<put-attribute name="title" value="결제"/>
+		<put-attribute name="body" value="/WEB-INF/views/order/pay.jsp"/>
+	</definition>
 	
 </tiles-definitions>
 

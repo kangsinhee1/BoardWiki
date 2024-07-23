@@ -40,6 +40,7 @@ public class Pointcontroller {
 
 	    MemberVO user = (MemberVO) session.getAttribute("user");
 	    long mem_num = user.getMem_num();
+	    int point = 0;
 
 	    log.debug("<<포인트 목록 - poi_status>> : {}", poi_status);
 	    log.debug("<<포인트 목록 - user>> : {}", mem_num);
@@ -63,11 +64,13 @@ public class Pointcontroller {
 	        map.put("end", page.getEndRow());
 
 	        list = pointService.selectPointList(map);
+	        point = pointService.selectPointTotal(mem_num);
 	    }
 
 	    model.addAttribute("count", count);
 	    model.addAttribute("list", list);
 	    model.addAttribute("page", page.getPage());
+	    model.addAttribute("point", point);
 
 	    return "pointList";
 	}

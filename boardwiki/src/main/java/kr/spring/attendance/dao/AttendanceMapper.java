@@ -13,7 +13,10 @@ import kr.spring.attendance.vo.AttendanceVO;
 public interface AttendanceMapper {
 	@Select("SELECT * FROM attendance WHERE TO_CHAR(att_date, 'MM') = TO_CHAR(SYSDATE, 'MM') AND mem_num = #{mem_num}")
     List<AttendanceVO> getMonthlyAttendance(Long mem_num);
-
+	
+	@Select("SELECT * FROM attendance WHERE TO_CHAR(att_date, 'DD') = TO_CHAR(SYSDATE, 'DD') AND mem_num = #{mem_num}")
+    AttendanceVO getAttendance(Long mem_num);
+	
 	@Select("SELECT COUNT(*) FROM attendance WHERE att_date = #{att_date} AND mem_num = #{mem_num}")
     int attendanceExists(AttendanceVO vo);
 

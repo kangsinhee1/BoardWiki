@@ -56,12 +56,17 @@
                 <h1>${mem_nickName}님의 방송</h1>
                 <video id="video" controls autoplay playsinline></video>
                 <div class="donation-mission-container">
-                    <button class="donation-button" onclick="openDonationModal()">도네이션 보내기</button>
-                    <button class="donation-list-button" onclick="openDonationListByStream()">도네이션 목록 보기 (스트림 기준)</button>
-                    <button class="donation-list-button" onclick="openDonationListByMember()">도네이션 목록 보기 (회원 기준)</button>
+                <c:if test="${strnum == param.str_num}">
+                	<button class="mission-button" onclick="openMissionListByStream()">미션 목록 보기</button>
+                	<button class="donation-list-button" onclick="openDonationListByStream()">도네이션 목록 보기</button>
+                </c:if>
+                <c:if test="${strnum != param.str_num}">
+                	<button class="donation-button" onclick="openDonationModal()">도네이션 보내기</button>
                 	<button class="mission-button" onclick="openMissionRequest()">미션 신청</button>
-                    <button class="mission-button" onclick="openMissionListByStream()">방송용 미션 목록</button>
-                    <button class="mission-button" onclick="openMissionListByMember()">유저용 미션 목록</button>
+                    <button class="donation-list-button" onclick="openDonationListByMember()">도네이션 목록 보기</button>
+                    <button class="mission-button" onclick="openMissionListByMember()">미션 목록 보기</button>
+                </c:if>
+                    
                 </div>
             </div>
             <div class="chat-section">
