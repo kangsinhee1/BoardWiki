@@ -13,4 +13,5 @@ public class BroadcastVO {
     private Long str_num;
     private String str_key;
     private int isLive;
+    private String mem_nickName;
 }

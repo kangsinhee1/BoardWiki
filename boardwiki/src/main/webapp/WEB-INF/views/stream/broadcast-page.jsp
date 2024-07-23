@@ -53,7 +53,7 @@
     <c:if test="${broadcast.isLive == 1}">
         <div class="container">
             <div class="video-container">
-                <h1>${broadcast.mem_num}님의 방송</h1>
+                <h1>${mem_nickName}님의 방송</h1>
                 <video id="video" controls autoplay playsinline></video>
                 <div class="donation-mission-container">
                     <button class="donation-button" onclick="openDonationModal()">도네이션 보내기</button>

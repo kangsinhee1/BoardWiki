@@ -74,6 +74,8 @@ public class AppConfig implements WebMvcConfigurer,WebSocketConfigurer{
 		.addPathPatterns("/rent/rentListAdmin")
 		.addPathPatterns("/team/**")
 		.addPathPatterns("/chat/**")
+		.addPathPatterns("/pointgame/**")
+		.addPathPatterns("/attendance/attendance")
 		.excludePathPatterns("/team/teamFav")
 		.excludePathPatterns("/team/teamDetail")
 		.excludePathPatterns("/team/teamList");

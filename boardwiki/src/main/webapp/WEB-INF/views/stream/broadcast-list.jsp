@@ -36,7 +36,7 @@
 						src="${pageContext.request.contextPath}/hls/${broadcast.str_key}/thumbnail.jpg"
 						alt="Thumbnail">
 				</div>
-				<div class="username">${broadcast.mem_num}님의 방송</div>
+				<div class="username">${broadcast.mem_nickName}님의 방송</div>
 			</a>
 		</div>
 	</c:forEach>

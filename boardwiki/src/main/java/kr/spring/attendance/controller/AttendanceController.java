@@ -44,8 +44,12 @@ public class AttendanceController {
             long mem_num = user.getMem_num();
             Integer dice = 0;
             dice = diceService.selectDicechanec(mem_num);
-
-            model.addAttribute("dice",dice);
+            if(dice > 0 ) {
+            	model.addAttribute("dice",dice);
+            }else {
+            	model.addAttribute("dice", 0);
+            }
+            
             List<AttendanceVO> attendance = attendanceService.getMonthlyAttendance(mem_num);
             for (AttendanceVO element : attendance) {
             	if(element.getAtt_status() == 1) {
