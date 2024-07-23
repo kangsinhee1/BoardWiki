@@ -48,11 +48,21 @@ public class ContestServiceImpl implements ContestService{
 	@Override
 	public void applyForContest(ContestApplyVO contestApplyVO) {
 		contestmapper.applyForContest(contestApplyVO);
-
+		contestmapper.updateContestManCount(contestApplyVO);
 	}
 
 	@Override
 	public Integer selectContestApplyList(ContestApplyVO contestApplyVO) {
 		return contestmapper.selectContestApplyList(contestApplyVO);
+	}
+
+	@Override
+	public void cancelContestApply(ContestApplyVO contestApplyVO) {
+		contestmapper.deleteContestApply(contestApplyVO);
+	}
+
+	@Override
+	public Integer countContestMan(Long con_num) {
+		return contestmapper.countContestMan(con_num);
 	}
 }

@@ -38,42 +38,70 @@
 								onclick="location.href='contestUpdate?con_num=${contest.con_num}'">
 							<input type="button" value="삭제" id="delete_btn">
 							<script type="text/javascript">
-								const delete_btn = document
-										.getElementById('delete_btn');
-								delete_btn.onclick = function() {
-									const choice = confirm('삭제하시겠습니까?');
-									if (choice) {
-										location
-												.replace('contestDelete?con_num=${contest.con_num}');
-									}
-								}
-							</script>
+                                const delete_btn = document
+                                        .getElementById('delete_btn');
+                                delete_btn.onclick = function() {
+                                    const choice = confirm('삭제하시겠습니까?');
+                                    if (choice) {
+                                        location
+                                                .replace('contestDelete?con_num=${contest.con_num}');
+                                    }
+                                }
+                            </script>
 						</c:if>
 					</div>
 					<div class="detail-content">
 						${contest.con_content}<br>
 					</div>
-					<h4>참가 현황: ${contest.con_man} / ${contest.con_maxman}</h4>
+					<h4>참가 현황: ${conManCount} / ${contest.con_maxman}</h4>
 				</div>
 				<hr>
 				<h4>대회 주소: ${contest.con_address1} ${contest.con_address2}</h4>
 				<div id="map" style="width: 100%; height: 350px;"></div>
 
 				<br>
+				
 				<c:if test="${!empty user}">
 					<p class="align-center">
-						<input type="button" value="대회신청" id="delete_btn">
+						<c:choose>
+					        <c:when test="${applied}">
+								<input type="button" value="대회 신청 취소" id="cancel_btn">
+							</c:when>
+							<c:otherwise>
+								<c:choose>
+									<c:when test="${conManCount >= contest.con_maxman}">
+										<input type="button" value="대회신청마감" id="apply_btn" disabled="disabled">
+									</c:when>
+									<c:otherwise>
+										<input type="button" value="대회신청" id="apply_btn">
+									</c:otherwise>
+								</c:choose>
+							</c:otherwise>
+						</c:choose>
 						<script type="text/javascript">
-								const delete_btn = document
-										.getElementById('delete_btn');
-								delete_btn.onclick = function() {
-									const choice = confirm('대회 신청하시겠습니까?');
-									if (choice) {
-										location
-												.replace('contestApply?con_num=${contest.con_num}');
-									}
-								}
-							</script>
+				            document.addEventListener('DOMContentLoaded', function() {
+				                const apply_btn = document.getElementById('apply_btn');
+				                const cancel_btn = document.getElementById('cancel_btn');
+
+				
+				                if (apply_btn) {
+				                    apply_btn.onclick = function() {
+				                        const choice = confirm('대회 신청하겠습니까?');
+				                        if (choice) {
+				                            location.replace('contestApply?action=apply&con_num=${contest.con_num}');
+				                        }
+				                    }
+				                }
+				                if (cancel_btn) {
+				                    cancel_btn.onclick = function() {
+				                        const choice = confirm('대회 신청을 취소하시겠습니까?');
+				                        if (choice) {
+				                            location.replace('contestApply?action=cancel&con_num=${contest.con_num}');
+				                        }
+				                    }
+				                }
+				            });
+        				</script>
 					</p>
 				</c:if>
 			</div>
@@ -84,49 +112,48 @@
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=77c9fa63541b3e967dfb6eb75abb22ff&libraries=services"></script>
 <script>
-	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-	mapOption = {
-		center : new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-		level : 3
-	// 지도의 확대 레벨
-	};
+    var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = {
+        center : new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        level : 3
+    // 지도의 확대 레벨
+    };
 
-	// 지도를 생성합니다    
-	var map = new kakao.maps.Map(mapContainer, mapOption);
+    // 지도를 생성합니다    
+    var map = new kakao.maps.Map(mapContainer, mapOption);
 
-	// 주소-좌표 변환 객체를 생성합니다
-	var geocoder = new kakao.maps.services.Geocoder();
-	var address = "${contest.con_address1}";
-	// 주소로 좌표를 검색합니다
-	geocoder
-			.addressSearch(
-					address,
-					function(result, status) {
+    // 주소-좌표 변환 객체를 생성합니다
+    var geocoder = new kakao.maps.services.Geocoder();
+    var address = "${contest.con_address1}";
+    // 주소로 좌표를 검색합니다
+    geocoder
+            .addressSearch(
+                    address,
+                    function(result, status) {
 
-						// 정상적으로 검색이 완료됐으면 
-						if (status === kakao.maps.services.Status.OK) {
+                        // 정상적으로 검색이 완료됐으면 
+                        if (status === kakao.maps.services.Status.OK) {
 
-							var coords = new kakao.maps.LatLng(result[0].y,
-									result[0].x);
+                            var coords = new kakao.maps.LatLng(result[0].y,
+                                    result[0].x);
 
-							// 결과값으로 받은 위치를 마커로 표시합니다
-							var marker = new kakao.maps.Marker({
-								map : map,
-								position : coords
-							});
+                            // 결과값으로 받은 위치를 마커로 표시합니다
+                            var marker = new kakao.maps.Marker({
+                                map : map,
+                                position : coords
+                            });
 
-							// 인포윈도우로 장소에 대한 설명을 표시합니다
-							var infowindow = new kakao.maps.InfoWindow(
-									{
-										content : '<div style="width:150px;text-align:center;padding:6px 0;">대회장소</div>'
-									});
-							infowindow.open(map, marker);
+                            // 인포윈도우로 장소에 대한 설명을 표시합니다
+                            var infowindow = new kakao.maps.InfoWindow(
+                                    {
+                                        content : '<div style="width:150px;text-align:center;padding:6px 0;">대회장소</div>'
+                                    });
+                            infowindow.open(map, marker);
 
-							// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-							map.setCenter(coords);
-							map.setDraggable(false);
-							map.setZoomable(false);
-						}
-					});
+                            // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+                            map.setCenter(coords);
+                            map.setDraggable(false);
+                            map.setZoomable(false);
+                        }
+                    });
 </script>
-

@@ -33,4 +33,12 @@ public interface ContestMapper {
 	//중복 신청 확인
 	@Select("SELECT count(*) FROM contest_apply WHERE con_num=#{con_num} AND mem_num=#{mem_num}")
 	public Integer selectContestApplyList(ContestApplyVO contestApplyVO);
+	
+	//대회 신청 처리 후 con_max값 +1
+	public void updateContestManCount(ContestApplyVO contestApplyVO);
+	
+	public void deleteContestApply(ContestApplyVO contestApplyVO);
+	
+	@Select("SELECT COUNT(*) FROM contest_APPLY WHERE con_num = #{con_num}")
+	public Integer countContestMan(Long con_num);
 }

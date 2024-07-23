@@ -21,4 +21,8 @@ public interface ContestService {
 	public void applyForContest(ContestApplyVO contestApplyVO);
 
 	public Integer selectContestApplyList(ContestApplyVO contestApplyVO);
+	
+	public void cancelContestApply(ContestApplyVO contestApplyVO);
+	
+	public Integer countContestMan(Long con_num);
 }

@@ -97,7 +97,7 @@ public class ContestController {
 			@RequestParam(defaultValue="1") int order,
 			String keyfield,String keyword,Model model) {
 
-		log.debug("<<게시판 목록 - order>> : " + order);
+		log.debug("<<대회 목록 진입>>");
 
 		Map<String,Object> map =
 				new HashMap<>();
@@ -132,39 +132,67 @@ public class ContestController {
 	 * 	   대회 상세
 	 *=====================*/
 	@GetMapping("/contest/contestDetail")
-	public ModelAndView contestDetail(long con_num) {
+	public ModelAndView contestDetail(long con_num, HttpSession session) {
+		
+		log.debug("<<대회 상세 진입 : >>   " + con_num);
+	    // 조회수 증가
+	    contestservice.updateContestHit(con_num);
 
-		contestservice.updateContestHit(con_num);
+	    // 대회 상세 정보 가져오기
+	    ContestVO contest = contestservice.detailContest(con_num);
 
-		ContestVO contest =  contestservice.detailContest(con_num);
+	    // 사용자가 이미 신청했는지 여부를 확인
+	    MemberVO member = (MemberVO) session.getAttribute("user");
+	    boolean applied = false;
+	    int conManCount = contestservice.countContestMan(con_num);
 
-		return new ModelAndView("contestDetail","contest",contest);
+	    if (member != null) {
+	        ContestApplyVO contestApplyVO = new ContestApplyVO();
+	        contestApplyVO.setMem_num(member.getMem_num());
+	        contestApplyVO.setCon_num(con_num);
+	        applied = contestservice.selectContestApplyList(contestApplyVO) > 0;	        
+	    }
+
+	    // ModelAndView 객체에 데이터 추가
+	    ModelAndView mav = new ModelAndView("contestDetail");
+	    mav.addObject("contest", contest);
+	    mav.addObject("applied", applied);
+	    mav.addObject("conManCount", conManCount);
+	   	    
+	    
+	    return mav;
 	}
+
 
 
 	/*=====================
-	 * 	    대회 신청 처리
+	 * 	  대회 신청/취소 처리
 	 *=====================*/
 	@GetMapping("/contest/contestApply")
-	public String submitApply(long con_num,
+	public String submitApply(@RequestParam String action, long con_num,
 			HttpServletRequest request, HttpSession session, ContestApplyVO contestApplyVO, Model model) {
 
-		MemberVO member = (MemberVO)session.getAttribute("user");
+		MemberVO member = (MemberVO) session.getAttribute("user");
 		contestApplyVO.setMem_num(member.getMem_num());
 		contestApplyVO.setCon_num(con_num);
 
-		//이전에 신청한 기록이 있으면 신청한 기록이 있다고 확인시켜주기
-		contestApplyVO.setMem_num(member.getMem_num());
-		if(contestservice.selectContestApplyList(contestApplyVO)>0){
-			model.addAttribute("message","이미 신청한 기록이 있습니다.");
-			model.addAttribute("url",request.getContextPath()+"contestDetail?con_num="+contestApplyVO.getCon_num());
+		
+			
+		if (action.equals("cancel")) {
+			contestservice.cancelContestApply(contestApplyVO);
+			model.addAttribute("message", "신청 취소 완료");
+			model.addAttribute("url", request.getContextPath() + "contestDetail?con_num=" + contestApplyVO.getCon_num());
 			return "common/resultAlert";
 		}
-
-		contestservice.applyForContest(contestApplyVO);
-		model.addAttribute("message","신청  완료");
-		model.addAttribute("url",request.getContextPath()+"contestDetail?con_num="+contestApplyVO.getCon_num());
-
+		if(action.equals("apply")) {
+			contestservice.applyForContest(contestApplyVO);
+			model.addAttribute("message", "신청 완료");
+			model.addAttribute("url", request.getContextPath() + "contestDetail?con_num=" + contestApplyVO.getCon_num());
+			return "common/resultAlert";
+		}
+		model.addAttribute("message", "신청 오류");
+		model.addAttribute("url", request.getContextPath() + "contestDetail?con_num=" + contestApplyVO.getCon_num());
 		return "common/resultAlert";
 	}
+	
 }
