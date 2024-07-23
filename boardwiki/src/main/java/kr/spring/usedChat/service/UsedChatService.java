@@ -32,9 +32,12 @@ public interface UsedChatService {
 	public void updateUseC_status (long useC_num);
 	//구매 완료된 목록 보기
 	public List<UsedChatRoomVO> selectChatRoomstatus2(long mem_num);
+	//구매 완료 개수 보기
+	public Integer selectChatRoomCountstatus2(long mem_num);
 	// 판매자 평점 확인
 	public Long selectAvgGrade(Long mem_num);	
 	//판매자 평점 처리
 	public void updateUseC_grade(UsedChatRoomVO usedChatRoomVO);
 	
+	public UsedChatRoomVO selectUsedChatROOMByuseCNum(long useC_num);
 }

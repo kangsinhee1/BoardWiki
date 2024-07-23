@@ -110,7 +110,7 @@ public class MyPageController {
 
 		PagingUtil page2 = new PagingUtil(null,keyword,pageNum,count,10,10,"myChat");
 		List<UsedItemVO> list2 = null;
-		if(count>0) {
+		if(count2>0) {
 			map.put("start", page2.getStartRow());
 			map.put("end", page2.getEndRow());
 			list2 = usedService.selectUsedListByMemNum(map);
@@ -120,16 +120,16 @@ public class MyPageController {
 			log.debug("목록 가져와 ! " + list2);
 		}
 		
-		int count3 = usedService.getUsedRowCountByMemNum(map);
+		int count3 = usedChatService.selectChatRoomCountstatus2(user.getMem_num());
 		PagingUtil page3 = new PagingUtil(null,keyword,pageNum,count3,10,10,"myChat");
 		List<UsedChatRoomVO> list3 = null;
-		if(count>0) {
+		if(count3>0) {
 			map.put("start", page3.getStartRow());
 			map.put("end", page3.getEndRow());
 			list3 = usedChatService.selectChatRoomstatus2(user.getMem_num());
 			model.addAttribute("count3",count3);
 			model.addAttribute("list3",list3);
-			model.addAttribute("page2",page2.getPage());
+			model.addAttribute("page3",page3.getPage());
 			log.debug("목록 가져와222 ! " + list3);
 		}
 		

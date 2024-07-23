@@ -23,6 +23,8 @@ public interface TeamMapper {
 		public Long selectTea_num();
 		//목록보기
 		public Integer getTeamRowCount(Map<String,Object>map);
+		public Integer getTeamRowCountByAdmin(Map<String,Object>map);
+		
 
 		public List<TeamVO> selectTeamListAdmin(Map<String,Object>map);
 		public List<TeamVO> selectTeamList(Map<String,Object>map);
@@ -177,9 +179,8 @@ public interface TeamMapper {
 		//부모글 삭제시 댓글 삭제
 		@Delete("DELETE FROM team_reply WHERE teaB_num = #{teaB_num}")
 		public void deleteTeamBoardReplyByTeamBoardNum(long teaB_num);
-
+		
 		@Update("UPDATE team SET tea_status=#{tea_status} WHERE tea_num=#{tea_num}")
 		public void updateTeamAuth(Long tea_status, Long tea_num);
-
 
 }

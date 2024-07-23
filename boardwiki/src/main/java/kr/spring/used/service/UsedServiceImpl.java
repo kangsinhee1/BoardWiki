@@ -62,6 +62,10 @@ public class UsedServiceImpl implements UsedService{
 	}
 
 	@Override
+	public void updateUseCheckByroom(long use_num) {
+		usedMapper.updateUseCheckByroom(use_num);
+	}
+	@Override
 	public void updateUsedAuth(Long use_auth, Long use_num) {
 		usedMapper.updateUsedAuth(use_auth, use_num);
 	}

@@ -3,6 +3,8 @@ package kr.spring.usedChat.service;
 import java.util.List;
 import java.util.Map;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +13,7 @@ import kr.spring.usedChat.vo.UsedChatRoomVO;
 import kr.spring.usedChat.vo.UsedChat_textVO;
 
 @Service
+@Transactional
 public class UsedChatServiceImpl implements UsedChatService{
 
 	@Autowired
@@ -93,6 +96,16 @@ public class UsedChatServiceImpl implements UsedChatService{
 	@Override
 	public void updateUseC_grade(UsedChatRoomVO usedChatRoomVO) {
 		usedChatMapper.updateUseC_grade(usedChatRoomVO);
+	}
+
+	@Override
+	public Integer selectChatRoomCountstatus2(long mem_num) {
+		return usedChatMapper.selectChatRoomCountstatus2(mem_num);
+	}
+
+	@Override
+	public UsedChatRoomVO selectUsedChatROOMByuseCNum(long useC_num) {
+		return usedChatMapper.selectUsedChatROOMByuseCNum(useC_num);
 	}
 
 }

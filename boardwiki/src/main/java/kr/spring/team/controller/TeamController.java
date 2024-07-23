@@ -65,6 +65,7 @@ public class TeamController {
 		Map<String,Object> map = new HashMap<>();
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
+		map.put("tea_status", 1);
 
 
 		int count = teamService.getTeamRowCount(map);
@@ -97,7 +98,7 @@ public class TeamController {
 		map.put("keyword", keyword);
 
 
-		int count = teamService.getTeamRowCount(map);
+		int count = teamService.getTeamRowCountByAdmin(map);
 
 		//페이지 처리
 		PagingUtil page = new PagingUtil(keyfield, keyword, pageNum,count,20,10,"teamListAdmin","&order="+order);

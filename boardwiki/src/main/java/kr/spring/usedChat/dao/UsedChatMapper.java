@@ -60,6 +60,8 @@ public interface UsedChatMapper {
 	@Select("SELECT * FROM UsedChatROOM WHERE usec_status =2 AND MEM_NUM = #{mem_num} ")
 	public List<UsedChatRoomVO> selectChatRoomstatus2(long mem_num);
 	
+	@Select("SELECT count(*) FROM UsedChatROOM WHERE usec_status =2 AND MEM_NUM = #{mem_num} ")
+	public Integer selectChatRoomCountstatus2(long mem_num);
 	
 	// 판매자 평가하기
 	@Update("UPDATE usedChatRoom SET useC_grade = #{useC_grade} WHERE useC_num = #{useC_num}")
@@ -67,6 +69,8 @@ public interface UsedChatMapper {
 	
 	// 판매자 평점
 	public Long selectAvgGrade(long mem_num);
-	
+	//채팅방 정보 불러오기 
+	@Select("Select * FROM usedChatRoom WHERE useC_Num = #{useC_num}")
+	public UsedChatRoomVO selectUsedChatROOMByuseCNum(long useC_num);
 	
 }

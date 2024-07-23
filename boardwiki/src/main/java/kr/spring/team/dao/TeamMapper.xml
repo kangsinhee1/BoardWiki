@@ -6,15 +6,38 @@
 	<!-- sql 태그와 include 태그를 이용해서 SQL문을 재사용 -->
 	 <sql id="teamSearch">
 	 	<where>
+	 	tea_status = #{tea_status}
 	 		<if test="keyword !=null and keyword != ''">
 		 		<if test="keyfield == 1">
-		 			tea_name LIKE '%' || #{keyword} || '%'
+		 	AND	tea_name LIKE '%' || #{keyword} || '%'
 		 		</if>
 		 		<if test="keyfield == 2">
-		 			tea_address1 LIKE '%' || #{keyword} || '%'
+		 	AND	tea_address1 LIKE '%' || #{keyword} || '%'
 		 		</if>
 	 		</if>
 	 	</where>
+	 </sql>
+	 	 <sql id="teamSearchAdmin">
+	 	<where>
+	 		<if test="keyword !=null and keyword != ''">
+		 		<if test="keyfield == 1">
+		 		tea_name LIKE '%' || #{keyword} || '%'
+		 		</if>
+		 		<if test="keyfield == 2">
+		 	tea_address1 LIKE '%' || #{keyword} || '%'
+		 		</if>
+	 		</if>
+	 	</where>
+	 </sql>
+	 <sql id="teamSearchCount">
+	 		<if test="keyword !=null and keyword != ''">
+		 		<if test="keyfield == 1">
+		 		AND tea_name LIKE '%' || #{keyword} || '%'
+		 		</if>
+		 		<if test="keyfield == 2">
+		 		AND tea_address1 LIKE '%' || #{keyword} || '%'
+		 		</if>
+	 		</if>
 	 </sql>
 	 <sql id="teamOrder">
 	 	<if test="order == 1">
@@ -54,43 +77,17 @@
 	  </insert>
 	 <!-- 모임 목록 -->
 	 <select id="getTeamRowCount" parameterType="map" resultType="integer">
-	 	SELECT count(*)FROM team JOIN member USING(mem_num) WHERE tea_status = 1
+	 	SELECT count(*)FROM team JOIN member USING(mem_num) 
+	 	WHERE tea_status = #{tea_status}
+	 	<include refid="teamSearchCount"/>
+	 </select>
+	  <select id="getTeamRowCountByAdmin" parameterType="map" resultType="integer">
+	 	SELECT count(*)FROM team JOIN member USING(mem_num)
+	 	<include refid="teamSearchAdmin"/>
 	 </select>
 	 
 	 <select id="selectTeamList" parameterType="map" resultType="teamVO">
-	 	SELECT *FROM
-	 	(SELECT a.*, rownum rnum FROM
-	 	(SELECT tea_num,
-	 	  <![CDATA[
-	         REPLACE(REPLACE(tea_name,'<','&lt;'),'>','&gt;') tea_name,
-	      ]]>
-	      tea_content,
-	      tea_time,
-	      tea_zipcode,
-	      tea_address1,
-	      tea_address2,
-	      tea_rdate,
-	      tea_man,
-	      tea_hit,
-	      tea_status,
-	      mem_num,
-	      mem_email,
-	      mem_nickname,
-	      fav_cnt
-	      FROM team
-	      JOIN member USING (mem_num) 
-	      LEFT OUTER JOIN member_detail USING(mem_num)
-	      LEFT OUTER JOIN (SELECT count(*) fav_cnt ,tea_num FROM team_fav GROUP BY tea_num) USING(tea_num)
-	      <include refid="teamSearch"></include>
-	      <include refid="teamOrder"></include>	
-	 	)a)
-	 	<![CDATA[
-	 	WHERE rnum >= #{start} AND rnum <= #{end} AND tea_status = #{tea_status}
-	 	]]>	
-	 </select>
-	 
-	  <select id="selectTeamListAdmin" parameterType="map" resultType="teamVO">
-	 	SELECT *FROM
+	 	SELECT * FROM
 	 	(SELECT a.*, rownum rnum FROM
 	 	(SELECT tea_num,
 	 	  <![CDATA[
@@ -118,8 +115,39 @@
 	 	)a)
 	 	<![CDATA[
 	 	WHERE rnum >= #{start} AND rnum <= #{end}
+	 		]]>	
+	 </select>
+	 
+	  <select id="selectTeamListAdmin" parameterType="map" resultType="teamVO">
+	 	SELECT * FROM
+	 	(SELECT a.*, rownum rnum FROM
+	 	(SELECT tea_num,
+	 	  <![CDATA[
+	         REPLACE(REPLACE(tea_name,'<','&lt;'),'>','&gt;') tea_name,
+	      ]]>
+	      tea_content,
+	      tea_time,
+	      tea_zipcode,
+	      tea_address1,
+	      tea_address2,
+	      tea_rdate,
+	      tea_man,
+	      tea_hit,
+	      tea_status,
+	      mem_num,
+	      mem_email,
+	      mem_nickname,
+	      fav_cnt
+	      FROM team
+	      JOIN member USING (mem_num) 
+	      LEFT OUTER JOIN member_detail USING(mem_num)
+	      LEFT OUTER JOIN (SELECT count(*) fav_cnt ,tea_num FROM team_fav GROUP BY tea_num) USING(tea_num)
+	      <include refid="teamSearchAdmin"></include>
+	      <include refid="teamOrder"></include>	
+	 	)a)
+	 	<![CDATA[
+	 	WHERE rnum >= #{start} AND rnum <= #{end}
 	 	]]>	
-	 Order BY tea_status desc
 	 </select>
 	 <!-- 모임 수정 -->
 	 <update id="updateTeam" parameterType="teamVO" >
@@ -317,10 +345,3 @@
  	</select>
 	  
  </mapper>
-
-
-
-
-
-
-

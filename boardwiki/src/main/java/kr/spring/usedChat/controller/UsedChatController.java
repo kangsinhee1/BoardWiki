@@ -54,9 +54,17 @@ public class UsedChatController {
 		return "useChatSeller";
 	}
 	@GetMapping("/*/finishDeal")
-	public String finishDeal(long useC_num) {
+	public String finishDeal(long useC_num,HttpServletRequest request,Model model) {
+		
 		usedChatService.updateUseC_status(useC_num);
-		return "myPage";
+		UsedChatRoomVO  roomVO = usedChatService.selectUsedChatROOMByuseCNum(useC_num);
+		usedService.updateUseCheckByroom(roomVO.getUse_num());
+		model.addAttribute("message", "판매 처리 완료");
+		model.addAttribute("url",
+		request.getContextPath()+"/myPage/myChat");
+		return "common/resultAlert";
+		
+		//return "redirect:myChat";
 	}
 	@GetMapping("/myPage/usedGrade")
 	public String usedGrade(long useC_num) {
@@ -65,11 +73,9 @@ public class UsedChatController {
 	}
 	@PostMapping("/myPage/usedGrade")
 	public String submitGrade(UsedChatRoomVO usedChatRoomVO ,HttpSession session, Model model) {
-		System.out.println("전송처리?");
-		log.debug("정보가 뭐가있을까요?" + usedChatRoomVO);
 		usedChatService.updateUseC_grade(usedChatRoomVO);
-		
-		return "myChat";
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		return "redirect:myChat";
 	}
 
 	@GetMapping("/*/useChat")
@@ -200,21 +206,4 @@ public class UsedChatController {
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

@@ -16,6 +16,7 @@ public interface TeamService {
 	//모임 관리( 관리자)
 			//목록보기
 			public Integer getTeamRowCount(Map<String,Object>map);
+			public Integer getTeamRowCountByAdmin(Map<String,Object>map);
 			public List<TeamVO> selectTeamList(Map<String,Object>map);
 			public List<TeamVO> selectTeamListAdmin(Map<String,Object>map);
 			//상세
@@ -116,5 +117,5 @@ public interface TeamService {
 			public void updateTeamApplyStatus(@Param(value="teaA_status")long teaA_status,@Param(value="teaA_num")long teaA_num);
 			
 			public void updateTeamAuth(Long tea_status, Long tea_num);
-			
+
 }
