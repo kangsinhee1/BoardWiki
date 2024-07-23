@@ -54,6 +54,7 @@ div#reply_div{
 	padding:5px 10px 40px 10px;
 	margin-top:10px;
 	background-color: rgb(76,1,128);
+	color:black;
 }
 form#re_form{
 	width:650px;
@@ -264,12 +265,16 @@ select#boa_category{
 }
 select#keyfield{
 	color:black;
+	font-size:13px;
 }
 #keyfield option {
-        color: black;
+    color: black;
 }
 
 #order{
 	color:black;
 }
- 
+.align-center{
+	text-align:center;	
+}
+

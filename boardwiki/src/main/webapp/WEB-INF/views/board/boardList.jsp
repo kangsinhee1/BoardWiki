@@ -64,6 +64,7 @@
 	<c:if test="${count > 0}">
 	<div class="chart-table">
 	<table>
+		<thead>
 		<tr>
 			<th>번호</th>
 			<th width="400">제목</th>
@@ -72,6 +73,7 @@
 			<th>조회수</th>
 			<th>좋아요수</th>
 		</tr>
+		</thead>
 		<c:forEach var="board" items="${list}">
 		<tr>
 			<td class="align-center">${board.boa_num}</td>
@@ -87,7 +89,9 @@
 		</c:forEach>
 	</table>
 	</div>
-	<div class="align-center">${page}</div>
+	<div class="align-center">
+	<div class="blog-pagination">${page}</div>
+	</div>
 	</c:if>
 </div>
 </div>
