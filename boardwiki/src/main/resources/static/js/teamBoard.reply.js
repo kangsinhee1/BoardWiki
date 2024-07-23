@@ -47,7 +47,7 @@ $(function(){
 					if(item.mem_nickname){
 						output += item.mem_nickname + '<br>';
 					}else{
-						output += item.id + '<br><br>;';
+						output += item.id;
 					}
 					if(item.re_mdate){
 						output += '<span class="modify-date">최근 수정일 : ' + item.teaR_mdate + '</span>';
@@ -161,6 +161,7 @@ $(function(){
 			modifyUI += '      <input type="submit" value="수정">';
 			modifyUI += '      <input type="button" value="취소" class="re-reset">';
 			modifyUI += '   </div>';
+			modifyUI += '   <br>';
 			modifyUI += '   <br>';
 			modifyUI += '   <hr size="1" noshade width="96%">';
 			modifyUI += '</form>';

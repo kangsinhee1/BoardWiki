@@ -10,9 +10,11 @@ form#search_form #order{
 form#team_register, form#team_modify{
 	padding:0 0 10px 0;
 	width:800px;
+	margin:auto;
 }
 form#team_register ul, form#team_modify ul{
 	padding:20px;
+	color:white;
 }
 form#team_register input[type="text"], 
                 form#team_modify input[type="text"]{

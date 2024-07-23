@@ -108,12 +108,18 @@ public interface TeamMapper {
 		public TeamApplyVO getTeamApply (@Param(value="teaA_num")long teaA_num);
 		@Select("SELECT * FROM team_apply JOIN member_detail USING (mem_num) WHERE tea_num = #{tea_num} AND teaA_status != 9")
 		public List<TeamApplyVO> listTeamApply(TeamApplyVO teamApply);
-
+		
+		@Select("SELECT * FROM team_apply JOIN member_detail USING (mem_num) WHERE tea_num = #{tea_num} AND teaA_status = 2")
+		public List<TeamApplyVO> listTeamApply2(TeamApplyVO teamApply);
 		@Update("UPDATE team_apply SET teaA_status=#{teaA_status} , teaA_mdate = sysdate WHERE teaA_num = #{teaA_num}")
 		public void updateTeamApplyStatus(@Param(value="teaA_status")long teaA_status,@Param(value="teaA_num")long teaA_num);
 
 		@Select("SELECT count(*) FROM team_apply WHERE tea_num = #{tea_num}")
 		public Integer countTeamApplyList(long tea_num);
+		@Select("SELECT count(*) FROM team_apply WHERE tea_num = #{tea_num} AND (teaA_status = 1 OR teaA_status =0)")
+		public Integer countTeamApplyList1(long tea_num);
+		@Select("SELECT count(*) FROM team_apply WHERE tea_num = #{tea_num} AND teaA_status=2")
+		public Integer countTeamApplyList2(long tea_num);
 		//모임 참석 처리
 		@Update("UPDATE team_apply SET teaA_attend=#{teaA_attend} WHERE mem_num = #{mem_num} AND tea_num=#{tea_num}")
 		public void updateTeamApplyUser(TeamApplyVO teamApply);

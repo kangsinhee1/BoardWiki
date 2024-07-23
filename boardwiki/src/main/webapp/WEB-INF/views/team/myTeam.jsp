@@ -6,7 +6,7 @@
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 <div class="page-main">
-	<div class="content-container" id="content">
+	<div class="content-container mt-5" id="content">
 		<!-- Content for 내가 신청한 모임 -->
 		<div class="font-white">
 		<h2>내가 신청한 모임 목록</h2>

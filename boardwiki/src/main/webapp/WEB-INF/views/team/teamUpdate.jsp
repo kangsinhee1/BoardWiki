@@ -37,11 +37,6 @@
 				<form:input path="tea_name" />
 				<form:errors path="tea_name" cssClass="error-color"/>
 			</li>
-			<li>
-				<form:label path="tea_man">모집 회원수</form:label>
-				<form:input type="number" path="tea_man"  min="2" max="99"/>
-				<form:errors path="tea_man" cssClass="error-color"/>
-			</li>
 			<!--  모임진행 날짜 등록시 ?
 			<li>
 				<form:label path="tea_time">모임 진행 날짜</form:label>

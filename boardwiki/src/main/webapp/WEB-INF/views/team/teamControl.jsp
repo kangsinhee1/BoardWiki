@@ -12,10 +12,10 @@
 		<div class="col-lg-12">
 <div class="page-main">
 	<h2 class="align-center">(${Team.tea_name})회원 목록</h2>
-	<c:if test="${count == 0}">
+	<c:if test="${count1 == 0}">
 		<div class="result-display">회원이 없습니다.</div>
 	</c:if>
-	<c:if test="${count > 0}">
+	<c:if test="${count1 > 0}">
 	<div class="chart-table">
 		<table >
 		<thead>
@@ -50,10 +50,10 @@
 	</c:if>
 	<br>
 	<h2 class="align-center">(${Team.tea_name})신청 목록</h2>
-	<c:if test="${count == 0}">
+	<c:if test="${count2 == 0}">
 		<div class="result-display">회원이 없습니다.</div>
 	</c:if>
-	<c:if test="${count > 0}">
+	<c:if test="${count2 > 0}">
 	<div class="chart-table">
 		<table>
 		<thead>

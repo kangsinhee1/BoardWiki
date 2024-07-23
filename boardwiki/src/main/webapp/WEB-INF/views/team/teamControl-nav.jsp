@@ -3,11 +3,10 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 	<!-- Page top section -->
 <!-- MyPage 메뉴 시작 -->
-	<nav class="side-nav">
+<div class="widget-item">
+<div class="categories-widget">
+	<h4 class="widget-title" >나의 모임</h4>
 	<ul>
-	&nbsp;
-	&nbsp;
-		
 		<li>
 		<input type="hidden" id="tea_status" value="${Team.tea_status}">
 			<input type="button" class="menu-btn" value="(${Team.tea_name})회원 목록"
@@ -27,10 +26,6 @@
 		<p>
 		<li >
 		<p>
-		&nbsp;
-		&nbsp;
-		&nbsp;
-		&nbsp;
 		</li>
 		<li >
 		<input type="button" style= "display:none"  class="menu-btn" value="모임 비활성화" id="delete_btn">
@@ -39,8 +34,9 @@
 		<input type="button" style="display:none" class="menu-btn" value="모임 활성화" id="open_btn">
 		</li>
 	</ul>
-	</nav>
 	
+</div>
+</div>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 <!-- MyPage 메뉴 끝 -->
 	<script type="text/javascript">

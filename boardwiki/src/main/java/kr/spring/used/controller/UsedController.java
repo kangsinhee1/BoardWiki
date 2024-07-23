@@ -134,7 +134,7 @@ public class UsedController {
 			used.setUseC_grade(-1L);
 		}else {
 			used.setUseC_grade(usedChatService.selectAvgGrade(used.getMem_num()));
-		}
+		}	
 		return new ModelAndView("usedView","used",used);
 	}
 	/*====================

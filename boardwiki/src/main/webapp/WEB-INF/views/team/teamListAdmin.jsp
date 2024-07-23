@@ -80,7 +80,7 @@
 		<tr>
 		
 			<td class="">${team.tea_num}</td>
-			<td class="link"><a class="link" href="teamDetailAdmin?tea_num=${team.tea_num}">(${fn:substring(team.tea_address1,0,2)}) ${team.tea_name} <c:if test="${team.tea_status == 0}">(정지) </c:if></a></td>
+			<td class="link"><a class="link" href="teamDetailAdmin?tea_num=${team.tea_num}">(${fn:substring(team.tea_address1,0,2)}) ${team.tea_name} <c:if test="${team.tea_status != 1}">(정지) </c:if></a></td>
 			<td class="">
 				${team.mem_nickname}
 			</td>

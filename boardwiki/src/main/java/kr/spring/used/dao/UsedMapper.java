@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import kr.spring.used.vo.UsedItemVO;
 
@@ -24,7 +25,9 @@ public interface UsedMapper {
 	//중고글 삭제
 	@Delete("DELETE FROM used_item WHERE use_num=#{use_num}")
 	public void deleteUsed(Map<String,Object> map);
-
+	//중고글 판매완료 처리
+	@Update("UPDATE  used_item SET use_check=#{use_check} WHERE use_num=#{use_num}")
+	public void updateUseCheck(long use_num);
 	//중고글 찾기
 	@Select("SELECT * FROM used_item WHERE mem_num = #{mem_num}")
 	public List<UsedItemVO> selectUsedListByMemNum(Map<String,Object>map);

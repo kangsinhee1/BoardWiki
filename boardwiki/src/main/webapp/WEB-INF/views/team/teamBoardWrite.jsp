@@ -25,7 +25,6 @@
 <div class="container">
 	<div class="row">
 		<div class="col-lg-12">
-	<h2>모임게시판  글쓰기</h2>
 <div class="">
 	<form:form action="teamBoardWrite" id="team_register"
 	           enctype="multipart/form-data"

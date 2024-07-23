@@ -319,7 +319,7 @@ public class TeamController {
 	 *=====================*/
 
 
-	@GetMapping("/team/myTeam2")
+	@GetMapping("/*/myTeam2")
 	public String getMyTeam2(Model model, HttpSession session,HttpServletRequest request) {
 		Map<String,Object> map = new HashMap<>();
 		Map<String,Object> map2 = new HashMap<>();
@@ -371,7 +371,6 @@ public class TeamController {
 		List<TeamApplyVO> list5 = null;
 		list5 = teamService.selectTeamListApplied(map5);
 		model.addAttribute("list5",list5);
-		log.debug("list5",list5);
 		return "myTeamprac";
 	}
 	//글작성 폼 호출
@@ -675,14 +674,14 @@ public class TeamController {
 
 		List<TeamApplyVO> list = null;
 		list = teamService.listTeamApply(teamApplyVO);
-		int count1  = teamService.countTeamApplyList(teamApplyVO.getTea_num());
-		int count2 = teamService.countTeamApplyList(teamApplyVO.getTea_num());
-		model.addAttribute("count",count1);
-		model.addAttribute("count",count2);
+		int count1  = teamService.countTeamApplyList1(teamApplyVO.getTea_num());
+		int count2 = teamService.countTeamApplyList2(teamApplyVO.getTea_num());
+		model.addAttribute("count1",count1);
+		model.addAttribute("count2",count2);
 		model.addAttribute("list",list);
 		model.addAttribute("tea_num",teamApplyVO.getTea_num());
 		model.addAttribute("Team",teamService.detailTeam(teamApplyVO.getTea_num()));
-		log.debug("모임 관련 내용 : " + count1 +" "+ count2);
+		log.debug("모임 관련 내용 : " + count1 +" "+ count2 + list);
 		return "teamControl";
 	}
 
@@ -694,7 +693,7 @@ public class TeamController {
 
 		List<TeamApplyVO> list = null;
 
-		list = teamService.listTeamApply(teamApplyVO);
+		list = teamService.listTeamApply2(teamApplyVO);
 		int count  = teamService.countTeamApplyList(teamApplyVO.getTea_num());
 		model.addAttribute("count",count);
 		model.addAttribute("list",list);

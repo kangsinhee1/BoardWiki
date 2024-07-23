@@ -276,4 +276,19 @@ public class TeamServiceImpl implements TeamService {
 		return teamMapper.selectTeamListAdmin(map);
 	}
 
+	@Override
+	public List<TeamApplyVO> listTeamApply2(TeamApplyVO teamApply) {
+		return teamMapper.listTeamApply2(teamApply);
+	}
+
+	@Override
+	public Integer countTeamApplyList1(long tea_num) {
+		return teamMapper.countTeamApplyList1(tea_num);
+	}
+
+	@Override
+	public Integer countTeamApplyList2(long tea_num) {
+		return teamMapper.countTeamApplyList2(tea_num);
+	}
+
 }

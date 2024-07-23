@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import kr.spring.team.vo.TeamApplyVO;
 import kr.spring.team.vo.TeamBoardVO;
@@ -50,6 +51,8 @@ public interface TeamService {
 			public Integer selectTeamApplyList(TeamApplyVO teamApply);
 			//신청 회원 갯수
 			public Integer countTeamApplyList(long tea_num);
+			public Integer countTeamApplyList1(long tea_num);
+			public Integer countTeamApplyList2(long tea_num);
 
 			// 회원이 가입한 모임
 			public List<TeamApplyVO> selectTeamListApplied(Map<String,Object>map);
@@ -107,6 +110,8 @@ public interface TeamService {
 
 
 			public List<TeamApplyVO> listTeamApply(TeamApplyVO teamApply);
+			
+			public List<TeamApplyVO> listTeamApply2(TeamApplyVO teamApply);
 
 			public void updateTeamApplyStatus(@Param(value="teaA_status")long teaA_status,@Param(value="teaA_num")long teaA_num);
 }

@@ -32,14 +32,18 @@
 		</div>
 	</div>
 </section>
-	<div class="side-height">
-		<div id="page_nav">
-			<tiles:insertAttribute name="nav"/>
-		</div>
-		<div id="page_body">
-			<tiles:insertAttribute name="body"/>
-		</div>
-	</div>
+<section class="blog-page">
+			<div class="container">
+				<div class="side-height">
+					<div id="page_nav">
+						<tiles:insertAttribute name="nav" />
+					</div>
+					<div id="page_body">
+						<tiles:insertAttribute name="body" />
+					</div>
+				</div>
+			</div>
+		</section>
 	<div id="main_footer" class="page-clear">
 		<tiles:insertAttribute name="footer"/>
 	</div>

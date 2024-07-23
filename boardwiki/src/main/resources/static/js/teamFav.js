@@ -29,7 +29,7 @@ $(function(){
 			data:{tea_num:$('#output_fav').attr('data-num')},
 			dataType:'json',
 			success:function(param){
-				if(param.result=='logout'){
+				if(param.result == 'logout'){
 					alert('로그인 후 좋아요를 눌러주세요');
 				}else if(param.result=='success'){
 					displayTeamFav(param);
