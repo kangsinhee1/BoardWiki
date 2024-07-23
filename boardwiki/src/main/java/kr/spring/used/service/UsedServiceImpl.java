@@ -61,4 +61,9 @@ public class UsedServiceImpl implements UsedService{
 		return usedMapper.getUsedRowCountByMemNum(map);
 	}
 
+	@Override
+	public void updateUsedAuth(Long use_auth, Long use_num) {
+		usedMapper.updateUsedAuth(use_auth, use_num);
+	}
+
 }

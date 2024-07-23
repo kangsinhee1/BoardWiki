@@ -60,8 +60,8 @@ public interface TnrboardMapper {
 	public void deleteReplyByTnrboardNum(Long tnr_num);
 	
 	
-	@Update("UPDATE board SET tnr_auth=#{tnr_auth} WHERE tnr_num=#{tnr_num}")
-	public void updateBoardAuth(Long tnr_num, Long tnr_auth);
+	@Update("UPDATE tnrboard SET tnr_auth=#{tnr_auth} WHERE tnr_num=#{tnr_num}")
+	public void updateTnrBoardAuth(Long tnr_num, Long tnr_auth);
 }
 
 

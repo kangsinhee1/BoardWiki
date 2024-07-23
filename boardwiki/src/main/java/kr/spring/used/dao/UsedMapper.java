@@ -34,4 +34,8 @@ public interface UsedMapper {
 	//내 중고글 갯수
 	@Select("SELECT COUNT(*) FROM used_item WHERE mem_num = #{mem_num}")
 	public Integer getUsedRowCountByMemNum(Map<String,Object>map);
+	
+	//등급 수정
+	@Update("UPDATE used_item SET use_auth=#{use_auth} WHERE use_num=#{use_num}")
+	public void updateUsedAuth(Long use_auth, Long use_num);
 }

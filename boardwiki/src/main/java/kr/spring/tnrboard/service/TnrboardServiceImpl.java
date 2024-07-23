@@ -121,8 +121,8 @@ public class TnrboardServiceImpl implements TnrboardService{
 	}
 
 	@Override
-	public void updateBoardAuth(Long tnr_num, Long tnr_auth) {
-		tnrboardMapper.updateBoardAuth(tnr_num, tnr_auth);
+	public void updateTnrBoardAuth(Long tnr_num, Long tnr_auth) {
+		tnrboardMapper.updateTnrBoardAuth(tnr_num, tnr_auth);
 	}
 
 

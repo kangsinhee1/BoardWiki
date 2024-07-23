@@ -23,4 +23,6 @@ public interface UsedService {
 	public List<UsedItemVO> selectUsedListByMemNum(Map<String,Object>map);
 	//내 중고글 갯수
 	public Integer getUsedRowCountByMemNum(Map<String,Object>map);
+	//등급수정
+	public void updateUsedAuth(Long use_auth, Long use_num);
 }

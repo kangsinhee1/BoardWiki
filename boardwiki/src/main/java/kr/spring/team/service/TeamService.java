@@ -114,4 +114,7 @@ public interface TeamService {
 			public List<TeamApplyVO> listTeamApply2(TeamApplyVO teamApply);
 
 			public void updateTeamApplyStatus(@Param(value="teaA_status")long teaA_status,@Param(value="teaA_num")long teaA_num);
+			
+			public void updateTeamAuth(Long tea_status, Long tea_num);
+			
 }

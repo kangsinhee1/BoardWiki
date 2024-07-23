@@ -178,7 +178,8 @@ public interface TeamMapper {
 		@Delete("DELETE FROM team_reply WHERE teaB_num = #{teaB_num}")
 		public void deleteTeamBoardReplyByTeamBoardNum(long teaB_num);
 
-
+		@Update("UPDATE team SET tea_status=#{tea_status} WHERE tea_num=#{tea_num}")
+		public void updateTeamAuth(Long tea_status, Long tea_num);
 
 
 }

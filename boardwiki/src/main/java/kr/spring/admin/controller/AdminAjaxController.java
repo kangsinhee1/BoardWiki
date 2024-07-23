@@ -5,11 +5,13 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.spring.board.service.BoardService;
+import kr.spring.team.service.TeamService;
+import kr.spring.tnrboard.service.TnrboardService;
+import kr.spring.used.service.UsedService;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -19,6 +21,14 @@ public class AdminAjaxController {
 	@Autowired
 	BoardService boardService;
 	
+	@Autowired
+	UsedService usedService;
+	
+	@Autowired
+	TeamService teamService;
+	
+	@Autowired
+	TnrboardService tnrBoardService;
 	//등급 처리
 	@PostMapping("/adminPage/changeAuth")
 	@ResponseBody
@@ -36,14 +46,14 @@ public class AdminAjaxController {
 			boardService.updateBoardAuth(boa_num, boa_auth);
 			mapJson.put("result", "success");
 		}else if(report_type == 5) {
+			usedService.updateUsedAuth(use_auth, use_num);
 			mapJson.put("result", "success");
-			
 		}else if(report_type == 6) {
+			teamService.updateTeamAuth(tea_status, tea_num);
 			mapJson.put("result", "success");
-			
 		}else if(report_type == 7) {
+			tnrBoardService.updateTnrBoardAuth(tnr_num, tnr_auth);
 			mapJson.put("result", "success");
-		
 		}else {
 			mapJson.put("result", "error");
 			
