@@ -53,14 +53,14 @@
     <c:if test="${broadcast.isLive == 1}">
         <div class="container">
             <div class="video-container">
-                <h1>${mem_nickName}님의 방송</h1>
+                <h1>${nick}님의 방송</h1>
                 <video id="video" controls autoplay playsinline></video>
                 <div class="donation-mission-container">
                 <c:if test="${strnum == param.str_num}">
                 	<button class="mission-button" onclick="openMissionListByStream()">미션 목록 보기</button>
                 	<button class="donation-list-button" onclick="openDonationListByStream()">도네이션 목록 보기</button>
                 </c:if>
-                <c:if test="${strnum != param.str_num}">
+                <c:if test="${strnum != param.str_num && user != null}">
                 	<button class="donation-button" onclick="openDonationModal()">도네이션 보내기</button>
                 	<button class="mission-button" onclick="openMissionRequest()">미션 신청</button>
                     <button class="donation-list-button" onclick="openDonationListByMember()">도네이션 목록 보기</button>
@@ -117,6 +117,8 @@
     function openMissionListByMember() {
         window.open("/mission/userlist?str_num=" + ${param.str_num}, "missionListByMember", "width=600,height=400");
     }
+    
+    let str_num = ${param.str_num};
 </script>
 
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>

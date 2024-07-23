@@ -16,5 +16,4 @@ public class StreamCreatingVO {
 	private long strt_num;
 	private String strt_chat;
 	private Date strt_date;
-	private String mem_nickName;
 }

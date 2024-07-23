@@ -1,6 +1,8 @@
 package kr.spring.stream.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -8,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -74,17 +75,24 @@ public class StreamVerificationController {
 
     //채팅방
     @GetMapping("/streaming/messages")
-    public List<StreamCreatingVO> getChatMessages(@RequestParam("strc_num") long strc_num, @RequestParam("str_num") long str_num) {
+    public List<StreamCreatingVO> getChatMessages(@RequestParam("str_num") long str_num) {
         StreamCreatingVO vo = new StreamCreatingVO();
-        vo.setStrc_num(strc_num);
+        vo = streamCreatingService.selectCreating(str_num);
         return streamCreatingService.selectMessageLive(vo);
     }
 
     @PostMapping("/streaming/send")
-    public ResponseEntity<?> sendChatMessage(@RequestBody StreamCreatingVO vo, HttpSession session) {
-        MemberVO user = (MemberVO) session.getAttribute("user");
-        vo.setMem_num(user.getMem_num());
-        streamCreatingService.insertMessage(vo);
-        return ResponseEntity.ok("Message sent successfully");
+    public Map<String,String> sendChatMessage(@RequestParam("str_num") long str_num,@RequestParam("strt_chat") String strt_chat, HttpSession session) {
+    	Map<String,String> map = new HashMap<String, String>();
+    	MemberVO user = (MemberVO) session.getAttribute("user");
+        StreamCreatingVO vos = new StreamCreatingVO();
+        StreamCreatingVO vos2 = streamCreatingService.selectCreating(str_num);
+        vos.setMem_num(user.getMem_num());
+        vos.setStrt_chat(strt_chat);
+        vos.setStrc_num(vos2.getStrc_num());
+        streamCreatingService.insertMessage(vos);
+        map.put("mem_nickName", user.getMem_nickName());
+        map.put("result", "seusse");
+        return map;
     }
 }

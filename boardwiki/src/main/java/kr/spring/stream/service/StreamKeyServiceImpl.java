@@ -29,7 +29,12 @@ public class StreamKeyServiceImpl implements StreamKeyService {
 
 	@Override
 	public Integer streamingNumber(long mem_num) {
-		return streamKeyMapper.streamingNumber(mem_num);
+		if(streamKeyMapper.streamingNumber(mem_num) == null) {
+			return 0;
+		}else {
+			return streamKeyMapper.streamingNumber(mem_num);
+		}
+		
 	}
 
 	@Override

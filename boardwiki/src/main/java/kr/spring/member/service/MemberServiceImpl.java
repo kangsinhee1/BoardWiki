@@ -54,7 +54,6 @@ public class MemberServiceImpl implements MemberService {
 	    String streamKey = UUID.randomUUID().toString();
         StreamKeyVO key = new StreamKeyVO();
         key.setMem_num(membervo.getMem_num());
-        key.setMem_nickName(membervo.getMem_nickName());
         key.setStr_key(streamKey);
         streamKeyMapper.save(key);
 

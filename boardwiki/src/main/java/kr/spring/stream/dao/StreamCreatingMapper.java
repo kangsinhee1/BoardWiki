@@ -26,7 +26,7 @@ public interface StreamCreatingMapper {
 	//채팅방 목록 수
 	public Integer countCreatinguser(Map<String,Object>map);
 	//채팅방 메세지 등록
-	@Insert("INSERT INTO streaming_chattage(strt_num,strt_chat,strc_num,mem_num) VALUES(streaming_chattage_seq.nextval,#{strt_chat},#{strc_num},#{mem_num})")
+	@Insert("INSERT INTO streaming_chattage(strt_num,strc_num,mem_num, strt_chat) VALUES(streaming_chattage_seq.nextval,#{strc_num},#{mem_num},#{strt_chat})")
 	public void insertMessage(StreamCreatingVO streamvo);
 	//채팅방 메시지 불러오기(방송에서:라이브 조건)
 	public List<StreamCreatingVO> selectMessageLive(StreamCreatingVO streamvo);
