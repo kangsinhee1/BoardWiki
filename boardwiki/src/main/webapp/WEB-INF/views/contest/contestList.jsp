@@ -93,7 +93,7 @@
         </c:forEach>
         </tbody>
     </table>
-    <div class="align-center">${page}</div>
+    <div class="blog-pagination">${page}</div>
     </c:if>    
 </div>
 </div>
