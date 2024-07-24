@@ -6,6 +6,12 @@
 	 <!-- sql 태그와 include 태그를 이용해서 SQL문을 재사용 -->
 	 <sql id="tnrboardSearch">
 	 	<where>
+	 		<if test="item_num !=null and item_num != ''">
+	 			item_num =#{item_num}
+	 		</if>
+	 		<if test="item_num !=null and item_num != '' and tnr_category !=null and tnr_category != ''">
+	 			AND
+	 		</if>
 	 		<if test="tnr_category !=null and tnr_category != ''">
 	 			tnr_category = #{tnr_category}
 	 		</if>
@@ -24,7 +30,32 @@
 	 		</if>
 	 	</where>
 	 </sql>
-	 
+	  <sql id="tnrboardClientSearch">
+	 	<where>
+	 		<if test="item_num !=null and item_num != ''">
+	 			item_num =#{item_num}
+	 		</if>
+	 		<if test="item_num !=null and item_num != '' and tnr_category !=null and tnr_category != ''">
+	 			AND
+	 		</if>
+	 		<if test="tnr_category !=null and tnr_category != ''">
+	 			tnr_category = #{tnr_category}
+	 		</if>
+	 		<if test="keyfield !=null and keyfield != ''">
+	 				AND
+	 		</if>
+	 		<if test="keyfield == 1">
+	 			tnr_title LIKE '%' || #{keyword} || '%' AND tnr_auth = 0
+	 		</if>
+	 		<if test="keyfield == 2">
+	 			tnr_content LIKE '%' || #{keyword} || '%' AND tnr_auth = 0
+	 		</if>
+	 		<if test="keyfield == 3">
+	 			(tnr_title LIKE '%' || #{keyword} || '%' OR
+	 			tnr_content LIKE '%' || #{keyword} || '%') AND tnr_auth = 0
+	 		</if>
+	 	</where>
+	 </sql>
 	 <sql id="tnrboardOrder">
  		<if test="order == 1">
  			ORDER BY tnr_num DESC
@@ -60,6 +91,15 @@
 		<include refid="tnrboardSearch"></include>
 		AND mem_num=#{mem_num} 
 	 </select> 
+	  <select id="selectTnrClientRowCount" parameterType="map"
+									resultType="integer">
+		SELECT
+			COUNT(*)
+		FROM tnrboard
+		JOIN member USING (mem_num)
+		JOIN item USING (item_num)
+		<include refid="tnrboardClientSearch"></include>	 
+	 </select>
 	 <!-- 게시판 전체 목록/검색 목록 -->
 	 <select id="selectTnrList" parameterType="map"
 	 							resultType="tnrboardVO">
@@ -121,6 +161,40 @@
 	 		   		 LEFT OUTER JOIN member_detail USING(mem_num)
 	 		   		 <include refid="tnrboardSearch"></include>
 	 		   		 AND mem_num = #{mem_num}
+	 		   		 <include refid="tnrboardOrder"></include>
+	 		   		 )a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+	</select>
+	<select id="selectClientTnrList" parameterType="map"
+	 							resultType="tnrboardVO">
+	 	SELECT
+	 	   *
+	 	FROM (SELECT
+	 			a.*,
+	 			rownum rnum
+	 		   FROM (SELECT
+	 		   			 tnr_num,
+		                 <![CDATA[
+		                 REPLACE(REPLACE(tnr_title,'<','&lt;'),'>','&gt;') tnr_title,
+		                 ]]>
+		                 tnr_hit,
+		                 filename,
+		                 tnr_rdate,
+		                 mem_num,
+		                 mem_email,
+		                 mem_nickname,
+		                 re_cnt,
+		                 fav_cnt
+	 		   		 FROM tnrboard
+	 		   		 JOIN member USING(mem_num)
+	 		   		 JOIN item USING(item_num)
+	 		   		 LEFT OUTER JOIN (SELECT COUNT(*) re_cnt, tnr_num FROM tnrboard_reply GROUP BY tnr_num) USING(tnr_num)
+	 		   		 LEFT OUTER JOIN (SELECT COUNT(*) fav_cnt, tnr_num FROM tnrboard_fav GROUP BY tnr_num) USING(tnr_num)
+	 		   		 LEFT OUTER JOIN member_detail USING(mem_num)
+	 		   		 <include refid="tnrboardClientSearch"></include>
+	 		   		 AND tnr_auth=0
 	 		   		 <include refid="tnrboardOrder"></include>
 	 		   		 )a)
 		<![CDATA[

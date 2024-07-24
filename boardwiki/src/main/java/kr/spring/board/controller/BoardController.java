@@ -128,7 +128,7 @@ public class BoardController {
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
 
-		int count = boardService.selectRowCount(map);
+		int count = boardService.selectClientRowCount(map);
 
 		PagingUtil page = new PagingUtil(keyfield,keyword,pageNum,count,
 							10,10,"list","&boa_category="+boa_category+"&order="+order);
@@ -138,7 +138,7 @@ public class BoardController {
 			map.put("start", page.getStartRow());
 			map.put("end", page.getEndRow());
 
-			list = boardService.selectList(map);
+			list = boardService.selectListForClient(map);
 		}
 
 		model.addAttribute("count", count);
@@ -182,40 +182,7 @@ public class BoardController {
 
 		return "boardList2";
 	}
-	/*====================
-	 *  고객 게시판 목록 category 1
-	 *====================*/
-	@GetMapping("/board/listClient")
-	public String getListClient(
-				@RequestParam(defaultValue="1") int pageNum,
-				@RequestParam(defaultValue="1") int order,
-				@RequestParam(defaultValue="") String boa_category,
-				String keyfield,String keyword,Model model) {
-
-		Map<String,Object> map = new HashMap<>();
-		map.put("boa_category", boa_category);
-		map.put("keyfield", keyfield);
-		map.put("keyword", keyword);
-
-		int count = boardService.selectClientRowCount(map);
-
-		PagingUtil page = new PagingUtil(keyfield,keyword,pageNum,count,
-							10,10,"list","&boa_category="+boa_category+"&order="+order);
-		List<BoardVO> list = null;
-		if(count > 0) {
-			map.put("order", order);
-			map.put("start", page.getStartRow());
-			map.put("end", page.getEndRow());
-
-			list = boardService.selectMyListForClient(map);
-		}
-
-		model.addAttribute("count", count);
-		model.addAttribute("list", list);
-		model.addAttribute("page", page.getPage());
-
-		return "boardClientList";
-	}
+	
 
 	/*====================
 	 *  게시판 글상세 category 1
