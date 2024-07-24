@@ -73,7 +73,7 @@
                     
                 </div>
             </div>
-            <div class="chat-section">
+            <div class="chat-section font-white">
                 <div class="chat-container" id="chat-container"></div>
                 <div class="chat-input-container">
                     <input type="text" id="chat-input" class="chat-input" placeholder="메시지를 입력하세요" />
