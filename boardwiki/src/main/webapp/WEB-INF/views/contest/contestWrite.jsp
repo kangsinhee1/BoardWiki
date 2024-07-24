@@ -30,7 +30,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="page-main">
-				<form:form action="contestWrite" id="board_register"
+				<form:form action="contestWrite" id="team_register"
 					enctype="multipart/form-data" modelAttribute="contestVO">
 					<ul class="form-list">
 						<li><form:input path="con_name" placeholder="제목을 입력하세요"
@@ -67,7 +67,7 @@
 						</li>
 						<li>
 							<div class="form-group">
-								<form:label path="con_edate">대회 모집 종료일:</form:label>
+								<form:label path="con_edate" style="margin:5px">대회 모집 종료일:</form:label>
 								<form:input path="con_edate" id="con_edate"
 									data-provide="datepicker" />
 								<form:errors path="con_edate" cssClass="error-color" />
@@ -95,10 +95,10 @@
 						<li><form:input path="con_address2" placeholder="상세주소" /> <form:errors
 								path="con_address2" cssClass="error-color" /></li>
 					</ul>
-					<div class="form-actions">
-						<form:button class="btn btn-primary">전송</form:button>
-						<input type="button" value="목록" class="btn btn-secondary"
-							onclick="location.href='${pageContext.request.contextPath}/list'">
+					<div class="align-center">
+						<form:button class="default-btn">전송</form:button>
+						<input type="button" value="목록" class="default-btn"
+							onclick="location.href='teamList'">
 					</div>
 				</form:form>
 				<!-- 우편번호 시작 -->

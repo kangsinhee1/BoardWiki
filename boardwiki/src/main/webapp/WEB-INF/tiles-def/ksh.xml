@@ -59,6 +59,7 @@
 	</definition>
 	<definition name="contestWrite" extends="main">
 		<put-attribute name="title" value="대회 글 작성"/>
+		<put-attribute name="css" value="/WEB-INF/views/team/teamCSS.jsp"/>
 		<put-attribute name="body" value="/WEB-INF/views/contest/contestWrite.jsp"/>
 	</definition>
 	<definition name="contestDetail" extends="main">
