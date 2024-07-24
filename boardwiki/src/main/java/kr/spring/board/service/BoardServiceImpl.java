@@ -129,8 +129,8 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public List<BoardVO> selectMyListForClient(Map<String, Object> map) {
-		return boardMapper.selectMyListForClient(map);
+	public List<BoardVO> selectListForClient(Map<String, Object> map) {
+		return boardMapper.selectListForClient(map);
 	}
 
 	@Override

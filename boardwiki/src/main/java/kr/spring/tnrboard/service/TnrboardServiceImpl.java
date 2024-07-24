@@ -125,6 +125,16 @@ public class TnrboardServiceImpl implements TnrboardService{
 		tnrboardMapper.updateTnrBoardAuth(tnr_num, tnr_auth);
 	}
 
+	@Override
+	public List<TnrboardVO> selectClientTnrList(Map<String, Object> map) {
+		return tnrboardMapper.selectClientTnrList(map);
+	}
+
+	@Override
+	public Integer selectTnrClientRowCount(Map<String, Object> map) {
+		return tnrboardMapper.selectTnrClientRowCount(map);
+	}
+
 
 
 }

@@ -18,7 +18,7 @@ public interface BoardMapper {
 	//게시글
 	public List<BoardVO> selectList(Map<String,Object> map);
 	public List<BoardVO> selectMyList(Map<String,Object> map);
-	public List<BoardVO> selectMyListForClient(Map<String,Object> map);
+	public List<BoardVO> selectListForClient(Map<String,Object> map);
 	public Integer selectRowCount(Map<String,Object> map);
 	public Integer selectRowmyCount(Map<String,Object> map);
 	public Integer selectClientRowCount(Map<String,Object> map);

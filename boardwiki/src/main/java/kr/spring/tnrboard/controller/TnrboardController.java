@@ -102,7 +102,7 @@ public class TnrboardController {
 			map.put("keyfield", keyfield);
 			map.put("keyword", keyword);
 			
-			int count = tnrboardService.selectTnrRowCount(map);
+			int count = tnrboardService.selectTnrClientRowCount(map);
 			
 			PagingUtil page = new PagingUtil(keyfield,keyword,pageNum,count,
 					10,10,"tnrboardList","&tnr_category="+tnr_category+"&order="+order);
@@ -112,7 +112,7 @@ public class TnrboardController {
 				map.put("start", page.getStartRow());
 				map.put("end", page.getEndRow());
 				
-				list = tnrboardService.selectTnrList(map);
+				list = tnrboardService.selectClientTnrList(map);
 			}
 			
 			model.addAttribute("count", count);
@@ -128,7 +128,7 @@ public class TnrboardController {
 			map.put("keyfield", keyfield);
 			map.put("keyword", keyword);
 			
-			int count = tnrboardService.selectTnrRowCount(map);
+			int count = tnrboardService.selectTnrClientRowCount(map);
 			
 			PagingUtil page = new PagingUtil(keyfield,keyword,pageNum,count,
 					10,10,"tnrboardList","&tnr_category="+tnr_category+"&order="+order);
@@ -138,7 +138,7 @@ public class TnrboardController {
 				map.put("start", page.getStartRow());
 				map.put("end", page.getEndRow());
 				
-				list = tnrboardService.selectTnrList(map);
+				list = tnrboardService.selectClientTnrList(map);
 			}
 			
 			model.addAttribute("count", count);

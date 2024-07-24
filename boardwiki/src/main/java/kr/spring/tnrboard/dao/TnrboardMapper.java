@@ -18,8 +18,10 @@ public interface TnrboardMapper {
 	//게시글
 	public List<TnrboardVO> selectTnrList(Map<String,Object> map);
 	public List<TnrboardVO> selectTnrMyList(Map<String,Object> map);
+	public List<TnrboardVO> selectClientTnrList(Map<String,Object> map);
 	public Integer selectTnrRowCount(Map<String,Object> map);
 	public Integer selectTnrRowmyCount(Map<String,Object> map);
+	public Integer selectTnrClientRowCount(Map<String,Object> map);
 	public void insertTnrBoard(TnrboardVO tnrboard);
 	@Select("SELECT * FROM tnrboard JOIN member USING(mem_num) LEFT OUTER JOIN member_detail USING(mem_num) LEFT OUTER JOIN item USING(item_num) WHERE tnr_num=#{tnr_num}")
 	public TnrboardVO selectTnrBoard(Long tnr_num);
