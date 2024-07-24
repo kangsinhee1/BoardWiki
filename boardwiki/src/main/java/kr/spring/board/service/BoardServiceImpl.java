@@ -138,5 +138,10 @@ public class BoardServiceImpl implements BoardService{
 		return boardMapper.selectClientRowCount(map);
 	}
 
+	@Override
+	public BoardVO selectMainBoard() {
+		return boardMapper.selectMainBoard();
+	}
+
 
 }

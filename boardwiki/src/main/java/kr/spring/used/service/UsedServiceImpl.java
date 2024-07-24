@@ -91,4 +91,9 @@ public class UsedServiceImpl implements UsedService{
 		return usedMapper.selectUsedListByItemNum(map);
 	}
 
+	@Override
+	public UsedItemVO selectMainUsed() {
+		return usedMapper.selectMainUsed();
+	}
+
 }  

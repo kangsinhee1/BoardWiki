@@ -68,6 +68,10 @@ public interface BoardMapper {
 	//등급 수정
 	@Update("UPDATE board SET boa_auth=#{boa_auth} WHERE boa_num=#{boa_num}")
 	public void updateBoardAuth(Long boa_num, Long boa_auth);
+	
+	//메인 화면 표시
+	@Select("SELECT *FROM (SELECT * FROM board ORDER BY boa_rdate DESC) WHERE ROWNUM = 1")
+	public BoardVO selectMainBoard();
 }
 
 

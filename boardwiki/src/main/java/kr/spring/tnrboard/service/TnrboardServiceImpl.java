@@ -135,6 +135,11 @@ public class TnrboardServiceImpl implements TnrboardService{
 		return tnrboardMapper.selectTnrClientRowCount(map);
 	}
 
+	@Override
+	public TnrboardVO selectMainTnrBoard() {
+		return tnrboardMapper.selectMainTnrBoard();
+	}
+
 
 
 }

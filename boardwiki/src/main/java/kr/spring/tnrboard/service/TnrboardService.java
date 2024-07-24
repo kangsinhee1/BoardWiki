@@ -36,5 +36,6 @@ public interface TnrboardService {
 	public void deleteTnrReply(Long tnrR_num);
 	
 	public void updateTnrBoardAuth(Long tnr_num, Long tnr_auth);
+	public TnrboardVO selectMainTnrBoard();
 
 }

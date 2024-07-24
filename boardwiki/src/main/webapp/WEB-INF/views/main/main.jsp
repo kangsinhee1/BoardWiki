@@ -1,126 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
-<!-- 메인 시작 -->
-<%-- <div class="page-main">
-	<div id="carouselExampleControls" class="carousel slide"
-		data-ride="carousel">
-		<div class="carousel-inner">
-			<div class="carousel-item active">
-				<a href="#"> <img class="d-block w-500"
-					src="${pageContext.request.contextPath}/images/main-1.png"
-					alt="First slide">
-				</a>
-			</div>
-			<div class="carousel-item">
-				<a href="#"> <img class="d-block w-500"
-					src="${pasgeContext.request.contextPath}/images/main-2.png"
-					alt="Second slide">
-				</a>
-			</div>
-			<div class="carousel-item">
-				<a href="#"> <img class="d-block w-500"
-					src="${pageContext.request.contextPath}/images/main-3.png"
-					alt="Third slide">
-				</a>
-			</div>
-		</div>
-		<a class="carousel-control-prev" href="#carouselExampleControls"
-			role="button" data-slide="prev"> <span
-			class="carousel-control-prev-icon" aria-hidden="true"></span> <span
-			class="sr-only">Previous</span>
-		</a> <a class="carousel-control-next" href="#carouselExampleControls"
-			role="button" data-slide="next"> <span
-			class="carousel-control-next-icon" aria-hidden="true"></span> <span
-			class="sr-only">Next</span>
-		</a>
-	</div>
-	<hr size="1" noshade="noshade" width="100%">
-
-</div> --%>
-
-<!-- 메인 끝 -->
-
 <!DOCTYPE html>
 <html lang="KR">
 <head>
 	<title>EndGam - Gaming Magazine Template</title>
 	<meta charset="UTF-8">
-	
-	<!-- <meta name="description" content="EndGam Gaming Magazine Template">
-	<meta name="keywords" content="endGam,gGaming, magazine, html">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
-	
-	<!-- Favicon -->
-	<!-- <link href="/img/favicon.ico" rel="shortcut icon"/> -->
-
-	<!-- Google Font -->
-	<!-- <link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i,900,900i" rel="stylesheet"> -->
-
-
-	<!-- Stylesheets -->
-	<!-- <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css"/>
-	<link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css"/>
-	<link rel="stylesheet" href="/css/slicknav.min.css" type="text/css"/>
-	<link rel="stylesheet" href="/css/owl.carousel.min.css" type="text/css"/>
-	<link rel="stylesheet" href="/css/magnific-popup.css" type="text/css"/>
-	<link rel="stylesheet" href="/css/animate.css" type="text/css"/> -->
-
-	<!-- Main Stylesheets -->
-	<!-- <link rel="stylesheet" href="/css/style.css"/> -->
-
-
-	<!--[if lt IE 9]>
-		  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-	<![endif]-->
-
 </head>
 <body>
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
 	</div>
-
-	<!-- Header section -->
-	<!-- <header class="header-section">
-		<div class="header-warp">
-			<div class="header-social d-flex justify-content-end">
-				<p>Follow us:</p>
-				<a href="#"><i class="fa fa-pinterest"></i></a>
-				<a href="#"><i class="fa fa-facebook"></i></a>
-				<a href="#"><i class="fa fa-twitter"></i></a>
-				<a href="#"><i class="fa fa-dribbble"></i></a>
-				<a href="#"><i class="fa fa-behance"></i></a>
-			</div>
-			<div class="header-bar-warp d-flex">
-				site logo
-				<a href="home.html" class="site-logo">
-					<img src="/img/logo.png" alt="">
-				</a>
-				<nav class="top-nav-area w-100">
-					<div class="user-panel">
-						<a href="">Login</a> / <a href="">Register</a>
-					</div>
-					Menu
-					<ul class="main-menu primary-menu">
-						<li><a href="home.html">Home</a></li>
-						<li><a href="games.html">Games</a>
-							<ul class="sub-menu">
-								<li><a href="game-single.html">Game Singel</a></li>
-							</ul>
-						</li>
-						<li><a href="review.html">Reviews</a></li>
-						<li><a href="blog.html">News</a></li>
-						<li><a href="contact.html">Contact</a></li>
-					</ul>
-				</nav>
-			</div>
-		</div>
-	</header> -->
-	<!-- Header section end -->
-
-
 	<!-- Hero section -->
 	<section class="hero-section overflow-hidden">
 		<div class="hero-slider owl-carousel">
@@ -153,26 +43,26 @@
 			<div class="row">
 				<div class="col-md-4">
 					<div class="intro-text-box text-box text-white">
-						<div class="top-meta">11.11.18  /  in <a href="">Games</a></div>
-						<h3>The best online game is out now!</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida....</p>
-						<a href="#" class="read-more">Read More  <img src="/img/icons/double-arrow.png" alt="#"/></a>
+						<div class="top-meta">${board.boa_rdate}  /  in <a href="">자유게시판</a></div>
+						<h3>${board.boa_title }</h3>
+						<p>${board.boa_content }</p>
+						<a href="/board/detail?boa_num=${board.boa_num }" class="read-more">Read More  <img src="/img/icons/double-arrow.png" alt="#"/></a>
 					</div>
 				</div>
 				<div class="col-md-4">
 					<div class="intro-text-box text-box text-white">
-						<div class="top-meta">11.11.18  /  in <a href="">Playstation</a></div>
-						<h3>Top 5 best games in november</h3>
-						<p>Ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum  labore suspendisse ultrices gravida....</p>
-						<a href="#" class="read-more">Read More  <img src="/img/icons/double-arrow.png" alt="#"/></a>
+						<div class="top-meta">${tnr.tnr_rdate }  /  in <a href="">팁/후기게시판</a></div>
+						<h3>${tnr.tnr_title }</h3>
+						<p>${tnr.tnr_content }</p>
+						<a href="/tnrboard/tnrboardDetail?tnr_category=${tnr.tnr_category }&tnr_num=${tnr.tnr_num }" class="read-more">Read More  <img src="/img/icons/double-arrow.png" alt="#"/></a>
 					</div>
 				</div>
 				<div class="col-md-4">
 					<div class="intro-text-box text-box text-white">
-						<div class="top-meta">11.11.18  /  in <a href="">Reviews</a></div>
-						<h3>Get this game at a promo price</h3>
-						<p>Sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida ncididunt ut labore ....</p>
-						<a href="#" class="read-more">Read More  <img src="/img/icons/double-arrow.png" alt="#"/></a>
+						<div class="top-meta">${used.use_rdate }  /  in <a href="">Reviews</a></div>
+						<h3>${used.use_title }</h3>
+						<p>${used.use_content }</p>
+						<a href="/used/usedDetail?use_num=${used.use_num }" class="read-more">Read More  <img src="/img/icons/double-arrow.png" alt="#"/></a>
 					</div>
 				</div>
 			</div>
@@ -326,34 +216,6 @@
 			</div>
 		</div>
 	</section>
-	<!-- Featured section end-->
-
-
-
-	<!-- Newsletter section -->
-	<!-- <section class="newsletter-section">
-		<div class="container">
-			<h2>Subscribe to our newsletter</h2>
-			<form class="newsletter-form">
-				<input type="text" placeholder="ENTER YOUR E-MAIL">
-				<button class="site-btn">subscribe  <img src="/img/icons/double-arrow.png" alt="#"/></button>
-			</form>
-		</div>
-	</section> -->
-	<!-- Newsletter section end -->
-
-
-
-	<!--====== Javascripts & Jquery ======-->
-	<!-- <script src="/js/jquery-3.2.1.min.js"></script>
-	<script src="/js/bootstrap.min.js"></script>
-	<script src="/js/jquery.slicknav.min.js"></script>
-	<script src="/js/owl.carousel.min.js"></script>
-	<script src="/js/jquery.sticky-sidebar.min.js"></script>
-	<script src="/js/jquery.magnific-popup.min.js"></script>
-	<script src="/js/main.js"></script> -->
-
 	</body>
 </html>
-
 

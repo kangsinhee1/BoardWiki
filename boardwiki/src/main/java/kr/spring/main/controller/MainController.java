@@ -17,6 +17,8 @@ import kr.spring.board.service.BoardService;
 import kr.spring.board.vo.BoardVO;
 import kr.spring.item.service.ItemService;
 import kr.spring.item.vo.ItemVO;
+import kr.spring.tnrboard.service.TnrboardService;
+import kr.spring.tnrboard.vo.TnrboardVO;
 import kr.spring.used.service.UsedService;
 import kr.spring.used.vo.UsedItemVO;
 import kr.spring.util.PagingUtil;
@@ -33,14 +35,29 @@ public class MainController {
 
 	@Autowired
 	private UsedService usedService;
+	
+	@Autowired
+	private TnrboardService tnrboardService;
 
 	@GetMapping("/")
 	public String init() {
+		
+		
 		return "redirect:/main/main";
 	}
 
 	@GetMapping("/main/main")
-	public String main() {
+	public String main(Model model) {
+		
+		BoardVO mainBoard = boardService.selectMainBoard();
+		model.addAttribute("board",mainBoard);
+		
+		TnrboardVO mainTnr = tnrboardService.selectMainTnrBoard();
+		model.addAttribute("tnr",mainTnr);
+		
+		UsedItemVO mainUsed = usedService.selectMainUsed();
+		model.addAttribute("used",mainUsed);
+		
 		return "main";//Tiles의 설정명
 	}
 

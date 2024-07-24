@@ -50,4 +50,7 @@ public interface UsedMapper {
 	//등급 수정
 	@Update("UPDATE used_item SET use_auth=#{use_auth} WHERE use_num=#{use_num}")
 	public void updateUsedAuth(Long use_auth, Long use_num);
+	
+	@Select("SELECT *FROM (SELECT * FROM used_item ORDER BY use_rdate DESC) WHERE ROWNUM = 1")
+	public UsedItemVO selectMainUsed();
 }

@@ -31,5 +31,6 @@ public interface UsedService {
 	public void updateUseCheckByroom(long use_num);
 	
 	//등급수정
-		public void updateUsedAuth(Long use_auth, Long use_num);
+	public void updateUsedAuth(Long use_auth, Long use_num);
+	public UsedItemVO selectMainUsed();
 }

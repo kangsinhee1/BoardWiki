@@ -64,6 +64,9 @@ public interface TnrboardMapper {
 	
 	@Update("UPDATE tnrboard SET tnr_auth=#{tnr_auth} WHERE tnr_num=#{tnr_num}")
 	public void updateTnrBoardAuth(Long tnr_num, Long tnr_auth);
+	@Select("SELECT *FROM (SELECT * FROM tnrBoard ORDER BY tnr_rdate DESC) WHERE ROWNUM = 1")
+	public TnrboardVO selectMainTnrBoard();
+
 }
 
 
