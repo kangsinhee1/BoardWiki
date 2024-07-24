@@ -522,7 +522,7 @@ h6 {
 	font-size: 16px;
 }
 
-p {
+.card-text {
 	font-size: 15px;
 	color: #ffffff;
 	line-height: 1.6;

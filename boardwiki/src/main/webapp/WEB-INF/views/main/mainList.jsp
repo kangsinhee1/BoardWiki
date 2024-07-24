@@ -57,7 +57,8 @@
 
 <section class="games-section">
 	<div class="container">
-		<h3>게시글</h3>
+		<h2>게시글</h2>
+			<b class="hr"></b>
 		<div>
 			<c:if test="${count2==0}">
 				<div class="result-display">표시할 게시물이 없습니다.</div>
@@ -92,7 +93,8 @@
 </section>
 <section class="games-section">
 	<div class="container">
-		<h3>중고게시판</h3>
+		<h2>중고게시판</h2>
+		<b class="hr"></b>
 		<div>
 			<c:if test="${count3 == 0}">
 				<div class="result-display">표시할 게시물이 없습니다.</div>
