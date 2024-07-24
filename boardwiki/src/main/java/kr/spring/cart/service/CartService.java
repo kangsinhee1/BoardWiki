@@ -13,6 +13,7 @@ public interface CartService {
 	public void insertCart(CartVO cart);
 	public void updateCart(CartVO cart);
 	public void updateCart2(CartVO cart);
+	public void updateCartDate(CartVO cart);
 	public CartVO getCart(CartVO cart);
 	public void deleteSmallCart(CartVO cart);
 }
