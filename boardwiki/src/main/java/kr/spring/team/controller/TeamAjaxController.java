@@ -69,8 +69,8 @@ public class TeamAjaxController {
 		Map<String, Object> mapJson = new HashMap<>();
 		MemberVO user = (MemberVO)session.getAttribute("user");
 
-		if(user==null) {
-			mapJson.put("result", "logout");
+		if(user == null) {
+			mapJson.put("result","logout");
 		}else {
 			teamFav.setMem_num(user.getMem_num());
 			TeamFavVO fav = teamService.selectTeamFav(teamFav);

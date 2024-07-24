@@ -35,7 +35,7 @@
 	</div>
 		<%--좋아요 --%>
 	<div class="align-right">
-		<img id="output_fav" data-num="${team.tea_num}" src="${pageContext.request.contextPath}/images/fav01.gif">
+		<img id="output_fav" data-num="${team.tea_num}" src="${pageContext.request.contextPath}/images/heart2.png">
 		&nbsp;<span id="output_fcount"></span>
 	</div>
 	<hr size="1" width="100%">
