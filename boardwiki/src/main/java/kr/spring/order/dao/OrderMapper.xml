@@ -23,6 +23,26 @@
 	 	  #{order_address2},
 	 	  #{order_price})
     </insert>
+    <insert id="insertOrderList" parameterType="map">
+        INSERT INTO orders(
+          order_num,
+          mem_num,
+          order_name,
+          order_phone,
+          order_zipcode,
+          order_address1,
+          order_address2,
+          order_price) 
+        VALUES(
+	 	  orders_seq.nextval,
+	 	  #{mem_num},
+	 	  #{order_name},
+	 	  #{order_phone},
+	 	  #{order_zipcode},
+	 	  #{order_address1},
+	 	  #{order_address2},
+	 	  #{order_price})
+    </insert>
     <select id="selectOrderDetail" parameterType="map" resultType="orderVO">
         SELECT * FROM order WHERE order_num=#{order_num}
     </select>

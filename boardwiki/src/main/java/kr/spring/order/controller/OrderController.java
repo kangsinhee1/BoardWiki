@@ -89,7 +89,11 @@ public class OrderController {
 		order.setOrder_address1(order_address1);
 		order.setOrder_address2(order_address2);
 		order.setOrder_price(cart.getCart_price());
-
+		
+		
+//		List<OrderVO> list = null;
+//		list = orderService.insertOrder(map);
+		
 		orderService.insertOrder(order);
 		cartService.updateCartDate(cart);
 
