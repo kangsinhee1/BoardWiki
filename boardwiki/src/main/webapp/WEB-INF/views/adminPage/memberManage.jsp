@@ -43,7 +43,6 @@
                 <td class="align-center">${member.mem_rdate}</td>
                 <td class="align-center">
                     <select class="auth-select" data-num="${member.mem_num}">
-					    <option value="0" <c:if test="${member.mem_auth == 0}">selected</c:if>>탈퇴</option>
 					    <option value="1" <c:if test="${member.mem_auth == 1}">selected</c:if>>정지</option>
 					    <option value="2" <c:if test="${member.mem_auth == 2}">selected</c:if>>일반</option>
 					</select>
