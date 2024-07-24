@@ -214,4 +214,6 @@ select#keyfield{
 	color:black;
 	font-size:13px;
 }
-
+.align-center{
+	text-align:center;	
+}

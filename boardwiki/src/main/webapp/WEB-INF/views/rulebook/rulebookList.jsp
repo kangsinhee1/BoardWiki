@@ -45,11 +45,13 @@
 	<c:if test="${count > 0}">
 	<div class="chart-table">
 	<table>
+		<thead>
 		<tr>
 			<th>번호</th>
 			<th width="400">게임</th>
 			<th>등록일</th>
 		</tr>
+		</thead>
 		<c:forEach var="rulebook" items="${list}">
 		<tr>
 			<td class="align-center">${rulebook.rulB_num}</td>
@@ -59,7 +61,9 @@
 		</c:forEach>
 	</table>
 	</div>
-	<div class="align-center">${page}</div>
+	<div class="align-center">
+	<div class="blog-pagination">${page}</div>
+	</div>
 	</c:if>
 </div>
 </div>
