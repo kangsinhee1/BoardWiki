@@ -5,7 +5,6 @@
         display: flex;
         justify-content: center;
         align-items: flex-start;
-        margin-top: 20px;
         min-height: 1000px;
     }
     .video-container {
