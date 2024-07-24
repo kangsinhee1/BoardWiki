@@ -138,4 +138,14 @@
 		WHERE rnum >= #{start} AND rnum <= #{end}
 		]]>
 	</select>
+	
+	<!-- 대회 참가자 리스트 -->
+	<select id="selectContestAdminApplyList" parameterType="map" resultType="contestVO">
+		SELECT * 
+		FROM member 
+		JOIN contest_apply USING(mem_num)
+		LEFT OUTER JOIN member_detail USING(mem_num)
+		JOIN contest ON contest_apply.con_num = contest.con_num
+		WHERE contest.con_num = #{con_num}
+	</select>
 </mapper>

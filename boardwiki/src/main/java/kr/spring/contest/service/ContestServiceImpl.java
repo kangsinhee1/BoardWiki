@@ -83,4 +83,14 @@ public class ContestServiceImpl implements ContestService{
 		return contestmapper.countAllcontest(map);
 	}
 
+	@Override
+	public Integer countContestAdminApplyList(long con_num) {
+		return contestmapper.countContestAdminApplyList(con_num);
+	}
+
+	@Override
+	public List<ContestVO> selectContestAdminApplyList(Map<String,Object>map) {
+		return contestmapper.selectContestAdminApplyList(map);
+	}
+
 }

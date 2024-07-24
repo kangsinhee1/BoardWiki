@@ -23,10 +23,15 @@ public interface ContestMapper {
 	
 	@Select("SELECT COUNT(*) FROM contest")
 	public Integer countAllcontest(Map<String,Object> map);
+	
 
 	//대회 상세
 	@Select("SELECT * FROM contest JOIN member USING(mem_num)LEFT OUTER JOIN member_detail USING(mem_num) WHERE con_num= #{con_num}")
 	public ContestVO detailContest(long con_num);
+	
+	@Select("SELECT COUNT(*) FROM member JOIN contest_APPLY USING(mem_num)LEFT OUTER JOIN member_detail USING(mem_num) WHERE con_num=#{con_num}")
+	public Integer countContestAdminApplyList(long con_num);
+	public List<ContestVO> selectContestAdminApplyList(Map<String,Object>map);
 
 	//조회수
 	@Update("UPDATE contest SET con_hit= con_hit+1 WHERE con_num = #{con_num}")

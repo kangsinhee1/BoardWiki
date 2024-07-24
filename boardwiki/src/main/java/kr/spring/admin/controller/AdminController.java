@@ -458,5 +458,49 @@ public class AdminController {
 
 		return "contestAdminList";
 	}
+	
+	/*==============================
+	 * 		관리자 페이지(대회목록상세)
+	 *==============================*/
+	@GetMapping("/adminPage/contestAdminListDetail")
+	public String contestListDetail(@RequestParam(defaultValue="1") int pageNum,
+            						@RequestParam(defaultValue="") String category,
+            						String keyfield,
+            						String keyword,Model model,
+            						HttpSession session,
+            						HttpServletRequest request,
+            						long con_num
+            						) {
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user != null && user.getMem_auth()!= 9) {
+			model.addAttribute("message","관리자 등급만 접속할 수 있습니다.");
+			model.addAttribute("url",request.getContextPath()+"/main/login");
+			return "common/resultAlert";
+		}
+		Map<String,Object> map = new HashMap<>();
 
+		map.put("category", category);
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		map.put("con_num", con_num);
+
+		int count = contestService.countContestAdminApplyList(con_num);
+
+		PagingUtil page =
+				new PagingUtil(keyfield,keyword,pageNum,count,5,10,"contestAdminListDetail");
+
+		List<ContestVO> list = null;
+	    if(count > 0) {
+	    	map.put("start", page.getStartRow());
+	    	map.put("end", page.getEndRow());
+
+	    	list = contestService.selectContestAdminApplyList(map);
+	    }
+
+	    model.addAttribute("count", count);
+		model.addAttribute("list", list);
+		model.addAttribute("page", page.getPage());
+
+		return "contestAdminListDetail";
+	}
 }

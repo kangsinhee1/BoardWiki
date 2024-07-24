@@ -24,7 +24,7 @@
 			<tr>
 				<td class="align-center">${contest.con_num}</td>
 				<td class="align-center">${contest.mem_num}</td>
-				<td class="align-center">${contest.con_name}</td>
+				<td class="align-center"><a href="contestAdminListDetail?con_num=${contest.con_num}">${contest.con_name}</a></td>
 				<td class="align-center">${contest.con_rdate}</td>
 				<td class="align-center">
 					<c:if test="${contest.con_status == 0}">

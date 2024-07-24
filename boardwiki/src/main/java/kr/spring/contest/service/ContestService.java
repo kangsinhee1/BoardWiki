@@ -31,4 +31,7 @@ public interface ContestService {
 	public void deleteContest(Long con_num);
 	
 	public Integer countAllcontest(Map<String,Object> map);
+	
+	public Integer countContestAdminApplyList(long con_num);
+	public List<ContestVO> selectContestAdminApplyList(Map<String,Object>map);
 }
