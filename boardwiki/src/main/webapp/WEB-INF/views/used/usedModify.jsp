@@ -26,24 +26,23 @@
     <h2>중고 글수정</h2>
     <form:form action="usedUpdate" id="used_modify"
                enctype="multipart/form-data"
-               modelAttribute="usedItemVO">
-        <form:hidden path="use_num" value="${used.use_num }"/>
+               modelAttribute="used">
+        <form:hidden path="use_num" value="${used.use_num}"/>
         <ul>
             <li>
-                
                 <form:label path="use_title">제목</form:label>
-                <form:input path="use_title" id="use_title"/>
+                <form:input path="use_title" />
                 <form:errors path="use_title" cssClass="error-color"/>
             </li>
             <li>
                 <form:label  path="item_num" >제품명</form:label>
-                <form:input type="hidden" path="item_num" id="item_num"/>
+                <form:input type="hidden" path="item_num"/>
                 <form:errors path="item_num" cssClass="error-color"/>
                 <input type="text" value="${used.item_name}"name="item_name" id="item_name" maxlength="10" readonly="readonly">
             </li>
             <li>
                 <form:label path="use_content">내용</form:label>
-                <form:textarea path="use_content" id="use_content"/>
+                <form:textarea path="use_content"/>
                 <form:errors path="use_content" cssClass="error-color"/>
                 <script>
                  function MyCustomUploadAdapterPlugin(editor) {
@@ -66,12 +65,12 @@
             </li>
             <li>
                 <form:label path="use_price">가격</form:label>
-                <form:input type="number" path="use_price" id="use_price" min="0" max="999999999"/>
+                <form:input type="number" path="use_price"  min="0" max="999999999"/>
                 <form:errors path="use_price" cssClass="error-color"/>
             </li>
             <li>
                 <form:label path="use_check">판매상태</form:label>
-                <form:select path="use_check" id="use_check">
+                <form:select path="use_check" >
                     <form:option value="0" disabled="disabled">제품상태를 선택해주세요</form:option>
                     <form:option value="1">판매중</form:option>
                     <form:option value="2">예약중</form:option>

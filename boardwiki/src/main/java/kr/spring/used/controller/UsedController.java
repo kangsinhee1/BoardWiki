@@ -173,7 +173,6 @@ public class UsedController {
 		MemberVO member = (MemberVO)session.getAttribute("user");
 
 
-
 		UsedItemVO used = usedService.selectUsed(use_num);
 		// 작성자 일치여부 확인
 				if(member.getMem_num()!= used.getMem_num()) {
@@ -182,6 +181,7 @@ public class UsedController {
 					return "common/resultAlert";
 				}
 
+				log.debug("<<게시판 글 수정>> : " +  used);
 		model.addAttribute("used",used);
 		return "usedModify";
 	}
