@@ -37,7 +37,7 @@
 						 <a href="/tnrboard/tnrboardList?tnr_category=1&item_num=${item.item_num }">팁</a>
 						 <a href="/tnrboard/tnrboardList?tnr_category=2&item_num=${item.item_num }">후기</a>
 						 <a href="/item/item_main">게임 목록</a>
-						</p>"src/main/java/kr/spring/used/service/UsedServiceImpl.java"
+						</p>
 					</div>
 
 				

@@ -94,7 +94,7 @@ public class TnrboardController {
 	public String getList(
 				@RequestParam(defaultValue="1") int pageNum,
 				@RequestParam(defaultValue="1") int order,
-				@RequestParam(defaultValue="") String tnr_category,
+				@RequestParam(defaultValue="") String tnr_category, Long item_num,
 				String keyfield,String keyword,Model model) {
 
 		Map<String,Object> map = new HashMap<>();
