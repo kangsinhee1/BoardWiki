@@ -58,7 +58,9 @@
 	<div class="result-display">표시할 게시물이 없습니다.</div>
 	</c:if>
 	<c:if test="${count > 0}">
-	<table class="striped-table">
+	<div class="chart-table">
+	<table >
+	<thead>
 		<tr>
 			<th>번호</th>
 			<th width="300">제목</th>
@@ -67,7 +69,9 @@
 			<th>제품명</th>
 			<th>가격</th>
 		</tr>
+		</thead>
 		<c:forEach var="used" items="${list}">
+		<tbody>
 		<tr>
 			<td class="align-center">${used.use_num}</td>
 			<td class="align-left">
@@ -89,10 +93,12 @@
 			<td class="align-center">${used.item_name}</td>
 			<td class="align-center">${used.use_price}</td>
 		</tr>
+		</tbody>
 		</c:forEach>
 	</table>
 	<div class="align-center">${page}</div>
 	</c:if>	
+</div>
 </div>
 </div>
 </div>

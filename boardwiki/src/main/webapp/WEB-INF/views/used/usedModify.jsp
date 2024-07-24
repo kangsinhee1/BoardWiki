@@ -18,6 +18,10 @@
 		</div>
 	</div>
 </section>
+<section class="blog-page">
+<div class="container">
+	<div class="row">
+		<div class="col-lg-12">
 <div class="page-main">
     <h2>중고 글수정</h2>
     <form:form action="usedUpdate" id="used_modify"
@@ -26,12 +30,13 @@
         <form:hidden path="use_num" value="${used.use_num }"/>
         <ul>
             <li>
-                제목
+                
+                <form:label path="use_title">제목</form:label>
                 <form:input path="use_title" id="use_title"/>
                 <form:errors path="use_title" cssClass="error-color"/>
             </li>
             <li>
-                제품명
+                <form:label  path="item_num" >제품명</form:label>
                 <form:input type="hidden" path="item_num" id="item_num"/>
                 <form:errors path="item_num" cssClass="error-color"/>
                 <input type="text" value="${used.item_name}"name="item_name" id="item_name" maxlength="10" readonly="readonly">
@@ -85,4 +90,9 @@
         </div>                           
     </form:form>
 </div>
+</div>
+</div>
+</div>
+</section>
+
 

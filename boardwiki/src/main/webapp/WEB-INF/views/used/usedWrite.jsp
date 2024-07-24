@@ -31,12 +31,12 @@
         <form:hidden path="mem_num" value="${member.mem_num }"/>
         <ul>
             <li>
-                제목
+             <form:label path="use_title">제목</form:label>
                 <form:input path="use_title" id="use_title"/>
                 <form:errors path="use_title" cssClass="error-color"/>
             </li>
             <li>
-                제품명
+               <form:label  path="item_num" >제품명</form:label>
                 <form:input type="hidden" path="item_num" id="item_num"/>
                 <form:errors path="item_num" cssClass="error-color"/>
                 <input type="text" name="item_name" placeholder="제품을 선택해주세요" id="item_name" maxlength="10" readonly="readonly">

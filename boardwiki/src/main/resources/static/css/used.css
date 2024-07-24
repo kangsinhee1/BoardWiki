@@ -32,3 +32,27 @@
 	border:1px solid #999 !important;
 	background:white;
 }
+/* 수정중 ~~~~~~~~~~~~~~~~ */
+.page-main ul.detail-info li{
+	color:white;
+	font-size:15px;
+}
+.page-main div.font-white {
+	color:white;
+}
+.page-main div.font-white h2{
+	color:white;
+}
+.page-main h4 {
+	color:white;
+}
+.page-main label{
+	color:white;
+}
+div.page-main h2{
+	text-align:center;
+	color:white;
+}
+div.page-main div.detail-content p{
+	color:white;
+}

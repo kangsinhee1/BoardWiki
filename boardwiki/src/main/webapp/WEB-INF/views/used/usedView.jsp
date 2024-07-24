@@ -25,24 +25,26 @@
 	<h2>${used.use_title}</h2>
 	<ul class="detail-info">
 	
+		<li>
+		작성자:
+			<c:if test="${empty used.mem_nickname}">${used.mem_email}</c:if>
+			<c:if test="${!empty used.mem_nickname}">${used.mem_nickname}</c:if>
+			<br>
 	<c:if test="${used.useC_grade == -1}">
    		 <li>온도점수 : 아직 거래내역이 없습니다.</li>
    </c:if>
 	<c:if test="${used.useC_grade != -1}">
    		 <li>온도점수 : ${used.useC_grade} 점</li>
 	</c:if>
-		<li>
-		작성자:
-			<c:if test="${empty used.mem_nickname}">${used.mem_email}</c:if>
-			<c:if test="${!empty used.mem_nickname}">${used.mem_nickname}</c:if>
-			<br>
-			<c:if test="${empty used.use_mdate}">
+		</li>
+	<li>
+				<c:if test="${empty used.use_mdate}">
 			작성일 : ${used.use_rdate}
 			</c:if>  
 			<c:if test="${!empty used.use_mdate}">
 			최근 수정일 : ${used.use_mdate}
 			</c:if>
-		</li>
+	</li>
 		<li>
 			제품 : ${used.item_name}
 		</li>
