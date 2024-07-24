@@ -19,10 +19,12 @@ public interface CartMapper {
 	public CartVO selectCart(Long mem_num);
 	@Insert("INSERT INTO cart (mem_num,item_num,item_quantity,cart_price) VALUES (#{mem_num},#{item_num},#{item_quantity},#{cart_price})")
 	public void insertCart(CartVO cart);
-	@Update("UPDATE cart set item_quantity=#{item_quantity},cart_price=#{cart_price} WHERE mem_num=#{mem_num} AND item_num=#{item_num}")
+	@Update("UPDATE cart set item_quantity=#{item_quantity},cart_price=#{cart_price},cart_date=SYSTIMESTAMP WHERE mem_num=#{mem_num} AND item_num=#{item_num}")
 	public void updateCart(CartVO cart);
-	@Update("UPDATE cart set item_quantity=#{item_quantity},cart_price=#{cart_price} WHERE mem_num=#{mem_num} AND item_num=#{item_num}")
+	@Update("UPDATE cart set item_quantity=#{item_quantity},cart_price=#{cart_price},cart_date=SYSTIMESTAMP WHERE mem_num=#{mem_num} AND item_num=#{item_num}")
 	public void updateCart2(CartVO cart);
+	@Update("UPDATE cart set cart_date=SYSTIMESTAMP,cart_check=1 WHERE mem_num=#{mem_num},cart_check=0")
+	public void updateCartDate(CartVO cart);
 	@Select("SELECT * FROM cart WHERE mem_num=#{mem_num} AND item_num=#{item_num}")
 	public CartVO getCart(CartVO cart);
 	@Delete("DELETE FROM cart WHERE mem_num=#{mem_num} AND item_num=#{item_num}")

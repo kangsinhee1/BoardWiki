@@ -21,10 +21,6 @@
 <div class="page-main">
     <h2>상품주문</h2>
     <div class="great-box">
-		<script>
-			let all_price = 0;
-			const $qElement = $('p[data-sum]');
-		</script>
 		<form id="GetToOrder" method="post" action="${pageContext.request.contextPath}/order/order1">
 		<c:forEach var="order" items="${list}">
 		<input type="hidden" name="mem_num" value="${mem_num}">
@@ -37,50 +33,29 @@
                   style="display: inline-block; vertical-align: top;" 
                   data-sum="${order.item_price * order.item_quantity}">${order.item_price * order.item_quantity}</p>
                </div>
-			<script>
-				const num2 = Number(num1);
-				all_price = all_price + num2;
-			</script>
 		</c:forEach>
-		
-		<c:forEach var="order" items="${list2}">
-		<input type="hidden" name="mem_num" value="${mem_num}">
-		</c:forEach>
-		
-		<c:forEach var="order" items="${list3}">
-		<input type="hidden" name="mem_num" value="${mem_num}">
-		</c:forEach>
-			<script type="text/javascript">
-				console.log('11:', all_price);
-				$('total_sum_value').text(all_price);
-			</script>
-<!-- 			<div> -->
-<!--                <p id="total_sum_price">총 금액<span id="total_sum_value" >0</span>원</p> -->
-<!--            </div> -->
-           <input type="hidden" name="mem_num" value="${mem_num}">
-           
            <div>
                <label for="order_name">수령인</label>
-               <input type="text" id="order_name">
+               <input type="text" id="order_name" name="order_name">
            </div>
            <div>
                <label for="order_phone">전화번호</label>
-               <input type="text" id="order_phone">
+               <input type="text" id="order_phone" name="order_phone">
            </div>
            <div>
                <label for="order_zipcode">우편번호</label>
-		       <input type="text" name="receive_post" id="order_zipcode" maxlength="5">
+		       <input type="text" name="order_zipcode" id="order_zipcode" maxlength="5">
 		       <input type="button" onclick="execDaumPostcode()" value="우편번호 찾기" class="post_btn">
            </div>
            <div>
 		       <label for="order_address1">주소</label>
-		       <input type="text" name="receive_address1" id="order_address1" maxlength="30">
+		       <input type="text" name="order_address1" id="order_address1" maxlength="30">
 		   </div>
            <div>
 		       <label for="order_address2">상세주소</label>
-		       <input type="text" name="receive_address2" id="order_address2" maxlength="30">
+		       <input type="text" name="order_address2" id="order_address2" maxlength="30">
 		   </div>
-		   <button type="submit" onclick="location.href='${pageContext.request.contextPath}/order/pay?mem_num=${mem_num}'">주문하기</button>
+		   <button type="submit">주문하기</button>
            </form>
     </div>
 </div>
@@ -89,7 +64,6 @@
 <div id="layer" style="display:none;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;">
 <img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnCloseLayer" style="cursor:pointer;position:absolute;right:-3px;top:-3px;z-index:1" onclick="closeDaumPostcode()" alt="닫기 버튼">
 </div>
-
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
     // 우편번호 찾기 화면을 넣을 element
