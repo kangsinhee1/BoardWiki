@@ -76,7 +76,7 @@
 		<span class="re-title align-center">댓글달기</span>
 		<form id="re_form">
 			<input type="hidden" name="teaB_num" value="${board.teaB_num}" id="teaB_num">
-			<textarea rows="3" cols="50" name="teaR_content" id="teaR_content" class="rep-content"
+			<textarea rows="3" cols="100" name="teaR_content" id="teaR_content" class="rep-content"
 			<c:if test="${empty user}"> disabled="disabled"</c:if>
 			><c:if test="${empty user}">로그인해야 작성할수 있습니다.</c:if></textarea>
 			<c:if test="${!empty user}">

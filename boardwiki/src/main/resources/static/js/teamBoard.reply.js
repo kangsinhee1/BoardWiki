@@ -155,7 +155,6 @@ $(function(){
 		let modifyUI = '<form id="mre_form">';
 			modifyUI += '   <input type="hidden" name="teaR_num" id="mre_num" value="'+re_num+'">';
 			modifyUI += '   <textarea rows="3" cols="50" name="teaR_content" id="mteaR_content" class="rep-content">'+teaR_content+'</textarea>';
-			
 			modifyUI += '   <div id="mre_first"><span class="letter-count">300/300</span></div>';      
 			modifyUI += '   <div id="mre_second" class="align-right">';
 			modifyUI += '      <input type="submit" value="수정">';

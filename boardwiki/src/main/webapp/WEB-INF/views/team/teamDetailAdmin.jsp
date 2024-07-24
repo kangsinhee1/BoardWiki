@@ -36,6 +36,16 @@
 	<input type="button" value="목록" onclick="location.href='teamListAdmin'">
 	
 	<input type="button" value="게시판" onclick="location.href='teamBoardAdmin?tea_num=${team.tea_num}'">
+			<input type="button" value="삭제" id="delete_btn" class="default_btn2">
+			<script type="text/javascript">
+	 			const delete_btn = document.getElementById('delete_btn');
+	 			delete_btn.onclick=function(){
+	 				const choice = confirm('삭제하시겠습니까?');
+	 				if(choice){
+	 					location.replace('teamDelete?tea_num=${team.tea_num}');
+	 				}
+	 			}
+	 		</script>
 		</div>
 		<div class="detail-content">${team.tea_content}</div>
 		<hr>

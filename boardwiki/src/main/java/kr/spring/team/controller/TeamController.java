@@ -71,7 +71,7 @@ public class TeamController {
 		int count = teamService.getTeamRowCount(map);
 
 		//페이지 처리
-		PagingUtil page = new PagingUtil(keyfield, keyword, pageNum,count,20,10,"teamList","&order="+order);
+		PagingUtil page = new PagingUtil(keyfield, keyword, pageNum,count,10,10,"teamList","&order="+order);
 		List<TeamVO> list = null;
 		if(count >0) {
 			map.put("order", order);
@@ -101,7 +101,7 @@ public class TeamController {
 		int count = teamService.getTeamRowCountByAdmin(map);
 
 		//페이지 처리
-		PagingUtil page = new PagingUtil(keyfield, keyword, pageNum,count,20,10,"teamListAdmin","&order="+order);
+		PagingUtil page = new PagingUtil(keyfield, keyword, pageNum,count,10,10,"teamListAdmin","&order="+order);
 		List<TeamVO> list = null;
 		if(count >0) {
 			map.put("order", order);
