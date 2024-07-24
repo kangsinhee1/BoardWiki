@@ -8,8 +8,10 @@ import kr.spring.used.vo.UsedItemVO;
 public interface UsedService {
 	//중고글 목록
 	public Integer getUsedRowCount(Map<String,Object>map);
+	public Integer getUsedRowCountForClient(Map<String,Object>map);
 	//중고글 정보
 	public List<UsedItemVO> selectUsedList(Map<String,Object>map);
+	public List<UsedItemVO> selectUsedListForClient(Map<String,Object>map);
 	//중고글 상세
 	public UsedItemVO selectUsed(long use_num);
 	//중고글 등록

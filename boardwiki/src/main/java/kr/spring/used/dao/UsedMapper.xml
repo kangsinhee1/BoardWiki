@@ -7,13 +7,28 @@
 	 	<where>
 	 		<if test="keyword !=null and keyword != ''">
 		 		<if test="keyfield == 1">
-		 			use_title LIKE '%' || #{keyword} || '%'
+		 			use_title LIKE '%' || #{keyword} || '%' 
 		 		</if>
 		 		<if test="keyfield == 2">
 		 			use_content LIKE '%' || #{keyword} || '%'
 		 		</if>
 		 		<if test="keyfield == 3">
 		 			item_name LIKE '%' || #{keyword} || '%'
+		 		</if>
+	 		</if>
+	 	</where>
+	 </sql>
+	<sql id="usedSearchForClient">
+	 	<where>
+	 		<if test="keyword !=null and keyword != ''">
+		 		<if test="keyfield == 1">
+		 			use_title LIKE '%' || #{keyword} || '%' AND use_auth=0
+		 		</if>
+		 		<if test="keyfield == 2">
+		 			use_content LIKE '%' || #{keyword} || '%' AND use_auth=0
+		 		</if>
+		 		<if test="keyfield == 3">
+		 			item_name LIKE '%' || #{keyword} || '%' AND use_auth=0 
 		 		</if>
 	 		</if>
 	 	</where>
@@ -33,6 +48,14 @@
 			COUNT(*)
 		FROM used_item JOIN item USING (item_num)
 		<include refid="usedSearch"></include>	 
+	 </select>
+	 <select id="getUsedRowCountForClient" parameterType="map"
+									resultType="integer">
+		SELECT
+			COUNT(*)
+		FROM used_item JOIN item USING (item_num)
+		<include refid="usedSearchForClient"></include>
+		
 	 </select>
 	<!-- 중고 글 목록 -->
 	 <select id="selectUsedList" parameterType="map"
@@ -54,6 +77,27 @@
 		<![CDATA[
 		WHERE rnum >= #{start} AND rnum <= #{end}
 		]]>
+	</select>
+	 <select id="selectUsedListForClient" parameterType="map"
+	 							resultType="usedItemVO">
+	 	SELECT
+	 	   *
+	 	FROM (SELECT
+	 			a.*,
+	 			rownum rnum
+	 		   FROM (SELECT
+	 		   			*
+	 		   		 FROM used_item
+	 		   		 JOIN item USING(item_num)
+	 		   		 JOIN member USING(mem_num)
+	 		   		 JOIN member_detail USING(mem_num)
+	 		   		 <include refid="usedSearchForClient"></include>
+	 		   		 <include refid="usedOrder"></include>
+	 		   		 )a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
+		AND use_auth = 0
 	</select>
 	 <!-- 중고글 선택 -->
 	 <select id="selectUsed" parameterType="map" resultType="usedItemVO">

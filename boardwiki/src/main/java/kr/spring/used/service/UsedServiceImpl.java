@@ -70,4 +70,14 @@ public class UsedServiceImpl implements UsedService{
 		usedMapper.updateUsedAuth(use_auth, use_num);
 	}
 
+	@Override
+	public List<UsedItemVO> selectUsedListForClient(Map<String, Object> map) {
+		return usedMapper.selectUsedListForClient(map);
+	}
+
+	@Override
+	public Integer getUsedRowCountForClient(Map<String, Object> map) {
+		return usedMapper.getUsedRowCountForClient(map);
+	}
+
 }

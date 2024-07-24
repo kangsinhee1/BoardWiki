@@ -65,9 +65,11 @@
 	<hr size="1" width="100%">
 	<div class="align-right">
 		<c:if test="${!empty user && user.mem_num == used.mem_num}">
+		<c:if test="${user.mem_auth != 9 }">
 		<c:if test="${used.use_check!=3 }">
 		<input type="button" value="수정"
 		   onclick="location.href='usedUpdate?use_num=${used.use_num}'">
+		</c:if>
 		</c:if>
 		<input type="button" value="삭제" id="delete_btn">
 		

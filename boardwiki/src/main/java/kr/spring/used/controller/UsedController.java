@@ -57,7 +57,7 @@ public class UsedController {
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
 
-		int count = usedService.getUsedRowCount(map);
+		int count = usedService.getUsedRowCountForClient(map);
 
 		//페이지 처리
 		PagingUtil page = new PagingUtil(keyfield, keyword, pageNum,count,10,10,"usedList","&order="+order);
@@ -66,7 +66,7 @@ public class UsedController {
 			map.put("order", order);
 			map.put("start",page.getStartRow());
 			map.put("end",page.getEndRow());
-			list = usedService.selectUsedList(map);
+			list = usedService.selectUsedListForClient(map);
 		}
 
 		model.addAttribute("count",count);

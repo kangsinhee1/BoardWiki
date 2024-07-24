@@ -12,10 +12,15 @@ import kr.spring.used.vo.UsedItemVO;
 
 @Mapper
 public interface UsedMapper {
-	//중고글
+	//중고글 갯수
 	public Integer getUsedRowCount(Map<String,Object>map);
+	//중고글 갯수(회원전용)
+	public Integer getUsedRowCountForClient(Map<String,Object>map);
+	
 	//중고글 목록
 	public List<UsedItemVO> selectUsedList(Map<String,Object>map);
+	//중고글 목록(회원전용)
+	public List<UsedItemVO> selectUsedListForClient(Map<String,Object>map);
 	//중고글 상세
 	public UsedItemVO selectUsed(long use_num);
 	//중고글 등록
