@@ -19,8 +19,19 @@
 .btn-primary:hover {
 	background: #C213B6;
 	border: 2px solid #b01ba5;
+	
 }
-
+.btn-primary:active {
+	background: #C213B6 !important;
+	border: 2px solid #b01ba5 !important;
+	outline : none !important;
+}
+.btn-primary:focus {
+	border: 2px solid #b01ba5 !important;
+	outline : 0px !important;
+	outline-style : none; 
+	box-shadow : none !important;
+}
 .quantity_label {
 	display: block;
     font-size: 16px;

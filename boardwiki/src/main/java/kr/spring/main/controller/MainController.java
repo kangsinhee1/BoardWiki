@@ -109,7 +109,7 @@ public class MainController {
 
 		    model.addAttribute("count", count);
 		    model.addAttribute("count2", count2);
-		    model.addAttribute("count3", count2);
+		    model.addAttribute("count3", count3);
 			model.addAttribute("list", list);
 			model.addAttribute("list2", list2);
 			model.addAttribute("list3", list3);

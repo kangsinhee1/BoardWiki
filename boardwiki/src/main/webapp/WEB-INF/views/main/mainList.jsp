@@ -1,32 +1,67 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	<!-- Page top section -->
+	<section class="page-top-section set-bg" data-setbg="/img/page-top-bg/1.jpg">
+		<div class="page-info">
+			<h2>Games</h2>
+			<div class="site-breadcrumb">
+				<a href="">Home</a>  /
+				<span>Games</span>
+			</div>
+		</div>
+	</section>
+	<!-- Page top end-->
+	<section class="games-section">
+<div class="container">
 
-<h3>게임</h3>
-<div>
-<c:if test="${count>0 }">
-    <div class="small-name">
-    <c:forEach var="item" items="${list}">
-        <div class="big-box" style="display:inline-block;vertical-align:top;">
-        <div class="image-box" style="display:inline-block;vertical-align:top;">
-            <img onclick="location.href='${pageContext.request.contextPath}/item/item_detail?item_num=${item.item_num}'" src="${item.item_image}" width="180" height="180">
-        </div>
-        <div class="text-box" style="display:inline-block;vertical-align:top;"
-             onclick="location.href='${pageContext.request.contextPath}/item/item_detail?item_num=${item.item_num}'">
-            <a class="name">${item.item_name}</a><br>
-            <a>순위:${item.item_rank}위</a><br>
-            <a>평점:${item.item_average}점</a><br>
-            <a>출시연도:${item.item_year}년</a>
-        </div>
-        </div>
-    </c:forEach>
-    </div>
-    <div class="align-center">${page}</div>
-	</c:if>
-	<c:if test="${count==0 }">
-	<h5>검색 결과가 없습니다.</h5>
-	</c:if>
-</div>
+
+			<div class="game-main">
+			<h2>Games</h2>
+				<c:if test="${count > 0}">
+
+					<div class="col-xl-12 col-lg-12 col-md-12">
+						<div class="row">
+							<c:forEach var="item" items="${list}" varStatus="status">
+								<div class="col-lg-2 col-md-4">
+									<div class="game-item">
+										<img
+											onclick="location.href='${pageContext.request.contextPath}/item/item_detail?item_num=${item.item_num}'"
+											src="${item.item_image}" class="card-img-top" alt="#">
+										<div class="card-body">
+											<h5 class="card-title">${item.item_name}</h5>
+											<p class="card-text">
+												순위: ${item.item_rank}위<br> 평점: ${item.item_average}점<br>
+												출시연도: ${item.item_year}년
+											</p>
+											<a
+												href="${pageContext.request.contextPath}/item/item_detail?item_num=${item.item_num}"
+												class="btn btn-primary">상세보기</a>
+										</div>
+									</div>
+								</div>
+								<c:if test="${status.index % 6 == 5 && !status.last}">
+						</div>
+						<div class="row">
+				</c:if>
+				</c:forEach>
+			</div>
+
+		
+		<div class="align-center" style= "text-align : center">${page}</div>
+		</c:if>
+
+		<c:if test="${count == 0}">
+			<h5>검색 결과가 없습니다.</h5>
+			<hr size="1" noshade="noshade" width="100%">
+		</c:if>
+	</div>
+	</section>
+
+
+
+	<section class="games-section">
+<div class="container">
 <h3>게시글</h3>
 <div>
 <c:if test="${count2==0}">
@@ -44,7 +79,7 @@
 		<c:forEach var="board" items="${list2}">
 		<tr>
 			<td class="align-center">${board.boa_num}</td>
-			<td class="align-left"><a href="detail?boa_num=${board.boa_num}">${board.boa_title}(${board.re_cnt})</a></td>
+			<td class="align-left"><a href="${pageContext.request.contextPath}/board/detail?boa_num=${board.boa_num}">${board.boa_title}(${board.re_cnt})</a></td>
 			<td class="align-center">
 				<c:if test="${empty board.mem_nickname}">${board.mem_email}</c:if>
 				<c:if test="${!empty board.mem_nickname}">${board.mem_nickname}</c:if>
@@ -54,9 +89,13 @@
 		</tr>
 		</c:forEach>
 	</table>
-	<div class="align-center">${page2}</div>
+	<div class="align-center" style="text-align: center;">${page2}</div>
 	</c:if>
 </div>
+</div>
+</section>
+	<section class="games-section">
+<div class="container">
 <h3>중고게시판</h3>
 <div>
 <c:if test="${count3 == 0}">
@@ -75,7 +114,7 @@
 		<tr>
 			<td class="align-center">${used.use_num}</td>
 			<td class="align-left">
-			<a href="usedDetail?use_num=${used.use_num}">
+			<a href="${pageContext.request.contextPath}/used/usedDetail?use_num=${used.use_num}">
 			<c:if test="${used.use_check==1 }"><b>[판매중] </b></c:if>
 			<c:if test="${used.use_check==2 }"><b>[예약중] </b></c:if>
 			<c:if test="${used.use_check==3 }"><b>[판매완료] </b></c:if>
@@ -94,7 +133,9 @@
 		</tr>
 		</c:forEach>
 	</table>
-	<div class="align-center">${page3}</div>
+	<div class="align-center" style="text-align: center;">${page3}</div>
 	</c:if>	
 	
 </div>
+</div>
+</section>

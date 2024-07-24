@@ -30,14 +30,14 @@
 	 				AND
 	 		</if>
 	 		<if test="keyfield == 1">
-	 			boa_title LIKE '%' || #{keyword} || '%'
+	 			boa_title LIKE '%' || #{keyword,jdbcType=VARCHAR} || '%'
 	 		</if>
 	 		<if test="keyfield == 2">
-	 			boa_content LIKE '%' || #{keyword} || '%'
+	 			boa_content LIKE '%' || #{keyword,jdbcType=VARCHAR} || '%'
 	 		</if>
 	 		<if test="keyfield == 3">
-	 			(boa_title LIKE '%' || #{keyword} || '%' OR
-	 			boa_content LIKE '%' || #{keyword} || '%')
+	 			(boa_title LIKE '%' || #{keyword,jdbcType=VARCHAR} || '%' OR
+	 			boa_content LIKE '%' || #{keyword,jdbcType=VARCHAR} || '%')
 	 		</if>
 	 	</where>
 	 </sql>
