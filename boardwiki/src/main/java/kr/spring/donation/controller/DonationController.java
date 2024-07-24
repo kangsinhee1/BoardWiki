@@ -15,10 +15,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.spring.donation.service.DonationService;
 import kr.spring.donation.vo.DonationVO;
+import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.point.service.PointService;
 import kr.spring.point.vo.PointVO;
 import kr.spring.stream.service.StreamKeyService;
+import kr.spring.stream.vo.StreamCreatingVO;
 import kr.spring.util.PagingUtil;
 
 @Controller
@@ -32,6 +34,9 @@ public class DonationController {
 	    
 	    @Autowired
 	    private StreamKeyService streamKeyService;
+	    
+	    @Autowired
+	    private MemberService memberService;
 
 	    @GetMapping("/donation/form")
 	    public String donationfrom(HttpSession session, Model model) {
@@ -83,6 +88,8 @@ public class DonationController {
 		    		point2.setPoi_status(3);
 		            pointService.processPointTransaction(point2);
 		            donationService.addDonation(donation);
+		            mapJson.put("don_content", don_content);
+		            mapJson.put("Mem_nickName", user.getMem_nickName());
 		    		mapJson.put("result", "success");
 	    		}
 	    	}
@@ -97,14 +104,19 @@ public class DonationController {
 	    	int count = donationService.SelectDonationscount(map);
 
 	    	PagingUtil page = new PagingUtil(pageNum, count, 20, 10, "strlist");
-
+	    	
 	    	List<DonationVO> list = null;
-
+	    	long mem_num = 0l;
 	    	if (count > 0) {
 			     map.put("start", page.getStartRow());
 			     map.put("end", page.getEndRow());
-
+			     
 			     list = donationService.getDonationsByStream(map);
+			     for(int i=0;i<list.size();i++) {
+			    	 mem_num = list.get(i).getMem_num();
+			    	 MemberVO member = memberService.selectMember(mem_num);
+			    	 list.get(i).setMem_nickName(member.getMem_nickName());
+			     }
 			}
 
 	    	model.addAttribute("count", count);
@@ -122,7 +134,7 @@ public class DonationController {
 	    	map.put("str_num", str_num);
 
 	    	int count = donationService.SelectDonationcount(map);
-
+	    	long mem_num = 0l;
 	    	PagingUtil page = new PagingUtil(pageNum, count, 20, 10, "userlist");
 
 	    	List<DonationVO> list = null;
@@ -130,8 +142,13 @@ public class DonationController {
 	    	if (count > 0) {
 			     map.put("start", page.getStartRow());
 			     map.put("end", page.getEndRow());
-
+			     
 			     list = donationService.getDonationsByMember(map);
+			     for(int i=0;i<list.size();i++) {
+			    	 mem_num = list.get(i).getMem_num();
+			    	 MemberVO member = memberService.selectMember(mem_num);
+			    	 list.get(i).setMem_nickName(member.getMem_nickName());
+			     }
 			}
 
 	    	model.addAttribute("count", count);
