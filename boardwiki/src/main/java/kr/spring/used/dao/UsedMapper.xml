@@ -33,6 +33,24 @@
 	 		</if>
 	 	</where>
 	 </sql>
+	<sql id="usedSearchByItemNum">
+	 	<where>
+	 		<if test="item_num !=null and item_num !='' ">
+	 			use_auth=0 AND item_num=#{item_num}
+	 		</if>
+	 		<if test="keyword !=null and keyword != ''">
+		 		<if test="keyfield == 1">
+		 			use_title LIKE '%' || #{keyword} || '%' AND use_auth=0
+		 		</if>
+		 		<if test="keyfield == 2">
+		 			use_content LIKE '%' || #{keyword} || '%' AND use_auth=0
+		 		</if>
+		 		<if test="keyfield == 3">
+		 			item_name LIKE '%' || #{keyword} || '%' AND use_auth=0
+		 		</if>
+	 		</if>
+	 	</where>
+	 </sql>
 	 <sql id="usedOrder">
  		<if test="order == 1">
  			ORDER BY use_num DESC
@@ -55,6 +73,14 @@
 			COUNT(*)
 		FROM used_item JOIN item USING (item_num)
 		<include refid="usedSearchForClient"></include>
+		
+	 </select>
+	 <select id="getUsedRowCountByItemNum" parameterType="map"
+									resultType="integer">
+		SELECT
+			COUNT(*)
+		FROM used_item JOIN item USING (item_num)
+		<include refid="usedSearchByItemNum"></include>
 		
 	 </select>
 	<!-- 중고 글 목록 -->
@@ -98,6 +124,26 @@
 		WHERE rnum >= #{start} AND rnum <= #{end}
 		]]>
 		AND use_auth = 0
+	</select>
+	 <select id="selectUsedListByItemNum" parameterType="map"
+	 							resultType="usedItemVO">
+	 	SELECT
+	 	   *
+	 	FROM (SELECT
+	 			a.*,
+	 			rownum rnum
+	 		   FROM (SELECT
+	 		   			*
+	 		   		 FROM used_item
+	 		   		 JOIN item USING(item_num)
+	 		   		 JOIN member USING(mem_num)
+	 		   		 JOIN member_detail USING(mem_num)
+	 		   		 <include refid="usedSearchByItemNum"></include>
+	 		   		 <include refid="usedOrder"></include>
+	 		   		 )a)
+		<![CDATA[
+		WHERE rnum >= #{start} AND rnum <= #{end}
+		]]>
 	</select>
 	 <!-- 중고글 선택 -->
 	 <select id="selectUsed" parameterType="map" resultType="usedItemVO">

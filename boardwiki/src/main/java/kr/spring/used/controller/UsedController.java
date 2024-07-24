@@ -44,35 +44,63 @@ public class UsedController {
 	/*=====================
 	 * 중고게시판 목록
 	 *=====================*/
-	@GetMapping("/used/usedList")
+	@GetMapping("/*/usedList")
 	public String selectList(
 			 @RequestParam(defaultValue="1") int pageNum,
 			 @RequestParam(defaultValue="1") int order,
+			 Long item_num,
 			 String keyfield,String keyword,Model model) {
+		log.debug("<<item_num>> : " + item_num);
+		
 
-
-		if(keyword != null) { keyword = keyword.toLowerCase(); }
-
-		Map<String,Object> map = new HashMap<>();
-		map.put("keyfield", keyfield);
-		map.put("keyword", keyword);
-
-		int count = usedService.getUsedRowCountForClient(map);
-
-		//페이지 처리
-		PagingUtil page = new PagingUtil(keyfield, keyword, pageNum,count,10,10,"usedList","&order="+order);
-		List<UsedItemVO> list = null;
-		if(count >0) {
-			map.put("order", order);
-			map.put("start",page.getStartRow());
-			map.put("end",page.getEndRow());
-			list = usedService.selectUsedListForClient(map);
+		if(item_num ==null) {
+			if(keyword != null) { keyword = keyword.toLowerCase(); }
+			
+			Map<String,Object> map = new HashMap<>();
+			map.put("keyfield", keyfield);
+			map.put("keyword", keyword);
+			
+			int count = usedService.getUsedRowCountForClient(map);
+			
+			//페이지 처리
+			PagingUtil page = new PagingUtil(keyfield, keyword, pageNum,count,10,10,"usedList","&order="+order);
+			List<UsedItemVO> list = null;
+			if(count >0) {
+				map.put("order", order);
+				map.put("start",page.getStartRow());
+				map.put("end",page.getEndRow());
+				list = usedService.selectUsedListForClient(map);
+			}
+			
+			model.addAttribute("count",count);
+			model.addAttribute("list",list);
+			model.addAttribute("page",page.getPage());
+			return "usedList";
+			
+		}else {
+			Map<String,Object> map = new HashMap<>();
+			map.put("keyfield", keyfield);
+			map.put("keyword", keyword);
+			map.put("item_num", item_num);
+			
+			int count = usedService.getUsedRowCountByItemNum(map);
+			
+			//페이지 처리
+			PagingUtil page = new PagingUtil(keyfield, keyword, pageNum,count,10,10,"usedList","&order="+order);
+			List<UsedItemVO> list = null;
+			if(count >0) {
+				map.put("order", order);
+				map.put("start",page.getStartRow());
+				map.put("end",page.getEndRow());
+				list = usedService.selectUsedListByItemNum(map);
+			}
+			
+			model.addAttribute("count",count);
+			model.addAttribute("list",list);
+			model.addAttribute("page",page.getPage());
+			
+			return "usedList";
 		}
-
-		model.addAttribute("count",count);
-		model.addAttribute("list",list);
-		model.addAttribute("page",page.getPage());
-		return "usedList";
 	}
 	/*=====================
 	 * 중고 게시판 작성

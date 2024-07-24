@@ -80,4 +80,15 @@ public class UsedServiceImpl implements UsedService{
 		return usedMapper.getUsedRowCountForClient(map);
 	}
 
+	@Override
+	public Integer getUsedRowCountByItemNum(Map<String, Object> map) {
+		return usedMapper.getUsedRowCountByItemNum(map);
+	}
+
+	@Override
+	public List<UsedItemVO> selectUsedListByItemNum(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return usedMapper.selectUsedListByItemNum(map);
+	}
+
 }

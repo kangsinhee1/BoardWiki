@@ -9,7 +9,6 @@
    <definition name="item_main" template="/WEB-INF/views/template/layout_item.jsp">
 		<put-attribute name="title" value="게임 메인"/>
 		<put-attribute name="css" value="/WEB-INF/views/item/itemCSS.jsp"/>
-		<put-attribute name="top-header" value="/WEB-INF/views/template/top-header.jsp"/>
 		<put-attribute name="header" value="/WEB-INF/views/template/header.jsp"/>
 		<put-attribute name="down-header" value="/WEB-INF/views/template/down-header.jsp"/>
 		<put-attribute name="body" value="/WEB-INF/views/item/item_main.jsp"/>
