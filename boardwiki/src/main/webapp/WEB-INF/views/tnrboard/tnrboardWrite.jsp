@@ -48,7 +48,7 @@
 				<form:errors path="tnr_title" cssClass="error-color"/>
 			</li>
 			<li>
-				<form:textarea path="tnr_content"/>
+				<form:textarea path="tnr_content" class="board_content"/>
 				<form:errors path="tnr_content" cssClass="error-color"/>
 				<script>
 				 function MyCustomUploadAdapterPlugin(editor) {

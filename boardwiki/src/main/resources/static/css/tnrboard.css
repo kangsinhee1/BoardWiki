@@ -257,6 +257,11 @@ div#mre_second input{
 	color:white;
 	font-size:15px;
 }
+.page-main ul li input{
+	color:black;
+	font-size:15px;
+}
+
 select#tnr_category{
 	color:black;
 }

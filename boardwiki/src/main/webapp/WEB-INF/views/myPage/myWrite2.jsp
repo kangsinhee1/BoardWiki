@@ -13,7 +13,9 @@
 	</c:if>
 	<c:if test="${count > 0}">
 		<h5>팁게시판</h5>
-		<table class="striped-table">
+		<div class="chart-table">
+		<table>
+		<thead>
 			<tr>
 				<th>번호</th>
 				<th width="400">제목</th>
@@ -22,6 +24,7 @@
 				<th>조회수</th>
 				<th>좋아요수</th>
 			</tr>
+			</thead>
 			<c:forEach var="tnrboard" items="${list}">
 					<tr>
 						<td class="align-center">${tnrboard.tnr_num}</td>
@@ -36,7 +39,10 @@
 					</tr>
 			</c:forEach>
 		</table>
-		<div class="align-center">${page}</div>
+		</div>
+		<div class="align-center">
+		<div class="blog-pagination">${page}</div>
+		</div>
 	</c:if>
 </div>
 </div>
