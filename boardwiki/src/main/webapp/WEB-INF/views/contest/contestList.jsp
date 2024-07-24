@@ -15,7 +15,10 @@
     </div>
 </section>
 <!-- Page top end-->
-
+<section class="blog-page">
+<div class="container">
+	<div class="row">
+	<div class="col-lg-12">
 <div class="page-main">
     <h2>대회</h2>
     <form action="contestList" id="search_form" method="get">
@@ -59,7 +62,8 @@
     <div class="alert alert-info">표시할 게시물이 없습니다.</div>
     </c:if>
     <c:if test="${count > 0}">
-    <table class="chart-table">
+    <div class="chart-table">
+    <table >
         <thead>
         <tr>
             <th>번호</th>
@@ -92,5 +96,9 @@
     <div class="align-center">${page}</div>
     </c:if>    
 </div>
+</div>
+</div>
+</div>
+</section>
 <!-- 게시판 목록 끝 -->
 

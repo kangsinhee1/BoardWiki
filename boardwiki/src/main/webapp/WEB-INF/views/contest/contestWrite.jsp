@@ -26,10 +26,10 @@
 	</div>
 </section>
 <!-- Page top end-->
-<section class="page-main">
+<section class="blog-page">
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-12">
+			<div class="page-main">
 				<form:form action="contestWrite" id="board_register"
 					enctype="multipart/form-data" modelAttribute="contestVO">
 					<ul class="form-list">
