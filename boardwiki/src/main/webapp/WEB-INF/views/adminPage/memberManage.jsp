@@ -26,11 +26,9 @@
 						test="${!empty member.mem_nickName}">${member.mem_nickName}</c:if>
 				</td>
 				<td class="align-center"><c:if test="${member.mem_auth==0}">일반</c:if>
-					<c:if test="${member.mem_auth==1}">탈퇴</c:if> <c:if
-						test="${member.mem_auth==2}">정지</c:if> <c:if
-						test="${member.mem_auth==9}">
-						<b>관리자</b>
-					</c:if></td>
+					<c:if test="${member.mem_auth==1}">정지</c:if> 
+					<c:if test="${member.mem_auth==2}">일반</c:if> 
+					<c:if test="${member.mem_auth==0}">탈퇴</c:if></td>
 				<td class="align-center">${member.mem_phone}</td>
 				<td class="align-center"><c:if
 						test="${member.mem_provider == 'Kakao'}">Kakao</c:if> <c:if

@@ -57,6 +57,8 @@
 	 		   			*
 	 		   		 FROM member
 	 		   		 JOIN member_detail USING(mem_num)
+	 		   		 WHERE mem_auth != 9
+	 		   		 ORDER BY mem_rdate DESC
 	 		   		 )a)
 		<![CDATA[
 		WHERE rnum >= #{start} AND rnum <= #{end}
