@@ -154,3 +154,6 @@ input[type="password"]::placeholder {
     background-color: white;
     padding: 0 10px;
 }
+.align-center{
+	text-align:center;
+}

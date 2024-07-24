@@ -7,6 +7,21 @@
     <title>이메일 결과</title>
 </head>
 <body>
+
+		<!-- Page top section -->
+	<section class="page-top-section set-bg" data-setbg="/img/page-top-bg/4.jpg">
+		<div class="page-info">
+			<h2>Contact</h2>
+			<div class="site-breadcrumb">
+				<a href="">Home</a>  /
+				<span>Contact</span>
+			</div>
+		</div>
+	</section>
+	<!-- Page top end-->
+		<section class="blog-page">
+<div class="container">
+	<div class="row">
 <div class="page-main">
     <h2>아이디 찾기 결과</h2>
     <c:if test="${!empty foundProvider}">
@@ -26,5 +41,8 @@
                onclick="location.href='${pageContext.request.contextPath}/main/main'">
     </div>
 </div>
+</div>
+</div>
+</section>
 </body>
 </html>

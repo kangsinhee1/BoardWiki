@@ -61,9 +61,9 @@ a:hover{
 .error-color{
 	color:#ff0000;
 }
-/* 공통 정렬
----------------------*/
-/* .align-center{
+공통 정렬
+---------------------
+.align-center{
 	text-align:center;
 }
 .align-right{
@@ -71,7 +71,7 @@ a:hover{
 }
 .align-left{
 	text-align:left;
-} */
+}
 
 /* 상단 메뉴
 ---------------------*/
@@ -110,6 +110,7 @@ div#main_menu ul li{
 form ul li label{
 	width:110px;
 	display:inline-block;
+	color:white;
 }
 ul {
 	list-style:none;

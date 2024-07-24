@@ -7,13 +7,17 @@
 	<div class="result-display">표시할 채팅방이 없습니다.</div>
 	</c:if>
 	<c:if test="${count>0}">
-	<table class="striped-table">
+	<div class="chart-table">
+	<table>
+	<thead>
 		<tr>
 			<th>채팅방 번호</th>
 			<th>채팅방 이름</th>
 			<th>채팅 개설일</th>
 		</tr>
+		</thead>
 		<c:forEach var="used" items="${list}">
+		<tbody>
 		<tr>
 			<td>${used.useC_num}</td>
 			<td style="text-align:left;">
@@ -23,8 +27,10 @@
 			</td>
 			<td>${used.useC_date }</td>
 		</tr>
+		</tbody>
 		</c:forEach>
 	</table>
+	</div>
 	<div class="align-center">${page}</div>
 	</c:if>
 	<hr size="1" width="80%" noshade="noshade">
@@ -33,13 +39,17 @@
 	<div class="result-display">표시할 채팅방이 없습니다.</div>
 	</c:if>
 	<c:if test="${count2>0}">
-	<table class="striped-table">
+		<div class="chart-table">
+	<table>
+	<thead>
 		<tr>
 			<th>중고글 번호</th>
 			<th>중고글 제목</th>
 			<th>중고글 작성일</th>
 		</tr>
+		</thead>
 		<c:forEach var="used" items="${list2}">
+		<tbody>
 		<tr>
 			<td>${used.use_num}</td>
 			<td style="text-align:left;">
@@ -49,8 +59,10 @@
 			</td>
 			<td>${used.use_rdate }</td>
 		</tr>
+		</tbody>
 		</c:forEach>
 	</table>
+	</div>
 	<div class="align-center">${page2}</div>
 	</c:if>
 </div>

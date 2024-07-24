@@ -3,6 +3,21 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!-- 회원정보 수정 시작 -->
+
+		<!-- Page top section -->
+	<section class="page-top-section set-bg" data-setbg="/img/page-top-bg/4.jpg">
+		<div class="page-info">
+			<h2>Contact</h2>
+			<div class="site-breadcrumb">
+				<a href="">Home</a>  /
+				<span>Contact</span>
+			</div>
+		</div>
+	</section>
+	<!-- Page top end-->
+		<section class="blog-page">
+<div class="container">
+	<div class="row">
 <div class="page-main">
 	<h2>회원정보 수정</h2>
 	<form:form action="memberUpdate" id="member_modify"
@@ -37,6 +52,9 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/member.register.js"></script>	
 </div>
+</div>
+</div>
+</section>
 <!-- 회원정보 수정 끝 -->
 
 
