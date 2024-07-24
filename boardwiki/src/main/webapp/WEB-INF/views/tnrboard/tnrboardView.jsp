@@ -34,9 +34,10 @@
 	<h2>${tnrboard.tnr_title}</h2>
 	<ul class="detail-info">
 		<li>
-			<c:if test="${empty tnrboard.mem_nickname}">${tnrboard.mem_email}</c:if>
-			<c:if test="${!empty tnrboard.mem_nickname}">${tnrboard.mem_nickname}</c:if>
+			<c:if test="${empty tnrboard.mem_nickname}">작성자 : ${tnrboard.mem_email}</c:if>
+			<c:if test="${!empty tnrboard.mem_nickname}">작성자 : ${tnrboard.mem_nickname}</c:if>
 			<br>
+			제품명 : ${tnrboard.item_name}<br>
 			<c:if test="${empty tnrboard.tnr_mdate}">
 			작성일 : ${tnrboard.tnr_rdate}
 			</c:if>

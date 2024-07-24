@@ -6,6 +6,12 @@
 	 <!-- sql 태그와 include 태그를 이용해서 SQL문을 재사용 -->
 	 <sql id="tnrboardSearch">
 	 	<where>
+	 		<if test="item_num !=null and item_num != ''">
+	 			item_num =#{item_num}
+	 		</if>
+	 		<if test="item_num !=null and item_num != '' and tnr_category !=null and tnr_category != ''">
+	 			AND
+	 		</if>
 	 		<if test="tnr_category !=null and tnr_category != ''">
 	 			tnr_category = #{tnr_category}
 	 		</if>

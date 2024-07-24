@@ -96,30 +96,56 @@ public class TnrboardController {
 				@RequestParam(defaultValue="1") int order,
 				@RequestParam(defaultValue="") String tnr_category, Long item_num,
 				String keyfield,String keyword,Model model) {
-
-		Map<String,Object> map = new HashMap<>();
-		map.put("tnr_category", tnr_category);
-		map.put("keyfield", keyfield);
-		map.put("keyword", keyword);
-
-		int count = tnrboardService.selectTnrRowCount(map);
-
-		PagingUtil page = new PagingUtil(keyfield,keyword,pageNum,count,
-							10,10,"tnrboardList","&tnr_category="+tnr_category+"&order="+order);
-		List<TnrboardVO> list = null;
-		if(count > 0) {
-			map.put("order", order);
-			map.put("start", page.getStartRow());
-			map.put("end", page.getEndRow());
-
-			list = tnrboardService.selectTnrList(map);
+		if(item_num==null) {
+			Map<String,Object> map = new HashMap<>();
+			map.put("tnr_category", tnr_category);
+			map.put("keyfield", keyfield);
+			map.put("keyword", keyword);
+			
+			int count = tnrboardService.selectTnrRowCount(map);
+			
+			PagingUtil page = new PagingUtil(keyfield,keyword,pageNum,count,
+					10,10,"tnrboardList","&tnr_category="+tnr_category+"&order="+order);
+			List<TnrboardVO> list = null;
+			if(count > 0) {
+				map.put("order", order);
+				map.put("start", page.getStartRow());
+				map.put("end", page.getEndRow());
+				
+				list = tnrboardService.selectTnrList(map);
+			}
+			
+			model.addAttribute("count", count);
+			model.addAttribute("list", list);
+			model.addAttribute("page", page.getPage());
+			
+			return "tnrboardList";
+			
+		}else {
+			Map<String,Object> map = new HashMap<>();
+			map.put("item_num", item_num);
+			map.put("tnr_category", tnr_category);
+			map.put("keyfield", keyfield);
+			map.put("keyword", keyword);
+			
+			int count = tnrboardService.selectTnrRowCount(map);
+			
+			PagingUtil page = new PagingUtil(keyfield,keyword,pageNum,count,
+					10,10,"tnrboardList","&tnr_category="+tnr_category+"&order="+order);
+			List<TnrboardVO> list = null;
+			if(count > 0) {
+				map.put("order", order);
+				map.put("start", page.getStartRow());
+				map.put("end", page.getEndRow());
+				
+				list = tnrboardService.selectTnrList(map);
+			}
+			
+			model.addAttribute("count", count);
+			model.addAttribute("list", list);
+			model.addAttribute("page", page.getPage());
+			return "tnrboardList";
 		}
-
-		model.addAttribute("count", count);
-		model.addAttribute("list", list);
-		model.addAttribute("page", page.getPage());
-
-		return "tnrboardList";
 	}
 
 
