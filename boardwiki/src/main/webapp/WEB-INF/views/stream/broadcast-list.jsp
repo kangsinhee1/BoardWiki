@@ -7,6 +7,7 @@
 
 <h1>Live Broadcasts</h1>
 </section>
+
 <style>
 .broadcast {
 	display: inline-block;
@@ -25,7 +26,10 @@
 	font-size: 18px;
 }
 </style>
+<section class="blog-page">
 <div class="container">
+<div class="row">
+		<div class="col-lg-12">
 <div class="game-main">
 	<c:forEach var="broadcast" items="${broadcasts}">
 		<div class="broadcast">
@@ -42,5 +46,9 @@
 	</c:forEach>
 </div>
 </div>
+</div>
+</div>
+</section>
+
 
 

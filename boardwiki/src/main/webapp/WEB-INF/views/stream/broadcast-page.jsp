@@ -47,6 +47,11 @@
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 
 <section class="page-top-section set-bg" data-setbg="/img/page-top-bg/4.jpg" style="background-image: url('/img/page-top-bg/4.jpg');"></section>
+
+<section class="blog-page">
+<div class="container">
+<div class="row">
+		<div class="col-lg-12">
 <div class="game-main">
 <input type="hidden" id="str_num" name="str_num" value="${param.str_num}">
     <c:if test="${broadcast.isLive == 1}">
@@ -91,6 +96,10 @@
         </div>
     </c:if>
 </div>
+</div>
+</div>
+</div>
+</section>
 
 <script>
     function openDonationModal() {

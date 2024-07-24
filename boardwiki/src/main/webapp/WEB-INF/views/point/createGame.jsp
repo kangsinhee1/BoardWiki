@@ -8,11 +8,16 @@
 
 <h1>게임 생성</h1>
 </section>
+<section class="blog-page">
+<div class="container">
+	<div class="row">
+		<div class="col-lg-12">
+		<div class="page-main">
 <form id="createGameForm">
-    <label for="gameTitle">주제:</label> 
+    <label for="gameTitle" class="font-white">주제:</label> 
     <input type="text" id="gameTitle" name="poiG_content" required><br><br>
     <div id="choicesContainer">
-        <label>선택지:</label><br>
+        <label class="font-white">선택지:</label><br>
         <div class="choice">
             <input type="text" name="choices" required>
         </div>
@@ -24,3 +29,8 @@
     
     <button type="submit">생성</button>
 </form>
+</div>
+</div>
+</div>
+</div>
+</section>

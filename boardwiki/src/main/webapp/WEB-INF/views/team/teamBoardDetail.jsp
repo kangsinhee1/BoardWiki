@@ -27,7 +27,6 @@
 	<h2> ${board.teaB_title}</h2>
 	<div class="align-right">
 	<c:if test="${!empty user &&user.mem_num != board.mem_num}">
-	<input type="button" value="신고" id="report_btn" class="default_btn2">
 	</c:if>
 		<c:if test="${!empty user &&user.mem_num == board.mem_num}">
 			<input type="button" value="수정"

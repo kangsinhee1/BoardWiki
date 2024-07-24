@@ -3,13 +3,19 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/boradchat.js"></script>
 
+<section class="blog-page">
+<div class="container">
+<div class="row">
+		<div class="col-lg-12">
+		<div class="game-main">
 <h2>도네이션 목록 (회원 기준)</h2>
 <c:if test="${count == 0}">
     <div class="result-display">표시할 게시물이 없습니다.</div>
 </c:if>
 
 <c:if test="${count > 0}">
-    <table class="striped-table" id="donation-list">
+	<div class="chart-table">
+    <table  id="donation-list">
         <thead>
             <tr>
                 <th>내용</th>
@@ -29,5 +35,11 @@
             </c:forEach>
         </tbody>
     </table>
+    </div>
     <div class="align-center">${page}</div>
 </c:if>
+</div>
+</div>
+</div>
+</div>
+</section>
