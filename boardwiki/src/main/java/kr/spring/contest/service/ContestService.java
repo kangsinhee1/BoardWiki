@@ -34,4 +34,5 @@ public interface ContestService {
 	
 	public Integer countContestAdminApplyList(long con_num);
 	public List<ContestVO> selectContestAdminApplyList(Map<String,Object>map);
+	public List<ContestVO> selectContestListForStatusOrder(Map<String,Object>map);
 }

@@ -114,41 +114,46 @@ public class ContestController {
 	 *=====================*/
 	@GetMapping("/contest/contestList")
 	public String getList(
-			@RequestParam(defaultValue="1") int pageNum,
-			@RequestParam(defaultValue="1") int order,
-			@RequestParam(defaultValue="") String category,
-			String keyfield,String keyword,Model model) {
+	        @RequestParam(defaultValue = "1") int pageNum,
+	        @RequestParam(defaultValue = "1") int order,
+	        @RequestParam(defaultValue = "") String category,
+	        @RequestParam(required = false) String keyfield,
+	        @RequestParam(required = false) String keyword,
+	        Model model) {
 
-		log.debug("<<대회 목록 진입>>");
+	    log.debug("<<대회 목록 진입>>");
 
-		Map<String,Object> map =
-				new HashMap<>();
-		map.put("category", category);
-		map.put("keyfield", keyfield);
-		map.put("keyword", keyword);
+	    Map<String, Object> map = new HashMap<>();
+	    map.put("category", category);
+	    map.put("keyfield", keyfield);
+	    map.put("keyword", keyword);
 
-		//전체,검색 레코드수
-		int count = contestservice.countAllcontest(map);
+	    // 전체, 검색 레코드 수
+	    int count = contestservice.countAllcontest(map);
 
-		//페이지 처리
-		PagingUtil page = new PagingUtil(keyfield,keyword,pageNum,count,20,10,"contestList","&order="+order);
-		
-		
-		List<ContestVO> list = null;
-		
-		if(count > 0) {
-			map.put("order", order);
-			map.put("start", page.getStartRow());
-			map.put("end", page.getEndRow());
+	    // 페이지 처리
+	    PagingUtil page = new PagingUtil(keyfield, keyword, pageNum, count, 20, 10, "contestList", "&order=" + order);
 
-			list = contestservice.selectContestList(map);
-		}
+	    List<ContestVO> list = null;
 
-		model.addAttribute("count", count);
-		model.addAttribute("list", list);
-		model.addAttribute("page", page.getPage());
+	    if (count > 0) {
+	        map.put("order", order);
+	        map.put("start", page.getStartRow());
+	        map.put("end", page.getEndRow());
 
-		return "contestList";
+	        // order 값에 따라 다른 메소드 호출
+	        if (order == 3 || order == 4) {
+	            list = contestservice.selectContestListForStatusOrder(map);
+	        } else {
+	            list = contestservice.selectContestList(map);
+	        }
+	    }
+
+	    model.addAttribute("count", count);
+	    model.addAttribute("list", list);
+	    model.addAttribute("page", page.getPage());
+
+	    return "contestList";
 	}
 	/*=====================
 	 * 	   대회 상세

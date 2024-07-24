@@ -37,7 +37,7 @@
             <nav class="top-nav-area w-100">
             	<c:if test="${empty user }">
                 <div class="user-panel">
-                    <a href="${pageContext.request.contextPath}/member/login">Login</a> / <a href="${pageContext.request.contextPath}/member/memberRegisterChoice">Register</a>
+                    <a href="${pageContext.request.contextPath}/member/login">Login</a> / <a href="${pageContext.request.contextPath}/member/memberRegister">Register</a>
                 </div>
                 </c:if>
             	<c:if test="${!empty user }">
