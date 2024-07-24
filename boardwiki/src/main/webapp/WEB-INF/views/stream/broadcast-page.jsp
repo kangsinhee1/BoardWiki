@@ -25,6 +25,7 @@
         height: 500px;
         border: 1px solid #ccc;
         overflow-y: scroll;
+        flex-direction:column_reverse;
     }
     .chat-input-container {
         margin-top: 10px;
@@ -42,6 +43,9 @@
         margin: 5px;
         cursor: pointer;
     }
+#chat-container::-webkit-scrollbar {
+    display: none; /* 크롬, 사파리, 오페라, 엣지 */ 👈
+}
 </style>
 
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
@@ -73,7 +77,7 @@
                     
                 </div>
             </div>
-            <div class="chat-section font-white">
+            <div class="chat-section font-white" >
                 <div class="chat-container" id="chat-container"></div>
                 <div class="chat-input-container">
                     <input type="text" id="chat-input" class="chat-input" placeholder="메시지를 입력하세요" />
