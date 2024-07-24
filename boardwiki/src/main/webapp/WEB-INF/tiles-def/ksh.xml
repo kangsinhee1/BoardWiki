@@ -33,6 +33,10 @@
 		<put-attribute name="title" value="회원정보 수정"/>
 		<put-attribute name="body" value="/WEB-INF/views/member/memberModify.jsp"/>
 	</definition>
+	<definition name="memberDelete" extends="myPage">
+		<put-attribute name="title" value="회원탈퇴"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/memberDelete.jsp"/>
+	</definition>
 	<definition name="memberFindEmail" extends="main">
 		<put-attribute name="title" value="아이디 찾기"/>
 		<put-attribute name="css" value="/WEB-INF/views/member/memberCSS.jsp"/>
