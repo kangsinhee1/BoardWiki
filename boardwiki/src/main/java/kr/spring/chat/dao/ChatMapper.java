@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import kr.spring.chat.vo.ChatMemberVO;
 import kr.spring.chat.vo.ChatRoomVO;
@@ -61,6 +62,12 @@ public interface ChatMapper {
 		@Select("SELECT * FROM chat_room WHERE chaR_num=#{chaR_num}")
 		public ChatRoomVO selectChatRoomBychaRnum(long chaR_num);
 		//신고기능?
+		
+		@Update("Update Chat_room set chaR_status = 1 WHERE tea_num = #{tea_num}")
+		public void updateChatRoomStatus1Bytea_num(long tea_num); 
+		
+		@Update("Update Chat_room set chaR_status = 0 WHERE tea_num = #{tea_num}")
+		public void updateChatRoomStatus0Bytea_num(long tea_num); 
 
 
 }

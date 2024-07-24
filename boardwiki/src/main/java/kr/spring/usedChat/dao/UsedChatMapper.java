@@ -57,10 +57,10 @@ public interface UsedChatMapper {
 	@Update("UPDATE usedChatROOM set usec_status = 2 WHERE useC_num = #{useC_num}")
 	public void updateUseC_status (long useC_num);
 	//구매 완료된 목록 보기
-	@Select("SELECT * FROM UsedChatROOM WHERE usec_status =2 AND MEM_NUM = #{mem_num} ")
+	@Select("SELECT * FROM UsedChatROOM WHERE usec_status =2 AND MEM_NUM = #{mem_num} AND useC_grade is  null")
 	public List<UsedChatRoomVO> selectChatRoomstatus2(long mem_num);
 	
-	@Select("SELECT count(*) FROM UsedChatROOM WHERE usec_status =2 AND MEM_NUM = #{mem_num} ")
+	@Select("SELECT count(*) FROM UsedChatROOM WHERE usec_status =2 AND MEM_NUM = #{mem_num} AND useC_grade is null ")
 	public Integer selectChatRoomCountstatus2(long mem_num);
 	
 	// 판매자 평가하기

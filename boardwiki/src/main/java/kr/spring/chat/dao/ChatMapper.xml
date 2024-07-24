@@ -40,6 +40,7 @@
 	<if test="keyword != null and keyword != ''">
 		AND chaR_name LIKE '%' || #{keyword} || '%'
 	</if>
+	AND chaR_status = 1
 </sql>
 
  <select id="selectChatRowCount" parameterType="map" resultType="integer">

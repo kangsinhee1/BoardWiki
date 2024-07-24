@@ -225,15 +225,15 @@ public class TeamController {
 	@GetMapping("/team/teamDelete")
 	public String deleteTeam(long tea_num) {
 		//모임장만 비활성화 되게 처리
-
+		chatService.updateChatRoomStatus0Bytea_num(tea_num);
 		teamService.updateTeamStatus(tea_num);
 		return "redirect:teamList";
 	}
 
 	@GetMapping("/team/teamOpen")
 	public String openTeam(long tea_num) {
-		//모임장만 비활성화 되게 처리
-
+		//모임장만 활성화 되게 처리
+		chatService.updateChatRoomStatus1Bytea_num(tea_num);
 		teamService.updateTeamStatusOpen(tea_num);
 		return "redirect:teamList";
 	}

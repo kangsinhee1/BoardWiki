@@ -77,6 +77,6 @@
 		</tr>
 		</c:forEach>
 	</table>
-	<div class="align-center">${page2}</div>
+	<div class="align-center">${page3}</div>
 	</c:if>
 </div>

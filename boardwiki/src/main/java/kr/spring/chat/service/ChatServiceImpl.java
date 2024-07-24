@@ -130,6 +130,16 @@ public class ChatServiceImpl implements ChatService{
 		return chatMapper.selectChatRoomBychaRnum(chaR_num);
 	}
 
+	@Override
+	public void updateChatRoomStatus1Bytea_num(long tea_num) {
+		chatMapper.updateChatRoomStatus1Bytea_num(tea_num);
+	}
+
+	@Override
+	public void updateChatRoomStatus0Bytea_num(long tea_num) {
+		chatMapper.updateChatRoomStatus0Bytea_num(tea_num);
+	}
+
 
 
 
