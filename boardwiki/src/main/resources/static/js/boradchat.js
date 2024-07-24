@@ -8,12 +8,12 @@ $(document).ready(function() {
     const socket = new WebSocket(`ws://localhost:8000/message-ws`);
 
     // Function to append chat messages to the chat container
-    function appendChatMessage(memNum, message) {
-        const messageElement = $('<div></div>').text(`${memNum}: ${message}`);
+    function appendChatMessage(mem_nickName, message) {
+        const messageElement = $('<div></div>').text(`${mem_nickName}: ${message}`);
         chatContainer.append(messageElement);
     }
-
-    // Load initial chat messages
+	
+	// Load initial chat messages
     function loadChatMessages() {
         $.ajax({
             url: `/streaming/messages`,
@@ -22,14 +22,15 @@ $(document).ready(function() {
             success: function(data) {
                 chatContainer.empty();
                 data.forEach(message => {
-                    appendChatMessage(message.mem_num, message.strt_chat);
+                    appendChatMessage(message.mem_nickName, message.strt_chat);
                 });
             },
-            error: function(xhr, status, error) {
+            error: function() {
                 console.error('Failed to load messages:', error);
             }
         });
     }
+    
 
     // WebSocket event listeners
     socket.onopen = function() {
@@ -63,7 +64,9 @@ $(document).ready(function() {
                 data: messageData,
                 success:function(param) {
 					if(param.result=='seusse'){
-                    socket.send(JSON.stringify({strt_chat: message, mem_nickName: param.mem_nickName}));
+						const nickname = param.mem_nickName;
+						alert(nickname);
+                    	socket.send(JSON.stringify({mem_nickName: nickname, strt_chat: message}));
                     }
                     chatInput.val('');
                 },

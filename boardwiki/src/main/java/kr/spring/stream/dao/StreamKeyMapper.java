@@ -24,7 +24,7 @@ public interface StreamKeyMapper {
     @Select("SELECT * FROM streaming WHERE str_num = #{str_num}")
     StreamKeyVO selectstream(Long str_key);
 
-    @Insert("INSERT INTO streaming (str_num,mem_num, str_key) VALUES (streaming_seq.nextval,#{mem_num}, #{str_key}, #{mem_nickName})")
+    @Insert("INSERT INTO streaming (str_num,mem_num, str_key) VALUES (streaming_seq.nextval,#{mem_num}, #{str_key})")
     void save(StreamKeyVO str_Key);
 
 }

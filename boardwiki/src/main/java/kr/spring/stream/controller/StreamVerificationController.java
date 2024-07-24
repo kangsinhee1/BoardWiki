@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.stream.service.BroadcastService;
 import kr.spring.stream.service.StreamCreatingService;
@@ -33,6 +34,9 @@ public class StreamVerificationController {
 
     @Autowired
     private StreamCreatingService streamCreatingService;
+    
+    @Autowired
+    private MemberService memberService;
 
     @GetMapping("/streaming/verify")
     public String verifyStreamKeyGet(@RequestParam String name) {
@@ -78,7 +82,14 @@ public class StreamVerificationController {
     public List<StreamCreatingVO> getChatMessages(@RequestParam("str_num") long str_num) {
         StreamCreatingVO vo = new StreamCreatingVO();
         vo = streamCreatingService.selectCreating(str_num);
-        return streamCreatingService.selectMessageLive(vo);
+        Long mem_num = 0l;
+        List<StreamCreatingVO> list = streamCreatingService.selectMessageLive(vo);
+        for(int i=0; i<list.size();i++) {
+        	mem_num = list.get(i).getMem_num();
+        	MemberVO member = memberService.selectMember(mem_num);
+        	list.get(i).setMem_nickName(member.getMem_nickName());
+        }
+        return list;
     }
 
     @PostMapping("/streaming/send")
@@ -91,6 +102,7 @@ public class StreamVerificationController {
         vos.setStrt_chat(strt_chat);
         vos.setStrc_num(vos2.getStrc_num());
         streamCreatingService.insertMessage(vos);
+        log.debug("<<닉네임>>"+user.getMem_nickName());
         map.put("mem_nickName", user.getMem_nickName());
         map.put("result", "seusse");
         return map;
