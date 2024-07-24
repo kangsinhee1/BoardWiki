@@ -56,6 +56,7 @@
                     <c:if test="${member.mem_provider == null }">
                         <a href="${pageContext.request.contextPath}/member/changePassword" class="btn btn-secondary">비밀번호 변경</a>
                     </c:if>
+                    <a href="${pageContext.request.contextPath}/member/memberDelete" class="btn btn-primary">회원탈퇴</a>
                 </div>
             </div>
         </div>

@@ -120,4 +120,10 @@ public class MemberServiceImpl implements MemberService {
 	public MemberVO findEmail(String mem_name, String mem_phone) {
 		return memberMapper.findEmail(mem_name, mem_phone);
 	}
+
+	@Override
+	public void deleteMember(long mem_num) {
+		memberMapper.deleteMember_detail(mem_num);
+		memberMapper.deleteMember(mem_num);
+	}
 }

@@ -769,4 +769,55 @@ public class MemberController {
 
 		return "common/resultAlert";
 	}
+	
+	
+	/*==============================
+	 * 	   		회원 탈퇴
+	 *==============================*/
+	//비밀번호 변경 폼
+	@GetMapping("/member/memberDelete")
+	public String formMemberDelete() {
+		return "memberDelete";
+	}
+	
+	//회원탈퇴 폼에서 전송된 데이터 처리
+		@PostMapping("/member/memberDelete")
+		public String submitMemberDelete(
+				@Valid MemberVO memberVO,
+				BindingResult result,
+				HttpSession session,
+				Model model,
+				HttpServletRequest request) {
+			log.debug("<<회원 탈퇴 처리>> : " + memberVO);
+
+			//유효성 체크 결과 오류가 있으면 폼 호출
+			if(result.hasFieldErrors("now_passwd")
+					|| result.hasFieldErrors("passwd")
+					|| result.hasFieldErrors("captcha_chars")) {
+				return formMemberDelete();
+			}
+			MemberVO user = (MemberVO)session.getAttribute("user");
+			memberVO.setMem_num(user.getMem_num());
+
+			MemberVO db_member = memberService.selectMember(
+					memberVO.getMem_num());
+			//폼에서 전송한 현재 비밀번호와 DB에서 읽어온 비밀번호 일치 여부 체크
+			if (!passwordEncoder.matches(memberVO.getMem_passwd(), db_member.getMem_passwd())) {
+				result.rejectValue("mem_passwd", "invalidPassword");
+				return formMemberDelete();
+			}
+
+			//회원탈퇴
+			memberService.deleteMember(memberVO.getMem_num());
+
+			//View에 표시할 메시지
+			model.addAttribute("message",
+					"탈퇴 완료 감사합니다.");
+			model.addAttribute("url",
+					request.getContextPath() + "/main/main");
+			
+			session.invalidate();
+
+			return "common/resultAlert";
+		}
 }

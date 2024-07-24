@@ -22,4 +22,7 @@ public interface MemberService {
 
 	//아이디 찾기
 	public MemberVO findEmail(String mem_email, String mem_phone);
+	
+	//회원탈퇴
+	public void deleteMember(long mem_num);
 }
