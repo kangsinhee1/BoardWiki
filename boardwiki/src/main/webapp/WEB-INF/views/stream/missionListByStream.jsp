@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/boradchat.js"></script>
 
 <section class="blog-page">
 <div class="container">
@@ -29,51 +30,12 @@
         <div class="align-center">${page}</div>
     </div>
     </c:if>
-    <script>
-    function deleteMission(mis_num, mis_point, mem_num) {
-        $.ajax({
-            url: '/mission/delete',
-            data: {
-                mis_num: mis_num,
-                mis_point:mis_point,
-                mem_num:mem_num
-            },
-            dataType: 'json',
-            type: 'post',
-            success: function(response){
-                alert(response);
-                location.reload();
-            },
-            error: function(){
-                alert('에러발생');
-            }
-        });
-    }
-    
-        function updateMissionStatus(mis_num, mis_status, min_point, mem_num) {
-            $.ajax({
-                url: '/mission/updateStatus',
-                data: {
-                    mis_num: mis_num,
-                    mis_status: mis_status,
-                    mis_point:mis_point,
-                    mem_num:mem_num
-                },
-                dataType: 'json',
-                type: 'post',
-                success: function(response){
-                    alert(response);
-                    location.reload();
-                },
-                error: function(){
-                    alert('에러발생');
-                }
-            });
-        }
-    </script>
     </div>
     </div>
     </div>
     </div>
     </section>
+    <script>
+let strNum = ${param.str_num};
+</script>
     

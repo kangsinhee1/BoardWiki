@@ -13,7 +13,7 @@
 	<div class="page-info">
 		<h2>대회 신청</h2>
 		<div class="site-breadcrumb">
-			<a href="">Home</a> / <span>대회신청</span> /
+			<a href="/main/main">Home</a> / <span>대회신청</span> /
 		</div>
 	</div>
 </section>
@@ -49,7 +49,7 @@
                             </script>
 						</c:if>
 					</div>
-					<div class="detail-content">
+					<div class="detail-content font-white">
 						${contest.con_content}<br>
 					</div>
 					<h4>참가 현황: ${conManCount} / ${contest.con_maxman}</h4>

@@ -51,7 +51,7 @@
             </tr>
         </c:forEach>
     </table>
-    <div class="align-center">${page}</div>
+    <div class="blog-pagination">${page}</div>
 </c:if>
 <script>
 $(document).ready(function() {

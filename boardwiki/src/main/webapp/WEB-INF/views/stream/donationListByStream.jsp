@@ -32,6 +32,9 @@
         </div>
         <div class="align-center">${page}</div>
     </c:if>
+    <script>
+let strNum = ${param.str_num};
+</script>
     </div>
     </div>
     </div>

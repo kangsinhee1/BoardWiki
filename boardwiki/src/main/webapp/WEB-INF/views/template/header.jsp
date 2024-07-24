@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!-- <link rel="stylesheet" href="/css/main.css" type="text/css"/> -->
+<link rel="stylesheet" href="/css/main.css" type="text/css"/>
 
 <!-- Header section -->
 <meta charset="UTF-8">
@@ -37,7 +37,7 @@
             <nav class="top-nav-area w-100">
             	<c:if test="${empty user }">
                 <div class="user-panel">
-                    <a href="${pageContext.request.contextPath}/member/login">Login</a> / <a href="${pageContext.request.contextPath}/member/memberRegisterChoice">Register</a>
+                    <a href="${pageContext.request.contextPath}/member/login">Login</a> / <a href="${pageContext.request.contextPath}/member/memberRegister">Register</a>
                 </div>
                 </c:if>
             	<c:if test="${!empty user }">

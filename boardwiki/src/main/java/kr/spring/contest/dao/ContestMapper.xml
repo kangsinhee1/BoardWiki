@@ -3,149 +3,189 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.spring.contest.dao.ContestMapper">
-	<!-- 글쓰기 -->
-	<insert id="insertContest" parameterType="contestVO">
-		INSERT INTO contest(
-		con_num,
-		con_name,
-		con_content,
-		con_zipcode,
-		con_address1,
-		con_address2,
-		con_sdate,
-		con_edate,
-		con_maxman,
-		con_status,
-		mem_num)
-		VALUES (
-		contest_seq.nextval,
-		#{con_name},
-		#{con_content},
-		#{con_zipcode},
-		#{con_address1},
-		#{con_address2},
-		#{con_sdate},
-		#{con_edate},
-		#{con_maxman},
-		#{con_status},
-		#{mem_num})
-	</insert>
-	<sql id="contestSearch">
-		<where>
-			<if test="keyword !=null and keyword != ''">
-				<if test="keyfield == 1">
-					con_name LIKE '%' || #{keyword} || '%'
-				</if>
-				<if test="keyfield == 2">
-					con_address1 LIKE '%' || #{keyword} || '%'
-				</if>
-			</if>
-		</where>
-	</sql>
-	<sql id="contestOrder">
-		<if test="order == 1">
-			ORDER BY con_num DESC
-		</if>
-		<if test="order == 2">
-			ORDER BY con_hit DESC
-		</if>
-		<if test="order == 3">
-			WHERE con_status = 0
-		</if>
-		<if test="order == 4">
-			WHERE con_status = 1
-		</if>
-	</sql>
-	<select id="selectRowCount" parameterType="map"
-		resultType="integer">
-		SELECT COUNT(*) FROM contest
-	</select>
-	<!-- 게시판 전체 목록/검색 목록 -->
-	<select id="selectContestList" parameterType="map"
-		resultType="contestVO">
-		SELECT
-		*
-		FROM (SELECT
-		a.*,
-		rownum rnum
-		FROM (SELECT
-		con_num,
-		                 <![CDATA[
-		                 REPLACE(REPLACE(con_name,'<','&lt;'),'>','&gt;') con_name,
-		                 ]]>
-		con_hit,
-		con_status,
-		con_rdate,
-		con_man,
-		con_address1,
-		mem_num,
-		mem_email,
-		mem_nickname
-		FROM contest
-		JOIN
-		member USING(mem_num)
-		LEFT OUTER JOIN
-		member_detail
-		USING(mem_num)
-		WHERE con_status = 0 OR con_status = 1 OR con_status = 2
-		<include refid="contestSearch"></include>
-		<include refid="contestOrder"></include>
-		)a)
-		<![CDATA[
-		WHERE rnum >= #{start} AND rnum <= #{end}
-		]]>
-	</select>
+    <!-- 글쓰기 -->
+    <insert id="insertContest" parameterType="contestVO">
+        INSERT INTO contest(
+            con_num,
+            con_name,
+            con_content,
+            con_zipcode,
+            con_address1,
+            con_address2,
+            con_sdate,
+            con_edate,
+            con_maxman,
+            con_status,
+            mem_num)
+        VALUES (
+            contest_seq.nextval,
+            #{con_name},
+            #{con_content},
+            #{con_zipcode},
+            #{con_address1},
+            #{con_address2},
+            #{con_sdate},
+            #{con_edate},
+            #{con_maxman},
+            #{con_status},
+            #{mem_num})
+    </insert>
 
-	<!-- 컨테스트 신청 -->
+    <sql id="contestSearch">
+        <where>
+        	con_status != 3
+            <if test="keyword != null and keyword != ''">
+                <choose>
+                    <when test="keyfield == 1">
+                        AND con_name LIKE '%' || #{keyword} || '%'
+                    </when>
+                    <when test="keyfield == 2">
+                        AND con_address1 LIKE '%' || #{keyword} || '%'
+                    </when>
+                </choose>
+            </if>
+        </where>
+    </sql>
+
+    <sql id="contestOrder">
+        <choose>
+            <when test="order == 1">
+                ORDER BY con_num DESC
+            </when>
+            <when test="order == 2">
+                ORDER BY con_hit DESC
+            </when>
+            <when test="order == 3">
+            </when>
+            <when test="order == 4">
+            </when>
+        </choose>
+    </sql>
+
+    <select id="selectRowCount" parameterType="map" resultType="integer">
+        SELECT COUNT(*) FROM contest
+    </select>
+
+    <!-- 게시판 전체 목록/검색 목록 -->
+    <select id="selectContestList" parameterType="map" resultType="contestVO">
+        SELECT *
+        FROM (
+            SELECT a.*, rownum rnum
+            FROM (
+                SELECT
+                    con_num,
+                    <![CDATA[
+                    REPLACE(REPLACE(con_name,'<','&lt;'),'>','&gt;') con_name,
+                    ]]>
+                    con_hit,
+                    con_status,
+                    con_rdate,
+                    con_man,
+                    con_address1,
+                    mem_num,
+                    mem_email,
+                    mem_nickname
+                FROM contest
+                JOIN member USING(mem_num)
+                LEFT OUTER JOIN member_detail USING(mem_num)
+                <include refid="contestSearch" />
+                <include refid="contestOrder" />
+            ) a
+        )
+        <![CDATA[
+        WHERE rnum >= #{start} AND rnum <= #{end}
+        ]]>
+    </select>
+
+    <select id="selectContestListForStatusOrder" parameterType="map" resultType="contestVO">
+        SELECT *
+        FROM (
+            SELECT a.*, rownum rnum
+            FROM (
+                SELECT
+                    con_num,
+                    <![CDATA[
+                    REPLACE(REPLACE(con_name,'<','&lt;'),'>','&gt;') con_name,
+                    ]]>
+                    con_hit,
+                    con_status,
+                    con_rdate,
+                    con_man,
+                    con_address1,
+                    mem_num,
+                    mem_email,
+                    mem_nickname
+                FROM contest
+                JOIN member USING(mem_num)
+                LEFT OUTER JOIN member_detail USING(mem_num)
+                <include refid="contestSearch" />
+                <!-- Apply status filter based on order parameter -->
+                <choose>
+                    <when test="order == 3">
+                        AND con_status = 0
+                    </when>
+                    <when test="order == 4">
+                        AND con_status = 2
+                    </when>
+                    <!-- No additional WHERE clause for other orders -->
+                </choose>
+                <include refid="contestOrder" />
+            ) a
+        )
+        <![CDATA[
+        WHERE rnum >= #{start} AND rnum <= #{end}
+        ]]>
+    </select>
+
+    <!-- 컨테스트 신청 -->
     <insert id="applyForContest" parameterType="contestApplyVO">
-        INSERT INTO
-        contest_apply (
+        INSERT INTO contest_apply (
             conA_num,
             con_num,
             mem_num
-        ) 
+        )
         VALUES (
             contest_apply_seq.nextval,
             #{con_num},
             #{mem_num}
         )
-    </insert>	
-	
+    </insert>
+
     <!-- 컨테스트 참가자 수 업데이트 -->
     <update id="updateContestManCount" parameterType="contestApplyVO">
-       UPDATE contest
-       SET con_man = (SELECT COUNT(*) FROM contest_apply WHERE con_num = #{con_num})
-       WHERE con_num = #{con_num}
+        UPDATE contest
+        SET con_man = (SELECT COUNT(*) FROM contest_apply WHERE con_num = #{con_num})
+        WHERE con_num = #{con_num}
     </update>
-    
-     <!-- 컨테스트 신청 취소 -->
+
+    <!-- 컨테스트 신청 취소 -->
     <delete id="deleteContestApply" parameterType="contestApplyVO">
-        DELETE FROM contest_apply 
+        DELETE FROM contest_apply
         WHERE con_num = #{con_num} AND mem_num = #{mem_num}
     </delete>
+
     <!-- 전체 대회 목록 보기 -->
     <select id="selectAllcontest" parameterType="map" resultType="contestVO">
-	SELECT
-	 	   *
-	 	FROM (SELECT
-	 			a.*,
-	 			rownum rnum
-	 		   FROM (SELECT
-	 		   			*
-	 		   		 FROM contest
-	 		   		 )a)
-		<![CDATA[
-		WHERE rnum >= #{start} AND rnum <= #{end}
-		]]>
-	</select>
-	
-	<!-- 대회 참가자 리스트 -->
-	<select id="selectContestAdminApplyList" parameterType="map" resultType="contestVO">
-		SELECT * 
-		FROM member 
-		JOIN contest_apply USING(mem_num)
-		LEFT OUTER JOIN member_detail USING(mem_num)
-		JOIN contest ON contest_apply.con_num = contest.con_num
-		WHERE contest.con_num = #{con_num}
-	</select>
+        SELECT *
+        FROM (
+            SELECT a.*, rownum rnum
+            FROM (
+                SELECT *
+                FROM contest
+            ) a
+        )
+        <![CDATA[
+        WHERE rnum >= #{start} AND rnum <= #{end}
+        ]]>
+    </select>
+
+    <!-- 대회 참가자 리스트 -->
+    <select id="selectContestAdminApplyList" parameterType="map" resultType="contestVO">
+        SELECT *
+        FROM member
+        JOIN contest_apply USING(mem_num)
+        LEFT OUTER JOIN member_detail USING(mem_num)
+        JOIN contest ON contest_apply.con_num = contest.con_num
+        WHERE contest.con_num = #{con_num}
+    </select>
 </mapper>

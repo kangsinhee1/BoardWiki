@@ -93,4 +93,9 @@ public class ContestServiceImpl implements ContestService{
 		return contestmapper.selectContestAdminApplyList(map);
 	}
 
+	@Override
+	public List<ContestVO> selectContestListForStatusOrder(Map<String, Object> map) {
+		return contestmapper.selectContestListForStatusOrder(map);
+	}
+
 }

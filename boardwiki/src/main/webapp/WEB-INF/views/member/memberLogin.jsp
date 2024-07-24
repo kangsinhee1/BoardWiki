@@ -43,10 +43,10 @@
 		<div class="align-center">
 			<form:button class="login-btn">로그인</form:button>
 		</div>
-		<p class="align-center">
-			<a onclick="location.href='sendPassword'">회원가입 | </a>
+		<p class="align-center font-white">
+			<a onclick="location.href='memberRegister'">간편회원가입 | </a>
 			<a onclick="location.href='memberFindEmail'">이메일 찾기 | </a>
-			<a onclick="location.href='sendResetCode'">비밀번호찾기</a>
+			<a onclick="location.href='sendResetCode'">비밀번호 찾기</a>
 		</p>
 			<hr>
 			<div class="button_group">
@@ -68,7 +68,6 @@
 				</div>
 			</div>
 	</form:form>
-	
 </div>
 </div>
 </div>

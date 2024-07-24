@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+<script src="${pageContext.request.contextPath}/js/boradchat.js"></script>
 
 <section class="blog-page">
 <div class="container">
@@ -28,55 +28,11 @@ ${logout}<br>
     </form>
     <button onclick="window.close()">닫기</button>
     </c:if>
-    <script>
-        $(document).ready(function() {
-            $('#missionForm').submit(function(event){
-                event.preventDefault(); // Prevent default form submission
-                
-                const missionContent = $('#mission_content').val();
-                const missionPoint = $('#mission_point').val();
-                const strNum = $('#str_num').val();
-                const memNum = $('#mem_num').val();
-                const mem_nickName = $('#mem_nickName').val();
-
-                if (!missionContent || !missionPoint) {
-                    alert('내용과 포인트를 입력해주세요!');
-                    return;
-                }
-
-                $.ajax({
-                    url: '/mission/add',
-                    data: {
-                        str_num: strNum,
-                        mis_content: missionContent,
-                        mis_point: missionPoint
-                    },
-                    dataType: 'json',
-                    type: 'get',
-                    success: function(param){
-                    	if(param.result =='logout'){
-                    		alert('로그인 필요');
-                    		window.close();
-                    	}else if(param.result =='success'){
-                    		alert('미션을 전송했습니다.');
-                            window.close();
-                    	}else if(param.result == 'rowpoint'){
-                        	alert('포인트가 부족합니다.');
-                        }else{
-                    		alert('오류발생');
-                    	}
-                    },
-                    error: function(){
-                        alert('에러발생');
-                    }
-                });
-            });
-        });
-    </script>
     </div>
     </div>
     </div>
     </div>
     </section>
-</body>
-</html>
+    <script>
+let strNum = ${param.str_num};
+</script>

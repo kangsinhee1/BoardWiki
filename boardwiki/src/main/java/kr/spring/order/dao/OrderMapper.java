@@ -2,6 +2,7 @@ package kr.spring.order.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -18,10 +19,14 @@ public interface OrderMapper {
 	public OrderVO selectOrderUser(Long mem_num);
 	@Select("SELECT * FROM order WHERE mem_num=#{mem_num}")
 	public List<OrderVO> selectOrderList(Long mem_num);
-	@Select("SELECT * FROM cart WHERE mem_num=#{mem_num}")
+	@Select("SELECT * FROM cart WHERE mem_num=#{mem_num} cart_check=0")
 	public List<CartVO> selectCartList(Long mem_num);
-	@Select("SELECT item_num FROM cart WHERE mem_num=#{mem_num}")
+	@Select("SELECT item_num FROM cart WHERE mem_num=#{mem_num} AND cart_check=0")
 	public List<CartVO> getnumList(Long mem_num);
-	@Select("SELECT cart_price FROM cart WHERE mem_num=#{mem_num}")
+	@Select("SELECT cart_price FROM cart WHERE mem_num=#{mem_num} AND cart_check=0")
 	public List<CartVO> getpriceList(Long mem_num);
+	
+	public List<OrderVO> insertOrderList(OrderVO order);
+	
+	public List<OrderVO> InsertOrderList(Long mem_num);
 }

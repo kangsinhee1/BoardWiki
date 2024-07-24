@@ -108,9 +108,9 @@ div#main_menu ul li{
 	padding:10px 10px 30px 10px;
 } */
 form ul li label{
-	width:110px;
+/* 	width:110px; */
 	display:inline-block;
-	color:white;
+	color:black;
 }
 ul {
 	list-style:none;
