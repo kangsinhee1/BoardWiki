@@ -128,5 +128,15 @@ public class BoardServiceImpl implements BoardService{
 		boardMapper.updateBoardAuth(boa_num, boa_auth);
 	}
 
+	@Override
+	public List<BoardVO> selectMyListForClient(Map<String, Object> map) {
+		return boardMapper.selectMyListForClient(map);
+	}
+
+	@Override
+	public Integer selectClientRowCount(Map<String, Object> map) {
+		return boardMapper.selectClientRowCount(map);
+	}
+
 
 }
