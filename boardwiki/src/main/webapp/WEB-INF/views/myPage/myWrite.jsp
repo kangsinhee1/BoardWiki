@@ -8,7 +8,6 @@
 <h3>내가 쓴 글</h3>
 <br>
 <div class="page-main">
-
 	<c:if test="${count==0}">
 		<div class="result-display">표시할 게시물이 없습니다.</div>
 	</c:if>

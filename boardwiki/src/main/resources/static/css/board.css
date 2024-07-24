@@ -269,6 +269,9 @@ p.font-white{
 }
 #order{
 	color:black;
+	font-size:15px;
+	width:70px;
+	
 }
 .align-center{
 	text-align:center;	
@@ -276,3 +279,4 @@ p.font-white{
 div.subitem p {
  color:white;
 }
+

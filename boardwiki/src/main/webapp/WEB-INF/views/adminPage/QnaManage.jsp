@@ -11,7 +11,9 @@
 	<div class="result-display">표시할 게시물이 없습니다.</div>
 </c:if>
 <c:if test="${count > 0}">
-	<table class="striped-table">
+	<div class="chart-table">
+	<table>
+		<thead>
 		<tr>
 			<th>번호</th>
 			<th width="300">제목</th>
@@ -21,6 +23,7 @@
 			<th>좋아요수</th>
 			<th>답변여부</th>
 		</tr>
+		</thead>
 		<c:forEach var="board" items="${list}">
 		<tr>
 			<td class="align-center">${board.boa_num}</td>
@@ -46,9 +49,9 @@
 						type : 'get',
 						success : function(param) {
 							if (param.result == 'true') {
-								$('#answer-${board.boa_num}').text('답변 완료').addClass('answered');
+								$('#answer-${board.boa_num}').text('답변 완료').css('color', 'green');;
 							} else if (param.result == 'false') {
-								$('#answer-${board.boa_num}').text('미답변').addClass('unanswered');
+								$('#answer-${board.boa_num}').text('미답변').css('color', 'red');;
 							} else {
 								alert('오류발생');
 							}
@@ -63,7 +66,10 @@
 		</script>
 		</c:forEach>
 	</table>
-	<div class="align-center">${page}</div>
+	</div>
+	<div class="align-center">
+	<div class="blog-pagination">${page}</div>
+	</div>
 </c:if>
 </div>
 </div>

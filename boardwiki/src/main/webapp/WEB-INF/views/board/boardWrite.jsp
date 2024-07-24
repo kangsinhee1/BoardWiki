@@ -36,7 +36,7 @@
 				<form:errors path="boa_category" cssClass="error-color"/>                             
 			</li>
 			<li>
-				<form:input path="boa_title" placeholder="제목을 입력하세요"/>
+				<form:input path="boa_title" placeholder="제목을 입력하세요" style="color:black;"/>
 				<form:errors path="boa_title" cssClass="error-color"/>
 			</li>
 			<li>
