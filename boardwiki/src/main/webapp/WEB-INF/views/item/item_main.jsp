@@ -8,7 +8,7 @@
 			<div class="game-main">
 				<c:if test="${count > 0}">
 
-					<div class="col-xl-12 col-lg-12 col-md-12">
+					<div class="col-xl-12 col-lg-12 col-md-12">  
 						<div class="row">
 							<c:forEach var="item" items="${list}" varStatus="status">
 								<div class="col-lg-2 col-md-4">

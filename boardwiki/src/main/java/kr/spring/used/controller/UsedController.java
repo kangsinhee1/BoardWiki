@@ -41,7 +41,7 @@ public class UsedController {
 	public UsedItemVO initCommand() {
 		return new UsedItemVO();
 	}
-	/*=====================
+	/*=====================    
 	 * 중고게시판 목록
 	 *=====================*/
 	@GetMapping("/*/usedList")

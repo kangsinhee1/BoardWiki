@@ -41,7 +41,7 @@
 					</div>
 
 				
-					
+					"src/main/java/kr/spring/used/controller/UsedController.java"
 					<h4>장르</h4>
 					<p>${item.item_genre}</p>
 					<h4>Description</h4>

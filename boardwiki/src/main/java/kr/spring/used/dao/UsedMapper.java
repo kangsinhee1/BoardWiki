@@ -15,7 +15,7 @@ public interface UsedMapper {
 	//중고글 갯수
 	public Integer getUsedRowCount(Map<String,Object>map);
 	//중고글 개수(게임상세 링크)
-	public Integer getUsedRowCountByItemNum(Map<String,Object>map);
+	public Integer getUsedRowCountByItemNum(Map<String,Object>map);  
 	//중고글 갯수(회원전용)
 	public Integer getUsedRowCountForClient(Map<String,Object>map);
 	

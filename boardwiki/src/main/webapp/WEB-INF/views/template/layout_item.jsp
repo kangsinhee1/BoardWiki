@@ -20,7 +20,7 @@
 <div id="main">
 
 	<div id="main_header">
-		<tiles:insertAttribute name="header"/>
+		<tiles:insertAttribute name="header"/>  
 	</div>
 	<!-- <hr size="1" noshade="noshade" width="100%"> -->
 	<div id="down-header">
