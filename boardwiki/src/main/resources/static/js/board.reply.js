@@ -61,7 +61,7 @@ $(function(){
 					output +='        </li>';
 					output +='     </ul>';
 					output +='     <div class="sub-item">';
-					output += '    <p>' + item.boaR_content.replace(/\r\n/g,'<br>') + '</p>';
+					output += '    <p class="font-white">' + item.boaR_content.replace(/\r\n/g,'<br>') + '</p>';
 					
 					
 					if(param.user_num===item.mem_num){

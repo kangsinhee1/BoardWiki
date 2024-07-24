@@ -174,16 +174,6 @@ div.respitem{
 	margin:5px 0 0 130px;
 }
 
-div#mre_second input{
-	padding:4px 20px;
-	border-radius:20px;
-	color:#6e6e6e;
-	border: 1px solid #f0f2f1;
-	background-color:#f0f2f1;
-	font-weight:bold;
-	cursor:pointer;
-}
-
 
 /*댓글달기 크기 고정*/
 #boaR_content {
@@ -252,9 +242,7 @@ div#mre_second input{
 	font-size:30px;
 }
 
-.page-main div{
-	color:white;
-}
+
 
 .page-main ul li{
 	color:white;
@@ -270,11 +258,21 @@ select#keyfield{
 #keyfield option {
     color: black;
 }
-
+.font-white{
+	color:white;
+}
+div.font-white{
+	color:white;
+}
+p.font-white{
+	color:white;
+}
 #order{
 	color:black;
 }
 .align-center{
 	text-align:center;	
 }
-
+div.subitem p {
+ color:white;
+}
