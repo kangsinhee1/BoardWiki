@@ -14,7 +14,6 @@ form#team_register, form#team_modify{
 }
 form#team_register ul, form#team_modify ul{
 	padding:20px;
-	color:white;
 }
 form#team_register input[type="text"], 
                 form#team_modify input[type="text"]{

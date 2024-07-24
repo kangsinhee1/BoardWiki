@@ -46,7 +46,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 
-
 <section class="page-top-section set-bg" data-setbg="/img/page-top-bg/4.jpg" style="background-image: url('/img/page-top-bg/4.jpg');"></section>
 <div class="game-main">
 <input type="hidden" id="str_num" name="str_num" value="${param.str_num}">
@@ -117,8 +116,7 @@
     function openMissionListByMember() {
         window.open("/mission/userlist?str_num=" + ${param.str_num}, "missionListByMember", "width=600,height=400");
     }
-    
-    let str_num = ${param.str_num};
+    let strNum = ${param.str_num};
 </script>
 
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>

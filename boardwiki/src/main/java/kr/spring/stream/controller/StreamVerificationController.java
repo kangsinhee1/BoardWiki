@@ -104,7 +104,7 @@ public class StreamVerificationController {
         streamCreatingService.insertMessage(vos);
         log.debug("<<닉네임>>"+user.getMem_nickName());
         map.put("mem_nickName", user.getMem_nickName());
-        map.put("result", "seusse");
+        map.put("result", "success");
         return map;
     }
 }

@@ -44,7 +44,7 @@
 	<div class="detail-content">
 		${board.boa_content}
 	</div>
-	<div>
+	<div class="font-white">
 		<%-- 좋아요 --%>
 		<img id="output_fav" data-num="${board.boa_num}"
 		    src="${pageContext.request.contextPath}/images/heart2.png">

@@ -25,4 +25,7 @@ public interface MemberService {
 	
 	//회원탈퇴
 	public void deleteMember(long mem_num);
+	
+	//관리자 멤버 등급 변경
+	public boolean updateMemberAuth(long mem_num, Integer mem_auth);
 }

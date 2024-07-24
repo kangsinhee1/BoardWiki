@@ -16,4 +16,5 @@ public class DonationVO {
     private Date don_date;
     private Long str_num;
     private Long mem_num;
+    private String mem_nickName;
 }

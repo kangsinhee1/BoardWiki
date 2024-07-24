@@ -126,4 +126,11 @@ public class MemberServiceImpl implements MemberService {
 		memberMapper.deleteMember_detail(mem_num);
 		memberMapper.deleteMember(mem_num);
 	}
+
+	@Override
+	public  boolean updateMemberAuth(long mem_num, Integer mem_auth) {
+		return memberMapper.updateMemberAuth(mem_num, mem_auth);
+	}
+	
+	
 }

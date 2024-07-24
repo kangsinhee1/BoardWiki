@@ -16,6 +16,7 @@ ${logout}<br>
         <label for="mission_point">포인트:</label>
         <input type="number" id="mission_point" name="mission_point" required><br>
         <input type="hidden" id="str_num" name="str_num" value="${param.str_num}">
+        <input type="hidden" id="mem_nickName" name="mem_nickName" value="${user.mem_nickName}">
         <button type="submit">미션 보내기</button>
     </form>
     <button onclick="window.close()">닫기</button>
@@ -29,8 +30,9 @@ ${logout}<br>
                 const missionPoint = $('#mission_point').val();
                 const strNum = $('#str_num').val();
                 const memNum = $('#mem_num').val();
+                const mem_nickName = $('#mem_nickName').val();
 
-                if (!missionContent || !missionPoint || !strNum) {
+                if (!missionContent || !missionPoint) {
                     alert('내용과 포인트를 입력해주세요!');
                     return;
                 }
@@ -49,7 +51,7 @@ ${logout}<br>
                     		alert('로그인 필요');
                     		window.close();
                     	}else if(param.result =='success'){
-                    		alert('미션 성공');
+                    		alert('미션을 전송했습니다.');
                             window.close();
                     	}else if(param.result == 'rowpoint'){
                         	alert('포인트가 부족합니다.');

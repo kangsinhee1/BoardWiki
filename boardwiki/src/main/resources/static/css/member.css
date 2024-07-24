@@ -71,6 +71,7 @@ input[type="password"]::placeholder {
     width: 350px;
     height: 55px;
     padding: 0.55rem 0.55rem;
+    
 }
 
 .floating-label > label {
