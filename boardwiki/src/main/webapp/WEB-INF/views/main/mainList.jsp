@@ -57,7 +57,7 @@
 
 <section class="games-section">
 	<div class="container">
-		<h2>게시글</h2>
+		<h2 id="section01">게시글</h2>
 			<b class="hr"></b>
 		<div>
 			<c:if test="${count2==0}">

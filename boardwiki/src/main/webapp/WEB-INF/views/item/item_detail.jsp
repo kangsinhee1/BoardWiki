@@ -27,7 +27,7 @@
 					<div class="gs-meta">boardgameGeek  /  in <a href="https://boardgamegeek.com/browse/boardgame">BGG</a></div>
 						<h2 class="gs-title">${item.item_name}</h2>
 					<div class="game-single-preview">
-						<img src="${item.item_image}" alt="">
+						<img src="${item.item_image}"class ="detail_img" alt="">
 					</div>
 					<div class="geme-social-share pt-5 d-flex">
 						<p>
