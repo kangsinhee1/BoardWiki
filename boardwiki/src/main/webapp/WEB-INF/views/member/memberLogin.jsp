@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <!-- 회원로그인 시작 -->
 
 		<!-- Page top section -->
@@ -22,6 +21,7 @@
 		<div class="container">
 		<div class="align-center">
 <div class="page-main">
+	<h2 class="register-h2">로그인</h2>
 	
 
 	<form:form action="login" id="member_login" modelAttribute="memberVO">

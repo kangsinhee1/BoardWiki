@@ -52,7 +52,7 @@ $(function(){
 	
 	let checknickName = 0;
 	
-	//이메일 중복 체크
+	//닉네임 중복 체크
 	$('#confirmNickname').click(function(){
 		if($('#mem_nickName').val().trim()==''){
 			$('#message_nickName').css('color','red').text('닉네임을 입력하세요');
@@ -64,7 +64,7 @@ $(function(){
 		
 		//서버와 통신
 		$.ajax({
-			url:'confirmNickname',
+			url:'/member/confirmNickname',
 			type:'get',
 			data:{mem_nickName:$('#mem_nickName').val()},
 			dataType:'json',

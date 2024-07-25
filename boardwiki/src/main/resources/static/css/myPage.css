@@ -39,3 +39,6 @@ h5 {
 .align-center{
 	text-align:center;	
 }
+.card-body {
+	background: #321854;
+}

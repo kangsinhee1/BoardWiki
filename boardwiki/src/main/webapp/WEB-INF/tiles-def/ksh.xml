@@ -11,7 +11,7 @@
 		<put-attribute name="body" value="/WEB-INF/views/member/memberLogin.jsp"/>
 	</definition>
 	<definition name="memberNaverRegister" extends="main">
-		<put-attribute name="title" value="네이버회원가입"/>
+		<put-attribute name="title" value="회원가입"/>
 		<put-attribute name="css" value="/WEB-INF/views/member/memberCSS.jsp"/>
 		<put-attribute name="body" value="/WEB-INF/views/member/memberNaverRegister.jsp"/>
 	</definition>
