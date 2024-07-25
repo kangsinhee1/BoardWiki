@@ -87,7 +87,7 @@
                         <div class="cart_box">
                         <p><label class ="quantity_label" for="quantity">수량</label></p>
                         <input type="number" id="quantity" name="item_quantity" value="1" min="1" max="${item.item_stock}" />
-                        <c:if test="${item_stock > 0}">
+                        <c:if test="${item.item_stock > 0}">
                         <button type="button" class="addToCartButton" id="addToCartButton" 
                          onclick="location.href='/cart/cart?mem_num=${member.mem_num}'">장바구니에 담기</button>
                          </c:if>
