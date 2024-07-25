@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="KR">
 <head>
@@ -79,26 +80,22 @@
 					<div class="section-title text-white">
 						<h2>Latest News</h2>
 					</div>
-					<ul class="blog-filter">
-						<li><a href="#">Racing</a></li>
-						<li><a href="#">Shooters</a></li>
-						<li><a href="#">Strategy</a></li>
-						<li><a href="#">Online</a></li>
-					</ul>
 					<!-- Blog item -->
+					<c:forEach var="news" items="${news }">
 					<div class="blog-item">
 						<div class="blog-thumb">
 							<img src="/img/blog/1.jpg" alt="">
 						</div>
 						<div class="blog-text text-box text-white">
-							<div class="top-meta">11.11.18  /  in <a href="">Games</a></div>
-							<h3>The best online game is out now!</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eius-mod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Lorem ipsum dolor sit amet, consecte-tur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.....</p>
-							<a href="#" class="read-more">Read More  <img src="/img/icons/double-arrow.png" alt="#"/></a>
+							<div class="top-meta">${news.boa_rdate }  /  in <a href="">News</a></div>
+							<h3>${news.boa_title }</h3>
+							<p>${news.boa_content }</p>
+							<a href="/board/detail?boa_num=${news.boa_num }" class="read-more">Read More  <img src="/img/icons/double-arrow.png" alt="#"/></a>
 						</div>
 					</div>
+					</c:forEach>
 					<!-- Blog item -->
-					<div class="blog-item">
+					<!-- <div class="blog-item">
 						<div class="blog-thumb">
 							<img src="/img/blog/2.jpg" alt="">
 						</div>
@@ -109,7 +106,7 @@
 							<a href="#" class="read-more">Read More  <img src="/img/icons/double-arrow.png" alt="#"/></a>
 						</div>
 					</div>
-					<!-- Blog item -->
+					Blog item
 					<div class="blog-item">
 						<div class="blog-thumb">
 							<img src="/img/blog/3.jpg" alt="">
@@ -120,49 +117,24 @@
 							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eius-mod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Lorem ipsum dolor sit amet, consecte-tur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.....</p>
 							<a href="#" class="read-more">Read More  <img src="/img/icons/double-arrow.png" alt="#"/></a>
 						</div>
-					</div>
+					</div> -->
 				</div>
 				<div class="col-xl-3 col-lg-4 col-md-5 sidebar">
 					<div id="stickySidebar">
 						<div class="widget-item">
 							<h4 class="widget-title">Trending</h4>
 							<div class="trending-widget">
+							<c:forEach var="item" items="${item }">
 								<div class="tw-item">
 									<div class="tw-thumb">
-										<img src="/img/blog-widget/1.jpg" alt="#">
+										<img src="${item.item_thumbnail }" alt="#">
 									</div>
 									<div class="tw-text">
-										<div class="tw-meta">11.11.18  /  in <a href="">Games</a></div>
-										<h5>The best online game is out now!</h5>
+										<div class="tw-meta">${item.item_year } /  in Games</div>
+										<h5><a href="${pageContext.request.contextPath}/item/item_detail?item_num=${item.item_num}">${item.item_name }</a></h5>
 									</div>
 								</div>
-								<div class="tw-item">
-									<div class="tw-thumb">
-										<img src="/img/blog-widget/2.jpg" alt="#">
-									</div>
-									<div class="tw-text">
-										<div class="tw-meta">11.11.18  /  in <a href="">Games</a></div>
-										<h5>The best online game is out now!</h5>
-									</div>
-								</div>
-								<div class="tw-item">
-									<div class="tw-thumb">
-										<img src="/img/blog-widget/3.jpg" alt="#">
-									</div>
-									<div class="tw-text">
-										<div class="tw-meta">11.11.18  /  in <a href="">Games</a></div>
-										<h5>The best online game is out now!</h5>
-									</div>
-								</div>
-								<div class="tw-item">
-									<div class="tw-thumb">
-										<img src="/img/blog-widget/4.jpg" alt="#">
-									</div>
-									<div class="tw-text">
-										<div class="tw-meta">11.11.18  /  in <a href="">Games</a></div>
-										<h5>The best online game is out now!</h5>
-									</div>
-								</div>
+							</c:forEach>
 							</div>
 						</div>
 						<div class="widget-item">
@@ -193,7 +165,7 @@
 
 	<!-- Intro section -->
 	<section class="intro-video-section set-bg d-flex align-items-end " data-setbg="/img/promo-bg.jpg">
-		<a href="https://www.youtube.com/watch?v=uFsGy5x_fyQ" class="video-play-btn video-popup"><img src="/img/icons/solid-right-arrow.png" alt="#"></a>
+		<a href="https://youtu.be/BnzGtEyyE9Q?si=p69FC5Fu1mwufnxY" class="video-play-btn video-popup"><img src="/img/icons/solid-right-arrow.png" alt="#"></a>
 		<div class="container">
 			<div class="video-text">
 				<h2>Promo video of the game</h2>

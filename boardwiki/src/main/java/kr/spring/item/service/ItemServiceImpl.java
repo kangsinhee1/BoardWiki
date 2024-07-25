@@ -65,4 +65,9 @@ public class ItemServiceImpl implements ItemService{
 	public void updateStock(Long item_num, int item_stock) {
 		itemMapper.updateStock(item_num, item_stock);
 	}
+
+	@Override
+	public List<ItemVO> selectMainItem() {
+		return itemMapper.selectMainItem();
+	}
 }

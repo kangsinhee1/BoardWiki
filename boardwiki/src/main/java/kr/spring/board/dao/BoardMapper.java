@@ -70,8 +70,12 @@ public interface BoardMapper {
 	public void updateBoardAuth(Long boa_num, Long boa_auth);
 	
 	//메인 화면 표시
-	@Select("SELECT *FROM (SELECT * FROM board ORDER BY boa_rdate DESC) WHERE ROWNUM = 1")
+	@Select("SELECT *FROM (SELECT * FROM board ORDER BY boa_rdate DESC) WHERE boa_category=1 AND ROWNUM = 1")
 	public BoardVO selectMainBoard();
+	
+	@Select("SELECT *FROM (SELECT * FROM board ORDER BY boa_rdate DESC) WHERE boa_category=4 AND ROWNUM between 1 and 3")
+	public List<BoardVO> selectMainNews();
+	
 }
 
 

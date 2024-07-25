@@ -143,5 +143,10 @@ public class BoardServiceImpl implements BoardService{
 		return boardMapper.selectMainBoard();
 	}
 
+	@Override
+	public List<BoardVO> selectMainNews() {
+		return boardMapper.selectMainNews();
+	}
+
 
 }

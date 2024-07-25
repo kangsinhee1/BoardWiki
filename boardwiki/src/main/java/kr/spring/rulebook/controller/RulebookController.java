@@ -89,13 +89,14 @@ public class RulebookController {
 	 *  룰북 목록
 	 *====================*/
 	@GetMapping("/rulebook/rulebookList")
-	public String getList(
+	public String getList(Long item_num, 
 				@RequestParam(defaultValue="1") int pageNum,
 				String keyfield,String keyword,Model model) {
 
 
 
 		Map<String,Object> map = new HashMap<>();
+		map.put("item_num",item_num);
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
 

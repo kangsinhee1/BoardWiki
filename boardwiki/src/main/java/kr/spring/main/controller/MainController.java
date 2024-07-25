@@ -58,6 +58,12 @@ public class MainController {
 		UsedItemVO mainUsed = usedService.selectMainUsed();
 		model.addAttribute("used",mainUsed);
 		
+		List<BoardVO> news = boardService.selectMainNews();
+		model.addAttribute("news",news);
+		
+		List<ItemVO> item = itemService.selectMainItem();
+		model.addAttribute("item",item);
+		
 		return "main";//Tiles의 설정명
 	}
 
