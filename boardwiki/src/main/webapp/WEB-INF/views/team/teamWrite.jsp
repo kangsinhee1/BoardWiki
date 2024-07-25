@@ -13,9 +13,9 @@
 <section class="page-top-section set-bg"
 	data-setbg="/img/page-top-bg/4.jpg">
 	<div class="page-info">
-		<h2>모임 신청</h2>
+		<h2>모임</h2>
 		<div class="site-breadcrumb">
-			<a href="">Home</a> / <span>모임 모집</span>
+			<a href="">Home</a> / <span>Team</span>
 		</div>
 	</div>
 </section>

@@ -11,9 +11,9 @@
 <section class="page-top-section set-bg"
 	data-setbg="/img/page-top-bg/4.jpg">
 	<div class="page-info">
-		<h2>대회 신청</h2>
+		<h2>대회</h2>
 		<div class="site-breadcrumb">
-			<a href="/main/main">Home</a> / <span>대회신청</span> /
+			<a href="/contest/contestList">Home</a> / <span>Contest</span>
 		</div>
 	</div>
 </section>
