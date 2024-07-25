@@ -35,9 +35,9 @@ public class ItemAjaxController {
 									  HttpSession session){
 		Map<String,Object> map = new HashMap<>();
 		map.put("keyword", keyword);
-
+		log.debug("<<<<keyword>>>:"+keyword);
 		//총글의 개수
-		int count = itemService.selectRowCount(map);
+		int count = itemService.selectRowCount2(map);
 		PagingUtil page = new PagingUtil(pageNum,count,rowCount);
 		map.put("start", page.getStartRow());
 		map.put("end", page.getEndRow());

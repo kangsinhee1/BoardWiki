@@ -7,7 +7,7 @@
 <script src="${pageContext.request.contextPath}/js/videoAdapter.js"></script>
 <section class="page-top-section set-bg" data-setbg="/img/page-top-bg/4.jpg">
 		<div class="page-info">
-			<h2>${used.use_title}</h2>
+			<h2>중고글 상세</h2>
 			<div class="site-breadcrumb">
 				<a href="">Home</a>  /
 				<span>Contact</span>

@@ -10,7 +10,7 @@
 <script src="${pageContext.request.contextPath}/js/uploadAdapter.js"></script>
 <section class="page-top-section set-bg" data-setbg="/img/page-top-bg/4.jpg">
 		<div class="page-info">
-			<h2>${used.use_title}</h2>
+			<h2>중고글 작성</h2>
 			<div class="site-breadcrumb">
 				<a href="">Home</a>  /
 				<span>Contact</span>
@@ -31,22 +31,25 @@
         <form:hidden path="mem_num" value="${member.mem_num }"/>
         <ul>
             <li>
-             <form:label path="use_title">제목</form:label>
-                <form:input path="use_title" id="use_title"/>
+             	<form:label path="use_title">제목</form:label>
+                <form:input path="use_title"/>
                 <form:errors path="use_title" cssClass="error-color"/>
             </li>
             <li>
-               <form:label  path="item_num" >제품명</form:label>
+               	<form:label  path="item_num" >제품</form:label>
                 <form:input type="hidden" path="item_num" id="item_num"/>
                 <form:errors path="item_num" cssClass="error-color"/>
                 <input type="text" name="item_name" placeholder="제품을 선택해주세요" id="item_name" maxlength="10" readonly="readonly">
                 <input type="button" id="item_numbtn" value="제품선택" class="button2">
                      
             </li>
+            <li style="">
+                <form:label path="use_price">가격</form:label>
+                <form:input type="number" path="use_price" id="use_price" min="0" max="999999999"/>
+                <form:errors path="use_price" cssClass="error-color"/>
+            </li>
             <li>
-                <form:label path="use_content">내용</form:label>
-                <form:textarea path="use_content" id="use_content"/>
-                <form:errors path="use_content" cssClass="error-color"/>
+                <form:textarea path="use_content"/>
                 <script>
                  function MyCustomUploadAdapterPlugin(editor) {
                         editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
@@ -67,13 +70,7 @@
                 </script>  
             </li>
             <li>
-                <form:label path="use_price">가격</form:label>
-                <form:input type="number" path="use_price" id="use_price" min="0" max="999999999"/>
-                <form:errors path="use_price" cssClass="error-color"/>
-            </li>
-            <li>
-                <form:label path="use_upload">제품 사진</form:label>
-                <input type="file" name="use_upload" id="use_upload">
+                <form:label path="use_upload">제품 사진</form:label><input type="file" name="use_upload" id="use_upload">
             </li>
         </ul> 
         <div class="align-center">

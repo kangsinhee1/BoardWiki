@@ -10,17 +10,20 @@
 	border-radius:10px;
 	border:1px solid #ccc;
 	width:400px;  
-    height:500px; 
+    height:600px; 
     padding:40px;  
 	text-align: center;
     box-shadow:0 2px 3px 0 rgba(34,36,38,0.15);
     transform:translateY(-50%);
-	
+	box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 }
-	
+.modal h4{
+	color:black;
+}
 
 .itemsh{
 	width:300px;
+	margin:1px;
 }
 .hide {
 	display:none; 
@@ -55,4 +58,20 @@ div.page-main h2{
 }
 div.page-main div.detail-content p{
 	color:white;
+}
+/*CKEditor 사용시 등록,수정폼*/
+form#board_register, form#board_modify{
+	padding:0 0 10px 0;
+	width:800px;
+}
+form#board_register ul, form#board_modify ul{
+	padding:20px;
+}
+form#board_register input[type="text"], 
+                form#board_modify input[type="text"]{
+	width:759px;
+	margin-bottom: 10px;                
+}
+.ck-editor__editable_inline{/*CKEditor 전용*/
+	min-height:250px;
 }
