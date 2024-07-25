@@ -59,7 +59,7 @@ public class ItemController {
 
 		//페이지 처리
 	    PagingUtil page =
-				new PagingUtil(keyfield,keyword,pageNum,count,21,10,"item_main","&order="+order);
+				new PagingUtil(keyfield,keyword,pageNum,count,20,10,"item_main","&order="+order);
 
 	    List<ItemVO> list = null;
 	    if(count > 0) {
