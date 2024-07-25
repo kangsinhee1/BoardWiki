@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 게시판 목록 시작 -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
-<section class="page-top-section set-bg" data-setbg="/img/page-top-bg/4.jpg">
+<section class="page-top-section set-bg" data-setbg="/images/maindice2.jpeg">
 		<div class="page-info">
 			<h2>중고 목록</h2>
 			<div class="site-breadcrumb">
@@ -11,9 +11,9 @@
 				<span>Contact</span>
 			</div>
 		</div>
-	</section>
 	<!-- Page top end-->
 
+</section>
 <script src="${pageContext.request.contextPath}/js/usedChat.js"></script>
 <section class="blog-page">
 		<div class="container">
@@ -96,9 +96,9 @@
 		</tbody>
 		</c:forEach>
 	</table>
+	</div>
 	<div class="align-center">${page}</div>
 	</c:if>	
-</div>
 </div>
 </div>
 </div>
