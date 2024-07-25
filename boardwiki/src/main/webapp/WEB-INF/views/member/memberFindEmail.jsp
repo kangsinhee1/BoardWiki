@@ -8,8 +8,8 @@
 		<div class="page-info">
 			<h2>Contact</h2>
 			<div class="site-breadcrumb">
-				<a href="">Home</a>  /
-				<span>Contact</span>
+				<a href="/main/main">Home</a>  /
+				<span>Find ID</span>
 			</div>
 		</div>
 	</section>

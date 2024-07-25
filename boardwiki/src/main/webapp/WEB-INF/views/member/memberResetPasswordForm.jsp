@@ -8,9 +8,9 @@
 <section class="page-top-section set-bg"
 	data-setbg="/img/page-top-bg/4.jpg">
 	<div class="page-info">
-		<h2>Contact</h2>
+		<h2>비밀번호찾기</h2>
 		<div class="site-breadcrumb">
-			<a href="">Home</a> / <span>Contact</span>
+			<a href="/main/main">Home</a> / <span>Find Password</span>
 		</div>
 	</div>
 </section>

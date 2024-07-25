@@ -8,7 +8,7 @@
 	<div class="page-info">
 		<h2>회원가입</h2>
 		<div class="site-breadcrumb">
-			<a href="/main/main">Home</a> / <span>회원가입</span>
+			<a href="/main/main">Home</a> / <span>Register</span>
 		</div>
 	</div>
 </section>
