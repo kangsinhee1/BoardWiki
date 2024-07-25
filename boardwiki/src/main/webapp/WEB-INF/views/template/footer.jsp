@@ -18,10 +18,10 @@
 			</a>
 			<ul class="main-menu footer-menu">
 				<li><a href="">Home</a></li>
-				<li><a href="">Games</a></li>
-				<li><a href="">Reviews</a></li>
-				<li><a href="">News</a></li>
-				<li><a href="">Contact</a></li>
+				<li><a href="${pageContext.request.contextPath}/item/item_main">Games</a></li>
+				<li><a href="${pageContext.request.contextPath}/tnrboard/tnrboardList?tnr_category=2">Reviews</a></li>
+				<li><a href="${pageContext.request.contextPath}/board/list2?boa_category=4">News</a></li>
+				<li><a href="${pageContext.request.contextPath}/contest/contestList">Contact</a></li>
 			</ul>
 			<div class="footer-social d-flex justify-content-center">
 				<a href="#"><i class="fa fa-pinterest"></i></a>
