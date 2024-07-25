@@ -95,10 +95,10 @@
 		</c:if>
 		<c:choose>
 			<c:when test="${board.boa_category == 4}">
-				<input type="button" value="목록" onclick="location.href='list?boa_category=4'">
+				<input type="button" value="목록" onclick="location.href='list2?boa_category=4'">
 		    </c:when>
 		    <c:when test="${board.boa_category == 5}">
-				<input type="button" value="목록" onclick="location.href='list?boa_category=5'">
+				<input type="button" value="목록" onclick="location.href='list2?boa_category=5'">
 		    </c:when> 
 		</c:choose>
 	</div>

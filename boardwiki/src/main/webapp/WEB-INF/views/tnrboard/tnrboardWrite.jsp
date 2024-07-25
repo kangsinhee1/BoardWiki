@@ -110,7 +110,7 @@
 				<div class="modal">
                     <form id="searchform">
                         <h4>제품 검색</h4>
-                        <input type="text" name="search" class="inputcheck input-style2" id="search" maxlength="30" placeholder="제목을 입력하세요">
+                        <input type="text" name="search" class="inputcheck input-style2" id="search" maxlength="30" placeholder="제목을 입력하세요"><br>
                         <input id="itembtn" type="button" value="검색" class="button2">
                         <input id="itembtn2" type="button" value="취소" class="button2">
                         <div id="add"></div>
