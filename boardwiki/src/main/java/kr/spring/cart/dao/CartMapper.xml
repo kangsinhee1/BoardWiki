@@ -14,7 +14,6 @@
 	 	    WHERE c.mem_num=#{mem_num} AND c.cart_check=0
 	 	    ORDER BY c.mem_num DESC)a)
 	</select>
-	
 	<select id="selectRowCount" parameterType="map"
 									resultType="integer">
 		SELECT

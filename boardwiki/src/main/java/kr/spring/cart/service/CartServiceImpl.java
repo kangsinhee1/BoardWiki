@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.cart.dao.CartMapper;
 import kr.spring.cart.vo.CartVO;
+import kr.spring.item.vo.ItemVO;
 
 @Service
 @Transactional
@@ -59,10 +60,4 @@ public class CartServiceImpl implements CartService{
 	public void updateCartDate(Long mem_num) {
 		cartMapper.updateCartDate(mem_num);
 	}
-
-	
-
-
-
-
 }

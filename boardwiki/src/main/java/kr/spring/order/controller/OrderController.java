@@ -66,39 +66,6 @@ public class OrderController {
 	/*=========================
 	 * 주문창에 데이터 담기
 	 *=========================*/
-//	@PostMapping("/order/order1")
-//	@ResponseBody
-//	public String addToOrder(Integer item_quantity,
-//			@RequestParam("order_name") String order_name,@RequestParam("order_phone") String order_phone,
-//			@RequestParam("order_zipcode") Long order_zipcode,
-//			@RequestParam("order_address1") String order_address1,
-//			@RequestParam("order_address2")String order_address2,
-//			HttpSession session,Model model){
-//
-//		MemberVO member = (MemberVO) session.getAttribute("user");
-//
-//		log.debug("<<유저 - order_name>>" + order_name);
-//		log.debug("<<유저 - mem_num>>" + member);
-//		CartVO cart = cartService.selectCart(member.getMem_num());
-//		OrderVO order2 = orderService.selectagg(member.getMem_num());
-//
-//		OrderVO order = new OrderVO();
-//		order.setMem_num(member.getMem_num());
-//		order.setOrder_name(order_name);
-//		order.setOrder_phone(order_phone);
-//		order.setOrder_zipcode(order_zipcode);
-//		order.setOrder_address1(order_address1);
-//		order.setOrder_address2(order_address2);
-//		order.setOrder_price(order2.getTotal_price());
-//		
-//		orderService.insertOrder(order);
-//		cartService.updateCartDate(cart);
-//
-//		model.addAttribute("message", "결재창으로 넘어갑니다.");
-//		model.addAttribute("url","/order/pay");
-//
-//		return "common/resultAlert";	
-//	}
 	@PostMapping("/order/order1")
 	@ResponseBody
 	public String addToOrder(Integer item_quantity,

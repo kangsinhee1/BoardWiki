@@ -29,6 +29,9 @@
             <a href="#"><i class="fa fa-twitter"></i></a>
             <a href="#"><i class="fa fa-dribbble"></i></a>
             <a href="#"><i class="fa fa-behance"></i></a>
+            <c:if test="${user.mem_auth!=9 && user != null}">
+            <a href="${pageContext.request.contextPath}/cart/cart" class="cart">장바구니</a>
+            </c:if>
         </div>
         <div class="header-bar-warp d-flex">
            	<a href="${pageContext.request.contextPath}/main/main" class="site-logo">

@@ -43,7 +43,7 @@ public class CartController {
 	@PostMapping("/item/addToCart")
 	@ResponseBody
 	public Map<String, Object> addToCart(@RequestParam Long item_num, @RequestParam Integer item_quantity,
-			                             HttpSession session) {
+			HttpSession session) {
 		Map<String, Object> mapAjax = new HashMap<>();
 
 		MemberVO member = (MemberVO) session.getAttribute("user");
@@ -68,9 +68,9 @@ public class CartController {
 
 			CartVO db_cart = cartService.getCart(cart);
 
-		    if(db_cart==null) {//동일 상품이 없을 경우
+			if(db_cart==null) {//동일 상품이 없을 경우
 
-		    	//재고수를 구하기 위해서 Item get 호출
+				//재고수를 구하기 위해서 Item get 호출
 				int db_item = itemService.getterItem(item_num);
 
 				if(db_item<item_quantity) {
@@ -80,7 +80,7 @@ public class CartController {
 				}else {
 
 					cartService.insertCart(cart);
-                    itemService.updateStock(item_num, db_item - item_quantity); // 아이템 번호와 재고 수량을 함께 전달
+					itemService.updateStock(item_num, db_item - item_quantity); // 아이템 번호와 재고 수량을 함께 전달
 					log.debug("<<장바구니에 상품 추가 성공>>");
 					mapAjax.put("result", "success");
 				}
@@ -90,17 +90,17 @@ public class CartController {
 
 				//구매수량 합산(기존 장바구니에 저장된 구매수량 + 새로 입력한 구매수량
 				item_quantity = db_cart.getItem_quantity() +
-						           cart.getItem_quantity();
+						cart.getItem_quantity();
 				if(db_item<item_quantity) {
 					//상품재고 수량보다 장바구니에 담은 구매수량이 더 많음
 					log.debug("<<재고 수량 초과>>");
 					mapAjax.put("result", "overquantity");
 				}else {
 					cart.setItem_quantity(item_quantity);
-                    cartService.updateCart(cart);
-                    itemService.updateStock(item_num, db_item - item_quantity); // 아이템 번호와 재고 수량을 함께 전달
-                    log.debug("<<장바구니에 상품 추가 성공>>");
-                    mapAjax.put("result", "success");
+					cartService.updateCart(cart);
+					itemService.updateStock(item_num, db_item - item_quantity); // 아이템 번호와 재고 수량을 함께 전달
+					log.debug("<<장바구니에 상품 추가 성공>>");
+					mapAjax.put("result", "success");
 				}
 			}
 		}
@@ -112,28 +112,28 @@ public class CartController {
 	 *=========================*/
 	@GetMapping("/cart/cart")
 	public String getList(
-	        Model model,
-	        HttpSession session) throws IllegalStateException, IOException {
+			Model model,
+			HttpSession session) throws IllegalStateException, IOException {
 
-	    MemberVO member = (MemberVO) session.getAttribute("user");
+		MemberVO member = (MemberVO) session.getAttribute("user");
 
-	    if (member == null) {
-	        return "redirect:/login"; // 세션에 user가 없으면 로그인 페이지로 리다이렉트
-	    }
+		if (member == null) {
+			return "redirect:/login"; // 세션에 user가 없으면 로그인 페이지로 리다이렉트
+		}
 
-	    log.debug("<<유저 - member>> : " + member);
+		log.debug("<<유저 - member>> : " + member);
 
-	    Map<String, Object> map = new HashMap<>();
-	    map.put("mem_num", member.getMem_num());
+		Map<String, Object> map = new HashMap<>();
+		map.put("mem_num", member.getMem_num());
 
-	    List<CartVO> list = null;
+		List<CartVO> list = null;
 
-	    list = cartService.selectCartList(map);
+		list = cartService.selectCartList(map);
 
-	    model.addAttribute("mem_num", member.getMem_num());
-	    model.addAttribute("list", list);
+		model.addAttribute("mem_num", member.getMem_num());
+		model.addAttribute("list", list);
 
-	    return "cart";
+		return "cart";
 	}
 
 	/*=========================
@@ -142,38 +142,38 @@ public class CartController {
 	@PostMapping("/cart/cart")
 	@ResponseBody
 	public Map<String, Object> updateCart(@RequestParam Long item_num, @RequestParam Integer item_quantity, HttpSession session) {
-	    Map<String, Object> mapAjax = new HashMap<>();
+		Map<String, Object> mapAjax = new HashMap<>();
 
-	    MemberVO member = (MemberVO) session.getAttribute("user");
+		MemberVO member = (MemberVO) session.getAttribute("user");
 
-	    if (member == null) {
-	        mapAjax.put("result", "notloggedin");
-	        return mapAjax;
-	    }
-	    ItemVO item = itemService.selectItem(item_num);
+		if (member == null) {
+			mapAjax.put("result", "notloggedin");
+			return mapAjax;
+		}
+		ItemVO item = itemService.selectItem(item_num);
 
-	    CartVO cart = new CartVO();
-	    cart.setMem_num(member.getMem_num());
-	    cart.setItem_num(item_num);
-	    cart.setItem_quantity(item_quantity);
-	    cart.setCart_price(item_quantity * item.getItem_price());
+		CartVO cart = new CartVO();
+		cart.setMem_num(member.getMem_num());
+		cart.setItem_num(item_num);
+		cart.setItem_quantity(item_quantity);
+		cart.setCart_price(item_quantity * item.getItem_price());
 
-	    int db_item = itemService.getterItem(item_num);
+		int db_item = itemService.getterItem(item_num);
 
 
 		//구매수량 합산(기존 장바구니에 저장된 구매수량 + 새로 입력한 구매수량
-	    item_quantity = cart.getItem_quantity();
+		item_quantity = cart.getItem_quantity();
 
-	    if (db_item < item_quantity) {
-	        mapAjax.put("result", "overquantity");
-	    } else {
-	        cart.setItem_quantity(item_quantity);
-	        cartService.updateCart(cart);
-	        mapAjax.put("result", "success");
-	        mapAjax.put("totalPrice", item.getItem_price() * item_quantity);
-	    }
+		if (db_item < item_quantity) {
+			mapAjax.put("result", "overquantity");
+		} else {
+			cart.setItem_quantity(item_quantity);
+			cartService.updateCart(cart);
+			mapAjax.put("result", "success");
+			mapAjax.put("totalPrice", item.getItem_price() * item_quantity);
+		}
 
-	    return mapAjax;
+		return mapAjax;
 	}
 
 
@@ -183,17 +183,39 @@ public class CartController {
 	@GetMapping("/cart/delete")
 	@ResponseBody
 	public Map<String, String> smallDelete(Long mem_num, Long item_num) {
-	    log.debug("<<장바구니 품목 삭제 -- item_num,mem_num>>" + item_num + mem_num);
+		log.debug("<<장바구니 품목 삭제 -- item_num,mem_num>>" + item_num + mem_num);
 
-	    CartVO cart = new CartVO();
-	    cart.setMem_num(mem_num);
-	    cart.setItem_num(item_num);
+		CartVO cart = new CartVO();
+		cart.setMem_num(mem_num);
+		cart.setItem_num(item_num);
 
-	    cartService.deleteSmallCart(cart);
+		// 현재 장바구니에서 아이템 수량 가져오기
+		CartVO currentCart = cartService.getCart(cart);
+		if (currentCart == null) {
+			Map<String, String> result = new HashMap<>();
+			result.put("status", "error");
+			result.put("message", "장바구니에서 상품을 찾을 수 없습니다!!!");
+			return result;
+		}
 
-	    Map<String, String> result = new HashMap<>();
-	    result.put("status", "success");
-	    return result;
+		int item_quantity = currentCart.getItem_quantity();
+
+		// 재고 업데이트
+		ItemVO item = itemService.selectItem(item_num);
+		if (item == null) {
+			Map<String, String> result = new HashMap<>();
+			result.put("status", "error");
+			result.put("message", "상품을 찾을 수 없습니다!!!");
+			return result;
+		}
+
+		itemService.updateStock(item_num, item.getItem_stock() + item_quantity);
+
+		cartService.deleteSmallCart(cart);
+
+		Map<String, String> result = new HashMap<>();
+		result.put("status", "success");
+		return result;
 	}
 }
 
