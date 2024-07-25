@@ -18,7 +18,6 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
-<div class="page-main">
    <div id="usedChat" class="page-main" onloadeddata="selectMsg()">
 	<h3 id="chatroom_title"><span id="useC_name" class="font-white">${useC_name}</span> 채팅방</h3> 
 	<div class="align-right">
@@ -32,7 +31,6 @@
 			<input type="submit" value="전송">
 		</div>
 	</form>
-</div>
 </div>
 </div>
 </div>

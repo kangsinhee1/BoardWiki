@@ -231,11 +231,13 @@ public class TeamController {
 	}
 
 	@GetMapping("/team/teamOpen")
-	public String openTeam(long tea_num) {
+	public String openTeam(long tea_num,Model model) {
 		//모임장만 활성화 되게 처리
 		chatService.updateChatRoomStatus1Bytea_num(tea_num);
 		teamService.updateTeamStatusOpen(tea_num);
-		return "redirect:teamList";
+		model.addAttribute("tea_num", tea_num);
+		
+		return "redirect:teamBoardAdmin?tea_num="+tea_num;
 	}
 
 
