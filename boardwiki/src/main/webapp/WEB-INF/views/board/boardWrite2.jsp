@@ -11,10 +11,22 @@
 <section class="page-top-section set-bg"
 	data-setbg="/img/page-top-bg/4.jpg">
 	<div class="page-info">
-		<h2>게시글 작성</h2>
-		<div class="site-breadcrumb">
-			<a href="">Home</a> / <span>게시글 작성</span>
-		</div>
+		<c:choose>
+        	<c:when test="${param.boa_category == 4}">
+           	<div class="site-breadcrumb">
+           		<h2>공지 작성</h2>
+				<a href="list2?boa_category=4">Home</a>  /
+				<span>Notice</span>
+			</div>
+       		 </c:when>
+        	<c:when test="${param.boa_category == 5}">
+           		<div class="site-breadcrumb">
+           		<h2>QnA 작성</h2>
+				<a href="list2?boa_category=5">Home</a>  /
+				<span>QnA</span>
+			</div>
+       		 </c:when>
+    		</c:choose>
 	</div>
 </section>
 <section class="blog-page">
@@ -27,17 +39,15 @@
 	                            modelAttribute="boardVO">
 		<ul>
 			<li>
-				<form:label path="boa_category">분류</form:label>
-				<form:select path="boa_category" id="boa_category">
-					<option disabled="disabled" selected>선택하세요</option>
-					<c:if test="${user.mem_auth==9}">
-					<form:option value="4">공지사항</form:option>
-					</c:if>
-					<form:option value="5">QnA</form:option>
-				</form:select>
-				<form:errors path="boa_category" cssClass="error-color"/>                             
+				<c:if test="${user.mem_auth==9}">
+					<input type="hidden" name="boa_category" value="4" >
+				</c:if>
+				<c:if test="${user.mem_auth!=9}">
+				<input type="hidden" name="boa_category" value="5">
+				</c:if>
 			</li>
 			<li>
+				<form:label path="boa_title" style="color:white;">제목</form:label>
 				<form:input path="boa_title" placeholder="제목을 입력하세요" style="color:black;"/>
 				<form:errors path="boa_title" cssClass="error-color"/>
 			</li>
@@ -64,7 +74,7 @@
 			    </script> 
 			</li>  
 			<li>
-				<form:label path="upload">파일업로드</form:label>
+				<form:label path="upload" style="color:white;">파일업로드</form:label>
 				<input type="file" name="upload" id="upload">
 			</li>
 		</ul> 

@@ -60,7 +60,7 @@
 			</select>
 			<script type="text/javascript">
 				$('#order').change(function(){
-					location.href='list?boa_category=${param.boa_category}&keyfield='
+					location.href='list2?boa_category=${param.boa_category}&keyfield='
 							+$('#keyfield').val()+'&keyword='
 							+$('#keyword').val()+'&order='
 							+$('#order').val();

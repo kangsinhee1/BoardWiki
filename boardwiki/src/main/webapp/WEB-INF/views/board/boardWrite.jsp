@@ -27,15 +27,10 @@
 	                            modelAttribute="boardVO">
 		<ul>
 			<li>
-				분류
-				<form:label path="boa_category"></form:label>
-				<form:select path="boa_category" id="boa_category">
-					<option disabled="disabled" selected>선택하세요</option>
-					<form:option value="1">자유게시판</form:option>
-				</form:select>
-				<form:errors path="boa_category" cssClass="error-color"/>                             
+				<input type="hidden" name="boa_category" value="1" >
 			</li>
 			<li>
+				<form:label path="boa_title" style="color:white;">제목</form:label>
 				<form:input path="boa_title" placeholder="제목을 입력하세요" style="color:black;"/>
 				<form:errors path="boa_title" cssClass="error-color"/>
 			</li>
@@ -62,7 +57,7 @@
 			    </script> 
 			</li>  
 			<li>
-				<form:label path="upload">파일업로드</form:label>
+				<form:label path="upload" style="color:white;">파일업로드</form:label>
 				<input type="file" name="upload" id="upload">
 			</li>
 		</ul> 

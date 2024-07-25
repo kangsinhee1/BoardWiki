@@ -11,11 +11,23 @@
 <section class="page-top-section set-bg"
 	data-setbg="/img/page-top-bg/4.jpg">
 	<div class="page-info">
-		<h2>게시글 작성</h2>
-		<div class="site-breadcrumb">
-			<a href="">Home</a> / <span>게시글 작성</span>
+			<c:choose>
+        	<c:when test="${param.tnr_category == 1}">
+           		 <div class="site-breadcrumb">
+           		 <h2>팁 작성</h2>
+				<a href="tnrboardList?tnr_category=1">Home</a>  /
+				<span>Tip</span>
+			</div>
+       		 </c:when>
+        	<c:when test="${param.tnr_category == 2}">
+           		<div class="site-breadcrumb">
+           		<h2>후기 작성</h2>
+				<a href="tnrboardList?tnr_category=2">Home</a>  /
+				<span>Review</span>
+			</div>
+       		 </c:when>
+    		</c:choose>
 		</div>
-	</div>
 </section>
 <section class="blog-page">
 		<div class="container">
@@ -27,7 +39,7 @@
 	                            modelAttribute="tnrboardVO">
 		<ul>
 			<li>
-				<form:label path="tnr_category">분류</form:label>
+				<form:label path="tnr_category" style="color:white;">분류</form:label>
 				<form:select path="tnr_category" id="tnr_category">
 					<option disabled="disabled" selected>선택하세요</option>
 					<form:option value="1">팁게시판</form:option>
@@ -36,7 +48,7 @@
 				<form:errors path="tnr_category" cssClass="error-color"/>                             
 			</li>
 			 <li>
-                제품명
+                <form:label path="item_num" style="color:white;">제품명</form:label>
                 <form:input type="hidden" path="item_num" id="item_num"/>
                 <form:errors path="item_num" cssClass="error-color"/>
                 <input type="text" name="item_name" placeholder="제품을 선택해주세요" id="item_name" maxlength="10" readonly="readonly">
@@ -44,6 +56,7 @@
                      
             </li>
 			<li>
+				<form:label path="tnr_title" style="color:white;">제목</form:label>
 				<form:input path="tnr_title" placeholder="제목을 입력하세요"/>
 				<form:errors path="tnr_title" cssClass="error-color"/>
 			</li>
@@ -70,7 +83,7 @@
 			    </script> 
 			</li>  
 			<li>
-				<form:label path="upload">파일업로드</form:label>
+				<form:label path="upload" style="color:white;">파일업로드</form:label>
 				<input type="file" name="upload" id="upload">
 			</li>
 		</ul> 
