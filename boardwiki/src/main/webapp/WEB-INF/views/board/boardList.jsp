@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!-- 게시판 목록 시작 -->
 <section class="page-top-section set-bg" data-setbg="/img/page-top-bg/4.jpg">
 		<div class="page-info">
@@ -75,19 +76,10 @@
 		</tr>
 		</thead>
 		<c:forEach var="board" items="${list}">
-		 <%-- boa_rdate를 LocalDate로 파싱합니다 --%>
-   		 <c:set var="boaRDate" value="${board.boa_rdate}" />
-    	 <c:set var="postDate" value="${java.time.LocalDate.parse(boaRDate)}" />
-    
-   		 <%-- 게시물이 오늘 생성되었는지 여부를 확인합니다 --%>
-   		 <c:set var="isToday" value="${postDate == java.time.LocalDate.now()}" />
 		<tr>
 			<td class="align-center">${board.boa_num}</td>
 			<td class="align-left"><a href="detail?boa_num=${board.boa_num}">${board.boa_title}(${board.re_cnt})
-			 <c:if test="${isToday}">
-                    <span style="color: red; font-weight: bold;"> new </span>
-             </c:if></a></td>
-			
+			 </a></td>
 			<td class="align-center">
 				<c:if test="${empty board.mem_nickname}">${board.mem_email}</c:if>
 				<c:if test="${!empty board.mem_nickname}">${board.mem_nickname}</c:if>
@@ -111,16 +103,3 @@
 </section>
 
 <!-- 게시판 목록 끝 -->
-
-
-
-
-
-
-
-
-
-
-
-
-
