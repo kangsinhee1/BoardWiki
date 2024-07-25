@@ -150,7 +150,7 @@ input,select{
 }
 #page_nav{
 	float:left;
-	width:25%;
+	width:240px;
 	min-height:530px;
 }
 #page_body{

@@ -41,6 +41,43 @@ public class RentController {
 		 * 보드게임 대여
 		 *=========================*/
 		// 대여 폼 호출
+		@GetMapping("/rent/rent")
+		public String form(RentVO rentVO) {
+			return "rentGame";
+		}
+		// 등록 폼에서 전송된 데이터 처리
+		@PostMapping("/rent/rent")
+		public String submit(@Valid RentVO rentVO,
+		                      BindingResult result,
+		                      @RequestParam(value = "item_num", required = true) int item_num,
+		                      HttpServletRequest request,
+		                      HttpSession session,
+		                      Model model)
+		                      throws IllegalStateException, IOException {
+		    log.debug("<<대여 저장>> : " + rentVO);
+		    log.debug("Received item_num: " + item_num);
+
+		    if(result.hasErrors()) {
+		        return "rentGame";
+		    }
+
+		    MemberVO vo = (MemberVO)session.getAttribute("user");
+		    rentVO.setMem_num(vo.getMem_num());
+		    rentVO.setItem_num(item_num);
+		    rentVO.setRent_status(1);
+
+		    rentService.insertRent(rentVO);
+
+		    model.addAttribute("message", "성공적으로 대여가 완료되었습니다.");
+		    model.addAttribute("url", request.getContextPath() + "/rent/list");
+
+		    return "common/resultAlert";
+		}
+
+
+		/*=========================
+		 * 대여 목록
+		 *=========================*/
 		@GetMapping("/rent/list")
 		public String getRentList(
 		        @RequestParam(defaultValue = "1") int pageNum,
