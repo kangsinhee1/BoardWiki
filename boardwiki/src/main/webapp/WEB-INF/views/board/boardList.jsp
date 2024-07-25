@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!-- 게시판 목록 시작 -->
-<section class="page-top-section set-bg" data-setbg="/img/page-top-bg/4.jpg">
+<section class="page-top-section set-bg" data-setbg="/images/maindice3.jpeg">
 		<div class="page-info">
 			<h2>자유게시판</h2>
 			<div class="site-breadcrumb">
