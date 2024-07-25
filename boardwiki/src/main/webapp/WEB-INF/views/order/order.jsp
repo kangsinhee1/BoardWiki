@@ -55,7 +55,7 @@
 		       <label for="order_address2">상세주소</label>
 		       <input type="text" name="order_address2" id="order_address2" maxlength="30">
 		   </div>
-		   <button type="submit">주문하기</button>
+		   <button type="submit" onclick="">주문하기</button>
            </form>
     </div>
 </div>
