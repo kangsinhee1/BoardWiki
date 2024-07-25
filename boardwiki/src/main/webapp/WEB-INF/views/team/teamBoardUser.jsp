@@ -24,7 +24,7 @@
 		<div class="col-lg-12">
 <div class="page-main">
     <h2>(${TEAM.tea_name}) 모임 게시판</h2>
-    <div class="align-right">
+    <div class="align-right font-white">
     	모임 일정 : <c:choose>
     	<c:when test="${TEAM.tea_time != ''&& TEAM.tea_time != null }"> ${TEAM.tea_time} </c:when>
     	<c:otherwise> 없습니다.</c:otherwise>

@@ -176,7 +176,7 @@ div.form-group label{
 }
 
 .modal-content {
-  background-color: #fefefe;
+  background-color: black;
   margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
@@ -346,4 +346,15 @@ div.sub-item p{
 }
 div.chart-table table  tbody tr td.link a{
 	color:pink;
+}
+
+.result-display2 {
+	width: 600px;
+	height: 300px;
+	margin: 50px auto;
+	border: 1px solid #ffffff;
+	display: flex;
+	color: #ffffff;
+	align-items: center;
+	justify-content: center;
 }

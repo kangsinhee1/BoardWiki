@@ -24,10 +24,8 @@
 		<div class="col-lg-12">
 <div class="page-main">
 	<h2>모임 신청하기</h2>
-	<div class="result-display">
+	<div class="result-display2">
 	<form:form action="teamApply" id="board_register" modelAttribute="teamApplyVO" >
-	
-	<h4> 모임 신청</h4>
 	<div>하고싶은 말:</div>
 		<form:hidden path="tea_num" value="${param.tea_num}"/>
 		<form:textarea path="teaA_content" cols="35" rows="5"/>
