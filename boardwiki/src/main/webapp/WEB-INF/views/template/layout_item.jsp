@@ -25,7 +25,7 @@
 	<!-- <hr size="1" noshade="noshade" width="100%"> -->
 	<div id="down-header">
 				<!-- Page top section -->
-	<section class="page-top-section set-bg" data-setbg="/img/page-top-bg/4.jpg">
+	<section class="page-top-section set-bg" data-setbg="/images/maindice4.jpeg">
 		<div class="page-info">
 			<h2>보드게임</h2>
 			<div class="site-breadcrumb">
