@@ -169,12 +169,12 @@
 							<div class="categories-widget">
 								<h4 class="widget-title">categories</h4>
 								<ul>
-									<li><a href="">Games</a></li>
-									<li><a href="">Gaming Tips & Tricks</a></li>
-									<li><a href="">Online Games</a></li>
-									<li><a href="">Team Games</a></li>
-									<li><a href="">Community</a></li>
-									<li><a href="">Uncategorized</a></li>
+									<li><a href="${pageContext.request.contextPath}/item/item_main">Games</a></li>
+									<li><a href="${pageContext.request.contextPath}/tnrboard/tnrboardList?tnr_category=1">Gaming Tips</a></li>
+									<li><a href="${pageContext.request.contextPath}/tnrboard/tnrboardList?tnr_category=2">Game review</a></li>
+									<li><a href="${pageContext.request.contextPath}/team/teamList">Team</a></li>
+									<li><a href="${pageContext.request.contextPath}/used/usedList">Used</a></li>
+									<li><a href="${pageContext.request.contextPath}/streaming/broadcasts">Streaming</a></li>
 								</ul>
 							</div>
 						</div>
