@@ -102,11 +102,11 @@ public class MainController {
 
 			//페이지 처리
 		    PagingUtil gamePage =
-					new PagingUtil(keyfield,keyword1,pageNum,count,21,10,"mainList","#page");
+					new PagingUtil(keyfield,keyword1,pageNum,count,20,10,"mainList","#page");
 		    PagingUtil boardPage =
-		    		new PagingUtil(keyfield,keyword1,pageNum,count2,20,10,"mainList","#page2");
+		    		new PagingUtil(keyfield,keyword1,pageNum,count2,10,10,"mainList","#page2");
 		    PagingUtil usedPage =
-		    		new PagingUtil(keyfield, keyword1, pageNum,count3,20,10,"mainList","#page3");
+		    		new PagingUtil(keyfield, keyword1, pageNum,count3,10,10,"mainList","#page3");
 
 
 		    List<ItemVO> list = null;
