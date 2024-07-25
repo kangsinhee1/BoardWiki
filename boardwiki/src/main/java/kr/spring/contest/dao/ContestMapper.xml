@@ -127,6 +127,9 @@
                     <when test="order == 4">
                         AND con_status = 2
                     </when>
+                    <when test="order == 5">
+                        AND con_status = 1
+                    </when>
                     <!-- No additional WHERE clause for other orders -->
                 </choose>
                 <include refid="contestOrder" />

@@ -42,7 +42,9 @@
                 <option value="1" <c:if test="${param.order == 1}">selected</c:if>>최신순</option>
                 <option value="2" <c:if test="${param.order == 2}">selected</c:if>>조회순</option>
                 <option value="3" <c:if test="${param.order == 3}">selected</c:if>>진행중대회</option>
+                <option value="5" <c:if test="${param.order == 5}">selected</c:if>>진행예정대회</option>
                 <option value="4" <c:if test="${param.order == 4}">selected</c:if>>종료된대회</option>
+                
             </select>
             <script type="text/javascript">
                 $('#order').change(function(){

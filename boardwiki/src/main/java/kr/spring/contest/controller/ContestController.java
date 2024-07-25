@@ -80,7 +80,7 @@ public class ContestController {
 		contestVO.setMem_num(member.getMem_num());
 		contestVO.getCon_sdate();
 		
-		// 현재 날짜와 비교하여 con_sdate가 오늘보다 크면 con_status를 2로 설정
+		// 현재 날짜와 비교하여 con_sdate가 오늘보다 크면 con_status를 1로 설정
 	    Date now = new Date();
 	    
 	    SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
@@ -94,7 +94,7 @@ public class ContestController {
 	    System.out.println("**********************"+compare+"*********************");
 	    
 	    if (compare > 0) {
-	        contestVO.setCon_status(2);
+	        contestVO.setCon_status(1);
 	    }else {
 	    	contestVO.setCon_status(0);
 	    }
@@ -142,7 +142,7 @@ public class ContestController {
 	        map.put("end", page.getEndRow());
 
 	        // order 값에 따라 다른 메소드 호출
-	        if (order == 3 || order == 4) {
+	        if (order == 3 || order == 4 || order == 5) {
 	            list = contestservice.selectContestListForStatusOrder(map);
 	        } else {
 	            list = contestservice.selectContestList(map);
@@ -164,12 +164,12 @@ public class ContestController {
 		log.debug("<<대회 상세 진입 : >>   " + con_num);
 	    // 조회수 증가
 	    contestservice.updateContestHit(con_num);
-
 	    // 대회 상세 정보 가져오기
 	    ContestVO contest = contestservice.detailContest(con_num);
 
 	    // 사용자가 이미 신청했는지 여부를 확인
 	    MemberVO member = (MemberVO) session.getAttribute("user");
+	    
 	    boolean applied = false;
 	    int conManCount = contestservice.countContestMan(con_num);
 
@@ -179,7 +179,6 @@ public class ContestController {
 	        contestApplyVO.setCon_num(con_num);
 	        applied = contestservice.selectContestApplyList(contestApplyVO) > 0;	        
 	    }
-
 	    // ModelAndView 객체에 데이터 추가
 	    ModelAndView mav = new ModelAndView("contestDetail");
 	    mav.addObject("contest", contest);
@@ -198,13 +197,9 @@ public class ContestController {
 	@GetMapping("/contest/contestApply")
 	public String submitApply(@RequestParam String action, long con_num,
 			HttpServletRequest request, HttpSession session, ContestApplyVO contestApplyVO, Model model) {
-
 		MemberVO member = (MemberVO) session.getAttribute("user");
 		contestApplyVO.setMem_num(member.getMem_num());
 		contestApplyVO.setCon_num(con_num);
-
-		
-			
 		if (action.equals("cancel")) {
 			contestservice.cancelContestApply(contestApplyVO);
 			model.addAttribute("message", "신청 취소 완료");
