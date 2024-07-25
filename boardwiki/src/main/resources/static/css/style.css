@@ -811,6 +811,7 @@ ol {
 
 .header-bar-warp {
 	background: #081624;
+	margin-top: 10px;
 	padding: 39px 40px 0;
 	-webkit-box-shadow: 0 0 9px 3px rgba(226, 30, 228, 0.24);
 	box-shadow: 0 0 9px 3px rgba(226, 30, 228, 0.24);
