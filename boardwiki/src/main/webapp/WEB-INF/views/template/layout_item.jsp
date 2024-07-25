@@ -27,10 +27,10 @@
 				<!-- Page top section -->
 	<section class="page-top-section set-bg" data-setbg="/img/page-top-bg/4.jpg">
 		<div class="page-info">
-			<h2>Contact</h2>
+			<h2>보드게임</h2>
 			<div class="site-breadcrumb">
 				<a href="">Home</a>  /
-				<span>Contact</span>
+				<span>Games</span>
 			</div>
 		</div>
 	</section>

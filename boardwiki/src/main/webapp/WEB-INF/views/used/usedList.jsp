@@ -8,7 +8,7 @@
 			<h2>중고 목록</h2>
 			<div class="site-breadcrumb">
 				<a href="">Home</a>  /
-				<span>Contact</span>
+				<span>Used</span>
 			</div>
 		</div>
 	<!-- Page top end-->
@@ -97,7 +97,7 @@
 		</c:forEach>
 	</table>
 	</div>
-	<div class="align-center">${page}</div>
+	<div class="align-center"  style= "text-align : center">${page}</div>
 	</c:if>	
 </div>
 </div>

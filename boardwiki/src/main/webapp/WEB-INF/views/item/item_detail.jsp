@@ -8,7 +8,7 @@
 	<div class="page-info">
 		<h2>게임상세</h2>
 		<div class="site-breadcrumb">
-			<a href="">Home</a> /
+			<a href="${pageContext.request.contextPath}/item/item_main">Home</a> /
 			<span>Detail</span>
 		</div>
 	</div>

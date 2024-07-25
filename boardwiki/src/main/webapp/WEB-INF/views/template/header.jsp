@@ -18,7 +18,6 @@
             </div>
         </div>
         <div class="header-social d-flex justify-content-end">
-            <p>Follow us:</p>
           	<c:if test="${user.mem_auth!=9 && user != null}">
            		<a href="${pageContext.request.contextPath}/myPage/myPage">MyPage</a>
           	</c:if>
