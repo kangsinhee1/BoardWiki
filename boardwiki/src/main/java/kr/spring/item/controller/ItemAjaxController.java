@@ -81,7 +81,7 @@ public class ItemAjaxController {
 		map.put("keyword", keyword);
 
 		//총글의 개수
-		int count = itemService.selectRowCount(map);
+		int count = itemService.selectRowCount2(map);
 		PagingUtil page = new PagingUtil(pageNum,count,rowCount);
 		map.put("start", page.getStartRow());
 		map.put("end", page.getEndRow());
@@ -125,7 +125,7 @@ public class ItemAjaxController {
 		map.put("keyword", keyword);
 
 		//총글의 개수
-		int count = itemService.selectRowCount(map);
+		int count = itemService.selectRowCount2(map);
 		PagingUtil page = new PagingUtil(pageNum,count,rowCount);
 		map.put("start", page.getStartRow());
 		map.put("end", page.getEndRow());
