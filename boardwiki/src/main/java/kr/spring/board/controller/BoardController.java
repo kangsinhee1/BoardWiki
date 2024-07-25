@@ -1,6 +1,8 @@
 package kr.spring.board.controller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -140,6 +142,12 @@ public class BoardController {
 
 			list = boardService.selectListForClient(map);
 		}
+		 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+	     Calendar cal = Calendar.getInstance();
+	     cal.add(Calendar.DAY_OF_MONTH,0); //7일간 보이도록 하기위해서.
+	     String nowday = format.format(cal.getTime());
+
+	     model.addAttribute("nowday", nowday);
 
 		model.addAttribute("count", count);
 		model.addAttribute("list", list);
