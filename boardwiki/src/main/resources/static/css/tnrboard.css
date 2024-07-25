@@ -50,11 +50,18 @@ ul.detail-info li:last-child{
 #output_fcount{
 	width:50px;
 	display:inline-block;
+	color: white;
+}
+
+#output_rcount{
+	width:70px;
+	display:inline-block;
+	color: white;
 }
 div#reply_div{
-	padding:5px 10px 40px 10px;
+	padding:10px 0px 40px 0px;
 	margin-top:10px;
-	background-color: rgb(76,1,128);
+	background-color: #321854;;
 	color:black;
 }
 form#re_form{
@@ -73,12 +80,10 @@ span.letter-count{
 textarea.rep-content{
 	width:90%;
 	height:50px;
-	margin:10px;
 }
 div#re_first, div#mre_first, div#mresp_first{
 	float:left;
 	width:70%;
-	padding-left:15px;
 	margin-bottom:10px;
 }
 div#re_second, div#mre_second, div#mresp_second{
@@ -267,4 +272,7 @@ select#keyfield{
 }
 div.sub-item{
 	color: white;
+}
+.writeReply {
+    padding-left: 60px;
 }

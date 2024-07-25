@@ -95,15 +95,23 @@
 		</c:if>
 		<c:choose>
 			<c:when test="${board.boa_category == 4}">
-				<input type="button" value="목록" onclick="location.href='list2?boa_category=4'">
+				<input type="button" value="목록" onclick="location.href='list?boa_category=4'">
 		    </c:when>
 		    <c:when test="${board.boa_category == 5}">
-				<input type="button" value="목록" onclick="location.href='list2?boa_category=5'">
+				<input type="button" value="목록" onclick="location.href='list?boa_category=5'">
 		    </c:when> 
 		</c:choose>
 	</div>
 	<hr size="1" width="100%">
 	<!-- 댓글 UI 시작 -->
+	<!-- 댓글 목록 출력 -->
+	<div id="output"></div>
+	<div id="loading" style="display:none;">
+		<img src="${pageContext.request.contextPath}/images/loading.gif" width="30" height="30">
+	</div>
+	<div class="paging-button" style="display:none;">
+		<input type="button" value="더보기">
+	</div>
 	<div id="reply_div">
 		<span class="re-title">댓글 달기</span>
 		<form id="re_form">
@@ -117,19 +125,10 @@
 			<div id="re_first">
 				<span class="letter-count">300/300</span>
 			</div>
-			<div id="re_second" class="align-right">
-				<input type="submit" value="전송">
-			</div>
+			 <br>
+            <a href="writeReply" id="submit-link" class="writeReply" style="color:white">댓글달기</a>
 			</c:if>
 		</form>
-	</div>
-	<!-- 댓글 목록 출력 -->
-	<div id="output"></div>
-	<div id="loading" style="display:none;">
-		<img src="${pageContext.request.contextPath}/images/loading.gif" width="30" height="30">
-	</div>
-	<div class="paging-button" style="display:none;">
-		<input type="button" value="더보기">
 	</div>
 	<!-- 댓글 UI 끝 -->
 </div>
@@ -138,6 +137,14 @@
 </div>
 </section>
 <!-- 게시판 글상세 끝 -->
+<script type="text/javascript">
+$(document).ready(function() {
+	 $('#submit-link').click(function(event) {
+         event.preventDefault(); // 기본 링크 동작 방지
+         $('#re_form').submit(); // 폼 제출
+     });
+});
+</script>
 
 
 

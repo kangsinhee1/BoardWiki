@@ -101,8 +101,17 @@
 	</div>
 	<hr size="1" width="100%">
 	<!-- 댓글 UI 시작 -->
+	<!-- 댓글 목록 출력 -->
+	<div id="output"></div>
+	<div id="loading" style="display:none;">
+		<img src="${pageContext.request.contextPath}/images/loading.gif" width="30" height="30">
+	</div>
+	<div class="paging-button" style="display:none;">
+		<input type="button" value="더보기">
+	</div>
+	<!-- 댓글 목록 끝 -->
 	<div id="reply_div">
-		<span class="re-title">댓글 달기</span>
+		<span class="re-title" style="color:white">댓글 달기</span>
 		<form id="re_form">
 			<input type="hidden" name="tnr_num"
 			          value="${tnrboard.tnr_num}" id="tnr_num">
@@ -113,20 +122,10 @@
 			<c:if test="${!empty user}">
 			<div id="re_first">
 				<span class="letter-count">300/300</span>
-			</div>
-			<div id="re_second" class="align-right">
-				<input type="submit" value="전송">
-			</div>
+			</div><br>
+			<a href="writeReply" id="submit-link" class="writeReply" style="color:white">댓글달기</a>
 			</c:if>
 		</form>
-	</div>
-	<!-- 댓글 목록 출력 -->
-	<div id="output"></div>
-	<div id="loading" style="display:none;">
-		<img src="${pageContext.request.contextPath}/images/loading.gif" width="30" height="30">
-	</div>
-	<div class="paging-button" style="display:none;">
-		<input type="button" value="더보기">
 	</div>
 	<!-- 댓글 UI 끝 -->
 </div>
@@ -209,6 +208,11 @@
             
             //기본 이벤트 제거
             event.preventDefault();
+        });
+     	// 폼 제출을 처리하는 코드 추가
+        $('#submit-link').click(function(event) {
+            event.preventDefault(); // 기본 링크 동작 방지
+            $('#re_form').submit(); // 폼 제출
         });
     });
 </script>
