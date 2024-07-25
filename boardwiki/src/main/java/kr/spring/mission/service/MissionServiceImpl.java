@@ -52,4 +52,15 @@ public class MissionServiceImpl implements MissionService{
 		return missionMapper.selectcountmember(map);
 	}
 
+	@Override
+	public Integer addMission() {
+		
+		return missionMapper.addMission();
+	}
+
+	@Override
+	public MissionVO selectmission(Long mis_num) {
+		return missionMapper.selectmission(mis_num);
+	}
+
 }

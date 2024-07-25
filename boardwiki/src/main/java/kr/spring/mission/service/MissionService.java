@@ -13,4 +13,6 @@ public interface MissionService {
     void deleteMission(Long mis_num);
     Integer selectcountstream(Map<String,Object> map);
     Integer selectcountmember(Map<String,Object> map);
+    Integer addMission();
+    MissionVO selectmission(Long mis_num);
 }

@@ -1,6 +1,5 @@
 package kr.spring.mission.controller;
 
-import java.net.http.HttpResponse;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.mission.service.MissionService;
 import kr.spring.mission.vo.MissionVO;
@@ -32,6 +32,8 @@ public class MissionController {
 	private PointService pointService;
 	@Autowired
 	private StreamKeyService streamKeyService;
+	@Autowired
+	private MemberService memberService;
 
     @GetMapping("/mission/form")
     public String showMissionForm(HttpSession session, Model model) {
@@ -51,8 +53,8 @@ public class MissionController {
 
     @GetMapping("/mission/add")
     @ResponseBody
-    public Map<String, String> addMission(long str_num, String mis_content, int mis_point,HttpSession session) {
-    	Map<String,String> map = new HashMap<>();
+    public Map<String, Object> addMission(long str_num, String mis_content, int mis_point,HttpSession session) {
+    	Map<String,Object> map = new HashMap<>();
     	MemberVO user = (MemberVO)session.getAttribute("user");
     	int point = 0;
     	if(user==null) {
@@ -62,7 +64,9 @@ public class MissionController {
     		if(point < mis_point) {
     			map.put("result", "rowpoint");
     		}else {
+    		long mis_num = missionService.addMission();
     		MissionVO mission = new MissionVO();
+    		mission.setMis_num(mis_num);
     		mission.setStr_num(str_num);
     		mission.setMis_content(mis_content);
     		mission.setMis_point(mis_point);
@@ -76,6 +80,7 @@ public class MissionController {
             pointService.processPointTransaction(point2);
             missionService.addMission(mission);
     		
+            map.put("mis_num", mis_num);
     		map.put("result", "success");
     		}
     	}
@@ -96,8 +101,19 @@ public class MissionController {
 		     map.put("end", page.getEndRow());
 
 		     list = missionService.getMissionsByStream(map);
+		     
 		}
-
+    	long mem_num = 0l;
+    	if (count > 0) {
+		     map.put("start", page.getStartRow());
+		     map.put("end", page.getEndRow());
+		     for(int i=0;i<list.size();i++) {
+		    	 mem_num = list.get(i).getMem_num();
+		    	 MemberVO member = memberService.selectMember(mem_num);
+		    	 list.get(i).setMem_nickName(member.getMem_nickName());
+		     }
+		}
+    	
     	model.addAttribute("count", count);
 		model.addAttribute("list", list);
 		model.addAttribute("page", page.getPage());
@@ -135,12 +151,18 @@ public class MissionController {
 
     @PostMapping("/mission/updateStatus")
     @ResponseBody
-    public Map<String, String> updateMissionStatus(long mis_num, int mis_status, long str_num,HttpSession session, long mem_num,int mis_point) {
+    public Map<String, Object> updateMissionStatus(long mis_num, int mis_status, long str_num,HttpSession session,int mis_point) {
     	MemberVO user = (MemberVO) session.getAttribute("user");
     	MissionVO vo = new MissionVO();
+    	MissionVO vos = new MissionVO();
     	int strNum = 0;
-    	Map<String, String> map = new HashMap<>();
-    	vo.setMis_status(mis_status);
+    	Map<String, Object> map = new HashMap<>();
+    	vos = missionService.selectmission(mis_num);
+    	if(mis_status > vos.getMis_status()) {
+    		vo.setMis_status(mis_status);
+    	}else {
+    		map.put("result", "reck");
+    	}
     	vo.setMis_num(mis_num);
     	if(mis_status == 3) {
     		PointVO pointVO = new PointVO();
@@ -152,11 +174,9 @@ public class MissionController {
             pointService.processPointTransaction(pointVO);
     	}else if(mis_status == 4) {
     		PointVO point2 = new PointVO();
-    		if(mem_num == 0) {
-    			point2.setMem_num(user.getMem_num());
-    		}else {
-    			point2.setMem_num(mem_num);
-    		}
+    		
+    		
+    		point2.setMem_num(vos.getMem_num());
     		point2.setPoi_use(mis_point);
     		point2.setPoi_increase(2);
     		point2.setPoi_status(4);

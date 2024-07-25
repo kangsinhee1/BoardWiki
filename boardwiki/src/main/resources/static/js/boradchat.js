@@ -42,7 +42,12 @@ document.addEventListener("DOMContentLoaded", function() {
                 <td class="align-center">${donation.don_date}</td>
             </tr>
         `;
-        document.querySelector(`#${listId} tbody`).insertAdjacentHTML('beforeend', newRow);
+        const listElement = document.querySelector(`#${listId} tbody`);
+        if (listElement) {
+            listElement.insertAdjacentHTML('beforeend', newRow);
+        } else {
+            console.error(`Element with id ${listId} not found.`);
+        }
     }
 
     // 초기 채팅 메시지 로드
@@ -97,8 +102,6 @@ document.addEventListener("DOMContentLoaded", function() {
             if (document.getElementById('mission-list2')) {
                 appendMission(data, 'mission-list2');
             }
-        } else if (data.mis_num && data.mis_status) {
-            updateMissionElement(data.mis_num, data.mis_status);
         }
     };
 
@@ -199,26 +202,15 @@ document.addEventListener("DOMContentLoaded", function() {
     function appendMission(mission, listId) {
         let missionStatusHTML = '';
         // 미션 상태에 따라 다른 HTML을 생성
-        if (mission.mis_status == 1) {
-            if (listId === 'mission-list') {
-                missionStatusHTML = `
-                    <td><button class="delete-mission" data-mis-num="${mission.mis_num}" data-mis-point="${mission.mis_point}">취소</button></td>
-                `;
-            } else if (listId === 'mission-list2') {
-                missionStatusHTML = `
-                    <td><button class="accept-mission" data-mis-num="${mission.mis_num}" data-mis-point="${mission.mis_point}">수락</button>
-                    <button class="delete-mission" data-mis-num="${mission.mis_num}" data-mis-point="${mission.mis_point}">취소</button></td>
-                `;
-            }
-        } else if (mission.mis_status == 2) {
+        if (listId === 'mission-list') {
             missionStatusHTML = `
-                <td><button class="success-mission" data-mis-num="${mission.mis_num}" data-mis-point="${mission.mis_point}">성공</button>
-                <button class="fail-mission" data-mis-num="${mission.mis_num}" data-mis-point="${mission.mis_point}">실패</button></td>
+                <td><button class="delete-mission" data-mis-num="${mission.mis_num}" data-mis-point="${mission.mis_point}">취소</button></td>
             `;
-        } else if (mission.mis_status == 3) {
-            missionStatusHTML = '<p>성공</p>';
-        } else if (mission.mis_status == 4) {
-            missionStatusHTML = '<p>실패</p>';
+        } else if (listId === 'mission-list2') {
+            missionStatusHTML = `
+                <td><button class="accept-mission" data-mis-num="${mission.mis_num}" data-mis-point="${mission.mis_point}">수락</button></td>
+                <td><button class="delete-mission" data-mis-num="${mission.mis_num}" data-mis-point="${mission.mis_point}">취소</button></td>
+            `;
         }
 
         const newRow = `
@@ -230,7 +222,12 @@ document.addEventListener("DOMContentLoaded", function() {
                 ${missionStatusHTML}
             </tr>
         `;
-        document.querySelector(`#${listId} tbody`).insertAdjacentHTML('beforeend', newRow);
+        const listElement = document.querySelector(`#${listId} tbody`);
+        if (listElement) {
+            listElement.insertAdjacentHTML('beforeend', newRow);
+        } else {
+            console.error(`Element with id ${listId} not found.`);
+        }
     }
 
     // 이벤트 위임을 사용하여 동적 요소에 이벤트 핸들러 추가
@@ -243,6 +240,7 @@ document.addEventListener("DOMContentLoaded", function() {
     $(document).on('click', '.delete-mission', function() {
         const mis_num = $(this).data('mis-num');
         const mis_point = $(this).data('mis-point');
+        console.log('Deleting mission:', mis_num, mis_point); // Debugging line
         deleteMission(mis_num, mis_point);
     });
 
@@ -263,7 +261,8 @@ document.addEventListener("DOMContentLoaded", function() {
         const updateData = {
             mis_num: mis_num,
             mis_status: mis_status,
-            mis_point: mis_point
+            mis_point: mis_point,
+            str_num: strNum
         };
 
         $.ajax({
@@ -274,8 +273,7 @@ document.addEventListener("DOMContentLoaded", function() {
             success: function(response) {
                 if (response.result == 'success') {
                     alert('미션 상태가 업데이트되었습니다.');
-                    socket.send(JSON.stringify(updateData)); // 실시간 업데이트 전송
-                    updateMissionElement(mis_num, mis_status); // 클라이언트에서 즉시 업데이트
+                    location.reload(); // 페이지 새로고침
                 } else {
                     alert('미션 상태 업데이트 실패');
                 }
@@ -286,33 +284,6 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // 미션 상태에 따라 미션 요소 업데이트
-    function updateMissionElement(mis_num, mis_status) {
-        let statusHTML = '';
-        if (mis_status == 2) {
-            statusHTML = `
-                <button class="success-mission" data-mis-num="${mis_num}" data-mis-point="0">성공</button>
-                <button class="fail-mission" data-mis-num="${mis_num}" data-mis-point="0">실패</button>
-                <td><p>수락됨</p></td>
-            `;
-        } else if (mis_status == 3) {
-            statusHTML = '<p>성공</p>';
-        } else if (mis_status == 4) {
-            statusHTML = '<p>실패</p>';
-        }
-
-        const missionElement = document.getElementById(`mission-${mis_num}`);
-        if (missionElement) {
-            missionElement.innerHTML = `
-                <td class="align-center">${missionElement.children[0].innerText}</td>
-                <td class="align-center">${missionElement.children[1].innerText}</td>
-                <td class="align-center">${missionElement.children[2].innerText}</td>
-                <td class="align-center">${missionElement.children[3].innerText}</td>
-                ${statusHTML}
-            `;
-        }
-    }
-
     // 미션 삭제 함수
     function deleteMission(mis_num, mis_point) {
         const deleteData = {
@@ -320,6 +291,8 @@ document.addEventListener("DOMContentLoaded", function() {
             mis_point: mis_point,
             mem_num: 0 // mem_num을 필요에 따라 변경
         };
+
+        console.log('Sending delete request:', deleteData); // Debugging line
 
         $.ajax({
             url: '/mission/delete',
@@ -330,7 +303,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 if (response.result == 'success') {
                     alert('미션이 삭제되었습니다.');
                     document.getElementById(`mission-${mis_num}`).remove();
-                    socket.send(JSON.stringify(deleteData)); // 실시간 업데이트 전송
+                    // 소켓 전송 삭제 (실시간 업데이트 필요 없음)
                 } else {
                     alert('미션 삭제 실패');
                 }
@@ -374,8 +347,8 @@ document.addEventListener("DOMContentLoaded", function() {
                         window.close();
                     } else if(param.result == 'success'){
                         alert('미션을 전송했습니다.');
-                        // 상태를 1로 설정하여 추가된 미션에 대해 올바른 버튼을 추가합니다.
-                        missionData.mis_status = 1;
+                        // 서버에서 반환된 mis_num을 사용하여 동적 요소 생성
+                        missionData.mis_num = param.mis_num;
                         socket.send(JSON.stringify(missionData)); // 실시간 전송
                         appendMission(missionData, 'mission-list'); // 목록에 추가
                         appendMission(missionData, 'mission-list2'); // 목록에 추가

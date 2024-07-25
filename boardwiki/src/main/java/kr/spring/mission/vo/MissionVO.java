@@ -17,4 +17,5 @@ public class MissionVO {
 	private Date mis_date;
 	private Long str_num;
 	private Long mem_num;
+	private String mem_nickName;
 }

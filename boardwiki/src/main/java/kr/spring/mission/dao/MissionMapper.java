@@ -13,7 +13,10 @@ import kr.spring.mission.vo.MissionVO;
 
 @Mapper
 public interface MissionMapper {
-	@Insert("INSERT INTO mission (mis_num,str_num, mis_content, mis_point, mis_status, mem_num) VALUES (mission_seq.nextval,#{str_num}, #{mis_content}, #{mis_point}, 1, #{mem_num})")
+	@Select("SELECT mission_seq.nextval FROM dual")
+	Integer addMission();
+	
+	@Insert("INSERT INTO mission (mis_num,str_num, mis_content, mis_point, mis_status, mem_num) VALUES (#{mis_num},#{str_num}, #{mis_content}, #{mis_point}, 1, #{mem_num})")
     void insertMission(MissionVO mission);
 
 	@Select("SELECT * FROM (SELECT a.*, rownum rnum FROM (SELECT * FROM mission WHERE str_num = #{str_num})a) WHERE rnum >= #{start} AND rnum <= #{end}")
@@ -33,4 +36,7 @@ public interface MissionMapper {
 
     @Select("SELECT COUNT(*) FROM mission WHERE mem_num = #{mem_num} AND str_num=#{str_num}")
     Integer selectcountmember(Map<String,Object> map);
+    
+    @Select("SELECT * FROM mission WHERE mis_num=#{mis_num}")
+    MissionVO selectmission(Long mis_num);
 }

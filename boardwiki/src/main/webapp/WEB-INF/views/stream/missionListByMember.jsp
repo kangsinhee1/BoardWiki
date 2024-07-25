@@ -45,8 +45,8 @@ ${logout}<br>
 											 <button class="delete-mission" data-mis-num="${mission.mis_num}" data-mis-point="${mission.mis_point}">취소</button>
 										</c:if>
 										<c:if test="${mission.mis_status == 2}">
-											<button class="accept-mission" data-mis-num="${mission.mis_num}" data-mis-point="${mission.mis_point}">수락</button>
-                    						<button class="delete-mission" data-mis-num="${mission.mis_num}" data-mis-point="${mission.mis_point}">취소</button>
+											<button class="success-mission" data-mis-num="${mission.mis_num}" data-mis-point="${mission.mis_point}">성공</button>
+                							<button class="fail-mission" data-mis-num="${mission.mis_num}" data-mis-point="${mission.mis_point}">실패</button>
 										</c:if>
 										<c:if test="${mission.mis_status == 3}">
 											<p class="font-white">성공</p>

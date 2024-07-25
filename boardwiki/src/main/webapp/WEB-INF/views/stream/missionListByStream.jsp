@@ -29,6 +29,7 @@ ${logout}<br>
 									<th>포인트</th>
 									<th>유저</th>
 									<th>날짜</th>
+									<th>버튼</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -36,7 +37,7 @@ ${logout}<br>
 									<tr>
 										<td class="align-center">${mission.mis_content}</td>
 										<td class="align-center">${mission.mis_point}</td>
-										<%-- <td class="align-center">${mission.mem_nickName}</td> --%>
+										<td class="align-center">${mission.mem_nickName}</td>
 										<td class="align-center">${mission.mis_date}</td>
 										<td>
 										<c:if test="${mission.mis_status == 1}">
@@ -44,8 +45,8 @@ ${logout}<br>
                     						<button class="delete-mission" data-mis-num="${mission.mis_num}" data-mis-point="${mission.mis_point}">취소</button>
 										</c:if>
 										<c:if test="${mission.mis_status == 2}">
-											<button class="accept-mission" data-mis-num="${mission.mis_num}" data-mis-point="${mission.mis_point}">수락</button>
-                    						<button class="delete-mission" data-mis-num="${mission.mis_num}" data-mis-point="${mission.mis_point}">취소</button>
+											<button class="success-mission" data-mis-num="${mission.mis_num}" data-mis-point="${mission.mis_point}">성공</button>
+                							<button class="fail-mission" data-mis-num="${mission.mis_num}" data-mis-point="${mission.mis_point}">실패</button>
 										</c:if>
 										<c:if test="${mission.mis_status == 3}">
 											<p class="font-white">성공</p>
@@ -55,6 +56,7 @@ ${logout}<br>
 										</c:if>
 										</td>
 									</tr>
+									<input type="hidden" name="mem_num" value="${mission.mem_num}">
 								</c:forEach>
 							</tbody>
 						</table>
