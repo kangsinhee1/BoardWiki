@@ -21,17 +21,16 @@
 			<div class="row">
 				<div class="col-lg-12">
 <div class="page-main">
-	<h2>${board.boa_title}</h2>
 	<ul class="detail-info">
 		<li>
 			<c:if test="${empty board.mem_nickname}">${board.mem_email}</c:if>
 			<c:if test="${!empty board.mem_nickname}">${board.mem_nickname}</c:if>
 			<br>
 			<c:if test="${empty board.boa_mdate}">
-			작성일 : ${board.boa_rdate}
+			작성일 : ${board.boa_rdate} /
 			</c:if>
 			<c:if test="${!empty board.boa_mdate}">
-			최근 수정일 : ${board.boa_mdate}
+			최근 수정일 : ${board.boa_mdate} /
 			</c:if>
 			조회 : ${board.boa_hit}
 		</li>

@@ -19,7 +19,6 @@
 			<div class="row">
 				<div class="col-lg-12">
 <div class="page-main">
-	<h2>${rulebook.item_name}</h2>
 	<ul class="detail-info">
 		<li>
 			<c:if test="${empty rulebook.rulB_mdate}">

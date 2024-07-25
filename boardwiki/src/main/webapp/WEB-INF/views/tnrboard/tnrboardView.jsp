@@ -31,7 +31,6 @@
 			<div class="row">
 				<div class="col-lg-12">
 <div class="page-main">
-	<h2>${tnrboard.tnr_title}</h2>
 	<ul class="detail-info">
 		<li>
 			<c:if test="${empty tnrboard.mem_nickname}">작성자 : ${tnrboard.mem_email}</c:if>
@@ -39,10 +38,10 @@
 			<br>
 			제품명 : ${tnrboard.item_name}<br>
 			<c:if test="${empty tnrboard.tnr_mdate}">
-			작성일 : ${tnrboard.tnr_rdate}
+			작성일 : ${tnrboard.tnr_rdate} /
 			</c:if>
 			<c:if test="${!empty tnrboard.tnr_mdate}">
-			최근 수정일 : ${tnrboard.tnr_mdate}
+			최근 수정일 : ${tnrboard.tnr_mdate} /
 			</c:if>
 			조회 : ${tnrboard.tnr_hit}
 		</li>
