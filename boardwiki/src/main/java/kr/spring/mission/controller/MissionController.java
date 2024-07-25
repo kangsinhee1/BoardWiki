@@ -163,7 +163,6 @@ public class MissionController {
             pointService.processPointTransaction(point2);
     	}
     	
-    	
     	missionService.updateMissionStatus(vo);
     	map.put("result", "success");
         return map;
@@ -171,7 +170,7 @@ public class MissionController {
 
     @PostMapping("/mission/delete")
     @ResponseBody
-    public Map<String, String> deleteMission(long mis_num, HttpSession session, int mis_point, long mem_num) {
+    public Map<String, String> deleteMission(long mis_num, HttpSession session, long mis_point, long mem_num) {
     	MemberVO user = (MemberVO) session.getAttribute("user");
     	Map<String, String> map = new HashMap<>();
         PointVO point2 = new PointVO();
@@ -180,7 +179,8 @@ public class MissionController {
 		}else {
 			point2.setMem_num(mem_num);
 		}
-		point2.setPoi_use(mis_point);
+        int mis_point1 = (int)mis_point;
+		point2.setPoi_use(mis_point1);
 		point2.setPoi_increase(2);
 		point2.setPoi_status(4);
         pointService.processPointTransaction(point2);

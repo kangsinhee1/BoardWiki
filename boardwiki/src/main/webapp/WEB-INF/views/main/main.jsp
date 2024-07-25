@@ -11,6 +11,13 @@
 div.hiddenImage figure{
 	display:none; 
 }
+.blog-item .text-box p {
+    height: 130px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+}
 </style>
 <body>
 	<!-- Page Preloder -->

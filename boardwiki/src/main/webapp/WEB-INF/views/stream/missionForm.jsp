@@ -22,7 +22,6 @@ ${logout}<br>
         <input type="text" id="mission_content" name="mission_content" required><br>
         <label for="mission_point" class="font-white">포인트:</label>
         <input type="number" id="mission_point" name="mission_point" required><br>
-        <input type="hidden" id="str_num" name="str_num" value="${param.str_num}">
         <input type="hidden" id="mem_nickName" name="mem_nickName" value="${user.mem_nickName}">
         <button type="submit">미션 보내기</button>
     </form>
@@ -33,6 +32,6 @@ ${logout}<br>
     </div>
     </div>
     </section>
-    <script>
+<script>
 let strNum = ${param.str_num};
 </script>

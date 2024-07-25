@@ -42,12 +42,11 @@ public class AttendanceController {
         MemberVO user = (MemberVO) session.getAttribute("user");
         if (user != null) {
             long mem_num = user.getMem_num();
-            Integer dice = 0;
-            dice = diceService.selectDicechanec(mem_num);
-            if(dice > 0 ) {
-            	model.addAttribute("dice",dice);
-            }else {
-            	model.addAttribute("dice", 0);
+            Integer dice = diceService.selectDicechanec(mem_num);
+            if (dice != null && dice != 0) {
+                model.addAttribute("dice", dice);
+            } else {
+                model.addAttribute("dice", 0);
             }
             
             AttendanceVO attendance = null;

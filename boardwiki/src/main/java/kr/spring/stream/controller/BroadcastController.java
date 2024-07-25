@@ -68,9 +68,10 @@ public class BroadcastController {
     	}
     	int strnum = 0;
     	if(user != null) {
-    		if(streamKeyService.streamingNumber(user.getMem_num()) == null) {
+    		if(streamKeyService.streamingNumber(user.getMem_num()) != null) {
     			strnum = streamKeyService.streamingNumber(user.getMem_num());
     		}
+    		log.debug("<체크>"+strnum);
     		if(strnum != 0) {
     			request.setAttribute("strnum", strnum);
     		}else if(strnum == 0) {

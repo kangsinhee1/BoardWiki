@@ -102,7 +102,6 @@ public class StreamVerificationController {
         vos.setStrt_chat(strt_chat);
         vos.setStrc_num(vos2.getStrc_num());
         streamCreatingService.insertMessage(vos);
-        log.debug("<<닉네임>>"+user.getMem_nickName());
         map.put("mem_nickName", user.getMem_nickName());
         map.put("result", "success");
         return map;

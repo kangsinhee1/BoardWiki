@@ -8,11 +8,17 @@
 <div class="row">
 		<div class="col-lg-12">
 		<div class="game-main">
+<c:if test="${user == null}">
+<div class="result-display">
+${logout}<br>
+<button onclick="window.close()">닫기</button>
+</div>
+</c:if>
+<c:if test="${user != null}">
 <h2>도네이션 목록 (회원 기준)</h2>
 <c:if test="${count == 0}">
     <div class="result-display">표시할 게시물이 없습니다.</div>
 </c:if>
-
 <c:if test="${count > 0}">
 	<div class="chart-table">
     <table  id="donation-list">
@@ -38,11 +44,12 @@
     </div>
     <div class="align-center">${page}</div>
 </c:if>
-<script>
-let strNum = ${param.str_num};
-</script>
+</c:if>
 </div>
 </div>
 </div>
 </div>
 </section>
+<script>
+let strNum = ${param.str_num};
+</script>
