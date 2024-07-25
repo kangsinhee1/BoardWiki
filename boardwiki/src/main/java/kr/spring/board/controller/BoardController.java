@@ -314,7 +314,43 @@ public class BoardController {
 			FileUtil.removeFile(request, db_board.getFilename());
 		}
 
-		return "redirect:/board/list";
+		return "redirect:/board/list?boa_category=1";
+	}
+	/*====================
+	 *  게시판 글 삭제
+	 *====================*/
+	@GetMapping("/board/delete2")
+	public String submitDelete2(long boa_num,
+							   HttpServletRequest request) {
+		log.debug("<<게시판 글 삭제 -- boa_num>> : " + boa_num);
+
+		BoardVO db_board = boardService.selectBoard(boa_num);
+
+		boardService.deleteBoard(boa_num);
+
+		if(db_board.getFilename()!=null) {
+			FileUtil.removeFile(request, db_board.getFilename());
+		}
+
+		return "redirect:/board/list2?boa_category=4";
+	}
+	/*====================
+	 *  게시판 글 삭제
+	 *====================*/
+	@GetMapping("/board/delete3")
+	public String submitDelete3(long boa_num,
+							   HttpServletRequest request) {
+		log.debug("<<게시판 글 삭제 -- boa_num>> : " + boa_num);
+
+		BoardVO db_board = boardService.selectBoard(boa_num);
+
+		boardService.deleteBoard(boa_num);
+
+		if(db_board.getFilename()!=null) {
+			FileUtil.removeFile(request, db_board.getFilename());
+		}
+
+		return "redirect:/board/list2?boa_category=5";
 	}
 }
 

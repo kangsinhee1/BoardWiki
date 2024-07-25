@@ -66,16 +66,32 @@
 		<c:if test="${!empty user && user.mem_num == board.mem_num || user.mem_auth == 9}">
 		<input type="button" value="수정"
 		   onclick="location.href='update2?boa_num=${board.boa_num}'">
-		<input type="button" value="삭제" id="delete_btn">
+		<c:choose>
+			<c:when test="${board.boa_category == 4}">
+				<input type="button" value="삭제" id="delete_btn">
 		<script>
 			const delete_btn = document.getElementById('delete_btn');
 			delete_btn.onclick=function(){
 				const choice = confirm('삭제하시겠습니까?');
 				if(choice){
-					location.replace('delete?boa_num=${board.boa_num}');
+					location.replace('delete2?boa_num=${board.boa_num}');
 				}
 			};
-		</script>   
+		</script> 
+		    </c:when>
+		    <c:when test="${board.boa_category == 5}">
+				<input type="button" value="삭제" id="delete_btn">
+		<script>
+			const delete_btn = document.getElementById('delete_btn');
+			delete_btn.onclick=function(){
+				const choice = confirm('삭제하시겠습니까?');
+				if(choice){
+					location.replace('delete3?boa_num=${board.boa_num}');
+				}
+			};
+		</script> 
+		    </c:when> 
+		</c:choose>
 		</c:if>
 		<c:choose>
 			<c:when test="${board.boa_category == 4}">

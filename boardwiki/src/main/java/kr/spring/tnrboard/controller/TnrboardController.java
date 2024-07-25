@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.spring.board.vo.BoardVO;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.tnrboard.service.TnrboardService;
 import kr.spring.tnrboard.vo.TnrboardVO;
@@ -220,25 +221,37 @@ public class TnrboardController {
 	 *  게시판 글 삭제
 	 *====================*/
 	@GetMapping("/tnrboard/tnrboardDelete")
-	public String submitDelete(@Valid TnrboardVO tnrboardVO,
-							   long tnr_num,
-							   Model model,
-							   HttpServletRequest request) {
-		log.debug("<<게시판 글 삭제 -- tnr_num>> : " + tnr_num);
+	public String submitDelete(long tnr_num,
+			   HttpServletRequest request) {
+		log.debug("<<게시판 글 삭제 -- boa_num>> : " + tnr_num);
 
 		TnrboardVO db_board = tnrboardService.selectTnrBoard(tnr_num);
-
 		tnrboardService.deleteTnrBoard(tnr_num);
 
 		if(db_board.getFilename()!=null) {
 			FileUtil.removeFile(request, db_board.getFilename());
 		}
 
-		model.addAttribute("message", "글 삭제 완료!!");
-		model.addAttribute("url","/tnrboard/tnrboardList?tnr_category=" + tnrboardVO.getTnr_category());
-
-		return "common/resultAlert";
+		return "redirect:/tnrboard/tnrboardList?tnr_category=1";
 	}
+	/*====================
+	 *  게시판 글 삭제
+	 *====================*/
+	@GetMapping("/tnrboard/tnrboardDelete2")
+	public String submitDelete2(long tnr_num,
+			   HttpServletRequest request) {
+		log.debug("<<게시판 글 삭제 -- boa_num>> : " + tnr_num);
+
+		TnrboardVO db_board = tnrboardService.selectTnrBoard(tnr_num);
+		tnrboardService.deleteTnrBoard(tnr_num);
+
+		if(db_board.getFilename()!=null) {
+			FileUtil.removeFile(request, db_board.getFilename());
+		}
+
+		return "redirect:/tnrboard/tnrboardList?tnr_category=2";
+	}
+	
 }
 
 
