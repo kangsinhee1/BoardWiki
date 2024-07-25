@@ -2,19 +2,13 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<section class="page-top-section set-bg" data-setbg="/img/page-top-bg/4.jpg">
-		<div class="page-info">
-			<h2>주문내역</h2>
-			<div class="site-breadcrumb">
-			</div>
-		</div>
-</section>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 <section class="blog-page">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
 <div class="page-main">
+<h2>주문내역</h2>
 	<c:if test="${count==0}">
 	<div class="result-display">주문내역이 없습니다.</div>
 	</c:if>
