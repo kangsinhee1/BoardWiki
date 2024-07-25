@@ -25,6 +25,7 @@
             	<a href="${pageContext.request.contextPath}/admin/adminPage">관리자 페이지</a>
           	</c:if>
 	        <a href="${pageContext.request.contextPath}/cart/cart" class="cart">장바구니</a>
+	        <a href="${pageContext.request.contextPath}/attendance/attendance">출석체크</a>
             <c:if test="${user.mem_auth!=9 && user != null}">
             </c:if>
         </div>
@@ -80,11 +81,6 @@
                     <li><a href="#">대회</a>
                         <ul class="sub-menu">
                             <li><a href="${pageContext.request.contextPath}/contest/contestList">대회</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#">출석체크</a>
-                        <ul class="sub-menu">
-                            <li><a href="${pageContext.request.contextPath}/attendance/attendance">출석체크</a></li>
                         </ul>
                     </li>
                 </ul>
