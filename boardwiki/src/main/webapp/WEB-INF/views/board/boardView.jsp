@@ -46,6 +46,10 @@
                     </div>
                     <hr>
                     <div class="align-right">
+                    <div class="detail-content font-white">
+						${board.boa_content} 
+					</div>
+                   
                     <c:if test="${!empty user && user.mem_num == board.mem_num}">
                         <input type="button" value="수정"
                                 onclick="location.href='update?boa_num=${board.boa_num}'">
