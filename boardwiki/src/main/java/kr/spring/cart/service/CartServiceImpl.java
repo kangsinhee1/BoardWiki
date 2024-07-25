@@ -45,10 +45,7 @@ public class CartServiceImpl implements CartService{
 	public CartVO getCart(CartVO cart) {
 		return cartMapper.getCart(cart);
 	}
-	@Override
-	public void updateCartDate(CartVO cart) {
-		cartMapper.updateCartDate(cart);
-	}
+	
 	@Override
 	public CartVO selectCart(Long mem_num) {
 		return cartMapper.selectCart(mem_num);
@@ -56,6 +53,11 @@ public class CartServiceImpl implements CartService{
 	@Override
 	public void deleteSmallCart(CartVO cart) {
 		cartMapper.deleteSmallCart(cart);
+	}
+
+	@Override
+	public void updateCartDate(Long mem_num) {
+		cartMapper.updateCartDate(mem_num);
 	}
 
 	

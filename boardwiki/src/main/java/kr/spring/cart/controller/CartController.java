@@ -80,7 +80,7 @@ public class CartController {
 				}else {
 
 					cartService.insertCart(cart);
-                  //itemService.updateStock(item_num, db_item - item_quantity); // 아이템 번호와 재고 수량을 함께 전달
+                    itemService.updateStock(item_num, db_item - item_quantity); // 아이템 번호와 재고 수량을 함께 전달
 					log.debug("<<장바구니에 상품 추가 성공>>");
 					mapAjax.put("result", "success");
 				}
@@ -98,7 +98,7 @@ public class CartController {
 				}else {
 					cart.setItem_quantity(item_quantity);
                     cartService.updateCart(cart);
-                  //itemService.updateStock(item_num, db_item - item_quantity); // 아이템 번호와 재고 수량을 함께 전달
+                    itemService.updateStock(item_num, db_item - item_quantity); // 아이템 번호와 재고 수량을 함께 전달
                     log.debug("<<장바구니에 상품 추가 성공>>");
                     mapAjax.put("result", "success");
 				}

@@ -23,8 +23,8 @@ public interface CartMapper {
 	public void updateCart(CartVO cart);
 	@Update("UPDATE cart set item_quantity=#{item_quantity},cart_price=#{cart_price},cart_date=SYSTIMESTAMP WHERE mem_num=#{mem_num} AND item_num=#{item_num}")
 	public void updateCart2(CartVO cart);
-	@Update("UPDATE cart set cart_date=SYSTIMESTAMP,cart_check=1 WHERE mem_num=#{mem_num},cart_check=0")
-	public void updateCartDate(CartVO cart);
+	@Update("UPDATE cart set cart_date=SYSTIMESTAMP,cart_check=1 WHERE mem_num=#{mem_num}")
+	public void updateCartDate(Long mem_num);
 	@Select("SELECT * FROM cart WHERE mem_num=#{mem_num} AND item_num=#{item_num}")
 	public CartVO getCart(CartVO cart);
 	@Delete("DELETE FROM cart WHERE mem_num=#{mem_num} AND item_num=#{item_num}")

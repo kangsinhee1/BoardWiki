@@ -26,7 +26,7 @@ public interface OrderMapper {
 	@Select("SELECT cart_price FROM cart WHERE mem_num=#{mem_num} AND cart_check=0")
 	public List<CartVO> getpriceList(Long mem_num);
 	
-	public List<OrderVO> insertOrderList(OrderVO order);
+	public OrderVO selectagg(Long mem_num);
 	
 	public List<OrderVO> InsertOrderList(Long mem_num);
 }

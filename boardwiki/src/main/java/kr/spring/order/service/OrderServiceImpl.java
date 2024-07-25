@@ -53,4 +53,9 @@ public class OrderServiceImpl implements OrderService{
 		return orderMapper.getpriceList(mem_num);
 	}
 
+	@Override
+	public OrderVO selectagg(Long mem_num) {
+		return orderMapper.selectagg(mem_num);
+	}
+
 }

@@ -27,9 +27,13 @@ public class OrderVO {
 	private Timestamp order_date;
 	
 	private int cart_price;
-	private int cart_quantity;
+	private int item_quantity;
 	private int cart_check;
 	private Timestamp cart_date;
 	
 	private Long item_num;
+	private String item_num_list;
+	private String item_quantity_list;
+	private String cart_price_list;
+	private Long total_price;
 }
