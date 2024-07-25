@@ -41,43 +41,6 @@ public class RentController {
 		 * 보드게임 대여
 		 *=========================*/
 		// 대여 폼 호출
-		@GetMapping("/rent/rent")
-		public String form(RentVO rentVO) {
-			return "rentGame";
-		}
-		// 등록 폼에서 전송된 데이터 처리
-		@PostMapping("/rent/rent")
-		public String submit(@Valid RentVO rentVO,
-		                      BindingResult result,
-		                      @RequestParam(value = "item_num", required = true) int item_num,
-		                      HttpServletRequest request,
-		                      HttpSession session,
-		                      Model model)
-		                      throws IllegalStateException, IOException {
-		    log.debug("<<대여 저장>> : " + rentVO);
-		    log.debug("Received item_num: " + item_num);
-
-		    if(result.hasErrors()) {
-		        return "rentGame";
-		    }
-
-		    MemberVO vo = (MemberVO)session.getAttribute("user");
-		    rentVO.setMem_num(vo.getMem_num());
-		    rentVO.setItem_num(item_num);
-		    rentVO.setRent_status(1);
-
-		    rentService.insertRent(rentVO);
-
-		    model.addAttribute("message", "성공적으로 대여가 완료되었습니다.");
-		    model.addAttribute("url", request.getContextPath() + "/rent/list");
-
-		    return "common/resultAlert";
-		}
-
-
-		/*=========================
-		 * 대여 목록
-		 *=========================*/
 		@GetMapping("/rent/list")
 		public String getRentList(
 		        @RequestParam(defaultValue = "1") int pageNum,
@@ -86,10 +49,12 @@ public class RentController {
 		        HttpSession session,
 		        @RequestParam(defaultValue = "") String keyfield,
 		        @RequestParam(defaultValue = "") String keyword,
+		        @RequestParam(required = false) String startDate,
+		        @RequestParam(required = false) String endDate,
 		        Model model) {
 
-			log.debug("<<대여 목록 - order>> : " + order);
-			
+		    log.debug("<<대여 목록 - order>> : " + order);
+		    
 		    // 서비스 메서드에 전달할 파라미터를 담는 맵 생성
 		    Map<String, Object> map = new HashMap<>();
 		    map.put("keyfield", keyfield);
@@ -102,6 +67,12 @@ public class RentController {
 		    // mem_num을 맵에 추가
 		    map.put("mem_num", mem_num);
 
+		    // startDate와 endDate가 존재하는 경우, 맵에 추가
+		    if (startDate != null && !startDate.isEmpty() && endDate != null && !endDate.isEmpty()) {
+		        map.put("startDate", startDate);
+		        map.put("endDate", endDate);
+		    }
+
 		    // 검색 조건에 따른 전체 레코드 수 가져오기
 		    int count = rentService.selectRowCount(map);
 
@@ -111,7 +82,7 @@ public class RentController {
 
 		    // 검색 결과가 있는 경우, 해당 결과 리스트 가져오기
 		    if (count > 0) {
-		    	map.put("order", order);
+		        map.put("order", order);
 		        map.put("start", page.getStartRow());
 		        map.put("end", page.getEndRow());
 		        list = rentService.selectRentList(map);

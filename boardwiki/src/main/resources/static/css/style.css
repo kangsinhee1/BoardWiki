@@ -105,6 +105,14 @@ form#search_form {
 	border: none;
 }
 
+ul.rent_search {
+	list-style: none;
+	padding: 0;
+	margin-left: 20%;
+	display: flex;
+	gap: 10px;
+}
+
 ul.search {
 	width: 340px;
 	list-style: none;

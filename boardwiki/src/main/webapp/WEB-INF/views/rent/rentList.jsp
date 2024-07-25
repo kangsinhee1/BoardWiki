@@ -26,10 +26,10 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-            <div class="align-center"style="text-align: center;">
-                <form action="list" id="rent_search_form" method="get">
+            <div class="align-center">
+                <form action="list" id="search_form" method="get">
                     <input type="hidden" name="item_name" value="${param.item_name}">
-                    <ul class="search">
+                    <ul class="rent_search">
                         <li>
                             <select name="keyfield" id="keyfield" class="form-control">
                                 <option value="1" <c:if test="${param.keyfield == 1}">selected</c:if>>게임명</option>
@@ -38,7 +38,7 @@
                                 <option value="4" <c:if test="${param.keyfield == 4}">selected</c:if>>제목+내용</option>
                             </select>
                         </li>
-                        <li id="dateFields" style="display: <c:if test="${param.keyfield == 2}">block</c:if>;" class="date-fields">
+                        <li id="dateFields" class="date-fields" style="display: flex;">
                             <input type="date" name="startDate" id="startDate" class="form-control" value="${param.startDate}">
                             <input type="date" name="endDate" id="endDate" class="form-control" value="${param.endDate}">
                         </li>
@@ -57,7 +57,7 @@
                         </select>
                     </div>
                 </form>
-                </div>
+                
                 <script type="text/javascript">
                     document.getElementById('order').addEventListener('change', function() {
                         document.getElementById('search_form').submit();
