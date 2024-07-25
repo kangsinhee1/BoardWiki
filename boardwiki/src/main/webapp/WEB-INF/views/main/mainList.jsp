@@ -16,7 +16,7 @@
 	<div class="container">
 
 		<div class="game-main">
-			<h2>Game</h2>
+			<h2 id="page">Game</h2>
 			<b class="hr"></b>
 			<c:if test="${count > 0}">
 				<div class="col-xl-12 col-lg-12 col-md-12">
@@ -45,7 +45,7 @@
 			</c:if>
 			</c:forEach>
 		</div>
-		<div class="align-center" style="text-align: center">${page}</div>
+		<div class="align-center" style="text-align: center"><a href="#page">${page}</a></div>
 		</c:if>
 
 		<c:if test="${count == 0}">
@@ -57,7 +57,7 @@
 
 <section class="games-section">
 	<div class="container">
-		<h2 id="section01">게시글</h2>
+		<h2 id="page2">게시글</h2>
 			<b class="hr"></b>
 		<div>
 			<c:if test="${count2==0}">
@@ -86,14 +86,14 @@
 						</tr>
 					</c:forEach>
 				</table>
-				<div class="align-center" style="text-align: center;">${page2}</div>
+				<div class="align-center" style="text-align: center;"><a href="#page2">${page2}</a></div>
 			</c:if>
 		</div>
 	</div>
 </section>
 <section class="games-section">
 	<div class="container">
-		<h2>중고게시판</h2>
+		<h2 id="page3">중고게시판</h2>
 		<b class="hr"></b>
 		<div>
 			<c:if test="${count3 == 0}">
@@ -131,7 +131,7 @@
 						</tr>
 					</c:forEach>
 				</table>
-				<div class="align-center" style="text-align: center;">${page3}</div>
+				<div class="align-center" style="text-align: center;"><a href ="#page3">${page3}</a></div>
 			</c:if>
 		</div>
 	</div>

@@ -81,12 +81,15 @@ public class RentController {
 		@GetMapping("/rent/list")
 		public String getRentList(
 		        @RequestParam(defaultValue = "1") int pageNum,
+		        @RequestParam(defaultValue="1") int order,
 		        HttpServletRequest request,
 		        HttpSession session,
 		        @RequestParam(defaultValue = "") String keyfield,
 		        @RequestParam(defaultValue = "") String keyword,
 		        Model model) {
 
+			log.debug("<<대여 목록 - order>> : " + order);
+			
 		    // 서비스 메서드에 전달할 파라미터를 담는 맵 생성
 		    Map<String, Object> map = new HashMap<>();
 		    map.put("keyfield", keyfield);
@@ -103,11 +106,12 @@ public class RentController {
 		    int count = rentService.selectRowCount(map);
 
 		    // 페이지 처리를 위한 페이징 유틸리티 생성
-		    PagingUtil page = new PagingUtil(keyfield, keyword, pageNum, count, 20, 10, "list");
+		    PagingUtil page = new PagingUtil(keyfield, keyword, pageNum, count, 20, 10, "list"+"&order="+order);
 		    List<RentVO> list = null;
 
 		    // 검색 결과가 있는 경우, 해당 결과 리스트 가져오기
 		    if (count > 0) {
+		    	map.put("order", order);
 		        map.put("start", page.getStartRow());
 		        map.put("end", page.getEndRow());
 		        list = rentService.selectRentList(map);

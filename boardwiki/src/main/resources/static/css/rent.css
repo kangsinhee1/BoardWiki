@@ -2,6 +2,13 @@
 /* 게시판 목록
 ---------------------*/
 
+.rent_search_form{
+	margin-left: -15%;
+	padding-bottom:0;
+	border:none;
+}
+
+
 .rent_btn {
     display: inline-block;
     font-size: 14px;
