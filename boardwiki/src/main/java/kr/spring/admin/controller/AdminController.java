@@ -23,6 +23,8 @@ import kr.spring.item.service.ItemService;
 import kr.spring.item.vo.ItemVO;
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
+import kr.spring.point.service.PointService;
+import kr.spring.point.vo.PointVO;
 import kr.spring.rent.service.RentService;
 import kr.spring.rent.vo.RentVO;
 import kr.spring.report.service.ReportService;
@@ -47,16 +49,20 @@ public class AdminController {
 
 	@Autowired
 	private ReportService reportService;
-	
+
 	@Autowired
 	private ContestService contestService;
+	
+	@Autowired
+	private PointService pointService;
+	
 	/*==============================
 	 * 관리자 페이지 메인
 	 *==============================*/
 	@GetMapping("/admin/adminPage")
 	public String adminPage(HttpSession session,
-							HttpServletRequest request,
-							Model model) {
+			HttpServletRequest request,
+			Model model) {
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		if(user.getMem_auth()!= 9) {
 			model.addAttribute("message","관리자 등급만 접속할 수 있습니다.");
@@ -72,12 +78,12 @@ public class AdminController {
 	 *==============================*/
 	@GetMapping("/adminPage/memberManage")
 	public String memberManagePage(@RequestParam(defaultValue="1") int pageNum,
-            						@RequestParam(defaultValue="") String category,
-            						String keyfield,
-            						String keyword,Model model,
-            						HttpSession session,
-            						HttpServletRequest request
-            						) {
+			@RequestParam(defaultValue="") String category,
+			String keyfield,
+			String keyword,Model model,
+			HttpSession session,
+			HttpServletRequest request
+			) {
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		if(user.getMem_auth()!= 9) {
 			model.addAttribute("message","관리자 등급만 접속할 수 있습니다.");
@@ -96,14 +102,14 @@ public class AdminController {
 				new PagingUtil(keyfield,keyword,pageNum,count,5,10,"memberManage");
 
 		List<MemberVO> list = null;
-	    if(count > 0) {
-	    	map.put("start", page.getStartRow());
-	    	map.put("end", page.getEndRow());
+		if(count > 0) {
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
 
-	    	list = memberService.selectAllmember(map);
-	    }
+			list = memberService.selectAllmember(map);
+		}
 
-	    model.addAttribute("count", count);
+		model.addAttribute("count", count);
 		model.addAttribute("list", list);
 		model.addAttribute("page", page.getPage());
 
@@ -115,11 +121,11 @@ public class AdminController {
 	 *==============================*/
 	@GetMapping("/adminPage/gameManage")
 	public String gameManagePage(@RequestParam(defaultValue="1") int pageNum,
-								 @RequestParam(defaultValue="") String category,
-								 String keyfield,
-								 String keyword,Model model,
-								 HttpSession session,
-								 HttpServletRequest request) {
+			@RequestParam(defaultValue="") String category,
+			String keyfield,
+			String keyword,Model model,
+			HttpSession session,
+			HttpServletRequest request) {
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		if(user.getMem_auth()!= 9) {
 			model.addAttribute("message","관리자 등급만 접속할 수 있습니다.");
@@ -241,11 +247,12 @@ public class AdminController {
 	 *==============================*/
 	@GetMapping("/adminPage/pointManage")
 	public String pointManagePage(@RequestParam(defaultValue="1") int pageNum,
-			@RequestParam(defaultValue="") String category,
-			String keyfield,
-			String keyword,Model model,
+								@RequestParam(defaultValue="") String category,
+														String keyfield,
+														String keyword,Model model,
 			HttpSession session,
-			HttpServletRequest request) {
+			HttpServletRequest request
+			) {
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		if(user.getMem_auth()!= 9) {
 			model.addAttribute("message","관리자 등급만 접속할 수 있습니다.");
@@ -258,18 +265,17 @@ public class AdminController {
 		map.put("keyfield", keyfield);
 		map.put("keyword", keyword);
 
-		int count = itemService.selectRowCount2(map);
+		int count = memberService.countAllmember(map);
 
 		PagingUtil page =
-				new PagingUtil(keyfield,keyword,pageNum,count,20,10,"gameManage");
+				new PagingUtil(keyfield,keyword,pageNum,count,5,10,"pointManage");
 
-		List<ItemVO> list = null;
+		List<MemberVO> list = null;
 		if(count > 0) {
 			map.put("start", page.getStartRow());
 			map.put("end", page.getEndRow());
 
-
-			list = itemService.selectList(map);
+			list = memberService.selectAllmember(map);
 		}
 
 		model.addAttribute("count", count);
@@ -278,6 +284,50 @@ public class AdminController {
 
 		return "pointManage";
 	}
+	
+	/**포인트 목록*/
+	@GetMapping("/point/pointListAdmin")
+	public String getListPoint(
+			long mem_num,
+	        @RequestParam(defaultValue="1") int pageNum,
+	        @RequestParam(defaultValue="") String poi_status,
+	        Model model) {
+
+	    int point = 0;
+
+	    log.debug("<<포인트 목록 - poi_status>> : {}", poi_status);
+	    log.debug("<<포인트 목록 - user>> : {}", mem_num);
+
+	    Map<String, Object> map = new HashMap<>();
+	    map.put("mem_num", mem_num);
+	    if (!poi_status.isEmpty()) {
+	        map.put("poi_status", Integer.parseInt(poi_status));
+	    }
+
+	    // 전체, 검색 레코드 수
+	    int count = pointService.selectRowCount(map);
+
+	    // 페이지 처리
+	    PagingUtil page = new PagingUtil(pageNum, count, 20, 10, "listAdmin",
+	            "&poi_status=" + poi_status + "&mem_num=" + mem_num);
+
+	    List<PointVO> list = null;
+	    if (count > 0) {
+	        map.put("start", page.getStartRow());
+	        map.put("end", page.getEndRow());
+
+	        list = pointService.selectPointList(map);
+	        point = pointService.selectPointTotal(mem_num);
+	    }
+
+	    model.addAttribute("count", count);
+	    model.addAttribute("list", list);
+	    model.addAttribute("page", page.getPage());
+	    model.addAttribute("point", point);
+
+	    return "pointListAdmin";
+	}
+
 	/*==============================
 	 * 관리자 페이지 (신고 관리)
 	 *==============================*/
@@ -322,10 +372,10 @@ public class AdminController {
 	}
 	@GetMapping("/adminPage/reportDetail")
 	public ModelAndView reportDetailPage(Long report_typeDetail,
-								   int report_type, Long report_num) {
-		
+			int report_type, Long report_num) {
+
 		ReportVO report = reportService.selectReportDetail(report_typeDetail, report_type, report_num);
-		
+
 		return new ModelAndView("reportDetail","report",report);
 	}
 	/*==============================
@@ -338,29 +388,29 @@ public class AdminController {
 			@RequestParam(defaultValue="5") String boa_category,
 			String keyfield,String keyword,Model model) {
 
-	Map<String,Object> map = new HashMap<>();
-	map.put("boa_category", boa_category);
-	map.put("keyfield", keyfield);
-	map.put("keyword", keyword);
-	int count = boardService.selectRowCount(map);
+		Map<String,Object> map = new HashMap<>();
+		map.put("boa_category", boa_category);
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+		int count = boardService.selectRowCount(map);
 
-	PagingUtil page = new PagingUtil(keyfield,keyword,pageNum,count,
-						10,10,"QnaManage","&boa_category="+boa_category+"&order="+order);
-	List<BoardVO> list = null;
-	if(count > 0) {
-		map.put("order", order);
-		map.put("start", page.getStartRow());
-		map.put("end", page.getEndRow());
+		PagingUtil page = new PagingUtil(keyfield,keyword,pageNum,count,
+				10,10,"QnaManage","&boa_category="+boa_category+"&order="+order);
+		List<BoardVO> list = null;
+		if(count > 0) {
+			map.put("order", order);
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
 
-		list = boardService.selectList(map);
-	}
+			list = boardService.selectList(map);
+		}
 
-	model.addAttribute("count", count);
-	model.addAttribute("list", list);
-	model.addAttribute("page", page.getPage());
+		model.addAttribute("count", count);
+		model.addAttribute("list", list);
+		model.addAttribute("page", page.getPage());
 
 
-	return "QnaManage";
+		return "QnaManage";
 	}
 
 	@GetMapping("/adminPage/QnaManage2")
@@ -377,56 +427,56 @@ public class AdminController {
 			map.put("result", "false");
 		}
 
-	return map;
+		return map;
 	}
 	/*=========================
 	 * 관리자 대여 목록 조회
 	 *=========================*/
 	@GetMapping("/rent/rentListAdmin")
 	public String getAdminRentList(
-	        @RequestParam(defaultValue = "1") int pageNum,
-	        @RequestParam(defaultValue = "") String keyfield,
-	        @RequestParam(defaultValue = "") String keyword,
-	        Model model) {
+			@RequestParam(defaultValue = "1") int pageNum,
+			@RequestParam(defaultValue = "") String keyfield,
+			@RequestParam(defaultValue = "") String keyword,
+			Model model) {
 
-	    // 서비스 메서드에 전달할 파라미터를 담는 맵 생성
-	    Map<String, Object> map = new HashMap<>();
-	    map.put("keyfield", keyfield);
-	    map.put("keyword", keyword);
+		// 서비스 메서드에 전달할 파라미터를 담는 맵 생성
+		Map<String, Object> map = new HashMap<>();
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
 
-	    // 검색 조건에 따른 전체 레코드 수 가져오기 (모든 회원 대여 목록 수)
-	    int count = rentService.selectAllMembersRowCount(map);
+		// 검색 조건에 따른 전체 레코드 수 가져오기 (모든 회원 대여 목록 수)
+		int count = rentService.selectAllMembersRowCount(map);
 
-	    // 페이지 처리를 위한 페이징 유틸리티 생성
-	    PagingUtil page = new PagingUtil(keyfield, keyword, pageNum, count, 20, 10, "rentListAdmin");
-	    List<RentVO> list = null;
+		// 페이지 처리를 위한 페이징 유틸리티 생성
+		PagingUtil page = new PagingUtil(keyfield, keyword, pageNum, count, 20, 10, "rentListAdmin");
+		List<RentVO> list = null;
 
-	    // 검색 결과가 있는 경우, 해당 결과 리스트 가져오기
-	    if (count > 0) {
-	        map.put("start", page.getStartRow());
-	        map.put("end", page.getEndRow());
-	        list = rentService.selectAllMembersRentList(map);
-	    }
+		// 검색 결과가 있는 경우, 해당 결과 리스트 가져오기
+		if (count > 0) {
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			list = rentService.selectAllMembersRentList(map);
+		}
 
-	    // 뷰에서 사용할 모델에 속성 추가
-	    model.addAttribute("count", count);
-	    model.addAttribute("list", list);
-	    model.addAttribute("page", page.getPage());
+		// 뷰에서 사용할 모델에 속성 추가
+		model.addAttribute("count", count);
+		model.addAttribute("list", list);
+		model.addAttribute("page", page.getPage());
 
-	    return "rentListAdmin"; // adminRentList 뷰 이름 반환
+		return "rentListAdmin"; // adminRentList 뷰 이름 반환
 	}
-	
+
 	/*==============================
 	 * 		관리자 페이지 (대회목록)
 	 *==============================*/
 	@GetMapping("/adminPage/contestAdminList")
 	public String contestList(@RequestParam(defaultValue="1") int pageNum,
-            						@RequestParam(defaultValue="") String category,
-            						String keyfield,
-            						String keyword,Model model,
-            						HttpSession session,
-            						HttpServletRequest request
-            						) {
+			@RequestParam(defaultValue="") String category,
+			String keyfield,
+			String keyword,Model model,
+			HttpSession session,
+			HttpServletRequest request
+			) {
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		if(user != null && user.getMem_auth()!= 9) {
 			model.addAttribute("message","관리자 등급만 접속할 수 있습니다.");
@@ -445,32 +495,32 @@ public class AdminController {
 				new PagingUtil(keyfield,keyword,pageNum,count,5,10,"contestAdminList");
 
 		List<ContestVO> list = null;
-	    if(count > 0) {
-	    	map.put("start", page.getStartRow());
-	    	map.put("end", page.getEndRow());
+		if(count > 0) {
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
 
-	    	list = contestService.selectAllcontest(map);
-	    }
+			list = contestService.selectAllcontest(map);
+		}
 
-	    model.addAttribute("count", count);
+		model.addAttribute("count", count);
 		model.addAttribute("list", list);
 		model.addAttribute("page", page.getPage());
 
 		return "contestAdminList";
 	}
-	
+
 	/*==============================
 	 * 		관리자 페이지(대회목록상세)
 	 *==============================*/
 	@GetMapping("/adminPage/contestAdminListDetail")
 	public String contestListDetail(@RequestParam(defaultValue="1") int pageNum,
-            						@RequestParam(defaultValue="") String category,
-            						String keyfield,
-            						String keyword,Model model,
-            						HttpSession session,
-            						HttpServletRequest request,
-            						long con_num
-            						) {
+			@RequestParam(defaultValue="") String category,
+			String keyfield,
+			String keyword,Model model,
+			HttpSession session,
+			HttpServletRequest request,
+			long con_num
+			) {
 		MemberVO user = (MemberVO)session.getAttribute("user");
 		if(user != null && user.getMem_auth()!= 9) {
 			model.addAttribute("message","관리자 등급만 접속할 수 있습니다.");
@@ -490,14 +540,14 @@ public class AdminController {
 				new PagingUtil(keyfield,keyword,pageNum,count,5,10,"contestAdminListDetail");
 
 		List<ContestVO> list = null;
-	    if(count > 0) {
-	    	map.put("start", page.getStartRow());
-	    	map.put("end", page.getEndRow());
+		if(count > 0) {
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
 
-	    	list = contestService.selectContestAdminApplyList(map);
-	    }
+			list = contestService.selectContestAdminApplyList(map);
+		}
 
-	    model.addAttribute("count", count);
+		model.addAttribute("count", count);
 		model.addAttribute("list", list);
 		model.addAttribute("page", page.getPage());
 
