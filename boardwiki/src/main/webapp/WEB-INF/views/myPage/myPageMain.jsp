@@ -40,7 +40,7 @@
                     <c:if test="${!empty member.mem_photo }">
                         <img src="${pageContext.request.contextPath}/images/${member.mem_photo}" class="profile-img mb-3" alt="Profile Image">
                     </c:if>
-                    <h5>${member.mem_name}</h5>
+                    <h5 style="color:white">${member.mem_name}</h5>
                     <p class="card-text">이메일: ${member.mem_email}</p>
                     <p class="card-text">닉네임: ${member.mem_nickName}</p>
                     <c:if test="${member.mem_mdate == null}">
@@ -52,11 +52,14 @@
                     <c:if test="${member.mem_provider != null }">
                         <p class="card-text">가입 플랫폼: ${member.mem_provider}</p>
                     </c:if>
-                    <a href="${pageContext.request.contextPath}/member/memberUpdate" class="btn btn-primary">회원번호 수정</a>
+                    <input type="button" value="회원번호 수정" class="mypage-btn"
+                    onclick="location.href='${pageContext.request.contextPath}/member/memberUpdate'">
                     <c:if test="${member.mem_provider == null }">
-                        <a href="${pageContext.request.contextPath}/member/changePassword" class="btn btn-secondary">비밀번호 변경</a>
+	                    <input type="button" value="비밀번호 변경" class="mypage-btn" 
+	                    onclick="location.href='${pageContext.request.contextPath}/member/changePassword'">
                     </c:if>
-                    <a href="${pageContext.request.contextPath}/member/memberDelete" class="btn btn-primary">회원탈퇴</a>
+                    <input type="button" value="회원탈퇴" class="mypage-btn"
+	                    onclick="location.href='${pageContext.request.contextPath}/member/memberDelete'">
                 </div>
             </div>
         </div>

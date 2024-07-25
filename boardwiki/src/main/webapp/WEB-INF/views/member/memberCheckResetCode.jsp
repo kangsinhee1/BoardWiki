@@ -22,7 +22,7 @@
 	<div class="row">
 <div class="page-main">
 	<h2>비밀번호 찾기</h2>
-	<p class="">
+	<p class="reset-code" style="color:white">
 		비밀번호를 분실하셨나요?<br>
 		가입할 때 사용한 아이디와 이메일를 입력하시면<br>
 		이메일로 임시비밀번호를 보내드립니다.<br><br>		
@@ -40,13 +40,14 @@
 				<input type="button" id="checkResetCodebtn" value="인증번호 확인" class="default-btn">
 			</li>
 		</ul>
+		<div id="loading" style="display:none;">
+			<img src="${pageContext.request.contextPath}/images/loading.gif" width="100" height="100">
+		</div>
 		<div class="align-center">
 			<input type="submit" value="전송">
 			<input type="button" value="홈으로" onclick="location.href='${pageContext.request.contextPath}/main/main'">
 		</div>
-		<div id="loading" style="display:none;">
-			<img src="${pageContext.request.contextPath}/images/loading.gif">
-		</div>
+		
 	</form>
 </div>
 </div>
