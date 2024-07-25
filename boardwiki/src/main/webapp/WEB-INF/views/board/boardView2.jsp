@@ -9,15 +9,16 @@
 <script src="${pageContext.request.contextPath}/js/board.reply.js"></script>
 <section class="page-top-section set-bg" data-setbg="/img/page-top-bg/4.jpg">
 		<div class="page-info">
-			<h2>${board.boa_title}</h2>
 			<c:choose>
         	<c:when test="${board.boa_category == 4}">
-           		 <div class="site-breadcrumb">
+        		<h2>공지</h2>
+           		<div class="site-breadcrumb">
 				<a href="list2?boa_category=4">Home</a>  /
 				<span>Notice</span>
 			</div>
        		 </c:when>
         	<c:when test="${board.boa_category == 5}">
+        	    <h2>QNA</h2>
            		<div class="site-breadcrumb">
 				<a href="list2?boa_category=5">Home</a>  /
 				<span>QnA</span>

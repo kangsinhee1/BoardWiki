@@ -9,15 +9,16 @@
 <script src="${pageContext.request.contextPath}/js/tnrboard.reply.js"></script>
 <section class="page-top-section set-bg" data-setbg="/img/page-top-bg/4.jpg">
 		<div class="page-info">
-			<h2>${tnrboard.tnr_title}</h2>
 			<c:choose>
         	<c:when test="${tnrboard.tnr_category == 1}">
+        		<h2>팁</h2>
            		 <div class="site-breadcrumb">
 				<a href="tnrboardList?tnr_category=1">Home</a>  /
 				<span>Tip</span>
 			</div>
        		 </c:when>
         	<c:when test="${tnrboard.tnr_category == 2}">
+        	    <h2>후기</h2>
            		<div class="site-breadcrumb">
 				<a href="tnrboardList?tnr_category=2">Home</a>  /
 				<span>Review</span>
