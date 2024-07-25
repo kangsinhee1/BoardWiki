@@ -24,12 +24,11 @@
 			<div class="col-lg-12">
 				<div class="page-main">
 					<h2 class="align-center">${contest.con_name}</h2>
-					<ul class="detail-info align-right">
-
-						<li>등록일 : ${contest.con_rdate}</li>
-
+					
+					<ul class="detail-info align-right2">
+						<li style="color:white">등록일 : ${contest.con_rdate}</li>
+						<li style="color:white">대회 일정 ${contest.con_sdate} ~ ${contest.con_edate}</li>
 					</ul>
-					<hr size="1" width="100%">
 					<div class="align-right">
 						<input type="button" value="목록"
 							onclick="location.href='contestList'">
@@ -49,13 +48,14 @@
                             </script>
 						</c:if>
 					</div>
+					<hr size="1" width="100%" color="black">
 					<div class="detail-content font-white">
-						${contest.con_content} 대회 일정 ${contest.con_sdate} ~
-						${contest.con_edate}</div>
+						${contest.con_content} 
+					</div>
 					<p>
 					<h4>참가 현황: ${conManCount} / ${contest.con_maxman}</h4>
 				</div>
-				<hr>
+				<hr size="1" width="100%" color="black">
 				<h4>대회 주소: ${contest.con_address1} ${contest.con_address2}</h4>
 				<div id="map" style="width: 100%; height: 350px;"></div>
 
@@ -92,28 +92,26 @@
 	</div>
 </section>
 <script type="text/javascript">
-				            document.addEventListener('DOMContentLoaded', function() {
-				                const apply_btn = document.getElementById('apply_btn');
-				                const cancel_btn = document.getElementById('cancel_btn');
-
-				
-				                if (apply_btn) {
-				                    apply_btn.onclick = function() {
-				                        const choice = confirm('대회 신청하겠습니까?');
-				                        if (choice) {
-				                            location.replace('contestApply?action=apply&con_num=${contest.con_num}');
-				                        }
-				                    }
-				                }
-				                if (cancel_btn) {
-				                    cancel_btn.onclick = function() {
-				                        const choice = confirm('대회 신청을 취소하시겠습니까?');
-				                        if (choice) {
-				                            location.replace('contestApply?action=cancel&con_num=${contest.con_num}');
-				                        }
-				                    }
-				                }
-				            });
+	document.addEventListener('DOMContentLoaded', function() {
+		const apply_btn = document.getElementById('apply_btn');
+		const cancel_btn = document.getElementById('cancel_btn');
+		if (apply_btn) {
+			apply_btn.onclick = function() {
+			const choice = confirm('대회 신청하겠습니까?');
+			if (choice) {
+				location.replace('contestApply?action=apply&con_num=${contest.con_num}');
+				}
+			}
+		}
+		if (cancel_btn) {
+			cancel_btn.onclick = function() {
+				const choice = confirm('대회 신청을 취소하시겠습니까?');
+				if (choice) {
+					location.replace('contestApply?action=cancel&con_num=${contest.con_num}');
+				}
+			}
+		}
+});
 </script>
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=77c9fa63541b3e967dfb6eb75abb22ff&libraries=services"></script>
