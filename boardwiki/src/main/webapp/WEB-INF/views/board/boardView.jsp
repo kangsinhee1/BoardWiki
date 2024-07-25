@@ -23,8 +23,8 @@
 <div class="page-main">
 	<ul class="detail-info">
 		<li>
-			<c:if test="${empty board.mem_nickname}">${board.mem_email}</c:if>
-			<c:if test="${!empty board.mem_nickname}">${board.mem_nickname}</c:if>
+			<c:if test="${empty board.mem_nickname}">작성자 : ${board.mem_email}</c:if>
+			<c:if test="${!empty board.mem_nickname}">작성자 : ${board.mem_nickname}</c:if>
 			<br>
 			<c:if test="${empty board.boa_mdate}">
 			작성일 : ${board.boa_rdate} /
