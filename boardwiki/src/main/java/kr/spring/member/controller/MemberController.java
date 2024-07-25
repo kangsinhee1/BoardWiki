@@ -285,13 +285,13 @@ public class MemberController {
 		log.debug("<<인증 성공>>");
 		log.debug("<<id>> : " + member.getMem_email());
 		log.debug("<<auth>> : " + member.getMem_auth());
+		
+		/*
+		 * //UI 메시지 처리 model.addAttribute("message", "Naver 로그인 완료");
+		 * model.addAttribute("url", request.getContextPath()+"/main/main");
+		 */
 
-		//UI 메시지 처리
-		model.addAttribute("message", "Naver 로그인 완료");
-		model.addAttribute("url",
-				request.getContextPath()+"/main/main");
-
-		return "common/resultAlert";
+		return "redirect:/main/main";
 
 	}
 
@@ -393,12 +393,12 @@ public class MemberController {
 		log.debug("<<id>> : " + member.getMem_email());
 		log.debug("<<auth>> : " + member.getMem_auth());
 
-		//UI 메시지 처리
-		model.addAttribute("message", "Kakao 로그인 완료");
-		model.addAttribute("url",
-				request.getContextPath()+"/main/main");
+//		//UI 메시지 처리
+//		model.addAttribute("message", "Kakao 로그인 완료");
+//		model.addAttribute("url",
+//				request.getContextPath()+"/main/main");
 
-		return "common/resultAlert";
+		return "redirect:/main/main";
 	}
 	// 구글 로그인 폼에서 받아온 데이터 처리
 	// 구글 - 구글 로그인 성공시 callback 호출 후 사용자 정보 요청
@@ -470,12 +470,12 @@ public class MemberController {
 		log.debug("<<id>> : " + member.getMem_email());
 		log.debug("<<auth>> : " + member.getMem_auth());
 
-		//UI 메시지 처리
-		model.addAttribute("message", "Google 로그인 완료");
-		model.addAttribute("url",
-				request.getContextPath()+"/main/main");
+//		//UI 메시지 처리
+//		model.addAttribute("message", "Google 로그인 완료");
+//		model.addAttribute("url",
+//				request.getContextPath()+"/main/main");
 
-		return "common/resultAlert";
+		return "redirect:/main/main";
 	}
 	/*==============================
 	 * 로그아웃
