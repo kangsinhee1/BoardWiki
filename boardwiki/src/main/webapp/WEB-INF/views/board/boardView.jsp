@@ -10,9 +10,9 @@
 <section class="page-top-section set-bg"
     data-setbg="/img/page-top-bg/4.jpg">
     <div class="page-info">
-        <h2>${board.boa_title}</h2>
+        <h2>자유게시판</h2>
         <div class="site-breadcrumb">
-            <a href="list?boa_category=1">Home</a> / <span>Contact</span>
+            <a href="list?boa_category=1">Home</a> / <span>Board</span>
         </div>
     </div>
 </section>
