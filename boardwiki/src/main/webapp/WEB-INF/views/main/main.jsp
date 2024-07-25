@@ -94,35 +94,11 @@ div.hiddenImage figure{
 						<div class="blog-text text-box text-white hiddenImage">
 							<div class="top-meta">${news.boa_rdate }  /  in <a href="">News</a></div>
 							<h3>${news.boa_title }</h3>
-							<p>${news.boa_content }</p>
+							<div class="p-tag">${news.boa_content }</div><br>
 							<a href="/board/detail?boa_num=${news.boa_num }" class="read-more">Read More  <img src="/img/icons/double-arrow.png" alt="#"/></a>
 						</div>
 					</div>
 					</c:forEach>
-					<!-- Blog item -->
-					<!-- <div class="blog-item">
-						<div class="blog-thumb">
-							<img src="/img/blog/2.jpg" alt="">
-						</div>
-						<div class="blog-text text-box text-white">
-							<div class="top-meta">11.11.18  /  in <a href="">Games</a></div>
-							<h3>The best online game is out now!</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eius-mod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Lorem ipsum dolor sit amet, consecte-tur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.....</p>
-							<a href="#" class="read-more">Read More  <img src="/img/icons/double-arrow.png" alt="#"/></a>
-						</div>
-					</div>
-					Blog item
-					<div class="blog-item">
-						<div class="blog-thumb">
-							<img src="/img/blog/3.jpg" alt="">
-						</div>
-						<div class="blog-text text-box text-white">
-							<div class="top-meta">11.11.18  /  in <a href="">Games</a></div>
-							<h3>The best online game is out now!</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eius-mod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Lorem ipsum dolor sit amet, consecte-tur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.....</p>
-							<a href="#" class="read-more">Read More  <img src="/img/icons/double-arrow.png" alt="#"/></a>
-						</div>
-					</div> -->
 				</div>
 				<div class="col-xl-3 col-lg-4 col-md-5 sidebar">
 					<div id="stickySidebar">

@@ -1079,6 +1079,12 @@ ol {
 }
 
 .text-box h3 {
+	display: inline-block;
+	width: 450px;
+	height: 37px;
+	overflow: hidden;
+	white-space: normal;
+	text-overflow: ellipsis;
 	margin-bottom: 40px;
 	max-width: 370px;
 }
@@ -1153,6 +1159,7 @@ ol {
 }
 
 .blog-item {
+	display:inline-block;
 	margin-top: 86px;
 }
 
@@ -1163,12 +1170,33 @@ ol {
 }
 
 .blog-item .text-box {
-	overflow: hidden;
+	width:450px;
+	height:250px;
+	width:450px;
+	height:250px;
+	display: inline-block;
+	max-height:235px;
 }
 
-.blog-item .text-box p {
+.blog-item .text-box div.p-tag{
 	margin-bottom: 42px;
+	display: inline-block;
+	width: 450px;
+	height: 133px;
+	overflow: hidden;
+	white-space: normal;
+	text-overflow: ellipsis;
+	
 }
+/* .blog-item .text-box #{
+	margin-bottom: 42px;
+	display: inline-block; inline-block으로 설정하여 너비를 제한할 수 있게 함
+	max-width: 450px; 적절한 너비 설정
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	width: 450px; 텍스트가 넘칠 경우 적용할 너비
+} */
 
 .widget-item {
 	margin-bottom: 85px;
@@ -1199,6 +1227,9 @@ ol {
 	float: left;
 	margin-right: 17px;
 	overflow: hidden;
+	height:70px;
+	width:70px;
+	text-align: center;
 }
 
 .trending-widget .tw-text .tw-meta {
@@ -1210,12 +1241,18 @@ ol {
 
 .trending-widget .tw-text .tw-meta a {
 	color: #b01ba5;
+	
 }
 
 .trending-widget .tw-text h5 {
 	font-size: 18px;
 	color: #fff;
 	line-height: 1.5;
+	width:150px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	max-width: 150px;
 }
 
 .categories-widget {
