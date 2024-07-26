@@ -50,7 +50,7 @@
     <sql id="contestOrder">
         <choose>
             <when test="order == 1">
-                ORDER BY con_sdate, con_rdate DESC
+                ORDER BY con_status ASC, con_sdate ASC 
             </when>
             <when test="order == 2">
                 ORDER BY con_hit DESC
