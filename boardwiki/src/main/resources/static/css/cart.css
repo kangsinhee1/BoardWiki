@@ -1,1 +1,72 @@
 @charset "UTF-8";
+
+
+p.h5 {
+	color: #ffffff;
+	font-size: 2.5rem;
+}
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+}
+
+.site-breadcrumb a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.site-breadcrumb span {
+    color: #b01ba5;
+}
+
+/* Table Styles */
+.table {
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.table thead {
+    background-color: #343a40;
+    color: #fff;
+}
+
+.table img {
+    background: transparent;
+    border: none;
+}
+
+.table td, .table th {
+    vertical-align: middle;
+    background: #321854;
+    border:none;
+}
+
+/* Remove Button Styles */
+.btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+    border-color: #c82333;
+}
+.btn-primary {
+	width: 200px;
+}
+
+/* Responsive Design */
+@media (max-width: 767px) {
+    .table img {
+        width: 80px;
+        height: 80px;
+    }
+}
