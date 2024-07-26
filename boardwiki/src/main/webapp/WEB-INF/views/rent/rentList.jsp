@@ -9,17 +9,6 @@
 <title>대여 목록</title>
 </head>
 <body>
-<!-- Page top section -->
-<section class="page-top-section set-bg" data-setbg="/img/page-top-bg/4.jpg">
-    <div class="page-info">
-        <h2>대여 목록</h2>
-        <div class="site-breadcrumb">
-            <a href="">Home</a> /
-            <span>대여 목록</span>
-        </div>
-    </div>
-</section>
-<!-- Page top end-->
 
 <!-- 대여 목록 시작 -->
 <section class="blog-page">
@@ -117,6 +106,7 @@
                     </div>
                 </c:if>
             </div>
+        </div>
         </div>
     </div>
 </section>

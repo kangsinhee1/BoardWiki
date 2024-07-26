@@ -11,7 +11,7 @@
 		<put-attribute name="body" value="/WEB-INF/views/main/main.jsp"/>
 	</definition>
 	
-	<definition name="rentList" extends="main">
+	<definition name="rentList" extends="myPage">
 		<put-attribute name="title" value="대여 목록"/>
 		<put-attribute name="css" value="/WEB-INF/views/rent/rentCSS.jsp"/>
 		<put-attribute name="body" value="/WEB-INF/views/rent/rentList.jsp"/>

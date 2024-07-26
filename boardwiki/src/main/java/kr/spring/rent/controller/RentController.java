@@ -78,7 +78,7 @@ public class RentController {
 		/*=========================
 		 * 대여 목록
 		 *=========================*/
-		@GetMapping("/rent/list")
+		@GetMapping("/myPage/rent")
 		public String getRentList(
 		        @RequestParam(defaultValue = "1") int pageNum,
 		        @RequestParam(defaultValue="1") int order,
