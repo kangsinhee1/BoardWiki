@@ -68,6 +68,7 @@
         justify-content: center;
         flex-direction: row;
         align-items: center;
+        color:white;
     }
     img#diceImage {
         margin: 0 auto;
@@ -82,6 +83,14 @@
     }
     div #daub {
         background-color: #320D38;
+    }
+    p#diceResult{
+    	color:white;
+    	margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+        align-items: center;
     }
 </style>
 <section class="page-top-section set-bg" data-setbg="/img/page-top-bg/4.jpg" style="background-image: url(&quot;/img/page-top-bg/4.jpg&quot;);">
@@ -182,8 +191,8 @@
         let diceCountElement = document.getElementById('diceCount');
         let currentFace = 1;
         let rollCount = 0;
-        const maxRolls = 18; // 5 times cycle through 1 to 6 (6 * 5)
-        const interval = 100; // 0.2 seconds
+        const maxRolls = 18;
+        const interval = 100;
 
         rollDiceButton.disabled = true;
 
@@ -197,7 +206,7 @@
                 fetch('${pageContext.request.contextPath}/attendance/roll-dice')
                     .then(response => response.json())
                     .then(data => {
-                        diceResult.innerText = 'Rolled: ' + data;
+                        diceResult.innerText = '주사위 값 : ' + data;
                         diceImage.src = '${pageContext.request.contextPath}/images/dice' + data + '.png';
                         diceCountElement.innerText = parseInt(diceCountElement.innerText) - 1;
                         if (parseInt(diceCountElement.innerText) > 0) {
