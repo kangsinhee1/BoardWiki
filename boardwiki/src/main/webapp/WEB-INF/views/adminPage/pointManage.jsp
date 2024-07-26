@@ -23,5 +23,5 @@
             </tr>
         </c:forEach>
     </table>
-    <div class="blog-pagination">${page}</div>
+    <div class="blog-pagination" style= "text-align : center">${page}</div>
 </c:if>
