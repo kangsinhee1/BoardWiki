@@ -10,6 +10,7 @@
  color:white;
  }
  
+ 
 .dropbtn {
 	display: inline-block;
 	font-size: 14px;
@@ -26,7 +27,20 @@
     transition: background-color 0.3s;
 }
 .dropbtn:hover {
-	background : #C213B6;
+	background : #C213B6 !important;
+}
+.dropbtn a:hover {
+	background : #C213B6 !important;
+}
+.dropdown:hover .dropbtn {
+	background: #C213B6 !important;
+}
+.dropdown a:hover {
+    /* 드롭다운 메뉴의 링크에 마우스를 올렸을 때의 스타일 */
+    background: #C213B6;
+}
+.dropbtn:focus {
+	background : #C213B6 !important;
 }
 
 a {
@@ -311,12 +325,12 @@ input[type="button"]:hover {
 	font-size: 14px;
 	padding: 6px 13px 6px;
 	color: #ffffff;
-	background: #C213B6;
+	background: #A11099;
 	line-height: normal;
 	letter-spacing: 1px;
 	text-transform: uppercase;
 	font-weight: 600;
-	border: 2px solid #C213B6;
+	border: 2px solid #A11099;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
@@ -865,6 +879,8 @@ ol {
 .footer-social a:hover,
 .geme-social-share a:hover {
 	background: #b01ba5;
+	color: #ffffff;
+    text-decoration: none;
 }
 
 .header-bar-warp {
@@ -899,6 +915,7 @@ ol {
 	list-style: none;
 	text-align: center;
 	padding-top: 3px;
+	margin-bottom: 0rem;
 	
 }
 

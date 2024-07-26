@@ -53,7 +53,7 @@
                             </div>
                             <div class="align-center">
                                 <form:button class="rent_btn">전송</form:button>
-                                <input type="button" value="목록" class="default-btn" onclick="location.href='list'">
+                                <input type="button" value="목록" class="default-btn" onclick="location.href='${pageContext.request.contextPath}/myPage/rent'">
                             </div>
                         </form:form>
                     </div>
