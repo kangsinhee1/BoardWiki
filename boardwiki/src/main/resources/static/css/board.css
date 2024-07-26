@@ -238,6 +238,7 @@ div.respitem{
 .page-main div.detail-content p{
 	color:white;
 	font-size:30px;
+	white-space: pre-wrap;
 }
 
 

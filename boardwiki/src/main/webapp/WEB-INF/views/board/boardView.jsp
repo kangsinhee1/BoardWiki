@@ -35,7 +35,7 @@
                             <li>첨부파일 : <a href="file?boa_num=${board.boa_num}">${board.filename}</a></li>
                         </ul>
                     </c:if>
-                    <div class="detail-content">${board.boa_content}</div>
+                    <br><div class="detail-content" style="width:100%; word-break:break-all;word-wrap:break-word;">${board.boa_content}</div>
                     <div class="font-white">
                         <%-- 좋아요 --%>
                         <img id="output_fav" data-num="${board.boa_num}"
@@ -46,9 +46,7 @@
                     </div>
                     <hr>
                     <div class="align-right">
-                    <div class="detail-content font-white">
-						${board.boa_content} 
-					</div>
+                    
                    
                     <c:if test="${!empty user && user.mem_num == board.mem_num}">
                         <input type="button" value="수정"
