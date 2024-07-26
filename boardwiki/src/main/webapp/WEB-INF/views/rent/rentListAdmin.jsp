@@ -77,7 +77,7 @@
                 </tr>
             </c:forEach>
         </table>
-        <div class="align-center">${page}</div>
+        <div class="blog-pagination" style= "text-align : center">${page}</div>
     </c:if>
 </div>
 <!-- 대여 목록 끝 -->
