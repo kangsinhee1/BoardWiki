@@ -16,6 +16,7 @@ import kr.spring.item.vo.ItemVO;
 public interface CartMapper {
 	//장바구니
 	public List<CartVO> selectCartList(Map<String,Object> map);
+	public List<CartVO> selectCartList2(Map<String,Object> map);
 	
 	public List<ItemVO> RollBackItem(Map<String,Object> map);
 	public Integer selectRowCount(Map<String, Object> map);

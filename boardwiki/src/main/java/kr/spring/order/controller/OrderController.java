@@ -67,7 +67,6 @@ public class OrderController {
 	 * 주문창에 데이터 담기
 	 *=========================*/
 	@PostMapping("/order/order1")
-	@ResponseBody
 	public String addToOrder(Integer item_quantity,
 	        @RequestParam("order_name") String order_name,
 	        @RequestParam("order_phone") String order_phone,
@@ -80,9 +79,9 @@ public class OrderController {
 
 	    log.debug("<<유저 - order_name>>" + order_name);
 	    log.debug("<<유저 - mem_num>>" + member);
-	    
+
 	    OrderVO order2 = orderService.selectagg(member.getMem_num());
-	    
+
 	    OrderVO order = new OrderVO();
 	    order.setMem_num(member.getMem_num());
 	    order.setOrder_name(order_name);
@@ -91,13 +90,54 @@ public class OrderController {
 	    order.setOrder_address1(order_address1);
 	    order.setOrder_address2(order_address2);
 	    order.setOrder_price(order2.getTotal_price());
-	    
+
 	    orderService.insertOrder(order);
 	    cartService.updateCartDate(member.getMem_num());
 
-	    model.addAttribute("message", "결재창으로 넘어갑니다.");
-	    model.addAttribute("url","/order/pay");
-
-	    return "common/resultAlert";    
+	    return "pay"; // "common/resultAlert" 대신 리다이렉트 사용
+	}
+	/*=========================
+	 * 주문내역 불러오기
+	 *=========================*/
+	@GetMapping("/order/pay")
+	public String orderList(Model model, HttpSession session,Long mem_num) {
+		
+		MemberVO member = (MemberVO) session.getAttribute("user");
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("mem_num", member.getMem_num());
+		
+		List<OrderVO> list = null;
+		list = orderService.selectOrderList(member.getMem_num());
+		
+		List<CartVO> list2 = null;
+		list2 = cartService.selectCartList2(map);
+		
+		model.addAttribute("mem_num",mem_num);
+		model.addAttribute("list",list);
+		model.addAttribute("list2",list2);
+		
+		return "pay";
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

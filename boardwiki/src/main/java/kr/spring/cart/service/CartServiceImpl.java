@@ -60,4 +60,9 @@ public class CartServiceImpl implements CartService{
 	public void updateCartDate(Long mem_num) {
 		cartMapper.updateCartDate(mem_num);
 	}
+
+	@Override
+	public List<CartVO> selectCartList2(Map<String, Object> map) {
+		return cartMapper.selectCartList2(map);
+	}
 }

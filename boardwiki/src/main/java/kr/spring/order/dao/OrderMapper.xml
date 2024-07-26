@@ -44,10 +44,10 @@
 	 	  #{order_price})
     </insert>
     <select id="selectOrderDetail" parameterType="map" resultType="orderVO">
-        SELECT * FROM order WHERE order_num=#{order_num}
+        SELECT * FROM orders WHERE order_num=#{order_num}
     </select>
     <select id="selectOrderUser" parameterType="map" resultType="orderVO">
-        SELECT * FROM order WHERE mem_num=#{mem_num}
+        SELECT * FROM orders WHERE mem_num=#{mem_num}
     </select>
     <select id="selectagg" parameterType="map" resultType="orderVO">
 <!--         SELECT mem_num=#{mem_num} -->

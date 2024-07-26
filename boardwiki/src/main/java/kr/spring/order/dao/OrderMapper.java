@@ -17,7 +17,7 @@ public interface OrderMapper {
 	public OrderVO selectOrderDetail(Long order_num);
 
 	public OrderVO selectOrderUser(Long mem_num);
-	@Select("SELECT * FROM order WHERE mem_num=#{mem_num}")
+	@Select("SELECT * FROM orders WHERE mem_num=#{mem_num}")
 	public List<OrderVO> selectOrderList(Long mem_num);
 	@Select("SELECT * FROM cart WHERE mem_num=#{mem_num} cart_check=0")
 	public List<CartVO> selectCartList(Long mem_num);
