@@ -98,4 +98,14 @@ public class ContestServiceImpl implements ContestService{
 		return contestmapper.selectContestListForStatusOrder(map);
 	}
 
+	@Override
+	public Integer countContestUserApplyList(long mem_num) {
+		return contestmapper.countContestUserApplyList(mem_num);
+	}
+
+	@Override
+	public List<ContestVO> selectContestUserApplyList(Map<String, Object> map) {
+		return contestmapper.selectContestUserApplyList(map);
+	}
+
 }

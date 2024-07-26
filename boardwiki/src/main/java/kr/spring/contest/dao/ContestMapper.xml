@@ -187,4 +187,8 @@
         JOIN contest ON contest_apply.con_num = contest.con_num
         WHERE contest.con_num = #{con_num}
     </select>
+    
+    <select id="selectContestUserApplyList" parameterType="map" resultType="contestVO">
+    	SELECT * FROM contest_apply a JOIN contest c USING(con_num) WHERE a.mem_num = #{mem_num}
+    </select>
 </mapper>

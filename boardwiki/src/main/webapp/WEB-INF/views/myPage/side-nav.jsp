@@ -22,6 +22,8 @@
 		<li><a href="${pageContext.request.contextPath}/myPage/myWrite">자유게시판</a></li>
 		<li><a href="${pageContext.request.contextPath}/myPage/myWrite2">팁게시판</a></li>
 		<li><a href="${pageContext.request.contextPath}/myPage/myWrite3">후기게시판</a></li>
+		<li><a href="${pageContext.request.contextPath}/myPage/myContest">대회신청내역</a></li>
+
 		<%-- <li>
 		<div class="dropdown">
 		  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

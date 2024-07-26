@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.spring.board.service.BoardService;
 import kr.spring.board.vo.BoardVO;
+import kr.spring.contest.service.ContestService;
+import kr.spring.contest.vo.ContestVO;
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.tnrboard.service.TnrboardService;
@@ -44,6 +47,9 @@ public class MyPageController {
 
 	@Autowired
 	private TnrboardService tnrboardService;
+	
+	@Autowired
+	private ContestService contestService;
 
 
 	/*==============================
@@ -347,5 +353,51 @@ public class MyPageController {
 		model.addAttribute("member", member);
 
 		return "myQna";
+	}
+	
+	//유저가 신청한 대회 목록
+	@GetMapping("/myPage/myContest")
+	public String contestList(@RequestParam(defaultValue="1") int pageNum,
+			@RequestParam(defaultValue="") String category,
+			String keyfield,
+			String keyword,Model model,
+			HttpSession session,
+			HttpServletRequest request
+			) {
+		
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		
+		log.debug("<<유저 신청 대회 목록 진입>>");
+		
+		
+		Map<String,Object> map = new HashMap<>();
+
+		map.put("category", category);
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+
+		int count = contestService.countContestUserApplyList(user.getMem_num());
+		
+		log.debug("<<count>>" + count);
+
+		PagingUtil page =
+				new PagingUtil(keyfield,keyword,pageNum,count,5,10,"myContest");
+
+		List<ContestVO> list = null;
+		if(count > 0) {
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			map.put("mem_num", user.getMem_num());
+
+			list = contestService.selectContestUserApplyList(map);
+		}
+		
+		log.debug("<<유저가 신청한 대회 리스트>>" + list);
+
+		model.addAttribute("count", count);
+		model.addAttribute("list", list);
+		model.addAttribute("page", page.getPage());
+
+		return "myContest";
 	}
 }

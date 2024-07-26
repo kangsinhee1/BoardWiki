@@ -29,9 +29,15 @@ public interface ContestMapper {
 	@Select("SELECT * FROM contest JOIN member USING(mem_num)LEFT OUTER JOIN member_detail USING(mem_num) WHERE con_num= #{con_num}")
 	public ContestVO detailContest(long con_num);
 	
+	//관리자 대회 리스트 조회
 	@Select("SELECT COUNT(*) FROM member JOIN contest_APPLY USING(mem_num)LEFT OUTER JOIN member_detail USING(mem_num) WHERE con_num=#{con_num}")
 	public Integer countContestAdminApplyList(long con_num);
 	public List<ContestVO> selectContestAdminApplyList(Map<String,Object>map);
+	
+	//유저 신청 대회 리스트 조회
+	@Select("SELECT COUNT(*) FROM contest_apply a JOIN contest c USING(con_num) WHERE a.mem_num = #{mem_num} AND (CON_STATUS = 0 OR CON_STATUS = 2)")
+	public Integer countContestUserApplyList(long mem_num);
+	public List<ContestVO> selectContestUserApplyList(Map<String,Object>map);
 
 	//조회수
 	@Update("UPDATE contest SET con_hit= con_hit+1 WHERE con_num = #{con_num}")
