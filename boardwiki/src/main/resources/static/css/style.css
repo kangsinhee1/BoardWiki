@@ -51,9 +51,66 @@ a {
     width: auto; /* 선택 상자의 폭을 자동으로 조절하여 내용에 맞춥니다. */
 }
 
+
+
+
+/* =================================
+ ------------------------------------
+  Bootstrap 4 Dark themed date and time picker
+ ------------------------------------
+ ====================================*/
+/* 날짜 선택 셀에 대한 스타일 */
+
+
+ .datepicker {
+    background-color: #000 !important;
+    color: #fff !important;
+    border: none;
+    padding: 10px !important;
+    z-index: 1000;
+}
+
+.datepicker-dropdown {
+    z-index: 1000 !important;
+}
+
+.datepicker-dropdown .day:hover,
+.datepicker .datepicker-switch:hover,
+.datepicker-dropdown .next:hover,
+.datepicker-dropdown .prev:hover,
+.datepicker-dropdown .old-day:hover,
+.datepicker-dropdown .new-day:hover,
+.datepicker-dropdown .month:hover,
+.datepicker-dropdown .year:hover,
+.datepicker-dropdown .decade:hover,
+.datepicker table tr td span.focused, .datepicker table tr td span:hover,
+.datepicker-dropdown .century:hover {
+    background-color: #C213B6 !important; /* 호버 시 배경색 변경 */
+    color: #fff !important; /* 호버 시 글자색 변경 */
+}
+
+/* 선택된 날짜에 대한 스타일 */
+.datepicker-dropdown .active {
+    background-image: linear-gradient(#90CAF9, #64B5F6) !important;
+    color: #000 !important;
+}
+
+/* 오늘 날짜 텍스트 색상 변경 */
+.datepicker-dropdown .day.today {
+    color: #C213B6 !important;
+    font-weight: bold !important;
+}
+
+ /* =================================
+ ------------------------------------
+ 커스텀 스타일 추가 명시
+ ------------------------------------
+ ====================================*/
+
+
  /*------------------------
   페이지 처리
--------------------------*/
+ -------------------------*/
  .blog-pagination {
 	padding-top: 10px;
 }
@@ -1001,7 +1058,6 @@ ol {
 .hero-item {
 	height: 921px;
 	padding-top: 125px;
-	border-bottom: 2px solid #b01ba5;
 }
 
 .hero-item h2 {
@@ -1097,6 +1153,15 @@ ol {
 	margin-bottom: 40px;
 	max-width: 370px;
 }
+.text-box2 h3 {
+	display: inline-block;
+	width: 450px;
+	height: 37px;
+	overflow: hidden;
+	white-space: normal;
+	text-overflow: ellipsis;
+	max-width: 370px;
+}
 
 .text-box p {
 	font-size: 15px;
@@ -1104,6 +1169,17 @@ ol {
 	color: #68647d;
 	margin-bottom: 10px;
 }
+.text-box2 p {
+	font-size: 15px;
+	font-weight: 500;
+	color: #68647d;
+	margin-bottom: 10px;
+	width:300px;
+	word-break:break-all;
+	word-wrap:break-word;
+	overflow: hidden;
+}
+
 
 .text-box .read-more {
 	font-size: 15px;

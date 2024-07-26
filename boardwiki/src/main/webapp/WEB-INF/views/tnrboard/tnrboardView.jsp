@@ -46,6 +46,7 @@
 			</c:if>
 			조회 : ${tnrboard.tnr_hit}
 		</li>
+		
 	</ul>
 	<c:if test="${!empty tnrboard.filename}">
 	<ul>
@@ -53,6 +54,7 @@
 	</ul>
 	</c:if>
 	<div class="detail-content">
+	<br>
 		${tnrboard.tnr_content}
 	</div>
 	<div>

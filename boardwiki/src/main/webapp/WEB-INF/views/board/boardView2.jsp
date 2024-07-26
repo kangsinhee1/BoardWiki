@@ -51,7 +51,7 @@
 		<li>첨부파일 : <a href="file?boa_num=${board.boa_num}">${board.filename}</a></li>
 	</ul>
 	</c:if>
-	<div class="detail-content">
+	<br><div class="detail-content">
 		${board.boa_content}
 	</div>
 	<div>
