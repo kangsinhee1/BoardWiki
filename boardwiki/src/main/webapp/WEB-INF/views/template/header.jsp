@@ -48,7 +48,6 @@
                     <li><a href="#">게임메인</a>
                         <ul class="sub-menu">
                             <li><a href="${pageContext.request.contextPath}/item/item_main">게임메인</a></li>
-                            <li><a href="${pageContext.request.contextPath}/rent/list">게임 대여</a></li>
                             <li><a href="${pageContext.request.contextPath}/rulebook/rulebookList">룰북</a></li>
                         </ul>
                     </li>

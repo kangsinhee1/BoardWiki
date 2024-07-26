@@ -2,6 +2,14 @@
 /* 게시판 목록
 ---------------------*/
 
+.align-right {
+	margin-top: 30px !important;
+
+}
+
+form#search_form {
+	width: 100%;
+}
 .rent_search_form{
 	margin-left: -15%;
 	padding-bottom:0;
@@ -26,9 +34,6 @@
     transition: background-color 0.3s;
 }
 
-form#search_form #order{
-	height:32px;
-}
 
 .form-container {
     background: white;
