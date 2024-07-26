@@ -24,7 +24,7 @@
 		<form:hidden path="tnr_num"/>
 		<ul>
 			<li>
-				<form:label path="tnr_category">분류</form:label>
+				<form:label path="tnr_category" style="color:white">분류</form:label>
 				<form:select path="tnr_category" >
 					<form:option value="1">팁게시판</form:option>
 					<form:option value="2">후기게시판</form:option>
@@ -58,7 +58,7 @@
 			    </script> 
 			</li>
 			<li>
-				<form:label path="upload">파일업로드</form:label>
+				<form:label path="upload" style="color:white">파일업로드</form:label>
 				<input type="file" name="upload" id="upload">
 				<c:if test="${!empty tnrboardVO.filename}">
 				<div id="file_detail">
