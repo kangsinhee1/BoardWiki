@@ -18,7 +18,7 @@
 			 	</div>
 			</div>
 		</li> --%>
-		<li><a href="${pageContext.request.contextPath}/myPage/myOrder">주문내역</a></li>
+		<li><a href="${pageContext.request.contextPath}/myPage/myOrder?mem_num=${member.mem_num}">주문내역</a></li>
 		<li><a href="${pageContext.request.contextPath}/myPage/myWrite">자유게시판</a></li>
 		<li><a href="${pageContext.request.contextPath}/myPage/myWrite2">팁게시판</a></li>
 		<li><a href="${pageContext.request.contextPath}/myPage/myWrite3">후기게시판</a></li>

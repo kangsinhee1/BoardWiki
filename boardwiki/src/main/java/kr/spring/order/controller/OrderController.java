@@ -104,6 +104,8 @@ public class OrderController {
 		
 		MemberVO member = (MemberVO) session.getAttribute("user");
 		
+		log.debug("<<유저 - mem_num>>" + member);
+		
 		Map<String, Object> map = new HashMap<>();
 		map.put("mem_num", member.getMem_num());
 		
