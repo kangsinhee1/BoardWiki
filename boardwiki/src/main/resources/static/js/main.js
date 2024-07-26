@@ -43,27 +43,28 @@ $(window).on('load', function() {
 		Hero Slider
 	--------------------*/
 	$('.hero-slider').owlCarousel({
-		loop: true,
-		nav: true,
-		dots: true,
-		navText: ['', '<img src="/img/icons/solid-right-arrow.png">'],
-		mouseDrag: false,
-		animateOut: 'fadeOut',
-		animateIn: 'fadeIn',
-		items: 1,
-		//autoplay: true,
-		autoplayTimeout: 10000,
-	});
+	loop: true,
+	nav: true,
+	dots: true,
+	navText: ['<img src="/img/icons/solid-left-arrow.png">', '<img src="/img/icons/solid-right-arrow.png">'],
+	mouseDrag: false,
+	animateOut: 'fadeOut',
+	animateIn: 'fadeIn',
+	items: 1,
+	autoplay: true,
+	autoplayTimeout: 10000,
+});
 
-	var dot = $('.hero-slider .owl-dot');
-	dot.each(function() {
-		var index = $(this).index() + 1;
-		if(index < 10){
-			$(this).html('0').append(index + '.');
-		}else{
-			$(this).html(index + '.');
-		}
-	});
+// 숫자 점의 스타일을 설정
+var dot = $('.hero-slider .owl-dot');
+dot.each(function() {
+	var index = $(this).index() + 1;
+	if (index < 10) {
+		$(this).html('0').append(index + '.');
+	} else {
+		$(this).html(index + '.');
+	}
+});
 
 
 

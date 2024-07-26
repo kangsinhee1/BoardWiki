@@ -898,6 +898,7 @@ ol {
 	list-style: none;
 	text-align: center;
 	padding-top: 3px;
+	
 }
 
 .main-menu li {
@@ -1006,122 +1007,135 @@ ol {
   Hero section
 ---------------------*/
 
+/* Hero section */
 .hero-slider .owl-dots {
-	display: -ms-flex;
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
-	z-index: 2;
-	left: calc(50% - 740px);
-	bottom: 38px;
-	position: relative;
-	width: 1496px;
-	position: absolute;
+    display: -ms-flex;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    z-index: 2;
+    left: calc(50% - 740px);
+    bottom: 38px;
+    position: relative;
+    width: 1496px;
+    position: absolute;
 }
 
 .hero-slider .owl-dots .owl-dot {
-	width: 44px;
-	height: 44px;
-	border-radius: 50%;
-	font-size: 16px;
-	font-weight: 500;
-	border: 2px solid transparent;
-	color: #fff;
-	display: -ms-inline-flex;
-	display: -webkit-inline-box;
-	display: -ms-inline-flexbox;
-	display: inline-flex;
-	-webkit-box-align: center;
-	-ms-flex-align: center;
-	align-items: center;
-	-webkit-box-pack: center;
-	-ms-flex-pack: center;
-	justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    font-size: 16px;
+    font-weight: 500;
+    border: 2px solid transparent;
+    color: #fff;
+    display: -ms-inline-flex;
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
 }
 
 .hero-slider .owl-dots .owl-dot.active {
-	color: #b01ba5;
-	border: 2px solid #b01ba5;
+    color: #b01ba5;
+    border: 2px solid #b01ba5;
 }
 
 .hero-slider .owl-nav {
-	margin-top: -24px;
-	display: block;
+    margin-top: -24px;
+    display: block;
 }
 
-.hero-slider .owl-nav .owl-next {
-	position: absolute;
-	top: 50%;
-	right: 100px;
+.hero-slider .owl-prev {
+    position: absolute;
+    top: 50%;
+    left: 100px; /* 왼쪽 버튼 위치 설정 */
+    transform: translateY(-50%);
+    z-index: 10;
 }
+
+
+
+.hero-slider .owl-next {
+    position: absolute;
+    top: 50%;
+    right: 100px; /* 오른쪽 버튼 위치 설정 */
+    transform: translateY(-50%);
+    z-index: 10;
+}
+
+	
 
 .hero-item {
-	height: 921px;
-	padding-top: 125px;
+    height: 921px;
+    padding-top: 125px;
 }
 
 .hero-item h2 {
-	font-size: 160px;
-	color: #fff;
-	font-weight: 500;
-	line-height: 1;
-	position: relative;
-	top: 100px;
-	opacity: 0;
+    font-size: 160px;
+    color: #fff;
+    font-weight: 500;
+    line-height: 1;
+    position: relative;
+    top: 100px;
+    opacity: 0;
 }
 
 .hero-item p {
-	font-size: 24px;
-	color: rgba(255, 255, 255, 0.4);
-	font-weight: 500;
-	opacity: 0.39;
-	margin-bottom: 70px;
-	position: relative;
-	top: 80px;
-	opacity: 0;
+    font-size: 24px;
+    color: rgba(255, 255, 255, 0.4);
+    font-weight: 500;
+    opacity: 0.39;
+    margin-bottom: 70px;
+    position: relative;
+    top: 80px;
+    opacity: 0;
 }
 
 .hero-item .site-btn {
-	position: relative;
-	top: 50px;
-	opacity: 0;
+    position: relative;
+    top: 50px;
+    opacity: 0;
 }
 
 .hero-slider .owl-item.active .hero-item h2,
 .hero-slider .owl-item.active .hero-item p,
 .hero-slider .owl-item.active .hero-item .site-btn {
-	top: 0;
-	opacity: 1;
+    top: 0;
+    opacity: 1;
 }
 
 .hero-slider .owl-item.active .hero-item h2 {
-	-webkit-transition: all 0.5s ease 0.4s;
-	-o-transition: all 0.5s ease 0.4s;
-	transition: all 0.5s ease 0.4s;
+    -webkit-transition: all 0.5s ease 0.4s;
+    -o-transition: all 0.5s ease 0.4s;
+    transition: all 0.5s ease 0.4s;
 }
 
 .hero-slider .owl-item.active .hero-item p {
-	-webkit-transition: all 0.5s ease 0.6s;
-	-o-transition: all 0.5s ease 0.6s;
-	transition: all 0.5s ease 0.6s;
+    -webkit-transition: all 0.5s ease 0.6s;
+    -o-transition: all 0.5s ease 0.6s;
+    transition: all 0.5s ease 0.6s;
 }
 
 .hero-slider .owl-item.active .hero-item .site-btn {
-	-webkit-transition: all 0.5s ease 0.8s;
-	-webkit-transition: all 0.5s ease 0.8s;
-	-o-transition: all 0.5s ease 0.8s;
-	transition: all 0.5s ease 0.8s;
+    -webkit-transition: all 0.5s ease 0.8s;
+    -o-transition: all 0.5s ease 0.8s;
+    transition: all 0.5s ease 0.8s;
 }
 
 .hero-slider .owl-item.active .hero-item .offer-card {
-	opacity: 1;
-	-webkit-transform: rotate(0deg);
-	-ms-transform: rotate(0deg);
-	transform: rotate(0deg);
-	-webkit-transition: all 0.5s ease 1s;
-	-webkit-transition: all 0.5s ease 1s;
-	-o-transition: all 0.5s ease 1s;
-	transition: all 0.5s ease 1s;
+    opacity: 1;
+    -webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-transition: all 0.5s ease 1s;
+    -o-transition: all 0.5s ease 1s;
+    transition: all 0.5s ease 1s;
 }
 
 /* ----------------
