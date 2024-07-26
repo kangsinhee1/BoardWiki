@@ -65,6 +65,11 @@
                         <label for="order_address2">상세주소</label>
                         <input type="text" name="order_address2" id="order_address2" class="form-control" maxlength="30">
                     </div>
+                    <div>
+			        <label for="pay_payment">결제수단</label>
+			        <input type="radio" name="order_pay" id="order_pay1" value="1">계좌입금
+			        <input type="radio" name="order_pay" id="order_pay2" value="2">카드결제
+	                </div>
                     <button type="submit" class="btn btn-primary mt-3">주문하기</button>
                 </form>
             </div>

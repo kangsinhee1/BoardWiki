@@ -12,7 +12,8 @@
           order_zipcode,
           order_address1,
           order_address2,
-          order_price) 
+          order_price,
+          order_pay) 
         VALUES(
 	 	  orders_seq.nextval,
 	 	  #{mem_num},
@@ -21,7 +22,8 @@
 	 	  #{order_zipcode},
 	 	  #{order_address1},
 	 	  #{order_address2},
-	 	  #{order_price})
+	 	  #{order_price},
+	 	  #{order_pay})
     </insert>
     <insert id="insertOrderList" parameterType="map">
         INSERT INTO orders(

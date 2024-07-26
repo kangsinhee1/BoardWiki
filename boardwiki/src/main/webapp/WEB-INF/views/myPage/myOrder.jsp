@@ -5,16 +5,11 @@
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 <section >
-<form>
 		<div >
 			<div >
 				<div >
 <div >
 <h2>주문내역</h2>
-<%-- 	<c:if test="${count==0}"> --%>
-<!-- 	<div class="result-display">주문내역이 없습니다.</div> -->
-<%-- 	</c:if> --%>
-<%-- 	<c:if test="${count > 0}"> --%>
 	<div >
 	<table>
 		<thead>
@@ -26,19 +21,19 @@
 			<th>배송상태</th>
 		</tr>
 		</thead>
-		<c:forEach var="my_order" items="${list}">
+		<c:forEach var="order" items="${list}">
 		<tr>
 		   
 			<td >${order.order_num}</td>
 			<td >
 			   <c:forEach var="my_order" items="${list2}">
-			      ${order.item_name}
+			     &nbsp;[${my_order.item_name}]&nbsp;
 			   </c:forEach>
 			</td>
-			<td >${order.order_price}</td>
+			<td >${order.order_price}원</td>
 			<td >${order.order_date}</td>
 			
-			<c:if test="${order_check==1}">
+			<c:if test="${order.order_check==1}">
 			<td >배송 준비</td>
 			</c:if>
 			<c:if test="${order_check==2}">
@@ -63,5 +58,4 @@
 </div>
 </div>
 </div>
-</form>
 </section>

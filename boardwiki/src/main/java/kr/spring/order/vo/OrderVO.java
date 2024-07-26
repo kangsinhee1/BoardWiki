@@ -25,6 +25,7 @@ public class OrderVO {
 	private Long order_price;
 	private int order_check;
 	private Timestamp order_date;
+	private int order_pay;
 	
 	private int cart_price;
 	private int item_quantity;

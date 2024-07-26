@@ -73,6 +73,7 @@ public class OrderController {
 	        @RequestParam("order_zipcode") Long order_zipcode,
 	        @RequestParam("order_address1") String order_address1,
 	        @RequestParam("order_address2") String order_address2,
+	        @RequestParam("order_pay") int order_pay,
 	        HttpSession session, Model model) {
 
 	    MemberVO member = (MemberVO) session.getAttribute("user");
@@ -90,38 +91,12 @@ public class OrderController {
 	    order.setOrder_address1(order_address1);
 	    order.setOrder_address2(order_address2);
 	    order.setOrder_price(order2.getTotal_price());
+	    order.setOrder_pay(order_pay);
 
 	    orderService.insertOrder(order);
 	    cartService.updateCartDate(member.getMem_num());
 
 	    return "pay"; // "common/resultAlert" 대신 리다이렉트 사용
-	}
-	/*=========================
-	 * 주문내역 불러오기
-	 *=========================*/
-	@GetMapping("/order/pay")
-	public String orderList(Model model, HttpSession session,Long mem_num) {
-		
-		MemberVO member = (MemberVO) session.getAttribute("user");
-		
-		log.debug("<<유저 - mem_num>>" + member);
-		
-		
-		
-		List<OrderVO> list = null;
-		list = orderService.selectOrderList(mem_num);
-		
-		Map<String, Object> map = new HashMap<>();
-		map.put("mem_num", member.getMem_num());
-		
-		List<CartVO> list2 = null;
-		list2 = cartService.selectCartList2(mem_num);
-		
-		model.addAttribute("mem_num",mem_num);
-		model.addAttribute("list",list);
-		model.addAttribute("list2",list2);
-		
-		return "pay";
 	}
 }
 
