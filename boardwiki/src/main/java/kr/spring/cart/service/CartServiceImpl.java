@@ -62,7 +62,8 @@ public class CartServiceImpl implements CartService{
 	}
 
 	@Override
-	public List<CartVO> selectCartList2(Map<String, Object> map) {
-		return cartMapper.selectCartList2(map);
+	public List<CartVO> selectCartList2(Long mem_num) {
+		return cartMapper.selectCartList2(mem_num);
 	}
+	
 }

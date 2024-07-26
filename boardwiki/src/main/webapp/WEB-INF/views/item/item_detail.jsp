@@ -85,7 +85,7 @@
                         <input type="hidden" name="user" value="${member.mem_num}" />
                         
                         <div class="cart_box">
-                        <p><label class ="quantity_label" for="quantity">수량</label></p>
+                        <label class ="quantity_label" for="quantity">수량</label>
                         <input type="number" id="quantity" name="item_quantity" value="1" min="1" max="${item.item_stock}" />
                         <c:if test="${item.item_stock > 0}">
                         <button type="button" class="addToCartButton" id="addToCartButton" 

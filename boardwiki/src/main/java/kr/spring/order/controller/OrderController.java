@@ -106,14 +106,16 @@ public class OrderController {
 		
 		log.debug("<<유저 - mem_num>>" + member);
 		
+		
+		
+		List<OrderVO> list = null;
+		list = orderService.selectOrderList(mem_num);
+		
 		Map<String, Object> map = new HashMap<>();
 		map.put("mem_num", member.getMem_num());
 		
-		List<OrderVO> list = null;
-		list = orderService.selectOrderList(member.getMem_num());
-		
 		List<CartVO> list2 = null;
-		list2 = cartService.selectCartList2(map);
+		list2 = cartService.selectCartList2(mem_num);
 		
 		model.addAttribute("mem_num",mem_num);
 		model.addAttribute("list",list);
