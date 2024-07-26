@@ -1001,7 +1001,6 @@ ol {
 .hero-item {
 	height: 921px;
 	padding-top: 125px;
-	border-bottom: 2px solid #b01ba5;
 }
 
 .hero-item h2 {
@@ -1097,6 +1096,15 @@ ol {
 	margin-bottom: 40px;
 	max-width: 370px;
 }
+.text-box2 h3 {
+	display: inline-block;
+	width: 450px;
+	height: 37px;
+	overflow: hidden;
+	white-space: normal;
+	text-overflow: ellipsis;
+	max-width: 370px;
+}
 
 .text-box p {
 	font-size: 15px;
@@ -1104,6 +1112,17 @@ ol {
 	color: #68647d;
 	margin-bottom: 10px;
 }
+.text-box2 p {
+	font-size: 15px;
+	font-weight: 500;
+	color: #68647d;
+	margin-bottom: 10px;
+	width:300px;
+	word-break:break-all;
+	word-wrap:break-word;
+	overflow: hidden;
+}
+
 
 .text-box .read-more {
 	font-size: 15px;
