@@ -28,20 +28,20 @@ div.hiddenImage figure{
 		<div class="hero-slider owl-carousel">
 			<div class="hero-item set-bg d-flex align-items-center justify-content-center text-center" data-setbg="/images/maindice1.jpeg">
 				<div class="container">
-					<p><img src="/images/main-1.png"></p>
-					<a href="#" class="site-btn">Read More  <img src="/img/icons/double-arrow.png" alt="#"/></a>
+					<p><img src="/images/brass.png"></p>
+					<a href="${pageContext.request.contextPath}/item/item_detail?item_num=20"	 class="site-btn">Read More  <img src="/img/icons/double-arrow.png" alt="#"/></a>
 				</div>
 			</div>
 			<div class="hero-item set-bg d-flex align-items-center justify-content-center text-center" data-setbg="/images/maindice1.jpeg">
 				<div class="container">
-					<p><img src="/images/main-2.png"></p>
-					<a href="#" class="site-btn">Read More  <img src="/img/icons/double-arrow.png" alt="#"/></a>
+					<p><img src="/images/twilight.jpg"></p>
+					<a href="${pageContext.request.contextPath}/item/item_detail?item_num=5" class="site-btn">Read More  <img src="/img/icons/double-arrow.png" alt="#"/></a>
 				</div>
 			</div>
 			<div class="hero-item set-bg d-flex align-items-center justify-content-center text-center" data-setbg="/images/maindice1.jpeg">
 				<div class="container">
-					<p><img src="/images/main-3.png"></p>
-					<a href="#" class="site-btn">Read More  <img src="/img/icons/double-arrow.png" alt="#"/></a>
+					<p><img src="${pageContext.request.contextPath}/images/skyteam.jpg"></p>
+					<a href="${pageContext.request.contextPath}/item/item_detail?item_num=97" class="site-btn">Read More  <img src="/img/icons/double-arrow.png" alt="#"/></a>
 				</div>
 			</div>
 		</div>

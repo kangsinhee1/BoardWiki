@@ -66,7 +66,8 @@
 	<div class="chart-table">
 	<table>
 		<thead>
-		<tr>
+		<tr style="border-top-left-radius: 1em 5em;
+			border-top-right-radius: 1em 5em;">
 			<th>번호</th>
 			<th width="400">제목</th>
 			<th>작성자</th>
