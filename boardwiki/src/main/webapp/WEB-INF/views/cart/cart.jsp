@@ -50,7 +50,7 @@
                                             <option value="${i}" <c:if test="${i == cart.item_quantity}">selected</c:if>>${i}</option>
                                         </c:forEach>
                                     </select>
-                                </td>
+                                </td> 
                                 <td id="total_price_${cart.item_num}" class="total-price">${cart.item_quantity * cart.item_price}원</td>
                                 <td>
                                     <button class="btn btn-danger deleteX" data-item-num="${cart.item_num}" data-mem-num="${cart.mem_num}">제거</button>
