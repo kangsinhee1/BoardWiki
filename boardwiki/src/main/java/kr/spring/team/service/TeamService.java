@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
 
 import kr.spring.team.vo.TeamApplyVO;
 import kr.spring.team.vo.TeamBoardVO;
@@ -111,11 +110,11 @@ public interface TeamService {
 
 
 			public List<TeamApplyVO> listTeamApply(TeamApplyVO teamApply);
-			
+
 			public List<TeamApplyVO> listTeamApply2(TeamApplyVO teamApply);
 
 			public void updateTeamApplyStatus(@Param(value="teaA_status")long teaA_status,@Param(value="teaA_num")long teaA_num);
-			
+
 			public void updateTeamAuth(Long tea_status, Long tea_num);
 
 }

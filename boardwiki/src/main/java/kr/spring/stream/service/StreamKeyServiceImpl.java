@@ -34,7 +34,7 @@ public class StreamKeyServiceImpl implements StreamKeyService {
 		}else {
 			return streamKeyMapper.streamingNumber(mem_num);
 		}
-		
+
 	}
 
 	@Override

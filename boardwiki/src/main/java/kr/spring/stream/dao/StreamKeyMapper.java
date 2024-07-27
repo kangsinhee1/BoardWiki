@@ -11,10 +11,10 @@ public interface StreamKeyMapper {
 
     @Select("SELECT * FROM streaming WHERE mem_num = #{mem_num}")
     StreamKeyVO findByUsername(Long mem_num);
-    
+
     @Select("SELECT str_num FROM streaming WHERE mem_num = #{mem_num}")
     Integer streamingNumber(Long mem_num);
-    
+
     @Select("SELECT mem_num FROM streaming WHERE str_num = #{str_num}")
     Integer streamingNum(Long str_num);
 

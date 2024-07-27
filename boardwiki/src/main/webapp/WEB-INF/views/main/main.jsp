@@ -28,20 +28,20 @@ div.hiddenImage figure{
 		<div class="hero-slider owl-carousel">
 			<div class="hero-item set-bg d-flex align-items-center justify-content-center text-center" data-setbg="/images/maindice1.jpeg">
 				<div class="container">
-					<p><img src="/images/main-1.png"></p>
-					<a href="#" class="site-btn">Read More  <img src="/img/icons/double-arrow.png" alt="#"/></a>
+					<p><img class="slider-img" src="/images/brass.png"></p>
+					<a href="${pageContext.request.contextPath}/item/item_detail?item_num=20"	 class="site-btn">Read More  <img src="/img/icons/double-arrow.png" alt="#"/></a>
 				</div>
 			</div>
 			<div class="hero-item set-bg d-flex align-items-center justify-content-center text-center" data-setbg="/images/maindice1.jpeg">
 				<div class="container">
-					<p><img src="/images/main-2.png"></p>
-					<a href="#" class="site-btn">Read More  <img src="/img/icons/double-arrow.png" alt="#"/></a>
+					<p><img class="slider-img" src="/images/twilight.jpg"></p>
+					<a href="${pageContext.request.contextPath}/item/item_detail?item_num=5" class="site-btn">Read More  <img src="/img/icons/double-arrow.png" alt="#"/></a>
 				</div>
 			</div>
 			<div class="hero-item set-bg d-flex align-items-center justify-content-center text-center" data-setbg="/images/maindice1.jpeg">
 				<div class="container">
-					<p><img src="/images/main-3.png"></p>
-					<a href="#" class="site-btn">Read More  <img src="/img/icons/double-arrow.png" alt="#"/></a>
+					<p><img class="slider-img" src="${pageContext.request.contextPath}/images/skyteam.jpg"></p>
+					<a href="${pageContext.request.contextPath}/item/item_detail?item_num=97" class="site-btn">Read More  <img src="/img/icons/double-arrow.png" alt="#"/></a>
 				</div>
 			</div>
 		</div>
@@ -54,26 +54,26 @@ div.hiddenImage figure{
 		<div class="container">
 			<div class="row">
 				<div class="col-md-4">
-					<div class="intro-text-box text-box text-white hiddenImage">
+					<div class="intro-text-box text-box2 text-white hiddenImage">
 						<div class="top-meta">${board.boa_rdate}  /  in <a href="">자유게시판</a></div>
 						<h3>${board.boa_title }</h3>
-						<p>${board.boa_content }</p>
+						<p>${board.boa_content }</p><br>
 						<a href="/board/detail?boa_num=${board.boa_num }" class="read-more">Read More  <img src="/img/icons/double-arrow.png" alt="#"/></a>
 					</div>
 				</div>
 				<div class="col-md-4">
-					<div class="intro-text-box text-box text-white hiddenImage">
+					<div class="intro-text-box text-box2 text-white hiddenImage">
 						<div class="top-meta">${tnr.tnr_rdate }  /  in <a href="">팁/후기게시판</a></div>
 						<h3>${tnr.tnr_title }</h3>
-						<p>${tnr.tnr_content }</p>
+						<p>${tnr.tnr_content }</p><br>
 						<a href="/tnrboard/tnrboardDetail?tnr_category=${tnr.tnr_category }&tnr_num=${tnr.tnr_num }" class="read-more">Read More  <img src="/img/icons/double-arrow.png" alt="#"/></a>
 					</div>
 				</div>
 				<div class="col-md-4">
-					<div class="intro-text-box text-box text-white hiddenImage">
+					<div class="intro-text-box text-box2 text-white hiddenImage">
 						<div class="top-meta">${used.use_rdate }  /  in <a href="">Reviews</a></div>
 						<h3>${used.use_title }</h3>
-						<p>${used.use_content }</p>
+						<p>${used.use_content }</p><br>
 						<a href="/used/usedDetail?use_num=${used.use_num }" class="read-more">Read More  <img src="/img/icons/double-arrow.png" alt="#"/></a>
 					</div>
 				</div>

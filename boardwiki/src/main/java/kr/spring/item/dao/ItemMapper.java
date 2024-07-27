@@ -10,7 +10,6 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
-import kr.spring.board.vo.BoardVO;
 import kr.spring.item.vo.ItemVO;
 
 @Mapper
@@ -39,7 +38,7 @@ public interface ItemMapper {
 	public int getterItem(Long item_num);
 	@Update("UPDATE item set item_stock=#{item_stock} WHERE item_num=#{item_num}")
 	void updateStock(@Param("item_num") Long item_num, @Param("item_stock") int item_stock);
-	
+
 	@Select("SELECT * FROM (SELECT * FROM item ORDER BY DBMS_RANDOM.VALUE) WHERE ROWNUM <= 4")
 	public List<ItemVO> selectMainItem();
 }

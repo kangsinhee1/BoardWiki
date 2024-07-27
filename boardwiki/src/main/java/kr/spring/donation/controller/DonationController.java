@@ -20,7 +20,6 @@ import kr.spring.member.vo.MemberVO;
 import kr.spring.point.service.PointService;
 import kr.spring.point.vo.PointVO;
 import kr.spring.stream.service.StreamKeyService;
-import kr.spring.stream.vo.StreamCreatingVO;
 import kr.spring.util.PagingUtil;
 
 @Controller
@@ -28,13 +27,13 @@ public class DonationController {
 
 	    @Autowired
 	    private DonationService donationService;
-	    
+
 	    @Autowired
 	    private PointService pointService;
-	    
+
 	    @Autowired
 	    private StreamKeyService streamKeyService;
-	    
+
 	    @Autowired
 	    private MemberService memberService;
 
@@ -42,7 +41,7 @@ public class DonationController {
 	    public String donationfrom(HttpSession session, Model model) {
 	    	MemberVO user = (MemberVO) session.getAttribute("user");
 	    	int point = 0;
-	    	
+
 	    	if(user==null) {
 	    		model.addAttribute("logout","로그인 필요");
 	    	}else {
@@ -61,7 +60,7 @@ public class DonationController {
 	    	MemberVO user = (MemberVO) session.getAttribute("user");
 	    	int strNum = 0;
 	    	int point = 0;
-	    	
+
 	    	if(user==null) {
 	    		mapJson.put("result", "logout");
 	    	}else {
@@ -80,7 +79,7 @@ public class DonationController {
 		            pointVO.setPoi_increase(2);
 		            pointVO.setPoi_status(3);
 		            pointService.processPointTransaction(pointVO);
-		            
+
 		            PointVO point2 = new PointVO();
 		    		point2.setMem_num(user.getMem_num());
 		    		point2.setPoi_use(don_point);
@@ -104,18 +103,18 @@ public class DonationController {
 	    	int count = donationService.SelectDonationscount(map);
 
 	    	PagingUtil page = new PagingUtil(pageNum, count, 20, 10, "strlist");
-	    	
+
 	    	List<DonationVO> list = null;
 	    	long mem_num = 0l;
 	    	if (count > 0) {
 			     map.put("start", page.getStartRow());
 			     map.put("end", page.getEndRow());
-			     
+
 			     list = donationService.getDonationsByStream(map);
-			     for(int i=0;i<list.size();i++) {
-			    	 mem_num = list.get(i).getMem_num();
+			     for (DonationVO element : list) {
+			    	 mem_num = element.getMem_num();
 			    	 MemberVO member = memberService.selectMember(mem_num);
-			    	 list.get(i).setMem_nickName(member.getMem_nickName());
+			    	 element.setMem_nickName(member.getMem_nickName());
 			     }
 			}
 
@@ -142,12 +141,12 @@ public class DonationController {
 	    	if (count > 0) {
 			     map.put("start", page.getStartRow());
 			     map.put("end", page.getEndRow());
-			     
+
 			     list = donationService.getDonationsByMember(map);
-			     for(int i=0;i<list.size();i++) {
-			    	 mem_num = list.get(i).getMem_num();
+			     for (DonationVO element : list) {
+			    	 mem_num = element.getMem_num();
 			    	 MemberVO member = memberService.selectMember(mem_num);
-			    	 list.get(i).setMem_nickName(member.getMem_nickName());
+			    	 element.setMem_nickName(member.getMem_nickName());
 			     }
 			}
 

@@ -50,27 +50,27 @@ public interface UsedChatMapper {
 
 	//채팅 메시지 읽기
 	public List<UsedChat_textVO> selectChatDetail(Map<String,Long> map);
-	
-	
-	
+
+
+
 	//구매 완료 처리
 	@Update("UPDATE usedChatROOM set usec_status = 2 WHERE useC_num = #{useC_num}")
 	public void updateUseC_status (long useC_num);
 	//구매 완료된 목록 보기
 	@Select("SELECT * FROM UsedChatROOM WHERE usec_status =2 AND MEM_NUM = #{mem_num} AND useC_grade is  null")
 	public List<UsedChatRoomVO> selectChatRoomstatus2(long mem_num);
-	
+
 	@Select("SELECT count(*) FROM UsedChatROOM WHERE usec_status =2 AND MEM_NUM = #{mem_num} AND useC_grade is null ")
 	public Integer selectChatRoomCountstatus2(long mem_num);
-	
+
 	// 판매자 평가하기
 	@Update("UPDATE usedChatRoom SET useC_grade = #{useC_grade} WHERE useC_num = #{useC_num}")
 	public void updateUseC_grade(UsedChatRoomVO usedChatRoomVO);
-	
+
 	// 판매자 평점
 	public Long selectAvgGrade(long mem_num);
-	//채팅방 정보 불러오기 
+	//채팅방 정보 불러오기
 	@Select("Select * FROM usedChatRoom WHERE useC_Num = #{useC_num}")
 	public UsedChatRoomVO selectUsedChatROOMByuseCNum(long useC_num);
-	
+
 }

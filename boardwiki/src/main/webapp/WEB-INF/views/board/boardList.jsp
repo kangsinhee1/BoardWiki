@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!-- 게시판 목록 시작 -->
-<section class="page-top-section set-bg" data-setbg="/images/maindice3.jpeg">
+<section class="page-top-section set-bg" data-setbg="/img/page-top-bg/4.jpg">
 		<div class="page-info">
 			<h2>자유게시판</h2>
 			<div class="site-breadcrumb">
@@ -66,7 +66,8 @@
 	<div class="chart-table">
 	<table>
 		<thead>
-		<tr>
+		<tr style="border-top-left-radius: 1em 5em;
+			border-top-right-radius: 1em 5em;">
 			<th>번호</th>
 			<th width="400">제목</th>
 			<th>작성자</th>

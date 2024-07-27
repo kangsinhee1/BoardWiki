@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import kr.spring.contest.dao.ContestMapper;
 import kr.spring.contest.vo.ContestApplyVO;
 import kr.spring.contest.vo.ContestVO;
-import kr.spring.member.vo.MemberVO;
 
 @Service
 @Transactional
@@ -70,7 +69,7 @@ public class ContestServiceImpl implements ContestService{
 	@Override
 	public void deleteContest(Long con_num) {
 		contestmapper.deleteContest(con_num);
-		
+
 	}
 
 	@Override
@@ -96,6 +95,16 @@ public class ContestServiceImpl implements ContestService{
 	@Override
 	public List<ContestVO> selectContestListForStatusOrder(Map<String, Object> map) {
 		return contestmapper.selectContestListForStatusOrder(map);
+	}
+
+	@Override
+	public Integer countContestUserApplyList(long mem_num) {
+		return contestmapper.countContestUserApplyList(mem_num);
+	}
+
+	@Override
+	public List<ContestVO> selectContestUserApplyList(Map<String, Object> map) {
+		return contestmapper.selectContestUserApplyList(map);
 	}
 
 }

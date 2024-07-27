@@ -5,7 +5,6 @@ import java.util.Map;
 
 import kr.spring.contest.vo.ContestApplyVO;
 import kr.spring.contest.vo.ContestVO;
-import kr.spring.member.vo.MemberVO;
 
 public interface ContestService {
 	//목록보기
@@ -23,16 +22,19 @@ public interface ContestService {
 	public void applyForContest(ContestApplyVO contestApplyVO);
 
 	public Integer selectContestApplyList(ContestApplyVO contestApplyVO);
-	
+
 	public void cancelContestApply(ContestApplyVO contestApplyVO);
-	
+
 	public Integer countContestMan(Long con_num);
-	
+
 	public void deleteContest(Long con_num);
-	
+
 	public Integer countAllcontest(Map<String,Object> map);
-	
+
 	public Integer countContestAdminApplyList(long con_num);
 	public List<ContestVO> selectContestAdminApplyList(Map<String,Object>map);
 	public List<ContestVO> selectContestListForStatusOrder(Map<String,Object>map);
+
+	public Integer countContestUserApplyList(long mem_num);
+	public List<ContestVO> selectContestUserApplyList(Map<String,Object>map);
 }

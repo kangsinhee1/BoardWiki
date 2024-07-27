@@ -96,4 +96,4 @@ public class UsedServiceImpl implements UsedService{
 		return usedMapper.selectMainUsed();
 	}
 
-}  
+}

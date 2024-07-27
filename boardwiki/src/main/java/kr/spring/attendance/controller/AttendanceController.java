@@ -48,7 +48,7 @@ public class AttendanceController {
             } else {
                 model.addAttribute("dice", 0);
             }
-            
+
             AttendanceVO attendance = null;
             attendance = attendanceService.getAttendance(mem_num);
             List<AttendanceVO> attendances = attendanceService.getMonthlyAttendance(mem_num);

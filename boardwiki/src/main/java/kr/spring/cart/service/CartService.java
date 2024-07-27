@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import kr.spring.cart.vo.CartVO;
-import kr.spring.item.vo.ItemVO;
 
 public interface CartService {
 	//장바구니
@@ -17,4 +16,5 @@ public interface CartService {
 	public void updateCartDate(Long mem_num);
 	public CartVO getCart(CartVO cart);
 	public void deleteSmallCart(CartVO cart);
+	public List<CartVO> selectCartList2(Long mem_num);
 }

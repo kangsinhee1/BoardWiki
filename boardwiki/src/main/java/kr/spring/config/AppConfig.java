@@ -79,7 +79,7 @@ public class AppConfig implements WebMvcConfigurer,WebSocketConfigurer{
 		.excludePathPatterns("/team/teamDetail")
 		.excludePathPatterns("/team/writeTeamFav")
 		.excludePathPatterns("/team/teamFav")
-		.excludePathPatterns("/team/teamList");	
+		.excludePathPatterns("/team/teamList");
 
 		//authCheckInterceptor설정
 		registry.addInterceptor(authCheck)

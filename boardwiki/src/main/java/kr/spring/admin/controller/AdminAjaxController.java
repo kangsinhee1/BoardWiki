@@ -70,7 +70,7 @@ public class AdminAjaxController {
 	@PostMapping("/adminPage/updateMemberAuth")
 	@ResponseBody
 	public Map<String, Object> updateMemberAuth(
-	        @RequestParam Long mem_num, 
+	        @RequestParam Long mem_num,
 	        @RequestParam Integer mem_auth) {
 	    Map<String, Object> mapJson = new HashMap<>();
 

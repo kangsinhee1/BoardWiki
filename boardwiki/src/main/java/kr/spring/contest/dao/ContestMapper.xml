@@ -50,7 +50,7 @@
     <sql id="contestOrder">
         <choose>
             <when test="order == 1">
-                ORDER BY con_sdate, con_rdate DESC
+                ORDER BY con_status ASC, con_sdate ASC 
             </when>
             <when test="order == 2">
                 ORDER BY con_hit DESC
@@ -186,5 +186,9 @@
         LEFT OUTER JOIN member_detail USING(mem_num)
         JOIN contest ON contest_apply.con_num = contest.con_num
         WHERE contest.con_num = #{con_num}
+    </select>
+    
+    <select id="selectContestUserApplyList" parameterType="map" resultType="contestVO">
+    	SELECT * FROM contest_apply a JOIN contest c USING(con_num) WHERE a.mem_num = #{mem_num}
     </select>
 </mapper>

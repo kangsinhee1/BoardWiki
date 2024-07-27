@@ -39,7 +39,7 @@ public class MissionController {
     public String showMissionForm(HttpSession session, Model model) {
     	MemberVO user = (MemberVO) session.getAttribute("user");
     	int point = 0;
-    	
+
     	if(user==null) {
     		model.addAttribute("logout","로그인 필요");
     	}else {
@@ -47,7 +47,7 @@ public class MissionController {
     		model.addAttribute("user",user);
     		model.addAttribute("point",point);
     	}
-    	
+
         return "missionForm";
     }
 
@@ -79,7 +79,7 @@ public class MissionController {
     		point2.setPoi_status(4);
             pointService.processPointTransaction(point2);
             missionService.addMission(mission);
-    		
+
             map.put("mis_num", mis_num);
     		map.put("result", "success");
     		}
@@ -101,19 +101,19 @@ public class MissionController {
 		     map.put("end", page.getEndRow());
 
 		     list = missionService.getMissionsByStream(map);
-		     
+
 		}
     	long mem_num = 0l;
     	if (count > 0) {
 		     map.put("start", page.getStartRow());
 		     map.put("end", page.getEndRow());
-		     for(int i=0;i<list.size();i++) {
-		    	 mem_num = list.get(i).getMem_num();
+		     for (MissionVO element : list) {
+		    	 mem_num = element.getMem_num();
 		    	 MemberVO member = memberService.selectMember(mem_num);
-		    	 list.get(i).setMem_nickName(member.getMem_nickName());
+		    	 element.setMem_nickName(member.getMem_nickName());
 		     }
 		}
-    	
+
     	model.addAttribute("count", count);
 		model.addAttribute("list", list);
 		model.addAttribute("page", page.getPage());
@@ -174,15 +174,15 @@ public class MissionController {
             pointService.processPointTransaction(pointVO);
     	}else if(mis_status == 4) {
     		PointVO point2 = new PointVO();
-    		
-    		
+
+
     		point2.setMem_num(vos.getMem_num());
     		point2.setPoi_use(mis_point);
     		point2.setPoi_increase(2);
     		point2.setPoi_status(4);
             pointService.processPointTransaction(point2);
     	}
-    	
+
     	missionService.updateMissionStatus(vo);
     	map.put("result", "success");
         return map;

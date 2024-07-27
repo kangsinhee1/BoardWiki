@@ -159,3 +159,13 @@ CREATE TABLE dice_value (
 );
 
 CREATE SEQUENCE dice_value_seq;
+
+CREATE TABLE calendar (
+    calendar_num NUMBER PRIMARY KEY,
+    mem_num NUMBER NOT NULL,
+    title VARCHAR2(255) NOT NULL,
+    calendar_start DATE NOT NULL,
+    calendar_end DATE,
+     CONSTRAINT fk_mem_num FOREIGN KEY (mem_num) REFERENCES member(mem_num)
+);
+CREATE SEQUENCE calendar_seq;

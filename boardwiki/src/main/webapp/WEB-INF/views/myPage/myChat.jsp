@@ -31,7 +31,9 @@
 		</c:forEach>
 	</table>
 	</div>
-	<div class="align-center">${page}</div>
+	<div class="align-center">
+	<div class="blog-pagination">${page}</div>
+	</div>
 	</c:if>
 	<hr size="1" width="80%" noshade="noshade">
 	<h2>중고글 목록	 (판매)</h2>
@@ -63,7 +65,9 @@
 		</c:forEach>
 	</table>
 	</div>
-	<div class="align-center">${page2}</div>
+	<div class="align-center">
+	<div class="blog-pagination">${page2}</div>
+	</div>
 	</c:if>
 </div>
 <h2> 구매 완료 목록</h2>
@@ -71,12 +75,15 @@
 	<div class="result-display">표시할 채팅방이 없습니다.</div>
 	</c:if>
 	<c:if test="${count3>0}">
-	<table class="striped-table">
+	<div class="chart-table">
+	<table>
+	<thead>
 		<tr>
 			<th>중고글 번호</th>
 			<th>중고글 제목</th>
 			<th>평점 주기</th>
 		</tr>
+		</thead>
 		<c:forEach var="used" items="${list3}">
 		<tr>
 			<td>${used.use_num}</td>
@@ -89,6 +96,9 @@
 		</tr>
 		</c:forEach>
 	</table>
-	<div class="align-center">${page3}</div>
+	</div>
+	<div class="align-center">
+	<div class="blog-pagination">${page3}</div>
+	</div>
 	</c:if>
 </div>

@@ -17,7 +17,7 @@ public interface ReportMapper {
 	public Integer getReportRowCount(Map<String,Object>map);
 	//신고 vo 리스트에 넣기
 	public List<ReportVO> selectReportList(Map<String,Object>map);
-	
+
 	//신고 상세 내용 찾기
 	public ReportVO selectReportDetail(Long report_typeDetail, int report_type, Long report_num);
 }

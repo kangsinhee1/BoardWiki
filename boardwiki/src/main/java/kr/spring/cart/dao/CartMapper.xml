@@ -3,7 +3,6 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.spring.cart.dao.CartMapper">
-
     <select id="selectCartList" parameterType="map" resultType="CartVO">
         SELECT * 
         FROM(
@@ -12,6 +11,16 @@
 	 	    SELECT * FROM cart c
 	 	    LEFT JOIN item i ON c.item_num = i.item_num
 	 	    WHERE c.mem_num=#{mem_num} AND c.cart_check=0
+	 	    ORDER BY c.mem_num DESC)a)
+	</select>
+	<select id="selectCartList2" parameterType="map" resultType="CartVO">
+        SELECT * 
+        FROM(
+            SELECT a.*, rownum rnum 
+	 	    FROM (
+	 	    SELECT * FROM cart c
+	 	    LEFT JOIN item i ON c.item_num = i.item_num
+	 	    WHERE c.mem_num=#{mem_num}
 	 	    ORDER BY c.mem_num DESC)a)
 	</select>
 	<select id="selectRowCount" parameterType="map"

@@ -80,7 +80,7 @@ public class UsedChatServiceImpl implements UsedChatService{
 	@Override
 	public void updateUseC_status(long useC_num) {
 		usedChatMapper.updateUseC_status(useC_num);
-		
+
 	}
 
 	@Override

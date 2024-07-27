@@ -34,7 +34,7 @@
 		<li>첨부파일 : <a href="file?rulB_num=${rulebook.rulB_num}">${rulebook.filename}</a></li>
 	</ul>
 	</c:if>
-	<div class="detail-content">
+	<br><div class="detail-content">
 		${rulebook.rulB_content}
 	</div>
 	<hr size="1" width="100%">

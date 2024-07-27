@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/usedChat.js"></script>
 <section class="page-top-section set-bg" data-setbg="/img/page-top-bg/4.jpg">
@@ -22,7 +23,9 @@
 	<h3 id="chatroom_title"><span id="useC_name">${useC_name}</span> 채팅방</h3> 
 	<div class="align-right">
 	<div id="deal">
+	<c:if test="selled">
 			<input type="button" value="거래완료" onclick="location.href='finishDeal?useC_num=${useC_num}'">
+	</c:if>
 		</div>
 </div>  
 	<div id="chatting_message"></div>

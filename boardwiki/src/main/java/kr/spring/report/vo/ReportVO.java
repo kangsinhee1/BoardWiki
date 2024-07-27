@@ -18,27 +18,27 @@ public class ReportVO {
 	private int report_category;	//신고 유형
 	private int report_type;		//신고 분류(게시판)
 	private	Long report_typeDetail;	//신고된 글이나 댓글 고유 번호
-	
-	
+
+
 	private String mem_nickName;
-	
+
 	private Long mem_num;
-	
+
 	//board
 	private String boa_title;
 	private Long boa_num;
 	private int boa_auth;
-	
+
 	//team
 	private String tea_name;
 	private Long tea_num;
 	private int tea_status;
-	
+
 	//used
 	private String use_title;
 	private Long use_num;
 	private int use_auth;
-	
+
 	//tnr
 	private String tnr_title;
 	private Long tnr_num;

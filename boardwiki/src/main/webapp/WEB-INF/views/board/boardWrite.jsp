@@ -50,6 +50,8 @@
 		            })
 		            .then( editor => {
 						window.editor = editor;
+						
+						
 					} )
 		            .catch( error => {
 		                console.error( error );
@@ -75,7 +77,28 @@
 </section>				
 <!-- 게시판 글쓰기 끝 -->
 
+<script>
+$(document).ready(function() {
+    // textarea의 id를 정확히 지정하여 해당 textarea를 모니터링합니다.
+    const textarea = document.getElementById('boa_content');
 
+    // textarea의 입력을 모니터링하는 이벤트 핸들러를 추가합니다.
+    textarea.addEventListener('input', function() {
+        const text = textarea.value;
+        const maxLength = 20;
+
+        let formattedText = '';
+        for (let i = 0; i < text.length; i++) {
+            formattedText += text[i];
+            if ((i + 1) % maxLength === 0) {
+                formattedText += '\n';
+            }
+        }
+
+        textarea.value = formattedText;
+    });
+});
+</script>
   
 
 

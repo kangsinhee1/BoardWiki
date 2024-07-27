@@ -190,7 +190,7 @@ public class BoardController {
 
 		return "boardList2";
 	}
-	
+
 
 	/*====================
 	 *  게시판 글상세 category 1

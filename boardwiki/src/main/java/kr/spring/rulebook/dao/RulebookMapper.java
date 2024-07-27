@@ -26,6 +26,6 @@ public interface RulebookMapper {
 	@Update("UPDATE rulebook SET filename='' WHERE rulB_num=#{rulB_num}")
 	public void deleteRulebookFile(Long rulB_num);
 
-	
-	
+
+
 }

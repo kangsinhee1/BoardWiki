@@ -89,7 +89,7 @@ public class RulebookController {
 	 *  룰북 목록
 	 *====================*/
 	@GetMapping("/rulebook/rulebookList")
-	public String getList(Long item_num, 
+	public String getList(Long item_num,
 				@RequestParam(defaultValue="1") int pageNum,
 				String keyfield,String keyword,Model model) {
 

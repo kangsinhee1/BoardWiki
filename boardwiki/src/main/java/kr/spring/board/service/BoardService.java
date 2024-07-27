@@ -34,7 +34,7 @@ public interface BoardService {
 	public void insertReply(BoardReplyVO boardReply);
 	public void updateReply(BoardReplyVO boardReply);
 	public void deleteReply(Long boaR_num);
-	
+
 	public void updateBoardAuth(Long boa_num, Long boa_auth);
 	public BoardVO selectMainBoard();
 	public List<BoardVO> selectMainNews();

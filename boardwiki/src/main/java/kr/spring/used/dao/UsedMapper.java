@@ -15,10 +15,10 @@ public interface UsedMapper {
 	//중고글 갯수
 	public Integer getUsedRowCount(Map<String,Object>map);
 	//중고글 개수(게임상세 링크)
-	public Integer getUsedRowCountByItemNum(Map<String,Object>map);  
+	public Integer getUsedRowCountByItemNum(Map<String,Object>map);
 	//중고글 갯수(회원전용)
 	public Integer getUsedRowCountForClient(Map<String,Object>map);
-	
+
 	//중고글 목록
 	public List<UsedItemVO> selectUsedList(Map<String,Object>map);
 	//중고글 목록(회원전용)
@@ -43,14 +43,14 @@ public interface UsedMapper {
 	//내 중고글 갯수
 	@Select("SELECT COUNT(*) FROM used_item WHERE mem_num = #{mem_num}")
 	public Integer getUsedRowCountByMemNum(Map<String,Object>map);
-	
+
 	@Update("UPDATE  used_item SET use_check= 3 WHERE use_num=#{use_num}")
 	public void updateUseCheckByroom(long use_num);
 
 	//등급 수정
 	@Update("UPDATE used_item SET use_auth=#{use_auth} WHERE use_num=#{use_num}")
 	public void updateUsedAuth(Long use_auth, Long use_num);
-	
+
 	@Select("SELECT *FROM (SELECT * FROM used_item ORDER BY use_rdate DESC) WHERE ROWNUM = 1")
 	public UsedItemVO selectMainUsed();
 }

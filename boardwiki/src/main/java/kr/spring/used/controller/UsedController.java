@@ -24,7 +24,6 @@ import kr.spring.member.vo.MemberVO;
 import kr.spring.used.service.UsedService;
 import kr.spring.used.vo.UsedItemVO;
 import kr.spring.usedChat.service.UsedChatService;
-import kr.spring.usedChat.vo.UsedChatRoomVO;
 import kr.spring.util.FileUtil;
 import kr.spring.util.PagingUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -41,7 +40,7 @@ public class UsedController {
 	public UsedItemVO initCommand() {
 		return new UsedItemVO();
 	}
-	/*=====================    
+	/*=====================
 	 * 중고게시판 목록
 	 *=====================*/
 	@GetMapping("/*/usedList")
@@ -51,17 +50,17 @@ public class UsedController {
 			 Long item_num,
 			 String keyfield,String keyword,Model model) {
 		log.debug("<<item_num>> : " + item_num);
-		
+
 
 		if(item_num ==null) {
 			if(keyword != null) { keyword = keyword.toLowerCase(); }
-			
+
 			Map<String,Object> map = new HashMap<>();
 			map.put("keyfield", keyfield);
 			map.put("keyword", keyword);
-			
+
 			int count = usedService.getUsedRowCountForClient(map);
-			
+
 			//페이지 처리
 			PagingUtil page = new PagingUtil(keyfield, keyword, pageNum,count,10,10,"usedList","&order="+order);
 			List<UsedItemVO> list = null;
@@ -71,20 +70,20 @@ public class UsedController {
 				map.put("end",page.getEndRow());
 				list = usedService.selectUsedListForClient(map);
 			}
-			
+
 			model.addAttribute("count",count);
 			model.addAttribute("list",list);
 			model.addAttribute("page",page.getPage());
 			return "usedList";
-			
+
 		}else {
 			Map<String,Object> map = new HashMap<>();
 			map.put("keyfield", keyfield);
 			map.put("keyword", keyword);
 			map.put("item_num", item_num);
-			
+
 			int count = usedService.getUsedRowCountByItemNum(map);
-			
+
 			//페이지 처리
 			PagingUtil page = new PagingUtil(keyfield, keyword, pageNum,count,10,10,"usedList","&order="+order);
 			List<UsedItemVO> list = null;
@@ -94,11 +93,11 @@ public class UsedController {
 				map.put("end",page.getEndRow());
 				list = usedService.selectUsedListByItemNum(map);
 			}
-			
+
 			model.addAttribute("count",count);
 			model.addAttribute("list",list);
 			model.addAttribute("page",page.getPage());
-			
+
 			return "usedList";
 		}
 	}
@@ -162,7 +161,7 @@ public class UsedController {
 			used.setUseC_grade(-1L);
 		}else {
 			used.setUseC_grade(usedChatService.selectAvgGrade(used.getMem_num()));
-		}	
+		}
 		return new ModelAndView("usedView","used",used);
 	}
 	/*====================

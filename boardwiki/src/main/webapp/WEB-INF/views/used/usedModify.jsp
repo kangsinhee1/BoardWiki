@@ -78,10 +78,6 @@
                 </form:select>
                 <form:errors path="use_check" cssClass="error-color"/>
             </li>
-            <li>
-                <form:label path="use_upload">제품 사진</form:label>
-                <input type="file" name="use_upload" id="use_upload">
-            </li>
         </ul> 
         <div class="align-center">
             <button type="submit" class="default-btn">수정하기</button>

@@ -52,10 +52,10 @@ public class AdminController {
 
 	@Autowired
 	private ContestService contestService;
-	
+
 	@Autowired
 	private PointService pointService;
-	
+
 	/*==============================
 	 * 관리자 페이지 메인
 	 *==============================*/
@@ -284,7 +284,7 @@ public class AdminController {
 
 		return "pointManage";
 	}
-	
+
 	/**포인트 목록*/
 	@GetMapping("/point/pointListAdmin")
 	public String getListPoint(

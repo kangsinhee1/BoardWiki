@@ -1,6 +1,5 @@
 package kr.spring.stream.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,20 +31,20 @@ public class BroadcastController {
 
     @Autowired
     private StreamCreatingService streamCreatingService;
-    
+
     @Autowired
     private MemberService memberService;
 
     @GetMapping("/streaming/broadcasts")
     public String getBroadcastList(HttpServletRequest request) {
         List<BroadcastVO> broadcasts = broadcastService.getAllBroadcasts();
-       
+
         long mem_num = 0;
-        for(int i=0; i<broadcasts.size();i++) {
-        	mem_num = broadcasts.get(i).getMem_num();
+        for (BroadcastVO broadcast : broadcasts) {
+        	mem_num = broadcast.getMem_num();
         	MemberVO member = memberService.selectMember(mem_num);
-            if (member != null) {  
-            	broadcasts.get(i).setMem_nickName(member.getMem_nickName());
+            if (member != null) {
+            	broadcast.setMem_nickName(member.getMem_nickName());
             }
     	}
         request.setAttribute("broadcasts", broadcasts);
@@ -59,9 +58,9 @@ public class BroadcastController {
     	user = (MemberVO)session.getAttribute("user");
     	long mem_num = 0;
     	String nick = null;
-    	for(int i=0; i<broadcasts.size();i++) {
-    		if(broadcasts.get(i).getStr_num() == str_num) {
-    			mem_num = broadcasts.get(i).getMem_num();
+    	for (BroadcastVO broadcast : broadcasts) {
+    		if(broadcast.getStr_num() == str_num) {
+    			mem_num = broadcast.getMem_num();
     			MemberVO member = memberService.selectMember(mem_num);
     			nick = member.getMem_nickName();
     		}

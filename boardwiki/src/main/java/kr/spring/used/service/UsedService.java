@@ -11,7 +11,7 @@ public interface UsedService {
 	public Integer getUsedRowCountByItemNum(Map<String,Object>map);
 	public Integer getUsedRowCountForClient(Map<String,Object>map);
 	//중고글 정보
-	public List<UsedItemVO> selectUsedList(Map<String,Object>map);  
+	public List<UsedItemVO> selectUsedList(Map<String,Object>map);
 	public List<UsedItemVO> selectUsedListByItemNum(Map<String,Object>map);
 	public List<UsedItemVO> selectUsedListForClient(Map<String,Object>map);
 	//중고글 상세
@@ -29,7 +29,7 @@ public interface UsedService {
 	public Integer getUsedRowCountByMemNum(Map<String,Object>map);
 	// 중고글 판매처리
 	public void updateUseCheckByroom(long use_num);
-	
+
 	//등급수정
 	public void updateUsedAuth(Long use_auth, Long use_num);
 	public UsedItemVO selectMainUsed();

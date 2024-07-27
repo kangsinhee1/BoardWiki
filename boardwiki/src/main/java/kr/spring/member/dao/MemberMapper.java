@@ -40,13 +40,13 @@ public interface MemberMapper {
 	//아이디 찾기
 	@Select("SELECT * FROM member JOIN member_detail USING(mem_num) WHERE mem_name = #{mem_name} AND mem_phone = #{mem_phone}")
 	public MemberVO findEmail(String mem_name, String mem_phone);
-	
+
 	//회원 탈퇴
 	@Update("UPDATE member SET mem_auth=0 WHERE mem_num= #{mem_num}")
 	public void deleteMember(long mem_num);
 	@Delete("DELETE FROM member_detail WHERE mem_num=#{mem_num}")
 	public void deleteMember_detail(long mem_num);
-	
+
 	//관리자 멤버 등급 변경
 	@Update("UPDATE member SET mem_auth=#{mem_auth} WHERE mem_num = #{mem_num}")
 	public  boolean updateMemberAuth(long mem_num, Integer mem_auth);

@@ -2,8 +2,6 @@ package kr.spring.order.service;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Select;
-
 import kr.spring.cart.vo.CartVO;
 import kr.spring.order.vo.OrderVO;
 

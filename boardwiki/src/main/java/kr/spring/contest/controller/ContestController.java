@@ -2,10 +2,10 @@ package kr.spring.contest.controller;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -69,7 +69,7 @@ public class ContestController {
 					throws IllegalStateException,
 					IOException{
 		log.debug("<<게시판 글 저장>> : " + contestVO);
-		
+
 		//유효성 체크 결과 오류가 있으면 폼 호출
 		if(result.hasErrors()) {
 			return writeform(contestVO, request, session, model);
@@ -79,20 +79,20 @@ public class ContestController {
 		MemberVO member = (MemberVO)session.getAttribute("user");
 		contestVO.setMem_num(member.getMem_num());
 		contestVO.getCon_sdate();
-		
+
 		// 현재 날짜와 비교하여 con_sdate가 오늘보다 크면 con_status를 1로 설정
 	    Date now = new Date();
-	    
+
 	    SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
-	    
+
 	    String nowTime = sdf1.format(now);
-	    
+
 	    String sdate = contestVO.getCon_sdate();
-	    
+
 	    int compare = sdate.compareTo(nowTime);
-	    
+
 	    System.out.println("**********************"+compare+"*********************");
-	    
+
 	    if (compare > 0) {
 	        contestVO.setCon_status(1);
 	    }else {
@@ -160,7 +160,7 @@ public class ContestController {
 	 *=====================*/
 	@GetMapping("/contest/contestDetail")
 	public ModelAndView contestDetail(long con_num, HttpSession session) {
-		
+
 		log.debug("<<대회 상세 진입 : >>   " + con_num);
 	    // 조회수 증가
 	    contestservice.updateContestHit(con_num);
@@ -169,7 +169,7 @@ public class ContestController {
 
 	    // 사용자가 이미 신청했는지 여부를 확인
 	    MemberVO member = (MemberVO) session.getAttribute("user");
-	    
+
 	    boolean applied = false;
 	    int conManCount = contestservice.countContestMan(con_num);
 
@@ -177,15 +177,15 @@ public class ContestController {
 	        ContestApplyVO contestApplyVO = new ContestApplyVO();
 	        contestApplyVO.setMem_num(member.getMem_num());
 	        contestApplyVO.setCon_num(con_num);
-	        applied = contestservice.selectContestApplyList(contestApplyVO) > 0;	        
+	        applied = contestservice.selectContestApplyList(contestApplyVO) > 0;
 	    }
 	    // ModelAndView 객체에 데이터 추가
 	    ModelAndView mav = new ModelAndView("contestDetail");
 	    mav.addObject("contest", contest);
 	    mav.addObject("applied", applied);
 	    mav.addObject("conManCount", conManCount);
-	   	    
-	    
+
+
 	    return mav;
 	}
 
@@ -216,7 +216,7 @@ public class ContestController {
 		model.addAttribute("url", request.getContextPath() + "contestDetail?con_num=" + contestApplyVO.getCon_num());
 		return "common/resultAlert";
 	}
-	
+
 	/*=====================
 	 * 	  대회 삭체 처리
 	 *=====================*/
@@ -225,7 +225,7 @@ public class ContestController {
 			HttpServletRequest request, HttpSession session, ContestVO contestVO, Model model) {
 
 		MemberVO member = (MemberVO) session.getAttribute("user");
-		
+
 		if(member.getMem_auth() < 9) {
 			model.addAttribute("message", "잘못된 접근입니다.");
 			model.addAttribute("url", request.getContextPath() + "/main/main");
@@ -233,10 +233,10 @@ public class ContestController {
 		}
 
 		contestservice.deleteContest(con_num);
-		
+
 		model.addAttribute("message", "삭제되었습니다.");
 		model.addAttribute("url", request.getContextPath() + "/contest/contestList");
-		
+
 		return "common/resultAlert";
 	}
 }

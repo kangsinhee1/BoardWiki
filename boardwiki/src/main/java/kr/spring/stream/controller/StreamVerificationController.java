@@ -7,7 +7,6 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,7 +33,7 @@ public class StreamVerificationController {
 
     @Autowired
     private StreamCreatingService streamCreatingService;
-    
+
     @Autowired
     private MemberService memberService;
 
@@ -84,17 +83,17 @@ public class StreamVerificationController {
         vo = streamCreatingService.selectCreating(str_num);
         Long mem_num = 0l;
         List<StreamCreatingVO> list = streamCreatingService.selectMessageLive(vo);
-        for(int i=0; i<list.size();i++) {
-        	mem_num = list.get(i).getMem_num();
+        for (StreamCreatingVO element : list) {
+        	mem_num = element.getMem_num();
         	MemberVO member = memberService.selectMember(mem_num);
-        	list.get(i).setMem_nickName(member.getMem_nickName());
+        	element.setMem_nickName(member.getMem_nickName());
         }
         return list;
     }
 
     @PostMapping("/streaming/send")
     public Map<String,String> sendChatMessage(@RequestParam("str_num") long str_num,@RequestParam("strt_chat") String strt_chat, HttpSession session) {
-    	Map<String,String> map = new HashMap<String, String>();
+    	Map<String,String> map = new HashMap<>();
     	MemberVO user = (MemberVO) session.getAttribute("user");
         StreamCreatingVO vos = new StreamCreatingVO();
         StreamCreatingVO vos2 = streamCreatingService.selectCreating(str_num);

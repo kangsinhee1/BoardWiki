@@ -6,7 +6,6 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
 
 import kr.spring.chat.vo.ChatMemberVO;
 import kr.spring.chat.vo.ChatRoomVO;
@@ -48,8 +47,8 @@ public interface ChatService {
 			public ChatTextVO selectChatText(long chaT_num);
 			public ChatRoomVO selectChatRoomBychaRnum(long chaR_num);
 
-			public void updateChatRoomStatus1Bytea_num(long tea_num); 
-			
-			public void updateChatRoomStatus0Bytea_num(long tea_num); 
+			public void updateChatRoomStatus1Bytea_num(long tea_num);
+
+			public void updateChatRoomStatus0Bytea_num(long tea_num);
 
 }

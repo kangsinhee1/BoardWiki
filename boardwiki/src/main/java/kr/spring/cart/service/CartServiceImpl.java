@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.spring.cart.dao.CartMapper;
 import kr.spring.cart.vo.CartVO;
-import kr.spring.item.vo.ItemVO;
 
 @Service
 @Transactional
@@ -46,7 +45,7 @@ public class CartServiceImpl implements CartService{
 	public CartVO getCart(CartVO cart) {
 		return cartMapper.getCart(cart);
 	}
-	
+
 	@Override
 	public CartVO selectCart(Long mem_num) {
 		return cartMapper.selectCart(mem_num);
@@ -60,4 +59,10 @@ public class CartServiceImpl implements CartService{
 	public void updateCartDate(Long mem_num) {
 		cartMapper.updateCartDate(mem_num);
 	}
+
+	@Override
+	public List<CartVO> selectCartList2(Long mem_num) {
+		return cartMapper.selectCartList2(mem_num);
+	}
+
 }

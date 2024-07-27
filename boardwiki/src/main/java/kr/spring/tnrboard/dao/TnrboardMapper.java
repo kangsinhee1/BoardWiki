@@ -60,8 +60,8 @@ public interface TnrboardMapper {
 	//부모글 삭제시 댓글이 존재하면 부모글 삭제전 댓글 삭제
 	@Delete("DELETE FROM tnrboard_reply WHERE tnr_num=#{tnr_num}")
 	public void deleteReplyByTnrboardNum(Long tnr_num);
-	
-	
+
+
 	@Update("UPDATE tnrboard SET tnr_auth=#{tnr_auth} WHERE tnr_num=#{tnr_num}")
 	public void updateTnrBoardAuth(Long tnr_num, Long tnr_auth);
 	@Select("SELECT *FROM (SELECT * FROM tnrBoard ORDER BY tnr_rdate DESC) WHERE ROWNUM = 1")

@@ -24,7 +24,7 @@ public interface TeamMapper {
 		//목록보기
 		public Integer getTeamRowCount(Map<String,Object>map);
 		public Integer getTeamRowCountByAdmin(Map<String,Object>map);
-		
+
 
 		public List<TeamVO> selectTeamListAdmin(Map<String,Object>map);
 		public List<TeamVO> selectTeamList(Map<String,Object>map);
@@ -110,7 +110,7 @@ public interface TeamMapper {
 		public TeamApplyVO getTeamApply (@Param(value="teaA_num")long teaA_num);
 		@Select("SELECT * FROM team_apply JOIN member_detail USING (mem_num) WHERE tea_num = #{tea_num} AND teaA_status != 9")
 		public List<TeamApplyVO> listTeamApply(TeamApplyVO teamApply);
-		
+
 		@Select("SELECT * FROM team_apply JOIN member_detail USING (mem_num) WHERE tea_num = #{tea_num} AND teaA_status = 2")
 		public List<TeamApplyVO> listTeamApply2(TeamApplyVO teamApply);
 		@Update("UPDATE team_apply SET teaA_status=#{teaA_status} , teaA_mdate = sysdate WHERE teaA_num = #{teaA_num}")
@@ -179,7 +179,7 @@ public interface TeamMapper {
 		//부모글 삭제시 댓글 삭제
 		@Delete("DELETE FROM team_reply WHERE teaB_num = #{teaB_num}")
 		public void deleteTeamBoardReplyByTeamBoardNum(long teaB_num);
-		
+
 		@Update("UPDATE team SET tea_status=#{tea_status} WHERE tea_num=#{tea_num}")
 		public void updateTeamAuth(Long tea_status, Long tea_num);
 

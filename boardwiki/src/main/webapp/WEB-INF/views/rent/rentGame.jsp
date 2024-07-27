@@ -2,6 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,7 +53,7 @@
                             </div>
                             <div class="align-center">
                                 <form:button class="rent_btn">전송</form:button>
-                                <input type="button" value="목록" class="default-btn" onclick="location.href='list'">
+                                <input type="button" value="목록" class="default-btn" onclick="location.href='${pageContext.request.contextPath}/myPage/rent'">
                             </div>
                         </form:form>
                     </div>
@@ -152,6 +154,8 @@ jb(function() {
         }
     });
 });
+
+
 </script>
 
 </body>

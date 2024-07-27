@@ -236,7 +236,7 @@ public class TeamController {
 		chatService.updateChatRoomStatus1Bytea_num(tea_num);
 		teamService.updateTeamStatusOpen(tea_num);
 		model.addAttribute("tea_num", tea_num);
-		
+
 		return "redirect:teamBoardAdmin?tea_num="+tea_num;
 	}
 

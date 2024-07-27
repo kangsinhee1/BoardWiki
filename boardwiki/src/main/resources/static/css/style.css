@@ -5,9 +5,11 @@
  ------------------------------------
  ====================================*/
  
+
  .font-white{
  color:white;
  }
+ 
  
 .dropbtn {
 	display: inline-block;
@@ -25,7 +27,20 @@
     transition: background-color 0.3s;
 }
 .dropbtn:hover {
-	background : #C213B6;
+	background : #C213B6 !important;
+}
+.dropbtn a:hover {
+	background : #C213B6 !important;
+}
+.dropdown:hover .dropbtn {
+	background: #C213B6 !important;
+}
+.dropdown a:hover {
+    /* 드롭다운 메뉴의 링크에 마우스를 올렸을 때의 스타일 */
+    background: #C213B6;
+}
+.dropbtn:focus {
+	background : #C213B6 !important;
 }
 
 a {
@@ -51,9 +66,66 @@ a {
     width: auto; /* 선택 상자의 폭을 자동으로 조절하여 내용에 맞춥니다. */
 }
 
+
+
+
+/* =================================
+ ------------------------------------
+  Bootstrap 4 Dark themed date and time picker
+ ------------------------------------
+ ====================================*/
+/* 날짜 선택 셀에 대한 스타일 */
+
+
+ .datepicker {
+    background-color: #000 !important;
+    color: #fff !important;
+    border: none;
+    padding: 10px !important;
+    z-index: 1000;
+}
+
+.datepicker-dropdown {
+    z-index: 1000 !important;
+}
+
+.datepicker-dropdown .day:hover,
+.datepicker .datepicker-switch:hover,
+.datepicker-dropdown .next:hover,
+.datepicker-dropdown .prev:hover,
+.datepicker-dropdown .old-day:hover,
+.datepicker-dropdown .new-day:hover,
+.datepicker-dropdown .month:hover,
+.datepicker-dropdown .year:hover,
+.datepicker-dropdown .decade:hover,
+.datepicker table tr td span.focused, .datepicker table tr td span:hover,
+.datepicker-dropdown .century:hover {
+    background-color: #C213B6 !important; /* 호버 시 배경색 변경 */
+    color: #fff !important; /* 호버 시 글자색 변경 */
+}
+
+/* 선택된 날짜에 대한 스타일 */
+.datepicker-dropdown .active {
+    background-image: linear-gradient(#90CAF9, #64B5F6) !important;
+    color: #000 !important;
+}
+
+/* 오늘 날짜 텍스트 색상 변경 */
+.datepicker-dropdown .day.today {
+    color: #C213B6 !important;
+    font-weight: bold !important;
+}
+
+ /* =================================
+ ------------------------------------
+ 커스텀 스타일 추가 명시
+ ------------------------------------
+ ====================================*/
+
+
  /*------------------------
   페이지 처리
--------------------------*/
+ -------------------------*/
  .blog-pagination {
 	padding-top: 10px;
 }
@@ -108,7 +180,7 @@ form#search_form {
 ul.rent_search {
 	list-style: none;
 	padding: 0;
-	margin-left: 20%;
+	margin-left: 10%;
 	display: flex;
 	gap: 10px;
 }
@@ -253,12 +325,12 @@ input[type="button"]:hover {
 	font-size: 14px;
 	padding: 6px 13px 6px;
 	color: #ffffff;
-	background: #C213B6;
+	background: #A11099;
 	line-height: normal;
 	letter-spacing: 1px;
 	text-transform: uppercase;
 	font-weight: 600;
-	border: 2px solid #C213B6;
+	border: 2px solid #A11099;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
@@ -807,6 +879,8 @@ ol {
 .footer-social a:hover,
 .geme-social-share a:hover {
 	background: #b01ba5;
+	color: #ffffff;
+    text-decoration: none;
 }
 
 .header-bar-warp {
@@ -841,6 +915,8 @@ ol {
 	list-style: none;
 	text-align: center;
 	padding-top: 3px;
+	margin-bottom: 0rem;
+	
 }
 
 .main-menu li {
@@ -949,123 +1025,135 @@ ol {
   Hero section
 ---------------------*/
 
+/* Hero section */
 .hero-slider .owl-dots {
-	display: -ms-flex;
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
-	z-index: 2;
-	left: calc(50% - 740px);
-	bottom: 38px;
-	position: relative;
-	width: 1496px;
-	position: absolute;
+    display: -ms-flex;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    z-index: 2;
+    left: calc(50% - 740px);
+    bottom: 38px;
+    position: relative;
+    width: 1496px;
+    position: absolute;
 }
 
 .hero-slider .owl-dots .owl-dot {
-	width: 44px;
-	height: 44px;
-	border-radius: 50%;
-	font-size: 16px;
-	font-weight: 500;
-	border: 2px solid transparent;
-	color: #fff;
-	display: -ms-inline-flex;
-	display: -webkit-inline-box;
-	display: -ms-inline-flexbox;
-	display: inline-flex;
-	-webkit-box-align: center;
-	-ms-flex-align: center;
-	align-items: center;
-	-webkit-box-pack: center;
-	-ms-flex-pack: center;
-	justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    font-size: 16px;
+    font-weight: 500;
+    border: 2px solid transparent;
+    color: #fff;
+    display: -ms-inline-flex;
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
 }
 
 .hero-slider .owl-dots .owl-dot.active {
-	color: #b01ba5;
-	border: 2px solid #b01ba5;
+    color: #b01ba5;
+    border: 2px solid #b01ba5;
 }
 
 .hero-slider .owl-nav {
-	margin-top: -24px;
-	display: block;
+    margin-top: -24px;
+    display: block;
 }
 
-.hero-slider .owl-nav .owl-next {
-	position: absolute;
-	top: 50%;
-	right: 100px;
+.hero-slider .owl-prev {
+    position: absolute;
+    top: 50%;
+    left: 100px; /* 왼쪽 버튼 위치 설정 */
+    transform: translateY(-50%);
+    z-index: 10;
 }
+
+
+
+.hero-slider .owl-next {
+    position: absolute;
+    top: 50%;
+    right: 100px; /* 오른쪽 버튼 위치 설정 */
+    transform: translateY(-50%);
+    z-index: 10;
+}
+
+	
 
 .hero-item {
-	height: 921px;
-	padding-top: 125px;
-	border-bottom: 2px solid #b01ba5;
+    height: 921px;
+    padding-top: 125px;
 }
 
 .hero-item h2 {
-	font-size: 160px;
-	color: #fff;
-	font-weight: 500;
-	line-height: 1;
-	position: relative;
-	top: 100px;
-	opacity: 0;
+    font-size: 160px;
+    color: #fff;
+    font-weight: 500;
+    line-height: 1;
+    position: relative;
+    top: 100px;
+    opacity: 0;
 }
 
 .hero-item p {
-	font-size: 24px;
-	color: rgba(255, 255, 255, 0.4);
-	font-weight: 500;
-	opacity: 0.39;
-	margin-bottom: 70px;
-	position: relative;
-	top: 80px;
-	opacity: 0;
+    font-size: 24px;
+    color: rgba(255, 255, 255, 0.4);
+    font-weight: 500;
+    opacity: 0.39;
+    margin-bottom: 70px;
+    position: relative;
+    top: 80px;
+    opacity: 0;
 }
 
 .hero-item .site-btn {
-	position: relative;
-	top: 50px;
-	opacity: 0;
+    position: relative;
+    top: 50px;
+    opacity: 0;
 }
 
 .hero-slider .owl-item.active .hero-item h2,
 .hero-slider .owl-item.active .hero-item p,
 .hero-slider .owl-item.active .hero-item .site-btn {
-	top: 0;
-	opacity: 1;
+    top: 0;
+    opacity: 1;
 }
 
 .hero-slider .owl-item.active .hero-item h2 {
-	-webkit-transition: all 0.5s ease 0.4s;
-	-o-transition: all 0.5s ease 0.4s;
-	transition: all 0.5s ease 0.4s;
+    -webkit-transition: all 0.5s ease 0.4s;
+    -o-transition: all 0.5s ease 0.4s;
+    transition: all 0.5s ease 0.4s;
 }
 
 .hero-slider .owl-item.active .hero-item p {
-	-webkit-transition: all 0.5s ease 0.6s;
-	-o-transition: all 0.5s ease 0.6s;
-	transition: all 0.5s ease 0.6s;
+    -webkit-transition: all 0.5s ease 0.6s;
+    -o-transition: all 0.5s ease 0.6s;
+    transition: all 0.5s ease 0.6s;
 }
 
 .hero-slider .owl-item.active .hero-item .site-btn {
-	-webkit-transition: all 0.5s ease 0.8s;
-	-webkit-transition: all 0.5s ease 0.8s;
-	-o-transition: all 0.5s ease 0.8s;
-	transition: all 0.5s ease 0.8s;
+    -webkit-transition: all 0.5s ease 0.8s;
+    -o-transition: all 0.5s ease 0.8s;
+    transition: all 0.5s ease 0.8s;
 }
 
 .hero-slider .owl-item.active .hero-item .offer-card {
-	opacity: 1;
-	-webkit-transform: rotate(0deg);
-	-ms-transform: rotate(0deg);
-	transform: rotate(0deg);
-	-webkit-transition: all 0.5s ease 1s;
-	-webkit-transition: all 0.5s ease 1s;
-	-o-transition: all 0.5s ease 1s;
-	transition: all 0.5s ease 1s;
+    opacity: 1;
+    -webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-transition: all 0.5s ease 1s;
+    -o-transition: all 0.5s ease 1s;
+    transition: all 0.5s ease 1s;
 }
 
 /* ----------------
@@ -1097,6 +1185,15 @@ ol {
 	margin-bottom: 40px;
 	max-width: 370px;
 }
+.text-box2 h3 {
+	display: inline-block;
+	width: 450px;
+	height: 37px;
+	overflow: hidden;
+	white-space: normal;
+	text-overflow: ellipsis;
+	max-width: 370px;
+}
 
 .text-box p {
 	font-size: 15px;
@@ -1104,6 +1201,17 @@ ol {
 	color: #68647d;
 	margin-bottom: 10px;
 }
+.text-box2 p {
+	font-size: 15px;
+	font-weight: 500;
+	color: #68647d;
+	margin-bottom: 10px;
+	width:300px;
+	word-break:break-all;
+	word-wrap:break-word;
+	overflow: hidden;
+}
+
 
 .text-box .read-more {
 	font-size: 15px;

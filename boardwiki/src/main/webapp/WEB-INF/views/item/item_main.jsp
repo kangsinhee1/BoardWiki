@@ -28,7 +28,9 @@
 				</c:forEach>
 
 		
-		<div class="align-center" style= "text-align : center">${page}</div>
+		<div class="align-center" style= "text-align : center">
+		<div class="blog-pagination">${page}</div>
+		</div>
 		</c:if>
 
 		<c:if test="${count == 0}">

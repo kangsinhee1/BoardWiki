@@ -16,6 +16,6 @@ public interface ItemService {
 	public ItemVO selectItem(Long item_num);
 	public int getterItem(Long item_num); // 재고수를 가져오는 메서드
 	void updateStock(Long item_num, int item_stock); // 재고수를 업데이트하는 메서드
-	
+
 	public List<ItemVO> selectMainItem();
 }

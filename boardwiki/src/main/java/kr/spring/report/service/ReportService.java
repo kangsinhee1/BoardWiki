@@ -11,6 +11,6 @@ public interface ReportService {
 	public Integer getReportRowCount(Map<String,Object>map);
 	//신고 vo 리스트에 넣기
 	public List<ReportVO> selectReportList(Map<String,Object>map);
-	
+
 	public ReportVO selectReportDetail(Long report_typeDetail, int report_type, Long report_num);
 }

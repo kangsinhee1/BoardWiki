@@ -7,7 +7,6 @@ import javax.validation.constraints.NotEmpty;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import kr.spring.usedChat.vo.UsedChatRoomVO;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -38,7 +37,7 @@ public class UsedItemVO {
 	private String mem_email;
 	private String item_name;
 	private String mem_nickname;
-	
+
 	private Long useC_grade;
 
 }

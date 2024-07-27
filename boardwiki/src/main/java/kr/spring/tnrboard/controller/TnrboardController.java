@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import kr.spring.board.vo.BoardVO;
 import kr.spring.member.vo.MemberVO;
 import kr.spring.tnrboard.service.TnrboardService;
 import kr.spring.tnrboard.vo.TnrboardVO;
@@ -102,9 +101,9 @@ public class TnrboardController {
 			map.put("tnr_category", tnr_category);
 			map.put("keyfield", keyfield);
 			map.put("keyword", keyword);
-			
+
 			int count = tnrboardService.selectTnrClientRowCount(map);
-			
+
 			PagingUtil page = new PagingUtil(keyfield,keyword,pageNum,count,
 					10,10,"tnrboardList","&tnr_category="+tnr_category+"&order="+order);
 			List<TnrboardVO> list = null;
@@ -112,25 +111,25 @@ public class TnrboardController {
 				map.put("order", order);
 				map.put("start", page.getStartRow());
 				map.put("end", page.getEndRow());
-				
+
 				list = tnrboardService.selectClientTnrList(map);
 			}
-			
+
 			model.addAttribute("count", count);
 			model.addAttribute("list", list);
 			model.addAttribute("page", page.getPage());
-			
+
 			return "tnrboardList";
-			
+
 		}else {
 			Map<String,Object> map = new HashMap<>();
 			map.put("item_num", item_num);
 			map.put("tnr_category", tnr_category);
 			map.put("keyfield", keyfield);
 			map.put("keyword", keyword);
-			
+
 			int count = tnrboardService.selectTnrClientRowCount(map);
-			
+
 			PagingUtil page = new PagingUtil(keyfield,keyword,pageNum,count,
 					10,10,"tnrboardList","&tnr_category="+tnr_category+"&order="+order);
 			List<TnrboardVO> list = null;
@@ -138,10 +137,10 @@ public class TnrboardController {
 				map.put("order", order);
 				map.put("start", page.getStartRow());
 				map.put("end", page.getEndRow());
-				
+
 				list = tnrboardService.selectClientTnrList(map);
 			}
-			
+
 			model.addAttribute("count", count);
 			model.addAttribute("list", list);
 			model.addAttribute("page", page.getPage());
@@ -251,7 +250,7 @@ public class TnrboardController {
 
 		return "redirect:/tnrboard/tnrboardList?tnr_category=2";
 	}
-	
+
 }
 
 

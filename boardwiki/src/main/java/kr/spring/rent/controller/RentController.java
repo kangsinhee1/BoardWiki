@@ -78,7 +78,7 @@ public class RentController {
 		/*=========================
 		 * 대여 목록
 		 *=========================*/
-		@GetMapping("/rent/list")
+		@GetMapping("/myPage/rent")
 		public String getRentList(
 		        @RequestParam(defaultValue = "1") int pageNum,
 		        @RequestParam(defaultValue="1") int order,
@@ -91,7 +91,7 @@ public class RentController {
 		        Model model) {
 
 		    log.debug("<<대여 목록 - order>> : " + order);
-		    
+
 		    // 서비스 메서드에 전달할 파라미터를 담는 맵 생성
 		    Map<String, Object> map = new HashMap<>();
 		    map.put("keyfield", keyfield);

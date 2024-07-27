@@ -285,7 +285,7 @@ public class MemberController {
 		log.debug("<<인증 성공>>");
 		log.debug("<<id>> : " + member.getMem_email());
 		log.debug("<<auth>> : " + member.getMem_auth());
-		
+
 		/*
 		 * //UI 메시지 처리 model.addAttribute("message", "Naver 로그인 완료");
 		 * model.addAttribute("url", request.getContextPath()+"/main/main");
@@ -769,8 +769,8 @@ public class MemberController {
 
 		return "common/resultAlert";
 	}
-	
-	
+
+
 	/*==============================
 	 * 	   		회원 탈퇴
 	 *==============================*/
@@ -779,7 +779,7 @@ public class MemberController {
 	public String formMemberDelete() {
 		return "memberDelete";
 	}
-	
+
 	//회원탈퇴 폼에서 전송된 데이터 처리
 		@PostMapping("/member/memberDelete")
 		public String submitMemberDelete(
@@ -815,7 +815,7 @@ public class MemberController {
 					"탈퇴 완료 감사합니다.");
 			model.addAttribute("url",
 					request.getContextPath() + "/main/main");
-			
+
 			session.invalidate();
 
 			return "common/resultAlert";

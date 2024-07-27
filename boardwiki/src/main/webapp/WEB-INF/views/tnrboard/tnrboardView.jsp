@@ -32,6 +32,7 @@
 			<div class="row">
 				<div class="col-lg-12">
 <div class="page-main">
+	<h2 style="text-align:center;">${tnrboard.tnr_title}</h2><br>
 	<ul class="detail-info">
 		<li>
 			<c:if test="${empty tnrboard.mem_nickname}">작성자 : ${tnrboard.mem_email}</c:if>
@@ -46,6 +47,7 @@
 			</c:if>
 			조회 : ${tnrboard.tnr_hit}
 		</li>
+		
 	</ul>
 	<c:if test="${!empty tnrboard.filename}">
 	<ul>
@@ -53,6 +55,7 @@
 	</ul>
 	</c:if>
 	<div class="detail-content">
+	<br>
 		${tnrboard.tnr_content}
 	</div>
 	<div>

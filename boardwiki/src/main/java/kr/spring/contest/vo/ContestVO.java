@@ -34,7 +34,7 @@ public class ContestVO {
     private String con_edate;
     private Integer con_man;	//참가인원
     private Integer con_maxman;//최대인원
-    
+
     private Date cona_rdate;
 
     private String mem_auth;

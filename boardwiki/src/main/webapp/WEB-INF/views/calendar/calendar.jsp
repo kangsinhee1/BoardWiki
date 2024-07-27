@@ -1,82 +1,62 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.css' rel='stylesheet' />
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js'></script>
-    <div id='calendar'></div>
-
+<link href='https://fullcalendar.io/releases/core/4.0.2/main.min.css' rel='stylesheet' />
+    <link href='https://fullcalendar.io/releases/daygrid/4.0.2/main.min.css' rel='stylesheet' />
+    <script src='https://fullcalendar.io/releases/core/4.0.2/main.min.js'></script>
+    <script src='https://fullcalendar.io/releases/daygrid/4.0.2/main.min.js'></script>
+    <script src='https://fullcalendar.io/releases/interaction/4.0.2/main.min.js'></script>
     <script>
-        $(document).ready(function() {
-            $('#calendar').fullCalendar({
-                editable: true,
-                events: '/events',
-                selectable: true,
-                selectHelper: true,
-                select: function(start, end) {
-                    var title = prompt('Event Title:');
-                    var eventData;
-                    if (title) {
-                        eventData = {
-                            title: title,
-                            start: start.format(),
-                            end: end.format()
-                        };
-                        $.ajax({
-                            url: '/events',
-                            type: 'POST',
-                            contentType: 'application/json',
-                            data: JSON.stringify(eventData),
-                            success: function() {
-                                $('#calendar').fullCalendar('refetchEvents');
-                            }
-                        });
-                    }
-                    $('#calendar').fullCalendar('unselect');
-                },
-                eventDrop: function(event) {
-                    var eventData = {
-                        title: event.title,
-                        start: event.start.format(),
-                        end: event.end ? event.end.format() : null
-                    };
-                    $.ajax({
-                        url: '/events/' + event.id,
-                        type: 'PUT',
-                        contentType: 'application/json',
-                        data: JSON.stringify(eventData),
-                        success: function() {
-                            $('#calendar').fullCalendar('refetchEvents');
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            plugins: [ 'dayGrid', 'interaction' ],
+            editable: true,
+            events: function(fetchInfo, successCallback, failureCallback) {
+                fetch('/events/user/1')  // Change 1 to the actual user ID
+                    .then(response => response.json())
+                    .then(data => successCallback(data));
+            },
+            dateClick: function(info) {
+                var title = prompt('Enter Event Title:');
+                var event = {
+                    title: title,
+                    startDate: info.dateStr,
+                    endDate: info.dateStr,
+                    memNum: 1 // Change to actual user ID
+                };
+
+                fetch('/events/save', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(event),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    calendar.addEvent(data);
+                });
+            },
+            eventClick: function(info) {
+                if (confirm('Are you sure you want to delete this event?')) {
+                    fetch('/events/delete/' + info.event.id, {
+                        method: 'DELETE'
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            info.event.remove();
+                        } else {
+                            alert('Failed to delete event');
                         }
                     });
-                },
-                eventResize: function(event) {
-                    var eventData = {
-                        title: event.title,
-                        start: event.start.format(),
-                        end: event.end ? event.end.format() : null
-                    };
-                    $.ajax({
-                        url: '/events/' + event.id,
-                        type: 'PUT',
-                        contentType: 'application/json',
-                        data: JSON.stringify(eventData),
-                        success: function() {
-                            $('#calendar').fullCalendar('refetchEvents');
-                        }
-                    });
-                },
-                eventClick: function(event) {
-                    if (confirm("Do you really want to delete?")) {
-                        $.ajax({
-                            url: '/events/' + event.id,
-                            type: 'DELETE',
-                            success: function() {
-                                $('#calendar').fullCalendar('refetchEvents');
-                            }
-                        });
-                    }
                 }
-            });
+            }
         });
+
+        calendar.render();
+    });
+
     </script>
+    <div id='calendar'></div>

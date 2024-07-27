@@ -35,35 +35,35 @@ public class MainController {
 
 	@Autowired
 	private UsedService usedService;
-	
+
 	@Autowired
 	private TnrboardService tnrboardService;
 
 	@GetMapping("/")
 	public String init() {
-		
-		
+
+
 		return "redirect:/main/main";
 	}
 
 	@GetMapping("/main/main")
 	public String main(Model model) {
-		
+
 		BoardVO mainBoard = boardService.selectMainBoard();
 		model.addAttribute("board",mainBoard);
-		
+
 		TnrboardVO mainTnr = tnrboardService.selectMainTnrBoard();
 		model.addAttribute("tnr",mainTnr);
-		
+
 		UsedItemVO mainUsed = usedService.selectMainUsed();
 		model.addAttribute("used",mainUsed);
-		
+
 		List<BoardVO> news = boardService.selectMainNews();
 		model.addAttribute("news",news);
-		
+
 		List<ItemVO> item = itemService.selectMainItem();
 		model.addAttribute("item",item);
-		
+
 		return "main";//Tiles의 설정명
 	}
 

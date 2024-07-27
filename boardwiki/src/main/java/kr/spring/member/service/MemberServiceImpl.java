@@ -131,6 +131,6 @@ public class MemberServiceImpl implements MemberService {
 	public  boolean updateMemberAuth(long mem_num, Integer mem_auth) {
 		return memberMapper.updateMemberAuth(mem_num, mem_auth);
 	}
-	
-	
+
+
 }

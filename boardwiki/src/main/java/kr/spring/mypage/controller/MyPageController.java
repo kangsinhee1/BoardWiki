@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.spring.board.service.BoardService;
 import kr.spring.board.vo.BoardVO;
+import kr.spring.cart.service.CartService;
+import kr.spring.cart.vo.CartVO;
+import kr.spring.contest.service.ContestService;
+import kr.spring.contest.vo.ContestVO;
 import kr.spring.member.service.MemberService;
 import kr.spring.member.vo.MemberVO;
+import kr.spring.order.service.OrderService;
+import kr.spring.order.vo.OrderVO;
 import kr.spring.tnrboard.service.TnrboardService;
 import kr.spring.tnrboard.vo.TnrboardVO;
 import kr.spring.used.service.UsedService;
@@ -44,6 +51,15 @@ public class MyPageController {
 
 	@Autowired
 	private TnrboardService tnrboardService;
+
+	@Autowired
+	private ContestService contestService;
+
+	@Autowired
+	private OrderService orderService;
+
+	@Autowired
+	private CartService cartService;
 
 
 	/*==============================
@@ -119,7 +135,7 @@ public class MyPageController {
 			model.addAttribute("page2",page2.getPage());
 			log.debug("목록 가져와 ! " + list2);
 		}
-		
+
 		int count3 = usedChatService.selectChatRoomCountstatus2(user.getMem_num());
 		PagingUtil page3 = new PagingUtil(null,keyword,pageNum,count3,10,10,"myChat");
 		List<UsedChatRoomVO> list3 = null;
@@ -132,8 +148,8 @@ public class MyPageController {
 			model.addAttribute("page3",page3.getPage());
 			log.debug("목록 가져와222 ! " + list3);
 		}
-		
-		
+
+
 
 		model.addAttribute("member", member);
 
@@ -143,15 +159,24 @@ public class MyPageController {
 	 * MY페이지 (내 주문)
 	 *==============================*/
 	@GetMapping("/myPage/myOrder")
-	public String myOrderPage(HttpSession session,Model model) {
-		MemberVO user =
-				(MemberVO)session.getAttribute("user");
-		//회원정보
-		MemberVO member =
-				memberService.selectMember(user.getMem_num());
-		log.debug("<<MY페이지>> : " + member);
+	public String myOrderPage(Model model, HttpSession session, Long mem_num) {
+	    MemberVO member = (MemberVO) session.getAttribute("user");
 
-		model.addAttribute("member", member);
+	    if (member == null) {
+	        return "redirect:/login"; // 세션에 user가 없으면 로그인 페이지로 리다이렉트
+	    }
+
+	    log.debug("<<유저 - mem_num>>" + member);
+
+	    List<OrderVO> list = orderService.selectOrderList(mem_num);
+	    List<CartVO> list2 = cartService.selectCartList2(mem_num);
+
+	    log.debug("<<>>"+list);
+	    log.debug("<<>>"+list2);
+
+	    model.addAttribute("mem_num", mem_num);
+	    model.addAttribute("list", list);
+	    model.addAttribute("list2", list2);
 
 		return "myOrder";
 	}
@@ -347,5 +372,51 @@ public class MyPageController {
 		model.addAttribute("member", member);
 
 		return "myQna";
+	}
+
+	//유저가 신청한 대회 목록
+	@GetMapping("/myPage/myContest")
+	public String contestList(@RequestParam(defaultValue="1") int pageNum,
+			@RequestParam(defaultValue="") String category,
+			String keyfield,
+			String keyword,Model model,
+			HttpSession session,
+			HttpServletRequest request
+			) {
+
+		MemberVO user = (MemberVO)session.getAttribute("user");
+
+		log.debug("<<유저 신청 대회 목록 진입>>");
+
+
+		Map<String,Object> map = new HashMap<>();
+
+		map.put("category", category);
+		map.put("keyfield", keyfield);
+		map.put("keyword", keyword);
+
+		int count = contestService.countContestUserApplyList(user.getMem_num());
+
+		log.debug("<<count>>" + count);
+
+		PagingUtil page =
+				new PagingUtil(keyfield,keyword,pageNum,count,5,10,"myContest");
+
+		List<ContestVO> list = null;
+		if(count > 0) {
+			map.put("start", page.getStartRow());
+			map.put("end", page.getEndRow());
+			map.put("mem_num", user.getMem_num());
+
+			list = contestService.selectContestUserApplyList(map);
+		}
+
+		log.debug("<<유저가 신청한 대회 리스트>>" + list);
+
+		model.addAttribute("count", count);
+		model.addAttribute("list", list);
+		model.addAttribute("page", page.getPage());
+
+		return "myContest";
 	}
 }

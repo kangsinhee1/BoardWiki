@@ -294,7 +294,7 @@ public class TeamServiceImpl implements TeamService {
 	public Integer countTeamApplyList2(long tea_num) {
 		return teamMapper.countTeamApplyList2(tea_num);
 	}
-	
+
 	@Override
 	public void updateTeamAuth(Long tea_status, Long tea_num) {
 		teamMapper.updateTeamAuth(tea_status, tea_num);

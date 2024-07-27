@@ -1,5 +1,5 @@
 package kr.spring.order.controller;
- 
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.spring.cart.service.CartService;
 import kr.spring.cart.vo.CartVO;
@@ -67,22 +66,22 @@ public class OrderController {
 	 * 주문창에 데이터 담기
 	 *=========================*/
 	@PostMapping("/order/order1")
-	@ResponseBody
 	public String addToOrder(Integer item_quantity,
 	        @RequestParam("order_name") String order_name,
 	        @RequestParam("order_phone") String order_phone,
 	        @RequestParam("order_zipcode") Long order_zipcode,
 	        @RequestParam("order_address1") String order_address1,
 	        @RequestParam("order_address2") String order_address2,
+	        @RequestParam("order_pay") int order_pay,
 	        HttpSession session, Model model) {
 
 	    MemberVO member = (MemberVO) session.getAttribute("user");
 
 	    log.debug("<<유저 - order_name>>" + order_name);
 	    log.debug("<<유저 - mem_num>>" + member);
-	    
+
 	    OrderVO order2 = orderService.selectagg(member.getMem_num());
-	    
+
 	    OrderVO order = new OrderVO();
 	    order.setMem_num(member.getMem_num());
 	    order.setOrder_name(order_name);
@@ -91,13 +90,32 @@ public class OrderController {
 	    order.setOrder_address1(order_address1);
 	    order.setOrder_address2(order_address2);
 	    order.setOrder_price(order2.getTotal_price());
-	    
+	    order.setOrder_pay(order_pay);
+
 	    orderService.insertOrder(order);
 	    cartService.updateCartDate(member.getMem_num());
 
-	    model.addAttribute("message", "결재창으로 넘어갑니다.");
-	    model.addAttribute("url","/order/pay");
-
-	    return "common/resultAlert";    
+	    return "pay"; // "common/resultAlert" 대신 리다이렉트 사용
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

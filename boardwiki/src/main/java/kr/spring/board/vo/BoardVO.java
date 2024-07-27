@@ -4,6 +4,7 @@ import java.sql.Date;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,6 +22,7 @@ public class BoardVO {
 	@NotBlank
 	private String boa_category;
 	@NotBlank
+	@Size(max = 50, message = "제목은 최대 50자까지 입력 가능합니다")
 	private String boa_title;
 	@NotEmpty
 	private String boa_content;

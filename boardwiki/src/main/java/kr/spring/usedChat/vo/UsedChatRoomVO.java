@@ -22,5 +22,5 @@ public class UsedChatRoomVO {
 
 	private String item_name;
 	private UsedChat_textVO usedChat_textVO;
-	private long useC_grade; //판매자 평점
+	private Long useC_grade; //판매자 평점
 }

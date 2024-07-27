@@ -21,16 +21,9 @@
 				<li><a href="${pageContext.request.contextPath}/item/item_main">Games</a></li>
 				<li><a href="${pageContext.request.contextPath}/tnrboard/tnrboardList?tnr_category=2">Reviews</a></li>
 				<li><a href="${pageContext.request.contextPath}/board/list2?boa_category=4">News</a></li>
-				<li><a href="${pageContext.request.contextPath}/contest/contestList">Contact</a></li>
+				<li><a href="${pageContext.request.contextPath}/contest/contestList">Contest</a></li>
 			</ul>
-			<div class="footer-social d-flex justify-content-center">
-				<a href="#"><i class="fa fa-pinterest"></i></a>
-				<a href="#"><i class="fa fa-facebook"></i></a>
-				<a href="#"><i class="fa fa-twitter"></i></a>
-				<a href="#"><i class="fa fa-dribbble"></i></a>
-				<a href="#"><i class="fa fa-behance"></i></a>
-			</div>
-			<div class="copyright"><a href="">Colorlib</a> 2018 @ All rights reserved</div>
+			<div class="copyright"><a href="">boardwiki</a> 2024 @ All rights reserved</div>
 		</div>
 	</footer>
 	<!-- Footer section end -->

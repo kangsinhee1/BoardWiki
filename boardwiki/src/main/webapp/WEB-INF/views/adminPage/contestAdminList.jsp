@@ -27,16 +27,16 @@
 				<td class="align-center"><a href="contestAdminListDetail?con_num=${contest.con_num}">${contest.con_name}</a></td>
 				<td class="align-center">${contest.con_rdate}</td>
 				<td class="align-center">
-					<c:if test="${contest.con_status == 0}">
-						진행중
-					</c:if>
-					<c:if test="${contest.con_status == 1 }">
-						종료
-					</c:if>
-					<c:if test="${contest.con_status == 2 }">
-						진행예정
-					</c:if>
-					<c:if test="${contest.con_status == 3 }">
+					<c:if test="${contest.con_status==0}">
+		            	진행중
+		            </c:if>
+		            <c:if test="${contest.con_status==1}">
+		            	진행예정
+		            </c:if>
+		            <c:if test="${contest.con_status==2}">
+		            	종료
+		            </c:if>
+					<c:if test="${contest.con_status==3 }">
 						삭제
 					</c:if>
 				</td>
@@ -47,5 +47,5 @@
 			</tr>
 		</c:forEach>
 	</table>
-	<div class="align-center">${page}</div>
+	<div class="blog-pagination" style= "text-align : center">${page}</div>
 </c:if>

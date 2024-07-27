@@ -46,7 +46,16 @@ public class UsedChatController {
 		UsedChatRoomVO alreayUChat = usedChatService.selectUsedChatRoomSeller(useC_name,use_num);
 		log.debug("<<<<<<<<<<<<<vovovoovov"+alreayUChat);
 		Long useC_num = alreayUChat.getUseC_num();
+		UsedChatRoomVO  roomVO = usedChatService.selectUsedChatROOMByuseCNum(useC_num);
 
+		log.debug("<<<<<<<<<<<<<vovovoovov2"+roomVO);
+		if(roomVO!=null) {
+			if(roomVO.getUseC_grade()!=null) {
+				model.addAttribute("selled",false);
+				//이미 판매처리되었는지를 확인하기위해 판매자 평점이 있는것을 확인
+			}
+
+		}
 		model.addAttribute("useC_name",useC_name);
 		model.addAttribute("useC_num",useC_num);
 		model.addAttribute("use_num",use_num);
@@ -55,7 +64,7 @@ public class UsedChatController {
 	}
 	@GetMapping("/*/finishDeal")
 	public String finishDeal(long useC_num,HttpServletRequest request,Model model) {
-		
+
 		usedChatService.updateUseC_status(useC_num);
 		UsedChatRoomVO  roomVO = usedChatService.selectUsedChatROOMByuseCNum(useC_num);
 		usedService.updateUseCheckByroom(roomVO.getUse_num());
@@ -63,12 +72,12 @@ public class UsedChatController {
 		model.addAttribute("url",
 		request.getContextPath()+"/myPage/myChat");
 		return "common/resultAlert";
-		
+
 		//return "redirect:myChat";
 	}
 	@GetMapping("/myPage/usedGrade")
 	public String usedGrade(long useC_num) {
-		
+
 		return "usedGrade";
 	}
 	@PostMapping("/myPage/usedGrade")

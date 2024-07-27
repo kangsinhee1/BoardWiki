@@ -46,6 +46,7 @@ ul.detail-info li:last-child{
 }
 .detail-content p{
 	color:white;
+	word-wrap: break-word;
 }
 
 #output_fav, .output_rfav{

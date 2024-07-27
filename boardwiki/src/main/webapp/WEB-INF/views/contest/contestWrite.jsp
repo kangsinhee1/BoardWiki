@@ -60,7 +60,7 @@
 							<div class="form-group">
 								<form:label path="con_sdate">대회 모집 시작일:</form:label>
 								<form:input path="con_sdate" id="con_sdate"
-									data-provide="datepicker" />
+									data-provide="datepicker" autocomplete="off"/>
 								<form:errors path="con_sdate" cssClass="error-color" />
 							</div>
 							
@@ -69,7 +69,7 @@
 							<div class="form-group">
 								<form:label path="con_edate" style="margin:5px">대회 모집 종료일:</form:label>
 								<form:input path="con_edate" id="con_edate"
-									data-provide="datepicker" />
+									data-provide="datepicker" autocomplete="off"/>
 								<form:errors path="con_edate" cssClass="error-color" />
 							</div>
 						</li>
