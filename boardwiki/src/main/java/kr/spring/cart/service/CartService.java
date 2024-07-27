@@ -17,4 +17,5 @@ public interface CartService {
 	public CartVO getCart(CartVO cart);
 	public void deleteSmallCart(CartVO cart);
 	public List<CartVO> selectCartList2(Long mem_num);
+	public List<CartVO> selectname(Map<String,Object> map);
 }

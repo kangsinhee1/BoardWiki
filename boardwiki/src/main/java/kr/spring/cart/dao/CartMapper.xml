@@ -37,4 +37,16 @@
         LEFT JOIN item i ON c.item_num = i.item_num
         WHERE c.mem_num = #{mem_num} AND c.cart_check=0
 	 </select>
+	 <select id="selectname" parameterType="map" resultType="CartVO">
+	    SELECT i.item_name 
+	    FROM item i 
+	    LEFT JOIN 
+	    (
+	    SELECT * FROM cart c
+	    LEFT JOIN orders o on c.mem_num = o.mem_num
+	    WHERE o.order_date=#{order_date}
+	    ) co on i.item_num co.item_num
+	    WHERE i.item_num={item_num}
+	    
+	 </select>
 </mapper>

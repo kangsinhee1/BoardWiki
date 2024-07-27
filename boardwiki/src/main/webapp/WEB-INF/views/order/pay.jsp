@@ -24,29 +24,26 @@
                 <table class="table table-bordered table-striped">
                     <thead class="thead-dark">
                         <tr>
-                            <th>이미지</th>
-                            <th>상품명</th>
-                            <th>가격</th>
-                            <th>수량</th>
-                            <th>총 가격</th>
+                            <th>주문번호</th>
+			                <th>상품명</th>
+			                <th>주소</th>
+			                <th>상세주소</th>
+			                <th>결제금액</th>
+			                <th>결제일</th>
+			                
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach var="cart" items="${list}">
                             <tr>
-                                <td><img src="${cart.item_image}" width="100" height="100" class="img-thumbnail"></td>
+                                <td >${order.order_num}</td>
                                 <td>${cart.item_name}</td>
                                 <td id="item_price_${cart.item_num}" data-price="${cart.item_price}">${cart.item_price}원</td>
                                 <td>
-                                    <select id="quantity_${cart.item_num}" name="item_quantity" class="form-control quantity" data-item-num="${cart.item_num}">
-                                        <c:forEach begin="1" end="${cart.item_stock}" var="i">
-                                            <option value="${i}" <c:if test="${i == cart.item_quantity}">selected</c:if>>${i}</option>
-                                        </c:forEach>
-                                    </select>
+                                
                                 </td> 
                                 <td id="total_price_${cart.item_num}" class="total-price">${cart.item_quantity * cart.item_price}원</td>
+                                <td></td>
                             </tr>
-                        </c:forEach>
                     </tbody>
                 </table>
             </div>

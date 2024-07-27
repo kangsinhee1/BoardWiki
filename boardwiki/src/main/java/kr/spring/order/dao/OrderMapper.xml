@@ -3,70 +3,76 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.spring.order.dao.OrderMapper">
-    <insert id="insertOrder" parameterType="map">
-        INSERT INTO orders(
-          order_num,
-          mem_num,
-          order_name,
-          order_phone,
-          order_zipcode,
-          order_address1,
-          order_address2,
-          order_price,
-          order_pay) 
-        VALUES(
-	 	  orders_seq.nextval,
-	 	  #{mem_num},
-	 	  #{order_name},
-	 	  #{order_phone},
-	 	  #{order_zipcode},
-	 	  #{order_address1},
-	 	  #{order_address2},
-	 	  #{order_price},
-	 	  #{order_pay})
-    </insert>
-    <insert id="insertOrderList" parameterType="map">
-        INSERT INTO orders(
-          order_num,
-          mem_num,
-          order_name,
-          order_phone,
-          order_zipcode,
-          order_address1,
-          order_address2,
-          order_price) 
-        VALUES(
-	 	  orders_seq.nextval,
-	 	  #{mem_num},
-	 	  #{order_name},
-	 	  #{order_phone},
-	 	  #{order_zipcode},
-	 	  #{order_address1},
-	 	  #{order_address2},
-	 	  #{order_price})
-    </insert>
-    <select id="selectOrderDetail" parameterType="map" resultType="orderVO">
-        SELECT * FROM orders WHERE order_num=#{order_num}
-    </select>
-    <select id="selectOrderUser" parameterType="map" resultType="orderVO">
-        SELECT * FROM orders WHERE mem_num=#{mem_num}
-    </select>
-    <select id="selectagg" parameterType="map" resultType="orderVO">
-<!--         SELECT mem_num=#{mem_num} -->
-<!--      , LISTAGG(item_num=#{item_num}, ',') WITHIN GROUP (ORDER BY mem_num) AS item_num_list -->
-<!--      , LISTAGG(item_quantity=#{item_quantity}, ',') WITHIN GROUP (ORDER BY mem_num) AS item_quantity_list -->
-<!--      , LISTAGG(cart_price=#{cart_price}, ',') WITHIN GROUP (ORDER BY mem_num) AS cart_price_list -->
-<!--      , SUM(cart_price=#{cart_price}) AS total_price -->
-<!--      FROM cart -->
-<!--      GROUP BY mem_num; -->
-      SELECT 
-        mem_num,
-        LISTAGG(item_num, ',') WITHIN GROUP (ORDER BY mem_num) AS item_num_list,
-        LISTAGG(item_quantity, ',') WITHIN GROUP (ORDER BY mem_num) AS item_quantity_list,
-        LISTAGG(cart_price, ',') WITHIN GROUP (ORDER BY mem_num) AS cart_price_list,
-        SUM(cart_price) AS total_price
-    FROM cart
-    WHERE mem_num = #{mem_num}
-    GROUP BY mem_num
-    </select>
+	<insert id="insertOrder" parameterType="map">
+		INSERT INTO orders(
+		order_num,
+		mem_num,
+		order_name,
+		order_phone,
+		order_zipcode,
+		order_address1,
+		order_address2,
+		order_price,
+		order_pay)
+		VALUES(
+		orders_seq.nextval,
+		#{mem_num},
+		#{order_name},
+		#{order_phone},
+		#{order_zipcode},
+		#{order_address1},
+		#{order_address2},
+		#{order_price},
+		#{order_pay})
+	</insert>
+	<insert id="insertOrderList" parameterType="map">
+		INSERT INTO orders(
+		order_num,
+		mem_num,
+		order_name,
+		order_phone,
+		order_zipcode,
+		order_address1,
+		order_address2,
+		order_price)
+		VALUES(
+		orders_seq.nextval,
+		#{mem_num},
+		#{order_name},
+		#{order_phone},
+		#{order_zipcode},
+		#{order_address1},
+		#{order_address2},
+		#{order_price})
+	</insert>
+	<select id="selectOrderDetail" parameterType="map"
+		resultType="orderVO">
+		SELECT * FROM orders WHERE order_num=#{order_num}
+	</select>
+	<select id="selectOrderUser" parameterType="map"
+		resultType="orderVO">
+		SELECT * FROM orders WHERE mem_num=#{mem_num}
+	</select>
+	<select id="selectagg" parameterType="map" resultType="orderVO">
+		SELECT
+		mem_num,
+		LISTAGG(item_num, ',') WITHIN GROUP (ORDER BY mem_num) AS item_num_list,
+		LISTAGG(item_quantity, ',') WITHIN GROUP (ORDER BY mem_num) AS
+		item_quantity_list,
+		LISTAGG(cart_price, ',') WITHIN GROUP (ORDER BY mem_num) AS cart_price_list,
+		SUM(cart_price) AS total_price
+		FROM cart
+		WHERE mem_num = #{mem_num}
+		GROUP BY mem_num
+	</select>
+	<select id="selectnum" parameterType="map" resultType="orderVO">
+		SELECT *
+		FROM orders
+		WHERE mem_num = #{mem_num}
+		AND order_num = (
+		SELECT MAX(order_num)
+		FROM orders
+		WHERE mem_num = #{mem_num}
+		);
+	</select>
 </mapper>

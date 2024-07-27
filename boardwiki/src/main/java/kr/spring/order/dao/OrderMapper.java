@@ -28,4 +28,6 @@ public interface OrderMapper {
 	public OrderVO selectagg(Long mem_num);
 
 	public List<OrderVO> InsertOrderList(Long mem_num);
+	
+	public OrderVO selectnum(Long mem_num);
 }

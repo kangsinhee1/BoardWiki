@@ -22,4 +22,5 @@ public class CartVO {
 	private String item_image;
 	private String item_thumbnail;//썸네일
 	private int item_stock;//재고
+	private Timestamp order_date;
 }

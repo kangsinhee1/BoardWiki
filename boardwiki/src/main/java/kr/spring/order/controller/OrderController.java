@@ -1,5 +1,6 @@
 package kr.spring.order.controller;
 
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -100,10 +101,29 @@ public class OrderController {
 	/*=========================
 	 * 결제 완료창
 	 *=========================*/
-//	@GetMapping("/order/order1")
-//	public String GetToPay(Model model,Long mem_num, HttpSession session){
-//		
-//	}
+	@GetMapping("/order/order1")
+	public String GetToPay(Model model,Long mem_num,Long order_num, HttpSession session,OrderVO orderVO){
+		
+		MemberVO member = (MemberVO) session.getAttribute("user");
+
+		if (member == null) {
+			return "redirect:/login"; // 세션에 user가 없으면 로그인 페이지로 리다이렉트
+		}
+		
+		OrderVO order = orderService.selectnum(member.getMem_num());
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("order_date", order);
+
+		List<CartVO> list = null;
+		list = cartService.selectname(map);
+		
+		model.addAttribute("mem_num",mem_num);
+		model.addAttribute("list",list);
+		model.addAttribute("order",order);
+		
+		return "pay";
+	}
 }
 
 

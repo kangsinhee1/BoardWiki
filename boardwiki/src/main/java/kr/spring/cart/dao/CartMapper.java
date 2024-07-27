@@ -33,4 +33,7 @@ public interface CartMapper {
 	public CartVO getCart(CartVO cart);
 	@Delete("DELETE FROM cart WHERE mem_num=#{mem_num} AND item_num=#{item_num}")
 	public void deleteSmallCart(CartVO cart);
+	
+	
+	public List<CartVO> selectname(Map<String,Object> map);
 }
