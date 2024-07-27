@@ -97,6 +97,13 @@ public class OrderController {
 
 	    return "pay"; // "common/resultAlert" 대신 리다이렉트 사용
 	}
+	/*=========================
+	 * 결제 완료창
+	 *=========================*/
+//	@GetMapping("/order/order1")
+//	public String GetToPay(Model model,Long mem_num, HttpSession session){
+//		
+//	}
 }
 
 

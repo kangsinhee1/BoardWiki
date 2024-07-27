@@ -2,13 +2,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
-<html lang="en"> 
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>장바구니</title>
     <script src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
-
+    <script src="${pageContext.request.contextPath}/js/cart.js"></script>
 </head>
 <body>
     <!-- Page top section -->
@@ -22,7 +22,6 @@
         </div>
     </section>
     <!-- Page top end-->
-
     <!-- Review section -->
     <section class="review-section py-5">
         <div class="container">
@@ -62,7 +61,7 @@
             </div>
             <div class="align-right">
             <div class="mt-4">
-                <p class="h5">총 금액: <span id="total_sum_value">0</span>원</p>
+                <p class="h5" id="total_sum_price">총 금액: <span id="total_sum_value">0</span>원</p>
                 <a href="${pageContext.request.contextPath}/order/order?mem_num=${mem_num}" class="btn btn-primary">주문하기</a>
             </div>
             </div>
