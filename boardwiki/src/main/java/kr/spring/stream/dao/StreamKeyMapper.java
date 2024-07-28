@@ -18,8 +18,8 @@ public interface StreamKeyMapper {
     @Select("SELECT mem_num FROM streaming WHERE str_num = #{str_num}")
     Integer streamingNum(Long str_num);
 
-    @Select("SELECT * FROM streaming WHERE str_key = #{stream_key}")
-    StreamKeyVO findByStreamKey(String str_key);
+    @Select("SELECT * FROM streaming WHERE mem_num = #{mem_num}")
+    StreamKeyVO findByStreamKey(Long mem_num);
 
     @Select("SELECT * FROM streaming WHERE str_num = #{str_num}")
     StreamKeyVO selectstream(Long str_key);

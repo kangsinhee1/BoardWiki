@@ -64,11 +64,9 @@ document.addEventListener("DOMContentLoaded", function() {
                 if (data && data.length > 0) {
                     data.forEach(message => {
                         appendChatMessage(message.mem_nickName, message.strt_chat);
-                    });
-                } else {
-                    $('#chat-container').html('<p>No messages found.</p>');
+                });
+                $('#chat-container').html('<p>채팅방에 입장하셌습니다.</p>');
                 }
-
                 // #chat-container가 존재하는지 확인하고 scrollHeight를 설정
                 const chatContainer = $("#chat-container")[0];
                 if (chatContainer) {

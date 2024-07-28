@@ -36,9 +36,14 @@ public class BroadcastController {
     private MemberService memberService;
 
     @GetMapping("/streaming/broadcasts")
-    public String getBroadcastList(HttpServletRequest request) {
+    public String getBroadcastList(HttpServletRequest request,HttpSession session) {
+    	MemberVO user = (MemberVO)session.getAttribute("user");
         List<BroadcastVO> broadcasts = broadcastService.getAllBroadcasts();
-
+        if(user !=null) {
+        	Integer str_num = streamKeyService.streamingNumber(user.getMem_num());
+        	request.setAttribute("str_num", str_num);
+        }
+        
         long mem_num = 0;
         for (BroadcastVO broadcast : broadcasts) {
         	mem_num = broadcast.getMem_num();
@@ -47,6 +52,7 @@ public class BroadcastController {
             	broadcast.setMem_nickName(member.getMem_nickName());
             }
     	}
+        request.setAttribute("user", user);
         request.setAttribute("broadcasts", broadcasts);
         return "broadcast-list";
     }

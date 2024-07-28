@@ -16,7 +16,7 @@
             <input type="hidden" id="poiG_num" name="poiG_num" value="${option.poiG_num}">
         </div>
     </c:forEach>
-    <label for="betPoints">Points to bet:</label> 
+    <label for="betPoints">배팅할 포인트:</label> 
     <input type="number" id="betPoints" name="betPoints" required><br><br>
-    <button type="submit">Place Bet</button>
+    <button type="submit">배팅 완료</button>
 </form>

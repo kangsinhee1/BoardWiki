@@ -3,6 +3,7 @@ package kr.spring.stream.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
@@ -37,43 +38,43 @@ public class StreamVerificationController {
     @Autowired
     private MemberService memberService;
 
-    @GetMapping("/streaming/verify")
-    public String verifyStreamKeyGet(@RequestParam String name) {
-        return verifyStreamKey(name);
-    }
-
-    @PostMapping("/streaming/verify")
-    public String verifyStreamKeyPost(@RequestParam String name) {
-        return verifyStreamKey(name);
-    }
-
-    private String verifyStreamKey(String name) {
-    	log.debug("<<살려줘>>"+name);
-        try {
-            StreamKeyVO key = streamKeyService.findByStreamKey(name);
-            if (key != null) {
-                System.out.println("Stream key verified: " + name);
-                BroadcastVO broadcast = broadcastService.findByMemNum(key.getStr_num());
+    @PostMapping("/streaming/start")
+    private Map<String, Object> startStreaming(HttpSession session,Integer str_num) {
+    	Map<String, Object> map = new HashMap<String, Object>();
+    	MemberVO user = (MemberVO)session.getAttribute("user");
+    	if(user==null) {
+    		map.put("result","logout");
+    	}else {
+    	StreamKeyVO key = streamKeyService.findByStreamKey(user.getMem_num());
+        if (key != null) {
+            BroadcastVO broadcast = broadcastService.findByMemNum(key.getStr_num());
                 if(broadcast == null) {
                 	BroadcastVO str = new BroadcastVO();
                 	str.setIsLive(1);
                 	str.setStr_num(key.getStr_num());
+                	StreamCreatingVO vo = streamCreatingService.selectCreating(key.getStr_num());
+                	if(vo == null) {
+                		streamCreatingService.inrsertCreating(key.getStr_num());
+                	}
                 	broadcastService.startStream(str);
+                	map.put("result", "start");
                 }else if(broadcast.getIsLive() == 1){
                 	BroadcastVO str = new BroadcastVO();
                 	str.setIsLive(2);
                 	str.setStrD_num(broadcast.getStrD_num());
                     broadcastService.updateBroadcast(str);
-                }
-                return "status=200";
-            } else {
-                System.out.println("Invalid stream key: " + name);
-                return "status=403";
-            }
-        } catch (NumberFormatException e) {
-            System.out.println("Invalid mem_num format: " + name);
-            return "status=400";
+                    map.put("result", "stop");
+                } 
+        }else {
+        	String streamKey = UUID.randomUUID().toString();
+            StreamKeyVO key2 = new StreamKeyVO();
+            key2.setMem_num(user.getMem_num());
+            key2.setStr_key(streamKey);
+            streamKeyService.save(key2);
+            map.put("result", "newkey");
         }
+    	}
+        return map;
     }
 
     //채팅방

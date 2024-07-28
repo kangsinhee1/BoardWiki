@@ -9,7 +9,7 @@ $(document).ready(function() {
             data: JSON.stringify({ gameId: gameId }),
             success: function(response) {
                 if (response.result === "success") {
-                    alert('Game cancelled successfully.');
+                    alert('게임이 종료 처리됬습니다..');
                     location.reload();
                 } else {
                     alert('Error cancelling game: ' + response.message);
@@ -32,7 +32,7 @@ $(document).ready(function() {
             data: JSON.stringify({ gameId: gameId, winningOption: winningOption }),
             success: function(response) {
                 if (response.result === "success") {
-                    alert('Winner selected successfully.');
+                    alert('선택된 선택지로 게임이 종료되었습니다.');
                     location.reload();
                 } else {
                     alert('Error selecting winner: ' + response.message);

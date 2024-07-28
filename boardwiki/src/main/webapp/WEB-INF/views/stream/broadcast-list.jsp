@@ -37,14 +37,16 @@
 				href="${pageContext.request.contextPath}/streaming/broadcast?str_num=${broadcast.str_num}">
 				<div class="thumbnail">
 					<img
-						src="${pageContext.request.contextPath}/hls/${broadcast.str_key}/thumbnail.jpg"
-						alt="Thumbnail">
+						src="${pageContext.request.contextPath}/hls/thumbnail.jpg">
 				</div>
 				<div class="username">${broadcast.mem_nickName}님의 방송</div>
 			</a>
 		</div>
 	</c:forEach>
 </div>
+<c:if test="${user != null}">
+	<button onclick="location.href='${pageContext.request.contextPath}/streaming/broadcast?str_num=${str_num}'">방송시작하기</button>
+</c:if>
 </div>
 </div>
 </div>

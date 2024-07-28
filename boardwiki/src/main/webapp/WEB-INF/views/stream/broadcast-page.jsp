@@ -67,6 +67,7 @@
                 <c:if test="${strnum == param.str_num}">
                 	<button class="mission-button" onclick="openMissionListByStream()">미션 목록 보기</button>
                 	<button class="donation-list-button" onclick="openDonationListByStream()">도네이션 목록 보기</button>
+                	<button onclick="stream()">방송 종료</button>
                 </c:if>
                 <c:if test="${strnum != param.str_num && user != null}">
                 	<button class="donation-button" onclick="openDonationModal()">도네이션 보내기</button>
@@ -94,10 +95,11 @@
             obs를 다운받습니다.
             obs를 설치 후 obs화면을 열고 설정 방송를 누르고 <br>
             사용자 지정<br>
-            서버:192.168.0.10:1935/live<br>
+            서버:rtmp://tkdrl.iptime.org:1935/live<br>
             스트림키:${streamkey.str_key}<br>
-            위 내용을 입력하고 적용을 누르고 obs로 돌아와 방송시작을 누르세요
+            위 내용을 입력하고 적용을 누르고 obs로 돌아와 방송시작을 누르세요.
         </div>
+        <button onclick="stream()">방송시작</button>
     </c:if>
 </div>
 </div>

@@ -40,7 +40,7 @@ public interface PointMapper {
 	@Select("SELECT point_game_seq.nextval FROM dual")
     Long getNextPointGameSeq();
 	//포인트 게임 등록
-	@Insert("INSERT INTO point_game (poiG_num,poiG_content,poiG_start,str_num,mem_num) VALUES (#{poiG_num},#{poiG_content},SYSDATE,1,#{mem_num})")
+	@Insert("INSERT INTO point_game (poiG_num,poiG_content,poiG_start,mem_num) VALUES (#{poiG_num},#{poiG_content},SYSDATE,#{mem_num})")
 	public void insertPointGame(PointGameVO pointGameVO);
 	//포인트 게임 상세 불러오기
 	@Select("SELECT * FROM point_game WHERE poiG_num=#{poiG_num}")

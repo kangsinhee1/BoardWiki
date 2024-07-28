@@ -3,7 +3,7 @@ package kr.spring.stream.service;
 import kr.spring.stream.vo.StreamKeyVO;
 
 public interface StreamKeyService {
-    StreamKeyVO findByStreamKey(String str_key);
+    StreamKeyVO findByStreamKey(Long mem_num);
 
 	StreamKeyVO findByUsername(Long mem_num);
 
@@ -12,4 +12,6 @@ public interface StreamKeyService {
 	Integer streamingNumber(long mem_num);
 
 	Integer streamingNum(Long str_num);
+	
+	void save(StreamKeyVO str_Key);
 }

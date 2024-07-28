@@ -13,8 +13,8 @@ public class StreamKeyServiceImpl implements StreamKeyService {
     private StreamKeyMapper streamKeyMapper;
 
     @Override
-    public StreamKeyVO findByStreamKey(String str_key) {
-        return streamKeyMapper.findByStreamKey(str_key);
+    public StreamKeyVO findByStreamKey(Long mem_num) {
+        return streamKeyMapper.findByStreamKey(mem_num);
     }
 
 	@Override
@@ -40,5 +40,11 @@ public class StreamKeyServiceImpl implements StreamKeyService {
 	@Override
 	public Integer streamingNum(Long str_num) {
 		return streamKeyMapper.streamingNum(str_num);
+	}
+
+	@Override
+	public void save(StreamKeyVO str_Key) {
+		streamKeyMapper.save(str_Key);
+		
 	}
 }

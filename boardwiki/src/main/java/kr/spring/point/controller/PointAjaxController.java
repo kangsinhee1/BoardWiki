@@ -180,7 +180,7 @@ public class PointAjaxController {
             return response;
         }
 
-        Long gameId = Long.valueOf((String) payload.get("gameId"));
+        Long gameId = Long.valueOf(String.valueOf(payload.get("gameId")));
         pointService.deletePointGame(gameId);
 
         response.put("result", "success");
@@ -207,7 +207,7 @@ public class PointAjaxController {
         return response;
     }
 
-    @PostMapping("/pointgame/close/{poiG_num}")
+    @PostMapping("/pointgame/close")
     @ResponseBody
     public void closeGame(@PathVariable Long poiG_num, @RequestParam Long winningOption) {
         List<PointGameVO> bets = pointService.selectPointBettingList(winningOption);

@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <section class="page-top-section set-bg" data-setbg="/img/page-top-bg/4.jpg" style="background-image: url(&quot;/img/page-top-bg/4.jpg&quot;);">
-<h1>Game List</h1>
+<h1>게임 리스트</h1>
 </section>
 <section class="blog-page">
 <div class="container">
@@ -19,6 +19,7 @@
     </c:forEach>
 </ul>
 <button id="createGameButton">게임 생성</button>
+<button onclick="location.href='/pointgame/manageGames'">게임 관리</button>
 </div>
 </div>
 </div>
