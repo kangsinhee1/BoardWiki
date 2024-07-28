@@ -2,6 +2,8 @@ package kr.spring.calendar.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import kr.spring.calendar.service.EventService;
 import kr.spring.calendar.vo.EventVO;
+import kr.spring.member.vo.MemberVO;
 
 @RestController
 @RequestMapping("/events")
@@ -21,18 +24,21 @@ public class EventController {
     @Autowired
     private EventService eventService;
 
-    @GetMapping("/user/{memNum}")
-    public List<EventVO> getEventsByUser(@PathVariable Long memNum) {
-        return eventService.getEventsByUser(memNum);
+    @PostMapping("/user")
+    public List<EventVO> getEventsByUser(HttpSession session) {
+    	MemberVO user = (MemberVO)session.getAttribute("user");
+        return eventService.getEventsByUser(user.getMem_num());
     }
 
     @PostMapping("/save")
-    public EventVO saveEvent(@RequestBody EventVO event) {
-        return null;
+    public EventVO saveEvent(@RequestBody EventVO event,HttpSession session) {
+    	MemberVO user = (MemberVO)session.getAttribute("user");
+    	event.setMem_num(user.getMem_num());
+        return event;
     }
 
-    @DeleteMapping("/delete/{id}")
-    public boolean deleteEvent(@PathVariable Long id) {
-        return false;
+    @DeleteMapping("/delete/{calendar_num}")
+    public boolean deleteEvent(@PathVariable Long calendar_num) {
+        return eventService.deleteEvent(calendar_num);
     }
 }

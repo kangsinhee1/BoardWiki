@@ -13,13 +13,13 @@ import kr.spring.calendar.vo.EventVO;
 @Mapper
 public interface EventMapper {
 
-    @Select("SELECT * FROM events WHERE memNum = #{memNum}")
+    @Select("SELECT * FROM calendar WHERE mem_num = #{mem_num}")
     List<EventVO> getEventsByUser(Long memNum);
 
-    @Insert("INSERT INTO events (memNum, title, startDate, endDate) VALUES (#{memNum}, #{title}, #{startDate}, #{endDate})")
-    @Options(useGeneratedKeys = true, keyProperty = "id")
+    @Insert("INSERT INTO calendar (calendar_num,mem_num, title, startDate, endDate) VALUES (calendar_seq.nextval #{memNum}, #{title}, #{startDate}, #{endDate})")
+    @Options(useGeneratedKeys = true, keyProperty = "calendar_num")
     int saveEvent(EventVO event);
 
-    @Delete("DELETE FROM events WHERE id = #{id}")
+    @Delete("DELETE FROM calendar WHERE calendar_num = #{calendar_num}")
     int deleteEvent(Long id);
 }

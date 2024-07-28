@@ -8,7 +8,7 @@
                     liveSyncDurationCount: 3, // Reduce buffer to 3 fragments
                     maxBufferLength: 5, // Keep buffer length low
                 });
-                hls.loadSource('http://192.168.0.10:8000/hls/' + streamKey + '.m3u8');
+                hls.loadSource('http://tkdrl.iptime.org:8000/hls/' + streamKey + '.m3u8');
                 hls.attachMedia(video);
                 hls.on(Hls.Events.MANIFEST_PARSED, () => {
                     video.play();
@@ -32,7 +32,7 @@
                     }
                 });
             } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-                video.src = 'http://192.168.0.10:8000/hls/' + streamKey + '.m3u8';
+                video.src = 'http://tkdrl.iptime.org/hls/' + streamKey + '.m3u8';
                 video.addEventListener('canplay', () => {
                     video.play();
                 });

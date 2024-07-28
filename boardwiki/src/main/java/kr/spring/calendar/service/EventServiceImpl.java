@@ -26,8 +26,7 @@ public class EventServiceImpl implements EventService{
     }
 
 	@Override
-	public int deleteEvent(Long id) {
-		// TODO Auto-generated method stub
-		return 0;
+	public boolean deleteEvent(Long calendar_num) {
+		return eventMapper.deleteEvent(calendar_num) > 0;
 	}
 }

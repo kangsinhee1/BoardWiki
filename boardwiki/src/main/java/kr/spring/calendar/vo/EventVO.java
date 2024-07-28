@@ -1,5 +1,7 @@
 package kr.spring.calendar.vo;
 
+import java.sql.Date;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -8,11 +10,11 @@ import lombok.ToString;
 @Setter
 @ToString
 public class EventVO {
-	private Long id;
-    private Long memNum;
+	private Long calendar_num;
+    private Long mem_num;
     private String title;
-    private String startDate;
-    private String endDate;
+    private Date startDate;
+    private Date endDate;
 
     // Getters and Setters
 }

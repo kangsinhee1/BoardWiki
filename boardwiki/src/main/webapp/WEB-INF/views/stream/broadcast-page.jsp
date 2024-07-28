@@ -57,6 +57,7 @@
 		<div class="col-lg-12">
 <div class="game-main">
 <input type="hidden" id="str_num" name="str_num" value="${param.str_num}">
+<input type="hidden" value="${streamkey.str_key}" id="str_key" name="str_key">
     <c:if test="${broadcast.isLive == 1}">
         <div class="container">
             <div class="video-container">
@@ -129,6 +130,7 @@
         window.open("/mission/userlist?str_num=" + ${param.str_num}, "missionListByMember", "width=600,height=400");
     }
     let strNum = ${param.str_num};
+    let streamKey = $('#str_key').val();
 </script>
 
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
