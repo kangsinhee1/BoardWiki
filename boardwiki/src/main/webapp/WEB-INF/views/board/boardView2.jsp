@@ -65,36 +65,18 @@
 	</div>
 	<hr size="1" width="100%">
 	<div class="align-right">
-		<c:if test="${!empty user && user.mem_num == board.mem_num || user.mem_auth == 9}">
+	<c:if test="${!empty user && user.mem_num == board.mem_num || user.mem_auth == 9}">
 		<input type="button" value="수정"
 		   onclick="location.href='update2?boa_num=${board.boa_num}'">
 		<c:choose>
-			<c:when test="${board.boa_category == 4}">
+			<c:when test="${board.boa_category == 4 }">
 				<input type="button" value="삭제" id="delete_btn">
-		<script>
-			const delete_btn = document.getElementById('delete_btn');
-			delete_btn.onclick=function(){
-				const choice = confirm('삭제하시겠습니까?');
-				if(choice){
-					location.replace('delete2?boa_num=${board.boa_num}');
-				}
-			};
-		</script> 
 		    </c:when>
 		    <c:when test="${board.boa_category == 5}">
 				<input type="button" value="삭제" id="delete_btn">
-		<script>
-			const delete_btn = document.getElementById('delete_btn');
-			delete_btn.onclick=function(){
-				const choice = confirm('삭제하시겠습니까?');
-				if(choice){
-					location.replace('delete3?boa_num=${board.boa_num}');
-				}
-			};
-		</script> 
 		    </c:when> 
 		</c:choose>
-		</c:if>
+	</c:if>
 		<c:choose>
 			<c:when test="${board.boa_category == 4}">
 				<input type="button" value="목록" onclick="location.href='list?boa_category=4'">
@@ -146,6 +128,20 @@ $(document).ready(function() {
          $('#re_form').submit(); // 폼 제출
      });
 });
+const delete_btn = document.getElementById('delete_btn');
+delete_btn.onclick=function(){
+	const choice = confirm('삭제하시겠습니까?');
+	if(choice){
+		location.replace('delete2?boa_num=${board.boa_num}');
+	}
+};
+const delete_btn = document.getElementById('delete_btn');
+delete_btn.onclick=function(){
+	const choice = confirm('삭제하시겠습니까?');
+	if(choice){
+		location.replace('delete3?boa_num=${board.boa_num}');
+	}
+};
 </script>
 
 
