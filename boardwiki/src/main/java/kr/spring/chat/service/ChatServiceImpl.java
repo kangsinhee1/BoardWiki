@@ -91,7 +91,7 @@ public class ChatServiceImpl implements ChatService{
 
 	@Override
 	public void deleteChatRead(Map<String, Long> map) {
-		// TODO Auto-generated method stub
+		chatMapper.deleteChatReadAdmin(map);
 
 	}
 	@Override
@@ -121,7 +121,6 @@ public class ChatServiceImpl implements ChatService{
 
 	@Override
 	public Integer selectChatRoomNum() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

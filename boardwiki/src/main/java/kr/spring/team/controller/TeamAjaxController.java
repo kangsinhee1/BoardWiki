@@ -288,7 +288,7 @@ public class TeamAjaxController {
 
 			}else {
 				chatService.deleteChatRoomMemeberUser(db_applyVO.getMem_num(),chatRoomVO.getChaR_num());
-				chatService.deleteChatRead(chatread);
+				chatService.deleteChatReadAdmin(chatread);
 			}
 			mapJson.put("result", "success");
 		}
