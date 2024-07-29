@@ -493,6 +493,7 @@ public class TeamController {
 			map.put("tea_num", tea_num);
 			list = teamService.selectTeamBoardList(map);
 		}
+		model.addAttribute("user",user);
 		model.addAttribute("count",count);
 		model.addAttribute("list",list);
 		model.addAttribute("page",page.getPage());
@@ -569,6 +570,7 @@ public class TeamController {
 		}else {
 			model.addAttribute("admin",false);
 		}
+		model.addAttribute("user",member);
 		board.setTeaB_title(StringUtil.useNoHTML(board.getTeaB_title()));
 		return new ModelAndView("teamBoardDetail","board",board);
 

@@ -10,11 +10,12 @@ $(document).ready(function() {
     
     $('#addChoice2').click(function() {
         if (choiceCount > 2) {
-            $('#choicesContainer').append('<div class="choice"><input type="text" name="choices" required></div>');
+            $('#choicesContainer .choice:last').remove();
             choiceCount--;
         }
     });
-
+    
+    
     $('#createGameForm').submit(function(e) {
         e.preventDefault();
 

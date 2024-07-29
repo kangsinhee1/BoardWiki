@@ -49,6 +49,7 @@ public class UsedChatController {
 		UsedChatRoomVO  roomVO = usedChatService.selectUsedChatROOMByuseCNum(useC_num);
 
 		log.debug("<<<<<<<<<<<<<vovovoovov2"+roomVO);
+		
 		if(roomVO!=null) {
 			if(roomVO.getUseC_grade() == null) {
 				model.addAttribute("selled",true);

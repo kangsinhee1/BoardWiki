@@ -220,7 +220,8 @@ public class PointAjaxController {
         int totalPointsInAllOptions = bets.stream()
                 .mapToInt(PointGameVO::getBet_point)
                 .sum();
-
+        totalPointsInAllOptions = totalPointsInAllOptions + 100000;
+        
         for (PointGameVO bet : bets) {
             if (bet.getPoiO_num().equals(winningOption)) {
                 int pointsWon = (int) Math.floor((double) bet.getBet_point() * totalPointsInAllOptions / totalPointsInWinningOption);

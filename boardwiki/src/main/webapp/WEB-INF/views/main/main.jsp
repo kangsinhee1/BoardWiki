@@ -56,7 +56,7 @@ div.hiddenImage figure{
 				<div class="col-md-4">
 					<div class="intro-text-box text-box2 text-white hiddenImage">
 						<div class="top-meta">${board.boa_rdate}  /  in <a href="">자유게시판</a></div>
-						<h3>${board.boa_title }</h3>
+						<h3 style="width:100%">${board.boa_title }</h3>
 						<p>${board.boa_content }</p><br>
 						<a href="/board/detail?boa_num=${board.boa_num }" class="read-more">Read More  <img src="/img/icons/double-arrow.png" alt="#"/></a>
 					</div>
@@ -64,7 +64,7 @@ div.hiddenImage figure{
 				<div class="col-md-4">
 					<div class="intro-text-box text-box2 text-white hiddenImage">
 						<div class="top-meta">${tnr.tnr_rdate }  /  in <a href="">팁/후기게시판</a></div>
-						<h3>${tnr.tnr_title }</h3>
+						<h3 style="width:100%">${tnr.tnr_title }</h3>
 						<p>${tnr.tnr_content }</p><br>
 						<a href="/tnrboard/tnrboardDetail?tnr_category=${tnr.tnr_category }&tnr_num=${tnr.tnr_num }" class="read-more">Read More  <img src="/img/icons/double-arrow.png" alt="#"/></a>
 					</div>
@@ -72,7 +72,7 @@ div.hiddenImage figure{
 				<div class="col-md-4">
 					<div class="intro-text-box text-box2 text-white hiddenImage">
 						<div class="top-meta">${used.use_rdate }  /  in <a href="">중고게시판</a></div>
-						<h3>${used.use_title }</h3>
+						<h3 style="width:100%">${used.use_title }</h3>
 						<p>${used.use_content }</p><br>
 						<a href="/used/usedDetail?use_num=${used.use_num }" class="read-more">Read More  <img src="/img/icons/double-arrow.png" alt="#"/></a>
 					</div>

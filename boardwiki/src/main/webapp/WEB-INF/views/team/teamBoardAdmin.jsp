@@ -52,7 +52,9 @@
                 <option value="2" <c:if test="${param.order == 2}">selected</c:if>>조회수&nbsp; </option>
                 <option value="3" <c:if test="${param.order == 3}">selected</c:if>>댓글순&nbsp; </option>
             </select>
+            <c:if test="${user.mem_auth!=9}">
             <input type="button" value="글쓰기" onclick="location.href='${pageContext.request.contextPath}/team/teamBoardWrite?tea_num=${tea_num}'">
+            </c:if>
         </div>
     </form>
 
