@@ -3,7 +3,7 @@ $(document).ready(function() {
 
     $('#addChoice').click(function() {
         if (choiceCount < 6) {
-            $('#choicesContainer').append('<div class="choice"><input type="text" name="choices" required></div>');
+            $('#choicesContainer').append('<div class="choice"><input type="text" name="choices" placeholder="선택지를 입력해주제요" required></div>');
             choiceCount++;
         }
     });

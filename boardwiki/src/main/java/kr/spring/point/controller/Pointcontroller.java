@@ -123,36 +123,45 @@ public class Pointcontroller {
     }
 
 	@GetMapping("/pointgame/participate")
-    public String participateGamePage(@RequestParam(defaultValue="1") int pageNum,
-    								  Long poiG_num, Model model,
+    public String participateGamePage(Long poiG_num, Model model,
     								  HttpSession session) {
-		Map<String,Object> map = new HashMap<>();
-
-
-
-		// 전체, 검색 레코드 수
-		int count = pointService.selectPointGameRowCount(map);
-
+		Map<String, Object> map = new HashMap<>();
+	    map.put("poiG_num", poiG_num);
+	    List<PointGameVO> gameOptions = pointService.selectPointGameOptionList(map);
+	    
+	    MemberVO user = (MemberVO)session.getAttribute("user");
+	    map.put("poiG_num", poiG_num);
+	    List<PointGameVO> list = pointService.selectPointGameOptionList(map);
+	    if(user != null) {
+	    	for (PointGameVO option : gameOptions) {
+		        List<PointGameVO> user2 = pointService.selectPointBettingList(option.getPoiO_num());
+		        for(PointGameVO vo : user2) {
+		        	if(user.getMem_num() == vo.getMem_num()) {
+		        		log.debug("<<ssssss:>>"+vo);
+		        		model.addAttribute("point", vo);
+		        		model.addAttribute("user", user);
+		        	}
+		        }
+		    }
+	    }
+	    
 		PointGameVO game = pointService.selectPointGame(poiG_num);
-
-		// 페이지 처리
-		PagingUtil page = new PagingUtil(pageNum, count, 20, 10, "participateGame");
-
-		List<PointGameVO> list = null;
-		if (count > 0) {
-			 map.put("start", page.getStartRow());
-			 map.put("end", page.getEndRow());
-			 map.put("poiG_num", poiG_num);
-
-			 list = pointService.selectPointGameOptionList(map);
-		}
-
-		model.addAttribute("count", count);
-		model.addAttribute("list", list);
-		model.addAttribute("page", page.getPage());
-
-
-
+		
+		int total_betting = 100000;
+		
+		Map<Long, Integer> totalBettingMap = new HashMap<>();
+		
+		
+		
+		for (PointGameVO option : gameOptions) {
+	        List<PointGameVO> bettingList = pointService.selectPointBettingList(option.getPoiO_num());
+	        int totalBetting = bettingList.stream().mapToInt(PointGameVO::getBet_point).sum();
+	        option.setBet_point(totalBetting);
+	        total_betting += totalBetting;
+	    }
+		
+		model.addAttribute("list", gameOptions);
+		model.addAttribute("total",total_betting);
         model.addAttribute("game", game);
 
         return "participateGame";

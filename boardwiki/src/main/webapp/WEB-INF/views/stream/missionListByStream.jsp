@@ -3,7 +3,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/boradchat.js"></script>
+<script>
+let strNum = ${param.str_num};
 
+function resizeWindow() {
+    // 페이지 내용의 높이와 너비를 계산
+    var pageHeight = document.documentElement.scrollHeight;
+    var pageWidth = document.documentElement.scrollWidth;
+
+    window.resizeTo(pageWidth, pageHeight);
+}
+
+// DOM이 완전히 로드된 후 창 크기 조정
+window.onload = resizeWindow;
+</script>
 <section class="blog-page">
 	<div class="container">
 		<div class="row">
@@ -68,6 +81,3 @@ ${logout}<br>
 		</div>
 	</div>
 </section>
-<script>
-let strNum = ${param.str_num};
-</script>

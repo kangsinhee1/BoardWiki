@@ -7,16 +7,19 @@
 <section class="page-top-section set-bg"
 	data-setbg="/img/page-top-bg/4.jpg">
 	<div class="page-info">
-		<h2>Live Broadcasts</h2>
+		<h2>방송 목록</h2>
 		<div class="site-breadcrumb">
 			<a href="${pageContext.request.contextPath}/item/item_main">Home</a>
-			/ <span>Detail</span>
+			/ <span>방송</span>
 		</div>
 	</div>
 </section>
 <!-- Page top end-->
 
 <style>
+.blog-page{
+	min-height:800px;
+}
 .broadcast {
 	display: inline-block;
 	margin: 20px;

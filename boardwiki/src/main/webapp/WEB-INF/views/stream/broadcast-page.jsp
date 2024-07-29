@@ -8,20 +8,20 @@
         display: flex;
         justify-content: center;
         align-items: flex-start;
-        min-height: 1000px;
     }
     .video-container {
-        width: 70%;
-        text-align: center;
+        float: inline-end;
+    	width: 800px;
+    	text-align: center;
     }
     video {
-        width: 100%;
-        height: auto;
-        cursor: pointer;
+        width: 800px;
+    	height: auto;
+    	cursor: pointer;
     }
     .chat-section {
-        width: 30%;
-        margin-left: 10px;
+        width: 200px;
+    	margin-left: 10px;
     }
     .chat-container {
         height: 500px;
@@ -30,10 +30,12 @@
         flex-direction:column_reverse;
     }
     .chat-input-container {
+    	text-align:right;
         margin-top: 10px;
+        width: 100%;
     }
     .chat-input {
-        width: calc(100% - 22px);
+    	width:100%;
         padding: 10px;
         margin-right: 2px;
     }
@@ -52,7 +54,15 @@
 
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 
-<section class="page-top-section set-bg" data-setbg="/img/page-top-bg/4.jpg" style="background-image: url('/img/page-top-bg/4.jpg');"></section>
+<section class="page-top-section set-bg"
+	data-setbg="/img/page-top-bg/4.jpg">
+	<div class="page-info">
+		<h2>${broadcast.mem_nickName}님의 방송</h2>
+		<div class="site-breadcrumb">
+			<a href="${pageContext.request.contextPath}/item/item_main">Home</a>/<span style="color:white;">방송</span>/<span>${broadcast.mem_nickName}님의 방송</span>
+		</div>
+	</div>
+</section>
 
 <section class="blog-page">
 <div class="container">
@@ -64,7 +74,7 @@
     <c:if test="${broadcast.isLive == 1}">
         <div class="container">
             <div class="video-container">
-                <h1>${broadcast.mem_nickName}님의 방송</h1>
+                <h1></h1>
                 <video id="video" controls autoplay playsinline></video>
                 <div class="donation-mission-container">
                 <c:if test="${strnum == param.str_num}">
@@ -132,28 +142,29 @@
 </section>
 
 <script>
+
     function openDonationModal() {
-        window.open("/donation/form?str_num="+${param.str_num}, "donationForm", "width=400,height=300");
+        window.open("/donation/form?str_num="+${param.str_num}, "donationForm", "width=600,height=426");
     }
 
     function openDonationListByStream() {
-        window.open('/donation/strlist?str_num='+${param.str_num}, "donationListByStream", "width=600,height=400");
+        window.open('/donation/strlist?str_num='+${param.str_num}, "donationListByStream", "width=600,height=426");
     }
 
     function openDonationListByMember() {
-        window.open("/donation/userlist?str_num="+${param.str_num}, "donationListByMember", "width=600,height=400");
+        window.open("/donation/userlist?str_num="+${param.str_num}, "donationListByMember", "width=600,height=426");
     }
     
     function openMissionRequest() {
-        window.open("/mission/form?str_num=" + ${param.str_num}, "missionRequest", "width=400,height=300");
+        window.open("/mission/form?str_num=" + ${param.str_num}, "missionRequest", "width=600,height=426");
     }
 
     function openMissionListByStream() {
-        window.open("/mission/strlist?str_num=" + ${param.str_num}, "missionListByStream", "width=600,height=400");
+        window.open("/mission/strlist?str_num=" + ${param.str_num}, "missionListByStream", "width=600,height=426");
     }
 
     function openMissionListByMember() {
-        window.open("/mission/userlist?str_num=" + ${param.str_num}, "missionListByMember", "width=600,height=400");
+        window.open("/mission/userlist?str_num=" + ${param.str_num}, "missionListByMember", "width=600,height=426");
     }
     let strNum = ${param.str_num};
     let streamKey = $('#str_key').val();

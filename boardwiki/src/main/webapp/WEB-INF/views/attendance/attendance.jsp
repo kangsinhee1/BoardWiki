@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <style>
+#daub{
+min-height: 800px;
+}
     div #daub {
         background-color: #8330B3;
     }

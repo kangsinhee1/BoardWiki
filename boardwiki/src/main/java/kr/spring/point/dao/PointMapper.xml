@@ -93,12 +93,9 @@
     <!-- 포인트 게임옵션 목록 -->
     <select id="selectPointGameOptionList" parameterType="map" resultType="pointGameVO">
     SELECT * FROM (SELECT a.*, rownum rnum FROM(
-    SELECT * FROM point_game_option WHERE poiG_num=#{poiG_num} 
+    SELECT * FROM point_game_option WHERE poiG_num=#{poiG_num}
     <include refid="pointgameoptionlist"/>
     )a)
-    <![CDATA[
-       WHERE rnum >= #{start} AND rnum <= #{end}
-    ]]>
     </select>
     
     <!-- 포인트 게임옵션 카운트 -->
