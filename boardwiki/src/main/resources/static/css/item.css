@@ -11,23 +11,23 @@
 	letter-spacing: 1px;
 	text-transform: uppercase;
 	font-weight: 600;
-	border: 2px solid #b01ba5;
+	border: 2px solid #534a99;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 .btn-primary:hover {
-	background: #C213B6;
-	border: 2px solid #b01ba5;
+	background: #534a99;
+	border: 2px solid #534a99;
 	
 }
 .btn-primary:active {
-	background: #C213B6 !important;
-	border: 2px solid #b01ba5 !important;
+	background: #534a99 !important;
+	border: 2px solid #534a99 !important;
 	outline : none !important;
 }
 .btn-primary:focus {
-	border: 2px solid #b01ba5 !important;
+	border: 2px solid #534a99 !important;
 	outline : 0px !important;
 	outline-style : none; 
 	box-shadow : none !important;
@@ -35,7 +35,7 @@
 .quantity_label {
 	display: block;
     font-size: 16px;
-    color: #b01ba5;
+    color: #534a99;
     font-weight: 500;
     margin-bottom: 10px;
 }
@@ -67,7 +67,7 @@
 }
 
 .addToCartButton:hover {
-	background-color: #c313b7; /* 호버 시 색상 */
+	background-color: #534a99; /* 호버 시 색상 */
 }
 
 /* down header 버튼 */
@@ -83,7 +83,7 @@
 }
 
 .custom-btn-success:hover {
-	background-color: #c313b7; /* 호버 시 색상 */
+	background-color: #534a99; /* 호버 시 색상 */
 }
 
 /* 게임 메인 */
@@ -153,12 +153,15 @@
 }
 .game-box{
 	display: inline-block;
-	margin: 10px;
+	margin-left:28px;
 }
 .game-box img{
+	border-radius:10px;
 	width: 230px;
 	height:200px;
 }
 .game-main {
-	background-color: #a13e97;
+	border-radius:10px;
+	background-color: #280E3B;
+	padding: 20px;
 }
