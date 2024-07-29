@@ -48,14 +48,14 @@
                             </script>
 						</c:if>
 					</div>
-					<hr size="1" width="100%" color="black">
+					<hr size="1" width="100%" color="white">
 					<div class="detail-content font-white">
 						${contest.con_content} 
 					</div>
 					<p>
 					<h4>참가 현황: ${conManCount} / ${contest.con_maxman}</h4>
 				</div>
-				<hr size="1" width="100%" color="black">
+				<hr size="1" width="100%" color="white">
 				<h4>대회 주소: ${contest.con_address1} ${contest.con_address2}</h4>
 				<div id="map" style="width: 100%; height: 350px;"></div>
 

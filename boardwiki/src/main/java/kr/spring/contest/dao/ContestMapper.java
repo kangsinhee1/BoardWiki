@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import kr.spring.board.vo.BoardVO;
 import kr.spring.contest.vo.ContestApplyVO;
 import kr.spring.contest.vo.ContestVO;
 
@@ -22,6 +23,10 @@ public interface ContestMapper {
 
 	@Select("SELECT COUNT(*) FROM contest")
 	public Integer countAllcontest(Map<String,Object> map);
+	
+	@Select("SELECT * FROM contest WHERE con_num = #{con_num}")
+	public ContestVO selectContest(long con_num);
+	public void updateContest(ContestVO contest);
 
 
 	//대회 상세
