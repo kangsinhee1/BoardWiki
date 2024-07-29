@@ -101,14 +101,16 @@ public class OrderController {
 	/*=========================
 	 * 결제 완료창
 	 *=========================*/
-	@GetMapping("/order/order1")
-	public String GetToPay(Model model,Long mem_num,Long order_num, HttpSession session,OrderVO orderVO){
+	@GetMapping("/order/pay")
+	public String GetToPay(Model model,Long order_num, HttpSession session,OrderVO orderVO){
 		
 		MemberVO member = (MemberVO) session.getAttribute("user");
 
 		if (member == null) {
 			return "redirect:/login"; // 세션에 user가 없으면 로그인 페이지로 리다이렉트
 		}
+		
+		log.debug("<<유저 - mem_num>>" + member);
 		
 		OrderVO order = orderService.selectnum(member.getMem_num());
 		
@@ -118,7 +120,6 @@ public class OrderController {
 		List<CartVO> list = null;
 		list = cartService.selectname(map);
 		
-		model.addAttribute("mem_num",mem_num);
 		model.addAttribute("list",list);
 		model.addAttribute("order",order);
 		

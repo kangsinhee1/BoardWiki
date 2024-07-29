@@ -9,10 +9,10 @@
 <!-- Page top section -->
 <section class="page-top-section set-bg" data-setbg="/img/page-top-bg/4.jpg">
 	<div class="page-info">
-		<h2>결제</h2>
+		<h2>결제내역</h2>
 		<div class="site-breadcrumb">
 			<a href="">Home</a> /
-			<span>Cart</span>
+			<span>pay</span>
 		</div>
 	</div>
 </section>
@@ -35,14 +35,16 @@
                     </thead>
                     <tbody>
                             <tr>
-                                <td >${pay.order_num}</td>
-                                <td>${cart.item_name}</td>
-                                <td id="item_price_${cart.item_num}" data-price="${cart.item_price}">${cart.item_price}원</td>
+                                <td >${order_num}</td>
                                 <td>
-                                
-                                </td> 
-                                <td id="total_price_${cart.item_num}" class="total-price">${cart.item_quantity * cart.item_price}원</td>
-                                <td></td>
+                                <c:forEach var="pay" items="${list}">
+			                    &nbsp;[${my_order.item_name}]&nbsp;
+			                    </c:forEach>
+			                    </td>
+                                <td>${order_address1}</td>
+                                <td>${order_address2}</td> 
+                                <td>${order_pay}원</td>
+                                <td>${order_date}</td>
                             </tr>
                     </tbody>
                 </table>
