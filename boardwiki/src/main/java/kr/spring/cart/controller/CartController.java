@@ -116,10 +116,11 @@ public class CartController {
 			HttpSession session) throws IllegalStateException, IOException {
 
 		MemberVO member = (MemberVO) session.getAttribute("user");
-
-		if (member == null) {
-			return "redirect:/login"; // 세션에 user가 없으면 로그인 페이지로 리다이렉트
+		
+		if(member == null) {
+			return "redirect:/member/login";
 		}
+		
 
 		log.debug("<<유저 - member>> : " + member);
 
