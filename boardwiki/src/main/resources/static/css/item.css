@@ -156,6 +156,9 @@
 	margin: 10px;
 }
 .game-box img{
-	width: 250px;
-	height:230px;
+	width: 230px;
+	height:200px;
+}
+.game-main {
+	background-color: #a13e97;
 }
