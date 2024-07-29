@@ -61,7 +61,9 @@
 				<c:forEach var="team" items="${list4}">
 				<c:if test="${team.teaA_status == 2}">
 					<tr>
-						<td>${team.tea_name}</td>
+						<td>${team.tea_name}
+						<c:if test="${team.tea_status ==0}">(비활성화 게시판)</c:if>
+						</td>
 						<td><c:choose>
 								<c:when test="${team.teaA_status == 1}">수락 대기중</c:when>
 								<c:when test="${team.teaA_status == 0}">수락 거부</c:when>

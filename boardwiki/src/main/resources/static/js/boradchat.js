@@ -26,7 +26,9 @@ document.addEventListener("DOMContentLoaded", function() {
                 'border': '2px solid red',
                 'padding': '10px',
                 'margin': '10px 0',
-                'background-color': '#ffe6e6'
+                'background-color': '#ffe6e6',
+                'color': 'black'
+                
             });
         $('#chat-container').append(messageElement);
         $('#chat-container').scrollTop($("#chat-container")[0].scrollHeight);
