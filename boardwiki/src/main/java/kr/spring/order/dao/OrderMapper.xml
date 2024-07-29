@@ -66,13 +66,13 @@
 		GROUP BY mem_num
 	</select>
 	<select id="selectnum" parameterType="map" resultType="orderVO">
-		SELECT *
-		FROM orders
-		WHERE mem_num = #{mem_num}
-		AND order_num = (
-		SELECT MAX(order_num)
-		FROM orders
-		WHERE mem_num = #{mem_num}
-		);
+        SELECT *
+        FROM orders
+        WHERE mem_num = #{mem_num}
+        AND order_num = (
+        SELECT MAX(order_num)
+        FROM orders
+        WHERE mem_num = #{mem_num}
+);
 	</select>
 </mapper>

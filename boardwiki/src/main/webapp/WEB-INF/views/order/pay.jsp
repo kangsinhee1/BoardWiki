@@ -35,7 +35,7 @@
                     </thead>
                     <tbody>
                             <tr>
-                                <td >${order.order_num}</td>
+                                <td >${pay.order_num}</td>
                                 <td>${cart.item_name}</td>
                                 <td id="item_price_${cart.item_num}" data-price="${cart.item_price}">${cart.item_price}원</td>
                                 <td>
