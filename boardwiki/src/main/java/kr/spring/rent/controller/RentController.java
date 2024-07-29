@@ -69,7 +69,7 @@ public class RentController {
 		    rentService.insertRent(rentVO);
 
 		    model.addAttribute("message", "성공적으로 대여가 완료되었습니다.");
-		    model.addAttribute("url", request.getContextPath() + "/rent/list");
+		    model.addAttribute("url", request.getContextPath() + "/myPage/rent");
 
 		    return "common/resultAlert";
 		}

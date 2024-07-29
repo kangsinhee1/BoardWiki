@@ -181,7 +181,7 @@ form#search_form {
 ul.rent_search {
 	list-style: none;
 	padding: 0;
-	margin-left: 10%;
+	margin-left: 4%;
 	display: flex;
 	gap: 10px;
 }
