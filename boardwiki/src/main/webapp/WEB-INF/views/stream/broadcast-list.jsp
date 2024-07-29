@@ -2,11 +2,19 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+<!-- Page top section -->
 
-<section class="page-top-section set-bg" data-setbg="/img/page-top-bg/4.jpg" style="background-image: url(&quot;/img/page-top-bg/4.jpg&quot;);">
-
-<h1>Live Broadcasts</h1>
+<section class="page-top-section set-bg"
+	data-setbg="/img/page-top-bg/4.jpg">
+	<div class="page-info">
+		<h2>Live Broadcasts</h2>
+		<div class="site-breadcrumb">
+			<a href="${pageContext.request.contextPath}/item/item_main">Home</a>
+			/ <span>Detail</span>
+		</div>
+	</div>
 </section>
+<!-- Page top end-->
 
 <style>
 .broadcast {
