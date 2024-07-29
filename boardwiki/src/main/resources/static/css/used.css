@@ -58,6 +58,8 @@ div.page-main h2{
 }
 div.page-main div.detail-content p{
 	color:white;
+	font-size:20px;
+	word-break:break-all;
 }
 /*CKEditor 사용시 등록,수정폼*/
 form#board_register, form#board_modify{
