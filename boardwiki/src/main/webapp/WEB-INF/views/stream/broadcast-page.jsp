@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
+	input::placeholder{
+		color:#CFCFCF;
+	}
     .container {
         display: flex;
         justify-content: center;
@@ -81,8 +84,14 @@
             <div class="chat-section font-white" >
                 <div class="chat-container" id="chat-container"></div>
                 <div class="chat-input-container">
-                    <input type="text" id="chat-input" class="chat-input" placeholder="메시지를 입력하세요" />
+                    <input type="text" id="chat-input" class="chat-input" 
+                    	<c:choose>
+            			<c:when test="${user != null}">placeholder="메시지를 입력하세요"</c:when>
+            			<c:otherwise>placeholder="로그인해야 채팅을 입력할 수 있습니다." readonly="readonly"</c:otherwise>
+        				</c:choose>>
+                    <c:if test="${user!=null}">
                     <button id="chat-send-button" class="chat-send-button">보내기</button>
+                    </c:if>
                 </div>
             </div>
         </div>

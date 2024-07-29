@@ -7,6 +7,13 @@ $(document).ready(function() {
             choiceCount++;
         }
     });
+    
+    $('#addChoice2').click(function() {
+        if (choiceCount > 2) {
+            $('#choicesContainer').append('<div class="choice"><input type="text" name="choices" required></div>');
+            choiceCount--;
+        }
+    });
 
     $('#createGameForm').submit(function(e) {
         e.preventDefault();
