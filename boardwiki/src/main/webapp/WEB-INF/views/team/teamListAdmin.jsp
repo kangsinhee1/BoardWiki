@@ -51,12 +51,6 @@
 							         +$('#order').val();
 				});
 			</script>
-			<!-- <c:if test="${!empty user}"> -->
-			
-			<!--</c:if>
-			-->
-			<input type="button" value="글쓰기" 
-			                    onclick="location.href='teamWrite'">
 		</div>                     
 	</form>
 	<c:if test="${count == 0}">
