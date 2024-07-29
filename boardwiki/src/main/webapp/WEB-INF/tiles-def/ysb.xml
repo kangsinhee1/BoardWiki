@@ -36,10 +36,10 @@
 		<put-attribute name="title" value="결제"/>
 		<put-attribute name="body" value="/WEB-INF/views/order/pay.jsp"/>
 	</definition>
-	<definition name="orderadmin" extends="main">
-		<put-attribute name="title" value="배송관리"/>
-		<put-attribute name="body" value="/WEB-INF/views/order/orderadmin.jsp"/>
-	</definition>
+<!-- 	<definition name="orderadmin" extends="main"> -->
+<!-- 		<put-attribute name="title" value="배송관리"/> -->
+<!-- 		<put-attribute name="body" value="/WEB-INF/views/order/orderadmin.jsp"/> -->
+<!-- 	</definition> -->
 	
 </tiles-definitions>
 

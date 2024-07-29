@@ -67,10 +67,10 @@
 	</select>
 	<select id="selectnum" parameterType="map" resultType="orderVO">
         SELECT 
-        order_address1 = #{order_address1},
-        order_address2 = #{order_address2},
-        order_pay = #{order_pay},
-        order_date = #{order_date}
+        order_address1,
+        order_address2,
+        order_pay,
+        order_date
         FROM orders
         WHERE mem_num = #{mem_num}
         AND order_num = (SELECT MAX(order_num) FROM orders WHERE mem_num = #{mem_num})

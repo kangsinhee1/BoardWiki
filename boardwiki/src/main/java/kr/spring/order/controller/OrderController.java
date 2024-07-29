@@ -66,7 +66,7 @@ public class OrderController {
 	/*=========================
 	 * 주문창에 데이터 담기
 	 *=========================*/
-	@PostMapping("/order/order1")
+	@PostMapping("/item/item_main")
 	public String addToOrder(Integer item_quantity,
 	        @RequestParam("order_name") String order_name,
 	        @RequestParam("order_phone") String order_phone,
@@ -96,56 +96,8 @@ public class OrderController {
 	    orderService.insertOrder(order);
 	    cartService.updateCartDate(member.getMem_num());
 
-	    return "pay"; // "common/resultAlert" 대신 리다이렉트 사용
+	    return "item_main"; // "common/resultAlert" 대신 리다이렉트 사용
 	}
-//	// 새로운 GET 메서드 추가
-//    @GetMapping("/order/order1")
-//    public String showOrderForm(Model model, HttpSession session) {
-//        MemberVO member = (MemberVO) session.getAttribute("user");
-//
-//        if (member == null) {
-//            return "redirect:/login"; // 세션에 user가 없으면 로그인 페이지로 리다이렉트
-//        }
-//
-//        // 주문 정보를 설정하는 로직을 추가합니다. 필요에 따라 설정하세요.
-//        // 예를 들어, 세션에서 필요한 데이터를 가져와서 모델에 추가합니다.
-//
-//        return "pay"; // 실제 주문 폼을 보여주는 JSP 페이지 이름
-//    }
-	
-	/*=========================
-	 * 결제 완료창
-	 *=========================*/
-	 @GetMapping("/order/order1")
-	    public String GetToPay(Model model, HttpSession session) {
-	        MemberVO member = (MemberVO) session.getAttribute("user");
-
-	        if (member == null) {
-	            return "redirect:/login"; // 세션에 user가 없으면 로그인 페이지로 리다이렉트
-	        }
-
-	        log.debug("<<유저 - mem_num>>" + member.getMem_num());
-
-	        // 주문 정보 가져오기
-	        OrderVO order = orderService.selectnum(member.getMem_num());
-
-	        if (order == null) {
-	            // 주문 정보가 없을 경우 처리
-	            return "redirect:/order/error"; // 예시로 에러 페이지로 리다이렉트
-	        }
-
-	        // 장바구니 정보 가져오기
-	        Map<String, Object> map = new HashMap<>();
-	        map.put("order_date", order.getOrder_date());
-	        map.put("order_date", member.getMem_num());
-	        List<CartVO> list = cartService.selectname(map);
-
-	        // 모델에 데이터 추가
-	        model.addAttribute("order", order);
-	        model.addAttribute("list", list);
-
-	        return "/order/order1";
-	    }
 }
 
 
