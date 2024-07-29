@@ -49,6 +49,16 @@ document.addEventListener("DOMContentLoaded", function() {
             console.error(`Element with id ${listId} not found.`);
         }
     }
+    
+    // 입장 메시지를 채팅 컨테이너에 추가하는 함수
+    function appendEntranceMessage(nickName) {
+        const messageElement = $('<div></div>').text(nickName + '님이 입장하셨습니다.').css({
+            'font-weight': 'bold',
+            'color': 'green'
+        });
+        $('#chat-container').append(messageElement);
+        $('#chat-container').scrollTop($("#chat-container")[0].scrollHeight);
+    }
 
     // 초기 채팅 메시지 로드
     function loadChatMessages() {
@@ -65,13 +75,18 @@ document.addEventListener("DOMContentLoaded", function() {
                     data.forEach(message => {
                         appendChatMessage(message.mem_nickName, message.strt_chat);
                 });
-                $('#chat-container').html('<p>채팅방에 입장하셌습니다.</p>');
                 }
                 // #chat-container가 존재하는지 확인하고 scrollHeight를 설정
                 const chatContainer = $("#chat-container")[0];
                 if (chatContainer) {
                     $('#chat-container').scrollTop(chatContainer.scrollHeight);
+                   
                 }
+                
+                // 입장 메시지 추가
+                appendEntranceMessage(memNickname);
+                // 서버로 입장 메시지 전송
+                socket.send(JSON.stringify({ mem_nickName: memNickname, strt_chat: `${memNickname}님이 입장하셨습니다.` }));
             },
             error: function(error) {
                 console.error('에러 발생 :', error);
@@ -171,6 +186,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 data: messageData,
                 success: function(param) {
                     if (param.result == 'success') {
+						alert('메세지 전송성공');
                         const nickname = param.mem_nickName;
                         socket.send(JSON.stringify({ mem_nickName: nickname, strt_chat: message }));
                         loadChatMessages();
