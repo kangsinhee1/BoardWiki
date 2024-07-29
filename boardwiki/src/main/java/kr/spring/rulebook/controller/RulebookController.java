@@ -103,7 +103,7 @@ public class RulebookController {
 		int count = rulebookService.selectRulebookRowCount(map);
 
 		PagingUtil page = new PagingUtil(keyfield,keyword,pageNum,count,
-							10,10,"list");
+							10,10,"rulebookList");
 		List<RulebookVO> list = null;
 		if(count > 0) {
 			map.put("start", page.getStartRow());

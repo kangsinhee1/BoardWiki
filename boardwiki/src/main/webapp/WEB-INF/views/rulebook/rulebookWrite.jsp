@@ -57,7 +57,7 @@
 			</li>
 			<li>
 				<form:label path="upload" style="color:white;">파일업로드</form:label>
-				<input type="file" name="upload" id="upload">
+				<input type="file" name="upload" id="upload" style="color:white;>
 			</li>
 		</ul> 
 		<div class="align-center">

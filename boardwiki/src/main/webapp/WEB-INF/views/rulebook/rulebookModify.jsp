@@ -46,8 +46,8 @@
 			    </script> 
 			</li>
 			<li>
-				<form:label path="upload">파일업로드</form:label>
-				<input type="file" name="upload" id="upload">
+				<form:label path="upload" style="color:white;" >파일업로드</form:label>
+				<input type="file" name="upload" id="upload" style="color:white;">
 				<c:if test="${!empty rulebookVO.filename}">
 				<div id="file_detail">
 					(${rulebookVO.filename})파일이 등록되어 있습니다.
