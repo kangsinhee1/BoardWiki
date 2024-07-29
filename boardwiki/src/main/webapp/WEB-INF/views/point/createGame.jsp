@@ -25,7 +25,7 @@
             <input type="text" name="choices" required>
         </div>
     </div>
-    <button type="button" id="addChoice">선택지 추가</button><br><br>
+    <button type="button" id="addChoice">선택지 추가</button><button type="button" id="addChoice2">선택지 삭제</button><br>
     
     <button type="submit">생성</button>
 </form>

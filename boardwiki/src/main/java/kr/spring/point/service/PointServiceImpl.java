@@ -134,6 +134,7 @@ public class PointServiceImpl implements PointService {
         int totalPointsInAllOptions = bets.stream()
                 .mapToInt(PointGameVO::getBet_point)
                 .sum();
+        totalPointsInAllOptions = totalPointsInAllOptions + 100000;
 
         for (PointGameVO bet : bets) {
             if (bet.getPoiO_num().equals(winningOption)) {
@@ -142,8 +143,9 @@ public class PointServiceImpl implements PointService {
                 PointVO pointVO = new PointVO();
                 pointVO.setMem_num(bet.getMem_num());
                 pointVO.setPoi_use(pointsWon);
-                pointVO.setPoi_increase(2); // 2: Gain points
-
+                pointVO.setPoi_increase(2);
+                pointVO.setPoi_status(1);
+                
                 pointMapper.insertpoint(pointVO);
                 pointMapper.updatepointtotal(pointVO);
             }
