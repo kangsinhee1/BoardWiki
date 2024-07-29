@@ -21,10 +21,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.spring.board.vo.BoardVO;
 import kr.spring.contest.service.ContestService;
 import kr.spring.contest.vo.ContestApplyVO;
 import kr.spring.contest.vo.ContestVO;
 import kr.spring.member.vo.MemberVO;
+import kr.spring.util.FileUtil;
 import kr.spring.util.PagingUtil;
 import lombok.extern.slf4j.Slf4j;
 
@@ -42,7 +44,7 @@ public class ContestController {
 
 
 	/*=====================
-	 * 게시판 글쓰기
+	 *    대회 게시판 글쓰기
 	 *=====================*/
 	//등록 폼 호출
 	@GetMapping("/contest/contestWrite")
@@ -106,6 +108,47 @@ public class ContestController {
 		model.addAttribute("url",
 				request.getContextPath()+"/contest/contestList");
 
+		return "common/resultAlert";
+	}
+	
+	/*=====================
+	 *    대회 게시판 글 수정
+	 *=====================*/
+	//수정 폼 호출
+	@GetMapping("/contest/contestUpdate")
+	public String formUpdate(long con_num,Model model) {
+		ContestVO contestVO = contestservice.selectContest(con_num);
+		model.addAttribute("contestVO", contestVO);
+		log.debug("<<게시판 글 수정 폼 호출>> : " + contestVO);
+		
+		return "contestUpdate";
+	}
+	
+	//수정 폼에서 전송된 데이터 처리
+	@PostMapping("/contest/contestUpdate")
+	public String submitUpdate(@Valid ContestVO contestVO,
+			                   BindingResult result,
+			                   Model model,
+			                   HttpServletRequest request) throws IllegalStateException, IOException {
+		log.debug("<<게시판 글 수정>> : " + contestVO);
+		
+		//유효성 체크 결과 오류가 있으면 폼 호출
+		if(result.hasErrors()) {
+			//title 또는 content가 입력되지 않아서 유효성 체크에 걸리면
+			//파일 정보를 잃어버리기 때문에 폼을 호출할 때 다시 파일 정보를
+			//셋팅해야 함
+			ContestVO vo = contestservice.selectContest(contestVO.getCon_num());
+			
+			return "contestUpdate";
+		}
+		
+		//글 수정
+		contestservice.updateContest(contestVO);
+		
+		//View에 표시할 메시지
+		model.addAttribute("message", "글 수정 완료!!");
+		model.addAttribute("url", request.getContextPath() + "/contest/contestDetail?con_num="+contestVO.getCon_num());
+		
 		return "common/resultAlert";
 	}
 

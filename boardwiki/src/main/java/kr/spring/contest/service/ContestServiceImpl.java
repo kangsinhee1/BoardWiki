@@ -107,4 +107,15 @@ public class ContestServiceImpl implements ContestService{
 		return contestmapper.selectContestUserApplyList(map);
 	}
 
+	@Override
+	public ContestVO selectContest(long con_num) {
+		return contestmapper.selectContest(con_num);
+	}
+
+	@Override
+	public void updateContest(ContestVO contest) {
+		contestmapper.updateContest(contest);
+		
+	}
+
 }

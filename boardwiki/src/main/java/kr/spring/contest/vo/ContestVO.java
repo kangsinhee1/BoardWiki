@@ -27,6 +27,7 @@ public class ContestVO {
 	private String con_address2;
 
     private Date con_rdate;
+    private Date con_mdate;
     private Integer con_hit;
     private Integer con_status;
     private Integer con_fav;
@@ -41,4 +42,5 @@ public class ContestVO {
     private String mem_email;
     private String mem_nickName;
     private String mem_phone;
+    
 }

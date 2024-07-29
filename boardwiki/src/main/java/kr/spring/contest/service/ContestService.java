@@ -37,4 +37,7 @@ public interface ContestService {
 
 	public Integer countContestUserApplyList(long mem_num);
 	public List<ContestVO> selectContestUserApplyList(Map<String,Object>map);
+	
+	public ContestVO selectContest(long con_num);
+	public void updateContest(ContestVO contest);
 }
