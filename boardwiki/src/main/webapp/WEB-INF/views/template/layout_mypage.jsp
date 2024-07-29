@@ -38,7 +38,7 @@
 		<section class="page-top-section set-bg"
 			data-setbg="/img/page-top-bg/4.jpg">
 			<div class="page-info">
-				<h2>Mypage</h2>
+				<h2></h2>
 			</div>
 		</section>
 		<section class="blog-page">

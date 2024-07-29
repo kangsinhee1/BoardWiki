@@ -10,11 +10,7 @@
 				<li><a
 					href="${pageContext.request.contextPath}/adminPage/memberManage">회원관리</a></li>
 				<li><a
-					href="${pageContext.request.contextPath}/adminPage/gameManage">게임관리</a></li>
-				<li><a
-					href="${pageContext.request.contextPath}/adminPage/orderManage">주문관리</a></li>
-				<li><a
-					href="${pageContext.request.contextPath}/adminPage/streamingManage">스트리밍관리</a></li>
+					href="${pageContext.request.contextPath}/adminPage/gameManage">게임</a></li>
 				<li><a
 					href="${pageContext.request.contextPath}/adminPage/pointManage">포인트
 						관리</a></li>

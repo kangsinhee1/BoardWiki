@@ -7,7 +7,6 @@
 	<div class="result-display">표시할 제품이 없습니다.</div>
 </c:if>
 <c:if test="${count > 0}">
-	<input type="button" value="등급 수정" class="align-right">
 	<table class="striped-table">
 		<tr>
 			<th>제품ID</th>

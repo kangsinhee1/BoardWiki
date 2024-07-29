@@ -73,7 +73,6 @@
 		   onclick="location.href='usedUpdate?use_num=${used.use_num}'">
 		</c:if>
 		</c:if>
-		<c:if test="${user.mem_auth != 9 }">
 		<input type="button" value="삭제" id="delete_btn">
 		
 		<input type="button" value="목록" class="default-btn" onclick="location.href='usedList'">
@@ -86,7 +85,6 @@
 				}
 			};
 		</script>   
-		</c:if>
 	</div>
 </div>
 </div>
