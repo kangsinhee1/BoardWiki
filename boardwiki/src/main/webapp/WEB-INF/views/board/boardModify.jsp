@@ -104,7 +104,7 @@
 			<form:button class="default-btn">전송</form:button>
 			<input type="button" value="목록"
 			  class="default-btn"
-			  onclick="location.href='list'">
+			  onclick="location.href='list?boa_category=1'">
 		</div>                           
 	</form:form>
 </div>

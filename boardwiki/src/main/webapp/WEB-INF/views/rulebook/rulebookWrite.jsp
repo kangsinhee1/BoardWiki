@@ -26,10 +26,10 @@
 	                            modelAttribute="rulebookVO">
 		<ul>
 			 <li>
-                제품명
+                <form:label path="item_name" style="color:white;">제품명</form:label>
                 <form:input type="hidden" path="item_num" id="item_num"/>
                 <form:errors path="item_num" cssClass="error-color"/>
-                <input type="text" name="item_name" placeholder="제품을 선택해주세요" id="item_name" maxlength="10" readonly="readonly">
+                <input type="text" name="item_name" placeholder="제품을 선택해주세요" id="item_name" maxlength="10" readonly="readonly" style="color:black;">
                 <input type="button" id="item_numbtn" value="제품선택" class="button2">
                      
             </li>
@@ -56,7 +56,7 @@
 			    </script> 
 			</li>
 			<li>
-				<form:label path="upload">파일업로드</form:label>
+				<form:label path="upload" style="color:white;">파일업로드</form:label>
 				<input type="file" name="upload" id="upload">
 			</li>
 		</ul> 
