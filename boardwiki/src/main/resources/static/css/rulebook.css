@@ -1,4 +1,8 @@
 @charset "UTF-8";
+
+.page-info h2 {
+	margin-bottom: .5rem;
+}
 /* 게시판 목록
 ---------------------*/
 form#search_form #order{

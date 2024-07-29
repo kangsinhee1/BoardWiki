@@ -35,7 +35,7 @@
 .quantity_label {
 	display: block;
     font-size: 16px;
-    color: #534a99;
+    color: #b01ba5;
     font-weight: 500;
     margin-bottom: 10px;
 }
@@ -117,6 +117,7 @@
 	height: 25px;
 	float: right;
 	text-align: right;
+	margin-top: -18%;
 }
 
 .card {
