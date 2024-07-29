@@ -13,7 +13,7 @@
 	<div class="result-display">
 		<div class="align-center">
 			${accessMsg}
-			<p>
+			<p class="align-center">
 			<input type="button" value="${accessBtn}"
 			   onclick="location.href='${accessUrl}'">
 		</div>
