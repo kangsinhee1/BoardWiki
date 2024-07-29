@@ -71,7 +71,6 @@
 		<c:if test="${!empty user && user.mem_num == tnrboard.mem_num || user.mem_auth == 9}">
 		<input type="button" value="수정"
 		   onclick="location.href='tnrboardUpdate?tnr_num=${tnrboard.tnr_num}'">
-		</c:if>
 		<c:choose>
 			<c:when test="${tnrboard.tnr_category == 1}">
 				<input type="button" value="삭제" id="delete_btn">
@@ -84,10 +83,8 @@
 				}
 			};
 		</script>   
-				<input type="button" value="신고" id="report_btn"> 
-				<input type="button" value="목록" onclick="location.href='tnrboardList?tnr_category=1'">
-		    </c:when>
-		    <c:when test="${tnrboard.tnr_category == 2}">
+		  </c:when>
+		   <c:when test="${tnrboard.tnr_category == 2}">
 		    	<input type="button" value="삭제" id="delete_btn">
 		<script>
 			const delete_btn = document.getElementById('delete_btn');
@@ -97,10 +94,19 @@
 					location.replace('tnrboardDelete2?tnr_num=${tnrboard.tnr_num}');
 				}
 			};
-		</script>   
+		</script>
+		</c:when>  
+		</c:choose>
+		</c:if>
+		<c:choose>
+			<c:when test="${tnrboard.tnr_category == 1}">
+				<input type="button" value="신고" id="report_btn"> 
+				<input type="button" value="목록" onclick="location.href='tnrboardList?tnr_category=1'">
+		  	</c:when>
+		    <c:when test="${tnrboard.tnr_category == 2}">  
 		    	<input type="button" value="신고" id="report_btn"> 
 				<input type="button" value="목록" onclick="location.href='tnrboardList?tnr_category=2'">
-		    </c:when> 
+		   	</c:when>
 		</c:choose>
 	</div>
 	<hr size="1" width="100%">
