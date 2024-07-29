@@ -210,13 +210,11 @@ public class MemberController {
 		memberService.insertMember(memberVO);
 
 		//UI 메시지 처리
-		model.addAttribute("accessTitle", "회원 가입");
-		model.addAttribute("accessMsg", "회원 가입이 완료되었습니다.");
-		model.addAttribute("accessBtn", "홈으로");
-		model.addAttribute("accessUrl",
+		model.addAttribute("message", "회원가입완료");
+		model.addAttribute("url",
 				request.getContextPath()+"/main/main");
 
-		return "common/resultView";
+		return "common/resultAlert";
 	}
 
 
@@ -313,15 +311,13 @@ public class MemberController {
 		 */
 		//회원 가입
 		memberService.insertMember(memberVO);
-
-		//UI 메시지 처리
-		model.addAttribute("accessTitle", "회원 가입");
-		model.addAttribute("accessMsg", "회원 가입이 완료되었습니다.");
-		model.addAttribute("accessBtn", "홈으로");
-		model.addAttribute("accessUrl",
+		
+		
+		model.addAttribute("message", "회원가입완료");
+		model.addAttribute("url",
 				request.getContextPath()+"/main/main");
 
-		return "common/resultView";
+		return "common/resultAlert";
 	}
 	//카카오 로그인 폼에서 받아온 데이터 처리
 	//카카오 - 카카오 로그인 성공시 callback 호출 후 사용자 정보 요청
