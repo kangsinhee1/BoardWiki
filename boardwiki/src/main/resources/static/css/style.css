@@ -44,7 +44,7 @@
 }
 
 a {
-    color: #C213B6;
+    color: #f1dcff;
     text-decoration: none;
     background-color: transparent;
 }
@@ -421,12 +421,11 @@ div.chart-table h6 {
 }
 
 .chart-table table thead tr th {
-	background: #060606;
+	background: #481677;
 	font-size: 14px;
 	color: #ffffff;
 	font-weight: 500;
-	border-left: none;
-	border-right: none;
+	border : none;
 	text-transform: uppercase;
 	padding: 14px 0;
 	text-align: center;
@@ -435,11 +434,11 @@ div.chart-table h6 {
 
 
 .chart-table table tbody tr td {
+	background: #32144f;
 	font-size: 14px;
 	color: #ffffff;
 	padding: 17px 0;
-	border-left: none;
-	border-right: none;
+	border: none;
 	text-align: center;
 	font-family: "NanumSquareNeo", sans-serif;
 }
@@ -2429,4 +2428,10 @@ ol {
 .align-right2 {
 	text-align: right;
 	margin-top: 10px;
+}
+.row{
+	padding: 40px;
+	background-color: #280E3B;
+	border-radius: 10px;
+	
 }
