@@ -227,6 +227,10 @@ table td, table th {
 /*------------------------
   임의 추가
 -------------------------*/
+
+.game-main h5 {
+	color:#ffffff;
+}
 table th {
 	background:#610994;
 	font-size: 14px;

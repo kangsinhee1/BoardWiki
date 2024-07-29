@@ -3,7 +3,7 @@
 <div class="widget-item">
 	<div class="categories-widget">
 		<div id="adminPage-side-bar-name" class="widget-title">
-			<a href="${pageContext.request.contextPath}/adminPage/adminPageMain">관리자
+			<a href="${pageContext.request.contextPath}/adminPage/contestAdminList">관리자
 				페이지</a>
 		</div>
 			<ul>

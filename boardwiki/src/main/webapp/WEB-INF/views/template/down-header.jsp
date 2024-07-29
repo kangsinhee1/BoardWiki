@@ -41,7 +41,7 @@
 	<button type="button" class="custom-btn-success" value="현대전">현대전</button>
 	<button type="button" class="custom-btn-success" value="협상">협상</button>
 	<button type="button" class="custom-btn-success" value="SF">SF</button>
-	<button type="button" class="custom-btn-success" value="없을떄">없을떄</button>
+	<button type="button" class="custom-btn-success" value="기타">기타</button>
 	<select id="order" name="order" style="float:right; margin-right:30px;">
 		<option value="1"<c:if test="${param.order == 1}">selected</c:if>>인기순</option>
 		<option value="2"<c:if test="${param.order == 2}">selected</c:if>>평점순</option>

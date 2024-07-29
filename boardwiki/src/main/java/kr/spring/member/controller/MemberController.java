@@ -210,13 +210,11 @@ public class MemberController {
 		memberService.insertMember(memberVO);
 
 		//UI 메시지 처리
-		model.addAttribute("accessTitle", "회원 가입");
-		model.addAttribute("accessMsg", "회원 가입이 완료되었습니다.");
-		model.addAttribute("accessBtn", "홈으로");
-		model.addAttribute("accessUrl",
+		model.addAttribute("message", "회원가입완료");
+		model.addAttribute("url",
 				request.getContextPath()+"/main/main");
 
-		return "common/resultView";
+		return "common/resultAlert";
 	}
 
 
@@ -268,7 +266,7 @@ public class MemberController {
 			log.debug("<<model>> : " + model);
 			log.debug("<<memberVO>> : " + memberVO);
 
-			return formMemberNaverRegister(); // 회원가입 폼으로 리다이렉트
+			return formMemberSocialRegister(); // 회원가입 폼으로 리다이렉트
 		}
 		if(!result.getMem_provider().equals("Naver")) {
 			//UI 메시지 처리
@@ -295,10 +293,10 @@ public class MemberController {
 
 	}
 
-	@GetMapping("/member/memberNaverRegister")
-	public String formMemberNaverRegister() {
-		log.debug("<<네이버 회원가입 페이지 요청 메서드>>");
-		return "memberNaverRegister";//Tiles 설정명
+	@GetMapping("/member/memberSocialRegister")
+	public String formMemberSocialRegister() {
+		log.debug("<<소셜 회원가입 페이지 요청 메서드>>");
+		return "memberSocialRegister";//Tiles 설정명
 	}
 	//전송된 데이터 처리
 	@PostMapping("/member/login/oauth2/code/memberNaverRegister")
@@ -313,15 +311,13 @@ public class MemberController {
 		 */
 		//회원 가입
 		memberService.insertMember(memberVO);
-
-		//UI 메시지 처리
-		model.addAttribute("accessTitle", "회원 가입");
-		model.addAttribute("accessMsg", "회원 가입이 완료되었습니다.");
-		model.addAttribute("accessBtn", "홈으로");
-		model.addAttribute("accessUrl",
+		
+		
+		model.addAttribute("message", "회원가입완료");
+		model.addAttribute("url",
 				request.getContextPath()+"/main/main");
 
-		return "common/resultView";
+		return "common/resultAlert";
 	}
 	//카카오 로그인 폼에서 받아온 데이터 처리
 	//카카오 - 카카오 로그인 성공시 callback 호출 후 사용자 정보 요청
@@ -372,7 +368,7 @@ public class MemberController {
 			log.debug("<<model>> : " + model);
 			log.debug("<<memberVO>> : " + memberVO);
 
-			return formMemberNaverRegister(); // 회원가입 폼으로 리다이렉트
+			return formMemberSocialRegister(); // 회원가입 폼으로 리다이렉트
 		}
 
 		if(!result.getMem_provider().equals("Kakao")) {
@@ -447,7 +443,7 @@ public class MemberController {
 			log.debug("<<model>> : " + model);
 			log.debug("<<memberVO>> : " + memberVO);
 
-			return formMemberNaverRegister(); // 회원가입 폼으로 리다이렉트
+			return formMemberSocialRegister(); // 회원가입 폼으로 리다이렉트
 		}
 
 
