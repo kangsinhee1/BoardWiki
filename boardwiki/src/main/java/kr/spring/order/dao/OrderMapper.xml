@@ -73,6 +73,6 @@
         SELECT MAX(order_num)
         FROM orders
         WHERE mem_num = #{mem_num}
-);
+        )
 	</select>
 </mapper>
