@@ -23,7 +23,8 @@
 	<h3 id="chatroom_title"><span id="useC_name">${useC_name}</span> 채팅방</h3> 
 	<div class="align-right">
 	<div id="deal">
-	<c:if test="selled">
+	
+	<c:if test="${selled}">
 			<input type="button" value="거래완료" onclick="location.href='finishDeal?useC_num=${useC_num}'">
 	</c:if>
 		</div>

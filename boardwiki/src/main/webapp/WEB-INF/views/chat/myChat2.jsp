@@ -4,7 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <div class="big-blog-item">
 <div class="page-main">
-	<h2>모임 채팅리스트</h2>
+	<h2>모임 채팅리스트 </h2>
 	<form action="myChat2" id="search_form" method="get">
 		<ul class="search">
 			<li>
@@ -17,7 +17,7 @@
 		</ul>
 	</form>
 		
-	<c:if test="${count == 0}">
+	<c:if test="${count == -1 }">
 	<div class="result-display">표시할 채팅방이 없습니다.</div>
 	</c:if>
 	<c:if test="${count>0}">
@@ -25,7 +25,7 @@
 	<table>
 	<thead>
 		<tr>
-			<th>모임명</th>
+			<th>모임명 </th>
 			<th>메시지시간</th>
 		</tr>
 	</thead>

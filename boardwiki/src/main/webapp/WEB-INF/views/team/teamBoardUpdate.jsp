@@ -33,7 +33,7 @@
 	<form:hidden path="mem_num"/>                            
 	<form:hidden path="teaB_num"/>                            
 			<li>
-				<form:label path="teaB_category">분류</form:label>
+				<form:label path="teaB_category" class="font-white">분류</form:label>
 				<form:select path="teaB_category" >
 						<form:option value="1">공지사항</form:option>
 						<form:option value="2">잡담</form:option>
@@ -42,12 +42,12 @@
 				<form:errors path="teaB_category" cssClass="error-color"/>
 			</li>
 			<li>
-				<form:label path="teaB_title">제목</form:label>
+				<form:label path="teaB_title" class="font-white">제목</form:label>
 				<form:input path="teaB_title" />
 				<form:errors path="teaB_title" cssClass="error-color"/>
 			</li>
 			<li>
-				<form:label path="teaB_content">내용</form:label>
+				<form:label path="teaB_content" class="font-white">내용</form:label>
 				<form:textarea path="teaB_content"/>
 				<form:errors path="teaB_content" cssClass="error-color"/>
 				<script>
@@ -69,10 +69,10 @@
 		            } );
 			    </script> 
 			    <li>
-				<form:label path="upload">파일업로드</form:label>
-				<input type="file" name="upload" id="upload">
+				<form:label path="upload" class="font-white">파일업로드</form:label>
+				<input type="file" name="upload" id="upload" class="font-white">
 				<c:if test="${!empty teamBoardVO.filename}">
-				<div id="file_detail">
+				<div id="file_detail" class="font-white"> 
 					(${teamBoardVO.filename})파일이 등록되어 있습니다.
 					<input type="button" value="파일 삭제" id="file_del">
 				</div>

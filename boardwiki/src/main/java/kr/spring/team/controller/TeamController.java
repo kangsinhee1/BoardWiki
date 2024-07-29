@@ -193,7 +193,7 @@ public class TeamController {
 			return "common/resultAlert";
 		}
 
-		model.addAttribute("team",team);
+		model.addAttribute("teamVO",team);
 
 		return "teamUpdate";
 
@@ -204,7 +204,8 @@ public class TeamController {
 			HttpServletRequest request,
 			HttpSession session,
 			Model model)  throws IllegalStateException, IOException{
-		log.debug("" + teamVO);
+		log.debug("<<<<<teamVO 확인용>>>>>>" + teamVO);
+		
 		if(result.hasErrors()) {
 			teamService.detailTeam(teamVO.getTea_num());
 			return "teamUpdate";

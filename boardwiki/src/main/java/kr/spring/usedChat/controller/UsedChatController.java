@@ -50,8 +50,8 @@ public class UsedChatController {
 
 		log.debug("<<<<<<<<<<<<<vovovoovov2"+roomVO);
 		if(roomVO!=null) {
-			if(roomVO.getUseC_grade()!=null) {
-				model.addAttribute("selled",false);
+			if(roomVO.getUseC_grade() == null) {
+				model.addAttribute("selled",true);
 				//이미 판매처리되었는지를 확인하기위해 판매자 평점이 있는것을 확인
 			}
 

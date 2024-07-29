@@ -20,7 +20,6 @@ public class TeamVO {
 	@NotEmpty
 	private String tea_content; 	//모임에 대한 설명
 	private String tea_time; 	 //모임이 진행되는 날짜
-	@Size(min=5,max=5)
 	private String tea_zipcode;//모임을 진행할 장소(지도API)
 	@NotBlank
 	private String tea_address1;

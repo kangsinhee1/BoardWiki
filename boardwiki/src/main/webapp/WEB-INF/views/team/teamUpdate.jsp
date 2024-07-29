@@ -29,7 +29,7 @@
 	<h2>모임 글수정</h2>
 	<form:form action="teamUpdate" id="team_register"
 	           enctype="multipart/form-data"
-	                            modelAttribute="team">
+	                            modelAttribute="teamVO">
 		<ul>
 	    	<form:hidden path="tea_num"/>
 			<li>
