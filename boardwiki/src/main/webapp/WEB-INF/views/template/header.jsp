@@ -22,7 +22,7 @@
            		<a href="${pageContext.request.contextPath}/myPage/myPage">MyPage</a>
           	</c:if>
           	<c:if test="${user.mem_auth==9 && user != null}">
-            	<a href="${pageContext.request.contextPath}/admin/adminPage">관리자 페이지</a>
+            	<a href="${pageContext.request.contextPath}/adminPage/contestAdminList">관리자 페이지</a>
           	</c:if>
 	        <a href="${pageContext.request.contextPath}/cart/cart" class="cart">장바구니</a>
 	        <a href="${pageContext.request.contextPath}/attendance/attendance">출석체크</a>

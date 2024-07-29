@@ -6,6 +6,23 @@
 <link rel="stylesheet" href="/css/main.css" type="text/css">
 <link rel="stylesheet" href="/css/rent.css" type="text/css">
 
+<head>
+<style type="text/css">
+/* 기존 td_name 스타일 */
+.td-name {
+    display: inline-block;
+    max-width: 160px;
+    overflow: hidden;
+    white-space: nowrap;
+    border-collapse: collapse; /* 테두리 중첩 방지 */
+    border: 1px solid #000000 !important;
+    text-overflow: ellipsis;
+    vertical-align: middle; /* 내용이 수직으로 가운데 정렬되도록 */
+    width: 160px; /* 텍스트가 넘칠 경우 적용할 너비 */
+}
+</style>
+</head>
+
 <div class="page-main">
     <h2>대여 목록(관리자)</h2>
     <form action="rentListAdmin" id="search_form" method="get">
@@ -48,23 +65,23 @@
         <table class="striped-table">
             <tr>
                 <th>대여번호</th>
-                <th width="400">보드게임명</th>
+                <th width="160px">보드게임명</th>
                 <th>대여시작일</th>
                 <th>대여종료일</th>
                 <th>대여기간</th>
-                <th>대여회원 ID</th>
-                <th>대여회원 닉네임</th>
+                <th>이메일</th>
+                <th>닉네임</th>
                 <th>대출/반납</th>
             </tr>
             <c:forEach var="rent" items="${list}">
                 <tr>
                     <td class="align-center">${rent.rent_num}</td>
-                    <td>${rent.item_name}</td>
+                    <td class="align-center td-name">${rent.item_name}</td>
                     <td class="align-center">${rent.rent_sdate}</td>
                     <td class="align-center">${rent.rent_edate}</td>
                     <td class="align-center">${rent.rent_period}</td>
                     <td class="align-center">${rent.mem_email}</td> <!-- 회원 Email 표시 -->
-        			<td class="align-center">${rent.mem_nickname}</td> <!-- 회원 Nickname 표시 -->
+                    <td class="align-center">${rent.mem_nickname}</td> <!-- 회원 Nickname 표시 -->
                     <td class="align-center">
                         <c:choose>
                             <c:when test="${rent.rent_status == 1}">
@@ -77,7 +94,7 @@
                 </tr>
             </c:forEach>
         </table>
-        <div class="blog-pagination" style= "text-align : center">${page}</div>
+        <div class="blog-pagination" style="text-align: center">${page}</div>
     </c:if>
 </div>
 <!-- 대여 목록 끝 -->
