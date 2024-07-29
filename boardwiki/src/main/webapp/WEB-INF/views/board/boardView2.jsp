@@ -55,7 +55,7 @@
 	<br><div class="detail-content">
 		${board.boa_content}
 	</div>
-	<div>
+	<div class="font-white">
 		<%-- 좋아요 --%>
 		<img id="output_fav" data-num="${board.boa_num}"
 		    src="${pageContext.request.contextPath}/images/heart2.png">
@@ -115,7 +115,7 @@
 		<input type="button" value="더보기">
 	</div>
 	<div id="reply_div">
-		<span class="re-title">댓글 달기</span>
+		<span class="re-title" style="color:white">댓글 달기</span>
 		<form id="re_form">
 			<input type="hidden" name="boa_num"
 			          value="${board.boa_num}" id="boa_num">

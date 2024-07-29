@@ -47,9 +47,15 @@ ul.detail-info li:last-child{
 #output_fav, .output_rfav{
 	cursor:pointer;
 }
+.span#output_fcount{
+	width:50px;
+	display:inline-block;
+	color:white;
+}
 #output_fcount{
 	width:50px;
 	display:inline-block;
+	color:white;
 }
 div#reply_div{
 	padding:10px 0px 40px 0px;

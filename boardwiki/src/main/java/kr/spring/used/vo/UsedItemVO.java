@@ -4,6 +4,7 @@ import java.sql.Date;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,6 +22,7 @@ public class UsedItemVO {
 	private int use_auth;
 
 	@NotBlank
+	@Size(max = 150, message = "제목은 최대 150자까지 입력 가능합니다")
 	private String use_title;
 	@NotEmpty
 	private String use_content;
