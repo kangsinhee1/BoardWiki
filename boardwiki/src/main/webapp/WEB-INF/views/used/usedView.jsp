@@ -57,7 +57,7 @@
 		<!-- 사진 넣어야함 -->	
 	</c:if>
 	<div class="align-right">
-	<c:if test="${used.use_check !=3 }">
+	<c:if test="${used.use_check !=3 && user.mem_auth != 9}">
 	<input type="button" value="신고" id="report_btn"> 
 		<input type="button" value=<c:if test="${user.mem_num == used.mem_num}">"채팅 목록"</c:if><c:if test="${user.mem_num != used.mem_num}">"1:1채팅하기"</c:if> onclick="location.href='useChat?mem_num=${used.mem_num}&use_num=${used.use_num }'">	
 	</c:if>
@@ -68,12 +68,12 @@
 	<hr size="1" width="100%">
 	<div class="align-right">
 		<c:if test="${!empty user && user.mem_num == used.mem_num}">
-		<c:if test="${user.mem_auth != 9 }">
 		<c:if test="${used.use_check!=3 }">
 		<input type="button" value="수정"
 		   onclick="location.href='usedUpdate?use_num=${used.use_num}'">
 		</c:if>
 		</c:if>
+		<c:if test="${user.mem_auth != 9 }">
 		<input type="button" value="삭제" id="delete_btn">
 		
 		<input type="button" value="목록" class="default-btn" onclick="location.href='usedList'">

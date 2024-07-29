@@ -51,7 +51,9 @@
 							         +$('#order').val();
 				});
 			</script>
+		<c:if test="${user.mem_auth != 9 }">
 			<input type="button" value="글쓰기" onclick="location.href='usedWrite'">
+		</c:if>
 		</div>                     
 	</form>
 	<c:if test="${count == 0}">
