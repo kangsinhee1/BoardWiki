@@ -24,7 +24,6 @@
             <table class="table table-bordered table-striped">
                 <thead class="thead-dark">
                     <tr>
-                        <th>주문번호</th>
                         <th>상품명</th>
                         <th>주소</th>
                         <th>상세주소</th>
@@ -34,24 +33,18 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>${order.order_num}</td>
                         <td>
                             <c:forEach var="pay" items="${list}">
-                                &nbsp;[${item.item_name}]&nbsp;
+                                &nbsp;[${pay.item_name}]&nbsp;
                             </c:forEach>
                         </td>
-                        <td>${order.order_address1}</td>
-                        <td>${order.order_address2}</td>
-                        <td>${order.order_pay}원</td>
-                        <td>${order.order_date}</td>
+                        <td>${pay.order_address1}</td>
+                        <td>${pay.order_address2}</td>
+                        <td>${pay.order_pay}원</td>
+                        <td>${pay.order_date}</td>
                     </tr>
                 </tbody>
             </table>
-        </div>
-        <div class="align-right">
-            <div class="mt-4">
-                <p class="h5" id="total_sum_price">총 금액: <span id="total_sum_value">0</span>원</p>
-            </div>
         </div>
     </div>
 </section>
