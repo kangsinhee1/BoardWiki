@@ -94,9 +94,6 @@ div.hiddenImage figure{
 					<!-- Blog item -->
 					<c:forEach var="news" items="${news }">
 					<div class="blog-item">
-						<div class="blog-thumb">
-							<img src="/img/blog/1.jpg" alt="">
-						</div>
 						<div class="blog-text text-box text-white hiddenImage">
 							<div class="top-meta">${news.boa_rdate }  /  in <a href="">News</a></div>
 							<h3>${news.boa_title }</h3>
@@ -104,6 +101,7 @@ div.hiddenImage figure{
 							<a href="/board/detail?boa_num=${news.boa_num }" class="read-more">Read More  <img src="/img/icons/double-arrow.png" alt="#"/></a>
 						</div>
 					</div>
+					<hr size="1" width="100%">
 					</c:forEach>
 				</div>
 				<div class="col-xl-3 col-lg-4 col-md-5 sidebar">

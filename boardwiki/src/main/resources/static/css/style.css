@@ -1314,11 +1314,9 @@ ol {
 	margin-bottom: 42px;
 	display: inline-block;
 	width: 450px;
-	height: 133px;
 	overflow: hidden;
 	white-space: normal;
 	text-overflow: ellipsis;
-	
 }
 /* .blog-item .text-box #{
 	margin-bottom: 42px;
