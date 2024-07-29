@@ -33,7 +33,7 @@
                     </ul>
                     <c:if test="${!empty board.filename}">
                         <ul>
-                            <li>첨부파일 : <a href="file?boa_num=${board.boa_num}">${board.filename}</a></li>
+                            <li style="color:white;">첨부파일 : <a href="file?boa_num=${board.boa_num}">${board.filename}</a></li>
                         </ul>
                     </c:if>
                     <br><div class="detail-content">${board.boa_content}</div>

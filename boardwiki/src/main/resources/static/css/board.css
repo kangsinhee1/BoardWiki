@@ -2,7 +2,8 @@
 /* 게시판 목록
 ---------------------*/
 form#search_form #order{
-	height:32px;
+	height: 36px;
+    margin-top: 2px;
 }
 /* 게시판 폼
 ---------------------*/
@@ -240,9 +241,6 @@ div.respitem{
 	font-size:20px;
 	word-break:break-all;
 }
-
-
-
 
 select#boa_category{
 	color:black;

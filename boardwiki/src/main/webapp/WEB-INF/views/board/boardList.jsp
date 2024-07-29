@@ -66,8 +66,7 @@
 	<div class="chart-table">
 	<table>
 		<thead>
-		<tr style="border-top-left-radius: 1em 5em;
-			border-top-right-radius: 1em 5em;">
+		<tr>
 			<th>번호</th>
 			<th width="400">제목</th>
 			<th>작성자</th>
@@ -81,7 +80,7 @@
 			<td class="align-center">${board.boa_num}</td>
 			<td class="align-left"><a href="detail?boa_num=${board.boa_num}">${board.boa_title}(${board.re_cnt})
 			<c:if test="${board.boa_rdate == nowday}">
-                    <span style="color: red; font-weight: bold;"> new </span>
+                    <span style="color: red; font-weight: bold; font-size:12px;"> new </span>
              </c:if></a></td>
 			<td class="align-center">
 				<c:if test="${empty board.mem_nickname}">${board.mem_email}</c:if>

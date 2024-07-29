@@ -2,8 +2,8 @@
 /* 게시판 목록
 ---------------------*/
 form#search_form #order{
-	/* height:32px; */
-	color: black;	
+	height: 36px;
+    margin-top: 2px;
 }
 /* 게시판 폼
 ---------------------*/

@@ -97,11 +97,7 @@ public class BoardController {
 
 		//회원번호 셋팅
 		MemberVO vo = (MemberVO)session.getAttribute("user");
-		if (vo == null || vo.getMem_auth() != 9) {
-	        model.addAttribute("message", "관리자만 글을 작성할 수 있습니다.");
-	        model.addAttribute("url", "/");
-	        return "common/resultAlert";
-	    }
+		
 		boardVO.setMem_num(vo.getMem_num());
 		//파일 업로드
 		boardVO.setFilename(FileUtil.createFile(request,
