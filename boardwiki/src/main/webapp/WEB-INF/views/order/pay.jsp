@@ -18,42 +18,41 @@
 </section>
 <!-- Page top end-->
 <!-- Review section -->
-    <section class="review-section py-5">
-        <div class="container">
-            <div class="table-responsive">
-                <table class="table table-bordered table-striped">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th>주문번호</th>
-			                <th>상품명</th>
-			                <th>주소</th>
-			                <th>상세주소</th>
-			                <th>결제금액</th>
-			                <th>결제일</th>
-			                
-                        </tr>
-                    </thead>
-                    <tbody>
-                            <tr>
-                                <td >${order_num}</td>
-                                <td>
-                                <c:forEach var="pay" items="${list}">
-			                    &nbsp;[${my_order.item_name}]&nbsp;
-			                    </c:forEach>
-			                    </td>
-                                <td>${order_address1}</td>
-                                <td>${order_address2}</td> 
-                                <td>${order_pay}원</td>
-                                <td>${order_date}</td>
-                            </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="align-right">
+<section class="review-section py-5">
+    <div class="container">
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>주문번호</th>
+                        <th>상품명</th>
+                        <th>주소</th>
+                        <th>상세주소</th>
+                        <th>결제금액</th>
+                        <th>결제일</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>${order.order_num}</td>
+                        <td>
+                            <c:forEach var="pay" items="${list}">
+                                &nbsp;[${item.item_name}]&nbsp;
+                            </c:forEach>
+                        </td>
+                        <td>${order.order_address1}</td>
+                        <td>${order.order_address2}</td>
+                        <td>${order.order_pay}원</td>
+                        <td>${order.order_date}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="align-right">
             <div class="mt-4">
                 <p class="h5" id="total_sum_price">총 금액: <span id="total_sum_value">0</span>원</p>
             </div>
-            </div>
         </div>
-    </section>
+    </div>
+</section>
 <!-- Review section end -->

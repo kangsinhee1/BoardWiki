@@ -101,30 +101,35 @@ public class OrderController {
 	/*=========================
 	 * 결제 완료창
 	 *=========================*/
-	@GetMapping("/order/pay")
-	public String GetToPay(Model model,Long order_num, HttpSession session,OrderVO orderVO){
-		
-		MemberVO member = (MemberVO) session.getAttribute("user");
+	 @GetMapping("/order/pay")
+	    public String GetToPay(Model model, HttpSession session) {
+	        MemberVO member = (MemberVO) session.getAttribute("user");
 
-		if (member == null) {
-			return "redirect:/login"; // 세션에 user가 없으면 로그인 페이지로 리다이렉트
-		}
-		
-		log.debug("<<유저 - mem_num>>" + member);
-		
-		OrderVO order = orderService.selectnum(member.getMem_num());
-		
-		Map<String, Object> map = new HashMap<>();
-		map.put("order_date", order);
+	        if (member == null) {
+	            return "redirect:/login"; // 세션에 user가 없으면 로그인 페이지로 리다이렉트
+	        }
 
-		List<CartVO> list = null;
-		list = cartService.selectname(map);
-		
-		model.addAttribute("list",list);
-		model.addAttribute("order",order);
-		
-		return "pay";
-	}
+	        log.debug("<<유저 - mem_num>>" + member.getMem_num());
+
+	        // 주문 정보 가져오기
+	        OrderVO order = orderService.selectnum(member.getMem_num());
+
+	        if (order == null) {
+	            // 주문 정보가 없을 경우 처리
+	            return "redirect:/order/error"; // 예시로 에러 페이지로 리다이렉트
+	        }
+
+	        // 장바구니 정보 가져오기
+	        Map<String, Object> map = new HashMap<>();
+	        map.put("order_date", order.getOrder_date());
+	        List<CartVO> list = cartService.selectname(map);
+
+	        // 모델에 데이터 추가
+	        model.addAttribute("order", order);
+	        model.addAttribute("list", list);
+
+	        return "pay";
+	    }
 }
 
 
