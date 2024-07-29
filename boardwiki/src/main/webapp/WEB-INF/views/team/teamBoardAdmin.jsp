@@ -28,7 +28,9 @@
         <input type="button" value="모임관리" onclick="location.href='${pageContext.request.contextPath}/team/teamControl?tea_num=${tea_num}'">
     </div>
     <hr>
+    <c:if test="${user.mem_auth!=9}">
     <div><a href="${pageContext.request.contextPath}/chat/chatDetail?chaR_num=${chaR_num}">채팅 하기</a></div>
+    </c:if>
     <form action="teamBoardAdmin" id="search_form" method="get">
         <input type="hidden" id="tea_num" name="tea_num" value="${tea_num}">
         <ul class="search">

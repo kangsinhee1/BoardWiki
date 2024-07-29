@@ -16,6 +16,7 @@ import lombok.ToString;
 public class TeamVO {
 	private long tea_num; 	//모임번호를 식별하는 번호
 	@NotBlank
+	@Size(max = 40)
 	private String tea_name; 	// 등록할 모임의 이름
 	@NotEmpty
 	private String tea_content; 	//모임에 대한 설명

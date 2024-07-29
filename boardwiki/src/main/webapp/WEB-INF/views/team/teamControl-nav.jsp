@@ -2,14 +2,19 @@
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 	<!-- Page top section -->
+	<<style>
+	.menu-btn{
+		width:180px;
+	}
+</style>
 <!-- MyPage 메뉴 시작 -->
 <div class="widget-item">
 <div class="categories-widget">
 	<h4 class="widget-title" >나의 모임</h4>
 	<ul>
 		<li>
-		<input type="hidden" id="tea_status" value="${Team.tea_status}">
-			<input type="button" class="menu-btn" value="(${Team.tea_name})회원 목록"
+		<input type="hidden" id="tea_status" value="${Team.tea_status}" ">
+			<input  type="button" class="menu-btn" value="(${Team.tea_name})회원 목록"
 			onclick="location.href='${pageContext.request.contextPath}/team/teamControl?tea_num=${tea_num}'">
 		</li>
 		<p>
@@ -18,10 +23,7 @@
 			onclick="location.href='${pageContext.request.contextPath}/team/teamCalendar?tea_num=${tea_num}'">
 		</li>
 		<p>
-		<li>
-			<input type="button" class="menu-btn" value="돌아가기"
-			onclick="location.href='${pageContext.request.contextPath}/team/teamBoardAdmin?tea_num=${tea_num}'">
-		</li>
+		
 		
 		<p>
 		<li >
@@ -32,6 +34,11 @@
 		</li>
 		<li>
 		<input type="button" style="display:none" class="menu-btn" value="모임 활성화" id="open_btn">
+		</li>
+		<p>
+		<li>
+			<input type="button" class="menu-btn" value="돌아 가기"
+			onclick="location.href='${pageContext.request.contextPath}/team/teamBoardAdmin?tea_num=${tea_num}'">
 		</li>
 	</ul>
 	

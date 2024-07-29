@@ -12,8 +12,7 @@
 		<h2>모임</h2>
 		<div class="site-breadcrumb">
 			<a href="">Home</a>  /
-			<span>Team Request</span> /
-			<span><a href="myTeam2"> 내 모임 보기(관리자)</a></span>
+			<span>Team Request</span>
 		</div>
 	</div>
 </section>

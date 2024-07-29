@@ -24,13 +24,13 @@
 	<form action="teamListAdmin" id="search_form" method="get">
 		<ul class="search">
 			<li>
-				<select name="keyfield" id="keyfield"  class="form-control">
+				<select name="keyfield" id="keyfield"  >
 					<option value="1" <c:if test="${param.keyfield == 1}">selected</c:if>>모임명&nbsp;</option>
 					<option value="2" <c:if test="${param.keyfield == 2}">selected</c:if>>지역&nbsp;</option>
 				</select>
 			</li>
 			<li>
-				<input type="search" name="keyword" class="form-control"
+				<input type="search" name="keyword" 
 				  id="keyword" value="${param.keyword}">
 			</li>
 			<li>
@@ -38,7 +38,7 @@
 			</li>
 		</ul> 
 		<div class="align-right">
-			<select id="order" name="order" class="form-control">
+			<select id="order" name="order" >
 				<option value="1" <c:if test="${param.order == 1}">selected</c:if>>최신순&nbsp;</option>
 				<option value="2" <c:if test="${param.order == 2}">selected</c:if>>조회수&nbsp;</option>
 				<option value="3" <c:if test="${param.order == 3}">selected</c:if>>좋아요&nbsp;</option>
@@ -54,7 +54,7 @@
 		</div>                     
 	</form>
 	<c:if test="${count == 0}">
-	<div class="alert alert-info mt-3">표시할 게시물이 없습니다.</div>
+	<div class="result-display">표시할 게시물이 없습니다.</div>
 	</c:if>
 	<c:if test="${count > 0}">
 	<div class="chart-table">

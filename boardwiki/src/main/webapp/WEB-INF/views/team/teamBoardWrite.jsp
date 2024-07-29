@@ -44,12 +44,12 @@
 				<form:errors path="teaB_category" cssClass="error-color"/>
 			</li>
 			<li>
-				<form:label path="teaB_title">제목</form:label>
+				<form:label path="teaB_title" class="font-white">제목</form:label>
 				<form:input path="teaB_title" />
 				<form:errors path="teaB_title" cssClass="error-color"/>
 			</li>
 			<li>
-				<form:label path="teaB_content">내용</form:label>
+				<form:label path="teaB_content" class="font-white">내용</form:label>
 				<form:textarea path="teaB_content"/>
 				<form:errors path="teaB_content" cssClass="error-color"/>
 				<script>
@@ -71,8 +71,8 @@
 		            } );
 			    </script> 
 			    <li>
-				<form:label path="upload">파일 업로드</form:label>
-				<input type="file" name="upload" id="upload">
+				<form:label path="upload" class="font-white">파일 업로드</form:label>
+				<input type="file" name="upload" id="upload" class="font-white">
 			</li>
 		</ul> 
 		<div class="align-center">

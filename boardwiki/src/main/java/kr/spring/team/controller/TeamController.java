@@ -680,14 +680,14 @@ public class TeamController {
 
 		List<TeamApplyVO> list = null;
 		list = teamService.listTeamApply(teamApplyVO);
-		int count1  = teamService.countTeamApplyList1(teamApplyVO.getTea_num());
-		int count2 = teamService.countTeamApplyList2(teamApplyVO.getTea_num());
+		int count1 = teamService.countTeamApplyList2(teamApplyVO.getTea_num());
+		int count2  = teamService.countTeamApplyList1(teamApplyVO.getTea_num());
 		model.addAttribute("count1",count1);
 		model.addAttribute("count2",count2);
 		model.addAttribute("list",list);
 		model.addAttribute("tea_num",teamApplyVO.getTea_num());
 		model.addAttribute("Team",teamService.detailTeam(teamApplyVO.getTea_num()));
-		log.debug("모임 관련 내용 : " + count1 +" "+ count2 + list);
+		log.debug("모임 관련 내용 : count1 " + count1 +" count2 "+ count2 + list);
 		return "teamControl";
 	}
 

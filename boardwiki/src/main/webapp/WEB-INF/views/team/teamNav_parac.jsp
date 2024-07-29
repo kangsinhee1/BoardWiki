@@ -3,6 +3,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!-- Add JavaScript for content toggling -->
 	<div class="widget-item">
+	
 <div class="categories-widget">
 	
 	
