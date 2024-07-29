@@ -90,16 +90,31 @@
 
     <c:if test="${broadcast.isLive == null}">
         <div>
-            방송하는법<br>
+        <h3>방송하는법</h3>
+            <br>
             <h2><a href="https://obsproject.com/ko">obs 다운로드</a><br></h2>
-            obs를 다운받습니다.
-            obs를 설치 후 obs화면을 열고 설정 방송를 누르고 <br>
-            사용자 지정<br>
-            서버:rtmp://tkdrl.iptime.org:1935/live<br>
-            스트림키:${streamkey.str_key}<br>
-            위 내용을 입력하고 적용을 누르고 obs로 돌아와 방송시작을 누르세요.
+            <div class="font-white">
+            
+            1.obs를 다운받습니다.
+            <br>
+            
+            2.실행후 우측 하단 설정 버튼을 누릅니다.<br>
+            <img src="${pageContext.request.contextPath}/upload/StreamingOBS.png" style="width:800px;">
+            <br>
+            3.빈칸에 내용을 입력하고 적용
+             <b>
+            <br>
+            서버: rtmp://tkdrl.iptime.org:1935/live<br>
+            스트림키: ${streamkey.str_key}<br>
+            </b>
+            <img src="${pageContext.request.contextPath}/upload/streamingSetup.png" style="width:800px;">
+            <br>
+            4.방송시작 버튼 누르기
         </div>
+        </div >
+        <div style="text-align:center;">
         <button onclick="stream()">방송시작</button>
+        </div>
     </c:if>
 </div>
 </div>
