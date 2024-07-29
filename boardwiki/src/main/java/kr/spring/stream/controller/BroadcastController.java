@@ -59,18 +59,8 @@ public class BroadcastController {
 
     @GetMapping("/streaming/broadcast")
     public String getBroadcastPage(Long str_num, HttpServletRequest request, HttpSession session) {
-    	List<BroadcastVO> broadcasts = broadcastService.getAllBroadcasts();
     	MemberVO user = null;
     	user = (MemberVO)session.getAttribute("user");
-    	long mem_num = 0;
-    	String nick = null;
-    	for (BroadcastVO broadcast : broadcasts) {
-    		if(broadcast.getStr_num() == str_num) {
-    			mem_num = broadcast.getMem_num();
-    			MemberVO member = memberService.selectMember(mem_num);
-    			nick = member.getMem_nickName();
-    		}
-    	}
     	int strnum = 0;
     	if(user != null) {
     		if(streamKeyService.streamingNumber(user.getMem_num()) != null) {
@@ -84,9 +74,10 @@ public class BroadcastController {
     		}
     	}
         BroadcastVO broadcast = broadcastService.findByMemNum(str_num);
+        MemberVO member = memberService.selectMember(broadcast.getMem_num());
+        broadcast.setMem_nickName(member.getMem_nickName());
         StreamKeyVO streamkey = streamKeyService.selectstream(str_num);
         StreamCreatingVO stream =  streamCreatingService.selectCreating(str_num);
-        request.setAttribute("nick", nick);
         request.setAttribute("streamkey", streamkey);
         request.setAttribute("broadcast", broadcast);
         request.setAttribute("str", stream);

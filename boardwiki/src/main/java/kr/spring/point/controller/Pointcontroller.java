@@ -85,7 +85,10 @@ public class Pointcontroller {
 	        				   @RequestParam(defaultValue="") String poi_status,
 	        				   Integer poi_ck,
 	        				   Model model, HttpSession session) {
-
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user!=null) {
+			model.addAttribute("mem_auth",user.getMem_auth());
+		}
 		Map<String,Object> map = new HashMap<>();
 
 		if (!poi_status.isEmpty()) {
@@ -105,7 +108,7 @@ public class Pointcontroller {
 
 		     list = pointService.selectPointGameList(map);
 		}
-
+		
 		model.addAttribute("count", count);
 		model.addAttribute("list", list);
 		model.addAttribute("page", page.getPage());

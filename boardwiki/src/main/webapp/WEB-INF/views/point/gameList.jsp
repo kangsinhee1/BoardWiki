@@ -18,8 +18,10 @@
         </c:if>
     </c:forEach>
 </ul>
+<c:if test="${mem_auth == 9}">
 <button id="createGameButton">게임 생성</button>
 <button onclick="location.href='/pointgame/manageGames'">게임 관리</button>
+</c:if>
 </div>
 </div>
 </div>

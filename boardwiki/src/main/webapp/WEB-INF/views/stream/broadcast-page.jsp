@@ -61,7 +61,7 @@
     <c:if test="${broadcast.isLive == 1}">
         <div class="container">
             <div class="video-container">
-                <h1>${nick}님의 방송</h1>
+                <h1>${broadcast.mem_nickName}님의 방송</h1>
                 <video id="video" controls autoplay playsinline></video>
                 <div class="donation-mission-container">
                 <c:if test="${strnum == param.str_num}">
