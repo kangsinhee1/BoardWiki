@@ -29,12 +29,10 @@
 		<ul>
 			<li class="floating-label"><form:input path="mem_email"
 					placeholder="이메일" autocomplete="off" cssClass="form-input" /> <form:label
-					path="mem_email">이메일</form:label> <form:errors path="mem_email"
-					cssClass="error-color" /></li>
+					path="mem_email">이메일</form:label></li>
 			<li class="floating-label"><form:password path="mem_passwd"
 					placeholder="비밀번호" cssClass="form-input" /> <form:label
-					path="mem_passwd">비밀번호</form:label> <form:errors path="mem_passwd"
-					cssClass="error-color" /></li>
+					path="mem_passwd">비밀번호</form:label></li>
 			<li>
 				<label for="auto"><input type="checkbox" name="auto" id="auto">로그인상태유지</label>
 			</li>

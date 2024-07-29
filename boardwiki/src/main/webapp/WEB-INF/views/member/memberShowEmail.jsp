@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-</head>
 <!-- Page top section -->
 <section class="page-top-section set-bg"
 	data-setbg="/img/page-top-bg/4.jpg">
@@ -19,7 +18,7 @@
 			<div class="page-main">
 				<h2>아이디 찾기 결과</h2>
 				<c:if test="${!empty foundProvider}">
-					<p>
+					<p style="color: white">
 						회원님은 <strong>${foundProvider}</strong>가입 계정입니다 <strong>${foundProvider}</strong>로그인을
 						이용해주세요
 					</p>
@@ -38,6 +37,10 @@
 					<input type="button" value="홈으로" class="default-btn"
 						onclick="location.href='${pageContext.request.contextPath}/main/main'">
 				</div>
+				<script type="text/javascript"
+					src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
+				<script type="text/javascript"
+					src="${pageContext.request.contextPath}/js/member.register.js"></script>
 			</div>
 		</div>
 	</div>

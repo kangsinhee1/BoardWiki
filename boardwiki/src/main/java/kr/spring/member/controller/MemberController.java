@@ -102,13 +102,6 @@ public class MemberController {
 			Model model) {
 		log.debug("<<회원로그인>> : " + memberVO);
 
-		//유효성 체크 결과 오류가 있으면 폼 호출
-		//id와 passwd 필드만 체크
-		if(result.hasFieldErrors("mem_email") ||
-				result.hasFieldErrors("mem_passwd")) {
-			return formLogin();
-		}
-
 		//로그인 체크(id,비밀번호 일치 여부 체크)
 		MemberVO member = null;
 		try {
@@ -677,7 +670,7 @@ public class MemberController {
 	@GetMapping("/member/showEmail")
 	public String showEmail() {
 		// 이메일을 보여주는 페이지의 경로를 반환
-		return "showEmail"; // showEmail.jsp 또는 .html 페이지
+		return "showEmail";
 	}
 
 
