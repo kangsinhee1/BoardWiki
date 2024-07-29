@@ -42,13 +42,14 @@
 	 			}
 	 		</script>
 		</c:if >
-		<c:if test="${admin}">
+		<c:if test="${admin || user.mem_auth ==9}">
 		<input type="button" value="목록" onclick="location.href='teamBoardAdmin?tea_num=${board.tea_num}'">
 		</c:if>
-		<c:if test="${!admin}">
+		
+		<c:if test="${!admin && user.mem_auth !=9}">
 		<input type="button" value="목록" onclick="location.href='teamBoardUser?tea_num=${board.tea_num}'">
 		</c:if>
-	</div>
+	</div>	
 	<ul class="detail-info">
 	<li><input type="hidden" id="teaB_num" value="${board.teaB_num}"></li>
 		<li> 작성자 : ${board.mem_nickname} <br>
