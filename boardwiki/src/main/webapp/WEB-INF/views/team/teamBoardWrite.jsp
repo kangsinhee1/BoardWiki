@@ -33,7 +33,7 @@
 			
 			<li>
 			<form:hidden path="tea_num"/>
-				<form:label path="teaB_category">분류</form:label>
+				<form:label class="font-white" path="teaB_category">분류</form:label>
 				<form:select path="teaB_category" >
 				<c:if test="${admin}">
 						<form:option value="1">공지사항</form:option>
