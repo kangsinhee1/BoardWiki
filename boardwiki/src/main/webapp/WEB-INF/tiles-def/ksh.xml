@@ -10,10 +10,10 @@
 		<put-attribute name="css" value="/WEB-INF/views/member/memberCSS.jsp"/>
 		<put-attribute name="body" value="/WEB-INF/views/member/memberLogin.jsp"/>
 	</definition>
-	<definition name="memberNaverRegister" extends="main">
+	<definition name="memberSocialRegister" extends="main">
 		<put-attribute name="title" value="회원가입"/>
 		<put-attribute name="css" value="/WEB-INF/views/member/memberCSS.jsp"/>
-		<put-attribute name="body" value="/WEB-INF/views/member/memberNaverRegister.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/memberSocialRegister.jsp"/>
 	</definition>
 	<definition name="memberRegister" extends="main">
 		<put-attribute name="title" value="회원가입"/>

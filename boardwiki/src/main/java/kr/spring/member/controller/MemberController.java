@@ -268,7 +268,7 @@ public class MemberController {
 			log.debug("<<model>> : " + model);
 			log.debug("<<memberVO>> : " + memberVO);
 
-			return formMemberNaverRegister(); // 회원가입 폼으로 리다이렉트
+			return formMemberSocialRegister(); // 회원가입 폼으로 리다이렉트
 		}
 		if(!result.getMem_provider().equals("Naver")) {
 			//UI 메시지 처리
@@ -295,10 +295,10 @@ public class MemberController {
 
 	}
 
-	@GetMapping("/member/memberNaverRegister")
-	public String formMemberNaverRegister() {
-		log.debug("<<네이버 회원가입 페이지 요청 메서드>>");
-		return "memberNaverRegister";//Tiles 설정명
+	@GetMapping("/member/memberSocialRegister")
+	public String formMemberSocialRegister() {
+		log.debug("<<소셜 회원가입 페이지 요청 메서드>>");
+		return "memberSocialRegister";//Tiles 설정명
 	}
 	//전송된 데이터 처리
 	@PostMapping("/member/login/oauth2/code/memberNaverRegister")
@@ -372,7 +372,7 @@ public class MemberController {
 			log.debug("<<model>> : " + model);
 			log.debug("<<memberVO>> : " + memberVO);
 
-			return formMemberNaverRegister(); // 회원가입 폼으로 리다이렉트
+			return formMemberSocialRegister(); // 회원가입 폼으로 리다이렉트
 		}
 
 		if(!result.getMem_provider().equals("Kakao")) {
@@ -447,7 +447,7 @@ public class MemberController {
 			log.debug("<<model>> : " + model);
 			log.debug("<<memberVO>> : " + memberVO);
 
-			return formMemberNaverRegister(); // 회원가입 폼으로 리다이렉트
+			return formMemberSocialRegister(); // 회원가입 폼으로 리다이렉트
 		}
 
 

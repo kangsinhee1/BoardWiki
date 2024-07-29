@@ -32,7 +32,7 @@
 							<form:label path="mem_nickName">별명 </form:label> 
 							<form:input path="mem_nickName" /> 
 							<input type="button" id="confirmNickname" value="별명중복체크" class="default-btn"> 
-							<span id="message_nickName"></span> 
+							<span id="message_nickName" style="color:white;"></span> 
 							<form:errors path="mem_nickName" cssClass="error-color" />
 						</li>
 						<li>
