@@ -23,6 +23,7 @@
 <div class="page-main">
   <input type="hidden" name="useC_name" value="${used.use_title} 중고거래채팅">
 	<h2>${used.use_title}</h2>
+	<br><br>
 	<ul class="detail-info">
 	
 		<li>

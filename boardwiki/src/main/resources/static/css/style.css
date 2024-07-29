@@ -128,17 +128,17 @@ a {
  -------------------------*/
  .blog-pagination {
 	padding-top: 10px;
+	text-align:center;
 }
 
 .blog-pagination a {
 	display: inline-block;
 	font-size: 14px;
-	color: #ffffff;
+	color: white ;
 	text-transform: uppercase;
 	padding: 7px 14px;
 	font-weight: 500;
 	margin-right: 7px;
-	background: #252525;
 	font-family: "Oswald", sans-serif;
 	-webkit-transition: all 0.3s;
 	-o-transition: all 0.3s;
@@ -156,16 +156,17 @@ a {
 .blog-pagination span {
 	display: inline-block;
 	font-size: 14px;
-	color: #000000;
+	color: white !important;
 	text-transform: uppercase;
 	padding: 7px 14px;
 	font-weight: 500;
 	margin-right: 7px;
-	background: #252525;
+	background: #481677;
 	font-family: "Oswald", sans-serif;
 	-webkit-transition: all 0.3s;
 	-o-transition: all 0.3s;
 	transition: all 0.3s;
+	border-radius: 20px;
 }
  
  
@@ -441,6 +442,13 @@ div.chart-table h6 {
 	border: none;
 	text-align: center;
 	font-family: "NanumSquareNeo", sans-serif;
+}
+.chart-th-title{
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	max-width: 400px;
+	width:400px;
 }
 
 .chart-table table tbody tr td.point {
@@ -2434,4 +2442,7 @@ ol {
 	background-color: #280E3B;
 	border-radius: 10px;
 	
+}
+hr{
+	background-color: white;
 }

@@ -63,7 +63,7 @@
 	<thead>
 		<tr>
 			<th>번호</th>
-			<th width="300">제목</th>
+			<th class="chart-th-title">제목</th>
 			<th>작성자</th>
 			<th>작성일</th>
 			<th>제품명</th>
@@ -74,7 +74,7 @@
 		<tbody>
 		<tr>
 			<td class="align-center">${used.use_num}</td>
-			<td class="align-left">
+			<td class="align-left chart-th-title">
 			<a href="usedDetail?use_num=${used.use_num}">
 			<c:if test="${used.use_check==1 }"><b>[판매중] </b></c:if>
 			<c:if test="${used.use_check==2 }"><b>[예약중] </b></c:if>

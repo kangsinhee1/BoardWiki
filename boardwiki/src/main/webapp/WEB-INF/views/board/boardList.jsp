@@ -68,7 +68,7 @@
 		<thead>
 		<tr>
 			<th>번호</th>
-			<th width="400">제목</th>
+			<th class="chart-th-title">제목</th>
 			<th>작성자</th>
 			<th>작성일</th>
 			<th>조회수</th>
@@ -78,7 +78,7 @@
 		<c:forEach var="board" items="${list}">
 		<tr>
 			<td class="align-center">${board.boa_num}</td>
-			<td class="align-left"><a href="detail?boa_num=${board.boa_num}">${board.boa_title}(${board.re_cnt})
+			<td class="align-left chart-th-title"><a href="detail?boa_num=${board.boa_num}">${board.boa_title}(${board.re_cnt})
 			<c:if test="${board.boa_rdate == nowday}">
                     <span style="color: red; font-weight: bold; font-size:12px;"> new </span>
              </c:if></a></td>

@@ -89,7 +89,7 @@
 		<thead>
 		<tr>
 			<th>번호</th>
-			<th width="400">제목</th>
+			<th class="chart-th-title">제목</th>
 			<th>작성자</th>
 			<th>작성일</th>
 			<th>조회수</th>
@@ -99,7 +99,7 @@
 		<c:forEach var="board" items="${list}">
 		<tr>
 			<td class="align-center">${board.boa_num}</td>
-			<td class="align-left"><a href="detail2?boa_num=${board.boa_num}">${board.boa_title}(${board.re_cnt})</a></td>
+			<td class="align-left chart-th-title"><a href="detail2?boa_num=${board.boa_num}">${board.boa_title}(${board.re_cnt})</a></td>
 			<td class="align-center">
 				<c:if test="${empty board.mem_nickname}">${board.mem_email}</c:if>
 				<c:if test="${!empty board.mem_nickname}">${board.mem_nickname}</c:if>
