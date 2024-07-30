@@ -99,7 +99,10 @@
 		<c:forEach var="tnrboard" items="${list}">
 		<tr>
 			<td class="align-center">${tnrboard.tnr_num}</td>
-			<td class="align-left chart-th-title"><a href="tnrboardDetail?tnr_num=${tnrboard.tnr_num}">${tnrboard.tnr_title}(${tnrboard.re_cnt})</a></td>
+			<td class="align-left chart-th-title"><a href="tnrboardDetail?tnr_num=${tnrboard.tnr_num}">${tnrboard.tnr_title}(${tnrboard.re_cnt})
+			<c:if test="${tnrboard.tnr_rdate == nowday}">
+                    <span style="color: red; font-weight: bold; font-size:12px;"> new </span>
+             </c:if></a></td>
 			<td class="align-center">
 				<c:if test="${empty tnrboard.mem_nickname}">${tnrboard.mem_email}</c:if>
 				<c:if test="${!empty tnrboard.mem_nickname}">${tnrboard.mem_nickname}</c:if>

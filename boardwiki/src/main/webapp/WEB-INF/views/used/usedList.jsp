@@ -82,6 +82,9 @@
 			<c:if test="${used.use_check==2 }"><b>[예약중] </b></c:if>
 			<c:if test="${used.use_check==3 }"><b>[판매완료] </b></c:if>
 			${used.use_title}
+			<c:if test="${used.use_rdate == nowday}">
+                    <span style="color: red; font-weight: bold; font-size:12px;"> new </span>
+             </c:if>
 			</a></td>
 			<td class="align-center">
 				<c:if test="${empty used.mem_nickname}">			

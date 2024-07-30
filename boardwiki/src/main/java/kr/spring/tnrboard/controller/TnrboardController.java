@@ -1,6 +1,8 @@
 package kr.spring.tnrboard.controller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -107,6 +109,12 @@ public class TnrboardController {
 			PagingUtil page = new PagingUtil(keyfield,keyword,pageNum,count,
 					10,10,"tnrboardList","&tnr_category="+tnr_category+"&order="+order);
 			List<TnrboardVO> list = null;
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		     Calendar cal = Calendar.getInstance();
+		     cal.add(Calendar.DAY_OF_MONTH,0); //7일간 보이도록 하기위해서.
+		     String nowday = format.format(cal.getTime());
+
+		     model.addAttribute("nowday", nowday);
 			if(count > 0) {
 				map.put("order", order);
 				map.put("start", page.getStartRow());
@@ -140,7 +148,7 @@ public class TnrboardController {
 
 				list = tnrboardService.selectClientTnrList(map);
 			}
-
+			
 			model.addAttribute("count", count);
 			model.addAttribute("list", list);
 			model.addAttribute("page", page.getPage());
