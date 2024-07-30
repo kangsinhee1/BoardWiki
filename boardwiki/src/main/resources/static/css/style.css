@@ -150,7 +150,8 @@ a {
 }
 
 .blog-pagination a:hover {
-	background: #555555;
+	background: #481677;
+	border-radius: 20px;
 }
 
 .blog-pagination span {

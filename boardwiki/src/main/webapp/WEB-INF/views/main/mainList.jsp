@@ -40,7 +40,9 @@
 				</c:forEach>
 
 		
-		<div class="align-center" style= "text-align : center">${page}</div>
+		<div class="align-center">
+		<div class="blog-pagination">${page}</div>
+		</div>
 		</c:if>
 
 
@@ -53,6 +55,7 @@
 
 <section class="games-section">
 	<div class="container">
+	<div class="game-main">
 		<h2 id="page2">게시글</h2>
 			<b class="hr"></b>
 		<div>
@@ -60,7 +63,8 @@
 				<div class="result-display">표시할 게시물이 없습니다.</div>
 			</c:if>
 			<c:if test="${count2 > 0}">
-				<table class="striped-table">
+			<div class="chart-table">
+				<table>
 					<tr>
 						<th>번호</th>
 						<th width="400">제목</th>
@@ -82,13 +86,18 @@
 						</tr>
 					</c:forEach>
 				</table>
-				<div class="align-center" style="text-align: center;"><a href="#page2">${page2}</a></div>
+				</div>
+				<div class="align-center">
+				<div class="blog-pagination">${page2}</div>
+				</div>
 			</c:if>
+		</div>
 		</div>
 	</div>
 </section>
 <section class="games-section">
 	<div class="container">
+	<div class="game-main">
 		<h2 id="page3">중고게시판</h2>
 		<b class="hr"></b>
 		<div>
@@ -96,7 +105,8 @@
 				<div class="result-display">표시할 게시물이 없습니다.</div>
 			</c:if>
 			<c:if test="${count3 > 0}">
-				<table class="striped-table">
+			<div class="chart-table">
+				<table >
 					<tr>
 						<th>번호</th>
 						<th width="400">제목</th>
@@ -127,8 +137,12 @@
 						</tr>
 					</c:forEach>
 				</table>
-				<div class="align-center" style="text-align: center;"><a href ="#page3">${page3}</a></div>
+			 </div>
+				<div class="align-center">
+				<div class="blog-pagination">${page3}</div>
+				</div>
 			</c:if>
+		</div>
 		</div>
 	</div>
 </section>
