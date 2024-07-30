@@ -32,7 +32,8 @@
 				<form:errors path="tnr_category" cssClass="error-color"/>                             
 			</li>
 			<li>
-				<form:input path="tnr_title" placeholder="제목을 입력하세요"/>
+				<form:label path="tnr_title" style="color:white;">제목</form:label>
+				<form:input path="tnr_title" placeholder="제목을 입력하세요" style="width=300px;"/>
 				<form:errors path="tnr_title" cssClass="error-color"/>
 			</li>
 			<li>

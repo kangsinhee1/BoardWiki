@@ -14,6 +14,7 @@ form#search_form #order{
 form#board_register, form#board_modify{
 	padding:0 0 10px 0;
 	width:800px;
+	margin:auto;
 }
 form#board_register ul, form#board_modify ul{
 	padding:20px;
