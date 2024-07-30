@@ -3,18 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!-- 비밀번호 변경 시작 -->
-
-		<!-- Page top section -->
-	<section class="page-top-section set-bg" data-setbg="/img/page-top-bg/4.jpg">
-		<div class="page-info">
-			<h2>Contact</h2>
-			<div class="site-breadcrumb">
-				<a href="">Home</a>  /
-				<span>Contact</span>
-			</div>
-		</div>
-	</section>
-	<!-- Page top end-->
 	<section class="blog-page">
 <div class="container">
 	<div class="row">

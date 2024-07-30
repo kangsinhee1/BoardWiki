@@ -25,7 +25,7 @@
 	<p class="reset-code" style="color:white">
 		비밀번호를 분실하셨나요?<br>
 		가입할 때 사용한 아이디와 이메일를 입력하시면<br>
-		이메일로 임시비밀번호를 보내드립니다.<br><br>		
+		이메일로 인증번호를 보내드립니다.<br><br>		
 	</p>
 	<form id="member_passwdReset">
 		<ul>
