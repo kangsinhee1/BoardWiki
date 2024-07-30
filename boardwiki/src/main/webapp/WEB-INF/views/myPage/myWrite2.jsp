@@ -12,7 +12,7 @@
 		<div class="result-display">표시할 게시물이 없습니다.</div>
 	</c:if>
 	<c:if test="${count > 0}">
-		<h5>팁게시판</h5>
+		<h5 style="color:white;">팁게시판</h5>
 		<div class="chart-table">
 		<table>
 		<thead>
