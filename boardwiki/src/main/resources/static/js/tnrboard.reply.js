@@ -49,7 +49,7 @@ $(function(){
 					}
 					
 					if(item.mem_auth == 9) {
-        				output += ' (관리자)';
+        				output += '<span style="color:yellow" ><b> (관리자)</b></span>';
    					}
        				output += '<br>';
 					
