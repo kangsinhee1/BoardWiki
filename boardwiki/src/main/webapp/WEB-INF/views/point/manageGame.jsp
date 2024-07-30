@@ -16,7 +16,7 @@ font-size: 18px;
 <div class="page-info">
         <h2>quiz 관리</h2>
         <div class="site-breadcrumb">
-            <a href="${pageContext.request.contextPath}/item/item_main">Home</a>/<span style="color: white;">quiz</span>/<span>${game.poiG_content}</span>
+            <a href="${pageContext.request.contextPath}/item/item_main">Home</a>/<a href="${pageContext.request.contextPath}/pointgame/list">quiz</a>/<span>${game.poiG_content}</span>
         </div>
     </div>
 </section>

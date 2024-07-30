@@ -25,7 +25,7 @@ input::placeholder{
 <div class="page-info">
         <h2>quiz 생성</h2>
         <div class="site-breadcrumb">
-            <a href="${pageContext.request.contextPath}/item/item_main">Home</a>/<span style="color: white;">quiz</span>/<span>quiz 생성</span>
+            <a href="${pageContext.request.contextPath}/item/item_main">Home</a>/<a href="${pageContext.request.contextPath}/pointgame/list">quiz</a>/<span>quiz 생성</span>
         </div>
     </div>
 </section>

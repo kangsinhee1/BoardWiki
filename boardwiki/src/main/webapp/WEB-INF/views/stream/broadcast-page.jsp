@@ -59,7 +59,7 @@
 	<div class="page-info">
 		<h2>${broadcast.mem_nickName}님의 방송</h2>
 		<div class="site-breadcrumb">
-			<a href="${pageContext.request.contextPath}/item/item_main">Home</a>/<span style="color:white;">방송</span>/<span>${broadcast.mem_nickName}님의 방송</span>
+			<a href="${pageContext.request.contextPath}/item/item_main">Home</a>/<a href="${pageContext.request.contextPath}/streaming/broadcasts">방송</a>/<span>${broadcast.mem_nickName}님의 방송</span>
 		</div>
 	</div>
 </section>
