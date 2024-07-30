@@ -31,9 +31,7 @@
     
     <section class="review-section py-5">
         <div class="container">
-        <c:if test="${cart.item_num!=null}">
             <div class="table-responsive">
-            
                 <table class="table table-bordered table-striped">
                     <thead class="thead-dark">
                         <tr>
@@ -64,11 +62,9 @@
                                     <button class="btn btn-danger deleteX" data-item-num="${cart.item_num}" data-mem-num="${cart.mem_num}">제거</button>
                                 </td>
                             </tr>
-                        
                         </c:forEach>
                     </tbody>
                 </table>
-                
             </div>
             <div class="align-right">
             <div class="mt-4">
@@ -76,17 +72,8 @@
                 <a href="${pageContext.request.contextPath}/order/order?mem_num=${mem_num}" class="btn btn-primary">주문하기</a>
             </div>
             </div>
-            </c:if>
-            <c:if test="${cart.item_num==null}">
-            <div class="table-responsive">
-                    <div class="result-display">장바구니에 상품이 없습니다.</div>
-            </div>
-            </c:if>
         </div>
-        
-        
         </section>
-        
 </body>
 <script type="text/javascript">
     function confirmAddToCart() {
