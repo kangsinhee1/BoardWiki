@@ -47,21 +47,48 @@
 </div>
 </section>
 
+<div class="modal-bg">
+	<div class="modal2">
+		<form id="reportForm">
+			<h3 style="color:black;">※신고하기※</h3><br><br>
+			<input type="hidden" id="report_type" name="report_type" value="3">
+			<input type="hidden" id="report_typeDetail" name="report_typeDetail"
+				value="${used.use_num }">
+			<textarea rows="10" cols="30" id="report_content"
+				name="report_content" placeholder="신고 사유를 적어주세요"></textarea>
+			<h6 style="color:black;"><b>신고 사유</b></h6>
+			<div>
+				<input type="radio" name="report_category" value="1" checked />욕설/혐오/차별표현<br>
+				<input type="radio" name="report_category" value="2" />부적절한 게시물<br>
+				<input type="radio" name="report_category" value="3" />불법정보를 포함<br>
+				<input type="radio" name="report_category" value="4" />도배/스팸
+			</div>
+			<br>
+			<div>
+				<input type="submit" id="sbm_btn" value="완료"> <input
+					type="button" value="취소" id="cancel">
+			</div>
+		</form>
+	</div>
+</div>
 
 <script type="text/javascript">
     $(document).ready(function() {
         let cnt = 0;
-        $(document).on('click', '.report_btn', function() {
+        $('#report_btn').click(function() {
             if (cnt === 0) {
                 $('.modal').show();
+                $('.modal-bg').show();
                 cnt = 1;
             } else {
                 $('.modal').hide();
+                $('.modal-bg').hide();
                 cnt = 0;    
             }
         });
         $('#cancel').click(function() {
             $('.modal').hide();
+            $('.modal-bg').hide();
             cnt = 0;
         });
         function initForm(){
@@ -89,6 +116,7 @@
                     } else if(param.result === 'success'){
                         alert('신고 완료');
                         $('.modal').hide();
+                        $('.modal-bg').hide();
                         cnt = 0;
                         initForm();
                     } else {
@@ -102,6 +130,11 @@
             
             //기본 이벤트 제거
             event.preventDefault();
+        });
+        // 폼 제출을 처리하는 코드 추가
+        $('#submit-link').click(function(event) {
+            event.preventDefault(); // 기본 링크 동작 방지
+            $('#re_form').submit(); // 폼 제출
         });
     });
 </script>

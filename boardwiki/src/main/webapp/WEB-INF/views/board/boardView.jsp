@@ -115,7 +115,7 @@
 	<div class="modal2">
 		<form id="reportForm">
 			<h3 style="color:black;">※신고하기※</h3><br><br>
-			<input type="hidden" id="report_type" name="report_type" value="5">
+			<input type="hidden" id="report_type" name="report_type" value="1">
 			<input type="hidden" id="report_typeDetail" name="report_typeDetail"
 				value="${used.use_num }">
 			<textarea rows="10" cols="30" id="report_content"
