@@ -5,7 +5,9 @@
  ------------------------------------
  ====================================*/
  
-
+.rent_search {
+	justify-content: center;
+}
  .font-white{
  color:white;
  }
@@ -1887,6 +1889,7 @@ ol {
 .blog-page,
 .contact-page {
 	padding: 50px 0;
+	min-height: 700px;
 	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#501755+0,2d1854+100 */
 	background: #321854;
 	/* Old browsers */

@@ -36,13 +36,14 @@
 
     <!-- 검색 필터 조건 (전체 회원) -->
     <sql id="rentSearch2">
-        <if test="keyword != null and keyword != ''">
-            AND i.item_name LIKE '%' || #{keyword} || '%'
-        </if>
-        <if test="startDate != null and endDate != null">
-            AND gr.rent_sdate &gt;= #{startDate} AND gr.rent_edate &lt;= #{endDate}
-        </if>
-    </sql>
+    <if test="keyword != null and keyword != ''">
+        AND i.item_name LIKE '%' || #{keyword} || '%'
+    </if>
+    <if test="startDate != null and startDate != '' and endDate != null and endDate != ''">
+        AND gr.rent_sdate &gt;= #{startDate} 
+        AND gr.rent_edate &lt;= #{endDate}
+    </if>
+</sql>
 
     <!-- 정렬 조건 -->
     <sql id="rentOrder">

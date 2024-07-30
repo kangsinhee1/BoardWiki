@@ -129,7 +129,7 @@ public class RentController {
 		    model.addAttribute("count", count);
 		    model.addAttribute("list", list);
 		    model.addAttribute("page", page.getPage());
-		    log.debug("<<카운트  : >>" + count);
+		    log.debug("<< Rent 카운트 : >>" + count);
 
 		    return "rentList"; // rentList 뷰 이름 반환
 		}
@@ -140,7 +140,7 @@ public class RentController {
 	    public String returnRent(@RequestParam("rent_num") Long rent_num) {
 	        rentService.updateRentStatus(rent_num);
 
-	        return "redirect:/rent/list"; // 리턴 후 이동할 페이지를 설정하세요.
+	        return "redirect:/myPage/rent"; // 리턴 후 이동할 페이지를 설정하세요.
 	    }
 
 

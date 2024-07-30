@@ -432,42 +432,55 @@ public class AdminController {
 
 		return map;
 	}
-	/*=========================
+	/*==============================
 	 * 관리자 대여 목록 조회
-	 *=========================*/
+	 *==============================*/
 	@GetMapping("/rent/rentListAdmin")
 	public String getAdminRentList(
-			@RequestParam(defaultValue = "1") int pageNum,
-			@RequestParam(defaultValue = "") String keyfield,
-			@RequestParam(defaultValue = "") String keyword,
-			Model model) {
+	        @RequestParam(defaultValue = "1") int pageNum,
+	        @RequestParam(defaultValue="1") int order,
+	        @RequestParam(defaultValue = "") String keyfield,
+	        @RequestParam(defaultValue = "") String keyword,
+	        @RequestParam(required = false) String startDate,
+	        @RequestParam(required = false) String endDate,
+	        Model model) {
 
-		// 서비스 메서드에 전달할 파라미터를 담는 맵 생성
-		Map<String, Object> map = new HashMap<>();
-		map.put("keyfield", keyfield);
-		map.put("keyword", keyword);
+	    // 서비스 메서드에 전달할 파라미터를 담는 맵 생성
+	    Map<String, Object> map = new HashMap<>();
+	    map.put("keyfield", keyfield);
+	    map.put("keyword", keyword);
 
-		// 검색 조건에 따른 전체 레코드 수 가져오기 (모든 회원 대여 목록 수)
-		int count = rentService.selectAllMembersRowCount(map);
+	    // 날짜 필터링을 위해 startDate와 endDate를 map에 추가
+	    if (startDate != null && !startDate.isEmpty() && endDate != null && !endDate.isEmpty()) {
+	        map.put("startDate", startDate);
+	        map.put("endDate", endDate);
+	    }
 
-		// 페이지 처리를 위한 페이징 유틸리티 생성
-		PagingUtil page = new PagingUtil(keyfield, keyword, pageNum, count, 20, 10, "rentListAdmin");
-		List<RentVO> list = null;
+	    // 검색 조건에 따른 전체 레코드 수 가져오기 (모든 회원 대여 목록 수)
+	    int count = rentService.selectAllMembersRowCount(map);
 
-		// 검색 결과가 있는 경우, 해당 결과 리스트 가져오기
-		if (count > 0) {
-			map.put("start", page.getStartRow());
-			map.put("end", page.getEndRow());
-			list = rentService.selectAllMembersRentList(map);
-		}
+	    // 페이지 처리를 위한 페이징 유틸리티 생성
+	    PagingUtil page = new PagingUtil(keyfield, keyword, pageNum, count, 20, 10, "rentListAdmin");
+	    List<RentVO> list = null;
 
-		// 뷰에서 사용할 모델에 속성 추가
-		model.addAttribute("count", count);
-		model.addAttribute("list", list);
-		model.addAttribute("page", page.getPage());
+	    // 검색 결과가 있는 경우, 해당 결과 리스트 가져오기
+	    if (count > 0) {
+	        map.put("order", order);
+	        map.put("start", page.getStartRow());
+	        map.put("end", page.getEndRow());
+	        list = rentService.selectAllMembersRentList(map);
+	    }
 
-		return "rentListAdmin"; // adminRentList 뷰 이름 반환
+	    // 뷰에서 사용할 모델에 속성 추가
+	    model.addAttribute("count", count);
+	    model.addAttribute("list", list);
+	    model.addAttribute("page", page.getPage());
+	    log.debug("<< Rent 카운트(관리자) : >>" + count);
+	    log.debug("Map contentsㅁㅁㅁ: " + map);
+
+	    return "rentListAdmin"; // adminRentList 뷰 이름 반환
 	}
+
 
 	/*==============================
 	 * 		관리자 페이지 (대회목록)

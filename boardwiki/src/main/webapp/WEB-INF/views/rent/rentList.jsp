@@ -25,12 +25,12 @@
 									class="form-control">
 										<option value="1"
 											<c:if test="${param.keyfield == 1}">selected</c:if>>게임명</option>
-										<option value="2"
+										<%-- <option value="2"
 											<c:if test="${param.keyfield == 2}">selected</c:if>>날짜</option>
 										<option value="3"
 											<c:if test="${param.keyfield == 3}">selected</c:if>>내용</option>
 										<option value="4"
-											<c:if test="${param.keyfield == 4}">selected</c:if>>제목+내용</option>
+											<c:if test="${param.keyfield == 4}">selected</c:if>>제목+내용</option> --%>
 								</select></li>
 								<li id="dateFields" class="date-fields" style="display: flex;">
 									<input type="date" name="startDate" id="startDate"

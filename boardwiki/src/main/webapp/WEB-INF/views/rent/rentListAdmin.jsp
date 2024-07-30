@@ -6,37 +6,31 @@
 <link rel="stylesheet" href="/css/main.css" type="text/css">
 <link rel="stylesheet" href="/css/rent.css" type="text/css">
 
-<head>
-<style type="text/css">
-/* 기존 td_name 스타일 */
-.td-name {
-    display: inline-block;
-    max-width: 160px;
-    overflow: hidden;
-    white-space: nowrap;
-    border-collapse: collapse; /* 테두리 중첩 방지 */
-    border: 1px solid #000000 !important;
-    text-overflow: ellipsis;
-    vertical-align: middle; /* 내용이 수직으로 가운데 정렬되도록 */
-    width: 160px; /* 텍스트가 넘칠 경우 적용할 너비 */
-}
-</style>
-</head>
+
+<section class="blog-page">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
 
 <div class="page-main">
     <h2>대여 목록(관리자)</h2>
     <form action="rentListAdmin" id="search_form" method="get">
         <input type="hidden" name="item_name" value="${param.item_name}">
         
-        <ul class="search">
+        <ul class="rent_search">
             <li>
                 <select name="keyfield" id="keyfield">
                     <option value="1" <c:if test="${param.keyfield == 1}">selected</c:if>>게임명</option>
-                    <option value="2" <c:if test="${param.keyfield == 2}">selected</c:if>>ID+별명</option>
-                    <option value="3" <c:if test="${param.keyfield == 3}">selected</c:if>>내용</option>
-                    <option value="4" <c:if test="${param.keyfield == 4}">selected</c:if>>제목+내용</option>
+                    <option value="2" <c:if test="${param.keyfield == 2}">selected</c:if>>이메일</option>
+                    <option value="3" <c:if test="${param.keyfield == 3}">selected</c:if>>닉네임</option>
                 </select>
             </li>
+            <li id="dateFields" class="date-fields" style="display: flex;">
+									<input type="date" name="startDate" id="startDate"
+									class="form-control" value="${param.startDate}"> <input
+									type="date" name="endDate" id="endDate" class="form-control"
+									value="${param.endDate}">
+								</li>
             <li>
                 <input type="search" name="keyword" id="keyword" value="${param.keyword}">
             </li>
@@ -46,23 +40,41 @@
         </ul>
         <div class="align-right">
             <select id="order" name="order">
-                <option value="1" <c:if test="${param.order == 1}">selected</c:if>>최신순</option>
-                <option value="2" <c:if test="${param.order == 2}">selected</c:if>>조회수</option>
-                <option value="3" <c:if test="${param.order == 3}">selected</c:if>>좋아요</option>
-                <option value="4" <c:if test="${param.order == 4}">selected</c:if>>댓글수</option>
+                <option value="1" <c:if test="${param.order == 1}">selected</c:if>>이름순</option>
+                <option value="2" <c:if test="${param.order == 2}">selected</c:if>>번호순</option>
+                <option value="3" <c:if test="${param.order == 3}">selected</c:if>>대여상태</option>
             </select>
-            <script type="text/javascript">
+            <!-- <script type="text/javascript">
                 $('#order').change(function() {
                     location.href='rentListAdmin?category=${param.category}&keyfield='+$('#keyfield').val()+'&keyword='+$('#keyword').val()+'&order='+$('#order').val();
                 });
-            </script>
+            </script> -->
         </div>
     </form>
+    
+    <script type="text/javascript">
+                    document.getElementById('order').addEventListener('change', function() {
+                        document.getElementById('search_form').submit();
+                    });
+
+                    document.getElementById('keyfield').addEventListener('change', function() {
+                        var keyfield = this.value;
+                        var dateFields = document.getElementById('dateFields');
+                        if (keyfield == '2') {
+                            dateFields.style.display = 'flex';
+                        } else {
+                            dateFields.style.display = 'none';
+                        }
+                    });
+                </script>
+    
     <c:if test="${count == 0}">
         <div class="result-display">표시할 대여 목록이 없습니다.</div>
     </c:if>
     <c:if test="${count > 0}">
-        <table class="striped-table">
+        <div class="chart-table">
+        <table>
+        <thead>
             <tr>
                 <th>대여번호</th>
                 <th width="160px">보드게임명</th>
@@ -74,9 +86,10 @@
                 <th>대출/반납</th>
             </tr>
             <c:forEach var="rent" items="${list}">
+            <tbody>
                 <tr>
                     <td class="align-center">${rent.rent_num}</td>
-                    <td class="align-center td-name">${rent.item_name}</td>
+                    <td class="align-center td-name" style="border: none !important;">${rent.item_name}</td>
                     <td class="align-center">${rent.rent_sdate}</td>
                     <td class="align-center">${rent.rent_edate}</td>
                     <td class="align-center">${rent.rent_period}</td>
@@ -93,8 +106,17 @@
                     </td>
                 </tr>
             </c:forEach>
+           
+            </thead>
+             </tbody> 
         </table>
+        </div>
         <div class="blog-pagination" style="text-align: center">${page}</div>
     </c:if>
 </div>
+</div>
+</div>
+</div>
+</section>
+
 <!-- 대여 목록 끝 -->
