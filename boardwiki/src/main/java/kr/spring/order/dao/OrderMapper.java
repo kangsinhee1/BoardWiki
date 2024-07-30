@@ -30,4 +30,8 @@ public interface OrderMapper {
 	public List<OrderVO> InsertOrderList(Long mem_num);
 	
 	public OrderVO selectnum(Long mem_num);
+	@Select("SELECT *FROM orders WHERE order_num = #{order_num}")
+	public OrderVO selectOrderByorderNum(Long order_num);
+	@Select("SELECT *FROM(SELECT * FROM orders  WHERE mem_num = #{mem_num} order by order_num DESC) WHERE rownum= 1")
+	public OrderVO selectOrderByMemNum(Long mem_num);
 }

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -98,6 +99,70 @@ public class OrderController {
 
 	    return "item_main"; // "common/resultAlert" 대신 리다이렉트 사용
 	}
+	
+	
+	@PostMapping("/order/order")
+	public String addToOrder2(Integer item_quantity,
+	        @RequestParam("order_name") String order_name,
+	        @RequestParam("order_phone") String order_phone,
+	        @RequestParam("order_zipcode") Long order_zipcode,
+	        @RequestParam("order_address1") String order_address1,
+	        @RequestParam("order_address2") String order_address2,
+	        @RequestParam("order_pay") int order_pay,
+	        HttpSession session, Model model, HttpServletRequest request) {
+
+	    MemberVO member = (MemberVO) session.getAttribute("user");
+
+	    log.debug("<<유저 - order_name>>" + order_name);
+	    log.debug("<<유저 - mem_num>>" + member);
+
+	    OrderVO order2 = orderService.selectagg(member.getMem_num());
+
+	    OrderVO order = new OrderVO();
+	    order.setMem_num(member.getMem_num());
+	    order.setOrder_name(order_name);
+	    order.setOrder_phone(order_phone);
+	    order.setOrder_zipcode(order_zipcode);
+	    order.setOrder_address1(order_address1);
+	    order.setOrder_address2(order_address2);
+	    order.setOrder_price(order2.getTotal_price());
+	    order.setOrder_pay(order_pay);
+
+	    orderService.insertOrder(order);
+	    OrderVO order3 = orderService.selectOrderByMemNum(member.getMem_num());
+	   long order_num = order3.getOrder_num(); 
+	   System.out.println("주문번호 : " + order_num);
+	    cartService.updateCartDate(member.getMem_num());
+	    
+	    
+	    model.addAttribute("message", "결제확인 하러 가보자");
+		model.addAttribute("url",
+				request.getContextPath()+"/order/pay");
+		return "common/resultAlert";
+	    //return "/order/pay?order_num="+order_num; // "common/resultAlert" 대신 리다이렉트 사용
+	}
+	
+	
+	@GetMapping("/order/pay")
+	public String payList( Model model, HttpSession session){
+
+		MemberVO member = (MemberVO) session.getAttribute("user");
+
+		if (member == null) {
+			return "redirect:/login"; // 세션에 user가 없으면 로그인 페이지로 리다이렉트
+		}
+		
+		 OrderVO order3 = orderService.selectOrderByMemNum(member.getMem_num());
+		 long order_num2 = order3.getOrder_num();
+		 OrderVO order = orderService.selectOrderByorderNum(order_num2);
+		 log.debug("주문상세" + order3);
+		 log.debug("회원번호 "+ member.getMem_num());
+		 model.addAttribute("order",order);
+
+
+		return "pay";
+	}
+
 }
 
 

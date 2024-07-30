@@ -22,7 +22,7 @@
     <div class="container">
         <div class="page-main">
             <div class="great-box">
-                <form id="GetToOrder" method="post" action="${pageContext.request.contextPath}/order/order1">
+                <form id="GetToOrder" method="post" action="${pageContext.request.contextPath}/order/order">
                     <c:forEach var="order" items="${list}">
                         <input type="hidden" name="mem_num" value="${mem_num}">
                         <input type="hidden" name="item_quantity" value="${order.item_quantity}">

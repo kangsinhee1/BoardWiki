@@ -33,11 +33,11 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>${order_num}</td>
-                        <td>${order_address1}</td>
-                        <td>${order_address2}</td>
-                        <td>${order_pay}원</td>
-                        <td>${order_date}</td>
+                        <td>${order.order_num}</td>
+                        <td>${order.order_address1}</td>
+                        <td>${order.order_address2}</td>
+                        <td>${order.order_price}원</td>
+                        <td>${order.order_date}</td>
                     </tr>
                 </tbody>
             </table>

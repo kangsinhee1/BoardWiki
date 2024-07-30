@@ -63,4 +63,14 @@ public class OrderServiceImpl implements OrderService{
 		return orderMapper.selectnum(mem_num);
 	}
 
+	@Override
+	public OrderVO selectOrderByorderNum(Long order_num) {
+		return orderMapper.selectOrderByorderNum(order_num);
+	}
+
+	@Override
+	public OrderVO selectOrderByMemNum(Long mem_num) {
+		return orderMapper.selectOrderByMemNum(mem_num);
+	}
+
 }

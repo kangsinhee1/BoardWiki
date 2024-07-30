@@ -16,4 +16,6 @@ public interface OrderService {
 	public List<CartVO> getpriceList(Long mem_num);
 	public OrderVO selectagg(Long mem_num);
 	public OrderVO selectnum(Long mem_num);
+	public OrderVO selectOrderByorderNum(Long order_num);
+	public OrderVO selectOrderByMemNum(Long mem_num);
 }
