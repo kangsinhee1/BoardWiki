@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const messageElement = $('<div></div>').text(mem_nickName + ': ' + message);
         $('#chat-container').append(messageElement);
     }
-
+	
     // 도네이션 메시지를 채팅 컨테이너에 강조하여 추가하는 함수
     function appendDonationMessage(donation) {
         const messageElement = $('<div></div>').text(donation.mem_nickName + ': ' + donation.don_content)
@@ -61,7 +61,8 @@ document.addEventListener("DOMContentLoaded", function() {
         $('#chat-container').append(messageElement);
         $('#chat-container').scrollTop($("#chat-container")[0].scrollHeight);
     }
-
+// 입장 메시지 추가
+                
     // 초기 채팅 메시지 로드
     function loadChatMessages() {
         // 로딩 스피너 표시
@@ -84,8 +85,6 @@ document.addEventListener("DOMContentLoaded", function() {
                     $('#chat-container').scrollTop(chatContainer.scrollHeight);
                    
                 }
-                
-                // 입장 메시지 추가
                 appendEntranceMessage();
             },
             error: function(error) {
@@ -94,7 +93,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
     }
-
+	loadChatMessages();
     socket.onmessage = function(event) {
         const data = JSON.parse(event.data);
         console.log('Received data:', data);
@@ -157,7 +156,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     if (param.result == 'success') {
                         alert('도네이션을 전송하였습니다.');
                         socket.send(JSON.stringify(donationData));
-                        appendDonationMessage(donationData); // 채팅 창에 도네이션 메시지 추가
+                        appendDonationMessage(donationData);
                         window.close();
                     } else if (param.result == 'logout') {
                         alert('로그인 해야합니다.');
@@ -175,10 +174,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // 새로운 채팅 메시지를 AJAX와 WebSocket을 통해 전송하는 함수
     function sendChatMessage() {
+		
+		
         const message = $('#chat-input').val();
         if (message.trim() !== "") {
             const messageData = { str_num: strNum, strt_chat: message };
-
+			
             $.ajax({
                 url: '/streaming/send',
                 type: 'POST',
@@ -188,7 +189,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     if (param.result == 'success') {
                         const nickname = param.mem_nickName;
                         socket.send(JSON.stringify({ mem_nickName: nickname, strt_chat: message }));
-                        loadChatMessages();
+                        
                     }
                     $('#chat-input').val('');
                     
@@ -200,8 +201,9 @@ document.addEventListener("DOMContentLoaded", function() {
         } else {
             alert('메시지를 입력해주세요');
         }
+        
     }
-
+	
     $('#chat-send-button').on('click', sendChatMessage);
     $('#chat-input').on('keypress', function(event) {
         if (event.key === 'Enter') {
@@ -209,7 +211,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-    loadChatMessages(); // 초기 채팅 메시지 로드
+    
     
     // 미션을 미션 목록에 추가하는 함수
     function appendMission(mission, listId) {
