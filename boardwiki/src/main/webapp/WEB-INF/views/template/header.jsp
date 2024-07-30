@@ -19,13 +19,14 @@
         </div>
         <div class="header-social d-flex justify-content-end">
           	<c:if test="${user.mem_auth!=9 && user != null}">
-           		<a href="${pageContext.request.contextPath}/myPage/myPage">MyPage</a>
+           		<a href="${pageContext.request.contextPath}/myPage/myPage">MyPage </a>
           	</c:if>
           	<c:if test="${user.mem_auth==9 && user != null}">
-            	<a href="${pageContext.request.contextPath}/admin/adminPage">관리자 페이지</a>
+            	<a href="${pageContext.request.contextPath}/admin/adminPage">관리자 페이지 </a>
           	</c:if>
+          	<a href="${pageContext.request.contextPath}/pointgame/list">Daliy Quiz </a>
           	<c:if test="${user.mem_auth!=9 && user != null}">
-	        <a href="${pageContext.request.contextPath}/cart/cart" class="cart">장바구니</a>
+	        <a href="${pageContext.request.contextPath}/cart/cart" class="cart">장바구니 </a>
 	        <a href="${pageContext.request.contextPath}/attendance/attendance">출석체크</a>
           	</c:if>
             <c:if test="${user.mem_auth!=9 && user != null}">
@@ -75,7 +76,6 @@
                     </li>
                     <li><a href="#">스트리밍</a>
                         <ul class="sub-menu">
-                            <li><a href="${pageContext.request.contextPath}/pointgame/list">실시간 보드게임</a></li>
                             <li><a href="${pageContext.request.contextPath}/streaming/broadcasts">스트리밍</a></li>
                         </ul>
                     </li>

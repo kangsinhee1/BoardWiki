@@ -14,9 +14,9 @@ font-size: 18px;
 </style>
 <section class="page-top-section set-bg" data-setbg="/img/page-top-bg/4.jpg" style="background-image: url(&quot;/img/page-top-bg/4.jpg&quot;);">
 <div class="page-info">
-        <h2>quiz 관리</h2>
+        <h2>Quiz 관리</h2>
         <div class="site-breadcrumb">
-            <a href="${pageContext.request.contextPath}/item/item_main">Home</a>/<a href="${pageContext.request.contextPath}/pointgame/list">quiz</a>/<span>${game.poiG_content}</span>
+            <a href="${pageContext.request.contextPath}/item/item_main">Home</a>/<a href="${pageContext.request.contextPath}/pointgame/list">Quiz</a>/<span>${game.poiG_content}</span>
         </div>
     </div>
 </section>

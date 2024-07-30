@@ -166,3 +166,6 @@
 	background-color: #280E3B;
 	padding: 20px;
 }
+.selected{
+	opacity: 0.4;
+}

@@ -35,9 +35,9 @@ text-align: center;
 
 <section class="page-top-section set-bg" data-setbg="/img/page-top-bg/4.jpg" style="background-image: url(&quot;/img/page-top-bg/4.jpg&quot;);">
 <div class="page-info">
-<h2>quiz 목록</h2>
+<h2>Quiz 목록</h2>
 <div class="site-breadcrumb">
-<a href="${pageContext.request.contextPath}/item/item_main">Home</a>/ <span>quiz</span>
+<a href="${pageContext.request.contextPath}/item/item_main">Home</a>/ <span>Quiz</span>
 </div>
 </div>
 </section>
@@ -52,7 +52,7 @@ text-align: center;
 <button onclick="location.href='/pointgame/manageGames'">게임 관리</button>
 </c:if>
 </div>
-<div class="qwer">현재 진행중인 quiz</div>
+<div class="qwer">현재 진행중인 Quiz</div>
 <div class="sidebar-menu">
 <ul id="gameList">
     <c:forEach var="game" items="${list}">
