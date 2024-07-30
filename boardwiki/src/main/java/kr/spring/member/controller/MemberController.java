@@ -261,7 +261,14 @@ public class MemberController {
 
 			return formMemberSocialRegister(); // 회원가입 폼으로 리다이렉트
 		}
-		if(!result.getMem_provider().equals("Naver")) {
+		if (result.getMem_provider() == null) {
+			//UI 메시지 처리
+			model.addAttribute("message", "회원님은 BoardWiki 회원입니다 BoardWiki 로그인으로 이용바랍니다.");
+			model.addAttribute("url",
+					request.getContextPath()+"/member/login");
+
+			return "common/resultAlert";
+		}else if(!result.getMem_provider().equals("Naver")) {
 			//UI 메시지 처리
 			model.addAttribute("message", "회원님의 이메일로 가입된 다른 계정이 있습니다.");
 			model.addAttribute("url",
@@ -363,8 +370,14 @@ public class MemberController {
 
 			return formMemberSocialRegister(); // 회원가입 폼으로 리다이렉트
 		}
+		if (result.getMem_provider() == null) {
+			//UI 메시지 처리
+			model.addAttribute("message", "회원님은 BoardWiki 회원입니다 BoardWiki 로그인으로 이용바랍니다.");
+			model.addAttribute("url",
+					request.getContextPath()+"/member/login");
 
-		if(!result.getMem_provider().equals("Kakao")) {
+			return "common/resultAlert";
+		}else if(!result.getMem_provider().equals("Kakao")) {
 			//UI 메시지 처리
 			//			model.addAttribute("accessTitle", "로그인 오류");
 			model.addAttribute("message", "회원님의 이메일로 가입된 다른 계정이 있습니다.");
@@ -438,9 +451,14 @@ public class MemberController {
 
 			return formMemberSocialRegister(); // 회원가입 폼으로 리다이렉트
 		}
+		if (result.getMem_provider() == null) {
+			//UI 메시지 처리
+			model.addAttribute("message", "회원님은 BoardWiki 회원입니다 BoardWiki 로그인으로 이용바랍니다.");
+			model.addAttribute("url",
+					request.getContextPath()+"/member/login");
 
-
-		if (!result.getMem_provider().equals("Google")) {
+			return "common/resultAlert";
+		}else if (!result.getMem_provider().equals("Google")) {
 			// UI 메시지 처리
 			model.addAttribute("accessTitle", "로그인 오류");
 			model.addAttribute("accessMsg", "회원님의 이메일로 가입된 다른 계정이 있습니다.");
