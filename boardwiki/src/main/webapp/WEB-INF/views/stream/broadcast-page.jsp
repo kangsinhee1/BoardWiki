@@ -172,7 +172,7 @@
     }
 
     function openMissionListByMember() {
-        window.open("/mission/userlist?str_num=" + ${param.str_num}, "missionListByMember", "width=600,height=426");
+        window.open("/mission/userlist?str_num=" + ${param.str_num}, "missionListByMember", "width=auto,height=");
     }
     let strNum = ${param.str_num};
     let streamKey = $('#str_key').val();

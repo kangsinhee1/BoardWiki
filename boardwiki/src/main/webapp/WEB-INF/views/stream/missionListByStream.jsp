@@ -6,31 +6,41 @@
 <script>
 let strNum = ${param.str_num};
 
-$(window).load(function() {
+$(document).ready(function() {
 
-    var strWidth;
-    var strHeight;
+    function resizeWindow() {
+        var section = $('section.blog-page');
+        var sectionWidth = section.outerWidth();
+        var sectionHeight = section.outerHeight();
 
-    if ( window.innerWidth && window.innerHeight && window.outerWidth && window.outerHeight ) {
-        strWidth = $('.blog-page').outerWidth() + (window.outerWidth - window.innerWidth);
-        strHeight = $('.blog-page').outerHeight() + (window.outerHeight - window.innerHeight);
+        var strWidth;
+        var strHeight;
+
+        if (window.innerWidth && window.innerHeight && window.outerWidth && window.outerHeight) {
+            strWidth = sectionWidth + (window.outerWidth - window.innerWidth);
+            strHeight = sectionHeight + (window.outerHeight - window.innerHeight);
+        } else {
+            var strDocumentWidth = $(document).outerWidth();
+            var strDocumentHeight = $(document).outerHeight();
+            window.resizeTo(strDocumentWidth, strDocumentHeight);
+
+            var strMenuWidth = strDocumentWidth - $(window).width();
+            var strMenuHeight = strDocumentHeight - $(window).height();
+
+            strWidth = sectionWidth + strMenuWidth;
+            strHeight = sectionHeight + strMenuHeight;
+        }
+
+        // Resize the window
+        window.resizeTo(strWidth, strHeight);
     }
 
-    else {
-        var strDocumentWidth = $(document).outerWidth();
-        var strDocumentHeight = $(document).outerHeight();
-        window.resizeTo ( strDocumentWidth, strDocumentHeight );
+    resizeWindow();
 
-        var strMenuWidth = strDocumentWidth - $(window).width();
-        var strMenuHeight = strDocumentHeight - $(window).height();
-
-        strWidth = $('.blog-page').outerWidth() + strMenuWidth;
-        strHeight = $('.blog-page').outerHeight() + strMenuHeight;
-    }
-
-	//resize
-	window.resizeTo( strWidth, strHeight );
-
+    // Recalculate on window resize just in case
+    $(window).resize(function() {
+        resizeWindow();
+    });
 });
 </script>
 <section class="blog-page">
