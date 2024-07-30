@@ -18,10 +18,10 @@
 			</div>
        		 </c:when>
         	<c:when test="${board.boa_category == 5}">
-        	    <h2>QNA</h2>
+        	    <h2>Q&amp;A</h2>
            		<div class="site-breadcrumb">
 				<a href="list2?boa_category=5">Home</a>  /
-				<span>QnA</span>
+				<span>Q&amp;A</span>
 			</div>
        		 </c:when>
     		</c:choose>

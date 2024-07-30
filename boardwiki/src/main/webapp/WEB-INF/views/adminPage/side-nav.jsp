@@ -17,7 +17,7 @@
 				<li><a
 					href="${pageContext.request.contextPath}/adminPage/reportManage">신고관리</a></li>
 				<li><a
-					href="${pageContext.request.contextPath}/adminPage/QnaManage">QnA</a></li>
+					href="${pageContext.request.contextPath}/adminPage/QnaManage">Q&amp;A</a></li>
 				<li><a
 					href="${pageContext.request.contextPath}/rent/rentListAdmin">대여관리</a></li>
 				<li><a

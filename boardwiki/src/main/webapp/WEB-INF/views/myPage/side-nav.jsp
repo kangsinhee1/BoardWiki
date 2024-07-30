@@ -38,7 +38,7 @@
 		</li> --%>
 		<li><a href="${pageContext.request.contextPath}/myPage/pointList">포인트</a></li>
 		<li><a href="${pageContext.request.contextPath}/myPage/rent">게임대여</a></li>	
-		<li><a href="${pageContext.request.contextPath}/myPage/myQna">내QnA</a></li>
+		<li><a href="${pageContext.request.contextPath}/myPage/myQna">내Q&amp;A</a></li>
 		
 	</ul>
 <!-- </nav> -->

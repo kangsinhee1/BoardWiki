@@ -10,7 +10,7 @@
            		 <h2>공지</h2>
        		 </c:when>
         	<c:when test="${param.boa_category == 5}">
-           		 <h2>QnA</h2>
+           		 <h2>Q&amp;A</h2>
        		 </c:when>
     	</c:choose>
     	<c:choose>
@@ -23,7 +23,7 @@
         	<c:when test="${param.boa_category == 5}">
            		<div class="site-breadcrumb">
 				<a href="list2?boa_category=5">Home</a>  /
-				<span>QnA</span>
+				<span>Q&amp;A</span>
 			</div>
        		 </c:when>
     	</c:choose>

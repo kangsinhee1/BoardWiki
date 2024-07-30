@@ -1667,6 +1667,7 @@ ol {
 
 .footer-section .container {
 	position: relative;
+	display: inline-block;
 	padding: 60px 15px 25px;
 }
 
@@ -1735,6 +1736,8 @@ ol {
 .page-info h2 {
 	color: #fff;
 	font-size: 48px;
+	margin-bottom: .5rem;
+	
 }
 
 .site-breadcrumb a,

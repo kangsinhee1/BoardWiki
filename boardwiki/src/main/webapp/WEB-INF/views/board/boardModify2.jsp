@@ -16,7 +16,7 @@
            		 <h2>공지</h2>
        		 </c:when>
         	<c:when test="${param.boa_category == 5}">
-           		 <h2>QnA</h2>
+           		 <h2>Q&amp;A</h2>
        		 </c:when>
     	</c:choose>
 		<div class="site-breadcrumb">
@@ -41,7 +41,7 @@
 					<c:if test="${user.mem_auth==9}">
 					<form:option value="4">공지사항</form:option>
 					</c:if>
-					<form:option value="5">QnA</form:option>
+					<form:option value="5">Q&amp;A</form:option>
 					
 				</form:select>
 				<form:errors path="boa_category" cssClass="error-color"/>                             
