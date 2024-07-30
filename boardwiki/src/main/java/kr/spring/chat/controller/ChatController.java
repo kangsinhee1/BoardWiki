@@ -139,9 +139,10 @@ public class ChatController {
 			map.put("keyword",keyword);
 			map.put("mem_num", user.getMem_num());
 			int count = chatService.selectRowCount(map);
+			log.debug("채팅 개수2 ~~~~~~~~~~~~~~~~~~~~~~" + count);
 			if(count == 0) {
 				count = -1;
-				model.addAttribute("count",count);
+				map.put("count", count);
 			}
 			log.debug("채팅 개수 ~~~~~~~~~~~~~~~~~~~~~~" + count);
 
@@ -152,7 +153,7 @@ public class ChatController {
 				map.put("start", page.getStartRow());
 				map.put("end", page.getEndRow());
 				list = chatService.selectChatRoomList(map);
-				
+				log.debug("채팅 리스트 뭔데 " + list);
 				model.addAttribute("count",count);
 				model.addAttribute("list",list);
 				model.addAttribute("page",page.getPage());
