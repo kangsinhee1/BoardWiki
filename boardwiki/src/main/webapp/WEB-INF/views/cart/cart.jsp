@@ -2,8 +2,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
+<script src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/cart.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/cart.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css" type="text/css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>장바구니</title>
@@ -20,12 +25,15 @@
                 <span>Cart</span>
             </div>
         </div>
-    </section>
+         </section>
     <!-- Page top end-->
     <!-- Review section -->
+    
     <section class="review-section py-5">
         <div class="container">
+        <c:if test="${cart.item_num!=null}">
             <div class="table-responsive">
+            
                 <table class="table table-bordered table-striped">
                     <thead class="thead-dark">
                         <tr>
@@ -39,6 +47,7 @@
                     </thead>
                     <tbody>
                         <c:forEach var="cart" items="${list}">
+                        
                             <tr>
                                 <td><img src="${cart.item_image}" width="100" height="100" class="img-thumbnail"></td>
                                 <td>${cart.item_name}</td>
@@ -49,15 +58,17 @@
                                             <option value="${i}" <c:if test="${i == cart.item_quantity}">selected</c:if>>${i}</option>
                                         </c:forEach>
                                     </select>
-                                </td> 
+                                </td>
                                 <td id="total_price_${cart.item_num}" class="total-price">${cart.item_quantity * cart.item_price}원</td>
                                 <td>
                                     <button class="btn btn-danger deleteX" data-item-num="${cart.item_num}" data-mem-num="${cart.mem_num}">제거</button>
                                 </td>
                             </tr>
+                        
                         </c:forEach>
                     </tbody>
                 </table>
+                
             </div>
             <div class="align-right">
             <div class="mt-4">
@@ -65,7 +76,48 @@
                 <a href="${pageContext.request.contextPath}/order/order?mem_num=${mem_num}" class="btn btn-primary">주문하기</a>
             </div>
             </div>
+            </c:if>
+            <c:if test="${cart.item_num==null}">
+            <div class="table-responsive">
+                    <div class="result-display">장바구니에 상품이 없습니다.</div>
+            </div>
+            </c:if>
         </div>
-    </section>
+        
+        
+        </section>
+        
 </body>
+<script type="text/javascript">
+    function confirmAddToCart() {
+        if (confirm('장바구니에 추가하시겠습니까?')) {
+            var item_num = $('input[name="item_num"]').val();
+            var item_quantity = $('input[name="item_quantity"]').val();
+            $.ajax({
+                type: 'POST',
+                url: '${pageContext.request.contextPath}/item/addToCart',
+                data: {
+                    item_num: item_num,
+                    item_quantity: item_quantity
+                },
+                dataType: 'json',
+                success: function(response) {
+                    alert(response.result);  // 서버에서 반환하는 결과 메시지를 표시
+                    if (response.result === 'success') {
+                        window.location.href = '${pageContext.request.contextPath}/cart/cart?mem_num=${member.mem_num}';
+                    }
+                },
+                error: function(xhr, status, error) {
+                    alert('장바구니에 추가하는 중 오류가 발생했습니다.');
+                }
+            });
+        }
+    }
+
+    $(document).ready(function() {
+        $('#addToCartButton').click(function() {
+            confirmAddToCart();
+        });
+    });
+</script>
 </html>
