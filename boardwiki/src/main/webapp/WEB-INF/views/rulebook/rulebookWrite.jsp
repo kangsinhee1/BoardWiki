@@ -73,18 +73,23 @@
 </div>
 </section>
 
-				<div class="modal">
-                    <form id="searchform">
-                        <h4>제품 검색</h4>
-                        <input type="text" name="search" class="inputcheck input-style2" id="search" maxlength="30" placeholder="제목을 입력하세요"><br>
-                        <input id="itembtn" type="button" value="검색" class="button2">
-                        <input id="itembtn2" type="button" value="취소" class="button2">
-                        <div id="add"></div>
-                        <input type="button" class="button2 paging2" style="display:none;" value="이전">
-                        <input type="button" class="button2 paging" style="display:none;" value="다음">
-                    </form>
-                </div>
-				<script type="text/javascript">
+			<div class="modal-bg">
+	<div class="modal-bg">
+	<div class="modal">
+		<form id="searchform">
+			<h4>제품 검색</h4>
+			<input type="text" name="search" class="inputcheck input-style2"
+				id="search" maxlength="30" placeholder="제목을 입력하세요"><br>
+			<input id="itembtn" type="button" value="검색" class="button2">
+			<input id="itembtn2" type="button" value="취소" class="button2">
+			<div id="add"></div>
+			<input type="button" class="button2 paging2" style="display: none;"
+				value="이전"> <input type="button" class="button2 paging"
+				style="display: none;" value="다음">
+		</form>
+	</div>
+</div>
+<script type="text/javascript">
 			    $(document).ready(function() {
 			        let currentNum;
 			        let count;
@@ -94,14 +99,17 @@
 			        $('#item_numbtn').click(function() {
 			            if (cnt === 0) {
 			                $('.modal').show();
+			                $('.modal-bg').show();
 			                cnt = 1;
 			            } else {
 			                $('.modal').hide();
+			                $('.modal-bg').hide();
 			                cnt = 0;	
 			            }
 			        });
 			        $('#itembtn2').click(function() {
 			            $('.modal').hide();
+			            $('.modal-bg').hide();
 			            cnt = 0;
 			        });
 			        $('#itembtn').on('click',function(event) {
@@ -162,6 +170,8 @@
 			            $('#item_name').val(this.value);
 			            $('#item_num').val(this.id);
 			            $('.modal').hide();
+			            $('.modal-bg').hide();
+			            
 			        });
 			        $('.paging').click(function() {
 			            selList(currentNum + 1);
@@ -171,10 +181,6 @@
 			        });
 			    });
 			    </script>
-
-
-
-
 
 
 

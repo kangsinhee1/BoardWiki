@@ -163,17 +163,60 @@ div.form-group label{
 .content-container.active {
         display: block;
     }
-.modal2 {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgb(0,0,0);
-  background-color: rgba(0,0,0,0.4);
+.modal{
+	position:absolute;
+	z-index:5;
+	background:#c096d9;
+	top:50%;
+	left:40%;
+	margin-bottom:8px !important;
+	padding-bottom:15px;
+	border-radius:10px;
+	border:3px solid #C213B6;
+	width:350px;
+    height:600px; 
+    padding:40px;
+	text-align: center;
+    transform:translateY(-50%);
+}
+.modal2{
+    top:50%;
+    left:40%; 
+	position:absolute;
+	z-index: 100;
+	background:white;
+	margin-bottom:8px !important;
+	padding-bottom:15px;
+	border-radius:10px;
+	border:1px solid #ccc;
+	width:350px;
+    height:600px; 
+    padding:40px;
+	text-align: center;
+    transform:translateY(-50%);
+}
+.modal2 textarea{
+	resize: none;
+}
+.modal-bg{
+	z-index: 99;
+	position:absolute;
+    display:none;
+    justify-content: center;
+    top:0;
+    left:0;
+	width:100%;
+    height:100%;
+	background-color: rgba(0,0,0,0.4);
+}
+.modal h4{
+	color:white;
+}
+
+.itemsh{
+	width:250px;
+	margin:2px;
+	border-radius: 5px;
 }
 
 .modal-content {
