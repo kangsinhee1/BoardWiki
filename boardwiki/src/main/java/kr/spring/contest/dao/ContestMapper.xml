@@ -227,5 +227,7 @@
 		SELECT * FROM contest_apply a JOIN contest c USING(con_num)
 		WHERE a.mem_num
 		= #{mem_num}
+		AND
+		(con_status = 0 or con_status = 2)
 	</select>
 </mapper>

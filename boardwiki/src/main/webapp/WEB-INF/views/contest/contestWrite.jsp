@@ -19,9 +19,9 @@
 <section class="page-top-section set-bg"
 	data-setbg="${pageContext.request.contextPath}/img/page-top-bg/4.jpg">
 	<div class="page-info">
-		<h2>글쓰기</h2>
+		<h2>대회글쓰기</h2>
 		<div class="site-breadcrumb">
-			<a href="${pageContext.request.contextPath}/home">Home</a> / <span>글쓰기</span>
+			<a href="${pageContext.request.contextPath}/home">Home</a> / <span>대회 글 쓰기 </span>
 		</div>
 	</div>
 </section>
