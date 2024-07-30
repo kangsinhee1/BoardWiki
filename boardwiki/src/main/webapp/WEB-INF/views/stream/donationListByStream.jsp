@@ -54,12 +54,14 @@ $(document).ready(function() {
     <c:if test="${count > 0}">
     <div class="chart-table">
         <table  id="donation-list2">
+        <thead>
             <tr>
                 <th>내용</th>
                 <th>포인트</th>
                 <th>유저</th>
                 <th>날짜</th>
             </tr>
+       </thead>
             <c:forEach var="donation" items="${list}">
                 <tr>
                     <td class="align-center">${donation.don_content}</td>
@@ -70,7 +72,7 @@ $(document).ready(function() {
             </c:forEach>
         </table>
         </div>
-        <div class="align-center">${page}</div>
+        <div class="align-center"><div class="blog-pagination">${page}</div></div>
     </c:if>
     </div>
     

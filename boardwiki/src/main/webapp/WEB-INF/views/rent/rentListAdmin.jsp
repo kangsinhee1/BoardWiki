@@ -98,7 +98,7 @@
                     <td class="align-center">
                         <c:choose>
                             <c:when test="${rent.rent_status == 1}">
-                                <a href="${pageContext.request.contextPath}/rent/return?rent_num=${rent.rent_num}" onclick="return confirm('반납하시겠습니까?');">대여중</a>
+                                <a href="${pageContext.request.contextPath}/rent/return?rent_num=${rent.rent_num}" onclick="return confirm('반납 완료 처리하시겠습니까?');">대여중</a>
                             </c:when>
                             <c:when test="${rent.rent_status == 2}">반납</c:when>
                             <c:otherwise>상태 불명</c:otherwise>

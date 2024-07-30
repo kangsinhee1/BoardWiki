@@ -60,6 +60,7 @@ ${logout}<br>
 				<c:if test="${count > 0}">
 					<div class="game-main">
 						<h2>방송용 미션 목록</h2>
+						<div class="chart-table">
 
 						<table id="mission-list2">
 							<thead>
@@ -99,8 +100,9 @@ ${logout}<br>
 								</c:forEach>
 							</tbody>
 						</table>
+						</div>
 					</div>
-					<div class="align-center">${page}</div>
+					<div class="align-center"><div class="blog-pagination">${page}</div></div>
 				</c:if>
 				</c:if>
 			</div>
