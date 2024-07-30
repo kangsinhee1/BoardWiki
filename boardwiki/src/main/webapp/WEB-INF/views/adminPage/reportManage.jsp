@@ -22,8 +22,8 @@
 									<th>번호</th>
 									<th>신고내용</th>
 									<th>신고자</th>
-									<th>신고유형</th>
 									<th>신고발생지</th>
+									<th>신고유형</th>
 								</tr>
 								<c:forEach var="report" items="${list}">
 									<tr>

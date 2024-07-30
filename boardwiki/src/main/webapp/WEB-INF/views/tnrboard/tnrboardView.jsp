@@ -149,9 +149,9 @@
 	<div class="modal2">
 		<form id="reportForm">
 			<h3 style="color:black;">※신고하기※</h3><br>
-			<input type="hidden" id="report_type" name="report_type" value="6">
+			<input type="hidden" id="report_type" name="report_type" value="7">
 			<input type="hidden" id="report_typeDetail" name="report_typeDetail"
-				value="${used.use_num }">
+				value="${tnrboard.tnr_num }">
 			<textarea rows="10" cols="30" id="report_content"
 				name="report_content" placeholder="신고 사유를 적어주세요"></textarea>
 			<h6 style="color:black;"><b>신고 사유</b></h6>

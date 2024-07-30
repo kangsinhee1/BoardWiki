@@ -117,7 +117,7 @@
 			<h3 style="color:black;">※신고하기※</h3><br><br>
 			<input type="hidden" id="report_type" name="report_type" value="1">
 			<input type="hidden" id="report_typeDetail" name="report_typeDetail"
-				value="${used.use_num }">
+				value="${board.boa_num }">
 			<textarea rows="10" cols="30" id="report_content"
 				name="report_content" placeholder="신고 사유를 적어주세요"></textarea>
 			<h6 style="color:black;"><b>신고 사유</b></h6>
