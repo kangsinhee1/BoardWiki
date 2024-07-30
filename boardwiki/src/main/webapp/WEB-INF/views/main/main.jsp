@@ -54,7 +54,7 @@ div.hiddenImage figure{
 		<div class="container">
 			<div class="row">
 				<div class="col-md-4">
-					<div class="intro-text-box text-box2 text-white hiddenImage">
+					<div class="intro-text-box text-box2 text-white hiddenImage" style=" overflow: hidden;display: -webkit-box; -webkit-line-clamp: 6; -webkit-box-orient: vertical;">
 						<div class="top-meta">${board.boa_rdate}  /  in <a href="">자유게시판</a></div>
 						<h3 style="width:100%">${board.boa_title }</h3>
 						<p>${board.boa_content }</p><br>
@@ -62,7 +62,7 @@ div.hiddenImage figure{
 					</div>
 				</div>
 				<div class="col-md-4">
-					<div class="intro-text-box text-box2 text-white hiddenImage">
+					<div class="intro-text-box text-box2 text-white hiddenImage" style=" overflow: hidden;display: -webkit-box; -webkit-line-clamp: 6; -webkit-box-orient: vertical;">
 						<div class="top-meta">${tnr.tnr_rdate }  /  in <a href="">팁/후기게시판</a></div>
 						<h3 style="width:100%">${tnr.tnr_title }</h3>
 						<p>${tnr.tnr_content }</p><br>
@@ -70,7 +70,7 @@ div.hiddenImage figure{
 					</div>
 				</div>
 				<div class="col-md-4">
-					<div class="intro-text-box text-box2 text-white hiddenImage">
+					<div class="intro-text-box text-box2 text-white hiddenImage" style=" overflow: hidden;display: -webkit-box; -webkit-line-clamp: 6; -webkit-box-orient: vertical;">
 						<div class="top-meta">${used.use_rdate }  /  in <a href="">중고게시판</a></div>
 						<h3 style="width:100%">${used.use_title }</h3>
 						<p>${used.use_content }</p><br>
