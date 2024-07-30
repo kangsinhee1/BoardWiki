@@ -13,13 +13,15 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Datepicker CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css" type="text/css">
 </head>
 <body>
 
 <!-- Page top section -->
 <section class="page-top-section set-bg" data-setbg="/img/page-top-bg/4.jpg">
     <div class="page-info">
-        <h2>대여 목록</h2>
+        <h2>게임 대여</h2>
         <div class="site-breadcrumb">
             <a href="">Home</a> /
             <span>Contact</span>
