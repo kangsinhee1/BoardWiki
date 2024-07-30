@@ -74,12 +74,14 @@ public class BroadcastController {
     		}
     	}
         BroadcastVO broadcast = broadcastService.findByMemNum(str_num);
-        MemberVO member = memberService.selectMember(broadcast.getMem_num());
-        broadcast.setMem_nickName(member.getMem_nickName());
+        if(broadcast!=null) {
+        	MemberVO member = memberService.selectMember(broadcast.getMem_num());
+        	broadcast.setMem_nickName(member.getMem_nickName());
+        	request.setAttribute("broadcast", broadcast);
+        }
         StreamKeyVO streamkey = streamKeyService.selectstream(str_num);
         StreamCreatingVO stream =  streamCreatingService.selectCreating(str_num);
         request.setAttribute("streamkey", streamkey);
-        request.setAttribute("broadcast", broadcast);
         request.setAttribute("str", stream);
         request.setAttribute("user", user);
         return "broadcast-page";

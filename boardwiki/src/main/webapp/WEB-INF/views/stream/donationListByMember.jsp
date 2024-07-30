@@ -6,16 +6,32 @@
 <script>
 let strNum = ${param.str_num};
 
-function resizeWindow() {
-    // 페이지 내용의 높이와 너비를 계산
-    var pageHeight = document.documentElement.scrollHeight;
-    var pageWidth = document.documentElement.scrollWidth;
+$(window).load(function() {
 
-    window.resizeTo(pageWidth, pageHeight);
-}
+    var strWidth;
+    var strHeight;
 
-// DOM이 완전히 로드된 후 창 크기 조정
-window.onload = resizeWindow;
+    if ( window.innerWidth && window.innerHeight && window.outerWidth && window.outerHeight ) {
+        strWidth = $('#contents').outerWidth() + (window.outerWidth - window.innerWidth);
+        strHeight = $('#contents').outerHeight() + (window.outerHeight - window.innerHeight);
+    }
+
+    else {
+        var strDocumentWidth = $(document).outerWidth();
+        var strDocumentHeight = $(document).outerHeight();
+        window.resizeTo ( strDocumentWidth, strDocumentHeight );
+
+        var strMenuWidth = strDocumentWidth - $(window).width();
+        var strMenuHeight = strDocumentHeight - $(window).height();
+
+        strWidth = $('#contents').outerWidth() + strMenuWidth;
+        strHeight = $('#contents').outerHeight() + strMenuHeight;
+    }
+
+	//resize
+	window.resizeTo( strWidth, strHeight );
+
+});
 </script>
 <section class="blog-page">
 <div class="container">

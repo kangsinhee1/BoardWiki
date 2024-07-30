@@ -53,8 +53,8 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     
     // 입장 메시지를 채팅 컨테이너에 추가하는 함수
-    function appendEntranceMessage(nickName) {
-        const messageElement = $('<div></div>').text(nickName + '님이 입장하셨습니다.').css({
+    function appendEntranceMessage() {
+        const messageElement = $('<div></div>').text('채팅방에 입장하셨습니다.').css({
             'font-weight': 'bold',
             'color': 'green'
         });
@@ -86,9 +86,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
                 
                 // 입장 메시지 추가
-                appendEntranceMessage(memNickname);
-                // 서버로 입장 메시지 전송
-                socket.send(JSON.stringify({ mem_nickName: memNickname, strt_chat: `${memNickname}님이 입장하셨습니다.` }));
+                appendEntranceMessage();
             },
             error: function(error) {
                 console.error('에러 발생 :', error);
@@ -188,7 +186,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 data: messageData,
                 success: function(param) {
                     if (param.result == 'success') {
-						alert('메세지 전송성공');
                         const nickname = param.mem_nickName;
                         socket.send(JSON.stringify({ mem_nickName: nickname, strt_chat: message }));
                         loadChatMessages();

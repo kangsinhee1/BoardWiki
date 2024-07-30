@@ -34,4 +34,30 @@ ${logout}<br>
     </section>
 <script>
 let strNum = ${param.str_num};
+$(window).load(function() {
+
+    var strWidth;
+    var strHeight;
+
+    if ( window.innerWidth && window.innerHeight && window.outerWidth && window.outerHeight ) {
+        strWidth = $('#contents').outerWidth() + (window.outerWidth - window.innerWidth);
+        strHeight = $('#contents').outerHeight() + (window.outerHeight - window.innerHeight);
+    }
+
+    else {
+        var strDocumentWidth = $(document).outerWidth();
+        var strDocumentHeight = $(document).outerHeight();
+        window.resizeTo ( strDocumentWidth, strDocumentHeight );
+
+        var strMenuWidth = strDocumentWidth - $(window).width();
+        var strMenuHeight = strDocumentHeight - $(window).height();
+
+        strWidth = $('#contents').outerWidth() + strMenuWidth;
+        strHeight = $('#contents').outerHeight() + strMenuHeight;
+    }
+
+	//resize
+	window.resizeTo( strWidth, strHeight );
+
+});
 </script>
