@@ -71,9 +71,9 @@
             <c:forEach var="point" items="${list}">
                 <tr>
                     <td class="align-center">${point.poi_num}</td>
-                    <td class="align-left">
+                    <td class="align-center">
                         <c:choose>
-                            <c:when test="${point.poi_status == 1}">포인트 게임</c:when>
+                            <c:when test="${point.poi_status == 1}">Quiz배팅</c:when>
                             <c:when test="${point.poi_status == 2}">출석체크</c:when>
                             <c:when test="${point.poi_status == 3}">후원</c:when>
                             <c:when test="${point.poi_status == 4}">미션후원</c:when>

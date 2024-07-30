@@ -2,7 +2,21 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="${pageContext.request.contextPath}/js/boradchat.js"></script>
-
+<style>
+input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+.qwe{
+color:white;
+margin-top:10px;
+margin-bottom:10px;
+}
+input{
+margin-bottom:10px;
+} 
+</style>
 
 
 <section class="blog-page">
@@ -20,8 +34,8 @@
 <c:if test="${user != null}">
     <h2>도네이션 입력</h2>
     <form id="donationForm">
-        <div>(${user.mem_nickName})님의 현재 포인트 : ${point}</div>
-        <label for="don_content" class="font-white">내용:</label>
+        <div class="qwe">(${user.mem_nickName})님의 현재 포인트 : ${point}</div>
+        <label for="don_content" class="font-white">내&nbsp;용:</label>&nbsp;&nbsp;
         <input type="text" id="don_content" name="don_content"><br>
         <label for="don_point" class="font-white">포인트:</label>
         <input type="number" id="don_point" name="don_point"><br>

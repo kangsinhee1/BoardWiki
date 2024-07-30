@@ -102,7 +102,13 @@ ${logout}<br>
 					<div class="align-center">${page}</div>
 				</c:if>
 				</c:if>
+				
 			</div>
 		</div>
 	</div>
 </section>
+<style>
+.align-center{
+text-align: center;
+}
+</style>

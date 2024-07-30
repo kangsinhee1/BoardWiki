@@ -79,7 +79,7 @@ public class AttendanceController {
             vo.setMem_num(user.getMem_num());
             vo.setAtt_date(LocalDate.now());
             attendanceService.checkAndInsertAttendance(vo);
-            model.addAttribute("message","출서체크 완료");
+            model.addAttribute("message","출석체크 완료");
     		model.addAttribute("url","/attendance/attendance");
         }else {
         	model.addAttribute("message","로그인이 필요합니다.");

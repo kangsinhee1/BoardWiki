@@ -107,3 +107,8 @@ ${logout}<br>
 		</div>
 	</div>
 </section>
+<style>
+.align-center{
+text-align: center;
+}
+</style>

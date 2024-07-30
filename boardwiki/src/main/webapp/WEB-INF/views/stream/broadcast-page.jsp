@@ -168,7 +168,7 @@
     }
 
     function openMissionListByStream() {
-        window.open("/mission/strlist?str_num=" + ${param.str_num}, "missionListByStream", "width=600,height=426");
+        window.open("/mission/strlist?str_num=" + ${param.str_num}, "missionListByStream", "width=auto,height=");
     }
 
     function openMissionListByMember() {
