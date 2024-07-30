@@ -2,9 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="page-main">
-
-<h2>신고목록(관리자)</h2>
-
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
 <section class="blog-page">
@@ -12,6 +9,7 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="page-main">
+				<h2>신고목록(관리자)</h2>
 					<c:if test="${count==0}">
 						<div class="result-display">표시할 신고가 없습니다.</div>
 					</c:if>
