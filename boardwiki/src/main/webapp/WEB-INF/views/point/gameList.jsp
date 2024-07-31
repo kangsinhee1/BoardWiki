@@ -48,8 +48,8 @@ text-align: center;
 		<div class="page-main">
 		<div class="wwwr">
 		<c:if test="${mem_auth == 9}">
-<button id="createGameButton">게임 생성</button>
-<button onclick="location.href='/pointgame/manageGames'">게임 관리</button>
+<button id="createGameButton">Quiz 생성</button>
+<button onclick="location.href='/pointgame/manageGames'">Quiz 관리</button>
 </c:if>
 </div>
 <div class="qwer">현재 진행중인 Quiz</div>

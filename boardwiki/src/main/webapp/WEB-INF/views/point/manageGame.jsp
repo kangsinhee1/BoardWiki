@@ -31,14 +31,14 @@ font-size: 18px;
         <div class="game">
             <h1>${game.poiG_content}</h1>
             <div>
-                <label for="winningOption_${game.poiG_num}">quiz 정답 번호 선택:</label>
+                <label for="winningOption_${game.poiG_num}">quiz 정답 선택:</label>
                 <select class="winningOption" id="winningOption_${game.poiG_num}">
                     <c:forEach var="option" items="${game.options}">
                         <option value="${option.poiO_num}">${option.poiO_content}</option>
                     </c:forEach>
                 </select>
-                <button class="selectWinnerButton" data-game-id="${game.poiG_num}">게임 종료</button>
-                <button class="cancelGameButton" data-game-id="${game.poiG_num}">게임 취소</button>
+                <button class="selectWinnerButton" data-game-id="${game.poiG_num}">Quiz 종료</button>
+                <button class="cancelGameButton" data-game-id="${game.poiG_num}">Quiz 취소</button>
             </div>
         </div>
      </c:if>
