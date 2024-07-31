@@ -192,6 +192,7 @@ div.form-group label{
     padding:40px;
 	text-align: center;
     transform:translateY(-50%);
+    display:none;
 }
 .modal2 textarea{
 	resize: none;
