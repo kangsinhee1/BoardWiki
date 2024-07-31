@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
-    const socket = new WebSocket('ws://192.168.10.94:8000/message-ws');
+    const socket = new WebSocket('ws://localhost:8000/message-ws');
 
     socket.onopen = function() {
         console.log('시작');

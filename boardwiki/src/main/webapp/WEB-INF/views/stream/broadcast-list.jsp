@@ -10,7 +10,7 @@
 		<h2>방송 목록</h2>
 		<div class="site-breadcrumb">
 			<a href="${pageContext.request.contextPath}/item/item_main">Home</a>
-			/ <span>방송</span>
+			/ <span>streaming</span>
 		</div>
 	</div>
 </section>

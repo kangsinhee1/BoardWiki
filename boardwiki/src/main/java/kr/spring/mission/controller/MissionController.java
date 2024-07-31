@@ -142,7 +142,7 @@ public class MissionController {
 
 		     list = missionService.getMissionsByMember(map);
 		}
-
+    	model.addAttribute("user", user);
     	model.addAttribute("count", count);
 		model.addAttribute("list", list);
 		model.addAttribute("page", page.getPage());

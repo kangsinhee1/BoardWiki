@@ -60,13 +60,13 @@
 	<c:if test="${broadcast.isLive == 1}">
 		<h2>${broadcast.mem_nickName}님의 방송</h2>
 		<div class="site-breadcrumb">
-			<a href="${pageContext.request.contextPath}/item/item_main">Home</a>/<a href="${pageContext.request.contextPath}/streaming/broadcasts">방송</a>/<span>${broadcast.mem_nickName}님의 방송</span>
+			<a href="${pageContext.request.contextPath}/item/item_main">Home</a>/<a href="${pageContext.request.contextPath}/streaming/broadcasts">streaming</a>/<span>${broadcast.mem_nickName}님의 방송</span>
 		</div>
 	</c:if>
 	<c:if test="${broadcast.isLive != 1}">
 		<h2>방송 시작하기</h2>
 		<div class="site-breadcrumb">
-			<a href="${pageContext.request.contextPath}/item/item_main">Home</a>/<a href="${pageContext.request.contextPath}/streaming/broadcasts">방송</a>/<span>방송시작</span>
+			<a href="${pageContext.request.contextPath}/item/item_main">Home</a>/<a href="${pageContext.request.contextPath}/streaming/broadcasts">streaming</a>/<span>방송시작</span>
 		</div>
 	</c:if>
 	</div>

@@ -77,7 +77,7 @@ ${logout}<br>
 										<td class="align-center">${mission.mis_content}</td>
 										<td class="align-center">${mission.mis_point}</td>
 										
-										<td class="align-center">//</td>
+										<td class="align-center">${user.mem_nickName}</td>
 										<td class="align-center">${mission.mis_date}</td>
 										<td>
 										<c:if test="${mission.mis_status == 1}">
