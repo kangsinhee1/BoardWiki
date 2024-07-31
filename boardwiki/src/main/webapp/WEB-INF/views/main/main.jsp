@@ -150,7 +150,7 @@ div.hiddenImage figure{
 
 	<!-- Intro section -->
 	<section class="intro-video-section set-bg d-flex align-items-end " data-setbg="/img/promo-bg.jpg">
-		<a href="https://youtu.be/BnzGtEyyE9Q?si=p69FC5Fu1mwufnxY" class="video-play-btn video-popup"><img src="/img/icons/solid-right-arrow.png" alt="#"></a>
+		<a href="https://www.youtube.com/embed/KNexS61fjus?si=6Auo1AqweWngDj5V"	 class="video-play-btn video-popup"><img src="/img/icons/solid-right-arrow.png" alt="#"></a>
 		<div class="container">
 			<div class="video-text">
 				<h2>Promo video of the game</h2>

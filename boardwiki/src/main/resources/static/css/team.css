@@ -184,11 +184,9 @@ div.form-group label{
     left:40%; 
 	position:absolute;
 	z-index: 100;
-	background:white;
 	margin-bottom:8px !important;
 	padding-bottom:15px;
 	border-radius:10px;
-	border:1px solid #ccc;
 	width:350px;
     height:600px; 
     padding:40px;
@@ -224,7 +222,6 @@ div.form-group label{
   margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 30%;
 }
 .modal2-content {
   background-color: #fefefe;
