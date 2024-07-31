@@ -159,8 +159,8 @@ public class MyPageController {
 	 * MY페이지 (내 주문)
 	 *==============================*/
 	@GetMapping("/myPage/myOrder")
-	public String myOrderPage(Model model, HttpSession session, Long mem_num) {
-	    MemberVO member = (MemberVO) session.getAttribute("user");
+	public String myOrderPage(Model model, HttpSession session) {
+	    MemberVO member = (MemberVO)session.getAttribute("user");
 
 	    if (member == null) {
 	        return "redirect:/login"; // 세션에 user가 없으면 로그인 페이지로 리다이렉트
@@ -168,13 +168,13 @@ public class MyPageController {
 
 	    log.debug("<<유저 - mem_num>>" + member);
 
-	    List<OrderVO> list = orderService.selectOrderList(mem_num);
-	    List<CartVO> list2 = cartService.selectCartList2(mem_num);
+	    List<OrderVO> list = orderService.selectOrderList(member.getMem_num());
+	    List<CartVO> list2 = cartService.selectCartList2(member.getMem_num());
 
 	    log.debug("<<>>"+list);
 	    log.debug("<<>>"+list2);
 
-	    model.addAttribute("mem_num", mem_num);
+	    model.addAttribute("mem_num", member.getMem_num());
 	    model.addAttribute("list", list);
 	    model.addAttribute("list2", list2);
 

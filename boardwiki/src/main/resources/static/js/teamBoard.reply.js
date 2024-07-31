@@ -45,7 +45,7 @@ $(function(){
 					output +='        <li>';
 					   
 					if(item.mem_nickname){
-						output += item.mem_nickname + '<br>';
+						output += item.mem_nickname + '&ensp;<br>';
 					}else{
 						output += item.id;
 					}
