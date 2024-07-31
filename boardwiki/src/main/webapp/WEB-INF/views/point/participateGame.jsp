@@ -121,6 +121,7 @@
                                 <div class="bet-info">선택지에 걸린 총 포인트 : ${option.bet_point}</div>
                             </div>
                         </c:forEach>
+                        <c:if test="${user.mem_auth!=9}">
                         <div class="ws">
                         <c:if test="${point==null}">
                         <label for="betPoints">배팅할 포인트:</label> 
@@ -131,6 +132,7 @@
                         <label for="betPoints">배팅한 포인트:${point.bet_point}</label> 
                         </c:if>
                         </div>
+                        </c:if>
                     </form>
                 </div>
             </div>
