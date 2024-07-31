@@ -14,6 +14,7 @@ input[type="text"] {
         padding: 5px;
         font-size: 16px;
         outline: none;
+        margin:2px;
         -moz-appearance: textfield; /* Firefox */
         
 }
@@ -35,7 +36,7 @@ input::placeholder{
 		<div class="col-lg-12">
 		<div class="page-main">
 <form id="createGameForm">
-    <label for="gameTitle" class="font-white">주제:</label> 
+    <label for="gameTitle" class="font-white">주제:</label><br>	
     <input type="text" id="gameTitle" name="poiG_content" placeholder="주제를 입력해주세요" required><br><br>
     <div id="choicesContainer">
         <label class="font-white">선택지:</label><br>
