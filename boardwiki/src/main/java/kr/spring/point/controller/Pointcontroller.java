@@ -184,4 +184,46 @@ public class Pointcontroller {
         model.addAttribute("createdGames", createdGames);
         return "manageGame";
     }
+	
+	@GetMapping("/admin/pointlist2")
+    public String gameListPage2(@RequestParam(defaultValue="1") int pageNum,
+	        				   @RequestParam(defaultValue="") String poi_status,
+	        				   Integer poi_ck,
+	        				   Model model, HttpSession session) {
+		MemberVO user = (MemberVO)session.getAttribute("user");
+		if(user!=null) {
+			model.addAttribute("mem_auth",user.getMem_auth());
+		}
+		Map<String,Object> map = new HashMap<>();
+
+		if (!poi_status.isEmpty()) {
+		   map.put("poi_status", Integer.parseInt(poi_status));
+		}
+
+		// 전체, 검색 레코드 수
+		int count = pointService.selectPointGameRowCount(map);
+
+		// 페이지 처리
+		PagingUtil page = new PagingUtil(pageNum, count, 20, 10, "gameList");
+
+		List<PointGameVO> list = null;
+		if (count > 0) {
+		     map.put("start", page.getStartRow());
+		     map.put("end", page.getEndRow());
+
+		     list = pointService.selectPointGameList(map);
+		}
+		
+		model.addAttribute("count", count);
+		model.addAttribute("list", list);
+		model.addAttribute("page", page.getPage());
+
+		poi_ck = 0;
+
+		if(poi_ck!=0 || poi_ck!=null) {
+			map.put("poi_ck", poi_ck);
+		}
+
+        return "gameList2";
+    }
 }

@@ -22,6 +22,8 @@
 					href="${pageContext.request.contextPath}/rent/rentListAdmin">대여관리</a></li>
 				<li><a
 					href="${pageContext.request.contextPath}/adminPage/contestAdminList">대회목록관리</a></li>
+				<li><a
+					href="${pageContext.request.contextPath}/admin/pointlist2">Quiz 관리</a></li>
 			</ul>
 	</div>
 </div>

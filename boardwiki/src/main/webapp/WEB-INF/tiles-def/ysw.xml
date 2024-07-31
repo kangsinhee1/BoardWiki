@@ -110,6 +110,10 @@
 		<put-attribute name="title" value="관리자 대회 조회"/>
 		<put-attribute name="body" value="/WEB-INF/views/adminPage/contestAdminListDetail.jsp"/>
 	</definition>
+	<definition name="gameList2" extends="adminPage">
+		<put-attribute name="title" value="Quiz 관리"/>
+		<put-attribute name="body" value="/WEB-INF/views/adminPage/gameList2.jsp"/>
+	</definition>
 	
 	<!-- 중고 -->
 	<definition name="usedList" extends="main">
